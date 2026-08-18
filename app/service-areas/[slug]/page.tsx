@@ -110,7 +110,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">Neighborhoods and subdivisions</p>
             <ul className="mt-4 flex flex-wrap gap-2.5">
               {c.neighborhoods.map((n) => (
-                <li key={n} className="rounded-full border border-accent-deep/40 bg-card px-4 py-2 text-sm font-medium text-foreground">{n}</li>
+                <li key={n} className="rounded-sm border border-accent-deep/40 bg-card px-4 py-2 text-sm font-medium text-foreground">{n}</li>
               ))}
             </ul>
             <p className="mt-5 text-sm text-muted-foreground">

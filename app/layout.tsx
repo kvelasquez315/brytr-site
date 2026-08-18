@@ -4,21 +4,21 @@ import "./globals.css";
 
 /* Self-hosted from @fontsource (npm), not fetched from Google at build time.
    Three roles per DESIGN.md: display / body / utility. */
-const chivo = localFont({
+const archivo = localFont({
   src: [
-    { path: "./fonts/chivo-latin-700-normal.woff2", weight: "700", style: "normal" },
-    { path: "./fonts/chivo-latin-900-normal.woff2", weight: "900", style: "normal" },
+    { path: "./fonts/archivo-latin-700-normal.woff2", weight: "700", style: "normal" },
+    { path: "./fonts/archivo-latin-800-normal.woff2", weight: "800", style: "normal" },
   ],
-  variable: "--font-chivo",
+  variable: "--font-archivo",
   display: "swap",
 });
-const figtree = localFont({
+const barlow = localFont({
   src: [
-    { path: "./fonts/figtree-latin-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/figtree-latin-500-normal.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/figtree-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/barlow-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/barlow-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/barlow-latin-600-normal.woff2", weight: "600", style: "normal" },
   ],
-  variable: "--font-figtree",
+  variable: "--font-barlow",
   display: "swap",
 });
 const plexMono = localFont({
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${chivo.variable} ${figtree.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${barlow.variable} ${plexMono.variable}`}>
       <body>{children}</body>
     </html>
   );

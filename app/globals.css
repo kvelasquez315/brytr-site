@@ -45,12 +45,59 @@
   --on-dark:       #f7f6f3;
   --on-dark-muted: #ccd3da;
 
-  /* ---- shape ------------------------------------------------------- */
-  --radius: 0.875rem; /* 14px cards; buttons/inputs derive down */
+  /* HERO — a full-bleed photograph carries the hero, per the reference layout.
+ * Two stacked gradients: one right-ward wash so left-column type stays legible over
+ * a lit brick facade, one upward wash so the form card's edge has something to sit on.
+ * Kept here because no hex may appear in a component. */
+.hero-scrim {
+  background:
+    linear-gradient(
+      100deg,
+      color-mix(in oklab, var(--brand-primary) 92%, transparent) 0%,
+      color-mix(in oklab, var(--brand-primary) 74%, transparent) 17%,
+      color-mix(in oklab, var(--brand-primary) 34%, transparent) 38%,
+      color-mix(in oklab, var(--brand-primary) 8%, transparent) 56%,
+      transparent 70%
+    ),
+    linear-gradient(
+      to top,
+      color-mix(in oklab, var(--brand-ink) 46%, transparent) 0%,
+      transparent 32%
+    );
+}
+
+/* mobile: the left-to-right wash has nothing to hide behind on a 390px screen, so the
+ * photograph becomes a texture under a mostly-even veil and every line stays legible. */
+@media (max-width: 1023px) {
+  .hero-scrim {
+    background:
+      linear-gradient(
+        to bottom,
+        color-mix(in oklab, var(--brand-primary) 90%, transparent) 0%,
+        color-mix(in oklab, var(--brand-primary) 72%, transparent) 34%,
+        color-mix(in oklab, var(--brand-primary) 80%, transparent) 70%,
+        color-mix(in oklab, var(--brand-primary) 94%, transparent) 100%
+      );
+  }
+}
+
+/* the one amber line: the channel, read as the base edge of the hero */
+.hero-baseline {
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    var(--brand-accent) 12%,
+    var(--brand-accent) 88%,
+    transparent 100%
+  );
+}
+
+/* ---- shape ------------------------------------------------------- */
+  --radius: 0.1875rem; /* 3px. Squared, like the reference. Nothing on this site is a pill. */
 
   /* ---- type — three roles ------------------------------------------ */
-  --font-display: var(--font-chivo), "Chivo", sans-serif;
-  --font-body:    var(--font-figtree), "Figtree", sans-serif;
+  --font-display: var(--font-archivo), "Archivo", sans-serif;
+  --font-body:    var(--font-barlow), "Barlow", sans-serif;
   --font-utility: var(--font-plex-mono), "IBM Plex Mono", monospace;
 
   --tracking-display: -0.028em;
@@ -109,10 +156,10 @@
   --font-body:    var(--font-body);
   --font-utility: var(--font-utility);
 
-  --radius-sm: calc(var(--radius) * 0.5);
-  --radius-md: calc(var(--radius) * 0.72);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-sm: 2px;
+  --radius-md: 2px;
+  --radius-lg: 3px;
+  --radius-xl: 4px;
 
   --shadow-sm:   var(--shadow-sm);
   --shadow-md:   var(--shadow-md);

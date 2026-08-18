@@ -42,7 +42,7 @@ export default function FaqPage() {
           <ul className="mt-4 flex flex-wrap gap-2.5">
             {groups.map((g) => (
               <li key={g.h}>
-                <a href={`#${g.h.toLowerCase().replace(/[^a-z]+/g, "-")}`} className="inline-block rounded-full border border-on-dark/22 px-4 py-2.5 text-sm text-on-dark-muted hover:border-accent hover:text-on-dark">
+                <a href={`#${g.h.toLowerCase().replace(/[^a-z]+/g, "-")}`} className="inline-block rounded-sm border border-on-dark/22 px-4 py-2.5 text-sm text-on-dark-muted hover:border-accent hover:text-on-dark">
                   {g.h}
                 </a>
               </li>

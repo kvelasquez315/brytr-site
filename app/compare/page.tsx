@@ -81,7 +81,7 @@ export default function CompareHub() {
                 <p className="mt-2 text-sm text-on-dark-muted">{g.note}</p>
                 <ul className="mt-5 flex flex-wrap gap-2">
                   {g.items.map((i) => (
-                    <li key={i} className="rounded-full border border-on-dark/20 px-3 py-1.5 text-xs text-on-dark-muted">{i}</li>
+                    <li key={i} className="rounded-sm border border-on-dark/20 px-3 py-1.5 text-xs text-on-dark-muted">{i}</li>
                   ))}
                 </ul>
               </article>

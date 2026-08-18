@@ -41,13 +41,26 @@ that *is* the light channel, and it does exactly two jobs:
    cross-section. It caps the icon container, and it appears as a full-bleed section edge at
    **exactly two places per page**, no more. Overused, a signature becomes wallpaper.
 
-Where it appears: the hero handle, the icon container top edge, two section edges per page, and the
-seam of a split hero.
+Where it appears: the base edge of the hero, the drag handle in the Scene Wipe section, the icon
+container top edge, and at most two section edges per page.
 Where it does NOT appear: everywhere else. One bold move, everything else quiet.
 
 **Icon container** is the channel in cross-section: a 56px tile with the top two corners squared and
 the bottom two rounded at 12px, carrying the 2px amber lens line along its top edge. Looking at the
-end of a piece of extrusion.
+end of a piece of extrusion. This is the ONE place a soft corner is allowed.
+
+### Hero (revised after the first review)
+
+The hero is **one full-bleed photograph** with short, keyword-forward type on the left over a scrim,
+and the quote form as a solid card on the right. Layout follows freedomexteriorsusa.com, which is
+the reference the client specified.
+
+The first build got this wrong in a way worth recording: it put the photograph inside a rounded card
+in a right-hand column, with three spec boxes stacked beneath it. That is a dashboard, not a hero —
+and a photo treated as a widget is one of the clearest tells of a generated site. The draggable
+warm-white/game-day wipe that used to live in that card is now its own full-width section
+(`components/sections/scene-wipe.tsx`), where it reads as a deliberate device rather than as hero
+furniture.
 
 ## Colors
 
@@ -84,13 +97,19 @@ Three roles. Display is used with restraint — hero and H2 only.
 
 | Role | Family | Usage |
 |---|---|---|
-| Display | **Chivo** 700/900 | Hero + H2 + H3 only. `-0.028em` tracking at display sizes. |
-| Body | **Figtree** 400/500/600 | All body copy, 1.6 line-height. |
+| Display | **Archivo** 700/800 | Hero + H2 + H3 only. `-0.028em` tracking at display sizes. |
+| Body | **Barlow** 400/500/600 | All body copy, 1.6 line-height. |
 | Utility | **IBM Plex Mono** 500 | Phone numbers, hours, prices, linear-foot figures, spec tables, license #s. `tnum` on. |
 
-Chivo is a workhorse grotesque with enough width and weight to carry a 76px hero without looking
-like a default; it is also not the face any other Nexus client uses. Figtree is warm and highly
-legible at 17px, which matters on pages this dense. IBM Plex Mono makes every real number on the
+**Revised after the first review — the original pairing read as generated.** Chivo (display) and
+Figtree (body) were both too soft: wide apertures, round dots, generous shoulders. Figtree in
+particular is a geometric sans in the Poppins family, and Poppins is the single most recognisable
+body font on AI-built sites — it was the thing that made this site feel machine-made on sight.
+
+Archivo replaces it on display: a grotesque with squarer terminals and tighter shoulders, which
+holds a 62px hero without looking friendly. Barlow replaces it in body copy: slightly condensed,
+drawn from transport signage, so it reads engineered rather than warm. Neither face appears on
+another Nexus client. IBM Plex Mono is unchanged and still earns its slot. IBM Plex Mono makes every real number on the
 site — 1.2M lights, 402-810-3973, linear-foot pricing — read as data rather than as marketing.
 
 Modular scale: **1.2** (dense, not airy — this site is a lot of pages with a lot of substance).
@@ -154,12 +173,19 @@ Section backgrounds alternate per the table above across four tokens: `neutral`,
 
 ## Shape & Motion
 
-Radius: inputs and buttons `10px`, cards `14px`, pills `999px`. One family, held everywhere. The
-icon container is the deliberate exception — squared top corners, rounded bottom — because that
-shape is the signature.
+Radius: **`2px` on inputs and buttons, `3px` on cards, `4px` on the largest panels. Nothing on this
+site is a pill.** The icon container is the deliberate exception — squared top corners, rounded
+bottom — because that shape *is* the signature.
+
+**Revised after the first review.** The first build ran `--radius: 14px` with fully-round pills on
+every chip and a 48px circular drag handle. 14px corners plus a soft shadow on a dark navy card is
+close to a fingerprint for AI-generated design, and the client read it as "bubbly" within seconds of
+opening the site. The reference (freedomexteriorsusa.com) is squared throughout. Extruded aluminum
+channel has a machined edge; the shape language should say so. If a future change reintroduces a
+radius above 4px anywhere but the icon tile, it is a regression.
 
 Motion: one orchestrated staggered load on the hero only. Durations 150 / 240 / 400ms on a single
-easing curve (`cubic-bezier(0.16, 1, 0.3, 1)`). The scene rail and the dusk line respond to input,
+easing curve (`cubic-bezier(0.16, 1, 0.3, 1)`). The scene rail and the Scene Wipe respond to input,
 not to scroll. Everything respects `prefers-reduced-motion` — the badge rail freezes, the hero
 settles to its night state.
 

@@ -38,7 +38,7 @@ export default function BlogHub() {
           <SectionHead eyebrow="All guides" title="Twelve, by category." />
           <ul className="mt-8 flex flex-wrap gap-2.5">
             {["All", ...categories].map((c, i) => (
-              <li key={c} className={`rounded-full px-4 py-2.5 text-sm font-medium ${i === 0 ? "bg-accent text-accent-foreground" : "border border-border bg-card text-foreground"}`}>{c}</li>
+              <li key={c} className={`rounded-sm px-4 py-2.5 text-sm font-medium ${i === 0 ? "bg-accent text-accent-foreground" : "border border-border bg-card text-foreground"}`}>{c}</li>
             ))}
           </ul>
           <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

@@ -80,8 +80,8 @@ export function ProofRail() {
               key={c.label}
               className={
                 c.own
-                  ? "rounded-full border border-accent/45 bg-raise px-4 py-2.5 text-sm font-semibold text-on-dark"
-                  : "rounded-full border border-on-dark/20 bg-raise px-4 py-2.5 text-sm text-on-dark-muted"
+                  ? "rounded-sm border border-accent/45 bg-raise px-4 py-2.5 text-sm font-semibold text-on-dark"
+                  : "rounded-sm border border-on-dark/20 bg-raise px-4 py-2.5 text-sm text-on-dark-muted"
               }
             >
               {c.label}
@@ -276,7 +276,7 @@ export function MaterialsSplit() {
           </div>
           <ul className="mt-7 flex flex-wrap gap-2.5">
             {["25 year LED rating", "IP66 weather sealed", "App controlled"].map((b) => (
-              <li key={b} className="rounded-full border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground">{b}</li>
+              <li key={b} className="rounded-sm border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground">{b}</li>
             ))}
           </ul>
           <div className="mt-8 flex flex-wrap items-center gap-5">

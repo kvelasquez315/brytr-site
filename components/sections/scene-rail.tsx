@@ -57,7 +57,7 @@ export function SceneRail() {
           {/* the spec panel — keeps the right side full */}
           <div className="flex flex-col rounded-lg bg-primary p-6 ring-1 ring-on-dark/12">
             <div className="flex items-center gap-3">
-              <span className="size-4 rounded-full" style={{ background: s.dot }} aria-hidden />
+              <span className="size-4 rounded-sm" style={{ background: s.dot }} aria-hidden />
               <h3 className="text-xl text-on-dark">{s.name}</h3>
             </div>
             <p className="mt-3 text-[0.95rem] text-on-dark-muted">{s.use}</p>
@@ -101,11 +101,11 @@ export function SceneRail() {
                 role="tab"
                 aria-selected={on}
                 onClick={() => setI(idx)}
-                className={`flex h-11 items-center gap-2.5 rounded-full px-4 text-sm font-medium transition-colors duration-[--dur-fast] ${
+                className={`flex h-11 items-center gap-2.5 rounded-sm px-4 text-sm font-medium transition-colors duration-[--dur-fast] ${
                   on ? "bg-accent text-accent-foreground" : "border border-on-dark/22 text-on-dark-muted hover:border-accent/50 hover:text-on-dark"
                 }`}
               >
-                <span className="size-3.5 rounded-full ring-1 ring-black/20" style={{ background: sc.dot }} aria-hidden />
+                <span className="size-3.5 rounded-sm ring-1 ring-black/20" style={{ background: sc.dot }} aria-hidden />
                 {sc.name}
               </button>
             );
