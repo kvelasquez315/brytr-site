@@ -1,0 +1,314 @@
+/* app/globals.css — Brytr Co brand lock.
+ * Every value here derives from DESIGN.md. No hex appears anywhere else in the codebase.
+ */
+
+@import "tailwindcss";
+
+:root {
+  /* ---- BRAND (from DESIGN.md) -------------------------------------- */
+  --brand-primary:   #111820; /* night sky above a lit roofline — dominant ~60% */
+  --brand-secondary: #4a5560; /* anodized aluminum channel body — ~30% */
+  --brand-accent:    #f5c518; /* logo yellow / 2700K LED — ~10%, CTA + signature only */
+  --brand-neutral:   #f1ede4; /* warm limestone, the daytime state */
+  --brand-ink:       #0c0f13; /* near-black text */
+
+  /* support surfaces so the page never runs 3 light or 3 dark in a row */
+  --brand-raise:        #202b38; /* elevated dark — lifted so it separates from
+                                    --brand-primary as a SECTION background, not just
+                                    as a card. At #1a222c the two read as one field. */
+  --brand-neutral-deep: #e7e1d4; /* second warm neutral */
+  --brand-accent-deep:  #d9a400; /* accent hover / pressed — on DARK only */
+  --brand-accent-ink:   #4f3e0d; /* the accent, darkened for eyebrow text on light
+                                    surfaces. Amber on cream cannot pass contrast, so
+                                    light-section eyebrows use this and the amber
+                                    channel-mark beside them carries the brand color. */
+
+  /* ---- semantic layer --------------------------------------------- */
+  --background:           var(--brand-neutral);
+  --foreground:           var(--brand-ink);
+  --card:                 #ffffff;
+  --card-foreground:      var(--brand-ink);
+  --primary:              var(--brand-primary);
+  --primary-foreground:   #f7f6f3;
+  --secondary:            var(--brand-secondary);
+  --secondary-foreground: #f7f6f3;
+  --muted:                var(--brand-neutral-deep);
+  --muted-foreground:     #47443d;
+  --accent:               var(--brand-accent);
+  --accent-foreground:    var(--brand-ink);
+  --destructive:          #b3261e;
+  --border:               color-mix(in oklab, var(--brand-ink) 12%, transparent);
+  --input:                color-mix(in oklab, var(--brand-ink) 20%, transparent);
+  --ring:                 var(--brand-accent);
+
+  /* on-dark text pair (APCA-checked against --brand-primary) */
+  --on-dark:       #f7f6f3;
+  --on-dark-muted: #ccd3da;
+
+  /* ---- shape ------------------------------------------------------- */
+  --radius: 0.875rem; /* 14px cards; buttons/inputs derive down */
+
+  /* ---- type — three roles ------------------------------------------ */
+  --font-display: var(--font-chivo), "Chivo", sans-serif;
+  --font-body:    var(--font-figtree), "Figtree", sans-serif;
+  --font-utility: var(--font-plex-mono), "IBM Plex Mono", monospace;
+
+  --tracking-display: -0.028em;
+  --leading-body: 1.6;
+
+  /* ---- depth: layered, ambient + direct ---------------------------- */
+  --shadow-sm:
+    0 1px 2px color-mix(in oklab, var(--brand-ink) 6%, transparent),
+    0 1px 1px color-mix(in oklab, var(--brand-ink) 4%, transparent);
+  --shadow-md:
+    0 4px 12px color-mix(in oklab, var(--brand-ink) 8%, transparent),
+    0 2px 4px color-mix(in oklab, var(--brand-ink) 6%, transparent);
+  --shadow-lg:
+    0 1px 2px color-mix(in oklab, var(--brand-ink) 5%, transparent),
+    0 12px 28px -12px color-mix(in oklab, var(--brand-ink) 16%, transparent);
+  --shadow-dark:
+    0 18px 40px -18px color-mix(in oklab, black 70%, transparent);
+
+  /* ---- motion: one curve, three durations -------------------------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 150ms;
+  --dur-base: 240ms;
+  --dur-slow: 400ms;
+
+  /* ---- rhythm ------------------------------------------------------ */
+  --section-y: 6.5rem;
+  --section-y-sm: 3.5rem;
+  --container: 90rem;
+}
+
+@theme inline {
+  --color-background:           var(--background);
+  --color-foreground:           var(--foreground);
+  --color-card:                 var(--card);
+  --color-card-foreground:      var(--card-foreground);
+  --color-primary:              var(--primary);
+  --color-primary-foreground:   var(--primary-foreground);
+  --color-secondary:            var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted:                var(--muted);
+  --color-muted-foreground:     var(--muted-foreground);
+  --color-accent:               var(--accent);
+  --color-accent-foreground:    var(--accent-foreground);
+  --color-accent-deep:          var(--brand-accent-deep);
+  --color-accent-ink:           var(--brand-accent-ink);
+  --color-destructive:          var(--destructive);
+  --color-border:               var(--border);
+  --color-input:                var(--input);
+  --color-ring:                 var(--ring);
+  --color-raise:                var(--brand-raise);
+  --color-neutral-deep:         var(--brand-neutral-deep);
+  --color-on-dark:              var(--on-dark);
+  --color-on-dark-muted:        var(--on-dark-muted);
+
+  --font-display: var(--font-display);
+  --font-body:    var(--font-body);
+  --font-utility: var(--font-utility);
+
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.72);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+
+  --shadow-sm:   var(--shadow-sm);
+  --shadow-md:   var(--shadow-md);
+  --shadow-lg:   var(--shadow-lg);
+  --shadow-dark: var(--shadow-dark);
+
+  --ease-out-expo: var(--ease-out-expo);
+  --container-site: var(--container);
+
+  /* modular scale 1.2, dense */
+  --text-2xs:  0.694rem;
+  --text-xs:   0.833rem;
+  --text-sm:   0.914rem;
+  --text-base: 1.0625rem;
+  --text-lg:   1.2rem;
+  --text-xl:   1.44rem;
+  --text-2xl:  1.728rem;
+  --text-3xl:  2.074rem;
+  --text-4xl:  2.488rem;
+  --text-5xl:  2.986rem;
+  --text-6xl:  3.583rem;
+  --text-7xl:  4.3rem;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    line-height: var(--leading-body);
+    font-size: 1.0625rem;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2 {
+    font-family: var(--font-display);
+    font-weight: 900;
+    letter-spacing: var(--tracking-display);
+    line-height: 1.03;
+    text-wrap: balance;
+  }
+  h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.018em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  /* phone numbers, hours, prices, spec figures */
+  .u {
+    font-family: var(--font-utility);
+    font-feature-settings: "tnum" 1, "zero" 1;
+    font-variant-numeric: tabular-nums;
+  }
+  ::selection {
+    background: var(--brand-accent);
+    color: var(--brand-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--brand-accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Section padding lives on ONE selector level so element-level rules
+     cannot silently cancel it between sections. */
+  .section {
+    padding-block: var(--section-y-sm);
+  }
+  @media (min-width: 768px) {
+    .section { padding-block: var(--section-y); }
+  }
+  .shell {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .shell { padding-inline: 2rem; }
+  }
+
+  /* ---- THE SIGNATURE: the channel / dusk line --------------------- */
+  /* horizontal: the lens edge of a channel in cross-section.
+     Capped at two per page by convention, enforced in review. */
+  .channel-edge {
+    height: 4px;
+    background: var(--brand-accent);
+    position: relative;
+  }
+  .channel-edge::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--brand-primary);
+  }
+  /* the short mark that sits above a section eyebrow */
+  .channel-mark {
+    width: 48px;
+    height: 4px;
+    background: var(--brand-accent);
+    position: relative;
+    flex: none;
+  }
+  .channel-mark::after {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 50%;
+    height: 1px;
+    background: var(--brand-primary);
+  }
+  /* icon container: the channel in cross-section — squared top, rounded bottom,
+     lens line along the top edge. */
+  .channel-tile {
+    position: relative;
+    display: grid;
+    place-items: center;
+    inline-size: 3rem;
+    block-size: 3rem;
+    flex: none;
+    border-radius: 2px 2px 12px 12px;
+    background: var(--brand-raise);
+    color: var(--on-dark);
+    overflow: hidden;
+  }
+  .channel-tile::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 2px;
+    background: var(--brand-accent);
+  }
+  .channel-tile--light {
+    background: var(--brand-primary);
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--brand-accent-ink);
+  }
+  .eyebrow--on-dark { color: var(--brand-accent); }
+
+  .prose-body p { max-width: 68ch; }
+
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Text on dark surfaces.
+ * These live OUTSIDE @layer on purpose: unlayered rules beat @layer utilities, and
+ * Tailwind's `text-foreground` utility would otherwise win and paint near-black text
+ * onto a near-black card. Found by measuring computed color against computed
+ * background, not by looking at a screenshot — at these sizes the difference is
+ * invisible to compression but not to a reader.
+ */
+.form-on-dark label { color: var(--on-dark); }
+.form-on-dark .form-note { color: var(--on-dark-muted); }
+.on-dark-cell { color: var(--on-dark); }
+.on-dark-cell-muted { color: var(--on-dark-muted); }
+
+/* Standalone text links (card CTAs, the announcement bar link) need a 44px touch
+ * target even though the visible text is smaller. Padding would change the layout,
+ * so the hit area is expanded with a pseudo-element instead. */
+@media (pointer: coarse) {
+  .tap-44 { position: relative; }
+  .tap-44::after {
+    content: "";
+    position: absolute;
+    inset-block: 50%;
+    inset-inline: 0;
+    block-size: 44px;
+    transform: translateY(-50%);
+  }
+}

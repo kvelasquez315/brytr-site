@@ -1,0 +1,36 @@
+import * as I from "@/components/icons";
+
+export const iconMap = {
+  wholeHome: I.IcWholeHome,
+  roofline: I.IcRoofline,
+  christmas: I.IcChristmas,
+  soffit: I.IcSoffit,
+  pathLight: I.IcPathLight,
+  hardscape: I.IcHardscape,
+  pergola: I.IcPergola,
+  gameday: I.IcGameday,
+  seasonal: I.IcSeasonal,
+  commercial: I.IcCommercial,
+  repair: I.IcRepair,
+  sceneStack: I.IcSceneStack,
+  schedule: I.IcSchedule,
+  zones: I.IcZones,
+  dimmer: I.IcDimmer,
+  installCount: I.IcInstallCount,
+  stars: I.IcStars,
+  hardHat: I.IcHardHat,
+  otherBrand: I.IcOtherBrand,
+  twoTiers: I.IcTwoTiers,
+  verified: I.IcVerified,
+  measured: I.IcMeasured,
+  yearlyCost: I.IcYearlyCost,
+  ladder: I.IcLadder,
+  financing: I.IcFinancing,
+  sameDay: I.IcSameDay,
+  hoaPaperwork: I.IcHoaPaperwork,
+  warranty: I.IcWarranty,
+  weatherSealed: I.IcWeatherSealed,
+  dayNight: I.IcDayNight,
+} as const;
+
+export type IconKey = keyof typeof iconMap;

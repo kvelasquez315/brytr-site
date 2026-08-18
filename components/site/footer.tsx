@@ -1,0 +1,97 @@
+import Link from "next/link";
+import { site, nav } from "@/content/site";
+import { services } from "@/content/services";
+import { cities } from "@/content/cities";
+import { systems } from "@/content/systems";
+
+const company = [
+  ["About", "/about"], ["How it works", "/how-it-works"], ["Pricing and financing", "/pricing"],
+  ["Warranty", "/warranty"], ["Reviews", "/reviews"], ["Gallery", "/gallery"],
+  ["Recent projects", "/recent-projects"], ["FAQ", "/faq"], ["Compare brands", "/compare"],
+];
+
+export function Footer() {
+  return (
+    <footer className="bg-primary pb-24 lg:pb-0">
+      <div className="shell pt-16">
+        <div className="grid gap-10 lg:grid-cols-5">
+          <div className="lg:col-span-1">
+            <p className="font-display text-2xl font-black tracking-[-0.04em] text-on-dark">
+              brytr<span className="ml-0.5 inline-block size-2 translate-y-[-0.35rem] rounded-full bg-accent" />
+            </p>
+            <p className="mt-4 text-sm text-on-dark-muted">
+              Permanent outdoor lighting for Omaha homes. Installed once by our own crews, controlled from
+              your phone, and serviced by the people who put it up.
+            </p>
+            <div className="mt-5 flex gap-3">
+              <a href={site.social.facebook} aria-label="Brytr on Facebook" className="grid size-10 place-items-center rounded-md border border-on-dark/20 text-accent hover:border-accent">
+                <svg viewBox="0 0 24 24" className="size-5" fill="currentColor" aria-hidden><path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.5l.5-3H13v-2c0-.6.4-1 1-1Z"/></svg>
+              </a>
+              <a href={site.social.instagram} aria-label="Brytr on Instagram" className="grid size-10 place-items-center rounded-md border border-on-dark/20 text-accent hover:border-accent">
+                <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.2" fill="currentColor" stroke="none"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <nav aria-label="Services" className="lg:col-span-1">
+            <h2 className="u text-2xs uppercase tracking-[0.16em] text-accent">Services</h2>
+            <ul className="mt-4 space-y-2.5">
+              {services.map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/services/${s.slug}`} className="text-sm text-on-dark-muted hover:text-accent">{s.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="Lighting systems" className="lg:col-span-1">
+            <h2 className="u text-2xs uppercase tracking-[0.16em] text-accent">Systems</h2>
+            <ul className="mt-4 space-y-2.5">
+              {systems.map((s) => (
+                <li key={s.slug}>
+                  <Link href={`/lighting-systems/${s.slug}`} className="text-sm text-on-dark-muted hover:text-accent">{s.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <nav aria-label="Service areas" className="lg:col-span-1">
+            <h2 className="u text-2xs uppercase tracking-[0.16em] text-accent">Service areas</h2>
+            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
+              {cities.map((c) => (
+                <li key={c.slug}>
+                  <Link href={`/service-areas/${c.slug}`} className="text-sm text-on-dark-muted hover:text-accent">{c.name}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="lg:col-span-1">
+            <h2 className="u text-2xs uppercase tracking-[0.16em] text-accent">Company</h2>
+            <ul className="mt-4 space-y-2.5">
+              {company.map(([l, h]) => (
+                <li key={h}><Link href={h} className="text-sm text-on-dark-muted hover:text-accent">{l}</Link></li>
+              ))}
+            </ul>
+            <h2 className="u mt-8 text-2xs uppercase tracking-[0.16em] text-accent">Contact</h2>
+            <address className="mt-4 space-y-1.5 not-italic text-sm text-on-dark-muted">
+              <p className="font-semibold text-on-dark">{site.name}</p>
+              <p>{site.city}, {site.state}</p>
+              <p><a href={site.phoneHref} className="u text-on-dark hover:text-accent">{site.phone}</a></p>
+              <p className="u pt-2">Mon to Sat · 8am to 6pm</p>
+            </address>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col gap-4 border-t border-on-dark/12 py-7 text-xs text-on-dark-muted sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} {site.name}. Permanent outdoor lighting, {site.region}.</p>
+          <ul className="flex flex-wrap gap-5">
+            <li><Link href="/privacy-policy" className="hover:text-accent">Privacy policy</Link></li>
+            <li><Link href="/terms-of-service" className="hover:text-accent">Terms of service</Link></li>
+            <li><Link href="/accessibility" className="hover:text-accent">Accessibility</Link></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  );
+}
