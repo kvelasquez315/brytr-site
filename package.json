@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "contrast": "node scripts/contrast.mjs",
-    "slopcheck": "bash .claude/skills/site-build/scripts/slopcheck.sh .",
+    "slopcheck": "bash scripts/slopcheck.sh .",
     "fonts": "node scripts/fonts.mjs",
     "prebuild": "node scripts/fonts.mjs",
     "postinstall": "node scripts/fonts.mjs"
