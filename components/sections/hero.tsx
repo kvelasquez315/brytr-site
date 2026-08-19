@@ -32,7 +32,7 @@ export function Hero() {
       />
       <div className="hero-scrim absolute inset-0" aria-hidden />
 
-      <div className="shell relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_25rem] lg:gap-14 lg:py-24 xl:gap-20">
+      <div className="shell relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_27rem] lg:gap-14 lg:py-24 xl:gap-20">
         {/* ── left: short, keyword-forward ─────────────────────────── */}
         <div className="max-w-[38rem]">
           <p className="u text-2xs uppercase tracking-[0.2em] text-accent">
@@ -88,7 +88,7 @@ export function Hero() {
         </div>
 
         {/* ── right: the form, in the hero ─────────────────────────── */}
-        <div className="lg:justify-self-end lg:w-[25rem]">
+        <div className="lg:justify-self-end lg:w-[27rem]">
           <QuoteForm variant="compact" heading="Get a free design consultation" />
         </div>
       </div>

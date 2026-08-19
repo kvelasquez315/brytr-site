@@ -12,13 +12,13 @@ const archivo = localFont({
   variable: "--font-archivo",
   display: "swap",
 });
-const barlow = localFont({
+const plexSans = localFont({
   src: [
-    { path: "./fonts/barlow-latin-400-normal.woff2", weight: "400", style: "normal" },
-    { path: "./fonts/barlow-latin-500-normal.woff2", weight: "500", style: "normal" },
-    { path: "./fonts/barlow-latin-600-normal.woff2", weight: "600", style: "normal" },
+    { path: "./fonts/ibm-plex-sans-latin-400-normal.woff2", weight: "400", style: "normal" },
+    { path: "./fonts/ibm-plex-sans-latin-500-normal.woff2", weight: "500", style: "normal" },
+    { path: "./fonts/ibm-plex-sans-latin-600-normal.woff2", weight: "600", style: "normal" },
   ],
-  variable: "--font-barlow",
+  variable: "--font-plex-sans",
   display: "swap",
 });
 const plexMono = localFont({
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${barlow.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable}`}>
       <body>{children}</body>
     </html>
   );

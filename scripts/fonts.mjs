@@ -7,9 +7,9 @@ import { dirname, join } from "node:path";
 const FILES = [
   ["@fontsource/archivo/files/archivo-latin-700-normal.woff2", "archivo-latin-700-normal.woff2"],
   ["@fontsource/archivo/files/archivo-latin-800-normal.woff2", "archivo-latin-800-normal.woff2"],
-  ["@fontsource/barlow/files/barlow-latin-400-normal.woff2", "barlow-latin-400-normal.woff2"],
-  ["@fontsource/barlow/files/barlow-latin-500-normal.woff2", "barlow-latin-500-normal.woff2"],
-  ["@fontsource/barlow/files/barlow-latin-600-normal.woff2", "barlow-latin-600-normal.woff2"],
+  ["@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-400-normal.woff2", "ibm-plex-sans-latin-400-normal.woff2"],
+  ["@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-500-normal.woff2", "ibm-plex-sans-latin-500-normal.woff2"],
+  ["@fontsource/ibm-plex-sans/files/ibm-plex-sans-latin-600-normal.woff2", "ibm-plex-sans-latin-600-normal.woff2"],
   ["@fontsource/ibm-plex-mono/files/ibm-plex-mono-latin-500-normal.woff2", "ibm-plex-mono-latin-500-normal.woff2"],
 ];
 

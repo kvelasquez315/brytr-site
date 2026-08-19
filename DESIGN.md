@@ -98,7 +98,7 @@ Three roles. Display is used with restraint — hero and H2 only.
 | Role | Family | Usage |
 |---|---|---|
 | Display | **Archivo** 700/800 | Hero + H2 + H3 only. `-0.028em` tracking at display sizes. |
-| Body | **Barlow** 400/500/600 | All body copy, 1.6 line-height. |
+| Body | **IBM Plex Sans** 400/500/600 | All body copy, 1.6 line-height. |
 | Utility | **IBM Plex Mono** 500 | Phone numbers, hours, prices, linear-foot figures, spec tables, license #s. `tnum` on. |
 
 **Revised after the first review — the original pairing read as generated.** Chivo (display) and
@@ -107,9 +107,17 @@ particular is a geometric sans in the Poppins family, and Poppins is the single 
 body font on AI-built sites — it was the thing that made this site feel machine-made on sight.
 
 Archivo replaces it on display: a grotesque with squarer terminals and tighter shoulders, which
-holds a 62px hero without looking friendly. Barlow replaces it in body copy: slightly condensed,
-drawn from transport signage, so it reads engineered rather than warm. Neither face appears on
-another Nexus client. IBM Plex Mono is unchanged and still earns its slot. IBM Plex Mono makes every real number on the
+holds a 62px hero without looking friendly.
+
+Body went through two attempts. Barlow was the first, and the client still read it as generated —
+correctly: Barlow is one of the most-used faces in web templates, and its narrow, slightly rounded
+letterforms read webby at 17px. The body face is now **IBM Plex Sans**, chosen for a systemic
+reason rather than a taste one: the utility face is already IBM Plex Mono, so prose and numbers now
+come from one family. Three unrelated Google fonts is itself a template tell; two siblings plus one
+display face is a system. Plex Sans is also wider and more open than Barlow, with enough character
+in the `g` and `a` to not read as a default.
+
+Do not reintroduce Barlow, Chivo or Figtree. IBM Plex Mono makes every real number on the
 site — 1.2M lights, 402-810-3973, linear-foot pricing — read as data rather than as marketing.
 
 Modular scale: **1.2** (dense, not airy — this site is a lot of pages with a lot of substance).

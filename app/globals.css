@@ -97,7 +97,7 @@
 
   /* ---- type — three roles ------------------------------------------ */
   --font-display: var(--font-archivo), "Archivo", sans-serif;
-  --font-body:    var(--font-barlow), "Barlow", sans-serif;
+  --font-body:    var(--font-plex-sans), "IBM Plex Sans", sans-serif;
   --font-utility: var(--font-plex-mono), "IBM Plex Mono", monospace;
 
   --tracking-display: -0.028em;

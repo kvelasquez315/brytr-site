@@ -1,7 +1,9 @@
 import Link from "next/link";
+import Image from "next/image";
 import { site } from "@/content/site";
 import { services } from "@/content/services";
 import { iconMap } from "@/content/icon-map";
+import { badges } from "@/content/badges";
 import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Tile, Check, TextLink, QuoteForm, ChannelEdge } from "@/components/ui/bits";
@@ -56,38 +58,53 @@ export function QuickQuote() {
   );
 }
 
-/* 5 — PROOF RAIL · horizontal rail · primary · carries signature edge #1 */
-const credentials = [
-  { label: "Haven Preferred Installer", own: true },
-  { label: "Jellyfish Authorized Dealer", own: true },
-  { label: "Google 5.0 · 177 reviews" },
-  { label: "Licensed in Nebraska" },
-  { label: "Fully insured" },
-  { label: "W2 crews only" },
-  { label: "Serves Nebraska + western Iowa" },
-];
+/* 5 — CREDENTIAL BAND · under the hero · primary · carries signature edge #1
+ *
+ * Was a row of seven text pills of equal weight, which read as a tag cloud and gave a
+ * manufacturer authorization the same visual value as "fully insured". Now five cells
+ * with real structure: mark, role, icon, divided. Each cell renders a real logo the
+ * moment one exists in content/badges.ts; until then it is a typographic lockup, which
+ * looks intentional rather than broken. No copy on the page refers to missing assets. */
 export function ProofRail() {
   return (
     <section className="bg-primary">
       <ChannelEdge />
-      <div className="shell py-12">
-        <p className="text-center text-sm text-on-dark-muted">
-          Certified, licensed and insured in Nebraska and Iowa. Third-party marks are shown in their own colors when the client supplies the files.
-        </p>
-        <ul className="mt-6 flex flex-wrap items-center justify-center gap-3">
-          {credentials.map((c) => (
-            <li
-              key={c.label}
-              className={
-                c.own
-                  ? "rounded-sm border border-accent/45 bg-raise px-4 py-2.5 text-sm font-semibold text-on-dark"
-                  : "rounded-sm border border-on-dark/20 bg-raise px-4 py-2.5 text-sm text-on-dark-muted"
-              }
-            >
-              {c.label}
-            </li>
-          ))}
-        </ul>
+      <div className="shell py-10 lg:py-12">
+        <div className="grid gap-8 lg:grid-cols-[15rem_1fr] lg:gap-12">
+          <div>
+            <p className="u text-2xs uppercase tracking-[0.18em] text-accent">Credentials</p>
+            <p className="mt-3 font-display text-xl font-bold leading-tight text-on-dark">
+              Authorized on both systems we sell.
+            </p>
+            <p className="mt-2 text-sm text-on-dark-muted">
+              Licensed and insured on both sides of the river.
+            </p>
+          </div>
+
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-0 lg:divide-x lg:divide-on-dark/12">
+            {badges.map((b) => {
+              const I = iconMap[b.icon];
+              return (
+                <li key={b.name} className="lg:px-5 lg:first:pl-0 lg:last:pr-0">
+                  {b.logo ? (
+                    /* the mark in its own colors, never recolored */
+                    <div className="relative h-8 w-full max-w-[8.5rem]">
+                      <Image src={b.logo} alt={`${b.name} — ${b.role}`} fill sizes="140px" className="object-contain object-left" />
+                    </div>
+                  ) : (
+                    <I className={`size-6 ${b.authorization ? "text-accent" : "text-on-dark-muted"}`} />
+                  )}
+                  <p className={`mt-3 font-display text-[0.95rem] font-bold leading-snug ${b.authorization ? "text-on-dark" : "text-on-dark"}`}>
+                    {b.name}
+                  </p>
+                  <p className="u mt-1.5 text-2xs uppercase leading-relaxed tracking-[0.12em] text-on-dark-muted">
+                    {b.role}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </section>
   );
@@ -113,20 +130,26 @@ export function ServicesBento() {
             return (
               <article
                 key={s.slug}
-                className={`flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5 ${
-                  s.slug === "permanent-christmas-lights" ? "sm:col-span-2 lg:col-span-2" : ""
-                }`}
+                /* Two of the eleven have no photograph in the archive — commercial and
+                 * repair, because every install we shot is residential. Rather than let
+                 * them read as unfinished white cards next to nine photographed ones,
+                 * they invert to the dark surface. The absence becomes the design. */
+                className={`flex flex-col rounded-lg p-6 transition-transform duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5 ${
+                  withPhoto
+                    ? "bg-card shadow-[var(--shadow-lg)]"
+                    : "bg-primary shadow-[var(--shadow-dark)] ring-1 ring-accent/15"
+                } ${s.slug === "permanent-christmas-lights" ? "sm:col-span-2 lg:col-span-2" : ""}`}
               >
                 {withPhoto ? (
                   <Photo slot={s.photo!} ratio={isLead ? "4/5" : undefined} className="mb-5" sizes="(min-width:1024px) 30vw, 100vw" />
                 ) : (
-                  <span className="channel-tile channel-tile--light mb-5" aria-hidden><I className="size-7" /></span>
+                  <span className="channel-tile mb-5" aria-hidden><I className="size-7" /></span>
                 )}
                 {s.slug === "permanent-christmas-lights" && (
                   <p className="u mb-2 text-2xs uppercase tracking-[0.14em] text-accent-ink">Most requested</p>
                 )}
-                <h3 className={s.slug === "permanent-christmas-lights" ? "text-3xl text-foreground" : "text-xl text-foreground"}>{s.name}</h3>
-                <p className={`mt-2.5 text-muted-foreground ${s.slug === "permanent-christmas-lights" ? "text-lg" : "text-[0.95rem]"}`}>
+                <h3 className={`${s.slug === "permanent-christmas-lights" ? "text-3xl" : "text-xl"} ${withPhoto ? "text-foreground" : "text-on-dark"}`}>{s.name}</h3>
+                <p className={`mt-2.5 ${withPhoto ? "text-muted-foreground" : "text-on-dark-muted"} ${s.slug === "permanent-christmas-lights" ? "text-lg" : "text-[0.95rem]"}`}>
                   {s.slug === "permanent-christmas-lights" ? s.lede : s.short}
                 </p>
                 {s.slug === "permanent-christmas-lights" ? (
@@ -144,12 +167,12 @@ export function ServicesBento() {
                     </dl>
                   </div>
                 ) : (
-                  <ul className="mt-4 flex-1 space-y-2">
-                    {s.includes.slice(0, withPhoto && !isLead ? 3 : 4).map((i) => <Check key={i}>{i}</Check>)}
+                  <ul className={`mt-4 flex-1 space-y-2 ${withPhoto ? "" : "on-dark-cell"}`}>
+                    {s.includes.slice(0, withPhoto && !isLead ? 3 : 5).map((i) => <Check key={i} onDark={!withPhoto}>{i}</Check>)}
                   </ul>
                 )}
                 <div className="mt-5 pt-1">
-                  <TextLink href={`/services/${s.slug}`}>See {s.name}</TextLink>
+                  <TextLink href={`/services/${s.slug}`} onDark={!withPhoto}>See {s.name}</TextLink>
                 </div>
               </article>
             );
