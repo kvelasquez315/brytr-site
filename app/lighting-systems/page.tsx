@@ -56,7 +56,7 @@ export default function SystemsHub() {
                 <div className="mb-4 overflow-hidden rounded-md ring-1 ring-border">
                   <Elevation night massing={(["gable","ranch","wing"] as const)[i % 3]} lit={{ hex: "#f5c518", label: s.name }} className="block w-full" />
                 </div>
-                <p className="u text-2xs uppercase tracking-[0.14em] text-accent-ink">{s.tier}</p>
+                <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">{s.tier}</p>
                 <h2 className="mt-1.5 font-display text-base font-bold text-foreground">{s.name}</h2>
                 <p className="mt-2 text-sm text-muted-foreground">{s.short}</p>
                 <dl className="mt-4 space-y-1.5 border-t border-border pt-3">

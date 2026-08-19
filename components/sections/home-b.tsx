@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { services } from "@/content/services";
@@ -49,7 +50,7 @@ export function AppSplit() {
             /* no-photo: render the scene list as real UI rather than a phone mockup image */
             <div className="mx-auto max-w-sm overflow-hidden rounded-xl bg-primary p-4 shadow-[var(--shadow-dark)] ring-1 ring-accent/15">
               <div className="flex items-center justify-between px-2 pb-3 pt-1">
-                <span className="u text-2xs uppercase tracking-[0.18em] text-on-dark-muted">Scenes</span>
+                <span className="label text-2xs uppercase tracking-[0.18em] text-on-dark-muted">Scenes</span>
                 <span className="u text-2xs text-accent">Front elevation</span>
               </div>
               {[["Everyday warm white", "100%", true], ["Husker red", "80%", false], ["Halloween", "70%", false], ["Christmas", "90%", false], ["Fourth of July", "85%", false], ["Off at 11:00 pm", "Scheduled", false]].map(([n, v, on]) => (
@@ -63,7 +64,7 @@ export function AppSplit() {
           {/* second element so the column is genuinely full */}
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <div className="rounded-lg bg-card p-5 shadow-[var(--shadow-lg)]">
-              <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">Zones on a typical home</p>
+              <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Zones on a typical home</p>
               <ul className="mt-3 space-y-2 text-sm text-foreground">
                 <li className="flex justify-between"><span>Front elevation</span><span className="u text-muted-foreground">Warm white</span></li>
                 <li className="flex justify-between"><span>Side elevations</span><span className="u text-muted-foreground">Off</span></li>
@@ -72,7 +73,7 @@ export function AppSplit() {
               </ul>
             </div>
             <div className="rounded-lg bg-card p-5 shadow-[var(--shadow-lg)]">
-              <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">A week of scheduling</p>
+              <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">A week of scheduling</p>
               <ul className="mt-3 space-y-2 text-sm text-foreground">
                 <li className="flex justify-between"><span>Mon to Thu</span><span className="u text-muted-foreground">Dusk to 10pm</span></li>
                 <li className="flex justify-between"><span>Fri and Sat</span><span className="u text-muted-foreground">Dusk to 12am</span></li>
@@ -106,13 +107,13 @@ export function Founders() {
                       <span className="u text-[4rem] font-medium leading-none text-accent">
                         {f.name.split(" ").map((p) => p[0]).join("")}
                       </span>
-                      <p className="u mt-3 text-2xs uppercase tracking-[0.16em] text-on-dark-muted">{f.role}</p>
+                      <p className="label mt-3 text-2xs uppercase tracking-[0.16em] text-on-dark-muted">{f.role}</p>
                     </div>
                   </div>
                 )}
                 <div className="p-6">
                   <h3 className="text-xl text-foreground">{f.name}</h3>
-                  <p className="u mt-1 text-xs uppercase tracking-[0.14em] text-accent-ink">{f.role}</p>
+                  <p className="label mt-1 text-xs uppercase tracking-[0.14em] text-accent-ink">{f.role}</p>
                   <ul className="mt-4 space-y-2">{f.handles.map((h) => <Check key={h}>{h}</Check>)}</ul>
                 </div>
               </article>
@@ -169,7 +170,7 @@ export function VersusTable() {
               <tr className="bg-raise">
                 <th scope="col" className="px-5 py-4 text-sm font-semibold text-on-dark-muted">&nbsp;</th>
                 <th scope="col" className="border-x-2 border-accent px-5 py-4 text-sm font-semibold text-on-dark">
-                  <span className="u text-2xs uppercase tracking-[0.16em] text-accent">Brytr</span>
+                  <span className="label text-2xs uppercase tracking-[0.16em] text-accent">Brytr</span>
                 </th>
                 <th scope="col" className="px-5 py-4 text-sm font-semibold text-on-dark-muted">The typical installer</th>
               </tr>
@@ -201,15 +202,27 @@ export function ServiceArea() {
           lede="Eighteen cities, each with its own page, real project photos and drive time. If your town is not on this list, call us and ask."
         />
         <div className="mt-10 grid gap-8 lg:grid-cols-[44fr_56fr] lg:gap-12">
-          <div className="overflow-hidden rounded-lg bg-muted shadow-[var(--shadow-lg)]">
-            <iframe
-              title="Map of the Brytr Co service area centerd on Omaha, Nebraska"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="aspect-4/3 w-full border-0"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-97.4%2C40.5%2C-95.4%2C41.8&layer=mapnik&marker=41.2565%2C-95.9345"
-            />
-          </div>
+          {/* Was an OpenStreetMap iframe. It rendered as an empty grey box whenever the
+            * embed was slow or blocked, which is a broken-looking void in the middle of
+            * the page and a third-party dependency we do not control. A real photograph
+            * of a finished install says "we work here" better than a generic basemap. */}
+          <figure className="overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-lg)]">
+            <div className="relative aspect-4/3">
+              <Image
+                src="/img/g-blue-white.jpg"
+                alt="A finished Brytr install lit blue and white on an Omaha home at night"
+                fill
+                sizes="(min-width:1024px) 42vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="flex items-baseline justify-between gap-4 p-5">
+              <span className="label text-2xs uppercase tracking-[0.16em] text-accent">West Omaha</span>
+              <span className="text-[0.95rem] text-on-dark-muted">
+                Same crews across all eighteen cities.
+              </span>
+            </figcaption>
+          </figure>
           <div>
             <ul className="grid gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
               {cities.map((c) => (

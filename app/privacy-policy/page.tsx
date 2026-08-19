@@ -39,7 +39,7 @@ export default function Page() {
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Your choices</h2>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">You can ask us what we hold about you, ask us to correct it, or ask us to delete it. Call the number below and we will handle it directly rather than routing you through a form.</p>
           <div className="mt-10 rounded-lg bg-muted p-6">
-            <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">Questions</p>
+            <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Questions</p>
             <p className="mt-2 text-[0.95rem] text-muted-foreground">
               Anything on this page you want explained, call{" "}
               <a href={site.phoneHref} className="u text-foreground underline decoration-accent decoration-2 underline-offset-4">{site.phone}</a>{" "}

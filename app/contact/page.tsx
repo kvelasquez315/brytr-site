@@ -31,7 +31,7 @@ export default function Contact() {
       <section className="section bg-background">
         <div className="shell grid gap-10 lg:grid-cols-3 lg:gap-12">
           <div>
-            <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">By phone</p>
+            <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">By phone</p>
             <a href={site.phoneHref} className="u mt-3 block text-3xl font-medium text-foreground hover:text-accent-deep">{site.phone}</a>
             <p className="u mt-4 text-sm text-muted-foreground">Mon to Sat · 8am to 6pm</p>
             <p className="mt-4 text-[0.95rem] text-muted-foreground">
@@ -39,7 +39,7 @@ export default function Contact() {
             </p>
           </div>
           <div>
-            <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">Where we are</p>
+            <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Where we are</p>
             <address className="mt-3 not-italic">
               <p className="font-display text-xl font-bold text-foreground">{site.name}</p>
               <p className="mt-2 text-muted-foreground">{site.city}, {site.state}</p>
@@ -53,7 +53,7 @@ export default function Contact() {
             </div>
           </div>
           <div>
-            <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">What to expect</p>
+            <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">What to expect</p>
             <ul className="mt-4 space-y-3">
               <Check>Same day reply on anything sent before 6pm</Check>
               <Check>No follow-up sequence if you go quiet</Check>

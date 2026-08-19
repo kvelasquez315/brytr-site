@@ -166,7 +166,7 @@ export default function Pricing() {
                 </p>
               </div>
               <div className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-                <p className="u text-2xs uppercase tracking-[0.14em] text-accent-ink">Also worth reading</p>
+                <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">Also worth reading</p>
                 <ul className="mt-4 space-y-3">
                   {[["Compare all 10 brands", "/compare"], ["What the warranty covers", "/warranty"],
                     ["The five-step process", "/how-it-works"], ["Are permanent lights worth it?", "/blog/are-permanent-christmas-lights-worth-it"]].map(([t, h]) => (

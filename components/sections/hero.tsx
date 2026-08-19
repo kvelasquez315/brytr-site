@@ -32,14 +32,14 @@ export function Hero() {
       />
       <div className="hero-scrim absolute inset-0" aria-hidden />
 
-      <div className="shell relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_27rem] lg:gap-14 lg:py-24 xl:gap-20">
+      <div className="shell relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_28rem] lg:gap-16 lg:py-24 xl:gap-24">
         {/* ── left: short, keyword-forward ─────────────────────────── */}
-        <div className="max-w-[38rem]">
-          <p className="u text-2xs uppercase tracking-[0.2em] text-accent">
+        <div className="max-w-[46rem]">
+          <p className="label text-2xs uppercase tracking-[0.2em] text-accent">
             Omaha, Nebraska · Installed year round
           </p>
 
-          <h1 className="mt-4 text-[clamp(2.4rem,5vw,3.9rem)] leading-[0.98] text-on-dark">
+          <h1 className="mt-4 text-[clamp(2.4rem,4.4vw,4.4rem)] leading-[0.98] text-on-dark">
             Permanent Outdoor Lighting in Omaha, NE
           </h1>
 
@@ -88,7 +88,7 @@ export function Hero() {
         </div>
 
         {/* ── right: the form, in the hero ─────────────────────────── */}
-        <div className="lg:justify-self-end lg:w-[27rem]">
+        <div className="lg:justify-self-end lg:w-[28rem]">
           <QuoteForm variant="compact" heading="Get a free design consultation" />
         </div>
       </div>

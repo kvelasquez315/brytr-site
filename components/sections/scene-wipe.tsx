@@ -72,11 +72,11 @@ export function SceneWipe() {
         <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_20rem]">
           <div>
             <div className="flex items-center justify-between px-1 pb-3">
-              <span className={`u text-2xs uppercase tracking-[0.18em] transition-colors duration-[--dur-fast] ${mostlyScene ? "text-on-dark-muted" : "text-accent"}`}>
+              <span className={`label text-2xs uppercase tracking-[0.18em] transition-colors duration-[--dur-fast] ${mostlyScene ? "text-on-dark-muted" : "text-accent"}`}>
                 Warm white
               </span>
-              <span className="u text-2xs uppercase tracking-[0.16em] text-on-dark-muted">Drag the line</span>
-              <span className={`u text-2xs uppercase tracking-[0.18em] transition-colors duration-[--dur-fast] ${mostlyScene ? "text-accent" : "text-on-dark-muted"}`}>
+              <span className="label text-2xs uppercase tracking-[0.16em] text-on-dark-muted">Drag the line</span>
+              <span className={`label text-2xs uppercase tracking-[0.18em] transition-colors duration-[--dur-fast] ${mostlyScene ? "text-accent" : "text-on-dark-muted"}`}>
                 Game day
               </span>
             </div>
@@ -128,7 +128,7 @@ export function SceneWipe() {
 
           {/* spec panel — swaps with the state, so the right side is full either way */}
           <div className="flex flex-col rounded-sm bg-primary p-6 ring-1 ring-on-dark/12">
-            <p className="u text-2xs uppercase tracking-[0.14em] text-accent">
+            <p className="label text-2xs uppercase tracking-[0.14em] text-accent">
               {mostlyScene ? "Saved scene" : "Everyday setting"}
             </p>
             <h3 className="mt-3 text-xl text-on-dark">
@@ -147,7 +147,7 @@ export function SceneWipe() {
                 ? "Any two colors can be saved as their own scene and scheduled to a date range, so the house changes without anyone touching it."
                 : "This is the setting most customers leave on year round. Color is the exception, not the point."}
             </p>
-            <p className="u mt-6 border-t border-on-dark/10 pt-4 text-2xs uppercase leading-relaxed tracking-[0.14em] text-on-dark-muted">
+            <p className="label mt-6 border-t border-on-dark/10 pt-4 text-2xs uppercase leading-relaxed tracking-[0.14em] text-on-dark-muted">
               Photographed on a completed Omaha install
             </p>
           </div>

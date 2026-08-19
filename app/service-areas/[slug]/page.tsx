@@ -107,7 +107,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <div className="mt-7"><TextLink href="/how-it-works">See how the process works</TextLink></div>
           </div>
           <div>
-            <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">Neighborhoods and subdivisions</p>
+            <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Neighborhoods and subdivisions</p>
             <ul className="mt-4 flex flex-wrap gap-2.5">
               {c.neighborhoods.map((n) => (
                 <li key={n} className="rounded-sm border border-accent-deep/40 bg-card px-4 py-2 text-sm font-medium text-foreground">{n}</li>
@@ -126,7 +126,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 ["Service response", c.tier === "metro" ? "Same week" : "Scheduled route"],
               ].map(([k, v]) => (
                 <div key={k}>
-                  <dt className="u text-2xs uppercase tracking-[0.12em] text-muted-foreground">{k}</dt>
+                  <dt className="label text-2xs uppercase tracking-[0.12em] text-muted-foreground">{k}</dt>
                   <dd className="u mt-1 text-base font-medium text-foreground">{v}</dd>
                 </div>
               ))}
@@ -191,7 +191,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <Check onDark>Written warranty before you sign</Check>
             </ul>
             <div className="mt-7 border-t border-on-dark/12 pt-6">
-              <p className="u text-2xs uppercase tracking-[0.14em] text-accent">What a service call looks like</p>
+              <p className="label text-2xs uppercase tracking-[0.14em] text-accent">What a service call looks like</p>
               <ol className="mt-4 space-y-3">
                 {[
                   ["You call the number on this page", "Not a portal, not a franchise dispatcher."],
@@ -282,7 +282,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <p className="u mt-1 text-xs text-on-dark-muted">Mon to Sat · 8am to 6pm</p>
               </div>
               <div className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-                <p className="u text-2xs uppercase tracking-[0.14em] text-accent-ink">Most asked for in {c.name}</p>
+                <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">Most asked for in {c.name}</p>
                 <ul className="mt-4 space-y-3">
                   {["permanent-christmas-lights", "permanent-outdoor-lighting", "landscape-lighting", "repairs-and-service"].map((slug) => {
                     const sv = services.find((x) => x.slug === slug)!;

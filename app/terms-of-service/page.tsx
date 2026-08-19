@@ -39,7 +39,7 @@ export default function Page() {
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Liability</h2>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">This site is provided as is. We are not liable for decisions made purely on the basis of website content rather than on a written quote and a site survey.</p>
           <div className="mt-10 rounded-lg bg-muted p-6">
-            <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">Questions</p>
+            <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Questions</p>
             <p className="mt-2 text-[0.95rem] text-muted-foreground">
               Anything on this page you want explained, call{" "}
               <a href={site.phoneHref} className="u text-foreground underline decoration-accent decoration-2 underline-offset-4">{site.phone}</a>{" "}

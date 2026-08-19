@@ -60,51 +60,41 @@ export function QuickQuote() {
 
 /* 5 — CREDENTIAL BAND · under the hero · primary · carries signature edge #1
  *
- * Was a row of seven text pills of equal weight, which read as a tag cloud and gave a
- * manufacturer authorization the same visual value as "fully insured". Now five cells
- * with real structure: mark, role, icon, divided. Each cell renders a real logo the
- * moment one exists in content/badges.ts; until then it is a typographic lockup, which
- * looks intentional rather than broken. No copy on the page refers to missing assets. */
+ * Went from seven text pills to five cells to three. Three is the right number: a
+ * credential band should carry the things a homeowner actually checks — the review
+ * score, the insurance, and who is physically on the roof. Manufacturer names are out
+ * until the official logo files exist, because a brand set in our own typeface reads
+ * as a missing image. Each cell carries a line of substance so this is a band with
+ * weight, not a chip row. */
 export function ProofRail() {
   return (
     <section className="bg-primary">
       <ChannelEdge />
-      <div className="shell py-10 lg:py-12">
-        <div className="grid gap-8 lg:grid-cols-[15rem_1fr] lg:gap-12">
-          <div>
-            <p className="u text-2xs uppercase tracking-[0.18em] text-accent">Credentials</p>
-            <p className="mt-3 font-display text-xl font-bold leading-tight text-on-dark">
-              Authorized on both systems we sell.
-            </p>
-            <p className="mt-2 text-sm text-on-dark-muted">
-              Licensed and insured on both sides of the river.
-            </p>
-          </div>
-
-          <ul className="grid grid-cols-2 gap-x-6 gap-y-7 sm:grid-cols-3 lg:grid-cols-5 lg:gap-x-0 lg:divide-x lg:divide-on-dark/12">
-            {badges.map((b) => {
-              const I = iconMap[b.icon];
-              return (
-                <li key={b.name} className="lg:px-5 lg:first:pl-0 lg:last:pr-0">
+      <div className="shell py-12 lg:py-14">
+        <ul className="grid gap-x-10 gap-y-9 sm:grid-cols-3 lg:gap-x-0 lg:divide-x lg:divide-on-dark/12">
+          {badges.map((b) => {
+            const I = iconMap[b.icon];
+            return (
+              <li key={b.name} className="lg:px-10 lg:first:pl-0 lg:last:pr-0">
+                <div className="flex items-start gap-4">
                   {b.logo ? (
                     /* the mark in its own colors, never recolored */
-                    <div className="relative h-8 w-full max-w-[8.5rem]">
-                      <Image src={b.logo} alt={`${b.name} — ${b.role}`} fill sizes="140px" className="object-contain object-left" />
+                    <div className="relative h-10 w-32 shrink-0">
+                      <Image src={b.logo} alt={`${b.name} — ${b.role}`} fill sizes="128px" className="object-contain object-left" />
                     </div>
                   ) : (
-                    <I className={`size-6 ${b.authorization ? "text-accent" : "text-on-dark-muted"}`} />
+                    <span className="channel-tile shrink-0" aria-hidden><I className="size-6" /></span>
                   )}
-                  <p className={`mt-3 font-display text-[0.95rem] font-bold leading-snug ${b.authorization ? "text-on-dark" : "text-on-dark"}`}>
-                    {b.name}
-                  </p>
-                  <p className="u mt-1.5 text-2xs uppercase leading-relaxed tracking-[0.12em] text-on-dark-muted">
-                    {b.role}
-                  </p>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+                  <div>
+                    <p className="font-display text-2xl font-bold leading-none text-on-dark">{b.name}</p>
+                    <p className="label mt-2 text-2xs uppercase tracking-[0.14em] text-accent">{b.role}</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-[0.95rem] leading-relaxed text-on-dark-muted">{b.detail}</p>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
@@ -120,13 +110,15 @@ export function ServicesBento() {
           title="Eleven ways to light an Omaha property."
           lede="Every one of these runs on the same channel, the same controller and the same app. Add to it whenever you like."
         />
-        <div className="mt-11 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, si) => {
             const I = iconMap[s.icon];
             const withPhoto = photoExists(s.photo);
-            /* the lead card sits beside the two-column Christmas feature, so it takes a
-             * taller crop and a fourth bullet to reach the same depth */
-            const isLead = si === 0;
+            /* Every card is the same shape now. The Christmas card used to span two
+             * columns with its own layout, which is what made the grid read uneven —
+             * one feature tile forces every neighbour to either stretch or fall short.
+             * It keeps its "most requested" flag instead, which carries the emphasis
+             * without breaking the rhythm. */
             return (
               <article
                 key={s.slug}
@@ -138,60 +130,45 @@ export function ServicesBento() {
                   withPhoto
                     ? "bg-card shadow-[var(--shadow-lg)]"
                     : "bg-primary shadow-[var(--shadow-dark)] ring-1 ring-accent/15"
-                } ${s.slug === "permanent-christmas-lights" ? "sm:col-span-2 lg:col-span-2" : ""}`}
+                }`}
               >
                 {withPhoto ? (
-                  <Photo slot={s.photo!} ratio={isLead ? "4/5" : undefined} className="mb-5" sizes="(min-width:1024px) 30vw, 100vw" />
+                  <Photo slot={s.photo!} className="mb-5" sizes="(min-width:1024px) 30vw, 100vw" />
                 ) : (
                   <span className="channel-tile mb-5" aria-hidden><I className="size-7" /></span>
                 )}
                 {s.slug === "permanent-christmas-lights" && (
-                  <p className="u mb-2 text-2xs uppercase tracking-[0.14em] text-accent-ink">Most requested</p>
+                  <p className="label mb-2 text-2xs uppercase tracking-[0.14em] text-accent-ink">Most requested</p>
                 )}
-                <h3 className={`${s.slug === "permanent-christmas-lights" ? "text-3xl" : "text-xl"} ${withPhoto ? "text-foreground" : "text-on-dark"}`}>{s.name}</h3>
-                <p className={`mt-2.5 ${withPhoto ? "text-muted-foreground" : "text-on-dark-muted"} ${s.slug === "permanent-christmas-lights" ? "text-lg" : "text-[0.95rem]"}`}>
-                  {s.slug === "permanent-christmas-lights" ? s.lede : s.short}
+                <h3 className={`text-xl ${withPhoto ? "text-foreground" : "text-on-dark"}`}>{s.name}</h3>
+                <p className={`mt-2.5 text-[0.95rem] ${withPhoto ? "text-muted-foreground" : "text-on-dark-muted"}`}>
+                  {s.short}
                 </p>
-                {s.slug === "permanent-christmas-lights" ? (
-                  <div className="mt-5 grid flex-1 gap-6 sm:grid-cols-2">
-                    <ul className="space-y-2">
-                      {s.includes.map((i) => <Check key={i}>{i}</Check>)}
-                    </ul>
-                    <dl className="divide-y divide-border border-y border-border">
-                      {[["Storage needed", "None"], ["Install time", "1 day"], ["Takedown", "None, ever"], ["Also does", "Every other holiday"]].map(([k, v]) => (
-                        <div key={k} className="flex items-baseline justify-between gap-3 py-2.5">
-                          <dt className="text-xs text-muted-foreground">{k}</dt>
-                          <dd className="u text-xs font-medium text-foreground">{v}</dd>
-                        </div>
-                      ))}
-                    </dl>
-                  </div>
-                ) : (
-                  <ul className={`mt-4 flex-1 space-y-2 ${withPhoto ? "" : "on-dark-cell"}`}>
-                    {s.includes.slice(0, withPhoto && !isLead ? 3 : 5).map((i) => <Check key={i} onDark={!withPhoto}>{i}</Check>)}
-                  </ul>
-                )}
+                <ul className={`mt-4 flex-1 space-y-2 ${withPhoto ? "" : "on-dark-cell"}`}>
+                  {s.includes.slice(0, 3).map((i) => <Check key={i} onDark={!withPhoto}>{i}</Check>)}
+                </ul>
                 <div className="mt-5 pt-1">
                   <TextLink href={`/services/${s.slug}`} onDark={!withPhoto}>See {s.name}</TextLink>
                 </div>
               </article>
             );
           })}
-          <article className="flex flex-col rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] sm:col-span-2 lg:col-span-3">
-            <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-              <div>
-                <h3 className="text-2xl text-on-dark">Not sure which one you need?</h3>
-                <p className="mt-2.5 max-w-[70ch] text-[0.95rem] text-on-dark-muted">
-                  We design it on site after dark, when you can actually see what we are proposing. Free,
-                  and there is no obligation. Three questions usually settle it before we even measure.
-                </p>
-                <ul className="mt-5 grid gap-2.5 sm:grid-cols-3">
-                  <Check onDark>Staying five years or more? Start with the roofline.</Check>
-                  <Check onDark>Sit outside in summer? A pergola run earns more.</Check>
-                  <Check onDark>Front of the house the point? Uplight the trees.</Check>
-                </ul>
-              </div>
-              <Button asChild size="lg" className="shrink-0 self-start lg:self-center">
+          {/* the twelfth cell, so 11 services land on an even 4 x 3 grid */}
+          <article className="flex flex-col rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] ring-1 ring-accent/20">
+            <span className="channel-tile mb-5" aria-hidden>
+              <IcMeasured className="size-7" />
+            </span>
+            <h3 className="text-xl text-on-dark">Not sure which one you need?</h3>
+            <p className="mt-2.5 text-[0.95rem] text-on-dark-muted">
+              We design it on site after dark, when you can actually see what we are proposing.
+            </p>
+            <ul className="mt-4 flex-1 space-y-2 on-dark-cell">
+              <Check onDark>Staying five years or more? Start with the roofline.</Check>
+              <Check onDark>Sit outside in summer? A pergola run earns more.</Check>
+              <Check onDark>Front of the house the point? Uplight the trees.</Check>
+            </ul>
+            <div className="mt-5 pt-1">
+              <Button asChild size="sm">
                 <Link href="/free-design-consultation">Book a consultation</Link>
               </Button>
             </div>
@@ -246,7 +223,7 @@ export function MaterialsSplit() {
                 <line x1="182" y1="122" x2="248" y2="122" className="stroke-accent/50" strokeWidth="1" />
                 <line x1="182" y1="148" x2="248" y2="148" className="stroke-on-dark/35" strokeWidth="1" />
               </svg>
-              <figcaption className="u mt-4 text-2xs uppercase tracking-[0.16em] text-on-dark-muted">
+              <figcaption className="label mt-4 text-2xs uppercase tracking-[0.16em] text-on-dark-muted">
                 The assembly, in section. Fastened into fascia, never through shingles.
               </figcaption>
               <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-on-dark/12 pt-6">
@@ -257,7 +234,7 @@ export function MaterialsSplit() {
                   ["Rating", "IP66 sealed"],
                 ].map(([k, v]) => (
                   <div key={k}>
-                    <dt className="u text-2xs uppercase tracking-[0.12em] text-on-dark-muted">{k}</dt>
+                    <dt className="label text-2xs uppercase tracking-[0.12em] text-on-dark-muted">{k}</dt>
                     <dd className="u mt-1 text-sm font-medium text-on-dark">{v}</dd>
                   </div>
                 ))}
@@ -290,9 +267,9 @@ export function MaterialsSplit() {
               <Link key={t.name} href={t.href} className="block rounded-md border border-border bg-card p-5 transition-colors duration-[--dur-fast] hover:border-accent-deep">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <h3 className="text-lg text-foreground">{t.name}</h3>
-                  <span className="u text-xs uppercase tracking-[0.14em] text-muted-foreground">{t.tier}</span>
+                  <span className="label text-xs uppercase tracking-[0.14em] text-muted-foreground">{t.tier}</span>
                 </div>
-                <p className="u mt-1 text-xs uppercase tracking-[0.1em] text-accent-ink">on {t.on}</p>
+                <p className="label mt-1 text-xs uppercase tracking-[0.1em] text-accent-ink">on {t.on}</p>
                 <p className="mt-2 text-[0.95rem] text-muted-foreground">{t.note}</p>
               </Link>
             ))}

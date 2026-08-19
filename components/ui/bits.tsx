@@ -8,18 +8,37 @@ import { Input, Label, Select, Textarea } from "@/components/ui/field";
 export function SectionHead({
   eyebrow, title, lede, onDark, className, align = "left",
 }: { eyebrow?: string; title: string; lede?: string; onDark?: boolean; className?: string; align?: "left" | "center" }) {
+  /* Two columns at lg when there is a lede: title left, lede right, aligned to the
+   * same baseline. A left-aligned title with a narrow paragraph under it leaves the
+   * right half of a 1600px container empty, which is the single biggest reason a wide
+   * page reads thin. Splitting them uses the width the container actually has. */
+  const split = align === "left" && !!lede;
   return (
-    <div className={cn(align === "center" && "mx-auto max-w-[52rem] text-center", className)}>
-      {eyebrow && (
-        <p className={cn("eyebrow", onDark && "eyebrow--on-dark", align === "center" && "justify-center")}>
-          {eyebrow}
-        </p>
+    <div
+      className={cn(
+        align === "center" && "mx-auto max-w-[52rem] text-center",
+        split && "grid gap-x-14 gap-y-5 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-end",
+        className
       )}
-      <h2 className={cn(eyebrow && "mt-4", "text-[clamp(1.85rem,3.4vw,2.9rem)]", onDark ? "text-on-dark" : "text-foreground")}>
-        {title}
-      </h2>
+    >
+      <div>
+        {eyebrow && (
+          <p className={cn("eyebrow", onDark && "eyebrow--on-dark", align === "center" && "justify-center")}>
+            {eyebrow}
+          </p>
+        )}
+        <h2 className={cn(eyebrow && "mt-4", "text-[clamp(1.85rem,3.4vw,2.9rem)]", onDark ? "text-on-dark" : "text-foreground")}>
+          {title}
+        </h2>
+      </div>
       {lede && (
-        <p className={cn("mt-4 max-w-[74ch] text-lg", onDark ? "text-on-dark-muted" : "text-muted-foreground")}>
+        <p
+          className={cn(
+            "text-lg",
+            split ? "lg:pb-1.5" : "mt-4 max-w-[74ch]",
+            onDark ? "text-on-dark-muted" : "text-muted-foreground"
+          )}
+        >
           {lede}
         </p>
       )}

@@ -99,7 +99,8 @@ Three roles. Display is used with restraint — hero and H2 only.
 |---|---|---|
 | Display | **Archivo** 700/800 | Hero + H2 + H3 only. `-0.028em` tracking at display sizes. |
 | Body | **IBM Plex Sans** 400/500/600 | All body copy, 1.6 line-height. |
-| Utility | **IBM Plex Mono** 500 | Phone numbers, hours, prices, linear-foot figures, spec tables, license #s. `tnum` on. |
+| Utility | **IBM Plex Mono** 500 | NUMBERS ONLY: phone, hours, prices, linear-foot figures, spec VALUES, drive times, license #s. `tnum` on. |
+| Micro-label | **Archivo** 700, uppercase, `.label` | Eyebrows, spec keys, figcaption tags. |
 
 **Revised after the first review — the original pairing read as generated.** Chivo (display) and
 Figtree (body) were both too soft: wide apertures, round dots, generous shoulders. Figtree in
@@ -117,7 +118,13 @@ come from one family. Three unrelated Google fonts is itself a template tell; tw
 display face is a system. Plex Sans is also wider and more open than Barlow, with enough character
 in the `g` and `a` to not read as a default.
 
-Do not reintroduce Barlow, Chivo or Figtree. IBM Plex Mono makes every real number on the
+Do not reintroduce Barlow, Chivo or Figtree.
+
+**The mono face had crept onto ~50 decorative labels** — every eyebrow, every figcaption
+tag, every spec key. Monospace on a label is its own techy tell, and it was what the client
+kept pointing at even after the body face was fixed. Mono is now restricted to things that
+are literally numbers; labels use `.label` (Archivo 700 uppercase). If a label ever needs
+the mono face again, it is because it contains a figure. IBM Plex Mono makes every real number on the
 site — 1.2M lights, 402-810-3973, linear-foot pricing — read as data rather than as marketing.
 
 Modular scale: **1.2** (dense, not airy — this site is a lot of pages with a lot of substance).
@@ -161,7 +168,14 @@ than two consecutive light or two consecutive dark sections.
 Adjacency check: no archetype repeats adjacently; longest light run is 2 (6–7, 10–11, 16–17, 19–20);
 longest dark run is 2 (8–9, 14–15, 17 is light so 18 stands alone).
 
-Container: 1440px (`--container: 90rem`), and actually filled. Grid: 12 col. Spacing: 8pt base,
+Container: **1600px** (`--container: 100rem`), and actually filled. It was 90rem, which left
+roughly 240px of dead gutter each side on a 1920 monitor and made the whole site read thin —
+the client's words were "a lot of blank space on the sides."
+
+Widening a container does not by itself fill it. `SectionHead` therefore splits at `lg` into
+two columns — title left, lede right, baselines aligned — because a left-aligned title with a
+narrow paragraph beneath it leaves the right half of a wide container empty. That single change
+did more for density than the width did. Grid: 12 col. Spacing: 8pt base,
 broken deliberately for hierarchy — primary elements are larger and heavier rather than uniformly
 padded.
 

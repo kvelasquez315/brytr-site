@@ -64,11 +64,11 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             <p className="mt-4 text-lg text-on-dark">{c.verdict}</p>
             <div className="mt-6 grid grid-cols-2 gap-3">
               <div className="rounded-md bg-primary p-4">
-                <p className="u text-2xs uppercase tracking-[0.12em] text-on-dark-muted">{c.a}</p>
+                <p className="label text-2xs uppercase tracking-[0.12em] text-on-dark-muted">{c.a}</p>
                 <p className="u mt-1.5 text-sm font-medium text-on-dark">{c.costA}</p>
               </div>
               <div className="rounded-md bg-primary p-4">
-                <p className="u text-2xs uppercase tracking-[0.12em] text-on-dark-muted">{c.b}</p>
+                <p className="label text-2xs uppercase tracking-[0.12em] text-on-dark-muted">{c.b}</p>
                 <p className="u mt-1.5 text-sm font-medium text-on-dark">{c.costB}</p>
               </div>
             </div>
@@ -95,7 +95,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                   <Elevation night massing={i === 0 ? "gable" : "ranch"} lit={{ hex: "#f5c518", label: name as string }} className="block w-full" />
                 </div>
                 <h3 className="mt-6 text-2xl text-foreground">{name as string}</h3>
-                <p className="u mt-2 text-xs uppercase tracking-[0.14em] text-muted-foreground">{cost as string}</p>
+                <p className="label mt-2 text-xs uppercase tracking-[0.14em] text-muted-foreground">{cost as string}</p>
                 <dl className="mt-5 divide-y divide-border border-y border-border">
                   {(specs as { spec: string; v: string }[]).map((x) => (
                     <div key={x.spec} className="flex items-baseline justify-between gap-4 py-3">
@@ -193,7 +193,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                     </div>
                   ))}
                 </dl>
-                <p className="u mt-4 text-xs uppercase tracking-[0.14em] text-accent-ink">See the system</p>
+                <p className="label mt-4 text-xs uppercase tracking-[0.14em] text-accent-ink">See the system</p>
               </Link>
             ))}
           </div>
@@ -216,7 +216,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               <p className="mt-2 text-sm text-on-dark-muted">
                 The whole Omaha market side by side, including where our premium system loses.
               </p>
-              <p className="u mt-4 text-xs uppercase tracking-[0.14em] text-accent">Open the matrix</p>
+              <p className="label mt-4 text-xs uppercase tracking-[0.14em] text-accent">Open the matrix</p>
             </Link>
           </div>
         </div>

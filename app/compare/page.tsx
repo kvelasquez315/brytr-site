@@ -57,7 +57,7 @@ export default function CompareHub() {
                 </div>
               ))}
             </div>
-            <p className="u mt-3 px-1 text-2xs uppercase tracking-[0.14em] text-on-dark-muted">
+            <p className="label mt-3 px-1 text-2xs uppercase tracking-[0.14em] text-on-dark-muted">
               Every brand here does color. The difference is white quality, channel, app and who installs it.
             </p>
           </div>
@@ -98,7 +98,7 @@ export default function CompareHub() {
               <Link key={c.slug} href={`/compare/${c.slug}`} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5">
                 <h2 className="font-display text-lg font-bold text-foreground">{c.a} vs {c.b}</h2>
                 <p className="mt-2.5 flex-1 text-[0.95rem] text-muted-foreground">{c.verdict.split(". ")[0].replace(/\.+$/, "")}.</p>
-                <p className="u mt-4 text-xs uppercase tracking-[0.14em] text-accent-ink">Read the comparison</p>
+                <p className="label mt-4 text-xs uppercase tracking-[0.14em] text-accent-ink">Read the comparison</p>
               </Link>
             ))}
           </div>

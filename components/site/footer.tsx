@@ -34,7 +34,7 @@ export function Footer() {
           </div>
 
           <nav aria-label="Services" className="lg:col-span-1">
-            <h2 className="u text-2xs uppercase tracking-[0.16em] text-accent">Services</h2>
+            <h2 className="label text-2xs uppercase tracking-[0.16em] text-accent">Services</h2>
             <ul className="mt-4 space-y-2.5">
               {services.map((s) => (
                 <li key={s.slug}>
@@ -45,7 +45,7 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Lighting systems" className="lg:col-span-1">
-            <h2 className="u text-2xs uppercase tracking-[0.16em] text-accent">Systems</h2>
+            <h2 className="label text-2xs uppercase tracking-[0.16em] text-accent">Systems</h2>
             <ul className="mt-4 space-y-2.5">
               {systems.map((s) => (
                 <li key={s.slug}>
@@ -56,7 +56,7 @@ export function Footer() {
           </nav>
 
           <nav aria-label="Service areas" className="lg:col-span-1">
-            <h2 className="u text-2xs uppercase tracking-[0.16em] text-accent">Service areas</h2>
+            <h2 className="label text-2xs uppercase tracking-[0.16em] text-accent">Service areas</h2>
             <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
               {cities.map((c) => (
                 <li key={c.slug}>
@@ -67,13 +67,13 @@ export function Footer() {
           </nav>
 
           <div className="lg:col-span-1">
-            <h2 className="u text-2xs uppercase tracking-[0.16em] text-accent">Company</h2>
+            <h2 className="label text-2xs uppercase tracking-[0.16em] text-accent">Company</h2>
             <ul className="mt-4 space-y-2.5">
               {company.map(([l, h]) => (
                 <li key={h}><Link href={h} className="text-sm text-on-dark-muted hover:text-accent">{l}</Link></li>
               ))}
             </ul>
-            <h2 className="u mt-8 text-2xs uppercase tracking-[0.16em] text-accent">Contact</h2>
+            <h2 className="label mt-8 text-2xs uppercase tracking-[0.16em] text-accent">Contact</h2>
             <address className="mt-4 space-y-1.5 not-italic text-sm text-on-dark-muted">
               <p className="font-semibold text-on-dark">{site.name}</p>
               <p>{site.city}, {site.state}</p>

@@ -6,7 +6,7 @@ import { QuickQuote, ProofRail, ServicesBento, MaterialsSplit, WhyBrytr } from "
 import { SceneRail } from "@/components/sections/scene-rail";
 import { ProjectTabs } from "@/components/sections/project-tabs";
 import {
-  AppSplit, Founders, VersusTable, ServiceArea, CtaBand, ProcessRow, Reviews, Financing, HomeFaq, FinalCta,
+  AppSplit, VersusTable, ServiceArea, CtaBand, ProcessRow, Reviews, Financing, HomeFaq, FinalCta,
 } from "@/components/sections/home-b";
 import { Jsonld, localBusiness, faqSchema } from "@/lib/schema";
 import { homeFaqs } from "@/content/faqs";
@@ -27,7 +27,6 @@ export default function Home() {
         <QuickQuote />      {/*  9 · form + stats, mid-page convert  · neutral */}
         <SceneRail />       {/* 10 · media + chip rail               · raise   */}
         <AppSplit />        {/* 11 · split reversed                  · neutral */}
-        <Founders />        {/* 12 · portraits + story               · deep    */}
         <VersusTable />     {/* 13 · comparison table                · primary */}
         <ServiceArea />     {/* 14 · map + city tiles                · neutral */}
         <ProjectTabs />     {/* 15 · tabbed gallery                  · raise   */}

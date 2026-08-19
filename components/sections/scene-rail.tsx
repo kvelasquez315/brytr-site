@@ -70,7 +70,7 @@ export function SceneRail() {
               ))}
             </dl>
             <div className="mt-6 flex-1">
-              <p className="u text-2xs uppercase tracking-[0.14em] text-accent">How it is built</p>
+              <p className="label text-2xs uppercase tracking-[0.14em] text-accent">How it is built</p>
               <ol className="mt-3 space-y-2.5">
                 {[
                   "Pick the color in the app, or start from a preset",
@@ -85,7 +85,7 @@ export function SceneRail() {
                 ))}
               </ol>
             </div>
-            <p className="u mt-6 border-t border-on-dark/10 pt-4 text-2xs uppercase leading-relaxed tracking-[0.14em] text-on-dark-muted">
+            <p className="label mt-6 border-t border-on-dark/10 pt-4 text-2xs uppercase leading-relaxed tracking-[0.14em] text-on-dark-muted">
               {photo?.src ? "Photographed on a completed install" : "Measured elevation, lit to the selected scene"}
             </p>
           </div>

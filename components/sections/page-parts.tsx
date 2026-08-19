@@ -174,7 +174,7 @@ export function PageCta({ city }: { city?: string }) {
           </ul>
           <div className="mt-9 grid gap-5 border-t border-border pt-7 sm:grid-cols-2">
             <div>
-              <p className="u text-2xs uppercase tracking-[0.14em] text-muted-foreground">Or call us directly</p>
+              <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Or call us directly</p>
               <a href={site.phoneHref} className="u mt-1.5 block text-3xl font-medium text-foreground hover:text-accent-deep">{site.phone}</a>
               <p className="u mt-2 text-xs text-muted-foreground">Mon to Sat · 8am to 6pm</p>
             </div>

@@ -54,7 +54,7 @@ export default function Gallery() {
               />
             </div>
             <figcaption className="flex flex-col gap-2 p-6 sm:flex-row sm:items-baseline sm:justify-between">
-              <span className="u text-2xs uppercase tracking-[0.16em] text-accent">{lead.scene}</span>
+              <span className="label text-2xs uppercase tracking-[0.16em] text-accent">{lead.scene}</span>
               <span className="max-w-[70ch] text-[0.95rem] text-on-dark-muted">{lead.caption}</span>
             </figcaption>
           </figure>
@@ -76,7 +76,7 @@ export default function Gallery() {
                   />
                 </div>
                 <figcaption className="flex flex-1 flex-col p-5">
-                  <span className="u text-2xs uppercase tracking-[0.16em] text-accent-ink">{shot.scene}</span>
+                  <span className="label text-2xs uppercase tracking-[0.16em] text-accent-ink">{shot.scene}</span>
                   <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">{shot.caption}</p>
                 </figcaption>
               </figure>
@@ -113,7 +113,7 @@ export default function Gallery() {
               <article key={h} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
                 <h3 className="text-xl text-foreground">{h}</h3>
                 <p className="mt-2.5 flex-1 text-[0.95rem] text-muted-foreground">{p2}</p>
-                <p className="u mt-4 border-t border-border pt-3 text-2xs uppercase leading-relaxed tracking-[0.12em] text-accent-ink">{note}</p>
+                <p className="label mt-4 border-t border-border pt-3 text-2xs uppercase leading-relaxed tracking-[0.12em] text-accent-ink">{note}</p>
               </article>
             ))}
           </div>

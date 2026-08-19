@@ -144,7 +144,7 @@ export default function RecentProjects() {
                     </div>
                   ))}
                 </dl>
-                <p className="u mt-6 text-2xs uppercase tracking-[0.14em] text-accent-ink">What made this one work</p>
+                <p className="label mt-6 text-2xs uppercase tracking-[0.14em] text-accent-ink">What made this one work</p>
                 <ul className="mt-3 flex-1 space-y-2.5">
                   {p.includes.map((t) => (
                     <Check key={t}>{t}</Check>
@@ -162,7 +162,7 @@ export default function RecentProjects() {
                   <div className="relative aspect-video">
                     <Image src={s.src} alt={s.alt} fill sizes="(min-width:1024px) 23vw, 50vw" className="object-cover" />
                   </div>
-                  <figcaption className="u px-4 py-3 text-2xs uppercase tracking-[0.14em] text-muted-foreground">
+                  <figcaption className="label px-4 py-3 text-2xs uppercase tracking-[0.14em] text-muted-foreground">
                     {s.label}
                   </figcaption>
                 </figure>

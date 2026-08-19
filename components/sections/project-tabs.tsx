@@ -113,7 +113,7 @@ export function ProjectTabs() {
                 />
               </div>
               <figcaption className="p-5">
-                <p className="u text-2xs uppercase tracking-[0.16em] text-accent">{s.label}</p>
+                <p className="label text-2xs uppercase tracking-[0.16em] text-accent">{s.label}</p>
                 <p className={`mt-2 text-on-dark-muted ${i === 0 ? "text-[0.95rem]" : "text-sm"}`}>{s.note}</p>
               </figcaption>
               <div className="absolute inset-x-0 top-0 h-0.5 bg-accent/0 transition-colors duration-[--dur-base] group-hover:bg-accent" aria-hidden />
@@ -122,7 +122,7 @@ export function ProjectTabs() {
         </div>
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-lg bg-primary px-5 py-4 ring-1 ring-on-dark/10">
-          <p className="u text-2xs uppercase tracking-[0.16em] text-on-dark-muted">
+          <p className="label text-2xs uppercase tracking-[0.16em] text-on-dark-muted">
             {tab.key} · {tab.spec}
           </p>
           <TextLink onDark href="/gallery">

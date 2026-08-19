@@ -125,7 +125,8 @@
   /* ---- rhythm ------------------------------------------------------ */
   --section-y: 6.5rem;
   --section-y-sm: 3.5rem;
-  --container: 90rem;
+  --container: 100rem;   /* 1600px. Was 90rem, which left ~240px of dead
+                            gutter each side on a 1920 monitor and read thin. */
 }
 
 @theme inline {
@@ -305,6 +306,18 @@
   }
   .channel-tile--light {
     background: var(--brand-primary);
+  }
+
+  /* Micro-labels — eyebrows, spec keys, figcaption tags.
+   *
+   * These used the mono utility face, which put IBM Plex Mono on ~50 decorative
+   * labels sitewide. Monospace on a label is a techy tell, and it was the thing the
+   * client kept flagging. Mono is now reserved for what it is actually for: phone
+   * numbers, prices, linear-foot figures, spec VALUES, tabular data. Labels use the
+   * display face at 700, which reads editorial rather than terminal. */
+  .label {
+    font-family: var(--font-display);
+    font-weight: 700;
   }
 
   .eyebrow {
