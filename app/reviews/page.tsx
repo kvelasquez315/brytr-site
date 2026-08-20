@@ -61,12 +61,12 @@ export default function Reviews() {
                   <h2 className="font-display text-2xl font-bold text-on-dark">Read them on Google</h2>
                   <p className="mt-2.5 max-w-[62ch] text-[0.95rem] text-on-dark-muted">
                     We would rather point you at the source than retype our own reviews. Search
-                    &ldquo;Brytr Co Omaha&rdquo; and read all 177 in whatever order Google gives you.
+                    &ldquo;Brytr Omaha&rdquo; and read all {reviewProof.count} in whatever order Google gives you.
                   </p>
                 </div>
                 <dl className="flex gap-8">
-                  <div><dt className="u text-3xl font-medium text-on-dark">5.0</dt><dd className="mt-1 text-xs text-on-dark-muted">average</dd></div>
-                  <div><dt className="u text-3xl font-medium text-on-dark">177</dt><dd className="mt-1 text-xs text-on-dark-muted">reviews</dd></div>
+                  <div><dt className="u text-3xl font-medium text-on-dark">{reviewProof.average}</dt><dd className="mt-1 text-xs text-on-dark-muted">average</dd></div>
+                  <div><dt className="u text-3xl font-medium text-on-dark">{reviewProof.count}</dt><dd className="mt-1 text-xs text-on-dark-muted">reviews</dd></div>
                 </dl>
               </div>
             </>
@@ -79,7 +79,7 @@ export default function Reviews() {
                     <IcStars className="size-5 text-accent" />
                     <p className={`mt-4 ${i % 5 === 1 ? "font-display text-xl text-on-dark" : "text-[0.95rem] text-muted-foreground"}`}>{r.text}</p>
                     <footer className={`mt-4 border-t pt-3 text-sm ${i % 5 === 1 ? "border-on-dark/15 text-on-dark-muted" : "border-border text-muted-foreground"}`}>
-                      {r.name} · {r.town}
+                      {r.name}{r.when ? ` · ${r.when}` : ""} · Google review
                     </footer>
                   </blockquote>
                 ))}

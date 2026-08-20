@@ -1,5 +1,5 @@
 /* Confirmed facts only. Anything not verified from the client is absent by design.
- * Verified: 177 five-star Google reviews · 5.0 average · 1.2M lights installed locally
+ * Verified: 196 five-star Google reviews · 5.0 average (Google Business Profile, 20 Aug 2026) · 1.2M lights installed locally
  * W2 crews (not subcontracted) · founders Zac Van Buren & Sam Greguska
  * Phone 402-810-3973 · Omaha, NE · carries both Haven Evolution and Jellyfish
  */
@@ -10,6 +10,9 @@ export const site = {
   phone: "402-810-3973",
   phoneHref: "tel:+14028103973",
   city: "Omaha",
+  /* From Brytr's Google Business Profile. A real street address on the site, matching the
+   * profile exactly, is what ties the two together for the local pack. */
+  address: { street: "13436 C St", city: "Omaha", state: "NE", zip: "68144" },
   state: "NE",
   region: "Omaha metro, Lincoln, western Iowa and eastern Nebraska",
   url: "https://brytrco.com",
@@ -32,7 +35,7 @@ export const site = {
   /* Every figure here is confirmed. Do not add one that is not. */
   stats: [
     { figure: "1.2M", label: "Lights installed in Omaha", icon: "installCount" },
-    { figure: "5.0", label: "Average from 177 Google reviews", icon: "stars" },
+    { figure: "5.0", label: "Average from 196 Google reviews", icon: "stars" },
     { figure: "W2", label: "Crews, never subcontracted", icon: "hardHat" },
     { figure: "25 yr", label: "LED rating on the Signature system", icon: "warranty" },
   ],

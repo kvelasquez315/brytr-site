@@ -230,6 +230,30 @@ Caught and corrected, in order:
 Test before shipping a section: **count the pieces, then count the pieces the reference has.** If
 ours is fuller only because our elements are larger, it is not fuller.
 
+### Proof, and the numbers behind it
+
+Review text is now real (`content/reviews.ts`) and the source of every line is recorded in that
+file's header: five are the testimonials Brytr publishes on brytrco.com, verbatim; the rest are
+quoted verbatim from the Google Business Profile with the reviewer's name and the age Google shows.
+The rating and count come off the profile — **5.0 from 196**, read 20 Aug 2026. The client's own site
+still says "135+" and their Instagram says "170+"; the profile is the live number and the one to
+publish. It only goes up, so re-check it before quoting it anywhere permanent.
+
+The profile also gave us two things the site was missing and one thing it was getting wrong:
+
+- **A real street address** (13436 C St, Omaha NE 68144), now in the footer and in the LocalBusiness
+  schema, matching the profile character for character. A site with no street address is the most
+  common reason a listing and a site fail to associate for the local pack.
+- **Google's own review tags with its own counts** ("professional team 46", and so on) — data, not
+  our summary of what customers say.
+- **Opening hours were invented.** "Mon to Sat · 8am to 6pm" appeared in the footer, the schema and
+  four page templates, and nobody had ever confirmed it. All of it is gone; the schema now carries no
+  `openingHours` at all. Ask Zac for the real week. Wrong hours in schema are worse than none.
+
+Standing rule, restated because it nearly slipped: **never write a testimonial, and never publish a
+number, an hour, a licence or a warranty term the client has not given us.** The empty state of every
+proof block is designed for exactly this reason.
+
 ### What the home-page audit changed (and the rules that came out of it)
 
 Three independent critics graded the page against the rulebook with no knowledge of how it was built.

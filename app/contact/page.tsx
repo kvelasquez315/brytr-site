@@ -25,7 +25,7 @@ export default function Contact() {
         lede="Calls go to us, not to a call center. If we are on a roof we will call you back the same day."
         trail={trail}
         aside={<QuoteForm variant="financing" heading="Send a message" submitLabel="Send" />}
-        stats={[["Same day", "reply"], ["Mon to Sat", "8am to 6pm"], ["18", "cities served"]]}
+        stats={[["Same day", "reply"], ["Free", "on-site design"], ["18", "cities served"]]}
       />
 
       <section className="section bg-background">
@@ -33,7 +33,7 @@ export default function Contact() {
           <div>
             <p className="label text-muted-foreground">By phone</p>
             <a href={site.phoneHref} className="u mt-3 block text-3xl font-medium text-foreground hover:text-accent-deep">{site.phone}</a>
-            <p className="u mt-4 text-sm text-muted-foreground">Mon to Sat · 8am to 6pm</p>
+            <p className="mt-4 text-sm text-muted-foreground">We reply the same day, most days</p>
             <p className="mt-4 text-[0.95rem] text-muted-foreground">
               Best for anything urgent, and for service calls on an existing system.
             </p>

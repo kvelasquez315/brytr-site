@@ -6,7 +6,7 @@ import { SceneWipe } from "@/components/sections/scene-wipe";
 import { ProofRail, ServicesBento, MaterialsSplit, WhyBrytr } from "@/components/sections/home-a";
 import { ProjectTabs } from "@/components/sections/project-tabs";
 import {
-  Writing, ServiceArea, ProcessRow, FinalCta, CtaBand,
+  Writing, ServiceArea, ProcessRow, FinalCta, CtaBand, Reviews,
 } from "@/components/sections/home-b";
 import { Jsonld, localBusiness } from "@/lib/schema";
 
@@ -44,6 +44,10 @@ export default function Home() {
         <ProofRail />       {/*  2 · one compact row           · primary */}
         <ServicesBento />   {/*  3 · card grid                 · neutral */}
         <SceneWipe />       {/*  4 · THE SIGNATURE             · raise   */}
+        {/* Real Google review text finally exists (content/reviews.ts), so proof lands
+          * here — before the hardware argument rather than after it — which is the one
+          * structural note from the audit I could not act on at the time. */}
+        <Reviews />         {/*  4b · pull-quote + cards       · neutral */}
         <MaterialsSplit />  {/*  5 · split, hardware left      · deep    */}
         <WhyBrytr />        {/*  6 · four-up + bridge          · primary */}
         <ProjectTabs />     {/*  8 · tabbed photo gallery      · raise   */}

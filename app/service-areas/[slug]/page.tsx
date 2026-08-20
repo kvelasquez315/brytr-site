@@ -279,7 +279,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   ))}
                 </dl>
                 <a href="tel:+14028103973" className="u mt-5 block text-2xl font-medium text-accent">402-810-3973</a>
-                <p className="u mt-1 text-xs text-on-dark-muted">Mon to Sat · 8am to 6pm</p>
+                <p className="mt-1 text-xs text-on-dark-muted">Same-day reply, most days</p>
               </div>
               <div className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
                 <p className="label text-accent-ink">Most asked for in {c.name}</p>

@@ -176,10 +176,10 @@ export function PageCta({ city }: { city?: string }) {
             <div>
               <p className="label text-muted-foreground">Or call us directly</p>
               <a href={site.phoneHref} className="u mt-1.5 block text-3xl font-medium text-foreground hover:text-accent-deep">{site.phone}</a>
-              <p className="u mt-2 text-xs text-muted-foreground">Mon to Sat · 8am to 6pm</p>
+              <p className="mt-2 text-xs text-muted-foreground">Same-day reply, most days</p>
             </div>
             <dl className="grid grid-cols-2 gap-4">
-              {[["1 day", "typical install"], ["5.0", "from 177 reviews"], ["2 tiers", "premium and value"], ["18", "cities served"]].map(([f, l]) => (
+              {[["1 day", "typical install"], ["5.0", "from 196 reviews"], ["2 tiers", "premium and value"], ["18", "cities served"]].map(([f, l]) => (
                 <div key={l}>
                   <dt className="u text-lg font-medium leading-none text-foreground">{f}</dt>
                   <dd className="mt-1 text-xs text-muted-foreground">{l}</dd>

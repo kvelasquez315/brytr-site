@@ -13,7 +13,7 @@ export const googleLogo: string | null = null;
 
 export const reviewProofBadge = {
   score: "5.0",
-  count: "177",
+  count: "196",
   source: "Google reviews",
   note: "Every one from an Omaha homeowner",
 };

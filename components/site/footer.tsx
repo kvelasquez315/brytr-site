@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { site, nav } from "@/content/site";
+import { reviewProof } from "@/content/reviews";
 import { services } from "@/content/services";
 import { cities } from "@/content/cities";
 import { systems } from "@/content/systems";
@@ -74,11 +75,20 @@ export function Footer() {
               ))}
             </ul>
             <h2 className="label mt-8 text-accent">Contact</h2>
+            {/* Real NAP, character for character as it appears on Brytr's Google Business
+              * Profile — that exact match is what ties a site to its local pack listing.
+              * The line that used to sit at the bottom of this block ("Mon to Sat · 8am to
+              * 6pm") was never confirmed by the client, so it is gone until it is. */}
             <address className="mt-4 space-y-1.5 not-italic text-sm text-on-dark-muted">
               <p className="font-semibold text-on-dark">{site.name}</p>
-              <p>{site.city}, {site.state}</p>
+              <p>{site.address.street}</p>
+              <p>{site.address.city}, {site.address.state} {site.address.zip}</p>
               <p><a href={site.phoneHref} className="u text-on-dark hover:text-accent">{site.phone}</a></p>
-              <p className="u pt-2">Mon to Sat · 8am to 6pm</p>
+              <p className="pt-2">
+                <a href={reviewProof.url} target="_blank" rel="noopener noreferrer" className="text-on-dark hover:text-accent">
+                  <span className="u">{reviewProof.average}</span> from <span className="u">{reviewProof.count}</span> Google reviews
+                </a>
+              </p>
             </address>
           </div>
         </div>

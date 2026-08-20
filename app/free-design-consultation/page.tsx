@@ -60,7 +60,7 @@ export default function Consult() {
             <div className="mt-9 rounded-lg bg-primary p-6">
               <p className="label text-accent">Prefer to talk</p>
               <a href={site.phoneHref} className="u mt-2 block text-3xl font-medium text-on-dark hover:text-accent">{site.phone}</a>
-              <p className="u mt-3 text-sm text-on-dark-muted">Mon to Sat · 8am to 6pm</p>
+              <p className="mt-3 text-sm text-on-dark-muted">Same-day reply, most days</p>
             </div>
             <div className="mt-6 overflow-hidden rounded-lg ring-1 ring-border">
               <Elevation night massing="ranch" lit={{ hex: "#f5c518", label:"warm white" }} className="block w-full" />

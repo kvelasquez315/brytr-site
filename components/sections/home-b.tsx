@@ -131,7 +131,7 @@ export function Founders() {
               So they built the opposite. Brytr stocks a premium system and a value system, runs its own
               W2 crews rather than subcontracting the install, and services other companies&rsquo; work
               when those companies stop answering. It's a less profitable way to run a lighting company
-              and a much better way to keep 177 five-star reviews.
+              and a much better way to keep a five-star average.
             </p>
             <p className="mt-4 text-muted-foreground">
               Zac handles design and the drone work. Sam handles product, install standards and crew
@@ -413,14 +413,46 @@ export function ProcessRow() {
  * is pasted in, this renders the confirmed-proof layout instead of fabricated
  * testimonials. It switches to review cards automatically once the array is filled. */
 const proofFacts = [
-  { icon: IcStars, h: "5.0 average, 177 reviews", p: "Every one of them on Google, where you can read them yourself rather than take our word for it." },
+  { icon: IcStars, h: `${reviewProof.average} average, ${reviewProof.count} reviews`, p: "Every one of them on Google, where you can read them yourself rather than take our word for it." },
   { icon: IcHardHat, h: "W2 crews on every install", p: "Not a subcontractor network. The same people who quoted your job are the ones on the ladder." },
   { icon: IcVerified, h: "Verified in daylight and dark", p: "We don't close a job until you've signed off on both states of the system." },
   { icon: IcTwoTiers, h: "Two tiers, honestly compared", p: "We publish where our cheaper system beats our expensive one. Ask a single-brand dealer to do that." },
   { icon: IcWarranty, h: "Warranty in writing, up front", p: "Manufacturer coverage plus our workmanship coverage, both on paper before you sign." },
   { icon: IcMeasured, h: "1.2M lights installed locally", p: "All of it in and around Omaha. This is the only market we work in." },
 ];
+/* Five stars, drawn as five. A single star glyph beside a 5.0 reads as one star, which is
+ * the opposite of the point. */
+function StarRow({ tone = "dark" }: { tone?: "dark" | "light" }) {
+  return (
+    <span className="flex gap-1" aria-label="Five out of five stars">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg key={i} viewBox="0 0 20 20" className={`size-4 ${tone === "dark" ? "text-accent-ink" : "text-accent"}`} fill="currentColor" aria-hidden>
+          <path d="M10 1.6l2.5 5.2 5.7.7-4.2 3.9 1.1 5.7L10 14.4 4.9 17.1 6 11.4 1.8 7.5l5.7-.7L10 1.6Z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+/* Straight off the Google profile: the tags Google itself pulls out of the reviews, with
+ * its own counts. Not our summary of what customers say — Google's. */
+const mentioned: [string, string][] = [
+  ["Professional team", "46"],
+  ["Outdoor lighting", "10"],
+  ["Early installation", "5"],
+  ["Roofline lighting", "4"],
+];
+
 export function Reviews() {
+  /* PROOF, AT SIZE.
+   *
+   * This section rendered a fallback layout for weeks because there was no real review
+   * text to show. There is now: the rating and the count come off Brytr's Google
+   * Business Profile and every quote is verbatim (see content/reviews.ts for the source
+   * of each one). The audit's sharpest finding was that the whole page carried its proof
+   * in one 13px grey line, so this is built to be the loudest quiet thing on the page —
+   * the score set large, the count beside it, a link to the profile so anyone can check,
+   * and one review set at pull-quote size instead of six equal cards. */
   if (reviews.length === 0) {
     return (
       <section className="section bg-muted">
@@ -449,20 +481,91 @@ export function Reviews() {
       </section>
     );
   }
+
+  const featured = reviews.find((r) => r.feature) ?? reviews[0];
+  const rest = reviews.filter((r) => r !== featured).slice(0, 4); // an even 2 x 2 beside the pull-quote
+
   return (
     <section className="section bg-muted">
       <div className="shell">
-        <SectionHead eyebrow="Omaha says" title="Homeowners keep saying the same thing." />
-        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {reviews.slice(0, 6).map((r, i) => (
-            <blockquote key={i} className={i === 1 ? "rounded-lg bg-primary p-6" : "rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]"}>
-              <IcStars className={i === 1 ? "size-5 text-accent" : "size-5 text-accent"} />
-              <p className={`mt-4 ${i === 1 ? "font-display text-xl text-on-dark" : "text-[0.95rem] text-muted-foreground"}`}>{r.text}</p>
-              <footer className={`mt-4 border-t pt-3 text-sm ${i === 1 ? "border-on-dark/15 text-on-dark-muted" : "border-border text-muted-foreground"}`}>
-                {r.name} · {r.town}
+        <SectionHead
+          eyebrow="Omaha says"
+          title="Every one of these was written by somebody in this metro."
+        />
+
+        {/* the score, at a size you cannot miss, with the profile one tap away */}
+        <div className="mt-9 flex flex-wrap items-end justify-between gap-x-10 gap-y-6 border-b border-border pb-8">
+          <div className="flex items-end gap-5">
+            <p className="u font-display text-[clamp(3.2rem,7vw,5rem)] font-black leading-[0.85] text-foreground">
+              {reviewProof.average}
+            </p>
+            <div className="pb-1">
+              <StarRow />
+              <p className="mt-2 text-[0.95rem] text-muted-foreground">
+                <span className="u font-medium text-foreground">{reviewProof.count}</span> reviews on{" "}
+                {reviewProof.platform}, and not a single one below five stars
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-wrap items-center gap-x-7 gap-y-3">
+            <a
+              href={reviewProof.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-display text-[0.95rem] font-bold text-foreground underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
+            >
+              Read them on Google
+            </a>
+            <TextLink href="/reviews">More on this site</TextLink>
+          </div>
+        </div>
+
+        <div className="mt-8 grid gap-5 lg:grid-cols-[38fr_62fr]">
+          {/* one review at pull-quote size — six equal cards is the layout that made the
+            * rest of this page read as machine output */}
+          <div className="flex flex-col gap-5">
+            <blockquote className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
+              <StarRow tone="light" />
+              <p className="mt-6 font-display text-[1.35rem] font-bold leading-snug text-on-dark">
+                &ldquo;{featured.text}&rdquo;
+              </p>
+              <footer className="mt-6 border-t border-on-dark/15 pt-4 text-sm text-on-dark-muted">
+                {featured.name}
+                {featured.when ? ` · ${featured.when}` : ""} · Google review
               </footer>
             </blockquote>
-          ))}
+
+            {/* Google's own review tags, with Google's own counts — so the column ends level
+              * with the cards beside it and what it adds is data rather than padding. */}
+            <div className="flex-1 rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+              <p className="label text-accent-ink">Mentioned most in the reviews</p>
+              <dl className="mt-4 divide-y divide-border">
+                {mentioned.map(([k, v]) => (
+                  <div key={k} className="flex items-baseline justify-between gap-4 py-2.5 first:pt-0">
+                    <dt className="text-sm text-muted-foreground">{k}</dt>
+                    <dd className="u text-sm font-medium text-foreground">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+
+          <ul className="grid gap-5 sm:grid-cols-2">
+            {rest.map((r) => (
+              <li key={r.name + r.text.slice(0, 12)}>
+                <blockquote className="flex h-full flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+                  <StarRow />
+                  <p className="mt-4 flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">
+                    &ldquo;{r.text}&rdquo;
+                  </p>
+                  <footer className="mt-5 border-t border-border pt-3 text-sm text-muted-foreground">
+                    <span className="font-display font-bold text-foreground">{r.name}</span>
+                    {r.when ? ` · ${r.when}` : ""}
+                  </footer>
+                </blockquote>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

@@ -41,7 +41,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
       <Jsonld data={{
         "@context": "https://schema.org", "@type": "Product", name: s.name,
         description: s.lede, brand: { "@type": "Brand", name: s.maker },
-        aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "177" },
+        aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "196" },
       }} />
 
       <PageHero

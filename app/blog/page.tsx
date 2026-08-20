@@ -22,7 +22,7 @@ export default function BlogHub() {
         h1="Answers before you buy."
         lede="Twelve guides written from installing and repairing this product rather than from a manufacturer's brochure. Including the parts that do not flatter us."
         trail={trail}
-        stats={[["12", "guides"], ["0", "sponsored posts"], ["5.0", "from 177 reviews"]]}
+        stats={[["12", "guides"], ["0", "sponsored posts"], ["5.0", "from 196 reviews"]]}
         aside={
           <Link href={`/blog/${feat.slug}`} className="block rounded-lg bg-raise p-7 ring-1 ring-accent/15 shadow-[var(--shadow-dark)]">
             <p className="label text-accent">Start here · {feat.category}</p>

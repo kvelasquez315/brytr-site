@@ -1,4 +1,5 @@
 import { site } from "@/content/site";
+import { reviewProof } from "@/content/reviews";
 import { cities } from "@/content/cities";
 
 export const localBusiness = (city?: string) => ({
@@ -10,11 +11,24 @@ export const localBusiness = (city?: string) => ({
     "Permanent outdoor lighting installation for homes in the Omaha metro, Lincoln and eastern Nebraska.",
   url: site.url,
   telephone: `+1${site.phone.replace(/-/g, "")}`,
-  address: { "@type": "PostalAddress", addressLocality: city ?? site.city, addressRegion: site.state, addressCountry: "US" },
+  /* Street address, postal code and the profile link all come off Brytr's own Google
+   * Business Profile. A LocalBusiness node without a street address is the single most
+   * common reason a local pack listing and a site fail to associate. */
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: site.address.street,
+    addressLocality: city ?? site.city,
+    addressRegion: site.state,
+    postalCode: site.address.zip,
+    addressCountry: "US",
+  },
   areaServed: cities.map((c) => ({ "@type": "City", name: c.name, addressRegion: c.state })),
-  aggregateRating: { "@type": "AggregateRating", ratingValue: "5.0", reviewCount: "177", bestRating: "5" },
-  sameAs: [site.social.facebook, site.social.instagram],
-  openingHours: "Mo-Sa 08:00-18:00",
+  aggregateRating: { "@type": "AggregateRating", ratingValue: reviewProof.average, reviewCount: String(reviewProof.count), bestRating: "5" },
+  sameAs: [site.social.facebook, site.social.instagram, reviewProof.url],
+  /* openingHours removed on purpose: the hours that used to be here were never confirmed
+   * by the client, and publishing wrong hours in schema is worse than publishing none.
+   * The Google profile shows "closes 9 PM" but not the full week — ask Zac and put the
+   * real week back. */
 });
 
 export const breadcrumb = (trail: { name: string; href: string }[]) => ({
