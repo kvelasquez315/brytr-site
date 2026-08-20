@@ -104,8 +104,10 @@ export function ProofRail() {
             const I = iconMap[o.icon];
             return (
               <li key={o.name}>
-                <Link href={o.href} className="group flex items-center gap-3">
-                  <I className="size-6 shrink-0 text-accent" />
+                <Link href={o.href} className="group flex items-center gap-3.5">
+                  {/* in the tile, not floating: a 24px icon on its own reads as a stock
+                    * glyph no matter how it was drawn */}
+                  <span className="channel-tile !size-10 shrink-0" aria-hidden><I className="size-6" /></span>
                   <span>
                     <span className="block font-display text-[0.95rem] font-bold leading-none text-on-dark group-hover:underline">
                       {o.name}
@@ -214,7 +216,7 @@ export function ServicesBento() {
                     data-spot
                     className="flex h-full gap-3.5 p-5 transition-colors duration-[--dur-fast] hover:bg-raise"
                   >
-                    <I className="mt-0.5 size-6 shrink-0 text-accent" />
+                    <I className="mt-0.5 size-7 shrink-0 text-accent" />
                     <span className="block">
                       <span className="block font-display text-[0.95rem] font-bold text-on-dark">{s.name}</span>
                       <span className="mt-1 block text-sm leading-relaxed text-on-dark-muted">{s.short}</span>
@@ -445,7 +447,7 @@ export function MaterialsSplit() {
               <ul className="mt-4 space-y-4">
                 {craft.map(([h, p2, I]) => (
                   <li key={h} className="flex gap-3.5">
-                    <I className="mt-0.5 size-6 shrink-0 text-accent" />
+                    <I className="mt-0.5 size-7 shrink-0 text-accent" />
                     <div>
                       <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
                       <p className="mt-0.5 text-sm text-on-dark-muted">{p2}</p>
