@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/content/site";
@@ -270,61 +271,123 @@ export function CityTiles({
 /** THE CLOSER, two ways — and the rule is ONE per page.
  *
  *  form  — the full form beside the argument. For pages where the next step is a quote.
- *  phone — no form: the number at size, plus where to read more. For pages that already
- *          carry a form higher up, and for reference pages where a second form is noise.
+ *  phone — no form: the number at size in its own dark panel, plus where to read next.
+ *          For pages that already carry a form in the hero, which since the hero rewrite
+ *          is every page except the legal ones.
  *
  *  Sixteen templates used to render this AND the band below it, which is two closers and
- *  two forms on one page. */
+ *  two forms on one page.
+ *
+ *  Two things this used to get wrong. The phone variant was ONE column in a narrow shell,
+ *  so the page ended on a half-empty row — the blank-space problem, at the bottom of every
+ *  page that used it. And the "not ready for a visit" line always printed the same three
+ *  links, so /pricing closed by offering to explain how the pricing works and
+ *  /free-design-consultation closed by repeating its own H1 word for word. `omit` drops
+ *  the self-link; `title`/`body` let a page that already made this exact argument up top
+ *  make a different one down here. */
 export function PageCta({
-  city, variant = "form", stats = true,
-}: { city?: string; variant?: "form" | "phone"; stats?: boolean }) {
-  const argument = (
-    <div>
-      <SectionHead eyebrow="Next step" title="See it on your house before you buy." />
+  city, variant = "form", stats = true, title, body, omit = [], panelLink,
+}: {
+  city?: string;
+  variant?: "form" | "phone";
+  stats?: boolean;
+  title?: string;
+  body?: string;
+  /** hrefs to drop from the read-next line — pass the page's own path */
+  omit?: string[];
+  /** the link at the foot of the phone panel. Override it on the consultation page,
+   *  which would otherwise close by linking to itself. */
+  panelLink?: { href: string; label: string };
+}) {
+  const nextLinks = [
+    { href: "/pricing", label: "how the pricing works" },
+    { href: "/compare", label: "compare the brands we are asked about" },
+    { href: "/warranty", label: "what the warranty covers" },
+    { href: "/how-it-works", label: "what install day looks like" },
+  ]
+    .filter((l) => !omit.includes(l.href))
+    .slice(0, 3);
+
+  const head = (
+    <>
+      <SectionHead
+        eyebrow="Next step"
+        title={title ?? "See it on your house before you buy."}
+      />
       <p className="mt-4 max-w-[60ch] text-lg text-muted-foreground">
-        We measure on site, design it with you after dark, and hand you a written quote. If you
-        decide against it, you&rsquo;ve lost an hour and gained a plan.
+        {body ??
+          "We measure on site, design it with you after dark, and hand you a written quote. If you decide against it, you’ve lost an hour and gained a plan."}
       </p>
       <ul className="mt-7 space-y-3">
         <Check>Free on-site assessment</Check>
         <Check>Written quote, no pressure</Check>
         <Check>Financing available</Check>
       </ul>
-      <div className="mt-9 grid gap-5 border-t border-border pt-7 sm:grid-cols-2">
-        <div>
-          <p className="label text-muted-foreground">Or call us directly</p>
-          <a href={site.phoneHref} className="u mt-1.5 block text-3xl font-medium text-foreground hover:text-accent-deep">{site.phone}</a>
-          <p className="mt-2 text-xs text-muted-foreground">Same-day reply, most days</p>
-        </div>
-        {stats && (
-          <dl className="grid grid-cols-2 gap-4">
-            {[
-              ["1 day", "typical install"],
-              [reviewProof.average, `from ${reviewProof.count} reviews`],
-              ["W2", "our own crews"],
-              ["2 tiers", "premium and value"],
-            ].map(([f, l]) => (
-              <div key={l}>
-                <dt className="u text-lg font-medium leading-none text-foreground">{f}</dt>
-                <dd className="mt-1 text-xs text-muted-foreground">{l}</dd>
-              </div>
-            ))}
-          </dl>
-        )}
-      </div>
-      <p className="mt-7 text-sm text-muted-foreground">
-        Not ready for a visit? Read{" "}
-        <Link href="/pricing" className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4">how the pricing works</Link>,{" "}
-        <Link href="/compare" className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4">compare the brands we are asked about</Link>, or see{" "}
-        <Link href="/warranty" className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4">what the warranty covers</Link>.
-      </p>
-    </div>
+    </>
   );
 
+  const readNext = (
+    <p className="text-sm leading-relaxed text-muted-foreground">
+      Not ready for a visit? Read{" "}
+      {nextLinks.map((l, i) => (
+        <Fragment key={l.href}>
+          {i > 0 && (i === nextLinks.length - 1 ? ", or " : ", ")}
+          <Link
+            href={l.href}
+            className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4"
+          >
+            {l.label}
+          </Link>
+        </Fragment>
+      ))}
+      .
+    </p>
+  );
+
+  const statList: [string, string][] = [
+    ["1 day", "typical install"],
+    [reviewProof.average, `from ${reviewProof.count} reviews`],
+    ["W2", "our own crews"],
+    ["2 tiers", "premium and value"],
+  ];
+
   if (variant === "phone") {
+    /* Two columns, so the page does not end on an empty half. The number gets the dark
+     * panel because it is the one thing on this band we want somebody to act on. */
     return (
       <section className="section bg-muted">
-        <div className="shell max-w-[74rem]">{argument}</div>
+        <div className="shell grid items-start gap-10 lg:grid-cols-[1fr_24rem] lg:gap-14">
+          <div>
+            {head}
+            <div className="mt-9 border-t border-border pt-7">{readNext}</div>
+          </div>
+
+          <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
+            <p className="label text-accent">Call the shop</p>
+            <a
+              href={site.phoneHref}
+              className="u mt-2.5 block text-[clamp(1.6rem,3vw,2.1rem)] font-medium leading-none text-on-dark hover:text-accent"
+            >
+              {site.phone}
+            </a>
+            <p className="mt-3 text-sm text-on-dark-muted">Same-day reply, most days.</p>
+            {stats && (
+              <dl className="mt-7 grid grid-cols-2 gap-x-5 gap-y-5 border-t border-on-dark/12 pt-6">
+                {statList.map(([f, l]) => (
+                  <div key={l}>
+                    <dt className="u text-lg font-medium leading-none text-on-dark">{f}</dt>
+                    <dd className="mt-1.5 text-xs leading-snug text-on-dark-muted">{l}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+            <div className="mt-6 border-t border-on-dark/12 pt-5">
+              <TextLink onDark href={panelLink?.href ?? "/free-design-consultation"}>
+                {panelLink?.label ?? "Book the on-site measure"}
+              </TextLink>
+            </div>
+          </div>
+        </div>
       </section>
     );
   }
@@ -332,7 +395,27 @@ export function PageCta({
   return (
     <section className="section bg-muted">
       <div className="shell grid items-start gap-10 lg:grid-cols-[52fr_48fr] lg:gap-14">
-        {argument}
+        <div>
+          {head}
+          <div className="mt-9 grid gap-5 border-t border-border pt-7 sm:grid-cols-2">
+            <div>
+              <p className="label text-muted-foreground">Or call us directly</p>
+              <a href={site.phoneHref} className="u mt-1.5 block text-3xl font-medium text-foreground hover:text-accent-deep">{site.phone}</a>
+              <p className="mt-2 text-xs text-muted-foreground">Same-day reply, most days</p>
+            </div>
+            {stats && (
+              <dl className="grid grid-cols-2 gap-4">
+                {statList.map(([f, l]) => (
+                  <div key={l}>
+                    <dt className="u text-lg font-medium leading-none text-foreground">{f}</dt>
+                    <dd className="mt-1 text-xs text-muted-foreground">{l}</dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+          </div>
+          <div className="mt-7">{readNext}</div>
+        </div>
         <QuoteForm variant="full" city={city} />
       </div>
     </section>
