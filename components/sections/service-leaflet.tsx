@@ -55,6 +55,11 @@ export function ServiceLeaflet({ className = "" }: { className?: string }) {
       const map = L.map(host.current!, {
         center: [41.15, -96.6],
         zoom: 8,
+        /* fractional zoom, or fitBounds rounds DOWN to the next whole level and the
+         * whole service area sits in the middle of the frame with a third of the map
+         * spare on every side. With zoomSnap off, Grand Island lands on the edge —
+         * which is where the furthest town should be. */
+        zoomSnap: 0,
         scrollWheelZoom: false,
         zoomControl: true,
         attributionControl: true,
@@ -69,7 +74,7 @@ export function ServiceLeaflet({ className = "" }: { className?: string }) {
       }).addTo(map);
 
       /* the metro radius, dashed — the same device the reference uses */
-      L.circle(SHOP, {
+      const ring = L.circle(SHOP, {
         radius: 48000, // ~30 miles, which is the same-week metro
         color: "#f5c518",
         weight: 1.5,
@@ -121,8 +126,13 @@ export function ServiceLeaflet({ className = "" }: { className?: string }) {
         .addTo(map)
         .bindTooltip("Brytr crews stage here", { direction: "top", opacity: 1 });
 
+      /* Fit the towns AND the dashed ring. Fitting the towns alone put Omaha hard on the
+       * right edge and sliced the ring in half, because the ring reaches ~30 miles past
+       * the easternmost pin. zoomSnap is off above, so this lands on a fractional zoom and
+       * Grand Island sits just inside the left edge instead of a whole level short. */
       map.fitBounds(
-        L.latLngBounds(cities.map((c) => [c.lat, c.lon] as [number, number])).pad(0.12)
+        L.latLngBounds(cities.map((c) => [c.lat, c.lon] as [number, number])).extend(ring.getBounds()),
+        { paddingTopLeft: [20, 16], paddingBottomRight: [20, 26] } // room for scale + attribution
       );
 
       /* the box is sized by the column beside it, so it can change after Leaflet has

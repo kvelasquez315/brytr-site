@@ -406,9 +406,12 @@
       transform var(--dur-base) var(--ease-out-expo);
   }
   [data-spot][data-inview="true"] { outline-color: var(--brand-accent); }
-  @media (hover: hover) {
-    [data-spot]:hover { outline-color: var(--brand-accent); }
-  }
+  /* Hover is NOT wrapped in `@media (hover: hover)` any more. A touchscreen laptop
+   * reports `hover: none` in Chrome even though it has a mouse plugged in, which left
+   * that machine with no hover highlight at all AND the scroll highlight firing on a
+   * desktop-width layout — the exact opposite of what it should do. Hover is now always
+   * live and the scroll pass is gated on viewport width instead (see ui/spotlight.tsx). */
+  [data-spot]:hover { outline-color: var(--brand-accent); }
   @media (prefers-reduced-motion: reduce) {
     [data-spot] { transition: outline-color 1ms linear; }
   }
@@ -514,6 +517,20 @@
     0 0 0 3px rgb(245 197 24 / 0.22),
     0 0 12px 3px rgb(245 197 24 / 0.75),
     0 0 34px 10px rgb(245 197 24 / 0.35);
+}
+.brytr-map .brytr-pin { transition: box-shadow 160ms ease-out, transform 160ms ease-out; }
+.brytr-map .leaflet-marker-icon:hover .brytr-pin { transform: scale(1.35); }
+.brytr-map .leaflet-marker-icon:hover .brytr-pin.is-metro {
+  box-shadow:
+    0 0 0 3px rgb(245 197 24 / 0.3),
+    0 0 16px 5px rgb(245 197 24 / 0.95),
+    0 0 44px 14px rgb(245 197 24 / 0.5);
+}
+.brytr-map .leaflet-marker-icon:hover .brytr-pin:not(.is-metro) {
+  background: #fff;
+  box-shadow:
+    0 0 0 3px rgb(230 236 242 / 0.28),
+    0 0 14px 4px rgb(230 236 242 / 0.7);
 }
 .brytr-map .brytr-shop {
   display: block;

@@ -8,7 +8,7 @@ import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Tile, Check, TextLink, QuoteForm, ChannelEdge } from "@/components/ui/bits";
 import { Spotlight } from "@/components/ui/spotlight";
-import { IcVerified, IcMeasured, IcSameDay, IcFinancing, IcLadder, IcYearlyCost, IcHardHat, IcTwoTiers, IcOtherBrand } from "@/components/icons";
+import { IcVerified, IcMeasured, IcSameDay, IcFinancing, IcLadder, IcYearlyCost, IcHardHat, IcTwoTiers, IcOtherBrand, IcRoofline, IcSoffit, IcWeatherSealed } from "@/components/icons";
 
 
 /* 4 — QUICK QUOTE + STATS · asymmetric split · neutral */
@@ -203,12 +203,79 @@ export function ServicesBento() {
   );
 }
 
-/* 7 — THE MATERIALS · asymmetric split, photo left · neutral-deep */
-const tiers = [
-  { name: "Brytr Signature", on: "Haven Evolution", note: "Dedicated warm white, 4 in. LED spacing, 25 year rating.", tier: "Premium", href: "/lighting-systems/brytr-signature" },
-  { name: "Brytr Basic", on: "Jellyfish", note: "A real permanent system at a lower entry point.", tier: "Value", href: "/lighting-systems/brytr-basic" },
-  { name: "Landscape and Bistro", on: "Haven 9 and X Series", note: "Path, uplight and pergola runs on the same app.", tier: "Add-on", href: "/lighting-systems/haven-9-series-landscape-lights" },
+/* 7 — THE HARDWARE · one recommended tier, then the craft that is common to both
+ *
+ * Round three. Round one was seven white cards in two columns whose counts did not line
+ * up. Round two was even rows, which fixed the alignment but, in the client's words,
+ * still read as "just a lot of text, and a bit disorganized" — and, fairly, "I don't see
+ * how it's highlighting anything": three identically-ringed panels highlight nothing.
+ *
+ * Two changes. HIERARCHY: the Signature tier is the recommendation, so it is the only lit
+ * panel — brighter surface, full amber edge, a tag, and the only filled button. The other
+ * two are quiet by design. COMPARABILITY: the prose blurb per tier is gone, replaced by
+ * the same four spec rows in the same order on all three, so the eye reads across instead
+ * of down through paragraphs. Every value here already appears on the system pages and in
+ * content/compares.ts — nothing was written to fill a row.
+ *
+ * The manufacturer name is a value in a spec row, not a label sitting where a logo should
+ * be. When the official Haven and Jellyfish files arrive they go in the `logo` slot on
+ * each tier in content/systems.ts.
+ */
+type Tier = {
+  name: string; tier: string; lead?: boolean; tag?: string;
+  rows: [string, string][]; who: string; href: string;
+};
+const tiers: Tier[] = [
+  {
+    name: "Brytr Signature", tier: "Premium", lead: true, tag: "What we recommend",
+    rows: [
+      ["Hardware", "Haven Evolution"],
+      ["White light", "Dedicated channel"],
+      ["LED spacing", "4 in., addressable"],
+      ["Rated life", "25 years"],
+    ],
+    who: "Long or complex rooflines, and anyone who leaves warm white on every night.",
+    href: "/lighting-systems/brytr-signature",
+  },
+  {
+    name: "Brytr Basic", tier: "Value",
+    rows: [
+      ["Hardware", "Jellyfish"],
+      ["White light", "Color mixed"],
+      ["LED spacing", "Wider"],
+      ["Rated life", "Shorter"],
+    ],
+    who: "A simple single-story roofline, or a budget you would rather split with landscape.",
+    href: "/lighting-systems/brytr-basic",
+  },
+  {
+    name: "Landscape and bistro", tier: "Add-on",
+    rows: [
+      ["Hardware", "Haven 9 and X Series"],
+      ["Runs", "Path, uplight, pergola"],
+      ["Control", "The same app"],
+      ["Pairs with", "Either tier"],
+    ],
+    who: "Beds, trees, patios and pergolas, added to either tier or installed on their own.",
+    href: "/lighting-systems/haven-9-series-landscape-lights",
+  },
 ];
+
+const craft: [string, string, typeof IcRoofline][] = [
+  ["Into fascia, never shingles", "Every penetration sealed as it is made.", IcRoofline],
+  ["Mitered at every transition", "Valleys, dormers and returns.", IcMeasured],
+  ["Concealed wire runs", "No drops down a downspout or across a soffit.", IcSoffit],
+  ["Capped terminations", "Sealed end caps, not tape.", IcWeatherSealed],
+];
+
+const specSheet: [string, string][] = [
+  ["Channel", "Extruded aluminum"],
+  ["Diffuser", "Frosted polycarbonate"],
+  ["LED spacing", "4 in., addressable"],
+  ["Weather rating", "IP66 sealed"],
+  ["White channel", "Dedicated, not color mixed"],
+];
+
 export function MaterialsSplit() {
   return (
     <section className="section bg-muted">
@@ -219,55 +286,72 @@ export function MaterialsSplit() {
           lede="Most installers carry one brand and therefore have one recommendation. We carry a premium tier and a value tier, which means we have no reason to talk you into either."
         />
 
-        {/* THREE PANELS, DARK ON CREAM.
-          *
-          * This section was a left column with a photo and a 2x2 of white cards beside a
-          * right column with three more white cards — seven white boxes, and two columns
-          * whose card counts did not line up, so nothing aligned with anything. Now it is
-          * full-width rows, each internally even: three tier panels, then the photograph,
-          * then four craft details across. Inverting the panels to the dark surface on a
-          * cream section reads as premium and stops the page being a field of white
-          * rectangles.
-          *
-          * The manufacturer name is body text inside a sentence, not a label sitting where
-          * a logo should be. When the official Haven and Jellyfish files arrive they go in
-          * the `logo` slot on each tier in content/systems.ts. */}
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+        <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-3">
           {tiers.map((t) => (
-            <Link
+            <article
               key={t.name}
-              href={t.href}
               data-spot
-              className="group flex flex-col rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10"
+              className={`relative flex flex-col overflow-hidden rounded-lg p-7 pt-8 ${
+                t.lead
+                  ? "bg-raise shadow-[var(--shadow-dark)] ring-2 ring-accent"
+                  : "bg-primary shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10"
+              }`}
             >
-              <span className="channel-edge mb-6 block w-14" aria-hidden />
-              <p className="label text-accent">{t.tier}</p>
-              <h3 className="mt-2 font-display text-2xl font-bold leading-tight text-on-dark group-hover:underline">
-                {t.name}
+              {/* the lit edge: full output on the tier we recommend, banked on the others */}
+              <span
+                className={`absolute inset-x-0 top-0 h-1 ${t.lead ? "bg-accent" : "bg-accent/25"}`}
+                aria-hidden
+              />
+
+              {/* min-height reserves the tag row on every card, so the spec rows below
+                * start on the same baseline across all three and the eye can read across. */}
+              <div className="flex min-h-7 items-start justify-between gap-3">
+                <p className="label text-accent">{t.tier}</p>
+                {t.tag && (
+                  <p className="label rounded-sm bg-accent px-2 py-1 text-accent-foreground">{t.tag}</p>
+                )}
+              </div>
+
+              <h3 className="mt-2 font-display text-2xl font-bold leading-tight text-on-dark">
+                <Link href={t.href} className="hover:text-accent">{t.name}</Link>
               </h3>
-              <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-on-dark-muted">
-                {t.note} Built on {t.on} hardware.
+
+              <dl className="mt-5 divide-y divide-on-dark/12 border-y border-on-dark/12">
+                {t.rows.map(([k, v]) => (
+                  <div key={k} className="flex items-baseline justify-between gap-4 py-2.5">
+                    <dt className="text-sm text-on-dark-muted">{k}</dt>
+                    <dd className="u text-right text-sm font-medium text-on-dark">{v}</dd>
+                  </div>
+                ))}
+              </dl>
+
+              <p className="mt-5 flex-1 text-[0.95rem] leading-relaxed text-on-dark-muted">
+                <span className="label block text-on-dark">Best for</span>
+                {t.who}
               </p>
-              <span className="label mt-6 border-t border-on-dark/12 pt-4 text-on-dark">
-                See the system
-              </span>
-            </Link>
+
+              <div className="mt-6">
+                {t.lead ? (
+                  <Button asChild size="sm"><Link href={t.href}>See the Signature system</Link></Button>
+                ) : (
+                  <TextLink onDark href={t.href}>See the system</TextLink>
+                )}
+              </div>
+            </article>
           ))}
         </div>
 
-        {/* MORE PIECES, NONE OVERSIZED.
-          *
-          * This was one full-bleed 21/9 photograph with a four-across caption strip under
-          * it — which is the "make it bigger to look full" move again, just with an image
-          * instead of type. A section is full because it has more to say, not because one
-          * element got scaled up. Three modest pieces now: the hardware photographed, the
-          * four things we do to install it, and the spec sheet. Each earns its own space.
-          *
-          * The specs are the same ones already on the channel diagram and the tier copy —
-          * nothing new was invented to fill a column. */}
+        {/* A labelled band, so the three panels below read as SUPPORTING the tiers rather
+          * than as three more things of equal weight. That flatness is most of what made
+          * the section feel disorganized. */}
+        <div className="mt-12 flex items-center gap-5">
+          <p className="label shrink-0 text-accent-ink">Same craft on either tier</p>
+          <span className="h-px flex-1 bg-foreground/15" aria-hidden />
+        </div>
+
         <div className="mt-5 grid items-stretch gap-5 lg:grid-cols-3">
-          <figure className="overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
-            <div className="relative aspect-4/3">
+          <figure className="flex flex-col overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
+            <div className="relative min-h-56 flex-1">
               <Image
                 src="/img/channel-detail.jpg"
                 alt="Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along the gable"
@@ -276,11 +360,10 @@ export function MaterialsSplit() {
                 className="object-cover"
               />
             </div>
-            <figcaption className="p-5">
+            <figcaption className="p-6">
               <p className="label text-accent">The channel, close up</p>
               <p className="mt-1.5 text-sm leading-relaxed text-on-dark-muted">
-                Extruded aluminum, color matched to the fascia, diffuser facing down. At noon it
-                reads as trim.
+                Color matched to the fascia, diffuser facing down. At noon it reads as trim.
               </p>
             </figcaption>
           </figure>
@@ -288,36 +371,32 @@ export function MaterialsSplit() {
           <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
             <p className="label text-accent">How it goes on</p>
             <ul className="mt-5 divide-y divide-on-dark/10">
-              {[
-                ["Into fascia, never shingles", "Every penetration sealed as it is made."],
-                ["Mitered at every transition", "Valleys, dormers and returns."],
-                ["Concealed wire runs", "No drops down a downspout or across a soffit."],
-                ["Capped terminations", "Sealed end caps, not tape."],
-              ].map(([h, p2]) => (
-                <li key={h} className="py-3.5 first:pt-0 last:pb-0">
-                  <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
-                  <p className="mt-1 text-sm text-on-dark-muted">{p2}</p>
+              {craft.map(([h, p2, I]) => (
+                <li key={h} className="flex gap-4 py-4 first:pt-0 last:pb-0">
+                  <I className="mt-0.5 size-6 shrink-0 text-accent" />
+                  <div>
+                    <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
+                    <p className="mt-1 text-sm text-on-dark-muted">{p2}</p>
+                  </div>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
+          <div className="flex flex-col rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
             <p className="label text-accent">On the spec sheet</p>
             <dl className="mt-5 divide-y divide-on-dark/10">
-              {[
-                ["Channel", "Extruded aluminum"],
-                ["Diffuser", "Frosted polycarbonate"],
-                ["LED spacing", "4 in., addressable"],
-                ["Weather rating", "IP66 sealed"],
-                ["White channel", "Dedicated, not color mixed"],
-              ].map(([k, v]) => (
-                <div key={k} className="flex items-baseline justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+              {specSheet.map(([k, v]) => (
+                <div key={k} className="flex items-baseline justify-between gap-4 py-3.5 first:pt-0">
                   <dt className="text-sm text-on-dark-muted">{k}</dt>
                   <dd className="u text-right text-sm font-medium text-on-dark">{v}</dd>
                 </div>
               ))}
             </dl>
+            <p className="mt-auto border-t border-on-dark/10 pt-4 text-sm text-on-dark-muted">
+              These are the Signature numbers. The Basic tier differs on the rows above, and we
+              show you both side by side.
+            </p>
           </div>
         </div>
 
