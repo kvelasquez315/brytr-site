@@ -1,19 +1,44 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services, serviceBySlug } from "@/content/services";
+import { detailFor } from "@/content/service-detail";
 import { systemBySlug } from "@/content/systems";
 import { serviceFaqsFor } from "@/content/faqs";
 import { iconMap } from "@/content/icon-map";
 import { metroCities } from "@/content/cities";
 import { Shell } from "@/app/layout-shell";
 import { Faq } from "@/components/sections/faq";
-import { Photo, photoExists } from "@/components/ui/photo";
-import { Elevation } from "@/components/sections/elevation";
+import { ServiceFigure } from "@/components/sections/service-figures";
 import {
-  PageHero, PageCta, BandCta, SpecTable, CityTiles, SectionHead, Check, TextLink,
+  PageHero, PageCta, SpecTable, SectionHead, Check, TextLink,
 } from "@/components/sections/page-parts";
 import { Jsonld, breadcrumb, serviceSchema, faqSchema } from "@/lib/schema";
+
+/* ONE TEMPLATE, ELEVEN PAGES — and it used to show that.
+ *
+ * Before this pass every one of the eleven service pages carried: the same six "Step 1…6"
+ * cards with identical copy, the same Quick Facts table (including "Roof types: shingle,
+ * metal, tile, flat" on the landscape page), the same permanent-versus-hanging comparison
+ * table (on the hardscape page, where nobody hangs anything seasonally), the same drawn
+ * elevation in the same slot, the same four related services from `slice(0, 4)`, and the
+ * same eighteen city tiles. Eleven URLs, one page.
+ *
+ * Everything that should differ now comes from content/service-detail.ts:
+ *   · the facts panel is written for the service, and is true of it
+ *   · what is in the quote is that service's list, with no step numbers
+ *   · the CENTREPIECE is unique to the service — the eave in section on roofline, beam
+ *     angle against overhang depth on soffit, a wall in section on hardscape, the year as
+ *     a calendar on Christmas, Saturday beside Sunday on gameday
+ *   · the hanging-lights comparison only appears where it is an honest comparison
+ *   · what people also look at is chosen, in order, not sliced off the array
+ *   · the page closes on a photograph of that service, so eleven pages do not all show
+ *     the same house
+ *
+ * Hero: the form (these pages take leads). Closer: the no-form variant, because two lead
+ * forms on one page is the mistake the shared layer was carrying.
+ */
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -30,6 +55,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+/* The one comparison that recurs — but only on the pages where somebody genuinely has the
+ * choice between installing this once and doing it again every year. */
 const compareRows = [
   { spec: "First year cost", a: "Higher, once", b: "Lower, every year" },
   { spec: "Ten year cost", a: "One install", b: "Ten rentals or ten purchases" },
@@ -45,9 +72,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const s = serviceBySlug(slug);
   if (!s) notFound();
+  const d = detailFor(s.slug);
   const sys = s.system ? systemBySlug(s.system) : undefined;
   const faqs = serviceFaqsFor(s.name);
-  const related = services.filter((r) => r.slug !== s.slug).slice(0, 4);
+  const alsoSee = (d?.alsoSee ?? [])
+    .map((sl) => services.find((r) => r.slug === sl))
+    .filter((r): r is (typeof services)[number] => !!r && r.slug !== s.slug);
   const trail = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
@@ -67,40 +97,35 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         trail={trail}
         footnote={
           <>
-            Installed once by our own crews and verified in daylight and after dark before we leave.{" "}
-            <Link href="/pricing" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">How pricing works</Link>.
+            Installed once by our own crews, and checked in daylight and after dark before we
+            leave.{" "}
+            <Link href="/pricing" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
+              How pricing works
+            </Link>.
           </>
         }
-        stats={[["1 day", "typical install"], ["18", "cities served"], ["2 tiers", "premium and value"]]}
       />
 
-      {/* 2 — answer block + quick facts · bone */}
+      {/* ── WHAT IT IS, AND THE FACTS THAT ONLY APPLY TO IT ─────────────── */}
       <section className="section bg-background">
         <div className="shell grid gap-10 lg:grid-cols-[58fr_42fr] lg:gap-14">
           <div>
-            <SectionHead title={`What ${s.name} means, in plain terms.`} />
-            <div className="prose-body mt-6 space-y-4 text-lg text-foreground">
-              <p>{s.lede}</p>
+            <SectionHead title={`What ${s.name.toLowerCase()} actually is.`} />
+            <div className="prose-body mt-6 space-y-4">
+              <p className="text-lg text-foreground">{s.lede}</p>
               <p className="text-base text-muted-foreground">
-                It is installed once, by our own W2 crew, and it stays on the house. There is nothing
-                to hang in November and nothing to take down in January. Every run is verified in
-                daylight and again after dark before we leave the property.
+                It is installed once, by our own crew, and it stays on the building. Nothing goes up
+                in November and nothing comes down in January.
               </p>
             </div>
             <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
               {s.includes.map((i) => <Check key={i}>{i}</Check>)}
             </ul>
           </div>
+
           <dl className="h-fit rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-            <p className="label text-muted-foreground">Quick facts</p>
-            {[
-              ["Install time", "One day, most homes"],
-              ["Season", "Year round, including winter"],
-              ["Warranty", "Manufacturer plus our workmanship"],
-              ["Pricing basis", "Linear foot plus complexity"],
-              ["Roof types", "Shingle, metal, tile, flat"],
-              ["Service area", "18 cities, Omaha to Lincoln"],
-            ].map(([k, v]) => (
+            <p className="label text-muted-foreground">{s.name}, in short</p>
+            {(d?.facts ?? []).map(([k, v]) => (
               <div key={k} className="flex items-baseline justify-between gap-4 border-b border-border py-3.5 last:border-0">
                 <dt className="text-sm text-muted-foreground">{k}</dt>
                 <dd className="u text-right text-sm font-medium text-foreground">{v}</dd>
@@ -111,140 +136,155 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* 3 — what is included · bone-deep */}
+      {/* ── THE CENTREPIECE ────────────────────────────────────────────────
+        * One per service, and no two services share one. */}
+      {d && (
+        <section className="section bg-raise">
+          <div className="shell">
+            <ServiceFigure figure={d.figure} />
+          </div>
+        </section>
+      )}
+
+      {/* ── WHAT IS IN THE QUOTE ───────────────────────────────────────── */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
             eyebrow="What is included"
             title="Everything in the written quote."
-            lede="No line items appear on install day that were not on the quote you signed."
+            lede="Nothing appears on install day that was not on the quote you signed."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              ["Design", "We walk the property after dark and design to what you actually want lit, not to a package."],
-              ["Materials", "Extruded aluminum channel color matched to your fascia, addressable LEDs, sealed terminations."],
-              ["Install", "Our own crew. Fastened into fascia and sealed, never through shingles. Mitered at every corner."],
-              ["Controls", "Controller sited and commissioned, app set up on your phone, scenes built with you."],
-              ["Verification", "Daylight sightline check from the curb, then every scene walked with you after dark."],
-              ["Aftercare", "One number to call. We hold the workmanship warranty alongside the manufacturer."],
-            ].map(([h, p], i) => (
-              <article key={h} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-                <p className="label text-accent-ink">Step {i + 1}</p>
-                <h3 className="mt-2 text-lg text-foreground">{h}</h3>
-                <p className="mt-2 text-[0.95rem] text-muted-foreground">{p}</p>
-              </article>
+          <ul className="mt-10 grid items-start gap-x-10 gap-y-6 lg:grid-cols-2">
+            {(d?.included ?? []).map(([h, p]) => (
+              <li key={h} className="border-t border-border pt-5">
+                <h3 className="font-display text-lg font-bold text-foreground">{h}</h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{p}</p>
+              </li>
             ))}
-          </div>
+          </ul>
+
           {sys && (
-            <div className="mt-8 flex flex-wrap items-center gap-4 rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-lg bg-primary px-6 py-5 shadow-[var(--shadow-dark)]">
               <div className="min-w-0 flex-1">
-                <p className="label text-accent-ink">Matching system</p>
-                <p className="mt-1 font-display text-lg font-bold text-foreground">{sys.name}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{sys.short}</p>
+                <p className="label text-accent">The hardware under it</p>
+                <p className="mt-1 font-display text-lg font-bold text-on-dark">{sys.name}</p>
+                <p className="mt-1 text-sm text-on-dark-muted">{sys.short}</p>
               </div>
-              <TextLink href={`/lighting-systems/${sys.slug}`}>See the system</TextLink>
+              <TextLink onDark href={`/lighting-systems/${sys.slug}`}>See the spec</TextLink>
             </div>
           )}
         </div>
       </section>
 
-      {/* 4 — full-bleed drawn band · breather between dense sections */}
-      <section className="bg-primary">
-        <div className="shell py-12">
-          {photoExists(s.photo) ? (
-            <Photo slot={s.photo!} sizes="100vw" />
-          ) : (
-            <div className="grid items-center gap-8 lg:grid-cols-[1fr_20rem]">
-              <div className="overflow-hidden rounded-lg ring-1 ring-on-dark/12">
-                <Elevation night massing="wing" lit={{ hex: "#f5c518", label:"warm white" }} className="block w-full" />
-              </div>
-              <div>
-                <p className="eyebrow eyebrow--on-dark">Measured elevation</p>
-                <p className="mt-4 text-on-dark-muted">
-                  This is how a run is drawn before anything is fastened to your house: eave line,
-                  channel position, zone breaks and linear feet.
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
-      {/* 5 — comparison table · bone */}
-      <section className="section bg-background">
-        <div className="shell">
-          <SectionHead
-            eyebrow="The comparison"
-            title="Permanent versus doing it again every year."
-            lede="This is the calculation almost nobody runs before they call, and it is the one that decides it."
-          />
-          <div className="mt-10">
-            <SpecTable
-              onDark={false}
-              caption="Permanent lighting compared with hanging lights every season"
-              rows={compareRows}
-              headA="Permanent"
-              headB="Hung each season"
-              highlightA
+      {/* ── THE COMPARISON, WHERE IT IS HONEST ─────────────────────────── */}
+      {d?.compare && (
+        <section className="section bg-background">
+          <div className="shell">
+            <SectionHead
+              eyebrow="The comparison"
+              title="Installed once, against doing it again every year."
+              lede="This is the calculation almost nobody runs before they call, and it is usually the one that decides it."
             />
+            <div className="mt-10">
+              <SpecTable
+                onDark={false}
+                caption="Permanent lighting compared with hanging lights every season"
+                rows={compareRows}
+                headA="Permanent"
+                headB="Hung each season"
+                highlightA
+                source="Ladder time, storage and takedown are the parts customers tell us they underestimated."
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* 6 — related services · charcoal */}
-      <section className="section bg-raise">
-        <div className="shell">
-          <SectionHead onDark title="What people usually add." />
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {related.map((r) => {
-              const I = iconMap[r.icon];
-              return (
-                <Link key={r.slug} href={`/services/${r.slug}`} className="flex flex-col rounded-lg bg-primary p-5 ring-1 ring-on-dark/10 transition-all duration-[--dur-base] hover:-translate-y-0.5 hover:ring-accent/40">
-                  <span className="channel-tile mb-4" aria-hidden><I className="size-7" /></span>
-                  <h3 className="text-lg text-on-dark">{r.name}</h3>
-                  <p className="mt-2 text-sm text-on-dark-muted">{r.short}</p>
-                  <ul className="mt-4 flex-1 space-y-1.5">
-                    {r.includes.slice(0, 2).map((x) => <Check key={x} onDark>{x}</Check>)}
-                  </ul>
-                </Link>
-              );
-            })}
+      {/* ── THE PROOF SHOT ─────────────────────────────────────────────────
+        * A real photograph of THIS service, so the eleven pages do not all
+        * close on the same house. */}
+      {d?.proofShot && (
+        <section className="bg-primary">
+          <div className="shell grid items-center gap-8 py-12 lg:grid-cols-[62fr_38fr] lg:gap-14">
+            <figure className="overflow-hidden rounded-lg ring-1 ring-on-dark/12">
+              <span className="relative block aspect-video">
+                <Image
+                  src={d.proofShot}
+                  alt={`${s.name} on a completed Brytr install in the Omaha metro`}
+                  fill
+                  sizes="(min-width:1024px) 60vw, 100vw"
+                  className="object-cover"
+                />
+              </span>
+            </figure>
+            <div>
+              <p className="eyebrow eyebrow--on-dark">Our own work</p>
+              <p className="mt-4 text-lg leading-relaxed text-on-dark/90">{d.proofCaption}</p>
+              <div className="mt-6"><TextLink onDark href="/gallery">See the full gallery</TextLink></div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* 7 — city tiles · bone */}
+      {/* ── WHAT PEOPLE LOOK AT NEXT ───────────────────────────────────── */}
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead title={`${s.name}, across 18 cities.`} />
-          <div className="mt-9"><CityTiles /></div>
+          <SectionHead title="What people look at next." />
+          <div className="mt-9 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+            <ul className="divide-y divide-border">
+              {alsoSee.map((r) => {
+                const I = iconMap[r.icon];
+                return (
+                  <li key={r.slug}>
+                    <Link
+                      href={`/services/${r.slug}`}
+                      className="group flex items-center gap-4 px-6 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
+                    >
+                      <span className="channel-tile channel-tile--light !size-10 shrink-0" aria-hidden>
+                        <I className="size-6" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-display text-[1.05rem] font-bold text-foreground group-hover:underline">
+                          {r.name}
+                        </span>
+                        <span className="mt-0.5 block text-sm text-muted-foreground">{r.short}</span>
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* 8 — FAQ · bone-deep */}
+      {/* ── QUESTIONS ──────────────────────────────────────────────────── */}
       <section className="section bg-muted">
         <div className="shell grid gap-10 lg:grid-cols-[1fr_20rem] lg:gap-14">
           <div>
-            <SectionHead eyebrow="Questions" title={`${s.name}: the eight we get most.`} />
+            <SectionHead eyebrow="Questions" title={`${s.name}: what people ask before they book.`} />
             <div className="mt-8"><Faq items={faqs} /></div>
           </div>
           <aside className="h-fit rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)]">
             <h3 className="text-xl text-on-dark">Nearest crews</h3>
-            <ul className="mt-4 space-y-2.5">
+            <p className="mt-2 text-sm text-on-dark-muted">Drive from our shop on C Street.</p>
+            <ul className="mt-4 divide-y divide-on-dark/10 border-t border-on-dark/10">
               {metroCities.slice(0, 6).map((c) => (
                 <li key={c.slug}>
-                  <Link href={`/service-areas/${c.slug}`} className="flex justify-between text-sm text-on-dark-muted hover:text-accent">
-                    <span>{c.name}</span><span className="u">{c.drive}</span>
+                  <Link href={`/service-areas/${c.slug}`} className="flex justify-between gap-4 py-2.5 text-sm text-on-dark-muted hover:text-accent">
+                    <span>{c.name}</span><span className="u text-accent">{c.drive}</span>
                   </Link>
                 </li>
               ))}
             </ul>
-            <div className="mt-6 border-t border-on-dark/12 pt-5"><TextLink onDark href="/service-areas">All service areas</TextLink></div>
+            <div className="mt-5 border-t border-on-dark/12 pt-4">
+              <TextLink onDark href="/service-areas">Every town we drive to</TextLink>
+            </div>
           </aside>
         </div>
       </section>
 
-      <PageCta />
+      <PageCta variant="phone" />
     </Shell>
   );
 }
