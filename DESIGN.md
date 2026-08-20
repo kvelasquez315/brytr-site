@@ -210,6 +210,65 @@ did more for density than the width did. Grid: 12 col. Spacing: 8pt base,
 broken deliberately for hierarchy — primary elements are larger and heavier rather than uniformly
 padded.
 
+### Fullness rule — the client's, stated three times
+
+**A section is full because it has more to say, not because one element got scaled up.** Every time
+a section has read "lazy" to the client it was the same move: one photograph or one heading enlarged
+to occupy the space that should have been carrying additional pieces.
+
+Caught and corrected, in order:
+
+1. Container 90rem to 100rem *plus* a bigger H1 — the width was right, the type scale was not.
+2. The systems split: one 21/9 photograph with a caption strip → a photograph at 4/3, a how-it-goes-on
+   list, and a spec table, all the same height.
+3. The project gallery: one 16/10 lead tile spanning 2x2 beside two small ones → six equal cells,
+   five photographs and a detail cell, two even rows.
+4. The service-area map: a fixed 34rem box beside eighteen city tiles, which left a dead band under
+   the map → both columns are flex columns, the map takes the remaining height, and the legend and
+   route notes below it are content, not packing.
+
+Test before shipping a section: **count the pieces, then count the pieces the reference has.** If
+ours is fuller only because our elements are larger, it is not fuller.
+
+### The run (process section) — third design, and why
+
+A timeline drawn *over* the content will always look like a mistake. Version one was
+1-2-3-4-5 ("really bad and honestly just super lazy"). Version two was the amber channel line
+run across the section with nodes clipped onto it — and the line landed on the stage headings
+while the nodes read as five random squares floating above them. Both versions drew a graphic
+on top of text it had no relationship to.
+
+Version three makes the timeline **out of** the content: each stage is a panel with a length of
+lit channel along its own top edge, and the segments brighten left to right — barely on at the
+walk-around, full output with a glow on the night it turns on. A border on the element it
+belongs to cannot land on anything else. Each panel also carries what the homeowner walks away
+holding, which is the part a process section usually forgets.
+
+### Header
+
+Nav is centred in the HEADER, not in the space left beside the wordmark: the bar is
+`1fr auto 1fr`, so the links sit on the page centre line whatever the wordmark and the phone
+number do. `mx-auto` in a flex row centres in the remainder, which is what makes most sites
+look almost-centred.
+
+Anything with more than one page under it has a dropdown panel: lighting systems, services,
+comparisons, service areas. Panels are full-bleed, not anchored to the trigger — a nineteen-city
+menu hung under the last nav item runs off the right edge. Lists are generated from
+`content/*.ts` via `content/nav.ts`, so the menu cannot drift from the pages that exist, and
+that module is imported by SERVER components only: importing `content/services.ts` into the
+client header would ship every word of body copy on 81 pages to the browser for eleven labels.
+
+### Leaflet, two things that will bite again
+
+- The map background is set with `.brytr-map.leaflet-container` — a **compound** selector, not a
+  descendant one. Leaflet puts `leaflet-container` on the element we put `brytr-map` on, so
+  `.brytr-map .leaflet-container` matches nothing and the map sits on Leaflet's own `#ddd`: a white
+  slab in the middle of a night page for as long as a tile request is in flight.
+- CARTO's dark basemap is built to sit under bright data on a white page. Dropped into a night-sky
+  section it is black on black. Fix is three parts: labels on their own pane **above** the metro
+  circle, both tile layers brightened in CSS (`.brytr-tiles-*`), and every city drawn as a lit pin
+  with a real glow rather than a flat dot. A light basemap is not the fix — it fights the page.
+
 ## Elevation & Depth
 
 Separation order: whitespace → background shift → elevation. Never a 1px gray border as the primary

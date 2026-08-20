@@ -367,23 +367,31 @@
      * is allowed, so there is no reason to risk it here. */
     background: linear-gradient(100deg, #1b2a3d 0%, #16212e 34%, #111820 68%, #0c0f13 100%);
   }
-  .run-line {
-    background: linear-gradient(
-      to right,
-      color-mix(in oklab, var(--brand-accent) 25%, transparent) 0%,
-      var(--brand-accent) 18%,
-      var(--brand-accent) 82%,
-      color-mix(in oklab, var(--brand-accent) 25%, transparent) 100%
-    );
-  }
-  /* the node: a short length of channel seen end-on, same profile as the icon tile */
-  .run-node {
-    position: relative;
-    width: 1.25rem;
-    height: 1.25rem;
-    border-radius: 2px 2px 6px 6px;
+  /* One length of channel per panel, along its top edge. Brightness ramps left to
+   * right, so reading the row is watching the system come up: barely on at the first
+   * walk-around, full output with a glow on the night it turns on. The segments are
+   * separated by the grid gap, which reads as one run mitered into five zones.
+   *
+   * The two earlier versions of this drew a continuous line ACROSS the section and
+   * dropped nodes onto it. Both put a graphic on top of the text — the line landed on
+   * the stage headings — which is why it looked like a mistake. A border on the element
+   * it belongs to cannot land on anything else. */
+  .run-seg {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: 0;
+    block-size: 3px;
+    border-start-start-radius: 3px;
+    border-start-end-radius: 3px;
     background: var(--brand-accent);
-    box-shadow: 0 0 0 5px color-mix(in oklab, var(--brand-accent) 18%, transparent);
+    opacity: 0.3;
+  }
+  .run-panel[data-lit="2"] .run-seg { opacity: 0.45; }
+  .run-panel[data-lit="3"] .run-seg { opacity: 0.62; }
+  .run-panel[data-lit="4"] .run-seg { opacity: 0.8; }
+  .run-panel[data-lit="5"] .run-seg {
+    opacity: 1;
+    box-shadow: 0 0 16px 1px color-mix(in oklab, var(--brand-accent) 55%, transparent);
   }
 
   /* CARD SPOTLIGHT — amber outline on hover, and on touch as the card crosses the
@@ -446,7 +454,12 @@
 /* Leaflet, restyled to the brand. Its stylesheet ships white popups, a white
  * attribution bar and blue links, all of which look pasted-in on a night palette.
  * Unlayered on purpose so these win over the library's own rules. */
-.brytr-map .leaflet-container { background: var(--brand-primary); font-family: var(--font-body); }
+/* NOTE the compound selector: Leaflet puts `leaflet-container` on the SAME element we
+ * put `brytr-map` on, so a descendant selector never matches it. That mistake left the
+ * map sitting on Leaflet's own #ddd while a tile request was in flight — a white flash
+ * in the middle of a night-palette page, and a light-grey slab for anyone whose tiles
+ * are slow or blocked. */
+.brytr-map.leaflet-container { background: var(--brand-primary); font-family: var(--font-body); }
 .brytr-map .leaflet-tooltip {
   background: var(--brand-primary);
   color: var(--on-dark);
@@ -472,6 +485,46 @@
 }
 .brytr-map .leaflet-bar a:hover { background: var(--brand-raise); }
 .brytr-map .leaflet-interactive { cursor: pointer; }
+
+/* CARTO's dark basemap is built to sit under bright data on a white page. Dropped onto a
+ * night-sky section it goes black-on-black and you cannot find Lincoln. Lifting the tiles
+ * in CSS keeps the palette and gets the roads and county lines back; the label layer is
+ * lifted harder still, because type has to win. */
+.brytr-map .brytr-tiles-base { filter: brightness(1.9) contrast(0.95) saturate(1.3); }
+.brytr-map .brytr-tiles-labels { filter: brightness(1.5) contrast(1.1); }
+
+/* Every town is a light, not a data point — that is what the company sells. Metro towns
+ * burn amber and carry a real glow; outstate towns are cooler and dimmer, which is also
+ * the legend. */
+.brytr-map .brytr-pin {
+  display: block;
+  inline-size: 10px;
+  block-size: 10px;
+  border-radius: 9999px;
+  background: #e6ecf2;
+  box-shadow:
+    0 0 0 2px rgb(230 236 242 / 0.16),
+    0 0 9px 2px rgb(230 236 242 / 0.4);
+}
+.brytr-map .brytr-pin.is-metro {
+  inline-size: 13px;
+  block-size: 13px;
+  background: #fff2c4;
+  box-shadow:
+    0 0 0 3px rgb(245 197 24 / 0.22),
+    0 0 12px 3px rgb(245 197 24 / 0.75),
+    0 0 34px 10px rgb(245 197 24 / 0.35);
+}
+.brytr-map .brytr-shop {
+  display: block;
+  inline-size: 15px;
+  block-size: 15px;
+  border-radius: 2px 2px 6px 6px;
+  background: #f5c518;
+  box-shadow:
+    0 0 0 4px rgb(245 197 24 / 0.24),
+    0 0 20px 6px rgb(245 197 24 / 0.55);
+}
 
 /* Standalone text links (card CTAs, the announcement bar link) need a 44px touch
  * target even though the visible text is smaller. Padding would change the layout,

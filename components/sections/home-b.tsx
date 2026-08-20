@@ -206,9 +206,15 @@ export function ServiceArea() {
           lede="Eighteen cities, each with its own page, real project photos and drive time. If your town is not on this list, call us and ask."
         />
         {/* Two columns, as in the reference: the list of towns on the left where it can be
-          * read and clicked, the map on the right doing the geography. */}
-        <div className="mt-10 grid gap-8 lg:grid-cols-[44fr_56fr] lg:gap-12">
-          <div>
+          * read and clicked, the map on the right doing the geography.
+          *
+          * The map used to be a fixed 34rem box, which is shorter than eighteen city tiles
+          * — so the right half ended in a dead band of background. Both columns are flex
+          * columns now and the map takes `flex-1`, so it grows to whatever the list is
+          * tall. The legend and the three notes underneath are real pieces, not spacers:
+          * they are what the pin colors actually mean and how the drive gets scheduled. */}
+        <div className="mt-10 grid items-stretch gap-8 lg:grid-cols-[44fr_56fr] lg:gap-12">
+          <div className="flex flex-col">
             {/* Were white boxes with black text, which the client called boring and was
               * right about — eighteen of them is a lot of empty white. They are dark
               * tiles now, with the drive time in amber, so the list reads as a control
@@ -227,13 +233,52 @@ export function ServiceArea() {
                 </li>
               ))}
             </ul>
-            <p className="mt-5 text-sm text-on-dark-muted">
-              Amber is the metro, where a crew can be at your house the same week. Grey is
-              outstate, which we still drive to — it is just a longer day.
-            </p>
+
+            <div className="mt-2.5 flex flex-wrap items-center justify-between gap-4 rounded-md bg-primary px-4 py-4 ring-1 ring-accent/30">
+              <div>
+                <p className="label text-accent">Your town is not on the list</p>
+                <p className="mt-1 text-sm text-on-dark-muted">
+                  Tell us where you are. If we can get a crew there, we will say so on the phone.
+                </p>
+              </div>
+              <a href={site.phoneHref} className="u shrink-0 font-display font-bold text-on-dark underline decoration-accent decoration-2 underline-offset-4">
+                {site.phone}
+              </a>
+            </div>
           </div>
 
-          <ServiceLeaflet />
+          <div className="flex flex-col gap-4">
+            <ServiceLeaflet className="aspect-4/3 lg:aspect-auto lg:min-h-[22rem] lg:flex-1" />
+
+            {/* what the pins mean, next to the pins */}
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 rounded-md bg-primary px-4 py-3 ring-1 ring-on-dark/10">
+              <li className="flex items-center gap-2 text-sm text-on-dark-muted">
+                <span className="size-2.5 rounded-full bg-accent shadow-[0_0_10px_2px_var(--brand-accent)]" aria-hidden />
+                Metro, same week
+              </li>
+              <li className="flex items-center gap-2 text-sm text-on-dark-muted">
+                <span className="size-2.5 rounded-full bg-on-dark/70" aria-hidden />
+                Outstate, by route day
+              </li>
+              <li className="flex items-center gap-2 text-sm text-on-dark-muted">
+                <span className="h-0 w-6 border-t border-dashed border-accent" aria-hidden />
+                Roughly a half hour from the shop
+              </li>
+            </ul>
+
+            <div className="grid gap-4 sm:grid-cols-3">
+              {[
+                ["Same week in the metro", "Inside the dashed ring a crew can be on your roofline within days of the quote being signed."],
+                ["Both sides of the river", "Council Bluffs and western Iowa run on the same schedule as Omaha, not as an afterthought."],
+                ["Outstate by route day", "Lincoln, Columbus, Norfolk and the towns west are grouped into route days, so the drive is ours."],
+              ].map(([h, p]) => (
+                <div key={h} className="rounded-md bg-primary p-4 ring-1 ring-on-dark/10">
+                  <h3 className="text-[0.95rem] font-bold text-on-dark">{h}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-on-dark-muted">{p}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -261,13 +306,37 @@ export function CtaBand() {
   );
 }
 
-/* 16 — THE BRYTR WAY · numbered process row · neutral */
-const steps = [
-  ["Free design consultation", "We come out, walk the property, and talk through what you actually want lit. No charge and no obligation."],
-  ["See it on your own house", "We show you the app and the scene library on a house like yours, so you are not buying from a brochure."],
-  ["On-site measure and written quote", "Linear feet, elevations, zones, tier. You get a real number in writing, not a range on the phone."],
-  ["Install by our own crew", "One day for most homes. Channel into fascia, sealed, mitered at every corner, wire concealed."],
-  ["Day and night verification", "We check the sightline from the curb in daylight, then walk every scene with you after dark before we leave."],
+/* 16 — THE RUN · five lit panels · run-field */
+/* THE RUN — one channel, five zones.
+ *
+ * Third design for this section. It was a 1-2-3-4-5 row (the client's words: "really bad
+ * and honestly just super lazy"), then an amber line with nodes clipped onto it — which
+ * ran the line straight through the stage headings and left five small squares floating
+ * above them with no relationship to anything. Both versions had the same flaw: the
+ * timeline was DRAWN OVER the content instead of being made out of it.
+ *
+ * Now each stage is a panel with a length of lit channel along its top edge, and the runs
+ * get brighter left to right — dim at the walk-around, full output with a glow on the
+ * night it turns on. The graphic is the story, the section reads as one run cut into five
+ * zones, and nothing crosses any text. Each panel also says what you walk away holding,
+ * which is the part a homeowner actually wants from a process section.
+ */
+const steps: [string, string, string, string][] = [
+  ["First visit", "Free design consultation",
+    "We come out, walk the property, and talk through what you actually want lit. No charge and no obligation.",
+    "A plan for your elevation"],
+  ["Same visit", "See it on your own house",
+    "We show you the app and the scene library on a house like yours, so you are not buying from a brochure.",
+    "A look at the system running"],
+  ["In writing", "On-site measure and written quote",
+    "Linear feet, elevations, zones, tier. You get a real number in writing, not a range on the phone.",
+    "A number you can hold us to"],
+  ["Install day", "Installed by our own crew",
+    "One day for most homes. Channel into fascia, sealed, mitered at every corner, wire concealed.",
+    "A finished run, wire hidden"],
+  ["Before we leave", "Checked in daylight and dark",
+    "We look at the sightline from the curb in daylight, then walk every scene with you after dark.",
+    "Both states, signed off by you"],
 ];
 export function ProcessRow() {
   return (
@@ -280,28 +349,23 @@ export function ProcessRow() {
           lede="One visit to decide, one day to install, and nobody leaves until you have seen it lit."
         />
 
-        <ol className="relative mt-12">
-          {/* the channel, run horizontally. Sits behind the nodes on desktop; on mobile
-            * the stages stack and the line becomes vertical down the left. */}
-          <span
-            className="run-line absolute left-[0.6rem] top-2 hidden h-px w-full lg:block"
-            style={{ width: "calc(100% - 1.2rem)" }}
-            aria-hidden
-          />
-          <span className="run-line absolute left-[0.6rem] top-2 h-[calc(100%-1rem)] w-px lg:hidden" aria-hidden />
-
-          <div className="grid gap-10 lg:grid-cols-5 lg:gap-6">
-            {steps.map(([h, p], i) => (
-              <li key={h} className="relative pl-9 lg:pl-0">
-                <span className="run-node absolute left-0 top-0 lg:relative lg:mb-7" aria-hidden />
-                <h3 className="text-lg text-on-dark">{h}</h3>
-                <p className="mt-2 text-[0.95rem] leading-relaxed text-on-dark-muted">{p}</p>
-                {i === steps.length - 1 && (
-                  <p className="label mt-4 text-accent">Then it is yours</p>
-                )}
-              </li>
-            ))}
-          </div>
+        <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {steps.map(([kicker, h, p, out], i) => (
+            <li
+              key={h}
+              data-lit={i + 1}
+              className="run-panel relative flex flex-col rounded-md bg-primary/75 p-5 pt-6 ring-1 ring-on-dark/10"
+            >
+              <span className="run-seg" aria-hidden />
+              <p className="label text-accent">{kicker}</p>
+              <h3 className="mt-2 text-lg leading-snug text-on-dark">{h}</h3>
+              <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-on-dark-muted">{p}</p>
+              <p className="mt-5 border-t border-on-dark/10 pt-3.5 text-sm text-on-dark">
+                <span className="label block text-on-dark-muted">You leave with</span>
+                <span className="mt-1 block font-display font-bold">{out}</span>
+              </p>
+            </li>
+          ))}
         </ol>
       </div>
     </section>

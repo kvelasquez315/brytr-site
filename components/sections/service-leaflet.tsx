@@ -14,17 +14,32 @@ import { cities } from "@/content/cities";
  * Vanilla Leaflet rather than react-leaflet: one dependency instead of two, no peer-range
  * argument with React 19, and this map is written once and never re-renders.
  *
- * CARTO dark tiles, because the site is a night-sky palette and a bright Google-grey
- * basemap would fight it. Attribution is required and is rendered — do not remove it.
+ * BRIGHTNESS: the first pass used CARTO dark_all straight, which on a night-sky page was
+ * near-black on near-black — roads and town names were technically there and practically
+ * invisible. Three changes, not one:
+ *   1. Basemap and labels are separate layers. Labels ride in their own pane ABOVE the
+ *      dashed metro circle, so the towns stay readable instead of being washed out by it.
+ *   2. Both layers are brightened in CSS (.brytr-tiles-*) rather than swapped for a light
+ *      basemap — a white Google-grey map would fight the rest of the page.
+ *   3. Every city is a LIT pin: an amber dot with a real glow, so the map reads like a
+ *      map of lights rather than a scatter plot. That is the product.
  *
  * Scroll-wheel zoom is OFF deliberately. A map that swallows the page scroll is the most
  * hated pattern in local-business web design; you click once to interact, and the site
  * scroll never gets hijacked.
+ *
+ * Height comes from the parent (the column it shares with the city list), so the map fills
+ * whatever the list leaves rather than stopping short and leaving a dead band beneath it.
+ * That means the box can resize after Leaflet has measured it, hence the ResizeObserver.
  */
 
 const SHOP: [number, number] = [41.2565, -96.1951]; // west Omaha, where the crews stage
 
-export function ServiceLeaflet() {
+const CARTO = "https://{s}.basemaps.cartocdn.com";
+const ATTR =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
+
+export function ServiceLeaflet({ className = "" }: { className?: string }) {
   const host = useRef<HTMLDivElement>(null);
   const made = useRef(false);
 
@@ -45,11 +60,12 @@ export function ServiceLeaflet() {
         attributionControl: true,
       });
 
-      L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+      /* base: roads and county lines, no type */
+      L.tileLayer(`${CARTO}/dark_nolabels/{z}/{x}/{y}{r}.png`, {
         subdomains: "abcd",
         maxZoom: 19,
-        attribution:
-          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        className: "brytr-tiles-base",
+        attribution: ATTR,
       }).addTo(map);
 
       /* the metro radius, dashed — the same device the reference uses */
@@ -59,17 +75,32 @@ export function ServiceLeaflet() {
         weight: 1.5,
         dashArray: "6 7",
         fillColor: "#f5c518",
-        fillOpacity: 0.06,
+        fillOpacity: 0.05,
+      }).addTo(map);
+
+      /* type on its own pane, above the circle and the pins' glow */
+      map.createPane("labels");
+      const labelPane = map.getPane("labels")!;
+      labelPane.style.zIndex = "650";
+      labelPane.style.pointerEvents = "none";
+      L.tileLayer(`${CARTO}/dark_only_labels/{z}/{x}/{y}{r}.png`, {
+        subdomains: "abcd",
+        maxZoom: 19,
+        pane: "labels",
+        className: "brytr-tiles-labels",
       }).addTo(map);
 
       for (const c of cities) {
         const metro = c.tier === "metro" || c.tier === "iowa";
-        L.circleMarker([c.lat, c.lon], {
-          radius: metro ? 6 : 5,
-          color: metro ? "#f5c518" : "#ccd3da",
-          weight: 2,
-          fillColor: metro ? "#f5c518" : "#ccd3da",
-          fillOpacity: 1,
+        const size = metro ? 13 : 10;
+        L.marker([c.lat, c.lon], {
+          icon: L.divIcon({
+            className: "",
+            html: `<span class="brytr-pin${metro ? " is-metro" : ""}"></span>`,
+            iconSize: [size, size],
+            iconAnchor: [size / 2, size / 2],
+          }),
+          keyboard: false,
         })
           .addTo(map)
           .bindTooltip(`${c.name} · ${c.drive}`, { direction: "top", opacity: 1 })
@@ -82,9 +113,9 @@ export function ServiceLeaflet() {
       L.marker(SHOP, {
         icon: L.divIcon({
           className: "",
-          html: '<span style="display:block;width:14px;height:14px;border-radius:2px 2px 5px 5px;background:#f5c518;box-shadow:0 0 0 5px rgba(245,197,24,.22)"></span>',
-          iconSize: [14, 14],
-          iconAnchor: [7, 7],
+          html: '<span class="brytr-shop"></span>',
+          iconSize: [15, 15],
+          iconAnchor: [7.5, 7.5],
         }),
       })
         .addTo(map)
@@ -94,7 +125,16 @@ export function ServiceLeaflet() {
         L.latLngBounds(cities.map((c) => [c.lat, c.lon] as [number, number])).pad(0.12)
       );
 
-      cleanup = () => map.remove();
+      /* the box is sized by the column beside it, so it can change after Leaflet has
+       * already measured — without this the tiles tile out to the old height and leave
+       * a grey band on the bottom edge. */
+      const ro = new ResizeObserver(() => map.invalidateSize());
+      ro.observe(host.current!);
+
+      cleanup = () => {
+        ro.disconnect();
+        map.remove();
+      };
     })();
 
     return () => cleanup();
@@ -103,7 +143,7 @@ export function ServiceLeaflet() {
   return (
     <div
       ref={host}
-      className="brytr-map aspect-4/3 w-full rounded-lg bg-primary ring-1 ring-on-dark/12 lg:aspect-auto lg:h-[34rem]"
+      className={`brytr-map w-full rounded-lg bg-primary ring-1 ring-on-dark/12 ${className}`}
       role="application"
       aria-label="Map of the Brytr Co service area. Every city is also listed as a link beside this map."
     />

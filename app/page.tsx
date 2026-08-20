@@ -1,4 +1,5 @@
 import { Header, MobileCallBar } from "@/components/site/header";
+import { navTree } from "@/content/nav";
 import { Footer } from "@/components/site/footer";
 import { Hero } from "@/components/sections/hero";
 import { SceneWipe } from "@/components/sections/scene-wipe";
@@ -13,7 +14,7 @@ export default function Home() {
   return (
     <>
       <Jsonld data={localBusiness()} />
-      <Header />
+      <Header nav={navTree} />
       <main>
         {/* Thirteen sections, down from twenty. The cut was made on DESIGN duplication,
           * not on content value: the page had four separate lead forms, five card grids,

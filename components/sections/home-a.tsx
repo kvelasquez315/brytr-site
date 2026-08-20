@@ -255,31 +255,71 @@ export function MaterialsSplit() {
           ))}
         </div>
 
-        {/* the photograph, full width, with the craft details reading off it */}
-        <figure className="mt-5 overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
-          <div className="relative aspect-21/9">
-            <Image
-              src="/img/channel-detail.jpg"
-              alt="Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along the gable"
-              fill
-              sizes="100vw"
-              className="object-cover object-[50%_38%]"
-            />
+        {/* MORE PIECES, NONE OVERSIZED.
+          *
+          * This was one full-bleed 21/9 photograph with a four-across caption strip under
+          * it — which is the "make it bigger to look full" move again, just with an image
+          * instead of type. A section is full because it has more to say, not because one
+          * element got scaled up. Three modest pieces now: the hardware photographed, the
+          * four things we do to install it, and the spec sheet. Each earns its own space.
+          *
+          * The specs are the same ones already on the channel diagram and the tier copy —
+          * nothing new was invented to fill a column. */}
+        <div className="mt-5 grid items-stretch gap-5 lg:grid-cols-3">
+          <figure className="overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
+            <div className="relative aspect-4/3">
+              <Image
+                src="/img/channel-detail.jpg"
+                alt="Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along the gable"
+                fill
+                sizes="(min-width:1024px) 32vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+            <figcaption className="p-5">
+              <p className="label text-accent">The channel, close up</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-on-dark-muted">
+                Extruded aluminum, color matched to the fascia, diffuser facing down. At noon it
+                reads as trim.
+              </p>
+            </figcaption>
+          </figure>
+
+          <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
+            <p className="label text-accent">How it goes on</p>
+            <ul className="mt-5 divide-y divide-on-dark/10">
+              {[
+                ["Into fascia, never shingles", "Every penetration sealed as it is made."],
+                ["Mitered at every transition", "Valleys, dormers and returns."],
+                ["Concealed wire runs", "No drops down a downspout or across a soffit."],
+                ["Capped terminations", "Sealed end caps, not tape."],
+              ].map(([h, p2]) => (
+                <li key={h} className="py-3.5 first:pt-0 last:pb-0">
+                  <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
+                  <p className="mt-1 text-sm text-on-dark-muted">{p2}</p>
+                </li>
+              ))}
+            </ul>
           </div>
-          <dl className="grid gap-x-8 gap-y-6 p-7 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-0 lg:divide-x lg:divide-on-dark/12">
-            {[
-              ["Into fascia, never shingles", "Every penetration sealed as it is made, not bridged over afterwards."],
-              ["Mitered at every transition", "Valleys, dormers and returns. This is where amateur runs show from the curb."],
-              ["Concealed wire runs", "No visible drops down a downspout or across a soffit."],
-              ["Capped terminations", "Sealed end caps, not tape. Water ingress is the most common real failure."],
-            ].map(([h, p2]) => (
-              <div key={h} className="lg:px-7 lg:first:pl-0 lg:last:pr-0">
-                <dt className="font-display text-[0.95rem] font-bold text-on-dark">{h}</dt>
-                <dd className="mt-1.5 text-sm leading-relaxed text-on-dark-muted">{p2}</dd>
-              </div>
-            ))}
-          </dl>
-        </figure>
+
+          <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
+            <p className="label text-accent">On the spec sheet</p>
+            <dl className="mt-5 divide-y divide-on-dark/10">
+              {[
+                ["Channel", "Extruded aluminum"],
+                ["Diffuser", "Frosted polycarbonate"],
+                ["LED spacing", "4 in., addressable"],
+                ["Weather rating", "IP66 sealed"],
+                ["White channel", "Dedicated, not color mixed"],
+              ].map(([k, v]) => (
+                <div key={k} className="flex items-baseline justify-between gap-4 py-3.5 first:pt-0 last:pb-0">
+                  <dt className="text-sm text-on-dark-muted">{k}</dt>
+                  <dd className="u text-right text-sm font-medium text-on-dark">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
 
         <div className="mt-8 flex flex-wrap items-center gap-6">
           <Button asChild><Link href="/compare">Compare every brand</Link></Button>
