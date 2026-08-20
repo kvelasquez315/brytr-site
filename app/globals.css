@@ -596,6 +596,14 @@
  * Wipe drag handle into normal flow on touchscreens and made one half of the photograph
  * 48px taller than the other.
  */
+/* The phone has a fixed Call now / Free quote bar 65px tall. Nothing is hidden behind it
+ * at rest — the footer clears it — but a focused input near the bottom of the viewport can
+ * end up under it when the keyboard opens, so every field keeps a bar's worth of
+ * scroll margin. */
+@media (pointer: coarse) {
+  input, select, textarea { scroll-margin-bottom: 6rem; }
+}
+
 @media (pointer: coarse) {
   .tap-44:not(.absolute):not(.fixed):not(.sticky) { position: relative; }
   .tap-44::after {

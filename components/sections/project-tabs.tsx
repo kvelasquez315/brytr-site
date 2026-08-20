@@ -116,7 +116,7 @@ export function ProjectTabs() {
   return (
     <section className="section bg-raise">
       <div className="shell">
-        <SectionHead onDark title="Installs we photographed ourselves." lede={tab.blurb} />
+        <SectionHead onDark title="Three west Omaha houses, shot the night they ran." lede={tab.blurb} />
 
         <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-b border-on-dark/12" role="tablist" aria-label="Project categories">
           {tabs.map((t, i) => (
@@ -172,8 +172,8 @@ export function ProjectTabs() {
               ))}
             </dl>
             <p className="mt-4 flex-1 text-sm leading-relaxed text-on-dark-muted">
-              We photograph our own work at night, on the property, with the system running.
-              No street names, because these are private homes.
+              Shot on the property at night with the system running, so what you are looking
+              at is the output, not a rendering of it.
             </p>
           </div>
         </div>

@@ -20,7 +20,7 @@ const appFeatures = [
   { icon: IcSceneStack, h: "Saved scenes", p: "Build a scene once, tap it forever. Most customers end up with eight to twelve." },
   { icon: IcSchedule, h: "Sunset scheduling", p: "On at dusk, off at 11, all year, without you touching it." },
   { icon: IcZones, h: "Zones per elevation", p: "Front on, back off. Roofline warm white while the pergola runs color." },
-  { icon: IcDimmer, h: "Per-zone dimming", p: "One to a hundred percent. Dinner party bright is not Christmas bright." },
+  { icon: IcDimmer, h: "Per-zone dimming", p: "One to a hundred percent. Dinner-party bright and Christmas bright are different settings." },
 ];
 export function AppSplit() {
   const hasApp = photoExists("appScreen");
@@ -130,7 +130,7 @@ export function Founders() {
             <p className="mt-4 text-muted-foreground">
               So they built the opposite. Brytr stocks a premium system and a value system, runs its own
               W2 crews rather than subcontracting the install, and services other companies&rsquo; work
-              when those companies stop answering. It is a less profitable way to run a lighting company
+              when those companies stop answering. It's a less profitable way to run a lighting company
               and a much better way to keep 177 five-star reviews.
             </p>
             <p className="mt-4 text-muted-foreground">
@@ -202,8 +202,8 @@ export function ServiceArea() {
         <SectionHead
           onDark
           eyebrow="Where we work"
-          title="Omaha metro, Lincoln, western Iowa and eastern Nebraska."
-          lede="Eighteen cities, each with its own page, real project photos and drive time. If your town is not on this list, call us and ask."
+          title="From Elkhorn to Council Bluffs, and out as far as Grand Island."
+          lede="Every town below has its own page, with real project photos and the drive from our shop. If yours isn't here, call and ask."
         />
         {/* Two columns, as in the reference: the list of towns on the left where it can be
           * read and clicked, the map on the right doing the geography.
@@ -219,20 +219,29 @@ export function ServiceArea() {
               * right about — eighteen of them is a lot of empty white. They are dark
               * tiles now, with the drive time in amber, so the list reads as a control
               * panel rather than a table of contents. */}
-            <ul className="grid gap-2.5 sm:grid-cols-2">
-              {cities.map((c) => (
-                <li key={c.slug}>
-                  <Link
-                    href={`/service-areas/${c.slug}`}
-                    data-spot
-                    className="flex h-19 flex-col justify-center rounded-md bg-primary px-4 ring-1 ring-on-dark/10 transition-colors duration-[--dur-fast]"
-                  >
-                    <span className="font-display font-bold text-on-dark">{c.name}{c.state === "IA" ? ", IA" : ""}</span>
-                    <span className="u mt-1 text-xs text-accent">{c.drive}</span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {/* AUDIT FIX. These were eighteen identical bordered tiles: nine rows of two
+              * on a desktop and eighteen full-width stacked cards on a phone, which is
+              * two and a half screens of 60px boxes. It is a LIST of towns — so it is a
+              * list now, in one framed rack with hairlines, drive time right-aligned in
+              * tabular figures. Same eighteen links, a third of the height, and it stops
+              * competing with the card grids elsewhere on the page. */}
+            <div className="overflow-hidden rounded-md bg-primary ring-1 ring-on-dark/10">
+              <ul className="grid divide-on-dark/10 sm:grid-cols-2 sm:divide-x">
+                {cities.map((c) => (
+                  <li key={c.slug} className="border-b border-on-dark/10 last:border-b-0 sm:[&:nth-last-child(-n+2)]:border-b-0">
+                    <Link
+                      href={`/service-areas/${c.slug}`}
+                      className="flex items-baseline justify-between gap-4 px-4 py-3 transition-colors duration-[--dur-fast] hover:bg-raise"
+                    >
+                      <span className="font-display text-[0.95rem] font-bold text-on-dark">
+                        {c.name}{c.state === "IA" ? ", IA" : ""}
+                      </span>
+                      <span className="u shrink-0 text-xs text-accent">{c.drive}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <div className="mt-2.5 flex flex-wrap items-center justify-between gap-4 rounded-md bg-primary px-4 py-4 ring-1 ring-accent/30">
               <div>
@@ -326,7 +335,7 @@ const steps: [string, string, string, string][] = [
     "We come out, walk the property, and talk through what you actually want lit. No charge and no obligation.",
     "A plan for your elevation"],
   ["Same visit", "See it on your own house",
-    "We show you the app and the scene library on a house like yours, so you are not buying from a brochure.",
+    "We show you the app and the scene library on a house like yours, so you're not buying from a brochure.",
     "A look at the system running"],
   ["In writing", "On-site measure and written quote",
     "Linear feet, elevations, zones, tier. You get a real number in writing, not a range on the phone.",
@@ -370,7 +379,7 @@ export function ProcessRow() {
           onDark
           eyebrow="How it goes"
           title="From the first walk-around to the night it turns on."
-          lede="One visit to decide, one day to install, and nobody leaves until you have seen it lit."
+          lede="One visit to decide, one day to install, and nobody leaves until you've seen it lit."
         />
 
         <ol className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
@@ -394,10 +403,6 @@ export function ProcessRow() {
             </li>
           ))}
         </ol>
-
-        <p className="label mt-6 text-on-dark-muted">
-          Photographed at dusk on a finished install, as the system came up on its own
-        </p>
       </div>
     </section>
   );
@@ -410,7 +415,7 @@ export function ProcessRow() {
 const proofFacts = [
   { icon: IcStars, h: "5.0 average, 177 reviews", p: "Every one of them on Google, where you can read them yourself rather than take our word for it." },
   { icon: IcHardHat, h: "W2 crews on every install", p: "Not a subcontractor network. The same people who quoted your job are the ones on the ladder." },
-  { icon: IcVerified, h: "Verified in daylight and dark", p: "We do not close a job until you have signed off on both states of the system." },
+  { icon: IcVerified, h: "Verified in daylight and dark", p: "We don't close a job until you've signed off on both states of the system." },
   { icon: IcTwoTiers, h: "Two tiers, honestly compared", p: "We publish where our cheaper system beats our expensive one. Ask a single-brand dealer to do that." },
   { icon: IcWarranty, h: "Warranty in writing, up front", p: "Manufacturer coverage plus our workmanship coverage, both on paper before you sign." },
   { icon: IcMeasured, h: "1.2M lights installed locally", p: "All of it in and around Omaha. This is the only market we work in." },
@@ -423,7 +428,7 @@ export function Reviews() {
           <SectionHead
             eyebrow="Omaha says"
             title="What Omaha homeowners say after the crew leaves."
-            lede="We would rather show you the reviews on Google than retype them here. In the meantime, here is what those reviews consistently mention."
+            lede="We'd rather you read the reviews on Google than take our retyping of them. Here's what they consistently mention."
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {proofFacts.map((f) => (
@@ -491,7 +496,7 @@ export function Financing() {
           </ul>
           <p className="mt-7 text-sm text-on-dark-muted">
             Exact terms come from our lending partner and we will show you the real numbers at the
-            consultation. We do not advertise a monthly payment that only applies to a perfect credit file.
+            consultation. We don't advertise a monthly payment that only applies to a perfect credit file.
           </p>
           <div className="mt-6"><TextLink onDark href="/pricing">See full pricing</TextLink></div>
         </div>
@@ -531,20 +536,38 @@ export function FinalCta() {
   return (
     <section className="section bg-muted">
       <div className="shell grid items-start gap-10 lg:grid-cols-[52fr_48fr] lg:gap-14">
-        <div>
+        <div className="flex flex-col">
           <SectionHead title="See it on your house before you buy." />
           <p className="mt-4 max-w-[60ch] text-lg text-muted-foreground">
             We measure on site, design it with you after dark, and hand you a written quote. If you
-            decide not to do it, you have lost an hour and gained a plan.
+            decide against it, you&rsquo;ve lost an hour and gained a plan.
           </p>
           <ul className="mt-7 space-y-3">
             <Check>Free on-site assessment</Check>
             <Check>Written quote, no pressure</Check>
             <Check>Financing available</Check>
           </ul>
-          <div className="mt-9 border-t border-border pt-7">
-            <p className="u text-sm text-muted-foreground">Or call us directly</p>
-            <a href={site.phoneHref} className="u mt-1 block text-3xl font-medium text-foreground hover:text-accent-deep">{site.phone}</a>
+
+          {/* AUDIT FIX. This column ran out ~200px before the form did, leaving a hole in
+            * the bottom-left of the page's last screen. What fills it is the proof a
+            * homeowner wants at the moment they decide to call — and every figure here is
+            * one Brytr can stand behind. Nothing invented. */}
+          <dl className="mt-9 grid gap-x-8 gap-y-6 border-t border-border pt-7 sm:grid-cols-3">
+            {[
+              [reviewProof.average, `Average of ${reviewProof.count} ${reviewProof.platform} reviews`],
+              ["1.2M", "Lights installed around Omaha"],
+              ["W2", "Our own crews, never subcontracted"],
+            ].map(([big, small]) => (
+              <div key={small}>
+                <dt className="u font-display text-3xl font-bold leading-none text-foreground">{big}</dt>
+                <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{small}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div className="mt-8 flex flex-wrap items-baseline gap-x-5 gap-y-2 border-t border-border pt-7">
+            <p className="text-sm text-muted-foreground">Or call us directly</p>
+            <a href={site.phoneHref} className="u text-3xl font-medium text-foreground hover:text-accent-deep">{site.phone}</a>
           </div>
         </div>
         <QuoteForm variant="full" />
@@ -609,7 +632,7 @@ export function CompareGrid() {
 /* One real photograph per article, chosen because it shows what the piece is about. */
 const postArt: Record<string, string> = {
   "are-permanent-christmas-lights-worth-it": "/img/christmas-detail.jpg",
-  "permanent-lights-vs-hanging-christmas-lights": "/img/scene-christmas.jpg",
+  "permanent-lights-vs-hanging-christmas-lights": "/img/g-gable-detail.jpg",
   "how-to-choose-a-permanent-lighting-installer": "/img/channel-detail.jpg",
 };
 
@@ -630,40 +653,39 @@ export function Writing() {
           title="The questions people ask before they spend the money."
           lede="Written by the people who install it, including the parts that argue against buying. Twelve more on the blog."
         />
-        {/* Each article gets a photograph. A three-row text list was the flattest thing
-          * on the page, and every one of these pieces is about something we photographed
-          * — the Christmas comparison has a red-and-green roofline, the installer piece
-          * has the channel detail. Still a list, not a fourth card grid. */}
-        <ul className="mt-9 divide-y divide-border border-y border-border">
+        {/* AUDIT FIX. This was three rows with a 256px thumbnail and text stopping at
+          * 65% width — the emptiest block on the page, and all three photographs were the
+          * same red-and-green house. Three cards now, each image filling its column, each
+          * a different subject, and the read time carried so the row is worth scanning. */}
+        <div className="mt-9 grid gap-5 lg:grid-cols-3">
           {featured.map((p) => (
-            <li key={p.slug}>
-              <Link
-                href={`/blog/${p.slug}`}
-                data-spot
-                className="group grid gap-5 py-6 sm:grid-cols-[16rem_1fr] sm:items-center sm:gap-8"
-              >
-                <span className="relative block aspect-video overflow-hidden rounded-sm bg-primary">
+            <article key={p.slug} data-spot className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+              <Link href={`/blog/${p.slug}`} className="group flex flex-1 flex-col">
+                <span className="relative block aspect-16/9 overflow-hidden bg-primary">
                   <Image
                     src={postArt[p.slug] ?? "/img/g-gable-detail.jpg"}
                     alt=""
                     fill
-                    sizes="(min-width:640px) 256px, 100vw"
+                    sizes="(min-width:1024px) 32vw, 100vw"
                     className="object-cover"
                   />
                 </span>
-                <span>
+                <span className="flex flex-1 flex-col p-6">
                   <span className="label text-accent-ink">{p.category}</span>
-                  <span className="mt-1.5 block font-display text-xl font-bold leading-snug text-foreground group-hover:underline">
+                  <span className="mt-2 block font-display text-xl font-bold leading-snug text-foreground group-hover:underline">
                     {p.title}
                   </span>
-                  <span className="mt-2 block max-w-[68ch] text-[0.95rem] leading-relaxed text-muted-foreground">
+                  <span className="mt-2.5 block flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">
                     {p.dek}
+                  </span>
+                  <span className="label mt-5 block border-t border-border pt-4 text-muted-foreground">
+                    Read it
                   </span>
                 </span>
               </Link>
-            </li>
+            </article>
           ))}
-        </ul>
+        </div>
         <div className="mt-6">
           <TextLink href="/blog">Everything we have written</TextLink>
         </div>

@@ -75,9 +75,9 @@ export function Header({ nav }: { nav: NavItem[] }) {
       <div className="bg-accent text-accent-foreground">
         <div className="shell flex min-h-10 items-center justify-center gap-2 py-2 text-center text-xs font-semibold sm:text-sm">
           <span>
-            Holiday install slots for 2026 are filling.{" "}
+            2026 holiday slots are filling.{" "}
             <Link href="/free-design-consultation" className="tap-44 underline decoration-2 underline-offset-2">
-              Book your design consultation by November 15
+              Book by November 15
             </Link>
             .
           </span>

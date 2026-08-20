@@ -59,11 +59,15 @@ export const images: Record<string, Slot> = {
   serviceHardscape: { src: "/img/hardscape.jpg",
     alt: "Hardscape lighting washing a limestone retaining wall and pool deck at an Omaha home",
     subject: "Wall washers, step lights, column caps.", ratio: "16/9" },
-  serviceGameday: { src: "/img/g-pool-red.jpg",
-    alt: "An Omaha home, pergola and pool deck lit scarlet for a Nebraska game day",
+  /* was g-pool-red.jpg — a pool deck with red umbrellas, which is not what a homeowner
+   * pictures when they read "game day". The ranch roofline in scarlet is. */
+  serviceGameday: { src: "/img/scene-husker-red.jpg",
+    alt: "An Omaha ranch home with its roofline lit scarlet for a Nebraska game day",
     subject: "Team colors across every zone at once.", ratio: "16/9" },
-  serviceHoliday: { src: "/img/g-ranch-blue.jpg",
-    alt: "An Omaha ranch home set to a full blue seasonal scene, rock garden lit warm below",
+  /* was g-ranch-blue.jpg — blue reads as nothing in particular next to the word
+   * "seasonal". Halloween violet reads as a season immediately. */
+  serviceHoliday: { src: "/img/scene-halloween.jpg",
+    alt: "An Omaha home washed violet for Halloween, a saved seasonal scene",
     subject: "A saved scene that is not Christmas — one of the 365.", ratio: "16/9" },
   serviceLandscape: { src: "/img/landscape.jpg",
     alt: "Landscape lighting and tree uplighting at an Omaha home after dark",

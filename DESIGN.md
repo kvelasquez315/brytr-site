@@ -230,6 +230,29 @@ Caught and corrected, in order:
 Test before shipping a section: **count the pieces, then count the pieces the reference has.** If
 ours is fuller only because our elements are larger, it is not fuller.
 
+### What the home-page audit changed (and the rules that came out of it)
+
+Three independent critics graded the page against the rulebook with no knowledge of how it was built.
+The findings that generalise:
+
+- **A grid of N identical cards highlights nothing and reads as machine output.** Eleven services in
+  eleven identical cards, each with exactly three bullets, was 2,440px of one archetype. The fix is
+  three objects, not one object eleven times: a few photographed leads, a compact rack for the rest,
+  a wide band for the qualifying questions. Vary bullet counts — uniformity is itself a tell.
+- **A list of things is a list, not a grid of boxes.** Eighteen city tiles became one framed rack with
+  hairlines and right-aligned drive times, at a third of the height.
+- **Count the archetypes down the page.** Seven card grids in a row is invisible while building each
+  section and obvious in one full-page screenshot. Take the full-page shot.
+- **Copy: contractions, and cap the "X, not Y" construction.** Prose with no contractions and ten
+  antitheses reads as a language model even when every fact in it is true.
+- **One glyph, one meaning.** Four craft icons were borrowing service-grid glyphs, so the gable mark
+  meant three different things on one page.
+- **A section that ends before its neighbour leaves a hole in the page.** Fill it with proof that
+  belongs there, not with padding.
+- **Never put a stat block beside a section heading to fill the right side.** The client's rule —
+  nothing sits next to a heading — outranks the density instinct. Left-aligned heads with air to the
+  right are correct here.
+
 ### Two sections in a row cannot be the same object
 
 The hardware section's craft band was three dark panels sitting directly under three dark

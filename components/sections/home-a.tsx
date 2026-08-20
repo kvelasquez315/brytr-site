@@ -8,7 +8,7 @@ import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Tile, Check, TextLink, QuoteForm, ChannelEdge } from "@/components/ui/bits";
 import { Spotlight } from "@/components/ui/spotlight";
-import { IcVerified, IcMeasured, IcSameDay, IcFinancing, IcLadder, IcYearlyCost, IcHardHat, IcTwoTiers, IcOtherBrand, IcRoofline, IcSoffit, IcWeatherSealed } from "@/components/icons";
+import { IcVerified, IcMeasured, IcSameDay, IcFinancing, IcLadder, IcYearlyCost, IcHardHat, IcTwoTiers, IcOtherBrand, IcFasciaMount, IcMiter, IcConcealedWire, IcEndCap } from "@/components/icons";
 
 
 /* 4 — QUICK QUOTE + STATS · asymmetric split · neutral */
@@ -122,81 +122,134 @@ export function ProofRail() {
   );
 }
 
-/* 6 — SERVICES · bento grid, 11 cards + a 12th CTA cell · neutral */
+/* 6 — SERVICES · three lead cards, then a compact rack · neutral
+ *
+ * AUDIT FIX. This was eleven identical cards plus a twelfth CTA cell: 2,440px of one
+ * archetype, every card carrying exactly three bullets and a "See <exact card title>"
+ * link. Twelve equal-weight boxes highlight nothing, and on a phone it was seven
+ * consecutive screens of the same card — the single biggest reason the page read long.
+ *
+ * Now it is a real bento. Three lead services get photographed cards, because those are
+ * what people actually search for and they carry the section. The other eight sit in a
+ * compact rack — icon, name, one line — which is a different object, not a smaller
+ * version of the same one. Nothing was cut: all eleven services are still linked, and
+ * every one still has its own page. Bullet counts run two to four so the cards stop
+ * looking stamped out. */
+const LEAD_SERVICES = [
+  "permanent-outdoor-lighting",
+  "permanent-christmas-lights",
+  "permanent-roofline-lighting",
+];
+
 export function ServicesBento() {
+  const leads = LEAD_SERVICES.map((sl) => services.find((s) => s.slug === sl)!).filter(Boolean);
+  const rest = services.filter((s) => !LEAD_SERVICES.includes(s.slug));
+
   return (
     <section className="section bg-background">
       <div className="shell">
         <SectionHead
           eyebrow="What we install"
           title="Every surface worth lighting on a property."
-          lede="Every one of these runs on the same channel, the same controller and the same app. Add to it whenever you like."
+          lede="It all runs on one channel, one controller and one app, so you can start with the roofline and add to it whenever you like."
         />
         <Spotlight />
-        <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map((s, si) => {
-            const I = iconMap[s.icon];
+
+        {/* the three people ask for by name */}
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {leads.map((s, si) => {
             const withPhoto = photoExists(s.photo);
-            /* Every card is the same shape now. The Christmas card used to span two
-             * columns with its own layout, which is what made the grid read uneven —
-             * one feature tile forces every neighbour to either stretch or fall short.
-             * It keeps its "most requested" flag instead, which carries the emphasis
-             * without breaking the rhythm. */
+            const I = iconMap[s.icon];
             return (
               <article
                 key={s.slug}
                 data-spot
-                /* Two of the eleven have no photograph in the archive — commercial and
-                 * repair, because every install we shot is residential. Rather than let
-                 * them read as unfinished white cards next to nine photographed ones,
-                 * they invert to the dark surface. The absence becomes the design. */
-                className={`flex flex-col rounded-lg p-6 transition-transform duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5 ${
-                  withPhoto
-                    ? "bg-card shadow-[var(--shadow-lg)]"
-                    : "bg-primary shadow-[var(--shadow-dark)] ring-1 ring-accent/15"
-                }`}
+                className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
               >
                 {withPhoto ? (
-                  <Photo slot={s.photo!} className="mb-5" sizes="(min-width:1024px) 30vw, 100vw" />
+                  <Photo slot={s.photo!} sizes="(min-width:1024px) 32vw, 100vw" />
                 ) : (
-                  <span className="channel-tile mb-5" aria-hidden><I className="size-7" /></span>
+                  <div className="grid aspect-16/9 place-items-center bg-primary">
+                    <span className="channel-tile" aria-hidden><I className="size-7" /></span>
+                  </div>
                 )}
-                {s.slug === "permanent-christmas-lights" && (
-                  <p className="label mb-2 text-accent-ink">Most requested</p>
-                )}
-                <h3 className={`text-xl ${withPhoto ? "text-foreground" : "text-on-dark"}`}>{s.name}</h3>
-                <p className={`mt-2.5 text-[0.95rem] ${withPhoto ? "text-muted-foreground" : "text-on-dark-muted"}`}>
-                  {s.short}
-                </p>
-                <ul className={`mt-4 flex-1 space-y-2 ${withPhoto ? "" : "on-dark-cell"}`}>
-                  {s.includes.slice(0, 3).map((i) => <Check key={i} onDark={!withPhoto}>{i}</Check>)}
-                </ul>
-                <div className="mt-5 pt-1">
-                  <TextLink href={`/services/${s.slug}`} onDark={!withPhoto}>See {s.name}</TextLink>
+                <div className="flex flex-1 flex-col p-6">
+                  {s.slug === "permanent-christmas-lights" && (
+                    <p className="label mb-2 text-accent-ink">Most requested</p>
+                  )}
+                  <h3 className="text-xl text-foreground">{s.name}</h3>
+                  <p className="mt-2.5 text-[0.95rem] text-muted-foreground">{s.short}</p>
+                  {/* three, or four where the service earns it — the old grid gave every one
+                    * of eleven cards exactly three, which is a tell on its own */}
+                  <ul className="mt-4 flex-1 space-y-2">
+                    {s.includes.slice(0, si === 2 ? 4 : 3).map((i) => <Check key={i}>{i}</Check>)}
+                  </ul>
+                  <div className="mt-5">
+                    <TextLink href={`/services/${s.slug}`}>
+                      {si === 0 ? "See a whole-home install" : si === 1 ? "See it at Christmas" : "See a roofline run"}
+                    </TextLink>
+                  </div>
                 </div>
               </article>
             );
           })}
-          {/* the twelfth cell, so 11 services land on an even 4 x 3 grid */}
-          <article data-spot className="flex flex-col rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] ring-1 ring-accent/20">
-            <span className="channel-tile mb-5" aria-hidden>
-              <IcMeasured className="size-7" />
-            </span>
-            <h3 className="text-xl text-on-dark">Not sure which one you need?</h3>
-            <p className="mt-2.5 text-[0.95rem] text-on-dark-muted">
-              We design it on site after dark, when you can actually see what we are proposing.
+        </div>
+
+        {/* THE RACK — the other eight, as one object rather than eight more cards */}
+        <div className="mt-5 overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
+          <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-on-dark/12 px-6 py-4">
+            <p className="label flex items-center gap-3 text-on-dark">
+              <span className="block h-4 w-1 bg-accent" aria-hidden />
+              Also on the same system
             </p>
-            <ul className="mt-4 flex-1 space-y-2 on-dark-cell">
-              <Check onDark>Staying five years or more? Start with the roofline.</Check>
-              <Check onDark>Sit outside in summer? A pergola run earns more.</Check>
-              <Check onDark>Front of the house the point? Uplight the trees.</Check>
-            </ul>
-            <div className="mt-5 pt-1">
-              <Button asChild size="sm">
-                <Link href="/free-design-consultation">Book a consultation</Link>
-              </Button>
+            <p className="text-sm text-on-dark-muted">Added at install, or any year after</p>
+          </div>
+          <ul className="grid divide-on-dark/10 sm:grid-cols-2 sm:divide-x lg:grid-cols-4">
+            {rest.map((s) => {
+              const I = iconMap[s.icon];
+              return (
+                <li key={s.slug} className="border-b border-on-dark/10 last:border-b-0 lg:[&:nth-last-child(-n+4)]:border-b-0">
+                  <Link
+                    href={`/services/${s.slug}`}
+                    data-spot
+                    className="flex h-full gap-3.5 p-5 transition-colors duration-[--dur-fast] hover:bg-raise"
+                  >
+                    <I className="mt-0.5 size-6 shrink-0 text-accent" />
+                    <span className="block">
+                      <span className="block font-display text-[0.95rem] font-bold text-on-dark">{s.name}</span>
+                      <span className="mt-1 block text-sm leading-relaxed text-on-dark-muted">{s.short}</span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+
+        {/* the qualifying questions, as a wide band — a third shape, not a fourth card */}
+        <div className="mt-5 grid gap-6 rounded-lg bg-raise p-6 ring-1 ring-accent/25 lg:grid-cols-[22rem_1fr] lg:items-center lg:gap-10 lg:p-8">
+          <div>
+            <p className="label text-accent">Not sure where to start</p>
+            <h3 className="mt-2 text-xl text-on-dark">We design it on site, after dark.</h3>
+            <p className="mt-2 text-[0.95rem] text-on-dark-muted">
+              You&rsquo;ll see what we&rsquo;re proposing on your own house before you decide anything.
+            </p>
+            <div className="mt-5">
+              <Button asChild size="sm"><Link href="/free-design-consultation">Book a consultation</Link></Button>
             </div>
-          </article>
+          </div>
+          <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-3">
+            {[
+              ["Staying five years or more", "Start with the roofline. It's the run you'll use every night."],
+              ["You sit outside in summer", "A pergola or patio run earns its money more months of the year."],
+              ["The front of the house matters", "Uplight the trees. It changes the elevation more than the eave does."],
+            ].map(([h, p2]) => (
+              <li key={h}>
+                <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
+                <p className="mt-1 text-sm leading-relaxed text-on-dark-muted">{p2}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
@@ -245,7 +298,7 @@ const tiers: Tier[] = [
       ["LED spacing", "Wider"],
       ["Rated life", "Shorter"],
     ],
-    who: "A simple single-story roofline, or a budget you would rather split with landscape.",
+    who: "A simple single-story roofline, or a budget you'd rather split with landscape.",
     href: "/lighting-systems/brytr-basic",
   },
   {
@@ -261,11 +314,14 @@ const tiers: Tier[] = [
   },
 ];
 
-const craft: [string, string, typeof IcRoofline][] = [
-  ["Into fascia, never shingles", "Every penetration sealed as it is made.", IcRoofline],
-  ["Mitered at every transition", "Valleys, dormers and returns.", IcMeasured],
-  ["Concealed wire runs", "No drops down a downspout or across a soffit.", IcSoffit],
-  ["Capped terminations", "Sealed end caps, not tape.", IcWeatherSealed],
+/* Four icons drawn for these four rows (see components/icons). They used to borrow the
+ * service-grid glyphs, which meant the gable mark stood for "Roofline", "into fascia" and
+ * a gallery tab on the same page. One glyph, one meaning. */
+const craft: [string, string, typeof IcFasciaMount][] = [
+  ["Into fascia, never shingles", "Every penetration sealed as it is made.", IcFasciaMount],
+  ["Mitered at every transition", "Valleys, dormers and returns.", IcMiter],
+  ["Concealed wire runs", "Nothing dropped down a downspout or run across a soffit.", IcConcealedWire],
+  ["Capped terminations", "A sealed end cap closes the run.", IcEndCap],
 ];
 
 const specSheet: [string, string][] = [
@@ -360,7 +416,7 @@ export function MaterialsSplit() {
               Same craft on either tier
             </p>
             <p className="text-sm text-on-dark-muted">
-              Photographed on a finished Omaha install, not a manufacturer render
+              Photographed on a finished Omaha install
             </p>
           </div>
 
@@ -409,10 +465,9 @@ export function MaterialsSplit() {
                   </div>
                 ))}
               </dl>
-              <p className="mt-auto pt-5 text-sm text-on-dark-muted">
-                These are the Signature numbers. Basic differs on the rows above, and we show
-                you both side by side.
-              </p>
+              <div className="mt-auto pt-5">
+                <TextLink onDark href="/lighting-systems/brytr-basic">See the Basic tier&rsquo;s numbers</TextLink>
+              </div>
             </div>
           </div>
         </div>
@@ -429,23 +484,24 @@ export function MaterialsSplit() {
 /* 8 — WHY BRYTR · 4-up feature grid + overlapping bridge card · primary */
 const why = [
   { icon: IcHardHat, h: "Our own crews, never subcontracted", p: "The people on your roof are Brytr employees on Brytr payroll. Subcontracted installs are the single biggest cause of the leaks and the dead sections we get called out to fix.", l: ["W2 employees, trained in house", "Same crew from measure to handover"] },
-  { icon: IcOtherBrand, h: "We service what we did not sell", p: "Dead run, failed controller, installer stopped answering the phone. We take over other brands' systems including Jellyfish, Gemstone, Trimlight and Oelo.", l: ["Diagnostics on any brand", "Full run replacement when repair is not worth it"] },
-  { icon: IcVerified, h: "Day and night verification", p: "We do not leave until you have seen it lit after dark and seen how it reads from the street in daylight. Both states, on the same visit, with you there.", l: ["Daylight sightline check from the curb", "Full scene walkthrough after dark"] },
-  { icon: IcTwoTiers, h: "Two tiers, so we are not selling you one option", p: "We carry premium and value hardware. That is why our comparison pages give the cheaper system real reasons to win, which is not something a single-brand dealer can do.", l: ["Premium and value both stocked", "Honest recommendation, in writing"] },
+  { icon: IcOtherBrand, h: "We service what we didn't sell", p: "Dead run, failed controller, installer stopped answering the phone. We take over other brands' systems including Jellyfish, Gemstone, Trimlight and Oelo.", l: ["Diagnostics on any brand", "Full run replacement when a repair won't hold"] },
+  { icon: IcVerified, h: "Day and night verification", p: "We don't leave until you've seen it lit after dark and seen how it reads from the street in daylight. Both states, on the same visit, with you there.", l: ["Daylight sightline check from the curb", "Full scene walkthrough after dark"] },
+  { icon: IcTwoTiers, h: "Two tiers, so we're never selling you the only option", p: "We carry premium and value hardware, which is why our comparison pages give the cheaper system real reasons to win. A single-brand dealer has no way to write those pages.", l: ["Premium and value both stocked", "Honest recommendation, in writing"] },
 ];
 export function WhyBrytr() {
+  const [lead, ...others] = why;
   return (
-    /* PHOTO-BACKED, not another dark panel.
+    /* PHOTO-BACKED, and now with a point of focus.
      *
-     * This was four grey cards and a stat bar on flat navy — the client's words were
-     * "very dark, not designed, people are just gonna scroll right past this", and that
-     * was fair. It is the most important argument on the page and it looked like a
-     * footer. Now a real photograph sits behind it: a roofline running red and green,
-     * which is the holiday register the rest of the page keeps promising. The scrim is
-     * heavy enough to read against and light enough that you can tell it is a house.
+     * Two passes ago this was four grey cards on flat navy — "very dark, not designed,
+     * people are just gonna scroll right past this." The photograph fixed the flatness.
+     * The audit caught what it did not fix: four equal columns of small muted body copy
+     * with 16px icons lost on a dark photo, ragged bottoms, and a lede that announced
+     * how many points were coming. This is the most important argument on the page.
      *
-     * The claim itself is set at hero size, because it is the reason to choose Brytr and
-     * it should stop a thumb. */
+     * So one claim leads at size — the crews, because subcontracting is the actual cause
+     * of the failures we get called out to fix — and the other three sit beside it as
+     * rows with icons in the channel container, big enough to read. */
     <section className="relative isolate overflow-hidden bg-primary">
       <Image
         src="/img/scene-christmas.jpg"
@@ -462,20 +518,35 @@ export function WhyBrytr() {
           Every quote in this market comes from somebody selling exactly one brand.
         </h2>
         <p className="mt-5 max-w-[62ch] text-lg text-on-dark/90">
-          That is the whole reason Zac and Sam started Brytr. Four things follow from it, and
-          all four are things a single-brand dealer cannot offer you.
+          That&rsquo;s the reason Zac and Sam started Brytr. It&rsquo;s also why we carry two
+          systems instead of one, and why we&rsquo;ll tell you which of them your house needs.
         </p>
 
-        <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-0 lg:divide-x lg:divide-on-dark/15">
-          {why.map((w) => (
-            <article key={w.h} className="lg:px-7 lg:first:pl-0 lg:last:pr-0">
-              <span className="channel-edge mb-5 block w-12" aria-hidden />
-              <w.icon className="size-7 text-accent" />
-              <h3 className="mt-4 font-display text-lg font-bold leading-snug text-on-dark">{w.h}</h3>
-              <p className="mt-2.5 text-[0.95rem] leading-relaxed text-on-dark-muted">{w.p}</p>
-              <ul className="mt-4 space-y-2">{w.l.map((i) => <Check key={i} onDark>{i}</Check>)}</ul>
-            </article>
-          ))}
+        <div className="mt-12 grid gap-8 lg:grid-cols-[44fr_56fr] lg:gap-14">
+          {/* the claim that matters most, at size */}
+          <article className="flex flex-col rounded-lg bg-primary/72 p-7 ring-1 ring-accent/30">
+            <span className="channel-tile mb-6" aria-hidden><lead.icon className="size-7" /></span>
+            <h3 className="font-display text-[clamp(1.4rem,2vw,1.9rem)] font-bold leading-tight text-on-dark">
+              {lead.h}
+            </h3>
+            <p className="mt-4 flex-1 text-[1.05rem] leading-relaxed text-on-dark/90">{lead.p}</p>
+            <ul className="mt-6 space-y-2 border-t border-on-dark/15 pt-5">
+              {lead.l.map((i) => <Check key={i} onDark>{i}</Check>)}
+            </ul>
+          </article>
+
+          <ul className="divide-y divide-on-dark/15">
+            {others.map((w) => (
+              <li key={w.h} className="flex gap-5 py-6 first:pt-0 last:pb-0">
+                <span className="channel-tile" aria-hidden><w.icon className="size-7" /></span>
+                <div>
+                  <h3 className="font-display text-lg font-bold leading-snug text-on-dark">{w.h}</h3>
+                  <p className="mt-2 text-[0.95rem] leading-relaxed text-on-dark/85">{w.p}</p>
+                  <ul className="mt-3 space-y-2">{w.l.map((i) => <Check key={i} onDark>{i}</Check>)}</ul>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>

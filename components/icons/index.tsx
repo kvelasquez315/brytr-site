@@ -294,3 +294,51 @@ export const IcDayNight = ({ className }: P) => (
     <path className="text-accent" d="M16 2v28" stroke={CC} strokeWidth="3" />
   </S>
 );
+
+/* ── Craft details (4) ─────────────────────────────────────────────
+ * Added in the home-page audit. The four craft rows in the hardware section were
+ * borrowing IcRoofline, IcMeasured, IcSoffit and IcWeatherSealed from the service
+ * grid, so the same glyph meant three different things on one page. These four draw
+ * the actual detail: the channel screwed into fascia rather than through shingles, a
+ * mitred corner, a wire run hidden inside the channel, and a sealed end cap.
+ */
+
+export const IcFasciaMount = ({ className }: P) => (
+  <S className={className}>
+    {/* shingle course above, fascia board below, channel screwed into the fascia */}
+    <path d="M2 4h28v3H2zM2 8h28v3H2z" fill={CC} opacity=".4" />
+    <rect x="2" y="12" width="28" height="7" rx="1" fill={CC} opacity=".85" />
+    <rect className="text-accent" x="4" y="20" width="24" height="5" rx="1.6" fill={CC} />
+    <circle cx="9" cy="15.5" r="1.5" fill={CC} />
+    <circle cx="23" cy="15.5" r="1.5" fill={CC} />
+  </S>
+);
+
+export const IcMiter = ({ className }: P) => (
+  <S className={className}>
+    {/* two lengths of channel meeting at a mitred 90°, cut line on the diagonal */}
+    <path d="M4 20h13v6H4z" fill={CC} opacity=".85" />
+    <path d="M20 4h6v13h-6z" fill={CC} opacity=".85" />
+    <path d="M17 26 26 17v9h-9Z" fill={CC} opacity=".5" />
+    <path className="text-accent" d="M17.6 25.4 25.4 17.6" stroke={CC} strokeWidth="2.6" strokeLinecap="round" />
+  </S>
+);
+
+export const IcConcealedWire = ({ className }: P) => (
+  <S className={className}>
+    {/* channel in section with the conductor tucked inside, nothing hanging below */}
+    <path d="M3 9h26v11a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V9Z" fill={CC} opacity=".8" />
+    <path className="text-accent" d="M5 13c4 0 4 4 8 4s4-4 8-4 4 4 6 4" fill="none" stroke={CC} strokeWidth="2.4" strokeLinecap="round" />
+    <rect x="2" y="6" width="28" height="3" rx="1.4" fill={CC} />
+  </S>
+);
+
+export const IcEndCap = ({ className }: P) => (
+  <S className={className}>
+    {/* the run stops in a capped, sealed termination — not tape */}
+    <rect x="2" y="12" width="19" height="8" rx="1" fill={CC} opacity=".8" />
+    <rect className="text-accent" x="21" y="10" width="6" height="12" rx="2" fill={CC} />
+    <path d="M5 16h11" stroke="#fff" strokeWidth="1.6" opacity=".35" strokeLinecap="round" />
+    <path d="M29 13v6" stroke={CC} strokeWidth="2.2" strokeLinecap="round" />
+  </S>
+);

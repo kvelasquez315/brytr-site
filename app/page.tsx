@@ -6,7 +6,7 @@ import { SceneWipe } from "@/components/sections/scene-wipe";
 import { ProofRail, ServicesBento, MaterialsSplit, WhyBrytr } from "@/components/sections/home-a";
 import { ProjectTabs } from "@/components/sections/project-tabs";
 import {
-  Writing, ServiceArea, ProcessRow, FinalCta,
+  Writing, ServiceArea, ProcessRow, FinalCta, CtaBand,
 } from "@/components/sections/home-b";
 import { Jsonld, localBusiness } from "@/lib/schema";
 
@@ -22,7 +22,8 @@ export default function Home() {
           *
           *  QuickQuote   form #2 of 4. The hero has one and FinalCta has one.
           *  Financing    form #3, and a /pricing subject. Page kept, section cut.
-          *  CtaBand      FinalCta already does this, better.
+          *  CtaBand      cut here, then brought back mid-page in the audit: the stretch
+          *               from the systems section to the final form had nothing to act on.
           *  SceneRail    said the same thing as SceneWipe with more pixels. The eight
           *               scene photographs all live on /gallery.
           *  AppSplit     the app interface was drawn in HTML rather than photographed.
@@ -46,6 +47,10 @@ export default function Home() {
         <MaterialsSplit />  {/*  5 · split, hardware left      · deep    */}
         <WhyBrytr />        {/*  6 · four-up + bridge          · primary */}
         <ProjectTabs />     {/*  8 · tabbed photo gallery      · raise   */}
+        {/* AUDIT FIX: from the systems section to the final form was ten phone screens
+          * with nothing to act on. One short centred band here, which is also an
+          * archetype the page does not otherwise use. */}
+        <CtaBand />         {/*  8b · short centred band       · primary */}
         <ServiceArea />     {/*  9 · photo + city tiles        · neutral */}
         <ProcessRow />      {/* 10 · numbered row              · primary */}
         <Writing />         {/* 11 · compact article list      · neutral */}
