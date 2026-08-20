@@ -63,7 +63,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
             <dl className="mt-4 grid grid-cols-2 gap-2">
               {s.specs.slice(0, 4).map((sp) => (
                 <div key={sp.label} className="rounded-md bg-primary px-3 py-3">
-                  <dt className="label text-2xs uppercase tracking-[0.12em] text-on-dark-muted">{sp.label}</dt>
+                  <dt className="label text-on-dark-muted">{sp.label}</dt>
                   <dd className="mt-1 text-[0.8rem] font-semibold leading-snug text-on-dark">{sp.value}</dd>
                 </div>
               ))}
@@ -77,7 +77,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
         <div className="shell grid gap-10 lg:grid-cols-[42fr_58fr] lg:gap-14">
           <div>
             <SectionHead title="Priced by the foot, not by the package." />
-            <p className="u mt-7 text-[3.2rem] font-medium leading-none text-accent-ink">{s.priceFrom ?? s.specs.find((x) => x.label === "Price tier")?.value ?? "By quote"}</p>
+            <p className="u mt-7 text-[3.2rem] font-medium leading-none text-accent-ink">{s.priceFrom ?? s.specs.find((x) => x.label ==="Price tier")?.value ?? "By quote"}</p>
             <p className="mt-3 text-sm text-muted-foreground">Per linear foot of roofline, adjusted for complexity.</p>
             <div className="mt-7"><TextLink href="/pricing">See full pricing and financing</TextLink></div>
           </div>
@@ -170,7 +170,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {others.map((o) => (
               <Link key={o.slug} href={`/lighting-systems/${o.slug}`} className="rounded-lg bg-card p-5 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5">
-                <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">{o.tier}</p>
+                <p className="label text-accent-ink">{o.tier}</p>
                 <h3 className="mt-1.5 text-base text-foreground">{o.name}</h3>
                 <p className="mt-2 text-sm text-muted-foreground">{o.short}</p>
               </Link>

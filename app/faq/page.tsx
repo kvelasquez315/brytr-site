@@ -38,7 +38,7 @@ export default function FaqPage() {
 
       <section className="bg-raise">
         <div className="shell py-10">
-          <p className="label text-2xs uppercase tracking-[0.14em] text-accent">Jump to</p>
+          <p className="label text-accent">Jump to</p>
           <ul className="mt-4 flex flex-wrap gap-2.5">
             {groups.map((g) => (
               <li key={g.h}>

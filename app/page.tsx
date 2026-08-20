@@ -5,16 +5,14 @@ import { SceneWipe } from "@/components/sections/scene-wipe";
 import { ProofRail, ServicesBento, MaterialsSplit, WhyBrytr } from "@/components/sections/home-a";
 import { ProjectTabs } from "@/components/sections/project-tabs";
 import {
-  CompareGrid, Writing, ServiceArea, ProcessRow, HomeFaq, FinalCta,
+  Writing, ServiceArea, ProcessRow, FinalCta,
 } from "@/components/sections/home-b";
-import { Jsonld, localBusiness, faqSchema } from "@/lib/schema";
-import { homeFaqs } from "@/content/faqs";
+import { Jsonld, localBusiness } from "@/lib/schema";
 
 export default function Home() {
   return (
     <>
       <Jsonld data={localBusiness()} />
-      <Jsonld data={faqSchema(homeFaqs)} />
       <Header />
       <main>
         {/* Thirteen sections, down from twenty. The cut was made on DESIGN duplication,
@@ -31,8 +29,13 @@ export default function Home() {
           *  Reviews      content/reviews.ts is deliberately empty — no real review text
           *               exists yet — so the section rendered as numbers we already
           *               state in the band above it.
-          *  VersusTable  same argument as CompareGrid, twice. CompareGrid wins: it is
-          *               specific brands, and it links nine pages that exist.
+          *  VersusTable  same argument as the brand comparisons, twice.
+          *  CompareGrid  white cards and text with no photography. The nine comparison
+          *               pages are strong; a card grid of them on the homepage was not.
+          *               Reached from the systems section and the nav instead.
+          *  HomeFaq      client asked for no FAQ on the homepage. The FAQPage schema
+          *               went with it — structured data has to describe what is on the
+          *               page, and /faq still carries both.
           *
           * Every archetype below is used exactly once. */}
         <Hero />            {/*  1 · full-bleed photo + form   · photo   */}
@@ -41,12 +44,10 @@ export default function Home() {
         <SceneWipe />       {/*  4 · THE SIGNATURE             · raise   */}
         <MaterialsSplit />  {/*  5 · split, hardware left      · deep    */}
         <WhyBrytr />        {/*  6 · four-up + bridge          · primary */}
-        <CompareGrid />     {/*  7 · three brands + link       · neutral */}
         <ProjectTabs />     {/*  8 · tabbed photo gallery      · raise   */}
         <ServiceArea />     {/*  9 · photo + city tiles        · neutral */}
         <ProcessRow />      {/* 10 · numbered row              · primary */}
         <Writing />         {/* 11 · compact article list      · neutral */}
-        <HomeFaq />         {/* 12 · accordion + aside         · deep    */}
         <FinalCta />        {/* 13 · split + full form         · primary */}
       </main>
       <Footer />

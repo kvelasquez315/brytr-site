@@ -7,6 +7,7 @@ import { googleLogo, reviewProofBadge, offerings } from "@/content/badges";
 import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Tile, Check, TextLink, QuoteForm, ChannelEdge } from "@/components/ui/bits";
+import { Spotlight } from "@/components/ui/spotlight";
 import { IcVerified, IcMeasured, IcSameDay, IcFinancing, IcLadder, IcYearlyCost, IcHardHat, IcTwoTiers, IcOtherBrand } from "@/components/icons";
 
 
@@ -76,9 +77,7 @@ export function ProofRail() {
             <div className="relative h-7 w-20 shrink-0">
               <Image src={googleLogo} alt="Google" fill sizes="80px" className="object-contain object-left" />
             </div>
-          ) : (
-            <span className="font-display text-lg font-bold leading-none text-on-dark">Google</span>
-          )}
+          ) : null}
           <span className="flex items-center gap-1" aria-hidden>
             {[0, 1, 2, 3, 4].map((i) => (
               <svg key={i} viewBox="0 0 20 20" className="size-4 text-accent" fill="currentColor">
@@ -86,10 +85,15 @@ export function ProofRail() {
               </svg>
             ))}
           </span>
+          {/* Until the official Google mark is on disk this reads as a sentence, not as a
+            * lockup with a missing image in it. Setting the word "Google" in our own
+            * display face was the exact thing I told the client not to do with Haven and
+            * Jellyfish — a brand name in someone else's typeface looks like a broken img. */}
           <p className="text-sm text-on-dark">
             <span className="u font-semibold">{reviewProofBadge.score}</span>{" "}
             <span className="text-on-dark-muted">
-              from <span className="u">{reviewProofBadge.count}</span> {reviewProofBadge.source} · {reviewProofBadge.note}
+              from <span className="u">{reviewProofBadge.count}</span>{" "}
+              {googleLogo ? "reviews" : "reviews on Google"} · {reviewProofBadge.note}
             </span>
           </p>
         </div>
@@ -128,6 +132,7 @@ export function ServicesBento() {
           title="Every surface worth lighting on a property."
           lede="Every one of these runs on the same channel, the same controller and the same app. Add to it whenever you like."
         />
+        <Spotlight />
         <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s, si) => {
             const I = iconMap[s.icon];
@@ -140,6 +145,7 @@ export function ServicesBento() {
             return (
               <article
                 key={s.slug}
+                data-spot
                 /* Two of the eleven have no photograph in the archive — commercial and
                  * repair, because every install we shot is residential. Rather than let
                  * them read as unfinished white cards next to nine photographed ones,
@@ -156,7 +162,7 @@ export function ServicesBento() {
                   <span className="channel-tile mb-5" aria-hidden><I className="size-7" /></span>
                 )}
                 {s.slug === "permanent-christmas-lights" && (
-                  <p className="label mb-2 text-2xs uppercase tracking-[0.14em] text-accent-ink">Most requested</p>
+                  <p className="label mb-2 text-accent-ink">Most requested</p>
                 )}
                 <h3 className={`text-xl ${withPhoto ? "text-foreground" : "text-on-dark"}`}>{s.name}</h3>
                 <p className={`mt-2.5 text-[0.95rem] ${withPhoto ? "text-muted-foreground" : "text-on-dark-muted"}`}>
@@ -172,7 +178,7 @@ export function ServicesBento() {
             );
           })}
           {/* the twelfth cell, so 11 services land on an even 4 x 3 grid */}
-          <article className="flex flex-col rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] ring-1 ring-accent/20">
+          <article data-spot className="flex flex-col rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] ring-1 ring-accent/20">
             <span className="channel-tile mb-5" aria-hidden>
               <IcMeasured className="size-7" />
             </span>
@@ -214,7 +220,7 @@ export function MaterialsSplit() {
           ) : (
             /* no-photo: a labelled diagram of the channel assembly. Nobody in this trade does this. */
             <figure className="overflow-hidden rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] sm:p-7">
-              <svg viewBox="0 0 520 250" className="w-full" role="img" aria-label="Cross-section of the Brytr channel clipped into a fascia board">
+              <svg viewBox="0 0 520 250" className="w-full" role="img"aria-label="Cross-section of the Brytr channel clipped into a fascia board">
                 <rect x="0" y="0" width="400" height="260" fill="none" />
                 {/* fascia */}
                 <rect x="60" y="40" width="34" height="180" rx="2" className="fill-on-dark/12" />
@@ -241,7 +247,7 @@ export function MaterialsSplit() {
                 <line x1="182" y1="122" x2="248" y2="122" className="stroke-accent/50" strokeWidth="1" />
                 <line x1="182" y1="148" x2="248" y2="148" className="stroke-on-dark/35" strokeWidth="1" />
               </svg>
-              <figcaption className="label mt-4 text-2xs uppercase tracking-[0.16em] text-on-dark-muted">
+              <figcaption className="label mt-4 text-on-dark-muted">
                 The assembly, in section. Fastened into fascia, never through shingles.
               </figcaption>
               <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-on-dark/12 pt-6">
@@ -252,7 +258,7 @@ export function MaterialsSplit() {
                   ["Rating", "IP66 sealed"],
                 ].map(([k, v]) => (
                   <div key={k}>
-                    <dt className="label text-2xs uppercase tracking-[0.12em] text-on-dark-muted">{k}</dt>
+                    <dt className="label text-on-dark-muted">{k}</dt>
                     <dd className="u mt-1 text-sm font-medium text-on-dark">{v}</dd>
                   </div>
                 ))}
@@ -285,9 +291,9 @@ export function MaterialsSplit() {
               <Link key={t.name} href={t.href} className="block rounded-md border border-border bg-card p-5 transition-colors duration-[--dur-fast] hover:border-accent-deep">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <h3 className="text-lg text-foreground">{t.name}</h3>
-                  <span className="label text-xs uppercase tracking-[0.14em] text-muted-foreground">{t.tier}</span>
+                  <span className="label text-xs text-muted-foreground">{t.tier}</span>
                 </div>
-                <p className="label mt-1 text-xs uppercase tracking-[0.1em] text-accent-ink">on {t.on}</p>
+                <p className="label mt-1 text-xs text-accent-ink">on {t.on}</p>
                 <p className="mt-2 text-[0.95rem] text-muted-foreground">{t.note}</p>
               </Link>
             ))}

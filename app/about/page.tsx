@@ -56,7 +56,7 @@ export default function About() {
             </div>
           </div>
           <div className="overflow-hidden rounded-lg ring-1 ring-border">
-            <Elevation night massing="wing" lit={{ hex: "#f5c518", label: "warm white" }} className="block w-full" />
+            <Elevation night massing="wing" lit={{ hex: "#f5c518", label:"warm white" }} className="block w-full" />
           </div>
         </div>
       </section>
@@ -75,13 +75,13 @@ export default function About() {
                       <span className="u text-[4rem] font-medium leading-none text-accent">
                         {f.name.split(" ").map((p) => p[0]).join("")}
                       </span>
-                      <p className="label mt-3 text-2xs uppercase tracking-[0.16em] text-on-dark-muted">{f.role}</p>
+                      <p className="label mt-3 text-on-dark-muted">{f.role}</p>
                     </div>
                   </div>
                 )}
                 <div className="p-6">
                   <h2 className="font-display text-xl font-bold text-foreground">{f.name}</h2>
-                  <p className="label mt-1 text-xs uppercase tracking-[0.14em] text-accent-ink">{f.role}</p>
+                  <p className="label mt-1 text-xs text-accent-ink">{f.role}</p>
                   <ul className="mt-4 space-y-2">{f.handles.map((h) => <Check key={h}>{h}</Check>)}</ul>
                 </div>
               </article>

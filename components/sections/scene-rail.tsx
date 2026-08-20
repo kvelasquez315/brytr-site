@@ -50,7 +50,7 @@ export function SceneRail() {
                 <Image key={s.name} src={photo.src} alt={photo.alt} fill sizes="(min-width:1024px) 60vw, 100vw" className="object-cover" />
               </div>
             ) : (
-              <Elevation night massing="wing" lit={{ hex: s.hex, label: s.name }} className="block w-full" />
+              <Elevation night massing="wing"lit={{ hex: s.hex, label: s.name }} className="block w-full" />
             )}
           </div>
 
@@ -70,7 +70,7 @@ export function SceneRail() {
               ))}
             </dl>
             <div className="mt-6 flex-1">
-              <p className="label text-2xs uppercase tracking-[0.14em] text-accent">How it is built</p>
+              <p className="label text-accent">How it is built</p>
               <ol className="mt-3 space-y-2.5">
                 {[
                   "Pick the color in the app, or start from a preset",
@@ -85,14 +85,14 @@ export function SceneRail() {
                 ))}
               </ol>
             </div>
-            <p className="label mt-6 border-t border-on-dark/10 pt-4 text-2xs uppercase leading-relaxed tracking-[0.14em] text-on-dark-muted">
+            <p className="label mt-6 border-t border-on-dark/10 pt-4 text-on-dark-muted">
               {photo?.src ? "Photographed on a completed install" : "Measured elevation, lit to the selected scene"}
             </p>
           </div>
         </div>
 
         {/* chip rail */}
-        <div className="mt-5 flex flex-wrap gap-2.5" role="tablist" aria-label="Lighting scenes">
+        <div className="mt-5 flex flex-wrap gap-2.5" role="tablist"aria-label="Lighting scenes">
           {scenes.map((sc, idx) => {
             const on = idx === i;
             return (

@@ -7,6 +7,7 @@ import { reviews, reviewProof } from "@/content/reviews";
 import { homeFaqs } from "@/content/faqs";
 import { compares } from "@/content/compares";
 import { posts } from "@/content/blog";
+import { ServiceMap } from "./service-map";
 import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Check, TextLink, QuoteForm, ChannelEdge } from "@/components/ui/bits";
@@ -52,7 +53,7 @@ export function AppSplit() {
             /* no-photo: render the scene list as real UI rather than a phone mockup image */
             <div className="mx-auto max-w-sm overflow-hidden rounded-xl bg-primary p-4 shadow-[var(--shadow-dark)] ring-1 ring-accent/15">
               <div className="flex items-center justify-between px-2 pb-3 pt-1">
-                <span className="label text-2xs uppercase tracking-[0.18em] text-on-dark-muted">Scenes</span>
+                <span className="label text-on-dark-muted">Scenes</span>
                 <span className="u text-2xs text-accent">Front elevation</span>
               </div>
               {[["Everyday warm white", "100%", true], ["Husker red", "80%", false], ["Halloween", "70%", false], ["Christmas", "90%", false], ["Fourth of July", "85%", false], ["Off at 11:00 pm", "Scheduled", false]].map(([n, v, on]) => (
@@ -66,7 +67,7 @@ export function AppSplit() {
           {/* second element so the column is genuinely full */}
           <div className="mt-5 grid gap-3 sm:grid-cols-2">
             <div className="rounded-lg bg-card p-5 shadow-[var(--shadow-lg)]">
-              <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Zones on a typical home</p>
+              <p className="label text-muted-foreground">Zones on a typical home</p>
               <ul className="mt-3 space-y-2 text-sm text-foreground">
                 <li className="flex justify-between"><span>Front elevation</span><span className="u text-muted-foreground">Warm white</span></li>
                 <li className="flex justify-between"><span>Side elevations</span><span className="u text-muted-foreground">Off</span></li>
@@ -75,7 +76,7 @@ export function AppSplit() {
               </ul>
             </div>
             <div className="rounded-lg bg-card p-5 shadow-[var(--shadow-lg)]">
-              <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">A week of scheduling</p>
+              <p className="label text-muted-foreground">A week of scheduling</p>
               <ul className="mt-3 space-y-2 text-sm text-foreground">
                 <li className="flex justify-between"><span>Mon to Thu</span><span className="u text-muted-foreground">Dusk to 10pm</span></li>
                 <li className="flex justify-between"><span>Fri and Sat</span><span className="u text-muted-foreground">Dusk to 12am</span></li>
@@ -109,13 +110,13 @@ export function Founders() {
                       <span className="u text-[4rem] font-medium leading-none text-accent">
                         {f.name.split(" ").map((p) => p[0]).join("")}
                       </span>
-                      <p className="label mt-3 text-2xs uppercase tracking-[0.16em] text-on-dark-muted">{f.role}</p>
+                      <p className="label mt-3 text-on-dark-muted">{f.role}</p>
                     </div>
                   </div>
                 )}
                 <div className="p-6">
                   <h3 className="text-xl text-foreground">{f.name}</h3>
-                  <p className="label mt-1 text-xs uppercase tracking-[0.14em] text-accent-ink">{f.role}</p>
+                  <p className="label mt-1 text-xs text-accent-ink">{f.role}</p>
                   <ul className="mt-4 space-y-2">{f.handles.map((h) => <Check key={h}>{h}</Check>)}</ul>
                 </div>
               </article>
@@ -172,7 +173,7 @@ export function VersusTable() {
               <tr className="bg-raise">
                 <th scope="col" className="px-5 py-4 text-sm font-semibold text-on-dark-muted">&nbsp;</th>
                 <th scope="col" className="border-x-2 border-accent px-5 py-4 text-sm font-semibold text-on-dark">
-                  <span className="label text-2xs uppercase tracking-[0.16em] text-accent">Brytr</span>
+                  <span className="label text-accent">Brytr</span>
                 </th>
                 <th scope="col" className="px-5 py-4 text-sm font-semibold text-on-dark-muted">The typical installer</th>
               </tr>
@@ -196,52 +197,39 @@ export function VersusTable() {
 /* 13 — SERVICE AREA · split, real map left · neutral */
 export function ServiceArea() {
   return (
-    <section className="section bg-background">
+    <section className="section bg-raise">
       <div className="shell">
         <SectionHead
+          onDark
           eyebrow="Where we work"
           title="Omaha metro, Lincoln, western Iowa and eastern Nebraska."
           lede="Eighteen cities, each with its own page, real project photos and drive time. If your town is not on this list, call us and ask."
         />
-        <div className="mt-10 grid gap-8 lg:grid-cols-[44fr_56fr] lg:gap-12">
-          {/* Was an OpenStreetMap iframe. It rendered as an empty grey box whenever the
-            * embed was slow or blocked, which is a broken-looking void in the middle of
-            * the page and a third-party dependency we do not control. A real photograph
-            * of a finished install says "we work here" better than a generic basemap. */}
-          <figure className="overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-lg)]">
-            <div className="relative aspect-4/3">
-              <Image
-                src="/img/g-blue-white.jpg"
-                alt="A finished Brytr install lit blue and white on an Omaha home at night"
-                fill
-                sizes="(min-width:1024px) 42vw, 100vw"
-                className="object-cover"
-              />
-            </div>
-            <figcaption className="flex items-baseline justify-between gap-4 p-5">
-              <span className="label text-2xs uppercase tracking-[0.16em] text-accent">West Omaha</span>
-              <span className="text-[0.95rem] text-on-dark-muted">
-                Same crews across all eighteen cities.
-              </span>
-            </figcaption>
-          </figure>
-          <div>
-            <ul className="grid gap-2.5 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-10">
+          <ServiceMap />
+
+          <div className="mt-6">
+            {/* Were white boxes with black text, which the client called boring and was
+              * right about — eighteen of them is a lot of empty white. They are dark
+              * tiles now, with the drive time in amber, so the list reads as a control
+              * panel rather than a table of contents. */}
+            <ul className="grid gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
               {cities.map((c) => (
                 <li key={c.slug}>
                   <Link
                     href={`/service-areas/${c.slug}`}
-                    className="flex h-19 flex-col justify-center rounded-md border border-border bg-card px-4 transition-colors duration-[--dur-fast] hover:border-accent-deep"
+                    data-spot
+                    className="flex h-19 flex-col justify-center rounded-md bg-primary px-4 ring-1 ring-on-dark/10 transition-colors duration-[--dur-fast]"
                   >
-                    <span className="font-semibold text-foreground">{c.name}{c.state === "IA" ? ", IA" : ""}</span>
-                    <span className="u mt-0.5 text-xs text-muted-foreground">{c.drive}</span>
+                    <span className="font-display font-bold text-on-dark">{c.name}{c.state === "IA" ? ", IA" : ""}</span>
+                    <span className="u mt-1 text-xs text-accent">{c.drive}</span>
                   </Link>
                 </li>
               ))}
             </ul>
-            <p className="mt-5 text-sm text-muted-foreground">
-              {metroCities.length} metro cities, {outstateCities.length} in Lincoln and eastern Nebraska,
-              and {iowaCities.length} in western Iowa.
+            <p className="mt-5 text-sm text-on-dark-muted">
+              Amber is the metro, where a crew can be at your house the same week. Grey on the
+              map is outstate, which we still drive to — it is just a longer day.
             </p>
           </div>
         </div>
@@ -281,21 +269,37 @@ const steps = [
 ];
 export function ProcessRow() {
   return (
-    <section className="section bg-background">
-      <div className="shell">
-        <SectionHead title="From the first walk-around to the night it turns on." />
-        <ol className="mt-11 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
-          {steps.map(([h, p], i) => (
-            <li key={h} className="relative">
-              <span className="u pointer-events-none absolute -top-3 left-0 text-[3.6rem] font-medium leading-none text-foreground/25" aria-hidden>
-                {i + 1}
-              </span>
-              <div className="relative pt-8">
-                <h3 className="text-lg text-foreground">{h}</h3>
-                <p className="mt-2 text-[0.95rem] text-muted-foreground">{p}</p>
-              </div>
-            </li>
-          ))}
+    <section className="run-field section relative overflow-hidden">
+      <div className="shell relative">
+        <SectionHead
+          onDark
+          eyebrow="How it goes"
+          title="From the first walk-around to the night it turns on."
+          lede="One visit to decide, one day to install, and nobody leaves until you have seen it lit."
+        />
+
+        <ol className="relative mt-12">
+          {/* the channel, run horizontally. Sits behind the nodes on desktop; on mobile
+            * the stages stack and the line becomes vertical down the left. */}
+          <span
+            className="run-line absolute left-[0.6rem] top-2 hidden h-px w-full lg:block"
+            style={{ width: "calc(100% - 1.2rem)" }}
+            aria-hidden
+          />
+          <span className="run-line absolute left-[0.6rem] top-2 h-[calc(100%-1rem)] w-px lg:hidden" aria-hidden />
+
+          <div className="grid gap-10 lg:grid-cols-5 lg:gap-6">
+            {steps.map(([h, p], i) => (
+              <li key={h} className="relative pl-9 lg:pl-0">
+                <span className="run-node absolute left-0 top-0 lg:relative lg:mb-7" aria-hidden />
+                <h3 className="text-lg text-on-dark">{h}</h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-on-dark-muted">{p}</p>
+                {i === steps.length - 1 && (
+                  <p className="label mt-4 text-accent">Then it is yours</p>
+                )}
+              </li>
+            ))}
+          </div>
         </ol>
       </div>
     </section>
@@ -477,7 +481,7 @@ export function CompareGrid() {
             .filter((c) => ["haven-vs-jellyfish-lighting", "haven-vs-gemstone-lights", "haven-vs-trimlight"].includes(c.slug))
             .map((c) => (
             <article key={c.slug} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-              <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">
+              <p className="label text-accent-ink">
                 {c.labor ? "Professional vs DIY" : c.neutral ? "Neither is ours" : "We install both"}
               </p>
               <h3 className="mt-3 font-display text-lg font-bold leading-snug text-foreground">
@@ -505,6 +509,13 @@ export function CompareGrid() {
  * The blog had twelve finished articles and not one internal link from the homepage,
  * which is a straight SEO defect as well as a wasted trust signal. Three posts, the
  * ones that answer pre-purchase questions. */
+/* One real photograph per article, chosen because it shows what the piece is about. */
+const postArt: Record<string, string> = {
+  "are-permanent-christmas-lights-worth-it": "/img/christmas-detail.jpg",
+  "permanent-lights-vs-hanging-christmas-lights": "/img/scene-christmas.jpg",
+  "how-to-choose-a-permanent-lighting-installer": "/img/channel-detail.jpg",
+};
+
 export function Writing() {
   const featured = [
     "are-permanent-christmas-lights-worth-it",
@@ -522,23 +533,35 @@ export function Writing() {
           title="The questions people ask before they spend the money."
           lede="Written by the people who install it, including the parts that argue against buying. Twelve more on the blog."
         />
-        {/* A list, not cards. The page already has a card grid for services and another
-          * for comparisons; a third would be the same design a third time. */}
+        {/* Each article gets a photograph. A three-row text list was the flattest thing
+          * on the page, and every one of these pieces is about something we photographed
+          * — the Christmas comparison has a red-and-green roofline, the installer piece
+          * has the channel detail. Still a list, not a fourth card grid. */}
         <ul className="mt-9 divide-y divide-border border-y border-border">
           {featured.map((p) => (
             <li key={p.slug}>
               <Link
                 href={`/blog/${p.slug}`}
-                className="group flex flex-col gap-2 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10"
+                data-spot
+                className="group grid gap-5 py-6 sm:grid-cols-[16rem_1fr] sm:items-center sm:gap-8"
               >
-                <span className="max-w-[52ch]">
-                  <span className="block font-display text-lg font-bold leading-snug text-foreground group-hover:underline">
+                <span className="relative block aspect-video overflow-hidden rounded-sm bg-primary">
+                  <Image
+                    src={postArt[p.slug] ?? "/img/g-gable-detail.jpg"}
+                    alt=""
+                    fill
+                    sizes="(min-width:640px) 256px, 100vw"
+                    className="object-cover"
+                  />
+                </span>
+                <span>
+                  <span className="label text-accent-ink">{p.category}</span>
+                  <span className="mt-1.5 block font-display text-xl font-bold leading-snug text-foreground group-hover:underline">
                     {p.title}
                   </span>
-                  <span className="mt-1.5 block text-[0.95rem] text-muted-foreground">{p.dek}</span>
-                </span>
-                <span className="label shrink-0 text-2xs uppercase tracking-[0.14em] text-accent-ink">
-                  {p.category} · {p.read}
+                  <span className="mt-2 block max-w-[68ch] text-[0.95rem] leading-relaxed text-muted-foreground">
+                    {p.dek}
+                  </span>
                 </span>
               </Link>
             </li>

@@ -48,7 +48,7 @@ export default function HowItWorks() {
               <div className="shell py-14">
                 <div className="grid items-center gap-10 lg:grid-cols-[1fr_24rem]">
                   <div className="overflow-hidden rounded-lg ring-1 ring-on-dark/12">
-                    <Elevation night massing="wing" lit={{ hex: "#f5c518", label: "warm white" }} className="block w-full" />
+                    <Elevation night massing="wing" lit={{ hex: "#f5c518", label:"warm white" }} className="block w-full" />
                   </div>
                   <div>
                     <p className="u text-[3rem] font-medium leading-none text-on-dark">
@@ -75,7 +75,7 @@ export default function HowItWorks() {
                 <div className="mt-9 grid gap-5 sm:grid-cols-3">
                   {s.list.map((l, k) => (
                     <div key={l} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-                      <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">On the day</p>
+                      <p className="label text-accent-ink">On the day</p>
                       <p className="mt-2 font-display text-base font-bold text-foreground">{l}</p>
                       <p className="mt-2.5 text-sm text-muted-foreground">
                         {[
@@ -105,12 +105,12 @@ export default function HowItWorks() {
               </div>
               {i === 0 ? (
                 <div className="overflow-hidden rounded-lg ring-1 ring-border">
-                  <Elevation night massing="gable" lit={{ hex: "#f5c518", label: "warm white" }} className="block w-full" />
+                  <Elevation night massing="gable" lit={{ hex: "#f5c518", label:"warm white" }} className="block w-full" />
                 </div>
               ) : i === 2 ? (
                 /* step 3 is the quote, so show what a quote contains rather than a house */
                 <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
-                  <p className="label text-2xs uppercase tracking-[0.14em] text-accent">On the written quote</p>
+                  <p className="label text-accent">On the written quote</p>
                   <dl className="mt-5 divide-y divide-on-dark/12 border-y border-on-dark/12">
                     {[["Linear feet", "244 ft, itemized by elevation"], ["Tier", "Signature or Basic, named"],
                       ["Zones", "3, one per elevation"], ["Corners mitered", "11"],
@@ -126,7 +126,7 @@ export default function HowItWorks() {
               ) : (
                 /* step 5 is verification, so show the two checks we actually run */
                 <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
-                  <p className="label text-2xs uppercase tracking-[0.14em] text-accent">The two checks</p>
+                  <p className="label text-accent">The two checks</p>
                   <div className="mt-5 space-y-5">
                     {[
                       ["Daylight, from the curb", "We stand where your neighbors stand and look at the eave line. If you can pick out the channel, we have not finished."],
@@ -166,7 +166,7 @@ export default function HowItWorks() {
                   <span className="channel-tile mb-5" aria-hidden><I className="size-7" /></span>
                   <h3 className="text-lg text-on-dark">{h}</h3>
                   <p className="mt-2 flex-1 text-[0.95rem] text-on-dark-muted">{p}</p>
-                  <p className="label mt-4 border-t border-on-dark/12 pt-3 text-2xs uppercase leading-relaxed tracking-[0.12em] text-on-dark-muted">{note}</p>
+                  <p className="label mt-4 border-t border-on-dark/12 pt-3 text-on-dark-muted">{note}</p>
                 </article>
               );
             })}

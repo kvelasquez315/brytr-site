@@ -64,7 +64,7 @@ export default function ServicesHub() {
                 >
                   Book a consultation
                 </Link>
-                <p className="label mt-4 text-2xs uppercase tracking-[0.14em] text-on-dark-muted">
+                <p className="label mt-4 text-on-dark-muted">
                   Or call <a href="tel:+14028103973" className="text-on-dark">402-810-3973</a>
                 </p>
               </div>

@@ -38,7 +38,7 @@ export default function Page() {
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Tell us</h2>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">If something here does not work for you, call and say so. We would rather fix it than have you work around it.</p>
           <div className="mt-10 rounded-lg bg-muted p-6">
-            <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Questions</p>
+            <p className="label text-muted-foreground">Questions</p>
             <p className="mt-2 text-[0.95rem] text-muted-foreground">
               Anything on this page you want explained, call{" "}
               <a href={site.phoneHref} className="u text-foreground underline decoration-accent decoration-2 underline-offset-4">{site.phone}</a>{" "}

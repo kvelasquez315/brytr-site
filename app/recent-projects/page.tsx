@@ -38,10 +38,10 @@ const projects = [
       "Entry left on its own warm circuit, unaffected by scene changes",
     ],
     shots: [
-      { src: "/img/hero-warm-white.jpg", label: "Everyday warm white", alt: "The same Omaha two-story on everyday warm white" },
-      { src: "/img/hero-game-day.jpg", label: "Game day", alt: "The same Omaha two-story lit red and blue for game day" },
-      { src: "/img/christmas-detail.jpg", label: "Christmas", alt: "Individual red and green LEDs alternating along the gables of the same Omaha home" },
-      { src: "/img/g-blue-white.jpg", label: "Two zones, two colors", alt: "The same Omaha home with gables in blue and eaves left white" },
+      { src: "/img/hero-warm-white.jpg", label:"Everyday warm white", alt: "The same Omaha two-story on everyday warm white" },
+      { src: "/img/hero-game-day.jpg", label:"Game day", alt: "The same Omaha two-story lit red and blue for game day" },
+      { src: "/img/christmas-detail.jpg", label:"Christmas", alt: "Individual red and green LEDs alternating along the gables of the same Omaha home" },
+      { src: "/img/g-blue-white.jpg", label:"Two zones, two colors", alt: "The same Omaha home with gables in blue and eaves left white" },
     ],
   },
   {
@@ -67,10 +67,10 @@ const projects = [
       "Landscape kept warm so the color has something to sit against",
     ],
     shots: [
-      { src: "/img/scene-husker-red.jpg", label: "Scarlet", alt: "The same Omaha ranch home lit scarlet" },
-      { src: "/img/scene-green.jpg", label: "Green", alt: "The same Omaha ranch home lit green" },
-      { src: "/img/scene-halloween.jpg", label: "October", alt: "The same Omaha ranch home washed violet with pumpkins on the steps" },
-      { src: "/img/g-twilight-yard.jpg", label: "Dusk trigger", alt: "The same Omaha home at twilight as the lighting switches on" },
+      { src: "/img/scene-husker-red.jpg", label:"Scarlet", alt: "The same Omaha ranch home lit scarlet" },
+      { src: "/img/scene-green.jpg", label:"Green", alt: "The same Omaha ranch home lit green" },
+      { src: "/img/scene-halloween.jpg", label:"October", alt: "The same Omaha ranch home washed violet with pumpkins on the steps" },
+      { src: "/img/g-twilight-yard.jpg", label:"Dusk trigger", alt: "The same Omaha home at twilight as the lighting switches on" },
     ],
   },
   {
@@ -96,10 +96,10 @@ const projects = [
       "Deck and step lighting on its own circuit, left warm through every scene",
     ],
     shots: [
-      { src: "/img/g-pool-red.jpg", label: "Full red", alt: "The same Omaha property lit red across house, pergola and deck" },
-      { src: "/img/g-pool-blue.jpg", label: "Whole property, one tap", alt: "The same Omaha property lit blue across house, pergola and deck" },
-      { src: "/img/g-pool-firebowl.jpg", label: "Under-cap wall wash", alt: "A lit limestone retaining wall and fire bowl at the pool deck" },
-      { src: "/img/g-pool-pergola.jpg", label: "Pergola fascia run", alt: "A pergola lit along its fascia beside the pool deck" },
+      { src: "/img/g-pool-red.jpg", label:"Full red", alt: "The same Omaha property lit red across house, pergola and deck" },
+      { src: "/img/g-pool-blue.jpg", label:"Whole property, one tap", alt: "The same Omaha property lit blue across house, pergola and deck" },
+      { src: "/img/g-pool-firebowl.jpg", label:"Under-cap wall wash", alt: "A lit limestone retaining wall and fire bowl at the pool deck" },
+      { src: "/img/g-pool-pergola.jpg", label:"Pergola fascia run", alt: "A pergola lit along its fascia beside the pool deck" },
     ],
   },
 ];
@@ -144,7 +144,7 @@ export default function RecentProjects() {
                     </div>
                   ))}
                 </dl>
-                <p className="label mt-6 text-2xs uppercase tracking-[0.14em] text-accent-ink">What made this one work</p>
+                <p className="label mt-6 text-accent-ink">What made this one work</p>
                 <ul className="mt-3 flex-1 space-y-2.5">
                   {p.includes.map((t) => (
                     <Check key={t}>{t}</Check>
@@ -162,7 +162,7 @@ export default function RecentProjects() {
                   <div className="relative aspect-video">
                     <Image src={s.src} alt={s.alt} fill sizes="(min-width:1024px) 23vw, 50vw" className="object-cover" />
                   </div>
-                  <figcaption className="label px-4 py-3 text-2xs uppercase tracking-[0.14em] text-muted-foreground">
+                  <figcaption className="label px-4 py-3 text-muted-foreground">
                     {s.label}
                   </figcaption>
                 </figure>

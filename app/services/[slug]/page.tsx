@@ -92,7 +92,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </ul>
           </div>
           <dl className="h-fit rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-            <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Quick facts</p>
+            <p className="label text-muted-foreground">Quick facts</p>
             {[
               ["Install time", "One day, most homes"],
               ["Season", "Year round, including winter"],
@@ -129,7 +129,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               ["Aftercare", "One number to call. We hold the workmanship warranty alongside the manufacturer."],
             ].map(([h, p], i) => (
               <article key={h} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-                <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">Step {i + 1}</p>
+                <p className="label text-accent-ink">Step {i + 1}</p>
                 <h3 className="mt-2 text-lg text-foreground">{h}</h3>
                 <p className="mt-2 text-[0.95rem] text-muted-foreground">{p}</p>
               </article>
@@ -138,7 +138,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           {sys && (
             <div className="mt-8 flex flex-wrap items-center gap-4 rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
               <div className="min-w-0 flex-1">
-                <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">Matching system</p>
+                <p className="label text-accent-ink">Matching system</p>
                 <p className="mt-1 font-display text-lg font-bold text-foreground">{sys.name}</p>
                 <p className="mt-1 text-sm text-muted-foreground">{sys.short}</p>
               </div>
@@ -156,7 +156,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           ) : (
             <div className="grid items-center gap-8 lg:grid-cols-[1fr_20rem]">
               <div className="overflow-hidden rounded-lg ring-1 ring-on-dark/12">
-                <Elevation night massing="wing" lit={{ hex: "#f5c518", label: "warm white" }} className="block w-full" />
+                <Elevation night massing="wing" lit={{ hex: "#f5c518", label:"warm white" }} className="block w-full" />
               </div>
               <div>
                 <p className="eyebrow eyebrow--on-dark">Measured elevation</p>

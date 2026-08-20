@@ -42,7 +42,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
           <p className="eyebrow eyebrow--on-dark">{p.category}</p>
           <h1 className="mt-4 max-w-[46ch] text-[clamp(2rem,4vw,3.1rem)] text-on-dark">{p.h1}</h1>
           <p className="mt-5 max-w-[68ch] text-lg text-on-dark/85">{p.dek}</p>
-          <p className="label mt-7 text-xs uppercase tracking-[0.14em] text-on-dark-muted">
+          <p className="label mt-7 text-xs text-on-dark-muted">
             Brytr Co · {p.read} read
           </p>
         </div>
@@ -52,7 +52,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         <div className="shell grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)_19rem] lg:gap-12">
           {/* TOC — scrolls away normally, not sticky */}
           <nav aria-label="On this page" className="h-fit">
-            <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">On this page</p>
+            <p className="label text-muted-foreground">On this page</p>
             <ul className="mt-4 space-y-2.5 border-l border-border pl-4">
               {toc.map((h) => (
                 <li key={h}><span className="text-sm text-muted-foreground">{h}</span></li>
@@ -96,7 +96,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
           <aside className="space-y-6">
             <QuoteForm variant="compact" heading="Get a written quote" />
             <div className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-              <p className="label text-2xs uppercase tracking-[0.14em] text-muted-foreground">Related services</p>
+              <p className="label text-muted-foreground">Related services</p>
               <ul className="mt-4 space-y-3">
                 {rel.map((s) => {
                   const I = iconMap[s.icon];
@@ -121,7 +121,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
           <div className="mt-9 grid gap-5 sm:grid-cols-3">
             {next.map((o) => (
               <Link key={o.slug} href={`/blog/${o.slug}`} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5">
-                <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">{o.category}</p>
+                <p className="label text-accent-ink">{o.category}</p>
                 <h3 className="mt-2 text-lg text-foreground">{o.title}</h3>
                 <p className="mt-2 flex-1 text-sm text-muted-foreground">{o.dek.split(".")[0]}.</p>
                 <p className="u mt-4 text-xs text-muted-foreground">{o.read} read</p>

@@ -1,74 +1,68 @@
-BRYTR SITE — update 6   (supersedes updates 1-5)
-================================================
-Everything changed since the version in the repo.
+BRYTR SITE — update 7   (supersedes 1-6)
+========================================
+Upload: unzip, drag the CONTENTS into GitHub's uploader, commit to main.
+package.json + package-lock.json must land together.
 
-UPLOAD
-------
-github.com/kvelasquez315/brytr-site -> Add file -> Upload files.
-Unzip, drag the CONTENTS into the drop area (not the brytr-update folder
-itself). Remove this README. Commit to main; Vercel rebuilds.
+THE FONT — fourth pass, and the first one that fixed the right thing
+-------------------------------------------------------------------
+You flagged Plex Mono, then Barlow, then Archivo. Every screenshot you sent
+had the same thing in common and I kept missing it: ALL CAPS WITH WIDE
+LETTER-SPACING. The typeface was never the problem. Tracked-out uppercase is
+a tech-brand tic — it reads machine-generated, and it is not how you speak to
+a homeowner. Fifty-one labels across twenty-nine files are now small, bold,
+sentence case, normal tracking. Checked in the browser: zero elements on the
+homepage compute uppercase.
 
-package.json and package-lock.json must land in the SAME commit — the font
-dependencies changed again (ibm-plex-mono removed).
+TWO BUGS, ONE ROOT CAUSE
+------------------------
+The new timeline gradient and the card-hover rule were both anchored next to
+.tap-44, which lives inside a touch-device media query. So they only existed
+on phones: the process section rendered near-white text on bare cream on
+every desktop, and the hover highlight never fired. Same mistake as the drag
+handle bug two rounds ago. Fixing it also caught that the 44px touch targets
+had leaked out of that query, which would have put invisible click-catchers
+over every text link on desktop. Both pointer modes verified explicitly.
 
-Optional: components/sections/hero-dusk.tsx is dead code, safe to delete.
+DONE THIS ROUND
+---------------
+Service area   A real map, drawn not embedded. Every town plotted from its
+               actual coordinates, longitude compressed for latitude so the
+               metro is not stretched. Drive-time rings at 30/60/90 miles.
+               No roads or rivers — it is an honest service-area diagram, not
+               a pretend survey. First attempt labelled all eleven metro
+               towns and they collided into mush, so the metro is one amber
+               cluster and the names are in the grid beside it. City tiles are
+               dark now with the drive time in amber.
+Timeline       The 1-2-3-4-5 row is gone. Rebuilt on the amber channel line
+               with each stage a node on it, over a background that runs
+               dusk-blue to full night left to right. No numerals.
+Service cards  Amber outline on hover. On touch, the card highlights as it
+               crosses the middle of the screen (IntersectionObserver —
+               scroll-linked CSS animation is Chromium-only).
+Blog           A photograph on every row.
+Hero           New photograph, a different property — warmer and wider.
+FAQ            Off the homepage, and the FAQPage schema with it, since
+               structured data has to describe what is on the page. /faq
+               still carries both.
+Comparisons    Off the homepage. Your call was "pictures or delete it", and
+               white cards with text was the whole problem. Eleven sections
+               now.
 
-THIS ROUND
-----------
-TWO FONTS, FULL STOP. The "robotic" font was IBM Plex Mono. I had it holding
-numbers — review score, install count, the phone placeholder, spec values —
-and kept defending that as principled. You were right twice over: monospace
-in a stat tile reads as a terminal, and running three families on one page is
-itself the tell. It is deleted. Archivo for headings and labels, IBM Plex
-Sans for everything else. Numbers still align in spec tables (tabular
-figures, same typeface). Verified in the browser: the page computes exactly
-two font families. The leftover Chivo and Figtree files were still sitting in
-app/fonts and are gone too.
+NOT DONE YET — next pass
+------------------------
+- The systems section (Brytr Signature / Basic / Landscape). Still white
+  cards, still uneven left-to-right. Needs the brand logos to do properly.
+- "Why Brytr" four-up. Needs imagery behind it; I have the photographs.
 
-HERO. Accent button is now the phone number — a second "get a consultation"
-button was competing with the form six inches to its right. The stat row and
-the "serving 18 cities" line are gone; both repeated the band below.
-
-THE BAND. Reviews left, the three things we install right, one row, about a
-third of its old height. Licensed/insured and W2 crews are off the trust side
-completely.
-
-  The Google mark needs the official file. Drop it at
-  /public/logo/google.svg and set `googleLogo` in content/badges.ts. Until
-  then the band draws its own five-star row (stars are not a trademark) with
-  "Google" set in Archivo. Google publishes an asset pack for review
-  displays — grab it from the Business Profile rather than saving one off a
-  web page.
-
-  ASSUMPTION TO CHECK: "three different things that are also offered" I read
-  as Roofline / Landscape / Patio and pergola, using three of the custom
-  icons. If you meant the three SYSTEMS instead (Signature, Basic, Landscape
-  and Bistro), say so and it is a two-line change.
-
-LENGTH. Twenty sections down to thirteen. I cut on duplicated DESIGN, not on
-content value — the page had four lead forms, five card grids, five
-two-column splits and two comparison sections.
-
-  QuickQuote   form #2 of 4
-  Financing    form #3, and really a /pricing subject
-  CtaBand      the final CTA does this better
-  SceneRail    same argument as the drag wipe with more pixels; all eight
-               scene photos are on /gallery
-  AppSplit     the app interface was DRAWN in HTML, not photographed. Comes
-               back when Zac sends a screenshot.
-  Reviews      content/reviews.ts is empty on purpose — no real review text
-               exists — so it rendered as numbers the band already states
-  VersusTable  same argument as the brand comparisons, twice
-
-Comparisons went from nine cards to three plus a link (nine was a second
-twelve-card grid), and the articles became a list instead of a third card
-grid. Every layout archetype is now used exactly once.
-
-Page height: 19,163px -> 13,542px.
-
-STILL OPEN
-----------
-- Google logo file; Haven + Jellyfish official asset packs.
+BLOCKED ON YOU
+--------------
+- Google's mark. content/badges.ts has the slot: drop the file at
+  /public/logo/google.svg, set `googleLogo`. Get it from the Business Profile
+  asset pack — I will not draw a trademark from memory, and I cannot pull one
+  off a web page. Until then the band draws its own five stars, which are not
+  a trademark, and says "reviews on Google" in body text rather than faking a
+  wordmark.
+- Haven and Jellyfish official asset packs, same reason.
 - A daytime photograph. Nothing in the archive is shot before dark.
-- App screenshot, crew shot, founder portraits for /about, one commercial install.
-- Real warranty terms, financing terms, review text. Placeholders on purpose.
+- App screenshot, crew shot, founder portraits, one commercial install.
+- Real warranty and financing terms.

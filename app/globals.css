@@ -318,23 +318,92 @@
    * client kept flagging. Mono is now reserved for what it is actually for: phone
    * numbers, prices, linear-foot figures, spec VALUES, tabular data. Labels use the
    * display face at 700, which reads editorial rather than terminal. */
+  /* MICRO-LABELS. Sentence case, normal tracking, no exceptions.
+   *
+   * This is the fourth pass at "the robotic font" and the first one that addresses what
+   * was actually wrong. The family was never the problem — the client flagged Plex Mono,
+   * then Barlow, then Archivo, and the common thread in every screenshot was ALL CAPS
+   * WITH WIDE LETTER-SPACING. Tracked-out uppercase is a tech-brand tic; on a
+   * contractor's site it reads as machine-generated and it is not how you speak to a
+   * homeowner. Labels are now small, bold, sentence case, tracked normally. */
   .label {
     font-family: var(--font-display);
     font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 0;
+    text-transform: none;
   }
 
   .eyebrow {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+    gap: 0.6rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 0;
+    text-transform: none;
     color: var(--brand-accent-ink);
   }
   .eyebrow--on-dark { color: var(--brand-accent); }
+
+  /* MOVED OUT OF @media (pointer: coarse). These were anchored next to .tap-44, which
+   * lives inside that query, so the timeline gradient and the card hover rule only ever
+   * existed on touch devices — the process section rendered near-white text on bare
+   * cream on every desktop. Same root cause as the .tap-44 specificity bug: careless
+   * placement relative to a media query. */
+  /* THE RUN — the process section.
+   *
+   * A numbered 1-2-3-4-5 row is the laziest pattern in local-business web design and the
+   * client said so. This replaces it with the site's own signature: the amber channel
+   * line, run horizontally across the section with each stage as a node clipped onto it.
+   * The section background runs dusk-blue on the left to full night on the right, so the
+   * layout itself is the story — you read left to right and the sky goes dark, which is
+   * exactly what the product does. No numerals anywhere in it. */
+  .run-field {
+    /* plain hex stops on purpose — a single invalid color in a multi-stop gradient drops
+     * the whole declaration, and this section rendered as bare cream with near-white
+     * text on it when one stop used color-mix. globals.css is the one file where hex
+     * is allowed, so there is no reason to risk it here. */
+    background: linear-gradient(100deg, #1b2a3d 0%, #16212e 34%, #111820 68%, #0c0f13 100%);
+  }
+  .run-line {
+    background: linear-gradient(
+      to right,
+      color-mix(in oklab, var(--brand-accent) 25%, transparent) 0%,
+      var(--brand-accent) 18%,
+      var(--brand-accent) 82%,
+      color-mix(in oklab, var(--brand-accent) 25%, transparent) 100%
+    );
+  }
+  /* the node: a short length of channel seen end-on, same profile as the icon tile */
+  .run-node {
+    position: relative;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 2px 2px 6px 6px;
+    background: var(--brand-accent);
+    box-shadow: 0 0 0 5px color-mix(in oklab, var(--brand-accent) 18%, transparent);
+  }
+
+  /* CARD SPOTLIGHT — amber outline on hover, and on touch as the card crosses the
+   * middle of the screen (see components/ui/spotlight.tsx for why that half is JS).
+   * An outline rather than a box-shadow, because these cards carry two different
+   * shadows depending on whether they sit on the light or the dark surface. */
+  [data-spot] {
+    outline: 2px solid transparent;
+    outline-offset: -2px;
+    transition:
+      outline-color var(--dur-base) var(--ease-out-expo),
+      transform var(--dur-base) var(--ease-out-expo);
+  }
+  [data-spot][data-inview="true"] { outline-color: var(--brand-accent); }
+  @media (hover: hover) {
+    [data-spot]:hover { outline-color: var(--brand-accent); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    [data-spot] { transition: outline-color 1ms linear; }
+  }
 
   .prose-body p { max-width: 68ch; }
 
@@ -371,6 +440,20 @@
    * positioning into normal flow on any touch device, adding its height to the track and
    * making the clipped overlay 48px taller than the photograph beneath it. Invisible on
    * a mouse-only machine, obvious on a touchscreen laptop. */
+}
+
+/* Standalone text links (card CTAs, the announcement bar link) need a 44px touch target
+ * even though the visible text is smaller. Padding would change the layout, so the hit
+ * area is expanded with a pseudo-element instead — and ONLY on touch devices, because on
+ * a desktop an invisible 44px-tall pseudo-element over every text link is a click-catcher
+ * sitting on top of whatever is beneath it.
+ *
+ * `:not(.absolute)` matters: a bare `.tap-44 { position: relative }` ties with Tailwind's
+ * `.absolute` on specificity and wins on source order, which is what knocked the Scene
+ * Wipe drag handle into normal flow on touchscreens and made one half of the photograph
+ * 48px taller than the other.
+ */
+@media (pointer: coarse) {
   .tap-44:not(.absolute):not(.fixed):not(.sticky) { position: relative; }
   .tap-44::after {
     content: "";

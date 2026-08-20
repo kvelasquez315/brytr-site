@@ -34,11 +34,11 @@ export function Header() {
 
       <header className="sticky top-0 z-50 border-b border-on-dark/10 bg-primary">
         <div className="shell flex h-19 items-center gap-6">
-          <Link href="/" aria-label="Brytr Co home" className="tap-44 flex shrink-0 items-center py-2">
+          <Link href="/"aria-label="Brytr Co home" className="tap-44 flex shrink-0 items-center py-2">
             <Wordmark />
           </Link>
 
-          <nav className="hidden flex-1 items-center gap-6 lg:flex" aria-label="Main">
+          <nav className="hidden flex-1 items-center gap-6 lg:flex"aria-label="Main">
             {nav.map((n) => (
               <Link
                 key={n.href}

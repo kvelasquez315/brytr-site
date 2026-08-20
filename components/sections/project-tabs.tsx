@@ -29,11 +29,11 @@ const tabs: Project[] = [
     blurb:
       "Three gables, a brick front and an arched entry. Roofline, gable accents and tree uplighting all run off the same controller, so a scene change reaches the whole property at once.",
     shots: [
-      { src: "/img/g-moonrise.jpg", label: "Blue and white", note: "Gables in color, eaves left white, tree uplights holding warm.",
+      { src: "/img/g-moonrise.jpg", label:"Blue and white", note: "Gables in color, eaves left white, tree uplights holding warm.",
         alt: "A two-story Omaha home lit blue and white under a rising moon, with an uplit tree in the front yard" },
-      { src: "/img/g-gable-detail.jpg", label: "Channel detail", note: "The run follows the gable line and turns the corner without a break.",
+      { src: "/img/g-gable-detail.jpg", label:"Channel detail", note: "The run follows the gable line and turns the corner without a break.",
         alt: "Close view of the lit channel following two gable edges on an Omaha home" },
-      { src: "/img/g-blue-elevation.jpg", label: "One color, every zone", note: "Same house with every zone pushed to a single color.",
+      { src: "/img/g-blue-elevation.jpg", label:"One color, every zone", note: "Same house with every zone pushed to a single color.",
         alt: "An Omaha home with its whole front elevation lit blue" },
     ],
   },
@@ -44,11 +44,11 @@ const tabs: Project[] = [
     blurb:
       "A long low ranch is the hardest elevation to light well — there is no gable to carry the eye, so the line itself has to be perfect. This one adds bed washes and boulder uplights at ground level.",
     shots: [
-      { src: "/img/g-ranch-blue-white.jpg", label: "Two zones, two colors", note: "Roofline in color, soffit left white, landscape warm underneath.",
+      { src: "/img/g-ranch-blue-white.jpg", label:"Two zones, two colors", note: "Roofline in color, soffit left white, landscape warm underneath.",
         alt: "A long Omaha ranch elevation lit blue and white with landscape uplighting" },
-      { src: "/img/g-ranch-blue.jpg", label: "Brightness dialed back", note: "Color reads cleaner at 70% than it does at full output.",
+      { src: "/img/g-ranch-blue.jpg", label:"Brightness dialed back", note: "Color reads cleaner at 70% than it does at full output.",
         alt: "An Omaha ranch home lit blue with a lit rock garden in front" },
-      { src: "/img/g-twilight-yard.jpg", label: "Dusk trigger", note: "The system came up on its own as the light dropped.",
+      { src: "/img/g-twilight-yard.jpg", label:"Dusk trigger", note: "The system came up on its own as the light dropped.",
         alt: "An Omaha home at twilight with its lighting just switched on" },
     ],
   },
@@ -59,11 +59,11 @@ const tabs: Project[] = [
     blurb:
       "The whole rear of the property on one system: house roofline, a freestanding pergola, under-cap washers along the limestone wall, and the pool deck. Every element is its own zone.",
     shots: [
-      { src: "/img/g-pool-blue.jpg", label: "Whole property, one tap", note: "House, pergola and hardscape switching together.",
+      { src: "/img/g-pool-blue.jpg", label:"Whole property, one tap", note: "House, pergola and hardscape switching together.",
         alt: "An Omaha home, pergola and pool deck lit blue at dusk" },
-      { src: "/img/g-pool-firebowl.jpg", label: "Under-cap wall wash", note: "Washers tucked under the wall cap, aimed down, no glare from the seating.",
+      { src: "/img/g-pool-firebowl.jpg", label:"Under-cap wall wash", note: "Washers tucked under the wall cap, aimed down, no glare from the seating.",
         alt: "A lit limestone retaining wall and fire bowl at an Omaha pool deck" },
-      { src: "/img/g-pool-pergola.jpg", label: "Pergola fascia run", note: "The same channel profile used on the house, run on the pergola.",
+      { src: "/img/g-pool-pergola.jpg", label:"Pergola fascia run", note: "The same channel profile used on the house, run on the pergola.",
         alt: "A pergola lit green along its fascia beside an Omaha pool deck" },
     ],
   },
@@ -77,7 +77,7 @@ export function ProjectTabs() {
       <div className="shell">
         <SectionHead onDark title="Installs we photographed ourselves." lede={tab.blurb} />
 
-        <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-b border-on-dark/12" role="tablist" aria-label="Project categories">
+        <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-b border-on-dark/12" role="tablist"aria-label="Project categories">
           {tabs.map((t, i) => (
             <button
               key={t.key}
@@ -113,7 +113,7 @@ export function ProjectTabs() {
                 />
               </div>
               <figcaption className="p-5">
-                <p className="label text-2xs uppercase tracking-[0.16em] text-accent">{s.label}</p>
+                <p className="label text-accent">{s.label}</p>
                 <p className={`mt-2 text-on-dark-muted ${i === 0 ? "text-[0.95rem]" : "text-sm"}`}>{s.note}</p>
               </figcaption>
               <div className="absolute inset-x-0 top-0 h-0.5 bg-accent/0 transition-colors duration-[--dur-base] group-hover:bg-accent" aria-hidden />
@@ -122,7 +122,7 @@ export function ProjectTabs() {
         </div>
 
         <div className="mt-6 flex flex-wrap items-center justify-between gap-4 rounded-lg bg-primary px-5 py-4 ring-1 ring-on-dark/10">
-          <p className="label text-2xs uppercase tracking-[0.16em] text-on-dark-muted">
+          <p className="label text-on-dark-muted">
             {tab.key} · {tab.spec}
           </p>
           <TextLink onDark href="/gallery">

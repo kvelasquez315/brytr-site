@@ -35,7 +35,7 @@ export function Hero() {
       <div className="shell relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_28rem] lg:gap-16 lg:py-24 xl:gap-24">
         {/* ── left: short, keyword-forward ─────────────────────────── */}
         <div className="max-w-[46rem]">
-          <p className="label text-2xs uppercase tracking-[0.2em] text-accent">
+          <p className="label text-accent">
             Omaha, Nebraska · Installed year round
           </p>
 
