@@ -230,6 +230,28 @@ Caught and corrected, in order:
 Test before shipping a section: **count the pieces, then count the pieces the reference has.** If
 ours is fuller only because our elements are larger, it is not fuller.
 
+### Highlighting means ONE thing is highlighted
+
+Three panels with identical amber rings highlight nothing — the client's read of the hardware
+section was "I don't see how it's highlighting anything... just a lot of text, and a bit
+disorganized." Two rules came out of it:
+
+1. If a section presents options, one of them is the recommendation and it is the only lit
+   element: brighter surface, full-strength accent edge, a tag, and the only filled button.
+   The others are deliberately quiet.
+2. Options are compared with the SAME rows in the SAME order, not with a paragraph each. The
+   eye reads across a table; it cannot read across three blocks of prose. Where a section has
+   supporting material under the options, put a labelled hairline band above it so it reads as
+   subordinate rather than as three more things of equal weight.
+
+### Hover is desktop, scroll is phone — and `(hover: hover)` cannot tell you which
+
+The card spotlight was gated on `@media (hover: hover)` / `matchMedia("(hover: hover)")`. On the
+client's touchscreen laptop Chrome reports `hover: none`, so that machine got the phone
+behaviour on a desktop layout — two to four cards lighting up as he scrolled — and no hover
+highlight at all. The hover rule is now unconditional and the scroll pass is gated on viewport
+width below `lg`, re-checked on resize. Test both by width, not by media feature.
+
 ### The run (process section) — third design, and why
 
 A timeline drawn *over* the content will always look like a mistake. Version one was
