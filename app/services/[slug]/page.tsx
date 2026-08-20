@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services, serviceBySlug } from "@/content/services";
+import { images } from "@/content/images";
 import { detailFor } from "@/content/service-detail";
 import { systemBySlug } from "@/content/systems";
 import { serviceFaqsFor } from "@/content/faqs";
@@ -36,8 +37,9 @@ import { Jsonld, breadcrumb, serviceSchema, faqSchema } from "@/lib/schema";
  *   · the page closes on a photograph of that service, so eleven pages do not all show
  *     the same house
  *
- * Hero: the form (these pages take leads). Closer: the no-form variant, because two lead
- * forms on one page is the mistake the shared layer was carrying.
+ * Hero: the home page's, on this service's own photograph. Closer: the no-form variant,
+ * because the hero already carries the form and two lead forms on one page is the mistake
+ * the shared layer was carrying.
  */
 
 export function generateStaticParams() {
@@ -84,6 +86,19 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     { name: s.name, href: `/services/${s.slug}` },
   ];
 
+  /* The hero photograph is THIS service's own shot wherever the archive has one, so eleven
+   * pages open on eleven different houses rather than on one stock hero. Commercial and
+   * repairs have no photograph of their own yet — they borrow the closest real thing and
+   * are on the shot list. */
+  const heroFallback: Record<string, string> = {
+    "commercial-outdoor-lighting": "/img/g-pool-blue.jpg",
+    "repairs-and-service": "/img/channel-detail.jpg",
+    "holiday-seasonal-scenes": "/img/scene-halloween.jpg",
+    "gameday-lighting": "/img/scene-husker-red.jpg",
+  };
+  const heroPhoto =
+    (s.photo && images[s.photo]?.src) || heroFallback[s.slug] || "/img/hero-bg.jpg";
+
   return (
     <Shell>
       <Jsonld data={breadcrumb(trail)} />
@@ -91,6 +106,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <Jsonld data={faqSchema(faqs)} />
 
       <PageHero
+        photo={heroPhoto}
+        photoAlt={(s.photo && images[s.photo]?.alt) || `${s.name} on a Brytr install in the Omaha metro`}
+        objectPosition="50% 58%"
         eyebrow={s.name}
         h1={s.h1}
         lede={s.lede}

@@ -20,8 +20,10 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
  * the full eleven as a grouped rack (a list, not eleven more cards), then the one thing
  * only this page has to settle: homes versus businesses.
  *
- * Archetype: photo hero + decision tree + grouped rack. The service pages under it open
- * with a form instead, so a child never looks like its parent. Closer: one, the form.
+ * Archetype: the home page's hero, then decision tree, then grouped rack. Every page on
+ * this site opens the way the home page does — same photograph treatment, same consultation
+ * form in the right column — and what differs is the section that comes after it. Closer:
+ * one, the form.
  */
 
 export const metadata: Metadata = {
@@ -101,7 +103,6 @@ export default function ServicesHub() {
       <Jsonld data={breadcrumb(trail)} />
 
       <PageHero
-        variant="photo"
         photo="/img/whole-home.jpg"
         photoAlt="A two-story Omaha home with its roofline, gables and front trees lit at night"
         objectPosition="50% 62%"
