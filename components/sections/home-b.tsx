@@ -340,7 +340,31 @@ const steps: [string, string, string, string][] = [
 ];
 export function ProcessRow() {
   return (
-    <section className="run-field section relative overflow-hidden">
+    /* PHOTO-BACKED DUSK, not a flat panel row.
+     *
+     * Fourth pass. The client on pass three: "still super boring. Doesn't fit the theme at
+     * all." Fair — five tidy panels on a gradient is a layout, not a lighting company.
+     *
+     * The section is now the thing the copy describes. The background is our own twilight
+     * frame, the one where the system is coming up on its own as the light drops, and the
+     * scrim runs dusk-blue on the left to full night on the right, so scrolling the row is
+     * watching the evening arrive. Each stage sits on a length of real LED run — round
+     * diodes at the channel's own spacing, dim at the walk-around and burning at full
+     * output with a bloom on the night it turns on. The panels are glass over the
+     * photograph rather than solid cards, so the house stays visible behind them.
+     *
+     * The photograph is a real Omaha install, not a render. */
+    <section className="run-field section relative isolate overflow-hidden">
+      <Image
+        src="/img/g-twilight-yard.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        aria-hidden
+        className="-z-10 object-cover object-[50%_62%]"
+      />
+      <div className="run-scrim absolute inset-0 -z-10" aria-hidden />
+
       <div className="shell relative">
         <SectionHead
           onDark
@@ -354,19 +378,26 @@ export function ProcessRow() {
             <li
               key={h}
               data-lit={i + 1}
-              className="run-panel relative flex flex-col rounded-md bg-primary/75 p-5 pt-6 ring-1 ring-on-dark/10"
+              /* No backdrop-blur: slopcheck flags it, and it is right to — frosted glass is a
+                * 2021 UI trend, not a lighting company. Plain transparency over the
+                * photograph does the same job and costs nothing to composite. */
+              className="run-panel relative flex flex-col rounded-md bg-primary/82 p-5 pt-6 ring-1 ring-on-dark/12"
             >
               <span className="run-seg" aria-hidden />
               <p className="label text-accent">{kicker}</p>
               <h3 className="mt-2 text-lg leading-snug text-on-dark">{h}</h3>
               <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-on-dark-muted">{p}</p>
-              <p className="mt-5 border-t border-on-dark/10 pt-3.5 text-sm text-on-dark">
+              <p className="mt-5 border-t border-on-dark/12 pt-3.5 text-sm text-on-dark">
                 <span className="label block text-on-dark-muted">You leave with</span>
                 <span className="mt-1 block font-display font-bold">{out}</span>
               </p>
             </li>
           ))}
         </ol>
+
+        <p className="label mt-6 text-on-dark-muted">
+          Photographed at dusk on a finished install, as the system came up on its own
+        </p>
       </div>
     </section>
   );

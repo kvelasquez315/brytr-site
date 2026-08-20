@@ -376,23 +376,38 @@
    * dropped nodes onto it. Both put a graphic on top of the text — the line landed on
    * the stage headings — which is why it looked like a mistake. A border on the element
    * it belongs to cannot land on anything else. */
+  /* A LENGTH OF REAL RUN, not a bar. Round diodes on the channel's own pitch, so the
+   * graphic at the top of each stage is the product rather than a rule. Output ramps
+   * left to right: barely on at the walk-around, full bloom on the night it turns on.
+   * A solid amber bar was the third version of this and the client's verdict was
+   * "still super boring. Doesn't fit the theme at all." */
   .run-seg {
     position: absolute;
     inset-inline: 0;
     inset-block-start: 0;
-    block-size: 3px;
-    border-start-start-radius: 3px;
-    border-start-end-radius: 3px;
-    background: var(--brand-accent);
-    opacity: 0.3;
+    block-size: 9px;
+    background-image: radial-gradient(
+      circle,
+      var(--brand-accent) 0 1.9px,
+      color-mix(in oklab, var(--brand-accent) 55%, transparent) 1.9px 2.6px,
+      transparent 2.9px
+    );
+    background-size: 15px 9px;
+    background-position: 3px center;
+    background-repeat: repeat-x;
+    opacity: 0.42;
   }
-  .run-panel[data-lit="2"] .run-seg { opacity: 0.45; }
-  .run-panel[data-lit="3"] .run-seg { opacity: 0.62; }
-  .run-panel[data-lit="4"] .run-seg { opacity: 0.8; }
+  .run-panel { border-block-start: 1px solid color-mix(in oklab, var(--brand-accent) 22%, transparent); }
+  .run-panel[data-lit="2"] .run-seg { opacity: 0.56; filter: drop-shadow(0 0 2px color-mix(in oklab, var(--brand-accent) 40%, transparent)); }
+  .run-panel[data-lit="3"] .run-seg { opacity: 0.72; filter: drop-shadow(0 0 3px color-mix(in oklab, var(--brand-accent) 55%, transparent)); }
+  .run-panel[data-lit="4"] .run-seg { opacity: 0.88; filter: drop-shadow(0 0 4px color-mix(in oklab, var(--brand-accent) 65%, transparent)); }
   .run-panel[data-lit="5"] .run-seg {
     opacity: 1;
-    box-shadow: 0 0 16px 1px color-mix(in oklab, var(--brand-accent) 55%, transparent);
+    filter:
+      drop-shadow(0 0 5px color-mix(in oklab, var(--brand-accent) 85%, transparent))
+      drop-shadow(0 0 14px color-mix(in oklab, var(--brand-accent) 45%, transparent));
   }
+  .run-panel[data-lit="5"] { border-block-start-color: var(--brand-accent); }
 
   /* CARD SPOTLIGHT — amber outline on hover, and on touch as the card crosses the
    * middle of the screen (see components/ui/spotlight.tsx for why that half is JS).
@@ -440,6 +455,21 @@
 .form-on-dark .form-note { color: var(--on-dark-muted); }
 .on-dark-cell { color: var(--on-dark); }
 .on-dark-cell-muted { color: var(--on-dark-muted); }
+
+/* The run sits on our own twilight frame — the evening the system came up on its own.
+ * Dusk-blue on the left to full night on the right, so reading the row left to right is
+ * watching the light drop. Heavier at the bottom, where five panels of body copy sit. */
+.run-scrim {
+  background:
+    linear-gradient(
+      100deg,
+      color-mix(in oklab, #1b2a3d 74%, transparent) 0%,
+      color-mix(in oklab, #16212e 80%, transparent) 38%,
+      color-mix(in oklab, var(--brand-primary) 88%, transparent) 70%,
+      color-mix(in oklab, var(--brand-ink) 94%, transparent) 100%
+    ),
+    linear-gradient(to top, color-mix(in oklab, var(--brand-ink) 55%, transparent) 0%, transparent 45%);
+}
 
 /* Why Brytr sits on a photograph. Darker than the hero scrim because there are four
  * columns of body copy on it rather than one headline, and a vertical gradient rather

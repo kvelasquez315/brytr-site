@@ -230,6 +230,26 @@ Caught and corrected, in order:
 Test before shipping a section: **count the pieces, then count the pieces the reference has.** If
 ours is fuller only because our elements are larger, it is not fuller.
 
+### Two sections in a row cannot be the same object
+
+The hardware section's craft band was three dark panels sitting directly under three dark
+tier panels — same silhouette, same surface, same rhythm. The client read the lower one as "a
+copy" of the upper one, because it was. Fix: change the FORM, not the palette. The craft band
+is now a single wide strip with its own header rail and internal hairline divisions, the
+photograph bleeding to its edges, and the amber mark on the left instead of across the top.
+Variety comes from silhouette and structure; introducing a new colour would break the lock.
+
+### A section about lighting has to look lit
+
+The process row went through four designs. Numbers, then a line with nodes, then five tidy
+panels on a gradient — "still super boring. Doesn't fit the theme at all," and right. A
+layout is not a lighting company. It now sits on our own twilight frame (the evening the
+system came up on its own), scrimmed dusk-blue on the left to full night on the right, with
+each stage carrying a length of real LED run — round diodes at the channel's own pitch, dim
+at the walk-around and blooming at full output on the last panel. No backdrop-blur: frosted
+glass is a UI trend, and slopcheck flags it. Plain transparency over the photograph does the
+same job.
+
 ### Highlighting means ONE thing is highlighted
 
 Three panels with identical amber rings highlight nothing — the client's read of the hardware

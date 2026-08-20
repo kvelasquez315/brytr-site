@@ -341,62 +341,79 @@ export function MaterialsSplit() {
           ))}
         </div>
 
-        {/* A labelled band, so the three panels below read as SUPPORTING the tiers rather
-          * than as three more things of equal weight. That flatness is most of what made
-          * the section feel disorganized. */}
-        <div className="mt-12 flex items-center gap-5">
-          <p className="label shrink-0 text-accent-ink">Same craft on either tier</p>
-          <span className="h-px flex-1 bg-foreground/15" aria-hidden />
-        </div>
+        {/* ONE BAND, NOT THREE MORE CARDS.
+          *
+          * This was three dark panels in a row, which is the same object as the three tier
+          * panels above it — the client's read was that the section below was "a copy" of
+          * the one above, and it was. Same silhouette, same surface, same rhythm, stacked.
+          *
+          * So this is a different device: a single wide strip with its own header rail and
+          * internal hairline divisions instead of three floating cards. The photograph
+          * bleeds to the strip's edges rather than sitting in a frame with a caption box
+          * under it, and the amber line runs down the LEFT edge rather than across the top,
+          * so nothing about it echoes the tier panels. Same palette, different form —
+          * which is how a section stays varied without introducing a new colour. */}
+        <div className="mt-12 overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
+          <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-on-dark/12 px-6 py-4">
+            <p className="label flex items-center gap-3 text-on-dark">
+              <span className="block h-4 w-1 bg-accent" aria-hidden />
+              Same craft on either tier
+            </p>
+            <p className="text-sm text-on-dark-muted">
+              Photographed on a finished Omaha install, not a manufacturer render
+            </p>
+          </div>
 
-        <div className="mt-5 grid items-stretch gap-5 lg:grid-cols-3">
-          <figure className="flex flex-col overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
-            <div className="relative min-h-56 flex-1">
+          <div className="grid divide-on-dark/12 lg:grid-cols-[36fr_32fr_32fr] lg:divide-x">
+            {/* the photograph bleeds — no frame, no caption card */}
+            <figure className="relative min-h-64 border-b border-on-dark/12 lg:border-b-0">
               <Image
                 src="/img/channel-detail.jpg"
                 alt="Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along the gable"
                 fill
-                sizes="(min-width:1024px) 32vw, 100vw"
+                sizes="(min-width:1024px) 34vw, 100vw"
                 className="object-cover"
               />
+              {/* the lit house behind it is bright pink-white here, so the caption needs a real
+                * scrim, not a hint of one */}
+              <figcaption className="absolute inset-x-0 bottom-0 bg-linear-to-t from-primary via-primary/92 to-transparent px-6 pb-5 pt-20">
+                <p className="label text-accent">The channel, close up</p>
+                <p className="mt-1 text-sm text-on-dark">
+                  Color matched to the fascia, diffuser facing down. At noon it reads as trim.
+                </p>
+              </figcaption>
+            </figure>
+
+            <div className="border-b border-on-dark/12 p-6 lg:border-b-0">
+              <p className="label text-on-dark-muted">How it goes on</p>
+              <ul className="mt-4 space-y-4">
+                {craft.map(([h, p2, I]) => (
+                  <li key={h} className="flex gap-3.5">
+                    <I className="mt-0.5 size-6 shrink-0 text-accent" />
+                    <div>
+                      <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
+                      <p className="mt-0.5 text-sm text-on-dark-muted">{p2}</p>
+                    </div>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <figcaption className="p-6">
-              <p className="label text-accent">The channel, close up</p>
-              <p className="mt-1.5 text-sm leading-relaxed text-on-dark-muted">
-                Color matched to the fascia, diffuser facing down. At noon it reads as trim.
-              </p>
-            </figcaption>
-          </figure>
 
-          <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
-            <p className="label text-accent">How it goes on</p>
-            <ul className="mt-5 divide-y divide-on-dark/10">
-              {craft.map(([h, p2, I]) => (
-                <li key={h} className="flex gap-4 py-4 first:pt-0 last:pb-0">
-                  <I className="mt-0.5 size-6 shrink-0 text-accent" />
-                  <div>
-                    <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
-                    <p className="mt-1 text-sm text-on-dark-muted">{p2}</p>
+            <div className="flex flex-col p-6">
+              <p className="label text-on-dark-muted">On the spec sheet</p>
+              <dl className="mt-4 divide-y divide-on-dark/10">
+                {specSheet.map(([k, v]) => (
+                  <div key={k} className="flex items-baseline justify-between gap-4 py-2.5 first:pt-0">
+                    <dt className="text-sm text-on-dark-muted">{k}</dt>
+                    <dd className="u text-right text-sm font-medium text-on-dark">{v}</dd>
                   </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="flex flex-col rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
-            <p className="label text-accent">On the spec sheet</p>
-            <dl className="mt-5 divide-y divide-on-dark/10">
-              {specSheet.map(([k, v]) => (
-                <div key={k} className="flex items-baseline justify-between gap-4 py-3.5 first:pt-0">
-                  <dt className="text-sm text-on-dark-muted">{k}</dt>
-                  <dd className="u text-right text-sm font-medium text-on-dark">{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="mt-auto border-t border-on-dark/10 pt-4 text-sm text-on-dark-muted">
-              These are the Signature numbers. The Basic tier differs on the rows above, and we
-              show you both side by side.
-            </p>
+                ))}
+              </dl>
+              <p className="mt-auto pt-5 text-sm text-on-dark-muted">
+                These are the Signature numbers. Basic differs on the rows above, and we show
+                you both side by side.
+              </p>
+            </div>
           </div>
         </div>
 
