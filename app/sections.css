@@ -1,0 +1,30 @@
+/* SECTION-LEVEL CSS.
+ *
+ * Classes that belong to one section or one page, kept out of globals.css so the brand
+ * lock stays readable. Same rules apply here: hex is allowed in this file and nowhere in a
+ * component, every colour comes from a token where a token exists, and every rule says
+ * what it is for.
+ */
+
+@layer components {
+  /* THE SPINE — a vertical length of channel beside a branch of the decision tree on
+   * /services. Same diode pitch as .run-seg, turned 90°, so the device reads as the same
+   * product in both places rather than as two different decorations. */
+  .run-spine {
+    position: relative;
+    flex: none;
+    inline-size: 3px;
+    align-self: stretch;
+    border-radius: 3px;
+    background-image: radial-gradient(
+      circle,
+      var(--brand-accent) 0 1.6px,
+      color-mix(in oklab, var(--brand-accent) 55%, transparent) 1.6px 2.2px,
+      transparent 2.5px
+    );
+    background-size: 3px 14px;
+    background-position: center 2px;
+    background-repeat: repeat-y;
+    opacity: 0.75;
+  }
+}
