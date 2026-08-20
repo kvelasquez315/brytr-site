@@ -42,23 +42,32 @@ export function Breadcrumb({ trail, onDark = true }: { trail: { name: string; hr
   );
 }
 
-/** SUBPAGE HERO, five ways.
+/** SUBPAGE HERO — the home page's hero, on every page.
  *
- *  quote  — type left, quote form right. The default, and the right call on pages whose job
- *           is to take a lead (service pages, city pages).
- *  spec   — type left, a real table right. For hardware and comparison pages, where the
- *           specification IS the argument and a form in the hero is premature.
- *  photo  — a real install fills the section, type over a scrim. For pages that are about
- *           what it looks like: gallery, projects, the seasonal services.
- *  map    — type left, the Leaflet map right. Service-area pages only.
- *  type   — type alone, no buttons, no aside. Legal and policy pages. They should look
- *           plain; plain is honest for what they are.
+ * The client's instruction, and it is the right one: the home page hero is the design, so
+ * every page opens the same way — a real photograph filling the section, a raking scrim,
+ * short keyword-forward type on the left, the quote form as a solid card on the right, and
+ * the amber channel line as the base edge. What changes page to page is the PHOTOGRAPH and
+ * the type, not the layout. That is how a site reads as one site.
+ *
+ *  photo  — the default. Full-bleed install photograph + scrim + form. Every page.
+ *  spec   — same photograph treatment, but a spec table replaces the form, for hardware
+ *           and comparison pages where a form in the hero is premature and the
+ *           specification IS the argument.
+ *  map    — same treatment with the Leaflet map in the right column. Service areas only.
+ *  type   — no photograph, no form: legal and policy pages. They should look plain,
+ *           because plain is honest for what they are.
+ *
+ * `photo` is required for the first three. There is a fallback, but a page that ships on
+ * the fallback is a page nobody chose a photograph for — the whole point is that the shot
+ * is about that page's subject.
  */
-type HeroVariant = "quote" | "spec" | "photo" | "map" | "type";
+type HeroVariant = "photo" | "spec" | "map" | "type" | "quote";
+const FALLBACK_HERO = "/img/hero-bg.jpg";
 
 export function PageHero({
   eyebrow, h1, lede, trail, aside, stats, footnote,
-  variant = "quote",
+  variant = "photo",
   photo,
   photoAlt = "",
   objectPosition = "50% 50%",
@@ -79,14 +88,16 @@ export function PageHero({
     <>
       <Breadcrumb trail={trail} />
       <p className="eyebrow eyebrow--on-dark">{eyebrow}</p>
-      <h1 className={`mt-4 text-on-dark ${variant === "photo" ? "text-[clamp(2.2rem,4.6vw,3.6rem)]" : "text-[clamp(2.1rem,4.2vw,3.3rem)]"}`}>
+      <h1 className="mt-4 text-[clamp(2.1rem,4.2vw,3.4rem)] leading-[1.02] text-on-dark">
         {h1}
       </h1>
       <p className="mt-5 max-w-[62ch] text-lg text-on-dark/85">{lede}</p>
       {variant !== "type" && (
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button asChild size="lg"><Link href="/free-design-consultation">Get a free design consultation</Link></Button>
-          <Button asChild size="lg" variant="outline-dark"><a href={site.phoneHref} className="u">{site.phone}</a></Button>
+        /* One button, and it is the phone number — the form is in the hero, so a second
+         * "get a consultation" button would be competing with itself. Same call the home
+         * page makes. */
+        <div className="mt-8">
+          <Button asChild size="lg"><a href={site.phoneHref} className="u">{site.phone}</a></Button>
         </div>
       )}
       {stats && (
@@ -112,35 +123,36 @@ export function PageHero({
     );
   }
 
-  /* photo: the install carries the section, the type sits on the scrim */
-  if (variant === "photo" && photo) {
-    return (
-      <section className="relative isolate overflow-hidden bg-primary">
-        <Image src={photo} alt={photoAlt} fill priority sizes="100vw" className="object-cover" style={{ objectPosition }} />
-        <div className="hero-scrim absolute inset-0" aria-hidden />
-        <div className="shell relative grid items-end gap-10 py-16 lg:grid-cols-[58fr_42fr] lg:py-24">
-          <div className="max-w-[46rem]">{Type}</div>
-          {aside ? <div className="lg:justify-self-end">{aside}</div> : null}
-        </div>
-        <div className="hero-baseline absolute inset-x-0 bottom-0 h-0.5" aria-hidden />
-      </section>
-    );
-  }
-
-  /* spec / map / quote: two columns, and what sits on the right is the difference */
+  /* Everything else gets the home page's hero: the photograph carries the section, the
+   * type sits on the scrim, and the right column is the form unless the page has a better
+   * use for it (a spec table, the map). */
   const asideNode =
-    aside ?? (variant === "quote" ? <QuoteForm variant="financing" heading="Get a written quote" /> : null);
+    aside ?? <QuoteForm variant="compact" heading="Get a free design consultation" />;
 
   return (
-    <section className="bg-primary">
+    <section className="relative isolate overflow-hidden bg-primary">
+      <Image
+        src={photo ?? FALLBACK_HERO}
+        alt={photoAlt}
+        fill
+        priority
+        sizes="100vw"
+        className="object-cover"
+        style={{ objectPosition }}
+      />
+      <div className="hero-scrim absolute inset-0" aria-hidden />
+
       <div
-        className={`shell grid items-start gap-10 py-12 lg:gap-14 lg:py-16 ${
-          variant === "spec" ? "lg:grid-cols-[46fr_54fr]" : "lg:grid-cols-[54fr_46fr]"
+        className={`shell relative grid items-center gap-10 py-14 lg:gap-14 lg:py-20 ${
+          variant === "spec" ? "lg:grid-cols-[46fr_54fr]" : "lg:grid-cols-[1fr_28rem]"
         }`}
       >
-        <div>{Type}</div>
-        {asideNode ? <div>{asideNode}</div> : null}
+        <div className="max-w-[46rem]">{Type}</div>
+        <div className={variant === "spec" ? "" : "lg:w-[28rem] lg:justify-self-end"}>{asideNode}</div>
       </div>
+
+      {/* the one amber line, same as home */}
+      <div className="hero-baseline absolute inset-x-0 bottom-0 h-0.5" aria-hidden />
     </section>
   );
 }
