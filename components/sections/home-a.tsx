@@ -210,103 +210,80 @@ const tiers = [
   { name: "Landscape and Bistro", on: "Haven 9 and X Series", note: "Path, uplight and pergola runs on the same app.", tier: "Add-on", href: "/lighting-systems/haven-9-series-landscape-lights" },
 ];
 export function MaterialsSplit() {
-  const hasHardware = photoExists("channelCloseUp");
   return (
     <section className="section bg-muted">
-      <div className="shell grid items-start gap-10 lg:grid-cols-[52fr_48fr] lg:gap-14">
-        <div>
-          {hasHardware ? (
-            <Photo slot="channelCloseUp" sizes="(min-width:1024px) 52vw, 100vw" />
-          ) : (
-            /* no-photo: a labelled diagram of the channel assembly. Nobody in this trade does this. */
-            <figure className="overflow-hidden rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] sm:p-7">
-              <svg viewBox="0 0 520 250" className="w-full" role="img"aria-label="Cross-section of the Brytr channel clipped into a fascia board">
-                <rect x="0" y="0" width="400" height="260" fill="none" />
-                {/* fascia */}
-                <rect x="60" y="40" width="34" height="180" rx="2" className="fill-on-dark/12" />
-                <text x="40" y="34" textAnchor="middle" className="fill-on-dark-muted" fontSize="11" fontFamily="var(--font-utility)">FASCIA</text>
-                {/* soffit */}
-                <rect x="94" y="196" width="150" height="24" rx="2" className="fill-on-dark/10" />
-                <text x="196" y="238" textAnchor="middle" className="fill-on-dark-muted" fontSize="11" fontFamily="var(--font-utility)">SOFFIT</text>
-                {/* channel body */}
-                <path d="M96 92h74v54H96z" className="fill-secondary/60" />
-                <path d="M96 92h74v8H96z" className="fill-secondary" />
-                <text x="256" y="98" className="fill-on-dark" fontSize="12" fontFamily="var(--font-utility)">EXTRUDED CHANNEL</text>
-                {/* leds */}
-                <g className="fill-accent">
-                  <circle cx="112" cy="120" r="5" /><circle cx="133" cy="120" r="5" /><circle cx="154" cy="120" r="5" />
-                </g>
-                <text x="256" y="126" className="fill-accent" fontSize="12" fontFamily="var(--font-utility)">ADDRESSABLE LED · 4 IN.</text>
-                {/* diffuser */}
-                <rect x="96" y="140" width="74" height="10" rx="3" className="fill-on-dark/70" />
-                <text x="256" y="152" className="fill-on-dark" fontSize="12" fontFamily="var(--font-utility)">FROSTED DIFFUSER</text>
-                {/* light throw */}
-                <path d="M104 152 74 232h118l-30-80z" className="fill-accent/12" />
-                <text x="256" y="182" className="fill-on-dark-muted" fontSize="12" fontFamily="var(--font-utility)">IP66 SEALED</text>
-                <line x1="182" y1="94" x2="248" y2="94" className="stroke-on-dark/35" strokeWidth="1" />
-                <line x1="182" y1="122" x2="248" y2="122" className="stroke-accent/50" strokeWidth="1" />
-                <line x1="182" y1="148" x2="248" y2="148" className="stroke-on-dark/35" strokeWidth="1" />
-              </svg>
-              <figcaption className="label mt-4 text-on-dark-muted">
-                The assembly, in section. Fastened into fascia, never through shingles.
-              </figcaption>
-              <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-on-dark/12 pt-6">
-                {[
-                  ["Channel", "Extruded aluminum"],
-                  ["Diffuser", "Frosted polycarbonate"],
-                  ["LED spacing", "4 in., addressable"],
-                  ["Rating", "IP66 sealed"],
-                ].map(([k, v]) => (
-                  <div key={k}>
-                    <dt className="label text-on-dark-muted">{k}</dt>
-                    <dd className="u mt-1 text-sm font-medium text-on-dark">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </figure>
-          )}
-          {/* fills the left column to match the right, with the argument the drawing implies */}
-          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+      <div className="shell">
+        <SectionHead
+          eyebrow="The hardware"
+          title="We install the good stuff, and we will tell you which is which."
+          lede="Most installers carry one brand and therefore have one recommendation. We carry a premium tier and a value tier, which means we have no reason to talk you into either."
+        />
+
+        {/* THREE PANELS, DARK ON CREAM.
+          *
+          * This section was a left column with a photo and a 2x2 of white cards beside a
+          * right column with three more white cards — seven white boxes, and two columns
+          * whose card counts did not line up, so nothing aligned with anything. Now it is
+          * full-width rows, each internally even: three tier panels, then the photograph,
+          * then four craft details across. Inverting the panels to the dark surface on a
+          * cream section reads as premium and stops the page being a field of white
+          * rectangles.
+          *
+          * The manufacturer name is body text inside a sentence, not a label sitting where
+          * a logo should be. When the official Haven and Jellyfish files arrive they go in
+          * the `logo` slot on each tier in content/systems.ts. */}
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {tiers.map((t) => (
+            <Link
+              key={t.name}
+              href={t.href}
+              data-spot
+              className="group flex flex-col rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10"
+            >
+              <span className="channel-edge mb-6 block w-14" aria-hidden />
+              <p className="label text-accent">{t.tier}</p>
+              <h3 className="mt-2 font-display text-2xl font-bold leading-tight text-on-dark group-hover:underline">
+                {t.name}
+              </h3>
+              <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-on-dark-muted">
+                {t.note} Built on {t.on} hardware.
+              </p>
+              <span className="label mt-6 border-t border-on-dark/12 pt-4 text-on-dark">
+                See the system
+              </span>
+            </Link>
+          ))}
+        </div>
+
+        {/* the photograph, full width, with the craft details reading off it */}
+        <figure className="mt-5 overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
+          <div className="relative aspect-21/9">
+            <Image
+              src="/img/channel-detail.jpg"
+              alt="Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along the gable"
+              fill
+              sizes="100vw"
+              className="object-cover object-[50%_38%]"
+            />
+          </div>
+          <dl className="grid gap-x-8 gap-y-6 p-7 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-0 lg:divide-x lg:divide-on-dark/12">
             {[
               ["Into fascia, never shingles", "Every penetration sealed as it is made, not bridged over afterwards."],
               ["Mitered at every transition", "Valleys, dormers and returns. This is where amateur runs show from the curb."],
               ["Concealed wire runs", "No visible drops down a downspout or across a soffit."],
               ["Capped terminations", "Sealed end caps, not tape. Water ingress is the most common real failure."],
             ].map(([h, p2]) => (
-              <div key={h} className="rounded-md bg-card p-5 shadow-[var(--shadow-sm)]">
-                <p className="font-display text-sm font-bold text-foreground">{h}</p>
-                <p className="mt-1.5 text-sm text-muted-foreground">{p2}</p>
+              <div key={h} className="lg:px-7 lg:first:pl-0 lg:last:pr-0">
+                <dt className="font-display text-[0.95rem] font-bold text-on-dark">{h}</dt>
+                <dd className="mt-1.5 text-sm leading-relaxed text-on-dark-muted">{p2}</dd>
               </div>
             ))}
-          </div>
-        </div>
-        <div>
-          <SectionHead
-            
-            title="We install the good stuff, and we will tell you which is which."
-            lede="Most installers carry one brand and therefore have one recommendation. We carry a premium tier and a value tier, which means we have no reason to talk you into either."
-          />
-          <div className="mt-8 space-y-3">
-            {tiers.map((t) => (
-              <Link key={t.name} href={t.href} className="block rounded-md border border-border bg-card p-5 transition-colors duration-[--dur-fast] hover:border-accent-deep">
-                <div className="flex flex-wrap items-baseline justify-between gap-2">
-                  <h3 className="text-lg text-foreground">{t.name}</h3>
-                  <span className="label text-xs text-muted-foreground">{t.tier}</span>
-                </div>
-                <p className="label mt-1 text-xs text-accent-ink">on {t.on}</p>
-                <p className="mt-2 text-[0.95rem] text-muted-foreground">{t.note}</p>
-              </Link>
-            ))}
-          </div>
-          <ul className="mt-7 flex flex-wrap gap-2.5">
-            {["25 year LED rating", "IP66 weather sealed", "App controlled"].map((b) => (
-              <li key={b} className="rounded-sm border border-border bg-card px-3.5 py-2 text-sm font-medium text-foreground">{b}</li>
-            ))}
-          </ul>
-          <div className="mt-8 flex flex-wrap items-center gap-5">
-            <Button asChild><Link href="/compare">Compare all 10 brands</Link></Button>
-            <TextLink href="/lighting-systems">See every system</TextLink>
-          </div>
+          </dl>
+        </figure>
+
+        <div className="mt-8 flex flex-wrap items-center gap-6">
+          <Button asChild><Link href="/compare">Compare every brand</Link></Button>
+          <TextLink href="/lighting-systems">See every system</TextLink>
         </div>
       </div>
     </section>
@@ -321,52 +298,50 @@ const why = [
   { icon: IcTwoTiers, h: "Two tiers, so we are not selling you one option", p: "We carry premium and value hardware. That is why our comparison pages give the cheaper system real reasons to win, which is not something a single-brand dealer can do.", l: ["Premium and value both stocked", "Honest recommendation, in writing"] },
 ];
 export function WhyBrytr() {
-  const hasCrew = photoExists("crewWide");
   return (
-    <section className="section bg-primary pb-0">
-      <div className="shell">
-        <SectionHead onDark eyebrow="Why Brytr" title="What most installers will not do." />
-        <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    /* PHOTO-BACKED, not another dark panel.
+     *
+     * This was four grey cards and a stat bar on flat navy — the client's words were
+     * "very dark, not designed, people are just gonna scroll right past this", and that
+     * was fair. It is the most important argument on the page and it looked like a
+     * footer. Now a real photograph sits behind it: a roofline running red and green,
+     * which is the holiday register the rest of the page keeps promising. The scrim is
+     * heavy enough to read against and light enough that you can tell it is a house.
+     *
+     * The claim itself is set at hero size, because it is the reason to choose Brytr and
+     * it should stop a thumb. */
+    <section className="relative isolate overflow-hidden bg-primary">
+      <Image
+        src="/img/scene-christmas.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover object-[50%_35%]"
+      />
+      <div className="why-scrim absolute inset-0" aria-hidden />
+
+      <div className="shell relative py-20 lg:py-28">
+        <p className="label text-accent">Why Brytr</p>
+        <h2 className="mt-4 max-w-[34ch] text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.02] text-on-dark">
+          Every quote in this market comes from somebody selling exactly one brand.
+        </h2>
+        <p className="mt-5 max-w-[62ch] text-lg text-on-dark/90">
+          That is the whole reason Zac and Sam started Brytr. Four things follow from it, and
+          all four are things a single-brand dealer cannot offer you.
+        </p>
+
+        <div className="mt-12 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-0 lg:divide-x lg:divide-on-dark/15">
           {why.map((w) => (
-            <article key={w.h} className="rounded-lg bg-raise p-6 shadow-[var(--shadow-dark)] ring-1 ring-accent/12">
-              <span className="channel-tile mb-5" aria-hidden><w.icon className="size-7" /></span>
-              <h3 className="text-lg text-on-dark">{w.h}</h3>
-              <p className="mt-2.5 text-[0.95rem] text-on-dark-muted">{w.p}</p>
+            <article key={w.h} className="lg:px-7 lg:first:pl-0 lg:last:pr-0">
+              <span className="channel-edge mb-5 block w-12" aria-hidden />
+              <w.icon className="size-7 text-accent" />
+              <h3 className="mt-4 font-display text-lg font-bold leading-snug text-on-dark">{w.h}</h3>
+              <p className="mt-2.5 text-[0.95rem] leading-relaxed text-on-dark-muted">{w.p}</p>
               <ul className="mt-4 space-y-2">{w.l.map((i) => <Check key={i} onDark>{i}</Check>)}</ul>
             </article>
           ))}
         </div>
       </div>
-      {/* bridge: the crew band straddles into the next section */}
-      <div className="relative mt-14">
-        <div className="shell">
-          {hasCrew ? (
-            <Photo slot="crewWide" sizes="100vw" />
-          ) : (
-            <div className="rounded-lg bg-raise px-7 py-9 ring-1 ring-accent/12 sm:px-10">
-              <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-center">
-                <div>
-                  <p className="eyebrow eyebrow--on-dark">Founded in Omaha</p>
-                  <p className="mt-4 max-w-[52ch] font-display text-2xl font-bold leading-tight text-on-dark">
-                    Zac and Sam started Brytr because every quote in this market came from somebody selling exactly one brand.
-                  </p>
-                </div>
-                <dl className="grid grid-cols-3 gap-6 lg:gap-9">
-                  {[["1.2M", "Lights installed"], ["177", "Five-star reviews"], ["2", "Tiers carried"]].map(([f, l]) => (
-                    <div key={l}>
-                      <dt className="u text-3xl font-medium text-on-dark">{f}</dt>
-                      <dd className="mt-1 text-xs text-on-dark-muted">{l}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            </div>
-          )}
-        </div>
-        <div className="h-14 bg-primary" />
-      </div>
     </section>
   );
 }
-
-

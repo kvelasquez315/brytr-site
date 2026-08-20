@@ -430,6 +430,49 @@
 .on-dark-cell { color: var(--on-dark); }
 .on-dark-cell-muted { color: var(--on-dark-muted); }
 
+/* Why Brytr sits on a photograph. Darker than the hero scrim because there are four
+ * columns of body copy on it rather than one headline, and a vertical gradient rather
+ * than a raking one because the content spans the full width. */
+.why-scrim {
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in oklab, var(--brand-ink) 88%, transparent) 0%,
+      color-mix(in oklab, var(--brand-primary) 80%, transparent) 42%,
+      color-mix(in oklab, var(--brand-ink) 90%, transparent) 100%
+    );
+}
+
+/* Leaflet, restyled to the brand. Its stylesheet ships white popups, a white
+ * attribution bar and blue links, all of which look pasted-in on a night palette.
+ * Unlayered on purpose so these win over the library's own rules. */
+.brytr-map .leaflet-container { background: var(--brand-primary); font-family: var(--font-body); }
+.brytr-map .leaflet-tooltip {
+  background: var(--brand-primary);
+  color: var(--on-dark);
+  border: 1px solid color-mix(in oklab, var(--brand-accent) 45%, transparent);
+  border-radius: 3px;
+  box-shadow: none;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.5rem;
+}
+.brytr-map .leaflet-tooltip-top::before { border-top-color: color-mix(in oklab, var(--brand-accent) 45%, transparent); }
+.brytr-map .leaflet-control-attribution {
+  background: color-mix(in oklab, var(--brand-ink) 78%, transparent);
+  color: var(--on-dark-muted);
+  font-size: 0.62rem;
+}
+.brytr-map .leaflet-control-attribution a { color: var(--on-dark-muted); }
+.brytr-map .leaflet-bar a {
+  background: var(--brand-primary);
+  color: var(--on-dark);
+  border-color: color-mix(in oklab, var(--on-dark) 18%, transparent);
+}
+.brytr-map .leaflet-bar a:hover { background: var(--brand-raise); }
+.brytr-map .leaflet-interactive { cursor: pointer; }
+
 /* Standalone text links (card CTAs, the announcement bar link) need a 44px touch
  * target even though the visible text is smaller. Padding would change the layout,
  * so the hit area is expanded with a pseudo-element instead. */

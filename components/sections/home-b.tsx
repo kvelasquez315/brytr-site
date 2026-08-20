@@ -7,7 +7,7 @@ import { reviews, reviewProof } from "@/content/reviews";
 import { homeFaqs } from "@/content/faqs";
 import { compares } from "@/content/compares";
 import { posts } from "@/content/blog";
-import { ServiceMap } from "./service-map";
+import { ServiceLeaflet } from "./service-leaflet";
 import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Check, TextLink, QuoteForm, ChannelEdge } from "@/components/ui/bits";
@@ -205,15 +205,15 @@ export function ServiceArea() {
           title="Omaha metro, Lincoln, western Iowa and eastern Nebraska."
           lede="Eighteen cities, each with its own page, real project photos and drive time. If your town is not on this list, call us and ask."
         />
-        <div className="mt-10">
-          <ServiceMap />
-
-          <div className="mt-6">
+        {/* Two columns, as in the reference: the list of towns on the left where it can be
+          * read and clicked, the map on the right doing the geography. */}
+        <div className="mt-10 grid gap-8 lg:grid-cols-[44fr_56fr] lg:gap-12">
+          <div>
             {/* Were white boxes with black text, which the client called boring and was
               * right about — eighteen of them is a lot of empty white. They are dark
               * tiles now, with the drive time in amber, so the list reads as a control
               * panel rather than a table of contents. */}
-            <ul className="grid gap-2.5 sm:grid-cols-3 lg:grid-cols-6">
+            <ul className="grid gap-2.5 sm:grid-cols-2">
               {cities.map((c) => (
                 <li key={c.slug}>
                   <Link
@@ -228,10 +228,12 @@ export function ServiceArea() {
               ))}
             </ul>
             <p className="mt-5 text-sm text-on-dark-muted">
-              Amber is the metro, where a crew can be at your house the same week. Grey on the
-              map is outstate, which we still drive to — it is just a longer day.
+              Amber is the metro, where a crew can be at your house the same week. Grey is
+              outstate, which we still drive to — it is just a longer day.
             </p>
           </div>
+
+          <ServiceLeaflet />
         </div>
       </div>
     </section>

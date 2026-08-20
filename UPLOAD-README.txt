@@ -1,68 +1,55 @@
-BRYTR SITE — update 7   (supersedes 1-6)
+BRYTR SITE — update 8   (supersedes 1-7)
 ========================================
 Upload: unzip, drag the CONTENTS into GitHub's uploader, commit to main.
-package.json + package-lock.json must land together.
+package.json + package-lock.json MUST land together — leaflet was added.
 
-THE FONT — fourth pass, and the first one that fixed the right thing
--------------------------------------------------------------------
-You flagged Plex Mono, then Barlow, then Archivo. Every screenshot you sent
-had the same thing in common and I kept missing it: ALL CAPS WITH WIDE
-LETTER-SPACING. The typeface was never the problem. Tracked-out uppercase is
-a tech-brand tic — it reads machine-generated, and it is not how you speak to
-a homeowner. Fifty-one labels across twenty-nine files are now small, bold,
-sentence case, normal tracking. Checked in the browser: zero elements on the
-homepage compute uppercase.
+Delete this file from the upload list. components/sections/service-map.tsx was
+removed from the repo (replaced by service-leaflet.tsx); if it is still in
+GitHub, delete it there — nothing imports it.
 
-TWO BUGS, ONE ROOT CAUSE
-------------------------
-The new timeline gradient and the card-hover rule were both anchored next to
-.tap-44, which lives inside a touch-device media query. So they only existed
-on phones: the process section rendered near-white text on bare cream on
-every desktop, and the hover highlight never fired. Same mistake as the drag
-handle bug two rounds ago. Fixing it also caught that the 44px touch targets
-had leaked out of that query, which would have put invisible click-catchers
-over every text link on desktop. Both pointer modes verified explicitly.
+THE MAP — Leaflet, as you asked
+-------------------------------
+Real tiled basemap, amber pin on every town, dashed 30-mile metro radius, a
+squared marker where the crews stage, town list on the left and map on the
+right per the Freedom layout. CARTO dark tiles rather than the light grey
+Freedom uses, because this site is a night palette and a bright basemap
+fights it.
 
-DONE THIS ROUND
----------------
-Service area   A real map, drawn not embedded. Every town plotted from its
-               actual coordinates, longitude compressed for latitude so the
-               metro is not stretched. Drive-time rings at 30/60/90 miles.
-               No roads or rivers — it is an honest service-area diagram, not
-               a pretend survey. First attempt labelled all eleven metro
-               towns and they collided into mush, so the metro is one amber
-               cluster and the names are in the grid beside it. City tiles are
-               dark now with the drive time in amber.
-Timeline       The 1-2-3-4-5 row is gone. Rebuilt on the amber channel line
-               with each stage a node on it, over a background that runs
-               dusk-blue to full night left to right. No numerals.
-Service cards  Amber outline on hover. On touch, the card highlights as it
-               crosses the middle of the screen (IntersectionObserver —
-               scroll-linked CSS animation is Chromium-only).
-Blog           A photograph on every row.
-Hero           New photograph, a different property — warmer and wider.
-FAQ            Off the homepage, and the FAQPage schema with it, since
-               structured data has to describe what is on the page. /faq
-               still carries both.
-Comparisons    Off the homepage. Your call was "pictures or delete it", and
-               white cards with text was the whole problem. Eleven sections
-               now.
+Three things worth knowing:
+- Scroll-wheel zoom is OFF. A map that swallows page scroll is the most hated
+  pattern in this category. Click once to interact.
+- Leaflet ships white popups and blue links, which look pasted on over a dark
+  palette, so its tooltips, zoom buttons and attribution are restyled to the
+  brand. The OpenStreetMap/CARTO attribution is required — leave it.
+- The tiles are third-party, so they will not render in my sandbox (no
+  outbound network). Pins, radius and container all render. They will load
+  normally on Vercel and on your machine — worth an eyeball on the deployment.
 
-NOT DONE YET — next pass
-------------------------
-- The systems section (Brytr Signature / Basic / Landscape). Still white
-  cards, still uneven left-to-right. Needs the brand logos to do properly.
-- "Why Brytr" four-up. Needs imagery behind it; I have the photographs.
+SYSTEMS SECTION — rebuilt, properly this time
+---------------------------------------------
+I listed this as "next pass" twice without touching it, which is why you saw
+the same thing three times. The problem was structural: a left column with a
+photo above a 2x2 of white cards, beside a right column of three more white
+cards. Seven white boxes, and two columns whose counts did not line up, so
+nothing aligned with anything. Now it is full-width rows, each internally
+even — three tier panels inverted to the dark surface, the photograph full
+width, then four craft details in a divided strip. Brand names read as part
+of a sentence instead of a label parked where a logo belongs.
+
+WHY BRYTR — on a photograph
+---------------------------
+You were right that it looked like a footer. It is the most important
+argument on the page. Now a red-and-green roofline sits behind it, the claim
+is set at near-hero size, and the four points are divided columns rather than
+grey boxes.
 
 BLOCKED ON YOU
 --------------
-- Google's mark. content/badges.ts has the slot: drop the file at
-  /public/logo/google.svg, set `googleLogo`. Get it from the Business Profile
-  asset pack — I will not draw a trademark from memory, and I cannot pull one
-  off a web page. Until then the band draws its own five stars, which are not
-  a trademark, and says "reviews on Google" in body text rather than faking a
-  wordmark.
-- Haven and Jellyfish official asset packs, same reason.
+- Google's mark: /public/logo/google.svg, then set googleLogo in
+  content/badges.ts. From the Business Profile asset pack. I will not draw a
+  trademark from memory and cannot pull one off a page.
+- Haven + Jellyfish official asset packs, same reason. Their tier panels have
+  the slot ready.
 - A daytime photograph. Nothing in the archive is shot before dark.
 - App screenshot, crew shot, founder portraits, one commercial install.
 - Real warranty and financing terms.
