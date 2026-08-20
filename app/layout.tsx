@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+/* Section-level CSS, imported after the brand lock so its @layer components rules join
+ * the layer Tailwind has already declared. Kept in its own sheet because globals.css is
+ * the brand lock — tokens, type, the signature device — and it should not grow a rule
+ * every time a page gets built. */
+import "./sections.css";
 
 /* Self-hosted from @fontsource (npm), not fetched from Google at build time.
    Three roles per DESIGN.md: display / body / utility. */
