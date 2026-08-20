@@ -27,4 +27,23 @@
     background-repeat: repeat-y;
     opacity: 0.75;
   }
+
+  /* SCENE BARS — the twelve-month strip on /services/permanent-christmas-lights.
+   * These are PRODUCT colours, not brand colours: what the diodes are actually set to on
+   * that scene. They live here because no hex may appear in a component, and they are
+   * deliberately not tokens — the brand palette is amber and night, and a Halloween
+   * violet is neither. */
+  .scene-bar {
+    display: block;
+    block-size: 2.75rem;
+    border-radius: 2px;
+    border-block-start: 3px solid color-mix(in oklab, var(--brand-accent) 70%, transparent);
+    background: #1b2430;
+  }
+  .scene-bar--warm     { background: linear-gradient(180deg, #f6e3b0 0%, #6b5a33 100%); }
+  .scene-bar--green    { background: linear-gradient(180deg, #4fbf72 0%, #1c4a2b 100%); }
+  .scene-bar--rwb      { background: linear-gradient(180deg, #e0483f 0%, #f2efe6 50%, #3d6fd0 100%); }
+  .scene-bar--scarlet  { background: linear-gradient(180deg, #e03a2f 0%, #5a1712 100%); }
+  .scene-bar--violet   { background: linear-gradient(180deg, #8b5cd6 0%, #34205c 100%); }
+  .scene-bar--redgreen { background: linear-gradient(90deg, #e03a2f 0 25%, #4fbf72 25% 50%, #e03a2f 50% 75%, #4fbf72 75% 100%); }
 }
