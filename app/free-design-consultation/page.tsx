@@ -110,7 +110,7 @@ export default function Consult() {
         }
       />
 
-      {/* ── THE HOUR ──────────────────────────────────────────────────────
+      {/* ── THE HOUR ──
         * The centrepiece: the clock down the left, the deliverable on the right. */}
       <section className="section bg-background">
         <div className="shell">
@@ -183,7 +183,7 @@ export default function Consult() {
         </div>
       </section>
 
-      {/* ── WHAT TURNS UP, AND WHAT HELPS ────────────────────────────────────
+      {/* ── WHAT TURNS UP, AND WHAT HELPS ──
         * Two lists, because both questions get asked on the phone and neither
         * one is answered anywhere on the site. */}
       <section className="section bg-muted">
@@ -242,7 +242,7 @@ export default function Consult() {
         </div>
       </section>
 
-      {/* ── WHAT WILL NOT HAPPEN ───────────────────────────────────────────
+      {/* ── WHAT WILL NOT HAPPEN ──
         * The objection nobody says out loud. One real review carrying it. */}
       <section className="section bg-primary">
         <div className="shell">

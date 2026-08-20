@@ -83,7 +83,7 @@ export default function Pricing() {
         }
       />
 
-      {/* ── THE HONEST NOTE ───────────────────────────────────────────────
+      {/* ── THE HONEST NOTE ──
         * First thing after the hero, because "why isn't there a price on
         * this page" is the reason people leave it. */}
       <section className="section bg-background">
@@ -155,7 +155,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── THE FIVE YEAR LEDGER ───────────────────────────────────────────
+      {/* ── THE FIVE YEAR LEDGER ──
         * The centrepiece. Counts events, states its assumptions, invents nothing. */}
       <section className="section bg-primary">
         <div className="shell">
@@ -286,7 +286,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── THE ARITHMETIC ───────────────────────────────────────────────
+      {/* ── THE ARITHMETIC ──
         * What used to be a ghost-numeral countdown. Now it is the actual
         * formula, with the operators showing how each term enters. */}
       <section className="section bg-muted">
@@ -330,7 +330,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── HOW EACH KIND OF WORK IS PRICED ────────────────────────────────── */}
+      {/* ── HOW EACH KIND OF WORK IS PRICED ── */}
       <section className="section bg-background">
         <div className="shell">
           <SectionHead
@@ -351,7 +351,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── FINANCING AND THE QUOTE ITSELF ────────────────────────────────── */}
+      {/* ── FINANCING AND THE QUOTE ITSELF ── */}
       <section className="section bg-primary">
         <div className="shell grid gap-10 lg:grid-cols-[48fr_52fr] lg:gap-14">
           <div>
@@ -399,7 +399,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      {/* ── QUESTIONS ────────────────────────────────────────────────────── */}
+      {/* ── QUESTIONS ── */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead eyebrow="Pricing questions" title="The ones we get most." />
