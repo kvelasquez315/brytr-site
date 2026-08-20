@@ -5,6 +5,8 @@ import { services } from "@/content/services";
 import { cities, metroCities, outstateCities, iowaCities } from "@/content/cities";
 import { reviews, reviewProof } from "@/content/reviews";
 import { homeFaqs } from "@/content/faqs";
+import { compares } from "@/content/compares";
+import { posts } from "@/content/blog";
 import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Check, TextLink, QuoteForm, ChannelEdge } from "@/components/ui/bits";
@@ -451,3 +453,88 @@ export function FinalCta() {
 }
 
 export { ProjectTabs };
+
+/* 13b — BRAND COMPARISONS · 3 x 3 grid · neutral-deep
+ *
+ * Added because the homepage never surfaced these nine pages, and "is Jellyfish any
+ * good?" is the highest-intent question a permanent-lighting shopper has. Brytr's
+ * actual differentiator is that they stock two systems and will tell you which one is
+ * right, so putting the comparisons on the homepage is the argument, not decoration.
+ * The blurb is each page's own verdict, clamped — no new copy, nothing invented. */
+export function CompareGrid() {
+  return (
+    <section className="section bg-muted">
+      <div className="shell">
+        <SectionHead
+          eyebrow="Shopping other brands"
+          title="We sell two systems, so we can tell you which one loses."
+          lede="Nine head-to-head comparisons, including the ones where the cheaper system is the honest answer. A single-brand dealer cannot write these pages."
+        />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {compares.map((c) => (
+            <article key={c.slug} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+              <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">
+                {c.labor ? "Professional vs DIY" : c.neutral ? "Neither is ours" : "We install both"}
+              </p>
+              <h3 className="mt-3 font-display text-lg font-bold leading-snug text-foreground">
+                {c.a} <span className="text-muted-foreground">vs</span> {c.b}
+              </h3>
+              <p className="mt-3 line-clamp-4 flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">
+                {c.verdict}
+              </p>
+              <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-border pt-4">
+                <TextLink href={`/compare/${c.slug}`}>Read the comparison</TextLink>
+                <span className="u text-2xs text-muted-foreground">{c.rows.length} specs</span>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* 19b — WRITING · 3 posts · neutral
+ *
+ * The blog had twelve finished articles and not one internal link from the homepage,
+ * which is a straight SEO defect as well as a wasted trust signal. Three posts, the
+ * ones that answer pre-purchase questions. */
+export function Writing() {
+  const featured = [
+    "are-permanent-christmas-lights-worth-it",
+    "permanent-lights-vs-hanging-christmas-lights",
+    "how-to-choose-a-permanent-lighting-installer",
+  ]
+    .map((sl) => posts.find((p) => p.slug === sl))
+    .filter((p): p is (typeof posts)[number] => !!p);
+
+  return (
+    <section className="section bg-background">
+      <div className="shell">
+        <SectionHead
+          eyebrow="From the blog"
+          title="The questions people ask before they spend the money."
+          lede="Written by the people who install it, including the parts that argue against buying. Twelve more on the blog."
+        />
+        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {featured.map((p) => (
+            <article key={p.slug} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+              <div className="flex items-baseline justify-between gap-4">
+                <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">{p.category}</p>
+                <span className="u text-2xs text-muted-foreground">{p.read}</span>
+              </div>
+              <h3 className="mt-3 font-display text-xl font-bold leading-snug text-foreground">{p.title}</h3>
+              <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">{p.dek}</p>
+              <div className="mt-5 border-t border-border pt-4">
+                <TextLink href={`/blog/${p.slug}`}>Read it</TextLink>
+              </div>
+            </article>
+          ))}
+        </div>
+        <div className="mt-6">
+          <TextLink href="/blog">All twelve articles</TextLink>
+        </div>
+      </div>
+    </section>
+  );
+}

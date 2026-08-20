@@ -362,7 +362,13 @@
  * target even though the visible text is smaller. Padding would change the layout,
  * so the hit area is expanded with a pseudo-element instead. */
 @media (pointer: coarse) {
-  .tap-44 { position: relative; }
+  /* Only promote elements that are NOT already positioned. Plain `.tap-44 { position:
+   * relative }` has the same specificity as Tailwind's `.absolute` and, being later in
+   * the sheet, silently won — which knocked the Scene Wipe drag handle out of absolute
+   * positioning into normal flow on any touch device, adding its height to the track and
+   * making the clipped overlay 48px taller than the photograph beneath it. Invisible on
+   * a mouse-only machine, obvious on a touchscreen laptop. */
+  .tap-44:not(.absolute):not(.fixed):not(.sticky) { position: relative; }
   .tap-44::after {
     content: "";
     position: absolute;

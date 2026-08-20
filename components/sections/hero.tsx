@@ -39,7 +39,7 @@ export function Hero() {
             Omaha, Nebraska · Installed year round
           </p>
 
-          <h1 className="mt-4 text-[clamp(2.4rem,4.4vw,4.4rem)] leading-[0.98] text-on-dark">
+          <h1 className="mt-4 text-[clamp(2.4rem,4vw,4rem)] leading-[0.98] text-on-dark">
             Permanent Outdoor Lighting in Omaha, NE
           </h1>
 

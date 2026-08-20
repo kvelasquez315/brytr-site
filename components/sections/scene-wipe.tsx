@@ -81,26 +81,32 @@ export function SceneWipe() {
               </span>
             </div>
 
-            <div ref={track} className="relative overflow-hidden rounded-sm ring-1 ring-on-dark/12">
-              {/* base layer: the color scene */}
-              {hasPair && scene.src ? (
-                <div className="relative aspect-video">
+            {/* The aspect ratio lives on the TRACK and both photographs are absolutely
+              * positioned inside it, so the two layers are the same box by construction.
+              * They used to derive height from an in-flow child, which meant anything else
+              * landing in flow changed one layer and not the other. */}
+            <div
+              ref={track}
+              className={`relative overflow-hidden rounded-sm ring-1 ring-on-dark/12 ${hasPair ? "aspect-video" : ""}`}
+            >
+              {hasPair && scene.src && warm.src ? (
+                <>
+                  {/* base layer: the color scene */}
                   <Image src={scene.src} alt={scene.alt} fill sizes="(min-width:1024px) 62vw, 100vw" className="object-cover" />
-                </div>
-              ) : (
-                <Elevation night massing="gable" lit={{ hex: "#f5c518", label: "warm white" }} className="block w-full" />
-              )}
 
-              {/* warm-white layer, clipped left of the line */}
-              <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }} aria-hidden>
-                {hasPair && warm.src ? (
-                  <div className="relative size-full">
+                  {/* warm-white layer, clipped left of the line */}
+                  <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }} aria-hidden>
                     <Image src={warm.src} alt="" fill sizes="(min-width:1024px) 62vw, 100vw" className="object-cover" />
                   </div>
-                ) : (
-                  <Elevation massing="gable" className="block w-full" />
-                )}
-              </div>
+                </>
+              ) : (
+                <>
+                  <Elevation night massing="gable" lit={{ hex: "#f5c518", label: "warm white" }} className="block w-full" />
+                  <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }} aria-hidden>
+                    <Elevation massing="gable" className="block w-full" />
+                  </div>
+                </>
+              )}
 
               {/* the line + handle */}
               <div className="absolute inset-y-0 z-20 w-0.5 bg-accent" style={{ left: `${pct}%` }} aria-hidden />

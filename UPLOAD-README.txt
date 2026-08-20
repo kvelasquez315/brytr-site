@@ -1,53 +1,63 @@
-BRYTR SITE — update 3   (supersedes updates 1 and 2)
-====================================================
-38 files. This is everything that has changed since the version currently in
-the repo. The label-font change touched most pages, hence the file count.
+BRYTR SITE — update 4   (supersedes updates 1-3)
+================================================
+38 files, everything changed since the version in the repo.
 
-TO UPLOAD
----------
-1. github.com/kvelasquez315/brytr-site -> Add file -> Upload files
-2. Unzip, then drag the CONTENTS (app, components, content, public, scripts
-   and the loose root files) into the drop area. Not the brytr-update folder
-   itself, or everything lands one level too deep.
-3. Remove UPLOAD-README.txt from the list before committing.
-4. Commit to main. Vercel rebuilds on its own.
+UPLOAD
+------
+github.com/kvelasquez315/brytr-site -> Add file -> Upload files.
+Unzip, drag the CONTENTS (app, components, content, public, scripts and the
+loose root files) into the drop area — not the brytr-update folder itself.
+Remove this README from the list. Commit to main; Vercel rebuilds.
 
-CRITICAL: package.json and package-lock.json must land in the SAME commit.
-Vercel runs `npm ci`, which hard-fails when they disagree — a failed build,
-not a bad render.
+package.json and package-lock.json must land in the SAME commit — Vercel runs
+`npm ci`, which hard-fails when they disagree.
 
-OPTIONAL: components/sections/hero-dusk.tsx is dead code. Nothing imports it.
-Delete it in the GitHub UI whenever convenient.
+Optional: components/sections/hero-dusk.tsx is dead code, safe to delete.
 
 THIS ROUND
 ----------
-Labels off the mono face   The font you flagged was IBM Plex Mono, the
-                           utility face — both screenshots were micro-labels.
-                           It had spread to ~50 eyebrows, figcaption tags and
-                           spec keys. Mono is now restricted to actual
-                           numbers; labels use Archivo 700 uppercase. This is
-                           why so many files changed.
-Founders off the homepage  Zac and Sam keep their section on /about.
-Even cards                 The Christmas card spanned two columns with its own
-                           layout, which forced every neighbour in the row to
-                           stretch or fall short. All cards are one shape now,
-                           heights stretch, links pin to the bottom: 11
-                           services + CTA cell = an even 4 x 3.
-Band down to three         Reviews, licensed + insured, W2 crews — each with a
-                           line of substance. Haven and Jellyfish are out
-                           until you send official logo files.
-Wider, and fuller          Container 1440 -> 1600px, and section headers now
-                           split into title-left / lede-right so the width is
-                           actually used. The split did more than the width.
-Service-area void          That section embedded an OpenStreetMap iframe that
-                           rendered as an empty grey box when blocked. Now a
-                           photograph of a finished install.
+1. THE WIPE BUG YOU SPOTTED. Real bug, and it only happened on your machine.
+
+   `.tap-44 { position: relative }` has the same CSS specificity as
+   Tailwind's `.absolute` and sits later in the stylesheet, so it quietly
+   won. That rule is inside @media (pointer: coarse) — a touchscreen query.
+   On your touchscreen laptop the drag handle therefore lost absolute
+   positioning, dropped into normal flow, and added its 48px of height to
+   the container. The base photograph kept its own 16:9 height while the
+   clipped warm-white layer filled the now-taller box, so one half ran 48px
+   past the other. A headless browser reports pointer:fine, so three
+   screenshot passes never reproduced it. The tell in your screenshot was
+   the drag handle sitting at the BOTTOM edge instead of centered.
+
+   Fixed twice over: tap-44 no longer promotes already-positioned elements,
+   and the wipe now puts the aspect ratio on the track with both photos
+   absolute inside it, so the two layers are the same box by construction.
+
+2. "MAKING IT BIGGER, NOT FULLER." Fair, and you were right. Last round I
+   widened the container, raised the headline size and split the section
+   headers. That is scaling. So this round is content that was already
+   written and simply never linked from the homepage:
+
+   - Nine brand comparisons (Jellyfish, Gemstone, Trimlight, Oelo, Govee,
+     Minleon, Ghouly, EverLights, plus one where neither system is ours).
+     "Is Jellyfish any good" is the highest-intent question in this
+     category, and carrying two systems is the differentiator — a
+     single-brand dealer cannot publish these pages. Each card shows that
+     page's own verdict text. No new copy was written for it.
+   - Three of the twelve finished blog articles. The homepage linked the
+     blog zero times, which is a straight SEO defect as well as a wasted
+     trust signal.
+
+   Headline clamp pulled back from 4.4rem to 4rem.
 
 STILL OPEN
 ----------
-- Haven + Jellyfish logo files (official asset packs from Zac). The band and
-  content/badges.ts are built to take them: drop files in /public/logo, set
-  `logo` on the badge, add the cells back. Use each mark's own colors.
+- Haven + Jellyfish logo files, official asset packs. content/badges.ts is
+  built to take them: drop files in /public/logo, set `logo`, add the cells
+  back to the band. Each mark in its own colors.
 - A daytime photograph. Nothing in the 223 GB archive is shot before dark.
 - Crew shot, founder portraits (for /about), app screenshot, one commercial
   install.
+- More density is available from real content if you want it: the eight
+  lighting systems currently show as three tiers, and the warranty and
+  financing terms are still placeholders pending Zac's numbers.
