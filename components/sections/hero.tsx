@@ -48,43 +48,16 @@ export function Hero() {
             every holiday for the life of your home.
           </p>
 
-          <div className="mt-7 flex flex-wrap gap-3">
+          {/* The form is right there, so a second "get a consultation" button would be
+            * competing with itself. The accent button is the phone number — the fastest
+            * path for anyone who would rather talk than type. Everything else that used
+            * to live under here (review score, install count, service area) is in the
+            * band directly below, so it is not repeated. */}
+          <div className="mt-8">
             <Button asChild size="lg">
-              <Link href="/free-design-consultation">Get a free design consultation</Link>
-            </Button>
-            <Button asChild size="lg" variant="outline-dark">
-              <a href={site.phoneHref} className="u">{site.phone}</a>
+              <a href={site.phoneHref}>{site.phone}</a>
             </Button>
           </div>
-
-          {/* proof, inline — not a boxed card */}
-          <dl className="mt-8 flex flex-wrap items-baseline gap-x-7 gap-y-3">
-            {[
-              ["5.0", "from 177 Google reviews"],
-              ["1.2M", "lights installed in Omaha"],
-            ].map(([f, l]) => (
-              <div key={l} className="flex items-baseline gap-2">
-                <dt className="u text-xl font-medium leading-none text-accent">{f}</dt>
-                <dd className="text-sm text-on-dark-muted">{l}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <p className="mt-6 text-sm text-on-dark-muted">
-            Serving{" "}
-            <Link href="/service-areas" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              18 cities
-            </Link>{" "}
-            from Omaha to Lincoln, with both a{" "}
-            <Link href="/lighting-systems/brytr-signature" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              premium
-            </Link>{" "}
-            and a{" "}
-            <Link href="/lighting-systems/brytr-basic" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              value
-            </Link>{" "}
-            system in stock.
-          </p>
         </div>
 
         {/* ── right: the form, in the hero ─────────────────────────── */}

@@ -38,7 +38,7 @@ export function SceneRail() {
         <SectionHead
           onDark
           
-          title="One roofline, 365 nights a year."
+          title="The same roofline, every night of the year."
           lede="You are not buying Christmas lights. You are buying a light fixture that happens to do Christmas, plus everyday warm white, plus a scarlet Saturday."
         />
 

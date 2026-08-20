@@ -66,7 +66,7 @@ export default function Contact() {
 
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="Coverage" title="Eighteen cities." />
+          <SectionHead eyebrow="Coverage" title="Where the trucks go." />
           <div className="mt-9"><CityTiles /></div>
         </div>
       </section>

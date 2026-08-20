@@ -75,7 +75,7 @@ export function ProjectTabs() {
   return (
     <section className="section bg-raise">
       <div className="shell">
-        <SectionHead onDark title="Three installs we photographed ourselves." lede={tab.blurb} />
+        <SectionHead onDark title="Installs we photographed ourselves." lede={tab.blurb} />
 
         <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-b border-on-dark/12" role="tablist" aria-label="Project categories">
           {tabs.map((t, i) => (

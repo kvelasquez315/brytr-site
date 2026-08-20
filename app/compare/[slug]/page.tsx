@@ -203,7 +203,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       {/* 7 — other comparisons · charcoal */}
       <section className="section bg-raise">
         <div className="shell">
-          <SectionHead onDark title="The other eight head to heads." />
+          <SectionHead onDark title="The rest of the head to heads." />
           <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {others.map((o) => (
               <Link key={o.slug} href={`/compare/${o.slug}`} className="rounded-lg bg-primary p-5 ring-1 ring-on-dark/10 transition-all duration-[--dur-base] hover:-translate-y-0.5 hover:ring-accent/40">
@@ -212,7 +212,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               </Link>
             ))}
             <Link href="/compare" className="flex flex-col justify-center rounded-lg bg-raise p-5 ring-1 ring-accent/25 transition-all duration-[--dur-base] hover:-translate-y-0.5 hover:ring-accent/60">
-              <h3 className="text-base text-on-dark">All 10 brands, one table</h3>
+              <h3 className="text-base text-on-dark">Every brand, one table</h3>
               <p className="mt-2 text-sm text-on-dark-muted">
                 The whole Omaha market side by side, including where our premium system loses.
               </p>

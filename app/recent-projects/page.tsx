@@ -110,7 +110,7 @@ export default function RecentProjects() {
       <Jsonld data={breadcrumb(trail)} />
       <PageHero
         eyebrow="Recent work"
-        h1="Three installs, photographed on site."
+        h1="Finished work, photographed on site."
         lede="Not renders and not stock houses — three finished Brytr systems in west Omaha, shot after dark across a single October. Homeowner addresses stay private, so each is described by elevation and by what is lit."
         trail={trail}
         stats={[["3", "installs photographed"], ["19", "scenes shown"], ["18", "cities served"]]}

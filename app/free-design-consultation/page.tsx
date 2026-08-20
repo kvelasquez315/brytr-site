@@ -34,7 +34,7 @@ export default function Consult() {
         <div className="shell grid gap-10 lg:grid-cols-[54fr_46fr] lg:gap-14">
           <QuoteForm variant="full" />
           <div>
-            <SectionHead eyebrow="What happens next" title="Four steps, about an hour." />
+            <SectionHead eyebrow="What happens next" title="About an hour, driveway to written quote." />
             <ol className="mt-8 space-y-6">
               {[
                 ["You send this form", "We reply the same day to book a time. Evenings are usually better for this, because the design happens after dark."],

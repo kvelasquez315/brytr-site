@@ -71,7 +71,7 @@ export default function AreasHub() {
 
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead eyebrow="In every city" title="All eleven services, everywhere we work." />
+          <SectionHead eyebrow="In every city" title="Every service, everywhere we work." />
           <div className="mt-9"><ServiceRows /></div>
         </div>
       </section>

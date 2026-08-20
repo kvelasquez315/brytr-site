@@ -32,7 +32,7 @@ export default function Reviews() {
       }} />
       <PageHero
         eyebrow="Reviews"
-        h1="A 5.0 average across 177 Google reviews."
+        h1="What Omaha homeowners say after the crew leaves."
         lede="We would rather send you to Google than retype our own reviews here. What those reviews consistently mention is below."
         trail={trail}
         stats={[["5.0", "average rating"], ["177", "reviews"], ["Google", "verified platform"]]}
@@ -44,7 +44,7 @@ export default function Reviews() {
             <>
               <SectionHead
                 eyebrow="What they mention"
-                title="The six themes that come up again and again."
+                title="The themes that come up again and again."
                 lede="Individual review text is not reproduced here. Writing plausible testimonials would be fabricating social proof, so this page shows the verified aggregate and the themes instead."
               />
               <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -91,12 +91,12 @@ export default function Reviews() {
 
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="Where we work" title="Reviews from across 18 cities." />
+          <SectionHead eyebrow="Where we work" title="Reviews from across the metro." />
           <div className="mt-9"><CityTiles /></div>
         </div>
       </section>
 
-      <BandCta title="Join the 177." body="Free consultation, written quote, and a system you will still like in year five." />
+      <BandCta title="Have us out, then say what you found." body="Free consultation, written quote, and a system you will still like in year five." />
       <PageCta />
     </Shell>
   );

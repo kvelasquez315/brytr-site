@@ -283,7 +283,7 @@ export function ProcessRow() {
   return (
     <section className="section bg-background">
       <div className="shell">
-        <SectionHead title="Five steps, one visit to decide." />
+        <SectionHead title="From the first walk-around to the night it turns on." />
         <ol className="mt-11 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
           {steps.map(([h, p], i) => (
             <li key={h} className="relative">
@@ -321,7 +321,7 @@ export function Reviews() {
         <div className="shell">
           <SectionHead
             eyebrow="Omaha says"
-            title="A 5.0 average across 177 Google reviews."
+            title="What Omaha homeowners say after the crew leaves."
             lede="We would rather show you the reviews on Google than retype them here. In the meantime, here is what those reviews consistently mention."
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -346,7 +346,7 @@ export function Reviews() {
   return (
     <section className="section bg-muted">
       <div className="shell">
-        <SectionHead eyebrow="Omaha says" title="177 five-star reviews and counting." />
+        <SectionHead eyebrow="Omaha says" title="Homeowners keep saying the same thing." />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {reviews.slice(0, 6).map((r, i) => (
             <blockquote key={i} className={i === 1 ? "rounded-lg bg-primary p-6" : "rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]"}>
@@ -405,7 +405,7 @@ export function HomeFaq() {
   return (
     <section className="section bg-background">
       <div className="shell">
-        <SectionHead eyebrow="Before you buy" title="The eight questions we get every week." />
+        <SectionHead eyebrow="Before you buy" title="The questions we get every week." />
         <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_20rem] lg:gap-14">
           <Faq items={homeFaqs} />
           <aside className="rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] lg:sticky-0">
@@ -467,11 +467,15 @@ export function CompareGrid() {
       <div className="shell">
         <SectionHead
           eyebrow="Shopping other brands"
-          title="We sell two systems, so we can tell you which one loses."
+          title="We sell both, so we can tell you which one loses."
           lede="Nine head-to-head comparisons, including the ones where the cheaper system is the honest answer. A single-brand dealer cannot write these pages."
         />
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {compares.map((c) => (
+          {/* Three, not nine. Nine was a second twelve-card grid on the same page; the
+            * other six are one click away and all nine are indexed either way. */}
+          {compares
+            .filter((c) => ["haven-vs-jellyfish-lighting", "haven-vs-gemstone-lights", "haven-vs-trimlight"].includes(c.slug))
+            .map((c) => (
             <article key={c.slug} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
               <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">
                 {c.labor ? "Professional vs DIY" : c.neutral ? "Neither is ours" : "We install both"}
@@ -484,10 +488,12 @@ export function CompareGrid() {
               </p>
               <div className="mt-5 flex items-baseline justify-between gap-4 border-t border-border pt-4">
                 <TextLink href={`/compare/${c.slug}`}>Read the comparison</TextLink>
-                <span className="u text-2xs text-muted-foreground">{c.rows.length} specs</span>
               </div>
             </article>
           ))}
+        </div>
+        <div className="mt-6">
+          <TextLink href="/compare">Every brand we are asked about</TextLink>
         </div>
       </div>
     </section>
@@ -516,23 +522,30 @@ export function Writing() {
           title="The questions people ask before they spend the money."
           lede="Written by the people who install it, including the parts that argue against buying. Twelve more on the blog."
         />
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+        {/* A list, not cards. The page already has a card grid for services and another
+          * for comparisons; a third would be the same design a third time. */}
+        <ul className="mt-9 divide-y divide-border border-y border-border">
           {featured.map((p) => (
-            <article key={p.slug} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-              <div className="flex items-baseline justify-between gap-4">
-                <p className="label text-2xs uppercase tracking-[0.14em] text-accent-ink">{p.category}</p>
-                <span className="u text-2xs text-muted-foreground">{p.read}</span>
-              </div>
-              <h3 className="mt-3 font-display text-xl font-bold leading-snug text-foreground">{p.title}</h3>
-              <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">{p.dek}</p>
-              <div className="mt-5 border-t border-border pt-4">
-                <TextLink href={`/blog/${p.slug}`}>Read it</TextLink>
-              </div>
-            </article>
+            <li key={p.slug}>
+              <Link
+                href={`/blog/${p.slug}`}
+                className="group flex flex-col gap-2 py-5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-10"
+              >
+                <span className="max-w-[52ch]">
+                  <span className="block font-display text-lg font-bold leading-snug text-foreground group-hover:underline">
+                    {p.title}
+                  </span>
+                  <span className="mt-1.5 block text-[0.95rem] text-muted-foreground">{p.dek}</span>
+                </span>
+                <span className="label shrink-0 text-2xs uppercase tracking-[0.14em] text-accent-ink">
+                  {p.category} · {p.read}
+                </span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
         <div className="mt-6">
-          <TextLink href="/blog">All twelve articles</TextLink>
+          <TextLink href="/blog">Everything we have written</TextLink>
         </div>
       </div>
     </section>

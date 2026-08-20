@@ -98,7 +98,6 @@
   /* ---- type — three roles ------------------------------------------ */
   --font-display: var(--font-archivo), "Archivo", sans-serif;
   --font-body:    var(--font-plex-sans), "IBM Plex Sans", sans-serif;
-  --font-utility: var(--font-plex-mono), "IBM Plex Mono", monospace;
 
   --tracking-display: -0.028em;
   --leading-body: 1.6;
@@ -155,7 +154,7 @@
 
   --font-display: var(--font-display);
   --font-body:    var(--font-body);
-  --font-utility: var(--font-utility);
+  --font-utility: var(--font-display);  /* alias only — the SVG drawings label in Archivo */
 
   --radius-sm: 2px;
   --radius-md: 2px;
@@ -216,8 +215,12 @@
     text-wrap: balance;
   }
   /* phone numbers, hours, prices, spec figures */
+  /* TWO FACES ONLY: Archivo for headings and labels, IBM Plex Sans for everything
+   * else. `.u` used to swap in IBM Plex Mono for figures — a third face, and the
+   * "robotic" one the client kept spotting in stat tiles, spec tables and the phone
+   * placeholder. It now only asks for tabular, same-width digits, which keeps numbers
+   * aligned in spec tables without changing the typeface. */
   .u {
-    font-family: var(--font-utility);
     font-feature-settings: "tnum" 1, "zero" 1;
     font-variant-numeric: tabular-nums;
   }

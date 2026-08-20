@@ -28,7 +28,7 @@ export default function HowItWorks() {
       <Jsonld data={breadcrumb(trail)} />
       <PageHero
         eyebrow="The Brytr way"
-        h1="Five steps, one visit to decide."
+        h1="From the first walk-around to the night it turns on."
         lede="Nothing here is unusual except the last step, which is the one that separates a system you enjoy from a system you argue about."
         trail={trail}
         footnote={
@@ -150,7 +150,7 @@ export default function HowItWorks() {
 
       <section className="section bg-raise">
         <div className="shell">
-          <SectionHead onDark title="Six things that are not standard in this trade." />
+          <SectionHead onDark title="Things that are not standard in this trade." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
               ["Designing after dark", "A night-time product designed in daylight is guesswork.", "Most installers quote from the driveway at 2pm.", "verified"],

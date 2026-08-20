@@ -21,7 +21,7 @@ export default function About() {
       <Jsonld data={breadcrumb(trail)} />
       <PageHero
         eyebrow="About Brytr"
-        h1="Two guys, two tiers, one market."
+        h1="Built by the guys who show up on the roof."
         lede="Brytr exists because every permanent lighting quote in Omaha came from somebody selling exactly one brand and calling it the only good option. We stock two, run our own crews, and service work we did not sell."
         trail={trail}
         stats={[["1.2M", "lights installed"], ["5.0", "from 177 reviews"], ["18", "cities served"]]}
@@ -30,7 +30,7 @@ export default function About() {
       <section className="section bg-background">
         <div className="shell grid gap-10 lg:grid-cols-[54fr_46fr] lg:gap-14">
           <div>
-            <SectionHead title="Why there are two tiers." />
+            <SectionHead title="Why we carry a premium shelf and a value shelf." />
             <div className="prose-body mt-6 space-y-4">
               <p className="text-lg text-foreground">
                 Almost every permanent lighting company is a dealer for one manufacturer. That is a
@@ -105,7 +105,7 @@ export default function About() {
 
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead title="Four commitments we will put in writing." />
+          <SectionHead title="The commitments we put in writing." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
               ["W2 crews only", "The people on your roof are our employees. Never a subcontractor network."],
@@ -124,7 +124,7 @@ export default function About() {
 
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead title="Eighteen cities." />
+          <SectionHead title="Where the trucks go." />
           <div className="mt-9"><CityTiles /></div>
         </div>
       </section>

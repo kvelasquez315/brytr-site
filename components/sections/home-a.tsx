@@ -3,7 +3,7 @@ import Image from "next/image";
 import { site } from "@/content/site";
 import { services } from "@/content/services";
 import { iconMap } from "@/content/icon-map";
-import { badges } from "@/content/badges";
+import { googleLogo, reviewProofBadge, offerings } from "@/content/badges";
 import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Tile, Check, TextLink, QuoteForm, ChannelEdge } from "@/components/ui/bits";
@@ -58,39 +58,57 @@ export function QuickQuote() {
   );
 }
 
-/* 5 — CREDENTIAL BAND · under the hero · primary · carries signature edge #1
+/* 5 — THE BAND · one compact row · primary · carries signature edge #1
  *
- * Went from seven text pills to five cells to three. Three is the right number: a
- * credential band should carry the things a homeowner actually checks — the review
- * score, the insurance, and who is physically on the roof. Manufacturer names are out
- * until the official logo files exist, because a brand set in our own typeface reads
- * as a missing image. Each cell carries a line of substance so this is a band with
- * weight, not a chip row. */
+ * Third pass. Seven pills, then five cells, then three, now this: the review score on
+ * the left and the three things we install on the right, in a single row about a third
+ * the height it started at. Licensed/insured and W2 crews came out because the client
+ * wants the trust side to be reviews only — both claims are made properly further down
+ * the page, where there is room to back them up instead of asserting them in a chip. */
 export function ProofRail() {
   return (
     <section className="bg-primary">
       <ChannelEdge />
-      <div className="shell py-12 lg:py-14">
-        <ul className="grid gap-x-10 gap-y-9 sm:grid-cols-3 lg:gap-x-0 lg:divide-x lg:divide-on-dark/12">
-          {badges.map((b) => {
-            const I = iconMap[b.icon];
+      <div className="shell flex flex-wrap items-center justify-between gap-x-12 gap-y-6 py-6">
+        {/* reviews */}
+        <div className="flex items-center gap-4">
+          {googleLogo ? (
+            <div className="relative h-7 w-20 shrink-0">
+              <Image src={googleLogo} alt="Google" fill sizes="80px" className="object-contain object-left" />
+            </div>
+          ) : (
+            <span className="font-display text-lg font-bold leading-none text-on-dark">Google</span>
+          )}
+          <span className="flex items-center gap-1" aria-hidden>
+            {[0, 1, 2, 3, 4].map((i) => (
+              <svg key={i} viewBox="0 0 20 20" className="size-4 text-accent" fill="currentColor">
+                <path d="M10 1.6l2.47 5.2 5.53.72-4.06 3.9 1.03 5.6L10 14.3l-4.97 2.72 1.03-5.6L2 7.52l5.53-.72z" />
+              </svg>
+            ))}
+          </span>
+          <p className="text-sm text-on-dark">
+            <span className="u font-semibold">{reviewProofBadge.score}</span>{" "}
+            <span className="text-on-dark-muted">
+              from <span className="u">{reviewProofBadge.count}</span> {reviewProofBadge.source} · {reviewProofBadge.note}
+            </span>
+          </p>
+        </div>
+
+        {/* what we install */}
+        <ul className="flex flex-wrap items-center gap-x-9 gap-y-4">
+          {offerings.map((o) => {
+            const I = iconMap[o.icon];
             return (
-              <li key={b.name} className="lg:px-10 lg:first:pl-0 lg:last:pr-0">
-                <div className="flex items-start gap-4">
-                  {b.logo ? (
-                    /* the mark in its own colors, never recolored */
-                    <div className="relative h-10 w-32 shrink-0">
-                      <Image src={b.logo} alt={`${b.name} — ${b.role}`} fill sizes="128px" className="object-contain object-left" />
-                    </div>
-                  ) : (
-                    <span className="channel-tile shrink-0" aria-hidden><I className="size-6" /></span>
-                  )}
-                  <div>
-                    <p className="font-display text-2xl font-bold leading-none text-on-dark">{b.name}</p>
-                    <p className="label mt-2 text-2xs uppercase tracking-[0.14em] text-accent">{b.role}</p>
-                  </div>
-                </div>
-                <p className="mt-4 text-[0.95rem] leading-relaxed text-on-dark-muted">{b.detail}</p>
+              <li key={o.name}>
+                <Link href={o.href} className="group flex items-center gap-3">
+                  <I className="size-6 shrink-0 text-accent" />
+                  <span>
+                    <span className="block font-display text-[0.95rem] font-bold leading-none text-on-dark group-hover:underline">
+                      {o.name}
+                    </span>
+                    <span className="mt-1 block text-xs text-on-dark-muted">{o.note}</span>
+                  </span>
+                </Link>
               </li>
             );
           })}
@@ -107,7 +125,7 @@ export function ServicesBento() {
       <div className="shell">
         <SectionHead
           eyebrow="What we install"
-          title="Eleven ways to light an Omaha property."
+          title="Every surface worth lighting on a property."
           lede="Every one of these runs on the same channel, the same controller and the same app. Add to it whenever you like."
         />
         <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -301,7 +319,7 @@ export function WhyBrytr() {
   return (
     <section className="section bg-primary pb-0">
       <div className="shell">
-        <SectionHead onDark eyebrow="Why Brytr" title="Four things most installers will not do." />
+        <SectionHead onDark eyebrow="Why Brytr" title="What most installers will not do." />
         <div className="mt-11 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {why.map((w) => (
             <article key={w.h} className="rounded-lg bg-raise p-6 shadow-[var(--shadow-dark)] ring-1 ring-accent/12">

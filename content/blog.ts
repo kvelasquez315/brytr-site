@@ -23,7 +23,7 @@ export const posts: Post[] = [
       { list: ["You are listing the house inside a year.", "Your roofline is very simple and you genuinely enjoy putting lights up.", "You want it for one event, not for a decade."] },
     ] }),
   B({ slug: "how-to-choose-a-permanent-lighting-installer", title: "How to Choose a Permanent Lighting Installer",
-    h1: "How to choose a permanent lighting installer: 10 questions to ask.", keyword: "permanent christmas light installers near me",
+    h1: "How to choose a permanent lighting installer, and the questions that make a salesperson uncomfortable.", keyword: "permanent christmas light installers near me",
     category: "Before you buy", read: "7 min",
     dek: "This is a building material fastened to your fascia. Ask these ten questions before you sign anything, and pay attention to which ones make the salesperson uncomfortable.",
     links: { label: "Book a free design consultation", href: "/free-design-consultation" },

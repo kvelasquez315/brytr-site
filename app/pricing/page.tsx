@@ -66,7 +66,7 @@ export default function Pricing() {
 
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead title="Five things, in order of impact." />
+          <SectionHead title="What actually moves the number, in order." />
           <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {[
               ["Linear feet", "How much roofline you are lighting. The single biggest factor."],
@@ -143,7 +143,7 @@ export default function Pricing() {
 
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead eyebrow="Pricing questions" title="The six we get most." />
+          <SectionHead eyebrow="Pricing questions" title="The ones we get most." />
           <div className="mt-9 grid gap-10 lg:grid-cols-[1fr_21rem] lg:gap-14">
             <Faq items={pricingFaqs} />
             <div className="space-y-5">

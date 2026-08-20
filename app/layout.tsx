@@ -21,12 +21,6 @@ const plexSans = localFont({
   variable: "--font-plex-sans",
   display: "swap",
 });
-const plexMono = localFont({
-  src: [{ path: "./fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500", style: "normal" }],
-  variable: "--font-plex-mono",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://brytrco.com"),
   title: {
@@ -41,7 +35,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${plexSans.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${plexSans.variable}`}>
       <body>{children}</body>
     </html>
   );

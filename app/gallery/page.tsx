@@ -89,7 +89,7 @@ export default function Gallery() {
         <div className="shell">
           <SectionHead
             eyebrow="What you are looking at"
-            title="Three things worth checking in any photo."
+            title="What to look for in any photo."
             lede="Permanent lighting is judged twice: how it performs after dark, and whether you can see the hardware at noon. A gallery can only settle the first one — which is why we will walk you to a finished install for the second."
           />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">

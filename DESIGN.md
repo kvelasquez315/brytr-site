@@ -99,8 +99,17 @@ Three roles. Display is used with restraint — hero and H2 only.
 |---|---|---|
 | Display | **Archivo** 700/800 | Hero + H2 + H3 only. `-0.028em` tracking at display sizes. |
 | Body | **IBM Plex Sans** 400/500/600 | All body copy, 1.6 line-height. |
-| Utility | **IBM Plex Mono** 500 | NUMBERS ONLY: phone, hours, prices, linear-foot figures, spec VALUES, drive times, license #s. `tnum` on. |
 | Micro-label | **Archivo** 700, uppercase, `.label` | Eyebrows, spec keys, figcaption tags. |
+
+**TWO FACES. That is the whole system.** Archivo for headings and micro-labels, IBM Plex
+Sans for everything else. There is no third face and no utility face.
+
+IBM Plex Mono used to hold the numbers — phone, prices, review scores, spec values. It
+survived three rounds of review and the client kept spotting it: "that very robotic
+font", "it looks like we're using three or four different fonts." Both true. A monospace
+face in a stat tile reads as a terminal, and mixing three families on one page is itself
+the tell. `.u` still exists but now only asks for tabular figures, so numbers stay
+column-aligned in spec tables without changing typeface.
 
 **Revised after the first review — the original pairing read as generated.** Chivo (display) and
 Figtree (body) were both too soft: wide apertures, round dots, generous shoulders. Figtree in
@@ -130,6 +139,28 @@ site — 1.2M lights, 402-810-3973, linear-foot pricing — read as data rather 
 Modular scale: **1.2** (dense, not airy — this site is a lot of pages with a lot of substance).
 Banned and unused anywhere: Inter, Roboto, Roboto Mono, Open Sans, Lato, Poppins, Montserrat,
 system-ui, Space Grotesk, Geist, Instrument Serif.
+
+## Copy rules
+
+Two rules, both from client review, both absolute.
+
+**No numbers in a heading.** A heading paints a picture; it does not count the items
+underneath it. `Eleven ways to light an Omaha property` became `Every surface worth
+lighting on an Omaha property`. `The eight questions we get every week` became `The
+questions we get every week`. `One roofline, 365 nights a year` became `The same
+roofline, every night of the year`. This applies to every `h1`, `h2` and `h3`, in
+components and in `content/*.ts`. Numbers still belong in stat tiles, spec tables and
+body copy — set in the mono utility face, where a figure is the point.
+
+Why it matters beyond taste: a counted heading dates instantly. "Eleven ways" is wrong
+the moment a twelfth service is added, and the count is already visible in the grid
+below it, so the heading is spending its only line on information the reader can see.
+
+**Body copy never sits beside a heading.** Eyebrow, then title, then lede, stacked.
+`SectionHead` briefly split into title-left / lede-right to fill a 1600px container —
+that reads as a magazine deck, breaks the vertical rhythm of the page, and was a lazy
+substitute for having enough content. Width gets filled with content. A form or a
+photograph may sit beside a heading; a paragraph may not.
 
 ## Layout
 

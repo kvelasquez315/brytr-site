@@ -20,7 +20,7 @@ export default function ServicesHub() {
       <Jsonld data={breadcrumb(trail)} />
       <PageHero
         eyebrow="What we install"
-        h1="Eleven ways Brytr lights an Omaha property."
+        h1="Every surface worth lighting on an Omaha property."
         lede="Every one of these runs on the same channel, the same controller and the same app, so you can start with a roofline and add landscape or a pergola run later without replacing anything."
         trail={trail}
         stats={[["11", "services"], ["18", "cities served"], ["1.2M", "lights installed"]]}
@@ -75,7 +75,7 @@ export default function ServicesHub() {
 
       <section className="section bg-primary">
         <div className="shell">
-          <SectionHead onDark eyebrow="Not sure yet" title="Three questions that usually settle it." />
+          <SectionHead onDark eyebrow="Not sure yet" title="The questions that usually settle it." />
           <ol className="mt-10 grid gap-8 sm:grid-cols-3">
             {[
               ["Is it mostly for the holidays?", "Then you want a roofline run. Everything else is an addition to it, and you can add later."],
@@ -96,7 +96,7 @@ export default function ServicesHub() {
 
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="Available in" title="All eleven, across 18 cities." />
+          <SectionHead eyebrow="Available in" title="Every service, everywhere we drive." />
           <div className="mt-9"><CityTiles /></div>
         </div>
       </section>

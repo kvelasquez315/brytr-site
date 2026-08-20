@@ -44,7 +44,7 @@ export default function CompareHub() {
 
       <PageHero
         eyebrow="Honest comparison"
-        h1="The 10 permanent lighting brands, compared by an installer."
+        h1="Every permanent lighting brand, compared by an installer."
         lede="We carry two of these, service five more, and would not put the rest on your house. Here is the whole market in one table, including where our own premium system loses."
         trail={trail}
         stats={[["10", "brands compared"], ["2", "we install"], ["5", "we service"]]}
@@ -92,7 +92,7 @@ export default function CompareHub() {
 
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="Head to head" title="Nine individual comparisons." />
+          <SectionHead eyebrow="Head to head" title="Head to head, one pair at a time." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {compares.map((c) => (
               <Link key={c.slug} href={`/compare/${c.slug}`} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5">

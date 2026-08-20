@@ -49,7 +49,7 @@ export default function SystemsHub() {
 
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead eyebrow="The lineup" title="Eight systems, two tiers." />
+          <SectionHead eyebrow="The lineup" title="A premium shelf and a value shelf." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {systems.map((s, i) => (
               <Link key={s.slug} href={`/lighting-systems/${s.slug}`} className="flex flex-col rounded-lg bg-card p-5 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5">
@@ -75,7 +75,7 @@ export default function SystemsHub() {
 
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="At a glance" title="All eight, one table." />
+          <SectionHead eyebrow="At a glance" title="Every system, side by side." />
           <div className="mt-10"><SpecTable onDark={false} caption="Every system Brytr installs" rows={master} headA="Tier" headB="Notable" /></div>
         </div>
       </section>
@@ -95,7 +95,7 @@ export default function SystemsHub() {
 
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead eyebrow="Signature versus Basic" title="Our two tiers, side by side." lede="This table lives here rather than on the homepage because it is the decision, not the pitch." />
+          <SectionHead eyebrow="Signature versus Basic" title="Premium against value, in plain terms." lede="This table lives here rather than on the homepage because it is the decision, not the pitch." />
           <div className="mt-10"><SpecTable onDark={false} caption="Brytr Signature compared with Brytr Basic" rows={tiers} headA="Brytr Signature" headB="Brytr Basic" highlightA /></div>
           <div className="mt-8 flex flex-wrap items-center gap-6">
             <TextLink href="/compare">Compare all 10 brands on the market</TextLink>
