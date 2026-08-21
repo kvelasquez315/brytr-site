@@ -24,13 +24,13 @@ import { Jsonld, breadcrumb, localBusiness, faqSchema } from "@/lib/schema";
  *   · two closers
  *
  * What differs now, and all of it from real data already in content/cities.ts: the drive
- * time, the tier, the actual subdivision names, and the actual neighbouring towns. Plus
+ * time, the tier, the actual subdivision names, and the actual neighboring towns. Plus
  * content/city-detail.ts, which gives each of the eighteen its own photograph — no shot
  * used twice.
  *
  * And THREE LEADS, one per band, because a page about a town twenty minutes away and a page
  * about a town two hours away are not making the same argument:
- *   metro    — leads with the neighbourhood rack. The subdivisions are the most per-city
+ *   metro    — leads with the neighborhood rack. The subdivisions are the most per-city
  *              thing we have, and in this band they are the thing people search.
  *   iowa     — leads with the river: Council Bluffs is twenty minutes from the shop, which
  *              is closer than half the Nebraska metro, and the drive times prove it.
@@ -117,17 +117,36 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             : " and eastern Nebraska"
         }. ${c.drive} from our shop, which is the number that decides how fast we can get back to you.`}
         trail={trail}
+        /* THE OUTSTATE DISCLOSURE IS NOT A PHOTO CREDIT, AND SHOULD NOT LOOK LIKE ONE.
+          * All three tiers used to render the same faint footnote in the same slot, so
+          * "we have not shot a job here" — the most creditable sentence on the page — was
+          * styled exactly like Omaha's ordinary "photographed on a Brytr install". A reader
+          * skimming both got no signal that one of them was a disclosure. It now gets a
+          * ruled-off block and says the word out loud. A surface shift rather than a coloured
+          * left strip, which slopcheck rejects on principle and is right to. */
         footnote={
-          <>
-            {c.tier === "metro"
-              ? "Photographed on a Brytr install in the metro. Core territory, so a service call here gets scheduled the same week."
-              : c.tier === "iowa"
-              ? "Photographed on a Brytr install on the Nebraska side. Iowa work gets the same crews, materials and warranty, with no border premium on the quote."
-              : `Photographed on a Brytr install in the Omaha metro — we have not shot a job in ${c.name} yet, and we are not going to caption a metro house as one.`}{" "}
-            <Link href="/how-it-works" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              What install day looks like
-            </Link>.
-          </>
+          c.tier === "outstate" ? (
+            <span className="block max-w-[62ch] rounded-sm bg-on-dark/[0.07] px-4 py-3">
+              <span className="label block text-on-dark">Worth saying about this photograph</span>
+              <span className="mt-1.5 block">
+                It is a Brytr install in the Omaha metro, not in {c.name}. We have not
+                photographed a job out here yet, and we are not going to caption a metro house
+                as a local one.{" "}
+                <Link href="/recent-projects" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
+                  The rest of what we do not have
+                </Link>.
+              </span>
+            </span>
+          ) : (
+            <>
+              {c.tier === "metro"
+                ? "Photographed on a Brytr install in the metro. Core territory, so a service call here gets scheduled the same week."
+                : "Photographed on a Brytr install on the Nebraska side. Iowa work gets the same crews, materials and warranty, with no border premium on the quote."}{" "}
+              <Link href="/how-it-works" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
+                What install day looks like
+              </Link>.
+            </>
+          )
         }
       />
 
@@ -157,7 +176,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <div>
               <p className="eyebrow">Working across {c.name}</p>
               <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
-                {c.neighborhoods.length} subdivisions, and the ones next door.
+                The subdivisions here, and the towns next door.
               </h2>
               <div className="prose-body mt-6 space-y-4">
                 <p className="text-lg text-foreground">
@@ -182,7 +201,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                 <p className="label flex items-center gap-3 text-foreground">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
-                  Neighbourhoods in {c.name}
+                  Neighborhoods in {c.name}
                 </p>
                 <p className="text-xs text-muted-foreground">Real subdivisions, not a keyword list</p>
               </div>
@@ -274,7 +293,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-on-dark/12 px-6 py-4">
                 <p className="label flex items-center gap-3 text-on-dark">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
-                  Neighbourhoods in {c.name}
+                  Neighborhoods in {c.name}
                 </p>
                 <p className="text-xs text-on-dark-muted">Where we have worked, not a boundary</p>
               </div>
@@ -307,7 +326,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 {[
                   ["What a route day is", `A crew leaves the shop early, works ${c.name} and the towns around it for the day, and comes back. Two or three properties, sometimes four on smaller runs.`],
                   ["What it means for your date", "We hold a window rather than a day until there is enough work out here to fill it, then it firms up and we ring you. That wait is the honest cost of not being charged for the drive."],
-                  ["What it does not change", "The crew, the method, the sealing, the mitred corners, the curb check and the scene walk at dusk. Identical to a metro job, because it is the same two people."],
+                  ["What it does not change", "The crew, the method, the sealing, the mitered corners, the curb check and the scene walk at dusk. Identical to a metro job, because it is the same two people."],
                   ["What it means for a service call", "Scheduled onto the next route rather than same-week. If something is genuinely urgent we will tell you honestly whether that is days or a fortnight."],
                   ["Why we still do it", `There is nobody out here carrying two tiers, so the alternative for a ${c.name} homeowner is one brand and one price. That is worth a drive.`],
                 ].map(([h, p]) => (
@@ -323,7 +342,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                     <p className="label flex items-center gap-3 text-foreground">
                       <span className="block h-4 w-1 bg-accent" aria-hidden />
-                      Neighbourhoods in {c.name}
+                      Neighborhoods in {c.name}
                     </p>
                     <p className="text-xs text-muted-foreground">Real subdivisions</p>
                   </div>
@@ -360,10 +379,20 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           <SectionHead
             eyebrow="Most asked for here"
             title={`What ${c.name} books.`}
-            lede="Every one of the eleven services is available at this address. These are the ones this part of the radius asks about most, and each has its own page with its own photographs."
+            /* One sentence on eighteen pages. The three bands genuinely do book different
+              * work — the metro adds landscape and hardscape on the same visit, the Iowa side
+              * skews to roofline first, and out here it is whole-property in one trip because
+              * a second trip is a route day — so each band says its own thing. */
+            lede={
+              c.tier === "metro"
+                ? "Everything we offer is available at this address, and in the metro it is normal for two or three of these to go on the same visit — the crew is already there and the controller is already being commissioned."
+                : c.tier === "iowa"
+                ? "Everything we offer is available at this address. Over the river it starts with the roofline more often than it does in the metro, and the landscape and patio work tends to get added a season later once people have lived with it."
+                : "Everything we offer is available at this address, and out here people tend to do all of it at once rather than in stages — a second visit is a route day, so it is worth scoping the whole property while the crew is on it."
+            }
           />
           <div className="mt-9"><ServiceRows only={servicesFor(c.tier)} columns={2} /></div>
-          <div className="mt-8"><TextLink href="/services">All eleven, grouped by what they attach to</TextLink></div>
+          <div className="mt-8"><TextLink href="/services">Everything we offer, grouped by what it attaches to</TextLink></div>
         </div>
       </section>
 
@@ -384,11 +413,26 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 ? `Iowa associations word this differently from the west Omaha ones, and there are fewer of them. Where ${c.name} has one, we pull the rules and submit to the board before we schedule anything.`
                 : `Most ${c.name} properties have no restriction at all. Where there is an association we handle the submission, and out here it is more often a city permit question than a covenant one.`}
             </p>
+            {/* These four used to print on all eighteen pages under whichever intro the tier
+              * generated. On Norfolk that meant a paragraph saying "most properties have no
+              * restriction at all" followed by four bullets promising to pull your covenant
+              * and eat the cost if the board refuses — the page arguing with itself. */}
             <ul className="mt-7 space-y-3">
-              <Check onDark>We pull the covenant before quoting, not after</Check>
-              <Check onDark>Spec sheet and elevation submitted in the board&rsquo;s own format</Check>
-              <Check onDark>Nothing goes on the house before approval lands</Check>
-              <Check onDark>If the board says no, you owe us nothing</Check>
+              {c.tier === "outstate" ? (
+                <>
+                  <Check onDark>We find out whether there is an association at all before quoting</Check>
+                  <Check onDark>Where there is one, the spec sheet and elevation go in its own format</Check>
+                  <Check onDark>City permit questions we handle the same way, and usually the same week</Check>
+                  <Check onDark>If an approval does not land, you owe us nothing</Check>
+                </>
+              ) : (
+                <>
+                  <Check onDark>We pull the covenant before quoting, not after</Check>
+                  <Check onDark>Spec sheet and elevation submitted in the board&rsquo;s own format</Check>
+                  <Check onDark>Nothing goes on the house before approval lands</Check>
+                  <Check onDark>If the board says no, you owe us nothing</Check>
+                </>
+              )}
             </ul>
           </div>
 
@@ -397,9 +441,9 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <ul className="mt-5 divide-y divide-on-dark/10 border-y border-on-dark/10">
               {[
                 ["A daylight photograph", "Boards worry about what it looks like at noon, not at night. A curb shot of a finished install answers the real objection."],
-                ["The words on the spec sheet", "“Architectural exterior lighting, colour matched to trim” describes it accurately. “Permanent Christmas lights” describes it badly and gets refused."],
+                ["The words on the spec sheet", "“Architectural exterior lighting, color matched to trim” describes it accurately. “Permanent Christmas lights” describes it badly and gets refused."],
                 ["Naming the zones", "A board that knows the back elevation can be left dark is a board with less to object to."],
-                ["Somebody else’s approval", "If a neighbour in your association already has one, that is usually the whole conversation."],
+                ["Somebody else’s approval", "If a neighbor in your association already has one, that is usually the whole conversation."],
               ].map(([h, p]) => (
                 <li key={h} className="py-4">
                   <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
@@ -413,7 +457,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
       </section>
 
       {/* ── NEXT DOOR ──
-        * This city's own neighbours, ordered by drive, not the eighteen-box rack. */}
+        * This city's own neighbors, ordered by drive, not the eighteen-box rack. */}
       <section className="section bg-background">
         <div className="shell grid items-start gap-10 lg:grid-cols-[38fr_62fr] lg:gap-14">
           <div>
@@ -426,7 +470,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               that decides how quickly anybody gets back to you.
             </p>
             <div className="mt-7">
-              <TextLink href="/service-areas">All eighteen, with drive times</TextLink>
+              <TextLink href="/service-areas">Every town we drive to, with drive times</TextLink>
             </div>
           </div>
 
@@ -454,7 +498,14 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         <div className="shell">
           <SectionHead eyebrow="Questions" title={`Permanent lighting in ${c.name}.`} />
           <div className="mt-9 grid gap-10 lg:grid-cols-[1fr_21rem] lg:gap-14">
-            <Faq items={faqs} />
+            {/* The glance card is h-fit, so it ran out a third of the way down and the
+              * accordion carried on beside a quarter-page of nothing — identically on all
+              * eighteen city pages. Two-up from xl, where the column has room for two
+              * readable measures. */}
+            <div className="grid gap-x-12 xl:grid-cols-2">
+              <Faq items={faqs.slice(0, Math.ceil(faqs.length / 2))} />
+              <Faq items={faqs.slice(Math.ceil(faqs.length / 2))} />
+            </div>
             <div className="h-fit rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)]">
               <h3 className="text-lg text-on-dark">{c.name} at a glance</h3>
               <dl className="mt-4 divide-y divide-on-dark/12 border-y border-on-dark/12">
@@ -462,7 +513,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   ["Drive from the shop", c.drive],
                   ["Band", bandLabel],
                   ["Subdivisions listed", `${c.neighborhoods.length}`],
-                  ["Neighbouring towns", `${nearby.length}`],
+                  ["Neighboring towns", `${nearby.length}`],
                   ["Systems carried", "Signature and Basic"],
                   ["Travel charge", "None"],
                 ].map(([k, v]) => (
