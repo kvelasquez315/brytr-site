@@ -2,19 +2,51 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { compares, compareBySlug } from "@/content/compares";
+import { detailForCompare } from "@/content/compare-detail";
 import { Shell } from "@/app/layout-shell";
-import { Elevation } from "@/components/sections/elevation";
-import {
-  PageHero, PageCta, BandCta, SpecTable, SectionHead, Check, TextLink,
-} from "@/components/sections/page-parts";
+import { PageHero, PageCta, SpecTable, SectionHead, Check, TextLink } from "@/components/sections/page-parts";
+import { PhotoPair } from "@/components/sections/photo-parts";
+import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 
-const shortVerdict = (v: string) => {
-  /* first whole sentence, never a mid-word cut */
-  const first = v.split(". ")[0].replace(/\.+$/, "");
-  if (first.length <= 150) return first + ".";
-  const cut = first.slice(0, 150);
-  return cut.slice(0, cut.lastIndexOf(" ")) + "…";
+/* ONE TEMPLATE, NINE COMPARISON PAGES — WAVE 4 of the page-by-page pass.
+ *
+ * What all nine used to carry:
+ *   · no photograph in the hero, and two drawn elevations in the body taking a literal hex
+ *     value as a prop — the brand lock forbids hex outside globals.css and sections.css
+ *   · a section headed "Equal billing, on purpose" whose body copy was about its own
+ *     styling: "same card, same divider, same type color". A page explaining its own CSS to
+ *     the reader is a page with nothing to say in that slot.
+ *   · the first five spec rows as two cards, then all fourteen rows again as a table
+ *   · "150 to 400 typical linear feet" — a figure about Brytr's own jobs nobody confirmed
+ *   · a "we carry both tiers" section identical on all nine
+ *   · the other eight comparisons as eight identical cards, on all nine pages
+ *   · two closers
+ *
+ * What differs now. content/compares.ts already held the per-page argument: the verdict,
+ * where each side wins, the cost tiers. content/compare-detail.ts adds the photograph, two
+ * chosen next comparisons, and the field that matters most on a page like this — WHAT WE
+ * HAVE NOT VERIFIED about the right-hand column, named per competitor.
+ *
+ * And the page has THREE FRAMES, because a page where we are competing and a page where we
+ * are refereeing should not read the same:
+ *   compete  — our system in the left column. Seven pages.
+ *   referee  — `neutral`: neither product is ours. No stance panel, no tier cards, and the
+ *              closer is the phone rather than the form, because we are not selling here.
+ *   labor   — `labor`: a company against a Saturday. The comparison is the work.
+ */
+
+/* The verdict's opening sentence, except where that sentence is three words long. "We
+ * install both." is true and useless as a card summary, so keep taking sentences until
+ * there is something to read. */
+const gist = (v: string) => {
+  const parts = v.split(/(?<=\.)\s+/);
+  let out = "";
+  for (const p of parts) {
+    out = out ? `${out} ${p}` : p;
+    if (out.length >= 70) break;
+  }
+  return out;
 };
 
 export function generateStaticParams() {
@@ -32,104 +64,223 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const c = compareBySlug(slug);
   if (!c) notFound();
-  const others = compares.filter((o) => o.slug !== c.slug);
+  const d = detailForCompare(c.slug);
+  const frame: "compete" | "referee" | "labor" = c.neutral ? "referee" : c.labor ? "labor" : "compete";
+  const alsoSee = (d?.alsoSee ?? [])
+    .map((sl) => compares.find((o) => o.slug === sl))
+    .filter((o): o is (typeof compares)[number] => !!o && o.slug !== c.slug);
   const trail = [
     { name: "Home", href: "/" },
     { name: "Compare", href: "/compare" },
     { name: `${c.a} vs ${c.b}`, href: `/compare/${c.slug}` },
   ];
 
+  const frameLabel =
+    frame === "referee"
+      ? "We are refereeing this one"
+      : frame === "labor"
+      ? "Labor, not brand"
+      : "We sell one of these two";
+
   return (
     <Shell>
       <Jsonld data={breadcrumb(trail)} />
-      <Jsonld data={{
-        "@context": "https://schema.org", "@type": "Article", headline: c.h1,
-        description: c.verdict, author: { "@type": "Organization", name: "Brytr Co" },
-      }} />
+      <Jsonld
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: c.h1,
+          description: c.verdict,
+          author: { "@type": "Organization", name: "Brytr Co" },
+        }}
+      />
 
       <PageHero
-        eyebrow="Honest comparison"
+        /* spec variant: the verdict goes in the right column, at size, because the verdict
+         * IS the answer to the H1 and burying it under a table is the standard mistake on
+         * pages like this. */
+        photo={d?.photo ?? "/img/channel-detail.jpg"}
+        photoAlt={d?.photoAlt ?? "A finished Brytr install in the Omaha metro at night"}
+        objectPosition={d?.objectPosition ?? "50% 50%"}
+        eyebrow={frameLabel}
         h1={c.h1}
-        lede={`We install two of the ten brands on this market and service five more, so this page is written from pulling failed sections off houses rather than from reading spec sheets. Both columns below get identical treatment.`}
+        lede={
+          frame === "referee"
+            ? "Neither of these is our premium system, so there is no version of this page that helps us. It exists because people ask, and because an answer from somebody with nothing to gain is worth more than an answer from either manufacturer."
+            : frame === "labor"
+            ? "One of these is a company and the other is a Saturday. Comparing them on spec misses the point entirely, so this page compares the work — who does it, how long it takes, and who you ring when a section dies."
+            : "We install two of the brands on this market and service five more, so what is below comes from pulling failed sections off houses as much as from spec sheets. Where we have not verified something, the page says which thing."
+        }
         trail={trail}
         footnote={
           <>
-            We carry two of the ten brands on this market and repair five more.{" "}
-            <Link href="/compare" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">See all ten compared</Link>.
+            Photographed on a Brytr install. {c.b} is not pictured anywhere on this site, because
+            captioning our own work as somebody else&rsquo;s is the one thing a comparison page must not
+            do.
           </>
-        }
-        aside={
-          <div className="rounded-lg bg-raise p-6 ring-1 ring-accent/15 shadow-[var(--shadow-dark)]">
-            <p className="eyebrow eyebrow--on-dark">The verdict</p>
-            <p className="mt-4 text-lg text-on-dark">{c.verdict}</p>
-            <div className="mt-6 grid grid-cols-2 gap-3">
-              <div className="rounded-md bg-primary p-4">
-                <p className="label text-on-dark-muted">{c.a}</p>
-                <p className="u mt-1.5 text-sm font-medium text-on-dark">{c.costA}</p>
-              </div>
-              <div className="rounded-md bg-primary p-4">
-                <p className="label text-on-dark-muted">{c.b}</p>
-                <p className="u mt-1.5 text-sm font-medium text-on-dark">{c.costB}</p>
-              </div>
-            </div>
-            <p className="mt-5 text-xs text-on-dark-muted">
-              {c.neutral
-                ? "Neither of these is our premium system, so we have no stake in the answer."
-                : c.labor
-                ? "This is a labor comparison, not a brand comparison."
-                : "We install both tiers, which is why the cheaper option gets real reasons to win below."}
-            </p>
-          </div>
         }
       />
 
-      {/* 2 — the two products, equal weight · bone */}
+      {/* ── THE VERDICT ──
+        * It was a card in the hero's right column. A verdict is the single thing a reader came
+        * to this page for, so it now gets the full width and sits on the dark ground where
+        * nothing competes with it. The two figures underneath are the whole reason the verdict
+        * lands: an opinion with two numbers under it is an argument. */}
+      <section className="bg-primary">
+        <div className="shell grid items-center gap-9 py-12 lg:grid-cols-[1fr_24rem] lg:gap-14 lg:py-16">
+          <div>
+            <p className="label flex items-center gap-3 text-accent">
+              <span className="block h-4 w-1 bg-accent" aria-hidden />
+              The verdict
+            </p>
+            <p className="mt-5 max-w-[54ch] font-display text-[clamp(1.4rem,2.8vw,2rem)] font-bold leading-snug text-on-dark">
+              {c.verdict}
+            </p>
+          </div>
+          {/* THREE ROWS, NOT TWO, and frameLabel now lives in here.
+            *
+            * The two cost cells were a 384 x 88px object in a 384 x 350px column — one small thing
+            * in a wide field, which is the void this site is least allowed to have. And frameLabel
+            * used to sit as a grey line under the verdict, where it read as an orphan caption
+            * attached to nothing AND repeated the hero's eyebrow word for word a screen above.
+            *
+            * As a labelled row it does the job it was written for — telling the reader what kind of
+            * comparison this is and where we stand in it — and it closes the column. */}
+          <dl className="overflow-hidden rounded-lg bg-raise ring-1 ring-on-dark/12">
+            <div className="grid grid-cols-2 gap-px bg-on-dark/12">
+              {[
+                [c.a, c.costA],
+                [c.b, c.costB],
+              ].map(([k, v]) => (
+                <div key={k} className="bg-raise px-5 py-5">
+                  <dt className="label text-on-dark-muted">{k}</dt>
+                  <dd className="u mt-2 text-[1rem] font-semibold leading-snug text-on-dark">{v}</dd>
+                </div>
+              ))}
+            </div>
+            <div className="border-t border-on-dark/12 px-5 py-4">
+              <dt className="label text-on-dark-muted">Where we stand</dt>
+              <dd className="mt-2 text-[0.95rem] leading-relaxed text-on-dark">{frameLabel}</dd>
+            </div>
+            <div className="border-t border-on-dark/12 bg-primary px-5 py-4">
+              <dt className="label text-on-dark-muted">What settles it</dt>
+              <dd className="mt-2 text-[0.95rem] leading-relaxed text-on-dark-muted">
+                Your roofline, measured on site. Every row below is true in general and none of
+                them is true of every house.
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      {/* ── THE SPECS ──
+        * One table, once. The old page printed the first five rows as two cards
+        * and then all fourteen again underneath. */}
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead title="Equal billing, on purpose." lede="Same card, same divider, same type color, same five specs. Neither column gets a badge, a highlight or a border the other does not." />
-          <div className="mt-10 grid gap-0 divide-y divide-border overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] lg:grid-cols-2 lg:divide-x lg:divide-y-0">
-            {[[c.a, c.costA, c.rows.slice(0, 5).map((r) => ({ spec: r.spec, v: r.a }))],
-              [c.b, c.costB, c.rows.slice(0, 5).map((r) => ({ spec: r.spec, v: r.b ?? "" }))]].map(([name, cost, specs], i) => (
-              <div key={name as string} className="p-7">
-                <div className="overflow-hidden rounded-md ring-1 ring-border">
-                  <Elevation night massing={i === 0 ? "gable" : "ranch"} lit={{ hex: "#f5c518", label: name as string }} className="block w-full" />
-                </div>
-                <h3 className="mt-6 text-2xl text-foreground">{name as string}</h3>
-                <p className="label mt-2 text-xs text-muted-foreground">{cost as string}</p>
-                <dl className="mt-5 divide-y divide-border border-y border-border">
-                  {(specs as { spec: string; v: string }[]).map((x) => (
-                    <div key={x.spec} className="flex items-baseline justify-between gap-4 py-3">
-                      <dt className="text-sm text-muted-foreground">{x.spec}</dt>
-                      <dd className="u text-right text-sm font-medium text-foreground">{x.v}</dd>
-                    </div>
-                  ))}
-                </dl>
-              </div>
-            ))}
+          <SectionHead
+            eyebrow="Line by line"
+            title={frame === "labor" ? "The job, not the datasheet." : `${c.a} against ${c.b}, spec by spec.`}
+            lede={
+              frame === "labor"
+                ? "Every row here is something that happens or does not happen on your property. None of it is about which diode is brighter."
+                : "Neither column is highlighted and neither gets a badge. Read it and decide."
+            }
+          />
+          <div className="mt-10">
+            <SpecTable
+              onDark={false}
+              caption={`${c.a} compared with ${c.b}`}
+              rows={c.rows}
+              headA={c.a}
+              headB={c.b}
+              source={
+                frame === "labor"
+                  ? "Everything in the left column is what our own crews do. The right column is what a competent DIY install involves, not a worst case."
+                  : frame === "referee"
+                  ? "Both columns are our own read from servicing these systems. Neither manufacturer has given us a datasheet, and we have not asked either of them to review this page."
+                  : `The ${c.a} column is the manufacturer's published spec. The ${c.b} column is our own read from systems we have serviced, which is worth something and is not the same as a datasheet.`
+              }
+            />
           </div>
         </div>
       </section>
 
-      {/* 3 — full spec table · bone-deep */}
+      {/* ── WHAT WE HAVE NOT VERIFIED ──
+        * The section that makes the table above trustworthy, and the one no
+        * comparison page in this category publishes. */}
+      {d?.unknowns?.length ? (
+        <section className="section bg-primary">
+          <div className="shell grid items-start gap-10 lg:grid-cols-[42fr_58fr] lg:gap-14">
+            <div>
+              <SectionHead
+                onDark
+                eyebrow="The gaps"
+                title="What we do not know about this one."
+              />
+              <p className="mt-5 text-lg leading-relaxed text-on-dark/85">
+                Every comparison page you will read on this subject is written with gaps in it. Ours has
+                them listed, because a page that appears to know everything about a competitor is a page
+                that has filled the gaps with plausible sentences.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-x-7 gap-y-2">
+                <TextLink onDark href="/compare">How all of these were judged</TextLink>
+                <TextLink onDark href="/contact">Tell us we have one wrong</TextLink>
+              </div>
+            </div>
+
+            <ul className="divide-y divide-on-dark/12 border-y border-on-dark/12">
+              {d.unknowns.map((u) => (
+                <li key={u} className="py-5 text-[1.05rem] leading-relaxed text-on-dark-muted">{u}</li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
+
+      {/* ── OUR OWN WORK, ON A PAGE ABOUT SOMEBODY ELSE'S ──
+        * A comparison page is the one place on this site where most of the nouns belong to
+        * other companies. Two photographs of installs we actually did is the only first-hand
+        * evidence on the page, and it sits before the "where each wins" section deliberately:
+        * a reader should know what we can do before they read us being fair about a rival. */}
+      <PhotoPair
+        eyebrow="Ours, for reference"
+        title="What we hand over, on two houses."
+        lede="Neither of these is a comparison. They are here because everything else on this page is a claim about hardware, and a claim about hardware is worth less than a photograph of a finished roofline."
+        a={pick(`${c.slug}-a`, 1)[0]?.photo ?? "homeShakeBrick"}
+        b={pick(`${c.slug}-b`, 1)[0]?.photo ?? "homeWideRanch"}
+        aLabel={pick(`${c.slug}-a`, 1)[0]?.caption ?? ""}
+        bLabel={pick(`${c.slug}-b`, 1)[0]?.caption ?? ""}
+        ground="background"
+      />
+
+      {/* ── WHERE EACH ACTUALLY WINS ──
+        * Equal cards. No commentary about the cards. */}
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="The specs" title="Line by line." lede="No column is highlighted here. Read it and decide." />
-          <div className="mt-10">
-            <SpecTable onDark={false} caption={`${c.a} compared with ${c.b}`} rows={c.rows} headA={c.a} headB={c.b} />
-          </div>
-        </div>
-      </section>
-
-      {/* 4 — where each wins · two equal cards · primary */}
-      <section className="section bg-primary">
-        <div className="shell">
-          <SectionHead onDark title="Where each of these actually wins." />
+          <SectionHead
+            eyebrow="Both sides"
+            title="Where each of these actually wins."
+            lede={
+              frame === "compete"
+                ? "The right-hand column is real. We stock a value tier as well as a premium one, which is what lets us give the other option honest reasons rather than token ones."
+                : frame === "labor"
+                ? "There are people who should absolutely do this themselves, and the right-hand column is written for them rather than at them."
+                : "Two products, no stake, and the deciding factor at the bottom is not either datasheet."
+            }
+          />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            {[[c.aWinsHead, c.aWins], [c.bWinsHead, c.bWins]].map(([h, list]) => (
-              <article key={h as string} className="rounded-lg bg-raise p-7 ring-1 ring-on-dark/10">
-                <h3 className="text-xl text-on-dark">{h as string}</h3>
-                <ul className="mt-5 space-y-3">
-                  {(list as string[]).map((w) => <Check key={w} onDark>{w}</Check>)}
+            {[
+              { h: c.aWinsHead, list: c.aWins, cost: c.costA, name: c.a },
+              { h: c.bWinsHead, list: c.bWins, cost: c.costB, name: c.b },
+            ].map((col) => (
+              <article key={col.h} className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)]">
+                <h3 className="font-display text-2xl font-bold leading-snug text-foreground">{col.h}</h3>
+                <p className="u mt-2 text-xs uppercase tracking-[0.08em] text-muted-foreground">
+                  {col.name} · {col.cost}
+                </p>
+                <ul className="mt-6 flex-1 space-y-3 border-t border-border pt-6">
+                  {col.list.map((w) => <Check key={w}>{w}</Check>)}
                 </ul>
               </article>
             ))}
@@ -137,92 +288,198 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* 5 — cost, full-width stat strip · charcoal */}
-      <section className="bg-raise">
-        <div className="shell py-14">
-          <SectionHead onDark eyebrow="What people actually pay" title="Ranges, not fake precision." />
-          <dl className="mt-8 grid grid-cols-2 gap-6 divide-on-dark/12 lg:grid-cols-4 lg:divide-x">
-            {[[c.costA, c.a], [c.costB, c.b], ["150 to 400", "typical linear feet, Omaha home"], ["Financing", "available on approved credit"]].map(([f, l], i) => (
-              <div key={l as string} className="lg:px-6">
-                <dt className={`u text-2xl font-medium leading-tight ${i < 2 ? "text-on-dark" : "text-accent"}`}>{f as string}</dt>
-                <dd className="mt-2 text-sm text-on-dark-muted">{l as string}</dd>
+      {/* ── THE FRAME-SPECIFIC SECTION ──
+        * compete → we carry both tiers, so we can lose honestly.
+        * referee → the deciding factor is the installer, and here is how to judge one.
+        * labor  → what a DIY install actually costs you that is not money. */}
+      {frame === "compete" && (
+        <section className="section bg-background">
+          <div className="shell grid items-start gap-10 lg:grid-cols-[48fr_52fr] lg:gap-14">
+            <div>
+              <p className="eyebrow">Why we can say this</p>
+              <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
+                We carry a cheaper one too.
+              </h2>
+              <div className="prose-body mt-6 space-y-4">
+                <p className="text-lg text-foreground">
+                  A dealer with one brand has exactly one recommendation available to them, and you can
+                  predict it before they park.
+                </p>
+                <p className="text-base text-muted-foreground">
+                  Brytr stocks a premium tier and a value tier. That is the only reason this page can give
+                  the other option real reasons to win, and it is why we will occasionally talk you down a
+                  tier — a worse day for us and a better system for you.
+                </p>
               </div>
-            ))}
-          </dl>
-          <p className="mt-8 max-w-[80ch] text-sm text-on-dark-muted">
-            Pricing on both systems is driven by linear feet of roofline, story count, roof complexity and
-            how many zones you want. That is why we measure on site instead of quoting over the phone. See{" "}
-            <Link href="/pricing" className="u text-accent underline decoration-2 underline-offset-4">full pricing</Link>.
-          </p>
-        </div>
-      </section>
-
-      {/* 6 — Brytr installs both · split · bone */}
-      <section className="section bg-background">
-        <div className="shell grid gap-10 lg:grid-cols-[52fr_48fr] lg:gap-14">
-          <div>
-            <SectionHead eyebrow="Why we can say this" title="We carry both tiers." />
-            <div className="prose-body mt-6 space-y-4">
-              <p className="text-lg text-foreground">
-                A dealer who sells one brand has exactly one recommendation available to them, and you can
-                predict it before they arrive.
-              </p>
-              <p className="text-muted-foreground">
-                Brytr stocks a premium system and a value system. That is the only reason this page can
-                give the cheaper option real reasons to win. It is also why we will occasionally talk you
-                down a tier, which is a worse day for us and a better outcome for you.
-              </p>
+              <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2">
+                <TextLink href="/lighting-systems">Both tiers, side by side</TextLink>
+                <TextLink href="/services/repairs-and-service">We service what we do not sell</TextLink>
+              </div>
             </div>
-            <div className="mt-7"><TextLink href="/lighting-systems/haven-evolution">Read the Haven Evolution review</TextLink></div>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {[
-              ["Brytr Signature", "Our premium tier, on Haven Evolution.", "/lighting-systems/brytr-signature",
-               [["LED spacing", "4 in."], ["White", "Dedicated channel"], ["Rated life", "25 years"], ["Zones", "Unlimited"]]],
-              ["Brytr Basic", "Our value tier, on Jellyfish.", "/lighting-systems/brytr-basic",
-               [["LED spacing", "Wider"], ["White", "Color mixed"], ["Rated life", "Shorter"], ["Zones", "Supported"]]],
-            ].map(([h, p2, href, specs]) => (
-              <Link key={h as string} href={href as string} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5">
-                <h3 className="text-lg text-foreground">{h as string}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{p2 as string}</p>
-                <dl className="mt-4 flex-1 divide-y divide-border border-y border-border">
-                  {(specs as [string, string][]).map(([k, v]) => (
-                    <div key={k} className="flex items-baseline justify-between gap-3 py-2.5">
-                      <dt className="text-xs text-muted-foreground">{k}</dt>
-                      <dd className="u text-xs font-medium text-foreground">{v}</dd>
-                    </div>
-                  ))}
-                </dl>
-                <p className="label mt-4 text-xs text-accent-ink">See the system</p>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* 7 — other comparisons · charcoal */}
+            <div className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+              <div className="border-b border-border bg-primary px-6 py-4">
+                <p className="label flex items-center gap-3 text-on-dark">
+                  <span className="block h-4 w-1 bg-accent" aria-hidden />
+                  What we would actually quote you
+                </p>
+              </div>
+              <ul className="divide-y divide-border">
+                {[
+                  ["A complex or two-story roofline", "Signature, on Haven Evolution.", "/lighting-systems/brytr-signature"],
+                  ["A simple single-story run", "Basic, on Jellyfish, and we will say so.", "/lighting-systems/brytr-basic"],
+                  ["A system already on the house", "Neither. We take it over and repair it.", "/services/repairs-and-service"],
+                ].map(([h, p, href]) => (
+                  <li key={h}>
+                    <Link
+                      href={href}
+                      className="group block px-6 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
+                    >
+                      <span className="block font-display text-[1.05rem] font-bold text-foreground group-hover:underline">
+                        {h}
+                      </span>
+                      <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">{p}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {frame === "referee" && (
+        <section className="section bg-background">
+          <div className="shell">
+            <SectionHead
+              eyebrow="The actual deciding factor"
+              title="On this comparison, the installer matters more than the box."
+              lede="Both of these are competent products in the same part of the market. Which one ends up better on your house is decided almost entirely by whoever fastens it there — so here is how to judge that instead."
+            />
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+              {[
+                ["Ask for a daylight photo from the curb", "Anybody can make a roofline look good at night. The test is whether you can pick the channel out at noon on a house they finished last year."],
+                ["Ask who is on the ladder", "An employee or a subcontractor. Almost every failure in this trade is workmanship, so this question is the one that predicts year four."],
+                ["Ask when the sealant goes on", "At the moment the screw is driven, or in one pass at the end of the day. Only one of those keeps water out of a fascia board."],
+                ["Ask how corners are handled", "Cut and mitered, or flexed around. A kink at a valley is visible from the street and cracks first in February."],
+                ["Ask who administers the warranty", "The installer, the manufacturer, or a franchise head office. All three are answers; not knowing is not."],
+                ["Ask what happens at handover", "Whether somebody walks the scenes with you, or hands you an app and drives off."],
+              ].map(([h, p]) => (
+                <li key={h} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+                  <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{h}</h3>
+                  <p className="mt-2.5 text-[0.95rem] leading-relaxed text-muted-foreground">{p}</p>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 max-w-[80ch] text-sm leading-relaxed text-muted-foreground">
+              Ask us the same six. We would rather be judged on them than on which brand is in our van.
+            </p>
+          </div>
+        </section>
+      )}
+
+      {frame === "labor" && (
+        <section className="section bg-background">
+          <div className="shell grid items-start gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
+            <div>
+              <p className="eyebrow">The part that is not money</p>
+              <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
+                What a DIY install actually costs.
+              </h2>
+              <div className="prose-body mt-6 space-y-4">
+                <p className="text-lg text-foreground">
+                  We are not going to pretend a consumer kit is worthless. It is a fraction of the price
+                  and there are people who will fit one well and be pleased with it for years.
+                </p>
+                <p className="text-base text-muted-foreground">
+                  What the price does not include is the list on the right. Every item on it is something
+                  we get called out to fix on somebody else&rsquo;s weekend project, which makes it an
+                  honest list and a biased one at the same time.
+                </p>
+              </div>
+              <div className="mt-7">
+                <TextLink href="/services/repairs-and-service">What we charge to put one right</TextLink>
+              </div>
+            </div>
+
+            <ul className="divide-y divide-border border-y border-border">
+              {[
+                ["A weekend at roof height", "Two days on a ladder for most homes, and the second day is the one where people get careless."],
+                ["Holes you drilled yourself", "Every fixing is a penetration in your own fascia. Sealing them properly is the difference between a project and a leak."],
+                ["It shows in daylight", "Consumer channel is not color matched to your trim, and adhesive mounts sit proud of the board. This is the part people regret."],
+                ["Corners", "There is no miter saw in the box. Every gable and valley is a bend, and bends are where a run cracks."],
+                ["No number to ring", "A dead section in December is your problem, in the dark, on a ladder, at height, in ice."],
+                ["It reads as a gadget", "At resale, a permanent lighting system reads as a building feature. A strip on adhesive mounts does not."],
+              ].map(([h, p]) => (
+                <li key={h} className="py-5">
+                  <h3 className="font-display text-[1.05rem] font-bold text-foreground">{h}</h3>
+                  <p className="mt-1.5 text-[0.95rem] leading-relaxed text-muted-foreground">{p}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* ── TWO MORE, CHOSEN ── */}
       <section className="section bg-raise">
-        <div className="shell">
-          <SectionHead onDark title="The rest of the head to heads." />
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {others.map((o) => (
-              <Link key={o.slug} href={`/compare/${o.slug}`} className="rounded-lg bg-primary p-5 ring-1 ring-on-dark/10 transition-all duration-[--dur-base] hover:-translate-y-0.5 hover:ring-accent/40">
-                <h3 className="text-base text-on-dark">{o.a} vs {o.b}</h3>
-                <p className="mt-2 text-sm text-on-dark-muted">{shortVerdict(o.verdict)}</p>
-              </Link>
-            ))}
-            <Link href="/compare" className="flex flex-col justify-center rounded-lg bg-raise p-5 ring-1 ring-accent/25 transition-all duration-[--dur-base] hover:-translate-y-0.5 hover:ring-accent/60">
-              <h3 className="text-base text-on-dark">Every brand, one table</h3>
-              <p className="mt-2 text-sm text-on-dark-muted">
-                The whole Omaha market side by side, including where our premium system loses.
-              </p>
-              <p className="label mt-4 text-xs text-accent">Open the matrix</p>
-            </Link>
+        <div className="shell grid items-start gap-10 lg:grid-cols-[38fr_62fr] lg:gap-14">
+          <div>
+            <SectionHead onDark eyebrow="Read next" title="What most people read after this one." />
+            <p className="mt-5 text-[1.05rem] leading-relaxed text-on-dark-muted">
+              Chosen, in order, rather than the other eight comparisons printed at the bottom of all nine
+              pages.
+            </p>
+            <div className="mt-7">
+              <TextLink onDark href="/compare">The whole market in one table</TextLink>
+            </div>
           </div>
+
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {alsoSee.map((o) => (
+              <li key={o.slug}>
+                <Link
+                  href={`/compare/${o.slug}`}
+                  className="flex h-full flex-col rounded-lg bg-primary p-6 ring-1 ring-on-dark/10 transition-all duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5 hover:ring-accent/40"
+                >
+                  <span className="font-display text-[1.05rem] font-bold leading-snug text-on-dark">
+                    {o.a} against {o.b}
+                  </span>
+                  <span className="mt-2.5 flex-1 text-sm leading-relaxed text-on-dark-muted">
+                    {gist(o.verdict)}
+                  </span>
+                  {/* Neutral pages get a neutral label. Putting our accent on a card about two
+                    * rivals is the brand colour taking a side on the one page that says it has
+                    * not got one. */}
+                  <span
+                    className={`label mt-4 border-t border-on-dark/12 pt-3 ${
+                      o.neutral ? "text-on-dark-muted" : "text-accent"
+                    }`}
+                  >
+                    {o.neutral ? "We have no stake in this one" : o.labor ? "Labor, not brand" : "Read it"}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
-      <PageCta />
+      {/* On the refereeing page we are not selling, so the closer does not carry a form. */}
+      {frame === "referee" ? (
+        <PageCta
+          variant="phone"
+          title="We will tell you which of the two to buy."
+          body="Free, on the phone, with no version of the answer that benefits us. We install neither of these as our premium tier and we will service whichever one you end up with."
+          omit={["/compare"]}
+          panelLink={{ href: "/services/repairs-and-service", label: "Service and takeovers" }}
+        />
+      ) : (
+        /* The two branches are a ternary, not two closers — a neutral comparison closes on the
+          * phone variant, one we sell into closes on the form. Both take the default muted ground,
+          * which alternates against the bg-raise section above. */
+        <PageCta omit={["/compare"]} />
+      )}
     </Shell>
   );
 }
