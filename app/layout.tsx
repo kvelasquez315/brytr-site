@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { reviewProof } from "@/content/reviews";
 import localFont from "next/font/local";
 import "./globals.css";
 /* Section-level CSS, imported after the brand lock so its @layer components rules join
@@ -32,8 +33,9 @@ export const metadata: Metadata = {
     default: "Permanent Outdoor Lighting in Omaha, NE | Brytr Co",
     template: "%s | Brytr Co",
   },
-  description:
-    "Permanent outdoor lighting installed once for Omaha homes. Smart app control, every color, every holiday. 177 five star reviews. Free design consultation.",
+  /* The review count comes from content/reviews.ts. It was hardcoded here as 177 while the
+   * Google Business Profile said 196, on the site's default description. */
+  description: `Permanent outdoor lighting installed once for Omaha homes. Smart app control, every color, every holiday. ${reviewProof.average} from ${reviewProof.count} ${reviewProof.platform} reviews. Free design consultation.`,
   openGraph: { type: "website", locale: "en_US", siteName: "Brytr Co" },
   robots: { index: true, follow: true },
 };
