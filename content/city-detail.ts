@@ -5,7 +5,7 @@
  * same drawn ranch elevation.
  *
  * Everything else on a city page comes from real per-city data in content/cities.ts — drive
- * time, tier, actual subdivision names, actual neighbouring towns. The one thing that file
+ * time, tier, actual subdivision names, actual neighboring towns. The one thing that file
  * cannot hold is a picture, so it lives here, one per slug, no shot used twice.
  *
  * THE HONEST PART. Every photograph in the archive was taken on an install in the Omaha
@@ -90,7 +90,7 @@ export const cityPhotos: Record<string, CityPhoto> = {
   /* outstate */
   lincoln: {
     photo: "/img/hero-warm-white.jpg",
-    photoAlt: "An Omaha home with Brytr permanent lighting set to everyday warm white",
+    photoAlt: "An Omaha home with every Brytr roofline run set to the same soft pink",
     objectPosition: "50% 60%",
   },
   fremont: {
