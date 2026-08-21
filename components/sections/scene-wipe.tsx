@@ -7,21 +7,27 @@ import { Elevation } from "./elevation";
 
 /* THE SIGNATURE: The Dusk Line — now its own full-width section.
  *
- * One draggable amber line. Left of it the roofline is on everyday warm white; right of
- * it the same roofline is on a saved color scene. Both halves are the SAME photograph of
- * the SAME house two minutes apart, registered to the pixel — which is the whole product
- * argument in one gesture. It used to sit in the hero as a card, which put a widget where
- * the hero photograph belonged. If either photo is missing the handle wipes the two drawn
- * states instead. */
+ * One draggable amber line. Both halves are the SAME house from the SAME camera position on
+ * the same evening, registered so the handle wipes one into the other — which is the whole
+ * product argument in one gesture. It used to sit in the hero as a card, which put a widget
+ * where the hero photograph belonged. If either photo is missing the handle wipes the two
+ * drawn states instead.
+ *
+ * The left half is genuinely the everyday setting again. It briefly was not: the pair used
+ * to be hero-warm-white.jpg against hero-game-day.jpg, and the first of those is a soft pink
+ * rather than warm white, so this section was captioning the wrong colour of light as the
+ * default. See the note on the hero pair in content/images.ts — the pool-deck shoot turned
+ * out to be one property photographed in both states, which is what this device needed all
+ * along. */
 
 const warmSpecs = [
-  ["Everyday scene", "Warm white, 100%"],
+  ["Everyday scene", "Warm white, roofline and grounds"],
   ["Channel finish", "Matched to fascia"],
   ["Schedule", "Dusk to 11:00 pm"],
 ];
 const sceneSpecs = [
-  ["Saved scene", "Red and blue, 80%"],
-  ["LED spacing", "4 in., addressable"],
+  ["Saved scene", "One color, every run"],
+  ["Zones on it", "House, pergola, walls and deck"],
   ["Switch time", "One tap, no ladder"],
 ];
 
@@ -66,7 +72,7 @@ export function SceneWipe() {
           onDark
           eyebrow="One house, two taps"
           title="The same roofline, on a Tuesday and on a Saturday."
-          lede="Drag the line. Both halves are the same photograph of the same Omaha home, taken two minutes apart — warm white on the left, a saved game day scene on the right. Nothing was recolored."
+          lede="Drag the line. Both halves are the same Omaha property from the same camera position on the same evening — the everyday warm white on the left, a saved color scene on the right. Nothing was recolored and nothing was rewired between the two. That is the same channel on the same fascia, one tap apart, and it is the reason nobody in this house owns a ladder in January."
         />
 
         <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_20rem]">
@@ -77,7 +83,7 @@ export function SceneWipe() {
               </span>
               <span className="label text-on-dark-muted">Drag the line</span>
               <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-accent" : "text-on-dark-muted"}`}>
-                Game day
+                One color
               </span>
             </div>
 
@@ -101,7 +107,7 @@ export function SceneWipe() {
                 </>
               ) : (
                 <>
-                  <Elevation night massing="gable" lit={{ hex: "#f5c518", label:"warm white" }} className="block w-full" />
+                  <Elevation night massing="gable" lit={{ label: "warm white" }} className="block w-full" />
                   <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - pct}% 0 0)` }} aria-hidden>
                     <Elevation massing="gable" className="block w-full" />
                   </div>
@@ -113,11 +119,11 @@ export function SceneWipe() {
               <button
                 data-dusk
                 role="slider"
-                aria-label="Drag to switch the roofline between warm white and a game day scene"
+                aria-label="Drag to switch the roofline between everyday warm white and a saved color scene"
                 aria-valuemin={6}
                 aria-valuemax={94}
                 aria-valuenow={Math.round(pct)}
-                aria-valuetext={mostlyScene ? "Mostly game day" : "Mostly warm white"}
+                aria-valuetext={mostlyScene ? "Mostly the saved color scene" : "Mostly everyday warm white"}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowLeft") { e.preventDefault(); setPct((v) => Math.max(6, v - 5)); }
                   if (e.key === "ArrowRight") { e.preventDefault(); setPct((v) => Math.min(94, v + 5)); }
@@ -138,7 +144,7 @@ export function SceneWipe() {
               {mostlyScene ? "Saved scene" : "Everyday setting"}
             </p>
             <h3 className="mt-3 text-xl text-on-dark">
-              {mostlyScene ? "Game day, red and blue" : "Warm white, every night"}
+              {mostlyScene ? "One color, the whole property" : "Warm white, every night"}
             </h3>
             <dl className="mt-6 divide-y divide-on-dark/10 border-y border-on-dark/10">
               {(mostlyScene ? sceneSpecs : warmSpecs).map(([k, v]) => (
