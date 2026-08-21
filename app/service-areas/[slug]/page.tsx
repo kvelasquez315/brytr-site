@@ -64,16 +64,16 @@ const minutes = (drive: string) => {
   return (h ? parseInt(h[1], 10) * 60 : 0) + (m ? parseInt(m[1], 10) : 0);
 };
 
-/* Four services per band rather than all eleven on all eighteen pages. Chosen for what the
- * band actually asks for: the metro is roofline-and-whole-home country, over the river the
- * hardscape and takeover work comes up more, and on a route day the repairs fill the gaps
- * between installs. */
+/* Four services per band rather than every one of them on all eighteen pages. Chosen for
+ * what the band actually asks for: the metro is roofline-and-whole-home country, over the
+ * river the hardscape work comes up more, and out on a route day the whole-home jobs are
+ * what makes the drive worth scheduling. */
 const servicesFor = (tier: string) =>
   tier === "metro"
     ? ["permanent-outdoor-lighting", "permanent-roofline-lighting", "permanent-christmas-lights", "landscape-lighting"]
     : tier === "iowa"
-    ? ["permanent-roofline-lighting", "permanent-christmas-lights", "hardscape-lighting", "repairs-and-service"]
-    : ["permanent-outdoor-lighting", "permanent-christmas-lights", "landscape-lighting", "repairs-and-service"];
+    ? ["permanent-roofline-lighting", "permanent-christmas-lights", "hardscape-lighting", "landscape-lighting"]
+    : ["permanent-outdoor-lighting", "permanent-christmas-lights", "landscape-lighting", "permanent-roofline-lighting"];
 
 export default async function CityPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
@@ -281,7 +281,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <ul className="divide-y divide-border border-y border-border">
                   {[
                     ["The same crews", "Not a partner and not a subcontractor on the Iowa side. The people who installed in Dundee last week are the people who install in Manawa this week."],
-                    ["The same materials", "Both tiers, both channel finishes, the same controllers. Nothing is substituted because of a state line."],
+                    ["The same materials", "The same hardware, the same channel finishes, the same controllers. Nothing is substituted because of a state line."],
                     ["The same warranty", "Manufacturer terms on the hardware and ours on the workmanship, written on the quote exactly as they are in Nebraska."],
                     ["No border premium", "Per-foot pricing, and the bridge is not a line item. Anybody quoting a river surcharge is quoting you for their own inconvenience."],
                     ["The covenant paperwork", "Iowa associations word things differently from west Omaha ones. We pull yours and read it either way."],
@@ -339,7 +339,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   ["What it means for your date", "We hold a window rather than a day until there is enough work out here to fill it, then it firms up and we ring you. That wait is the honest cost of not being charged for the drive."],
                   ["What it does not change", "The crew, the method, the sealing, the mitered corners, the curb check and the scene walk at dusk. Identical to a metro job, because it is the same two people."],
                   ["What it means for a service call", "Scheduled onto the next route rather than same-week. If something is genuinely urgent we will tell you honestly whether that is days or a fortnight."],
-                  ["Why we still do it", `There is nobody out here carrying two tiers, so the alternative for a ${c.name} homeowner is one brand and one price. That is worth a drive.`],
+                  ["Why we still do it", `There is nobody out here carrying more than one brand, so the alternative for a ${c.name} homeowner is one brand and one price. That is worth a drive.`],
                 ].map(([h, p]) => (
                   <li key={h} className="py-5">
                     <h3 className="font-display text-[1.05rem] font-bold text-foreground">{h}</h3>
@@ -588,7 +588,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                     * reader actually wants from a glance card is what the visit costs and how soon. */
                   ["The measure", "Free, on site, after dark"],
                   ["Written quote", "Yours to keep"],
-                  ["Systems carried", "Signature and Basic"],
+                  ["Systems carried", "Haven and Jellyfish"],
                   ["Travel charge", "None"],
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-4 py-3">
@@ -603,7 +603,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   : "A service call in this band gets scheduled inside the week."}
               </p>
               <div className="mt-auto border-t border-on-dark/12 pt-4">
-                <TextLink onDark href="/services/repairs-and-service">Service and takeovers</TextLink>
+                <TextLink onDark href="/warranty">What the warranty covers</TextLink>
               </div>
             </div>
           </div>
