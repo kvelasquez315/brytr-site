@@ -2,7 +2,7 @@
  *
  * Classes that belong to one section or one page, kept out of globals.css so the brand
  * lock stays readable. Same rules apply here: hex is allowed in this file and nowhere in a
- * component, every colour comes from a token where a token exists, and every rule says
+ * component, every color comes from a token where a token exists, and every rule says
  * what it is for.
  */
 
@@ -29,7 +29,7 @@
   }
 
   /* SCENE BARS — the twelve-month strip on /services/permanent-christmas-lights.
-   * These are PRODUCT colours, not brand colours: what the diodes are actually set to on
+   * These are PRODUCT colors, not brand colors: what the diodes are actually set to on
    * that scene. They live here because no hex may appear in a component, and they are
    * deliberately not tokens — the brand palette is amber and night, and a Halloween
    * violet is neither. */
