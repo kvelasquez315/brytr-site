@@ -39,7 +39,7 @@ const havenRows = (bName: string, b: Partial<Record<string, string>>): Row[] => 
 export const compares: Compare[] = [
   {
     slug: "haven-vs-jellyfish-lighting",
-    title: "Haven Evolution vs Jellyfish Lighting | Brytr Co",
+    title: "Haven Evolution vs Jellyfish Lighting",
     h1: "Haven Evolution versus Jellyfish, compared by an installer who sells both.",
     keyword: "haven lighting vs jellyfish",
     a: "Haven Evolution", b: "Jellyfish Lighting",
@@ -64,7 +64,7 @@ export const compares: Compare[] = [
   },
   {
     slug: "haven-vs-gemstone-lights",
-    title: "Haven Evolution vs Gemstone Lights | Brytr Co",
+    title: "Haven Evolution vs Gemstone Lights",
     h1: "Haven Evolution versus Gemstone Lights.",
     keyword: "gemstone lights",
     volume: "1,900/mo",
@@ -80,7 +80,7 @@ export const compares: Compare[] = [
   },
   {
     slug: "haven-vs-trimlight",
-    title: "Haven Evolution vs Trimlight | Brytr Co",
+    title: "Haven Evolution vs Trimlight",
     h1: "Haven Evolution versus Trimlight.",
     keyword: "trimlight",
     volume: "1,700/mo",
@@ -96,7 +96,7 @@ export const compares: Compare[] = [
   },
   {
     slug: "haven-vs-oelo",
-    title: "Haven Evolution vs Oelo Lighting | Brytr Co",
+    title: "Haven Evolution vs Oelo Lighting",
     h1: "Haven Evolution versus Oelo.",
     keyword: "oelo lighting",
     a: "Haven Evolution", b: "Oelo",
@@ -151,7 +151,7 @@ export const compares: Compare[] = [
   },
   {
     slug: "haven-vs-minleon-rainmin",
-    title: "Haven Evolution vs Minleon and Rainmin | Brytr Co",
+    title: "Haven Evolution vs Minleon and Rainmin",
     h1: "Haven Evolution versus Minleon and Rainmin.",
     keyword: "minleon",
     volume: "350/mo",
@@ -202,7 +202,7 @@ export const compares: Compare[] = [
   },
   {
     slug: "haven-vs-everlights",
-    title: "Haven Evolution vs EverLights | Brytr Co",
+    title: "Haven Evolution vs EverLights",
     h1: "Haven Evolution versus EverLights.",
     keyword: "everlights permanent lighting",
     a: "Haven Evolution", b: "EverLights",
