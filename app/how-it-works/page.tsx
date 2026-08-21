@@ -238,8 +238,8 @@ export default function HowItWorks() {
           </div>
 
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            The right-hand column describes practices we have been called out to fix on other
-            people&rsquo;s installs. It is not a claim about any particular company.
+            The right-hand column describes practices that are common in this trade and that we have
+            chosen not to use. It is not a claim about any particular company.
           </p>
         </div>
       </section>
@@ -265,7 +265,7 @@ export default function HowItWorks() {
               <ul className="mt-6 flex-1 divide-y divide-on-dark/10 border-y border-on-dark/10">
                 {[
                   ["The consultation", "About an hour, after dark, no charge and nothing to sign. It has its own page because it is the part people ask about most."],
-                  ["The written quote", "One number for the whole scope, itemized by elevation, tier and zone, unchanged on install day."],
+                  ["The written quote", "One number for the whole scope, itemized by elevation, hardware and zone, unchanged on install day."],
                   ["The covenant submission", "Pulled, read and filed by us, before we schedule anything, if your neighborhood needs it."],
                 ].map(([h, p]) => (
                   <li key={h} className="py-4">
@@ -297,8 +297,7 @@ export default function HowItWorks() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6 flex flex-wrap gap-x-7 gap-y-2">
-                <TextLink onDark href="/services/repairs-and-service">Repairs and service</TextLink>
+              <div className="mt-6">
                 <TextLink onDark href="/warranty">The warranty terms</TextLink>
               </div>
             </article>
