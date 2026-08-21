@@ -87,13 +87,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
     { name: s.name, href: `/services/${s.slug}` },
   ];
 
-  /* The hero photograph is THIS service's own shot wherever the archive has one, so eleven
-   * pages open on eleven different houses rather than on one stock hero. Commercial and
-   * repairs have no photograph of their own yet — they borrow the closest real thing and
-   * are on the shot list. */
+  /* The hero photograph is THIS service's own shot wherever the archive has one, so every
+   * page opens on a different house rather than on one stock hero. Commercial has no
+   * photograph of its own yet, so it borrows the closest real thing and is on the shot
+   * list. */
   const heroFallback: Record<string, string> = {
     "commercial-outdoor-lighting": "/img/g-pool-blue.jpg",
-    "repairs-and-service": "/img/channel-detail.jpg",
     "holiday-seasonal-scenes": "/img/scene-halloween.jpg",
     "gameday-lighting": "/img/scene-husker-red.jpg",
   };
@@ -219,10 +218,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           /* THE LEDE IS PER-SERVICE, and it had to become per-service for two reasons.
            *
            * It used to read "Photographed on nights these were already running, rather than lit
-           * for a camera" — a template constant, on eleven pages. On the repairs page all three
-           * photographs are broad daylight and their own captions say so ("A daytime call", "What
-           * a correct run looks like at noon"), so the section was calling its own images liars.
-           * A provenance claim cannot be hard-coded above a set of photographs that varies.
+           * for a camera" — a template constant, on every service page. Several services carry
+           * daylight frames whose own captions say so, so the section was calling its own images
+           * liars. A provenance claim cannot be hard-coded above a set of photographs that
+           * varies.
            *
            * And it was one more string-for-string identical line in a template that already had
            * six of them. `proofCaption` is written per service and was sitting in a section further
