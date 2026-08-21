@@ -230,6 +230,39 @@ Caught and corrected, in order:
 Test before shipping a section: **count the pieces, then count the pieces the reference has.** If
 ours is fuller only because our elements are larger, it is not fuller.
 
+### The icon language (second generation)
+
+The first set was hand-drawn, had no lucide in it, and still read as templated — the client
+called it, and a contact sheet made it obvious why:
+
+1. A third of it was the standard icon vocabulary: clock, shield, eye, lightning bolt, credit
+   card, clipboard, stacked squares. Drawing a clock yourself does not make the clock yours.
+2. Another third were abstractions that collapsed into each other — four different "three
+   horizontal bars, one amber" marks meaning install count, two tiers, hardscape and fascia
+   mounting, indistinguishable at 24px.
+3. Not enough detail to survive at the size they were used.
+
+The rules the set is drawn to now:
+
+- **Every icon is a physical object from this trade.** Fascia board, channel section, gable,
+  path light, wall course, reel of channel, service van, hard hat, tape measure, ladder,
+  storefront parapet. Where a concept has no object — scheduling, verification, financing —
+  draw the moment it happens to a house instead.
+- **Amber appears ONLY where light comes out.** The lit diode, the wash on a wall, the glow
+  under a soffit. Never a decorative accent, never a container, never a tick. This single rule
+  is what makes thirty-four drawings read as one set.
+- **Solid bodies at two ink weights** (0.85 near, 0.45 far) so each icon has depth instead of
+  being an outline. No thin-line glyphs anywhere.
+- **Shared primitives** (`Gable`, `Wall`, `Run`, `Section`) so the geometry is literally the
+  same geometry across the set.
+- **Distinct silhouettes** — checked on a contact sheet at 24px, 48px and in the channel tile.
+- **Size matters as much as drawing.** A 24px icon floating next to a heading reads as a stock
+  glyph no matter how it was drawn. Anything leading a card or a row goes in the channel tile
+  at 40–48px; bare use is for inline list marks only.
+
+Known weak spot to revisit: `IcHoaPaperwork` is still a document, because a covenant is a
+document. It is the one icon in the set that could belong to another industry.
+
 ### Proof, and the numbers behind it
 
 Review text is now real (`content/reviews.ts`) and the source of every line is recorded in that

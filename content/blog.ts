@@ -117,7 +117,7 @@ export const posts: Post[] = [
     body: [
       { p: "Covenant language on permanent exterior lighting is newer than the product, which means a lot of associations are working out their position as applications arrive. That is good news: a well-presented submission usually gets approved." },
       { h: "What boards actually object to" },
-      { list: ["Visible hardware in daylight, which is a design question and answerable with a daytime photo", "Color changing displays running year round, which a scheduling commitment resolves", "Brightness spilling onto neighbouring lots, which zoning and aiming resolves", "Non-matching channel finishes, which color matching resolves"] },
+      { list: ["Visible hardware in daylight, which is a design question and answerable with a daytime photo", "Color changing displays running year round, which a scheduling commitment resolves", "Brightness spilling onto neighboring lots, which zoning and aiming resolves", "Non-matching channel finishes, which color matching resolves"] },
       { h: "How the submission goes" },
       { p: "We pull your covenant and read the lighting clause, put together a spec sheet and a rendering of your elevation in the format your board wants, and submit it. Nothing is mounted before the approval comes back. Typically two weeks." },
       { callout: "Worth knowing: an approval is much easier to get with a daylight photograph of a finished install than with a night photograph. Boards are worried about how it looks at noon, not at midnight." },

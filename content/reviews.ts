@@ -6,11 +6,17 @@
  * "135+" and their Instagram says "170+"; the profile is the live number, so it is the
  * one we publish. It only ever goes up — check the profile before quoting it in an ad.)
  *
- * Source of the quoted text: five of these are the testimonials Brytr already publishes
- * on brytrco.com, verbatim. Two are from the profile itself, quoted verbatim from the
- * start of the review, with the reviewer's name as Google shows it and the age Google
- * shows. Nothing is paraphrased, tidied, or lengthened. If a review is edited or removed
- * by its author, delete it from this file.
+ * Source of the quoted text: most of these are the testimonials Brytr already publishes on
+ * brytrco.com, verbatim. The rest are from the Google profile itself, quoted verbatim from
+ * the start of the review, with the reviewer's name as Google shows it and the age Google
+ * shows. Nothing is paraphrased, tidied, or lengthened. If a review is edited or removed by
+ * its author, delete it from this file.
+ *
+ * TO CONFIRM WITH BRYTR: this note used to say "five" published and "two" from the profile,
+ * which is seven, and there are six reviews here. Whoever assembled the array knows which is
+ * which; nobody reading the file afterwards does. Only Meghan Gibbons carries a Google age,
+ * so she is certainly one of the profile ones. Rather than guess the split, the page no longer
+ * states it. Get the per-review provenance from Brytr and record it here as a field.
  *
  * RULE, unchanged: never write a testimonial. An invented review is a trust problem and
  * an FTC problem, and this section renders a designed proof layout when the array is

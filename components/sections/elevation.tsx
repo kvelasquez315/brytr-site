@@ -10,7 +10,10 @@
  * a single-story ranch, and a two-story with a garage wing. Linear feet changes with it.
  */
 
-export type Lit = { hex: string; label: string };
+/* `hex` is optional so a caller that just wants the default lit state does not have to
+ * restate the hex, which is the only way an inline colour was reaching a component from
+ * outside globals.css / sections.css. The fallback below is the single source of it. */
+export type Lit = { hex?: string; label: string };
 export type Massing = "gable" | "ranch" | "wing";
 
 type Geo = {
@@ -73,15 +76,20 @@ export function Elevation({
   massing?: Massing;
   className?: string;
 }) {
-  const glow = lit?.hex ?? "#f5c518";
+  const glow = lit?.hex ?? "var(--brand-accent)";
   const g = GEO[massing];
-  const line = night ? "#4c5866" : "#8d8574";
-  const faint = night ? "#2a3542" : "#c9c1b0";
-  const paper = night ? "#101823" : "#efeae0";
-  const mass = night ? "#18212c" : "#e4ded0";
-  const ink = night ? "#a9b4c0" : "#5f5949";
+  const line = night ? "var(--draw-line-night)" : "var(--draw-line-day)";
+  const faint = night ? "var(--draw-faint-night)" : "var(--draw-faint-day)";
+  const paper = night ? "var(--draw-paper-night)" : "var(--draw-paper-day)";
+  const mass = night ? "var(--draw-mass-night)" : "var(--draw-mass-day)";
+  const ink = night ? "var(--draw-ink-night)" : "var(--draw-ink-day)";
   const runs = [g.roof, g.second].filter(Boolean) as string[];
-  const uid = `${massing}-${glow.slice(1)}`;
+  /* The gradient needs a unique id per rendered instance, and this used to be built by slicing
+   * the "#" off the hex — `glow.slice(1)`. Now that `glow` is a var() reference that produced
+   * "ar(--brand-accent)", which is not a legal id fragment, so every night elevation on a page
+   * would have referenced a broken url(#…) and lost its window glow. Derived from the inputs and
+   * stripped to word characters instead. */
+  const uid = `${massing}-${(lit?.label ?? "warm").toLowerCase().replace(/[^a-z0-9]+/g, "")}`;
 
   return (
     <svg viewBox="0 0 640 400" className={className} role="img"
@@ -122,7 +130,7 @@ export function Elevation({
       {/* front gable or garage wing */}
       {g.gable && (
         <>
-          <path d={g.gable} fill={night ? "#1d2836" : "#e9e3d6"} stroke={line} strokeWidth="1.5" />
+          <path d={g.gable} fill={night ? "var(--draw-gable-night)" : "var(--draw-gable-day)"} stroke={line} strokeWidth="1.5" />
           {g.gableRoof && <path d={g.gableRoof} fill="none" stroke={line} strokeWidth="1.5" />}
         </>
       )}
@@ -131,29 +139,29 @@ export function Elevation({
           outward — a window does not read as a spotlight in elevation. */}
       {g.windows.map(([x, y]) => (
         <g key={`${x}-${y}`}>
-          <rect x={x} y={y} width="32" height="46" fill={night ? "#f0d59a" : "#aeb7c0"} opacity={night ? 0.5 : 0.42} />
+          <rect x={x} y={y} width="32" height="46" fill={night ? "var(--draw-glazing-night)" : "var(--draw-glazing-day)"} opacity={night ? 0.5 : 0.42} />
           <rect x={x} y={y} width="32" height="46" fill="none" stroke={line} strokeWidth="1.25" />
           <line x1={x + 16} y1={y} x2={x + 16} y2={y + 46} stroke={line} strokeWidth="0.75" />
           <line x1={x} y1={y + 23} x2={x + 32} y2={y + 23} stroke={line} strokeWidth="0.75" />
         </g>
       ))}
-      <rect x={g.door[0]} y={g.door[1]} width="44" height={362 - g.door[1]} fill={night ? "#243040" : "#cfc7b5"} stroke={line} strokeWidth="1.25" />
-      <rect x={g.door[0] + 8} y={g.door[1] + 10} width="28" height="22" fill={night ? "#f0d59a" : "#aeb7c0"} opacity={night ? 0.45 : 0.35} stroke={line} strokeWidth="0.75" />
+      <rect x={g.door[0]} y={g.door[1]} width="44" height={362 - g.door[1]} fill={night ? "var(--draw-door-night)" : "var(--draw-door-day)"} stroke={line} strokeWidth="1.25" />
+      <rect x={g.door[0] + 8} y={g.door[1] + 10} width="28" height="22" fill={night ? "var(--draw-glazing-night)" : "var(--draw-glazing-day)"} opacity={night ? 0.45 : 0.35} stroke={line} strokeWidth="0.75" />
 
       {g.chimney && (
         <>
-          <rect x={g.chimney[0]} y={g.chimney[1]} width="34" height="46" fill={night ? "#1a222d" : "#ddd6c6"} stroke={line} strokeWidth="1.25" />
-          <rect x={g.chimney[0] - 4} y={g.chimney[1] - 6} width="42" height="8" fill={night ? "#232d3a" : "#cec6b4"} stroke={line} strokeWidth="1" />
+          <rect x={g.chimney[0]} y={g.chimney[1]} width="34" height="46" fill={night ? "var(--draw-stack-night)" : "var(--draw-stack-day)"} stroke={line} strokeWidth="1.25" />
+          <rect x={g.chimney[0] - 4} y={g.chimney[1] - 6} width="42" height="8" fill={night ? "var(--draw-cap-night)" : "var(--draw-cap-day)"} stroke={line} strokeWidth="1" />
         </>
       )}
 
-      {/* ── THE CHANNEL ──────────────────────────────────────────
+      {/* ── THE CHANNEL ──
           A continuous line of light, not a row of dots. Dots read as a string of
           Christmas bulbs, which is the exact thing this product is not. */}
       {runs.map((d, i) => (
         <g key={i}>
-          <path d={d} fill="none" stroke={night ? "#3b4653" : "#9c9483"} strokeWidth="6" strokeLinecap="round" />
-          <path d={d} fill="none" stroke={night ? "#4d596a" : "#b3ab99"} strokeWidth="1" strokeLinecap="round" />
+          <path d={d} fill="none" stroke={night ? "var(--draw-run-night)" : "var(--draw-run-day)"} strokeWidth="6" strokeLinecap="round" />
+          <path d={d} fill="none" stroke={night ? "var(--draw-runline-night)" : "var(--draw-runline-day)"} strokeWidth="1" strokeLinecap="round" />
           {night && (
             <>
               <path d={d} fill="none" stroke={glow} strokeWidth="12" strokeLinecap="round" opacity="0.15" />
