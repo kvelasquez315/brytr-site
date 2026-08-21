@@ -29,7 +29,7 @@ import { Jsonld, breadcrumb, serviceSchema, faqSchema } from "@/lib/schema";
  * Everything that should differ now comes from content/service-detail.ts:
  *   · the facts panel is written for the service, and is true of it
  *   · what is in the quote is that service's list, with no step numbers
- *   · the CENTREPIECE is unique to the service — the eave in section on roofline, beam
+ *   · the CENTERPIECE is unique to the service — the eave in section on roofline, beam
  *     angle against overhang depth on soffit, a wall in section on hardscape, the year as
  *     a calendar on Christmas, Saturday beside Sunday on gameday
  *   · the hanging-lights comparison only appears where it is an honest comparison
@@ -124,17 +124,15 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         }
       />
 
-      {/* ── WHAT IT IS, AND THE FACTS THAT ONLY APPLY TO IT ─────────────── */}
+      {/* ── WHAT IT IS, AND THE FACTS THAT ONLY APPLY TO IT ── */}
       <section className="section bg-background">
         <div className="shell grid gap-10 lg:grid-cols-[58fr_42fr] lg:gap-14">
           <div>
             <SectionHead title={`What ${s.name.toLowerCase()} actually is.`} />
             <div className="prose-body mt-6 space-y-4">
               <p className="text-lg text-foreground">{s.lede}</p>
-              <p className="text-base text-muted-foreground">
-                It is installed once, by our own crew, and it stays on the building. Nothing goes up
-                in November and nothing comes down in January.
-              </p>
+              {/* Per-service now. See the comment on ServiceDetail.secondPara. */}
+              <p className="text-base text-muted-foreground">{d?.secondPara}</p>
             </div>
             <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
               {s.includes.map((i) => <Check key={i}>{i}</Check>)}
@@ -154,7 +152,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* ── THE CENTREPIECE ────────────────────────────────────────────────
+      {/* ── THE CENTERPIECE ──
         * One per service, and no two services share one. */}
       {d && (
         <section className="section bg-raise">
@@ -164,7 +162,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </section>
       )}
 
-      {/* ── WHAT IS IN THE QUOTE ───────────────────────────────────────── */}
+      {/* ── WHAT IS IN THE QUOTE ── */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
@@ -194,7 +192,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* ── THE COMPARISON, WHERE IT IS HONEST ─────────────────────────── */}
+      {/* ── THE COMPARISON, WHERE IT IS HONEST ── */}
       {d?.compare && (
         <section className="section bg-background">
           <div className="shell">
@@ -218,7 +216,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </section>
       )}
 
-      {/* ── THE PROOF SHOT ─────────────────────────────────────────────────
+      {/* ── THE PROOF SHOT ──
         * A real photograph of THIS service, so the eleven pages do not all
         * close on the same house. */}
       {d?.proofShot && (
@@ -244,7 +242,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </section>
       )}
 
-      {/* ── WHAT PEOPLE LOOK AT NEXT ───────────────────────────────────── */}
+      {/* ── WHAT PEOPLE LOOK AT NEXT ── */}
       <section className="section bg-background">
         <div className="shell">
           <SectionHead title="What people look at next." />
@@ -276,12 +274,19 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* ── QUESTIONS ──────────────────────────────────────────────────── */}
+      {/* ── QUESTIONS ── */}
       <section className="section bg-muted">
         <div className="shell grid gap-10 lg:grid-cols-[1fr_20rem] lg:gap-14">
           <div>
             <SectionHead eyebrow="Questions" title={`${s.name}: what people ask before they book.`} />
-            <div className="mt-8"><Faq items={faqs} /></div>
+            {/* The "Nearest crews" aside is h-fit, so it ended a third of the way down while
+              * the accordion carried on alone — roughly 350px of bare column beside the rest
+              * of the questions, on all eleven service pages. Two-up from xl, where the
+              * column is wide enough for two readable measures. */}
+            <div className="mt-8 grid gap-x-12 xl:grid-cols-2">
+              <Faq items={faqs.slice(0, Math.ceil(faqs.length / 2))} />
+              <Faq items={faqs.slice(Math.ceil(faqs.length / 2))} />
+            </div>
           </div>
           <aside className="h-fit rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)]">
             <h3 className="text-xl text-on-dark">Nearest crews</h3>
