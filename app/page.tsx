@@ -48,16 +48,16 @@ export default function Home() {
           * here — before the hardware argument rather than after it — which is the one
           * structural note from the audit I could not act on at the time. */}
         <Reviews />         {/*  4b · pull-quote + cards       · neutral */}
-        <MaterialsSplit />  {/*  5 · split, hardware left      · deep    */}
+        <MaterialsSplit />  {/*  5 · two tiers + add-on strip  · deep    */}
         <WhyBrytr />        {/*  6 · four-up + bridge          · primary */}
         <ProjectTabs />     {/*  8 · tabbed photo gallery      · raise   */}
         {/* AUDIT FIX: from the systems section to the final form was ten phone screens
-          * with nothing to act on. One short centred band here, which is also an
+          * with nothing to act on. One short centered band here, which is also an
           * archetype the page does not otherwise use. */}
-        <CtaBand />         {/*  8b · short centred band       · primary */}
+        <CtaBand />         {/*  8b · deadline + date ledger    · primary */}
         <ServiceArea />     {/*  9 · photo + city tiles        · neutral */}
         <ProcessRow />      {/* 10 · numbered row              · primary */}
-        <Writing />         {/* 11 · compact article list      · neutral */}
+        <Writing />         {/* 11 · three article cards       · neutral */}
         <FinalCta />        {/* 13 · split + full form         · primary */}
       </main>
       <Footer />
