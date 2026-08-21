@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { site, nav } from "@/content/site";
+import { brandLogo } from "@/content/badges";
 import { reviewProof } from "@/content/reviews";
 import { services } from "@/content/services";
 import { cities } from "@/content/cities";
@@ -28,9 +30,21 @@ export function Footer() {
           * of forty-five identical links on a phone, which is a scroll tax and not a navigation. */}
         <div className="grid gap-10 lg:grid-cols-6">
           <div className="lg:col-span-1">
-            <p className="font-display text-2xl font-black tracking-[-0.04em] text-on-dark">
-              brytr<span className="ml-0.5 inline-block size-2 translate-y-[-0.35rem] rounded-full bg-accent" />
-            </p>
+            {/* Same slot as the header — one source for the mark, so the two cannot drift into
+              * showing different lockups. See the note on `brandLogo` in content/badges.ts. */}
+            {brandLogo ? (
+              <Image
+                src={brandLogo.src}
+                alt={brandLogo.alt}
+                width={brandLogo.width}
+                height={brandLogo.height}
+                className="h-9 w-auto"
+              />
+            ) : (
+              <p className="font-display text-2xl font-black tracking-[-0.04em] text-on-dark">
+                brytr<span className="ml-0.5 inline-block size-2 translate-y-[-0.35rem] rounded-full bg-accent" />
+              </p>
+            )}
             <p className="mt-4 text-sm text-on-dark-muted">
               Permanent outdoor lighting for Omaha homes. Installed once by our own crews, controlled from
               your phone, and serviced by the people who put it up.
