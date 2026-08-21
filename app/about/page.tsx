@@ -33,7 +33,9 @@ import { reviewProof } from "@/content/reviews";
  */
 
 export const metadata: Metadata = {
-  title: "About Brytr Co | Family Owned, Omaha",
+  /* `absolute` bypasses the root layout's "%s | Brytr Co" template — see the note on
+   * /contact. The brand is already in the title, so the template would repeat it. */
+  title: { absolute: "About Brytr Co | Family Owned, Omaha" },
   description:
     "Brytr Co is Zac Van Buren and Sam Greguska: two lighting tiers instead of one, W2 crews instead of subcontractors, and service on systems we did not sell. Permanent outdoor lighting across the Omaha metro.",
   alternates: { canonical: "/about" },
