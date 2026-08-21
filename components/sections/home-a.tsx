@@ -1,15 +1,15 @@
-import { Fragment } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/content/site";
 import { services } from "@/content/services";
-import { iconMap } from "@/content/icon-map";
+import { iconMap, type IconKey } from "@/content/icon-map";
 
 import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Check, TextLink, QuoteForm } from "@/components/ui/bits";
 import { Spotlight } from "@/components/ui/spotlight";
-import { IcVerified, IcHardHat, IcTwoTiers, IcOtherBrand, IcFasciaMount, IcMiter, IcConcealedWire, IcEndCap } from "@/components/icons";
+import { IcVerified, IcHardHat, IcTwoTiers, IcOtherBrand, IcSceneStack, IcFasciaMount, IcMiter, IcConcealedWire, IcEndCap } from "@/components/icons";
+import { cn } from "@/lib/utils";
 
 
 /* 4 — QUICK QUOTE + STATS · asymmetric split · neutral */
@@ -82,31 +82,68 @@ export { ProofRail } from "./proof-rail";
  * version of the same one. Nothing was cut: all eleven services are still linked, and
  * every one still has its own page. Bullet counts run two to four so the cards stop
  * looking stamped out. */
-/* WHERE THE OTHER EIGHT GO. Grouped by the physical place on the property, because that is
- * the only thing about them a homeowner on the home page needs: the same controller reaches
- * all of it. Repairs and takeover is deliberately NOT in here — see the note at the block. */
-const addedOn: { where: string; what: string; slugs: string[] }[] = [
-  {
-    where: "On the house",
-    what: "Under the overhang and across a storefront band —",
-    slugs: ["soffit-lighting", "commercial-outdoor-lighting"],
-  },
-  {
-    where: "At ground level",
-    what: "Beds, trunks, seat walls and step risers —",
-    slugs: ["landscape-lighting", "hardscape-lighting"],
-  },
-  {
-    where: "Overhead",
-    what: "Anything with a structure to fasten to at both ends —",
-    slugs: ["patio-pergola-bistro-lighting"],
-  },
-  {
-    where: "What you set it to",
-    what: "The part you actually touch, saved and scheduled —",
-    slugs: ["holiday-seasonal-scenes", "gameday-lighting"],
-  },
+/* WHERE IT GOES, TOP DOWN.
+ *
+ * Grouped by the physical place on the property, because that is the only thing about them a
+ * homeowner on the home page needs: the same controller reaches all of it. Ordered the way it
+ * sits on a house — under the eave, then overhead, then at grade — rather than in whatever
+ * order the service pages happen to have been written in.
+ *
+ * NO BLURB PER PLACE. Each one used to carry a line of its own — "Beds, trunks, seat walls and
+ * step risers" — sitting beside "Path, uplighting, tree wash and beds" and "Built into walls,
+ * steps and coping". The place line was a summary of the two services next to it, which is how
+ * a row ends up looking full while saying one thing twice. The place is the label; the services
+ * carry the detail they already have.
+ *
+ * TWO THINGS ARE DELIBERATELY NOT IN HERE, and both used to be rendered as if they were places.
+ * The app is not a place: it is the one thing every run above has in common, so putting it in
+ * the fourth row of a four-row table of locations put it on the same footing as a flower bed.
+ * And repairs are not on our system at all — that is work on somebody else's, often a brand we
+ * would never have sold. Each gets its own shape below. */
+const places: { where: string; icon: IconKey; slugs: string[] }[] = [
+  { where: "On the house", icon: "soffit", slugs: ["soffit-lighting", "commercial-outdoor-lighting"] },
+  { where: "Overhead", icon: "pergola", slugs: ["patio-pergola-bistro-lighting"] },
+  { where: "At ground level", icon: "pathLight", slugs: ["landscape-lighting", "hardscape-lighting"] },
 ];
+
+/* The control layer. Not a place — the reason the places are worth grouping at all. */
+const control = {
+  what: "The part you actually touch, saved and scheduled — the one thing every run above has in common.",
+  slugs: ["holiday-seasonal-scenes", "gameday-lighting"],
+};
+
+/* A SERVICE, AS A TARGET.
+ *
+ * All eight of these were rendered as underlined words inside a sentence — "Beds, trunks, seat
+ * walls and step risers — Landscape Lighting and Hardscape Lighting." That is the lowest
+ * affordance available for the only things in the block anybody would want to click, and it
+ * made five rows identical apart from the nouns.
+ *
+ * The first pass made them chips: better targets, but a chip is one word wide, so right-aligning
+ * two of them in a 1,392px row just moved the empty space from the middle to the middle. They
+ * carry each service's own `short` line now — "Recessed and track options under the overhang",
+ * "Husker red on a Saturday, one tap" — which is copy that already existed, is specific, and
+ * fills the row with a reason to click rather than with air. `basis` keeps a card at a readable
+ * width instead of stretching one lone card across the whole row. */
+function ServiceCard({ slug }: { slug: string }) {
+  const svc = services.find((x) => x.slug === slug);
+  if (!svc) return null;
+  return (
+    <Link
+      href={`/services/${slug}`}
+      data-spot
+      className={cn(
+        "group block flex-1 basis-[19.5rem] rounded-md bg-on-dark/8 px-4 py-3.5 ring-1 ring-on-dark/15",
+        "transition-colors duration-[--dur-fast] hover:bg-on-dark/14 hover:ring-accent/60"
+      )}
+    >
+      <span className="block font-display text-[0.95rem] font-bold leading-tight text-on-dark decoration-accent decoration-2 underline-offset-4 group-hover:underline">
+        {svc.name}
+      </span>
+      <span className="mt-1.5 block text-[0.85rem] leading-snug text-on-dark-muted">{svc.short}</span>
+    </Link>
+  );
+}
 
 const LEAD_SERVICES = [
   "permanent-outdoor-lighting",
@@ -175,13 +212,12 @@ export function ServicesBento() {
           * app, so you can add to it whenever you like"). So the cells restated a claim instead
           * of evidencing it, which is why it read as furniture next to the three cards above.
           *
-          * It also had a category error in it. "Permanent Lighting Repair and System Takeover"
-          * is not something that goes ON our system — it is work on somebody else's, often a
-          * brand we would never have sold. Filing it under "also on the same system" was
-          * straightforwardly wrong, so it comes out and gets its own line.
-          *
-          * Grouped by where it physically goes instead: on the house, on the ground, overhead,
-          * and what you set the whole thing to. Every one of the eight is still linked. */}
+          * Grouping it by place fixed the argument and left the DESIGN wrong: five rows of a
+          * 13rem label beside a single sentence, identical apart from the nouns, the width
+          * filled by pushing prose sideways rather than by content. Three shapes now, because
+          * there are three kinds of thing here and they were all drawn the same: the places on
+          * the property, the app that reaches all of them, and one row that is not our hardware
+          * at all. */}
         <div className="mt-5 overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
           <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-on-dark/12 px-6 py-4">
             <p className="label flex items-center gap-3 text-on-dark">
@@ -191,49 +227,88 @@ export function ServicesBento() {
             <p className="text-sm text-on-dark-muted">Added at install, or any year after</p>
           </div>
 
-          <dl className="divide-y divide-on-dark/10">
-            {addedOn.map((g) => (
-              <div key={g.where} className="grid gap-x-8 gap-y-1.5 px-6 py-5 sm:grid-cols-[13rem_1fr]">
-                <dt className="font-display text-[0.95rem] font-bold text-on-dark">{g.where}</dt>
-                <dd className="text-[0.95rem] leading-relaxed text-on-dark-muted">
-                  {g.what}{" "}
-                  {g.slugs.map((sl, i) => {
-                    const svc = services.find((x) => x.slug === sl);
-                    if (!svc) return null;
-                    return (
-                      <Fragment key={sl}>
-                        {i > 0 && (i === g.slugs.length - 1 ? " and " : ", ")}
-                        <Link
-                          href={`/services/${sl}`}
-                          data-spot
-                          className="font-semibold text-on-dark underline decoration-accent decoration-2 underline-offset-4"
-                        >
-                          {svc.name}
-                        </Link>
-                      </Fragment>
-                    );
-                  })}
-                  .
-                </dd>
-              </div>
-            ))}
-          </dl>
+          {/* THE PLACES. Row height varies with how many services actually land there, so the
+            * rhythm comes from the content instead of from a fixed rail. */}
+          <ul className="divide-y divide-on-dark/10">
+            {places.map((g) => {
+              const I = iconMap[g.icon];
+              return (
+                <li
+                  key={g.where}
+                  className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-3 px-6 py-5 md:grid-cols-[auto_11rem_minmax(0,1fr)] md:gap-x-6 md:gap-y-4"
+                >
+                  <span className="channel-tile !size-11" aria-hidden><I className="size-6" /></span>
+                  <p className="font-display text-[1.05rem] font-bold leading-tight text-on-dark">{g.where}</p>
+                  {/* col-span-2 below md so the tile and the place name share one line on a
+                    * phone instead of eating two — three rows of that is 90px of nothing. */}
+                  <div className="col-span-2 flex flex-wrap gap-3 md:col-span-1">
+                    {g.slugs.map((sl) => <ServiceCard key={sl} slug={sl} />)}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
 
-          {/* Not "also on the same system" — the opposite. Somebody else's system, and
-            * usually somebody else's mistake. */}
-          <div className="grid gap-x-8 gap-y-1.5 border-t border-accent/30 bg-raise px-6 py-5 sm:grid-cols-[13rem_1fr]">
-            <p className="font-display text-[0.95rem] font-bold text-on-dark">Already have a system</p>
-            <p className="text-[0.95rem] leading-relaxed text-on-dark-muted">
-              Then this is the one thing on this page that is not about our hardware.{" "}
-              <Link
-                href="/services/repairs-and-service"
-                data-spot
-                className="font-semibold text-on-dark underline decoration-accent decoration-2 underline-offset-4"
-              >
-                We take over and repair systems we did not sell
-              </Link>
-              , including brands we would never have quoted you.
-            </p>
+          {/* THE CONTROL LAYER, on its own ground. It is what the three rows above have in
+            * common, so it sits under all of them rather than beside them as a fourth. Same
+            * three-column spine as the rows, so it reads as the sum of them and not as a
+            * separate widget that happened to land here. */}
+          <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-3 border-t border-on-dark/10 bg-raise px-6 py-6 md:grid-cols-[auto_11rem_minmax(0,1fr)] md:gap-x-6 md:gap-y-4">
+            <span className="channel-tile !size-11" aria-hidden><IcSceneStack className="size-6" /></span>
+            <div>
+              <p className="label text-accent">What you set it to</p>
+              <p className="mt-1.5 font-display text-[1.05rem] font-bold leading-tight text-on-dark">
+                Every run above
+              </p>
+            </div>
+            <div className="col-span-2 flex flex-wrap items-center gap-3 md:col-span-1">
+              {control.slugs.map((sl) => <ServiceCard key={sl} slug={sl} />)}
+              <p className="basis-[19.5rem] text-[0.85rem] leading-snug text-on-dark-muted">
+                {control.what}
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        {/* NOT PART OF THE PANEL ABOVE, WHICH IS THE WHOLE POINT.
+          *
+          * This spent two revisions inside that card needing something — a lighter tint, then an
+          * amber rule across the top — to look like it did not belong there. slopcheck failed the
+          * rule, correctly: a coloured strip across a card is decoration standing in for
+          * structure. The strip was covering for a container error. "One controller, the whole
+          * property" is a claim about our system, and this is the one thing on the page that is
+          * about somebody else's, so it is its own object on its own ground — light, where
+          * everything either side of it is dark. Nothing has to be drawn on it to say so. */}
+        <div className="mt-5 grid gap-6 rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] ring-1 ring-accent/25 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
+          <div className="flex items-start gap-4">
+            <span className="channel-tile !size-11" aria-hidden><IcOtherBrand className="size-6" /></span>
+            <div>
+              <p className="label text-accent-ink">Not our hardware</p>
+              <p className="mt-2 max-w-[78ch] text-[0.95rem] leading-relaxed text-muted-foreground">
+                Already have a system? Then this is the one thing on this page that is not about our
+                hardware.{" "}
+                <Link
+                  href="/services/repairs-and-service"
+                  data-spot
+                  className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4"
+                >
+                  We take over and repair systems we did not sell
+                </Link>
+                , including brands we would never have quoted you.
+              </p>
+            </div>
+          </div>
+          {/* The brands, spelled out. Somebody arriving here has a dead run and a specific make
+            * on their fascia, and "other brands" does not answer the only question they have.
+            * These are the four we say elsewhere on this page that we diagnose. */}
+          <div className="lg:border-l lg:border-border lg:pl-12">
+            <p className="label text-muted-foreground">Systems we take over</p>
+            <ul className="mt-3 grid grid-cols-2 gap-x-8 gap-y-1.5">
+              {["Jellyfish", "Gemstone", "Trimlight", "Oelo"].map((b) => (
+                <li key={b} className="font-display text-[0.95rem] font-bold text-foreground">{b}</li>
+              ))}
+            </ul>
           </div>
         </div>
 
