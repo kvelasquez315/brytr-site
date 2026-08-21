@@ -210,20 +210,6 @@ export const IcCommercial = ({ className }: P) => (
   </S>
 );
 
-/** repair and takeover: a run with one dead diode, and a driver on it */
-export const IcRepair = ({ className }: P) => (
-  <S className={className}>
-    <Section x={2} y={7} w={28} h={7} />
-    <g className="text-accent" fill={CC}>
-      <circle cx="6" cy="10.5" r="1.5" /><circle cx="12" cy="10.5" r="1.5" /><circle cx="24" cy="10.5" r="1.5" />
-    </g>
-    <circle cx="18" cy="10.5" r="1.5" fill={CC} opacity=".28" />
-    <path d="M18 12.5v4" stroke={CC} strokeWidth="1.4" opacity=".4" strokeDasharray="1.6 1.6" />
-    <path d="M9 29 20 18l2.6 2.6L11.6 31.6Z" fill={CC} opacity=".85" />
-    <path className="text-accent" d="M19.4 17.2 22.6 20.4l3-3-3.2-3.2Z" fill={CC} />
-  </S>
-);
-
 /* ── APP AND CONTROL ── */
 
 /** saved scenes: the app's list, one scene live */
@@ -313,20 +299,6 @@ export const IcHardHat = ({ className }: P) => (
     <path d="M3 19h26v3.2H3z" fill={CC} opacity=".85" />
     <path className="text-accent" d="M8.4 16.4h15.2v2.6H8.4z" fill={CC} />
     <path d="M6 25h20v2H6z" fill={CC} opacity=".3" />
-  </S>
-);
-
-/** we service what we did not sell: two profiles, ours lit, theirs dark */
-export const IcOtherBrand = ({ className }: P) => (
-  <S className={className}>
-    <Section x={2} y={5} w={13} h={7} />
-    <Run y={8.5} x0={5} x1={12} n={3} r={1.4} />
-    <Section x={17} y={5} w={13} h={7} />
-    <g fill={CC} opacity=".32">
-      <circle cx="20" cy="8.5" r="1.4" /><circle cx="23.5" cy="8.5" r="1.4" /><circle cx="27" cy="8.5" r="1.4" />
-    </g>
-    <path d="M11 17.5 22 28.5l-2.6 2.6L8.4 20.1Z" fill={CC} opacity=".85" />
-    <path className="text-accent" d="M6.6 16.4a4.4 4.4 0 0 1 6.2 6.2l-3.1-3.1-3.1-3.1Z" fill={CC} />
   </S>
 );
 

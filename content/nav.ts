@@ -41,8 +41,8 @@ export const navTree: NavItem[] = [
       },
     ],
     feature: {
-      label: "Two tiers, on purpose",
-      body: "We install a premium system and a value system, and we will tell you which one your house actually needs.",
+      label: "More than one brand, on purpose",
+      body: "We install Haven and we install Jellyfish, which is why these comparisons can give the other side real reasons to win.",
       href: "/compare",
       cta: "See how they differ",
     },
@@ -74,7 +74,7 @@ export const navTree: NavItem[] = [
     ],
     feature: {
       label: "We sell both sides",
-      body: "These comparisons are written by the crew that installs and services the hardware, not by a brand.",
+      body: "These comparisons are written by the crew that installs the hardware, not by a brand.",
       href: "/compare",
       cta: "Read every comparison",
     },

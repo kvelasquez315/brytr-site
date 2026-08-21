@@ -271,8 +271,7 @@ export default function AreasHub() {
                 ring from out there we will say so on the call rather than drive out and load the number.
               </p>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-7 gap-y-2">
-              <TextLink onDark href="/services/repairs-and-service">Repairs and takeovers</TextLink>
+            <div className="mt-8">
               <TextLink onDark href="/warranty">What is covered</TextLink>
             </div>
           </div>
