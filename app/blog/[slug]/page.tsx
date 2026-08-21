@@ -2,14 +2,40 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { posts, postBySlug } from "@/content/blog";
+import { photoForPost, relatedByCategory } from "@/content/blog-detail";
 import { services } from "@/content/services";
 import { Shell } from "@/app/layout-shell";
-import { QuoteForm, SectionHead, TextLink, Breadcrumb } from "@/components/sections/page-parts";
-import { PageCta } from "@/components/sections/page-parts";
+import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
 import { iconMap } from "@/content/icon-map";
+import { PhotoBand } from "@/components/sections/photo-parts";
+import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 
-export function generateStaticParams() { return posts.map((p) => ({ slug: p.slug })); }
+/* ONE TEMPLATE, TWELVE POSTS — WAVE 6 of the page-by-page pass.
+ *
+ * The writing in content/blog.ts is real and each piece has its own argument. What the
+ * template around it was doing wrong:
+ *   · a flat color band for a hero, with no photograph on any of the twelve
+ *   · a "On this page" table of contents made of <span> elements with no ids to point at.
+ *     A navigation control that cannot navigate is worse than none, because the reader
+ *     tries it. The headings now carry ids and the entries are anchors.
+ *   · "Related services" was `services.slice(0, 3)` — the same three rows on all twelve
+ *   · "Read next" was `posts.slice(0, 3)` — the same three posts on all twelve
+ *   · a form in the sidebar AND a form in the closer, which is two forms on a page whose
+ *     job is to be read
+ *
+ * content/blog-detail.ts supplies the photograph per slug and the related services per
+ * category, so a post about install method points at the install pages and a post about
+ * Omaha covenants points at the two things Omaha books.
+ *
+ * Archetype: home hero (photograph + the form, since a reader who finishes a 7 minute piece
+ * is the most qualified visitor on the site) → anchored TOC beside the article → same-
+ * category reading. Closer: the phone band, because the hero already carries the form.
+ */
+
+export function generateStaticParams() {
+  return posts.map((p) => ({ slug: p.slug }));
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -18,72 +44,133 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return { title: p.title, description: p.dek.slice(0, 155), alternates: { canonical: `/blog/${p.slug}` } };
 }
 
+const anchor = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export default async function Post({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const p = postBySlug(slug);
   if (!p) notFound();
-  const next = posts.filter((o) => o.slug !== p.slug).slice(0, 3);
-  const rel = services.slice(0, 3);
-  const trail = [{ name: "Home", href: "/" }, { name: "Resources", href: "/blog" }, { name: p.title, href: `/blog/${p.slug}` }];
+  const pic = photoForPost(p.slug);
+
+  /* Same category first, then anything else, so "read next" is a related read rather than
+   * the first three entries in the array on all twelve pages. */
+  const sameCategory = posts.filter((o) => o.slug !== p.slug && o.category === p.category);
+  const others = posts.filter((o) => o.slug !== p.slug && o.category !== p.category);
+  const next = [...sameCategory, ...others].slice(0, 3);
+
+  const related = (relatedByCategory[p.category] ?? [])
+    .map((sl) => services.find((s) => s.slug === sl))
+    .filter((s): s is (typeof services)[number] => !!s);
+
+  const trail = [
+    { name: "Home", href: "/" },
+    { name: "Resources", href: "/blog" },
+    { name: p.title, href: `/blog/${p.slug}` },
+  ];
   const toc = p.body.filter((b) => b.h).map((b) => b.h!) as string[];
 
   return (
     <Shell>
       <Jsonld data={breadcrumb(trail)} />
-      <Jsonld data={{
-        "@context": "https://schema.org", "@type": "Article", headline: p.h1, description: p.dek,
-        author: { "@type": "Organization", name: "Brytr Co" },
-        publisher: { "@type": "Organization", name: "Brytr Co" },
-      }} />
+      <Jsonld
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          headline: p.h1,
+          description: p.dek,
+          author: { "@type": "Organization", name: "Brytr Co" },
+          publisher: { "@type": "Organization", name: "Brytr Co" },
+        }}
+      />
 
-      <section className="bg-primary">
-        <div className="shell py-12 lg:py-16">
-          <Breadcrumb trail={trail} />
-          <p className="eyebrow eyebrow--on-dark">{p.category}</p>
-          <h1 className="mt-4 max-w-[46ch] text-[clamp(2rem,4vw,3.1rem)] text-on-dark">{p.h1}</h1>
-          <p className="mt-5 max-w-[68ch] text-lg text-on-dark/85">{p.dek}</p>
-          <p className="label mt-7 text-xs text-on-dark-muted">
-            Brytr Co · {p.read} read
-          </p>
-        </div>
-      </section>
+      <PageHero
+        photo={pic?.photo ?? "/img/hero-bg.jpg"}
+        photoAlt={pic?.photoAlt ?? "A finished Brytr install in the Omaha metro at night"}
+        objectPosition={pic?.objectPosition ?? "50% 50%"}
+        eyebrow={`${p.category} · ${p.read} read`}
+        h1={p.h1}
+        lede={p.dek}
+        trail={trail}
+        footnote={
+          <>
+            Written by Brytr Co from installing and repairing this product in the Omaha metro. Not
+            sponsored and not manufacturer copy.{" "}
+            <Link href="/blog" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
+              The other eleven
+            </Link>.
+          </>
+        }
+      />
 
+      {/* ── THE ARTICLE ──
+        * TOC on the left with real anchors, the piece in the middle, and one
+        * panel on the right that differs by category. No second form. */}
       <div className="section bg-background">
-        <div className="shell grid gap-10 lg:grid-cols-[14rem_minmax(0,1fr)_19rem] lg:gap-12">
-          {/* TOC — scrolls away normally, not sticky */}
-          <nav aria-label="On this page" className="h-fit">
-            <p className="label text-muted-foreground">On this page</p>
-            <ul className="mt-4 space-y-2.5 border-l border-border pl-4">
-              {toc.map((h) => (
-                <li key={h}><span className="text-sm text-muted-foreground">{h}</span></li>
-              ))}
-            </ul>
-          </nav>
-
+        {/* TWO COLUMNS, NOT THREE, and the reason is that no post has enough headings for a
+          * sidebar. A previous pass gave this template a 13rem left column for a table of
+          * contents. Every one of the twelve articles has two or three headings, so that column
+          * held two links and a disclaimer beside six hundred pixels of live body copy — a
+          * 215 x 610px empty gutter, twelve times over.
+          *
+          * A list of two is not a table of contents, it is a pair of anchors. They sit as a
+          * horizontal rail above the article, where they cost one line and no column. */}
+        <div className="shell grid gap-10 lg:grid-cols-[minmax(0,1fr)_18rem] lg:gap-12">
           <article className="max-w-[68ch]">
-            <p className="text-lg text-foreground">
+            {toc.length > 1 ? (
+              <nav
+                aria-label="On this page"
+                className="mb-9 flex flex-wrap items-baseline gap-x-5 gap-y-2 border-b border-border pb-5"
+              >
+                <p className="label text-muted-foreground">On this page</p>
+                {toc.map((h) => (
+                  <a
+                    key={h}
+                    href={`#${anchor(h)}`}
+                    className="text-sm text-foreground underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
+                  >
+                    {h}
+                  </a>
+                ))}
+              </nav>
+            ) : null}
+            <p className="text-lg leading-relaxed text-foreground">
               {p.body[0]?.p}{" "}
-              <Link href={p.links.href} className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4">
+              <Link
+                href={p.links.href}
+                className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4"
+              >
                 {p.links.label}
               </Link>.
             </p>
             {p.body.slice(1).map((b, i) => (
               <div key={i}>
-                {b.h && <h2 className="mt-9 text-[1.6rem] text-foreground">{b.h}</h2>}
+                {b.h && (
+                  <h2
+                    id={anchor(b.h)}
+                    className="mt-10 scroll-mt-28 text-[clamp(1.35rem,2.4vw,1.6rem)] text-foreground"
+                  >
+                    {b.h}
+                  </h2>
+                )}
                 {b.p && <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">{b.p}</p>}
                 {b.list && (
                   <ul className="mt-4 space-y-2.5">
                     {b.list.map((li) => (
                       <li key={li} className="flex gap-3">
-                        <svg viewBox="0 0 16 16" className="mt-1.5 size-3.5 shrink-0 text-accent" fill="none" aria-hidden><rect x="3" y="3" width="10" height="10" rx="2" fill="currentColor" /></svg>
+                        <svg viewBox="0 0 16 16" className="mt-1.5 size-3.5 shrink-0 text-accent" fill="none" aria-hidden>
+                          <rect x="3" y="3" width="10" height="10" rx="2" fill="currentColor" />
+                        </svg>
                         <span className="text-[1.05rem] leading-relaxed text-muted-foreground">{li}</span>
                       </li>
                     ))}
                   </ul>
                 )}
                 {b.callout && (
-                  <aside className="mt-7 rounded-md bg-muted p-6">
-                    <p className="font-display text-lg font-bold leading-snug text-foreground">{b.callout}</p>
+                  <aside className="mt-8 rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)]">
+                    <p className="label text-accent">Worth pulling out</p>
+                    <p className="mt-2.5 font-display text-lg font-bold leading-snug text-on-dark">
+                      {b.callout}
+                    </p>
                   </aside>
                 )}
               </div>
@@ -93,45 +180,111 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
             </div>
           </article>
 
-          <aside className="space-y-6">
-            <QuoteForm variant="compact" heading="Get a written quote" />
-            <div className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-              <p className="label text-muted-foreground">Related services</p>
-              <ul className="mt-4 space-y-3">
-                {rel.map((s) => {
+          <aside className="h-fit space-y-5">
+            <div className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+              <div className="border-b border-border px-6 py-4">
+                <p className="label flex items-center gap-3 text-foreground">
+                  <span className="block h-4 w-1 bg-accent" aria-hidden />
+                  Pages this touches
+                </p>
+              </div>
+              <ul className="divide-y divide-border">
+                {related.map((s) => {
                   const I = iconMap[s.icon];
                   return (
                     <li key={s.slug}>
-                      <Link href={`/services/${s.slug}`} className="flex items-center gap-3 text-sm font-medium text-foreground hover:text-accent-deep">
-                        <span className="channel-tile channel-tile--light !size-10" aria-hidden><I className="size-5" /></span>
-                        {s.name}
+                      <Link
+                        href={`/services/${s.slug}`}
+                        className="group flex items-start gap-3 px-5 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
+                      >
+                        <span className="channel-tile channel-tile--light !size-10 shrink-0" aria-hidden>
+                          <I className="size-6" />
+                        </span>
+                        <span className="min-w-0">
+                          <span className="block text-sm font-semibold text-foreground group-hover:underline">
+                            {s.name}
+                          </span>
+                          <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+                            {s.short}
+                          </span>
+                        </span>
                       </Link>
                     </li>
                   );
                 })}
               </ul>
+              <p className="border-t border-border bg-muted px-5 py-4 text-xs leading-relaxed text-muted-foreground">
+                Chosen for the {p.category.toLowerCase()} category rather than sliced off the front of the
+                service list.
+              </p>
+            </div>
+
+            <div className="rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)]">
+              <p className="label text-accent">If this changed your mind</p>
+              <p className="mt-2.5 text-sm leading-relaxed text-on-dark-muted">
+                The consultation is an hour after dark, costs nothing, and you keep the written quote
+                whether or not you ever ring us again.
+              </p>
+              <div className="mt-5 border-t border-on-dark/12 pt-4">
+                <TextLink onDark href="/free-design-consultation">What the hour looks like</TextLink>
+              </div>
             </div>
           </aside>
         </div>
       </div>
 
+      {/* ── A PHOTOGRAPH AT THE END OF THE READ ──
+        * Twelve articles through this template, and the only image on any of them was the hero.
+        * A reader who has just finished seven minutes of prose about install method or covenant
+        * procedure has earned a picture of the outcome. Seeded on the slug, so the twelve do not
+        * all close on the same house. */}
+      <PhotoBand
+        photo={pick(`post-${p.slug}`, 1)[0]?.photo ?? "homeShakeBrick"}
+        label="One of ours"
+        note={`Filed under ${p.category.toLowerCase()}`}
+        caption={pick(`post-${p.slug}`, 1)[0]?.caption ?? ""}
+        ground="raise"
+      />
+
+      {/* ── READ NEXT, SAME CATEGORY FIRST ── */}
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="Read next" title="More before you buy." />
+          <SectionHead
+            eyebrow="Read next"
+            title={`More on ${p.category.toLowerCase()}.`}
+            lede="Same category first, then whatever else is closest, rather than whatever happens to sit at the top of the list."
+          />
           <div className="mt-9 grid gap-5 sm:grid-cols-3">
             {next.map((o) => (
-              <Link key={o.slug} href={`/blog/${o.slug}`} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5">
+              <Link
+                key={o.slug}
+                href={`/blog/${o.slug}`}
+                className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5"
+              >
                 <p className="label text-accent-ink">{o.category}</p>
-                <h3 className="mt-2 text-lg text-foreground">{o.title}</h3>
-                <p className="mt-2 flex-1 text-sm text-muted-foreground">{o.dek.split(".")[0]}.</p>
-                <p className="u mt-4 text-xs text-muted-foreground">{o.read} read</p>
+                <h3 className="mt-2 font-display text-[1.05rem] font-bold leading-snug text-foreground">
+                  {o.title}
+                </h3>
+                <p className="mt-2.5 flex-1 text-sm leading-relaxed text-muted-foreground">
+                  {o.dek.split(". ")[0].replace(/\.+$/, "")}.
+                </p>
+                <p className="u mt-4 border-t border-border pt-3 text-xs text-muted-foreground">
+                  {o.read} read
+                </p>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <PageCta />
+      <PageCta
+        variant="phone"
+        /* background, not the default muted: the read-next section above is bg-muted, and the two
+          * ran together as one block with a 1440 x 199px dead strip between them, on all twelve
+          * article pages. */
+        ground="background"
+        panelLink={{ href: "/blog", label: "The rest of the guides" }}
+      />
     </Shell>
   );
 }
