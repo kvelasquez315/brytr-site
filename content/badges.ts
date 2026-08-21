@@ -11,6 +11,26 @@ import type { IconKey } from "./icon-map";
  */
 export const googleLogo: string | null = null;
 
+/* BRYTR'S OWN MARK.
+ *
+ * Set `brandLogo` to the path of the real logo file once it is on disk and the header and
+ * footer switch to it automatically. `width`/`height` are the file's own pixel dimensions —
+ * next/image needs the intrinsic ratio, and getting it wrong is how a logo ends up subtly
+ * stretched in the one place it is most visible.
+ *
+ * Until then the header sets the name in the brand's display face. That is not an invented
+ * mark: it is the word "brytr", set correctly, with the amber dot that appears everywhere else
+ * on the site. A traced approximation of the real logo would be worse than either — it would
+ * look almost right, which is the one thing a logo may never look.
+ *
+ * The lockup wanted here is the WHITE-AND-YELLOW one, because both the header and the footer
+ * sit on the dark ground. The black-and-yellow file is for light surfaces and there are none
+ * behind a logo on this site. A vector (SVG, or the AI/EPS original) is worth chasing over the
+ * 1024px PNG on the current site: the header renders it at roughly 150px wide on a 3x display,
+ * which a raster at that size will not survive cleanly.
+ */
+export const brandLogo: { src: string; width: number; height: number; alt: string } | null = null;
+
 export const reviewProofBadge = {
   score: "5.0",
   count: "196",
