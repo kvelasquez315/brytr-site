@@ -29,7 +29,7 @@ import { Faq } from "@/components/sections/faq";
 export const metadata: Metadata = {
   title: "Permanent Lighting FAQ",
   description:
-    "Every question we get about permanent outdoor lighting in Omaha: cost, install day, damage to the fascia, HOA approval, warranty, winter installs and servicing other brands.",
+    "Every question we get about permanent outdoor lighting in Omaha: cost, install day, damage to the fascia, HOA approval, warranty and winter installs.",
   alternates: { canonical: "/faq" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "FAQ", href: "/faq" }];
@@ -87,7 +87,6 @@ const groups: { h: string; note: string; items: typeof homeFaqs; wide?: boolean 
       ...pick(homeFaqs, "What happens when a section stops working?"),
       ...pick(service,
         "What warranty comes with it?",
-        "Do you service other brands?",
         "What areas do you cover?",
         "How do I get a number?"),
     ],
@@ -138,11 +137,6 @@ const shortAnswers: { q: string; a: string; to: string }[] = [
   {
     q: "What if a section goes dark?",
     a: "You call us and we come out. It is usually a driver or one bad connection rather than the whole run.",
-    to: "Service and warranty",
-  },
-  {
-    q: "Do you service other brands?",
-    a: "Yes, including brands we would never have sold you, and systems whose installer has stopped answering.",
     to: "Service and warranty",
   },
 ];
