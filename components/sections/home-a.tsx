@@ -8,7 +8,7 @@ import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Check, TextLink, QuoteForm } from "@/components/ui/bits";
 import { Spotlight } from "@/components/ui/spotlight";
-import { IcVerified, IcHardHat, IcTwoTiers, IcOtherBrand, IcSceneStack, IcFasciaMount, IcMiter, IcConcealedWire, IcEndCap } from "@/components/icons";
+import { IcVerified, IcHardHat, IcSceneStack, IcFasciaMount, IcMiter, IcConcealedWire, IcEndCap } from "@/components/icons";
 import { cn } from "@/lib/utils";
 
 
@@ -214,10 +214,9 @@ export function ServicesBento() {
           *
           * Grouping it by place fixed the argument and left the DESIGN wrong: five rows of a
           * 13rem label beside a single sentence, identical apart from the nouns, the width
-          * filled by pushing prose sideways rather than by content. Three shapes now, because
-          * there are three kinds of thing here and they were all drawn the same: the places on
-          * the property, the app that reaches all of them, and one row that is not our hardware
-          * at all. */}
+          * filled by pushing prose sideways rather than by content. Two shapes now, because
+          * there are two kinds of thing here and they were drawn the same: the places on the
+          * property, and the app that reaches all of them. */}
         <div className="mt-5 overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
           <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-on-dark/12 px-6 py-4">
             <p className="label flex items-center gap-3 text-on-dark">
@@ -271,49 +270,12 @@ export function ServicesBento() {
 
         </div>
 
-        {/* NOT PART OF THE PANEL ABOVE, WHICH IS THE WHOLE POINT.
+        {/* the qualifying questions, as a wide band, not a third card.
           *
-          * This spent two revisions inside that card needing something — a lighter tint, then an
-          * amber rule across the top — to look like it did not belong there. slopcheck failed the
-          * rule, correctly: a coloured strip across a card is decoration standing in for
-          * structure. The strip was covering for a container error. "One controller, the whole
-          * property" is a claim about our system, and this is the one thing on the page that is
-          * about somebody else's, so it is its own object on its own ground — light, where
-          * everything either side of it is dark. Nothing has to be drawn on it to say so. */}
-        <div className="mt-5 grid gap-6 rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] ring-1 ring-accent/25 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-12">
-          <div className="flex items-start gap-4">
-            <span className="channel-tile !size-11" aria-hidden><IcOtherBrand className="size-6" /></span>
-            <div>
-              <p className="label text-accent-ink">Not our hardware</p>
-              <p className="mt-2 max-w-[78ch] text-[0.95rem] leading-relaxed text-muted-foreground">
-                Already have a system? Then this is the one thing on this page that is not about our
-                hardware.{" "}
-                <Link
-                  href="/services/repairs-and-service"
-                  data-spot
-                  className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4"
-                >
-                  We take over and repair systems we did not sell
-                </Link>
-                , including brands we would never have quoted you.
-              </p>
-            </div>
-          </div>
-          {/* The brands, spelled out. Somebody arriving here has a dead run and a specific make
-            * on their fascia, and "other brands" does not answer the only question they have.
-            * These are the four we say elsewhere on this page that we diagnose. */}
-          <div className="lg:border-l lg:border-border lg:pl-12">
-            <p className="label text-muted-foreground">Systems we take over</p>
-            <ul className="mt-3 grid grid-cols-2 gap-x-8 gap-y-1.5">
-              {["Jellyfish", "Gemstone", "Trimlight", "Oelo"].map((b) => (
-                <li key={b} className="font-display text-[0.95rem] font-bold text-foreground">{b}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* the qualifying questions, as a wide band — a third shape, not a fourth card */}
-        <div className="mt-5 grid gap-6 rounded-lg bg-raise p-6 ring-1 ring-accent/25 lg:grid-cols-[22rem_1fr] lg:items-center lg:gap-10 lg:p-8">
+          * On bg-primary rather than bg-raise: the panel above closes on a bg-raise strip, and the
+          * light band that used to sit between the two is gone with the takeover claim, so bg-raise
+          * here would put the same ground either side of a 20px gap. */}
+        <div className="mt-5 grid gap-6 rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] ring-1 ring-accent/25 lg:grid-cols-[22rem_1fr] lg:items-center lg:gap-10 lg:p-8">
           <div>
             <p className="label text-accent">Not sure where to start</p>
             <h3 className="mt-2 text-xl text-on-dark">We design it on site, after dark.</h3>
@@ -342,91 +304,47 @@ export function ServicesBento() {
   );
 }
 
-/* 7 — THE HARDWARE · one recommended tier, then the craft that is common to both
+/* 7 — THE HARDWARE · one manufacturer, and the craft that is the same on every run
  *
- * Round three. Round one was seven white cards in two columns whose counts did not line
- * up. Round two was even rows, which fixed the alignment but, in the client's words,
- * still read as "just a lot of text, and a bit disorganized" — and, fairly, "I don't see
- * how it's highlighting anything": three identically-ringed panels highlight nothing.
+ * THE PLANS ARE GONE, AND THIS TIME PROPERLY. Two rounds of this section were spent
+ * rearranging a fabrication instead of deleting it. Round one was seven white cards. Round
+ * two was three panels, one badged "what we recommend", which the client rejected with "i
+ * dont like this plans section since its not a real thing". Round three was two tiers side
+ * by side, each carrying the case against itself — better designed, still fiction. Named
+ * tiers called "Brytr Signature" and "Brytr Basic" do not exist, and the spec rows under
+ * them ("Rated life: 25 years", "LED spacing: 4 in., addressable") were numbers no one had
+ * given me. The client, plainly, on the third pass: they do not have packages, it is not
+ * true, talk about the main type of light they actually install, which is Haven.
  *
- * Two changes. HIERARCHY: the Signature tier is the recommendation, so it is the only lit
- * panel — brighter surface, full amber edge, a tag, and the only filled button. The other
- * two are quiet by design. COMPARABILITY: the prose blurb per tier is gone, replaced by
- * the same four spec rows in the same order on all three, so the eye reads across instead
- * of down through paragraphs. Every value here already appears on the system pages and in
- * content/compares.ts — nothing was written to fill a row.
- *
- * The manufacturer name is a value in a spec row, not a label sitting where a logo should
- * be. When the official Haven and Jellyfish files arrive they go in the `logo` slot on
- * each tier in content/systems.ts.
+ * So the section is about Haven now. Every name below is a real Haven product line with a
+ * real page behind it, and there is not a single number in it, because a number on a home
+ * page has to come from somewhere. The craft band underneath survives untouched: fascia
+ * mount, mitred corners, concealed wire and end caps are things we do, photographed on a
+ * finished install, and they were never the problem.
  */
-type Tier = {
-  name: string; tier: string;
-  rows: [string, string][]; who: string; against: string; href: string;
-};
-
-/* TWO TIERS, AND AN ADD-ON THAT IS NOT ONE.
- *
- * This was three equal panels in a row, the first ringed in amber with a "What we recommend"
- * badge on it. The client: "i dont like this plans section since its not a real thing." That
- * is exactly right and it is worth naming the failure precisely, because it was mine.
- *
- * Three cards abreast, one highlighted, one badged "recommended" is the SaaS pricing table.
- * It is a strong pattern and I reached for it because it makes a page feel decided. But it
- * encodes two claims that are both false here. First, that these are three comparable
- * choices: they are not — Signature and Basic are an either/or, and the landscape range is an
- * accessory you add to whichever you pick, so putting it third in a row of three invents a
- * decision nobody has to make. Second, that we have a house recommendation: the entire
- * argument of this business is that the recommendation depends on the roof, and that we are
- * the only ones who can say the cheap one wins. A permanent amber "what we recommend" badge
- * contradicts the sentence directly above it.
- *
- * So: two tiers, side by side, neither ringed and neither badged, each carrying the case
- * AGAINST itself as well as for — which is the only version of this a reader can trust. The
- * landscape range follows as a strip, subordinate, because that is what it is.
- */
-const tiers: Tier[] = [
+const havenLines: { name: string; what: string; slug: string }[] = [
   {
-    name: "Brytr Signature", tier: "Premium",
-    rows: [
-      ["Hardware", "Haven Evolution"],
-      ["White light", "Dedicated channel"],
-      ["LED spacing", "4 in., addressable"],
-      ["Rated life", "25 years"],
-    ],
-    who: "Long or complex rooflines, and anyone who leaves warm white on every night.",
-    against: "More than you need on a short, simple roof.",
-    href: "/lighting-systems/brytr-signature",
+    name: "Haven Evolution",
+    what: "The roofline channel and the diodes that sit in it.",
+    slug: "haven-evolution",
   },
   {
-    name: "Brytr Basic", tier: "Value",
-    rows: [
-      ["Hardware", "Jellyfish"],
-      ["White light", "Color mixed"],
-      ["LED spacing", "Wider"],
-      ["Rated life", "Shorter"],
-    ],
-    who: "A simple single-story roofline, or a budget you'd rather split with landscape.",
-    against: "Its white is mixed from colour, so warm white every night is where it shows.",
-    href: "/lighting-systems/brytr-basic",
+    name: "Haven Q Series",
+    what: "Soffit and architectural fixtures, recessed or on track.",
+    slug: "haven-q-series",
+  },
+  {
+    name: "Haven 9 Series",
+    what: "Ground level: path, uplight and bed fixtures.",
+    slug: "haven-9-series-landscape-lights",
+  },
+  {
+    name: "Haven X Bistro",
+    what: "Overhead runs on a pergola, a patio or a structure.",
+    slug: "haven-x-bistro-lights",
   },
 ];
 
-const addOn = {
-  name: "Landscape and bistro",
-  rows: [
-    ["Hardware", "Haven 9 and X Series"],
-    ["Runs", "Path, uplight, pergola"],
-    ["Control", "The same app"],
-    ["Pairs with", "Either tier"],
-  ] as [string, string][],
-  who: "Beds, trees, patios and pergolas, added to either tier or installed on their own.",
-  href: "/lighting-systems/haven-9-series-landscape-lights",
-};
-
-/* Four icons drawn for these four rows (see components/icons). They used to borrow the
- * service-grid glyphs, which meant the gable mark stood for "Roofline", "into fascia" and
- * a gallery tab on the same page. One glyph, one meaning. */
 const craft: [string, string, typeof IcFasciaMount][] = [
   ["Into fascia, never shingles", "Every penetration sealed as it is made.", IcFasciaMount],
   ["Mitered at every transition", "Valleys, dormers and returns.", IcMiter],
@@ -434,13 +352,11 @@ const craft: [string, string, typeof IcFasciaMount][] = [
   ["Capped terminations", "A sealed end cap closes the run.", IcEndCap],
 ];
 
-const specSheet: [string, string][] = [
-  ["Channel", "Extruded aluminum"],
-  ["Diffuser", "Frosted polycarbonate"],
-  ["LED spacing", "4 in., addressable"],
-  ["Weather rating", "IP66 sealed"],
-  ["White channel", "Dedicated, not color mixed"],
-];
+/* THE SPEC SHEET IS GONE. It was five rows of component specification on a home page, and
+ * one of them — "LED spacing: 4 in., addressable" — was the same invented number that was
+ * under the tier cards. The client, twice in one video: this looks like a dashboard, and we
+ * should not have specs like that on the home page. Component detail lives on the system
+ * pages, where each value sits next to the product it describes. */
 
 export function MaterialsSplit() {
   return (
@@ -448,90 +364,30 @@ export function MaterialsSplit() {
       <div className="shell">
         <SectionHead
           eyebrow="The hardware"
-          title="We install the good stuff, and we will tell you which is which."
-          lede="Most installers carry one brand and therefore have one recommendation. We carry a premium tier and a value tier, which means we have no reason to talk you into either."
+          title="We lead with Haven, and we install every line of it."
+          lede="Haven Lighting makes the roofline channel, the soffit and architectural fixtures, the ground-level lights and the overhead bistro runs. We install all of it, which is why everything on the property answers to the same app instead of to three different ones. Jellyfish is the other system we put up, and the comparison pages are where that argument belongs."
         />
 
-        <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-2">
-          {tiers.map((t) => (
-            <article
-              key={t.name}
+        {/* Four names, one line each, no specification rows. The client on the version that
+          * stood here: it looks like being in a dashboard. A home page introduces the
+          * hardware; the system pages are where a number belongs, next to its source. */}
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          {havenLines.map((h) => (
+            <Link
+              key={h.slug}
+              href={`/lighting-systems/${h.slug}`}
               data-spot
-              className="relative flex flex-col overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10"
+              className="group flex items-start gap-4 rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10 transition-colors duration-[--dur-fast] hover:ring-accent/50"
             >
-              {/* This card used to carry a 4px amber bar across its top edge. That is the
-                * coloured-strip-on-card pattern — the tell slopcheck greps for as border-t-4, which
-                * it did not catch because I drew it with an absolutely positioned span instead of a
-                * border. It is also amber doing pure decoration, on a site where amber is reserved
-                * for light coming out of a fixture.
-                *
-                * A header rail instead: a surface step and a hairline, which is the same object
-                * that heads every spec sheet and every photograph on the site, so the card now
-                * belongs to the page's vocabulary rather than to a template's. */}
-              <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-on-dark/12 bg-raise px-7 py-4">
-                <p className="label text-on-dark">{t.tier}</p>
-                <p className="text-xs text-on-dark-muted">Named on your quote</p>
-              </div>
-
-              <div className="flex flex-1 flex-col p-7">
-                <h3 className="font-display text-2xl font-bold leading-tight text-on-dark">
-                <Link href={t.href} className="hover:text-accent">{t.name}</Link>
-              </h3>
-
-              <dl className="mt-5 divide-y divide-on-dark/12 border-y border-on-dark/12">
-                {t.rows.map(([k, v]) => (
-                  <div key={k} className="flex items-baseline justify-between gap-4 py-2.5">
-                    <dt className="text-sm text-on-dark-muted">{k}</dt>
-                    <dd className="u text-right text-sm font-medium text-on-dark">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <div className="mt-5 flex-1 space-y-4">
-                <p className="text-[0.95rem] leading-relaxed text-on-dark-muted">
-                  <span className="label block text-on-dark">Right for</span>
-                  {t.who}
-                </p>
-                {/* The case against, on both cards. A comparison where neither side has a
-                  * downside written on it is a brochure. */}
-                <p className="bg-on-dark/[0.07] px-4 py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">
-                  <span className="label block text-on-dark">Where it is the wrong call</span>
-                  {t.against}
-                </p>
-              </div>
-
-                <div className="mt-6">
-                  <TextLink onDark href={t.href}>The full sheet for {t.name}</TextLink>
-                </div>
-              </div>
-            </article>
+              <span className="mt-1 block h-9 w-1 shrink-0 bg-accent" aria-hidden />
+              <span>
+                <span className="block font-display text-xl font-bold leading-tight text-on-dark decoration-accent decoration-2 underline-offset-4 group-hover:underline">
+                  {h.name}
+                </span>
+                <span className="mt-2 block text-[0.95rem] leading-snug text-on-dark-muted">{h.what}</span>
+              </span>
+            </Link>
           ))}
-        </div>
-
-        {/* THE ADD-ON, AS A STRIP RATHER THAN A THIRD TIER.
-          * Horizontal, half the height, one row of specs. It reads as something you bolt on,
-          * because that is what it is. */}
-        <div className="mt-5 overflow-hidden rounded-lg bg-raise ring-1 ring-on-dark/10">
-          <div className="grid gap-6 p-6 lg:grid-cols-[30fr_46fr_24fr] lg:items-center lg:gap-8">
-            <div>
-              <p className="label text-accent">Adds to either</p>
-              <h3 className="mt-2 font-display text-xl font-bold leading-tight text-on-dark">
-                <Link href={addOn.href} className="hover:text-accent">{addOn.name}</Link>
-              </h3>
-            </div>
-            <dl className="grid grid-cols-2 gap-x-8 gap-y-2 sm:grid-cols-4 lg:gap-x-6">
-              {addOn.rows.map(([k, v]) => (
-                <div key={k}>
-                  <dt className="label text-on-dark-muted">{k}</dt>
-                  <dd className="u mt-1 text-sm font-medium leading-snug text-on-dark">{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <div className="lg:text-right">
-              <TextLink onDark href={addOn.href}>See the range</TextLink>
-            </div>
-          </div>
-          <p className="border-t border-on-dark/12 px-6 py-3.5 text-sm text-on-dark-muted">{addOn.who}</p>
         </div>
 
         {/* ONE BAND, NOT THREE MORE CARDS.
@@ -550,14 +406,14 @@ export function MaterialsSplit() {
           <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-on-dark/12 px-6 py-4">
             <p className="label flex items-center gap-3 text-on-dark">
               <span className="block h-4 w-1 bg-accent" aria-hidden />
-              Same craft on either tier
+              Same craft on every run
             </p>
             <p className="text-sm text-on-dark-muted">
               Photographed on a finished Omaha install
             </p>
           </div>
 
-          <div className="grid divide-on-dark/12 lg:grid-cols-[36fr_32fr_32fr] lg:divide-x">
+          <div className="grid divide-on-dark/12 lg:grid-cols-[46fr_54fr] lg:divide-x">
             {/* the photograph bleeds — no frame, no caption card */}
             <figure className="relative min-h-64 border-b border-on-dark/12 lg:border-b-0">
               <Image
@@ -592,20 +448,6 @@ export function MaterialsSplit() {
               </ul>
             </div>
 
-            <div className="flex flex-col p-6">
-              <p className="label text-on-dark-muted">On the spec sheet</p>
-              <dl className="mt-4 divide-y divide-on-dark/10">
-                {specSheet.map(([k, v]) => (
-                  <div key={k} className="flex items-baseline justify-between gap-4 py-2.5 first:pt-0">
-                    <dt className="text-sm text-on-dark-muted">{k}</dt>
-                    <dd className="u text-right text-sm font-medium text-on-dark">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-              <div className="mt-auto pt-5">
-                <TextLink onDark href="/lighting-systems/brytr-basic">See the Basic tier&rsquo;s numbers</TextLink>
-              </div>
-            </div>
           </div>
         </div>
 
@@ -618,7 +460,7 @@ export function MaterialsSplit() {
   );
 }
 
-/* 8 — WHY BRYTR · one lead claim + three rows · primary
+/* 8 — WHY BRYTR · two claims, equal weight · primary
  *
  * Each of these four used to end in a two-item ticked list. The client: "with these i dont
  * like the check marks. it needs to be simpler." He is right, and the lists were worse than
@@ -630,14 +472,32 @@ export function MaterialsSplit() {
  * measure to handover, replacing a whole run when a repair will not hold, and putting the
  * recommendation in writing — are now clauses in the paragraphs, where they read as part of
  * an argument instead of a checkbox. Nothing was lost and eight rows of furniture went. */
+/* THE TIER CLAIM IS OUT, AND SO IS THE TAKEOVER CLAIM. "Two tiers, so we're never selling
+ * you the only option" was the load-bearing sentence under a pair of tiers that do not
+ * exist, so it went with them. "We service what we didn't sell" went the same way: the
+ * client confirmed on camera that Brytr does not take over or repair other brands' systems,
+ * so the claim, its service page and the band on the section above are all gone.
+ *
+ * A claim on a home page is a promise made before anybody has spoken to us. Two we can keep
+ * beats four where two are furniture, so both of these are drawn at the same weight rather
+ * than one leading and the rest sitting beside it as rows. */
 const why = [
-  { icon: IcHardHat, h: "Our own crews, never subcontracted", p: "The people on your roof are Brytr employees on Brytr payroll, and it is the same crew from the measure to the handover. Subcontracted installs are the single biggest cause of the leaks and the dead sections we get called out to fix." },
-  { icon: IcOtherBrand, h: "We service what we didn't sell", p: "Dead run, failed controller, installer stopped answering the phone. We take over other brands' systems including Jellyfish, Gemstone, Trimlight and Oelo — diagnosing any of them, and replacing a whole run when a repair will not hold." },
-  { icon: IcVerified, h: "Day and night verification", p: "We don't leave until you've seen it lit after dark and seen how it reads from the street in daylight. Both states, on the same visit, with you there." },
-  { icon: IcTwoTiers, h: "Two tiers, so we're never selling you the only option", p: "We carry premium and value hardware, which is why our comparison pages give the cheaper system real reasons to win, and why the recommendation arrives in writing. A single-brand dealer has no way to write those pages." },
+  {
+    icon: IcHardHat,
+    h: "Our own crews, never subcontracted",
+    p: "The people on your roof are Brytr employees on Brytr payroll, and it is the same crew from the measure to the handover. Subcontracting the install is the single biggest cause of the leaks and the dead sections in this trade, which is the whole reason we do not do it.",
+    href: "/about",
+    cta: "Who is actually on the roof",
+  },
+  {
+    icon: IcVerified,
+    h: "Day and night verification",
+    p: "We don't leave until you've seen it lit after dark and seen how it reads from the street in daylight. Both states, on the same visit, with you there.",
+    href: "/how-it-works",
+    cta: "What the last hour looks like",
+  },
 ];
 export function WhyBrytr() {
-  const [lead, ...others] = why;
   return (
     /* PHOTO-BACKED, and now with a point of focus.
      *
@@ -647,9 +507,8 @@ export function WhyBrytr() {
      * with 16px icons lost on a dark photo, ragged bottoms, and a lede that announced
      * how many points were coming. This is the most important argument on the page.
      *
-     * So one claim leads at size — the crews, because subcontracting is the actual cause
-     * of the failures we get called out to fix — and the other three sit beside it as
-     * rows with icons in the channel container, big enough to read. */
+     * So both claims are drawn at the same size, in the same container, with the icons in
+     * the channel tile big enough to read. Two panels beat a lead panel and a lone row. */
     <section className="relative isolate overflow-hidden bg-primary">
       <Image
         src="/img/scene-christmas.jpg"
@@ -663,37 +522,30 @@ export function WhyBrytr() {
       <div className="shell relative py-20 lg:py-28">
         <p className="label text-accent">Why Brytr</p>
         <h2 className="mt-4 max-w-[34ch] text-[clamp(2rem,3.8vw,3.2rem)] leading-[1.02] text-on-dark">
-          Every quote in this market comes from somebody selling exactly one brand.
+          The people who quote your roof should be the people who install it.
         </h2>
+        {/* The headline here used to be "Every quote in this market comes from somebody selling
+          * exactly one brand", and the paragraph under it finished the thought with "that is why
+          * we carry two systems instead of one". Both halves rested on the tier fiction, so both
+          * went. What is left is the thing the client stood behind on camera: the crew. */}
         <p className="mt-5 max-w-[62ch] text-lg text-on-dark/90">
-          That&rsquo;s the reason Zac and Sam started Brytr. It&rsquo;s also why we carry two
-          systems instead of one, and why we&rsquo;ll tell you which of them your house needs.
+          That&rsquo;s the reason Zac and Sam started Brytr, and it is still the part of this they
+          will not hand to anybody else.
         </p>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-[44fr_56fr] lg:gap-14">
-          {/* the claim that matters most, at size */}
-          <article className="flex flex-col rounded-lg bg-primary/72 p-7 ring-1 ring-accent/30">
-            <span className="channel-tile mb-6" aria-hidden><lead.icon className="size-7" /></span>
-            <h3 className="font-display text-[clamp(1.4rem,2vw,1.9rem)] font-bold leading-tight text-on-dark">
-              {lead.h}
-            </h3>
-            <p className="mt-4 text-[1.05rem] leading-relaxed text-on-dark/90">{lead.p}</p>
-            <div className="mt-auto border-t border-on-dark/15 pt-6">
-              <TextLink onDark href="/about">Who is actually on the roof</TextLink>
-            </div>
-          </article>
-
-          <ul className="divide-y divide-on-dark/15">
-            {others.map((w) => (
-              <li key={w.h} className="flex gap-5 py-6 first:pt-0 last:pb-0">
-                <span className="channel-tile" aria-hidden><w.icon className="size-7" /></span>
-                <div>
-                  <h3 className="font-display text-lg font-bold leading-snug text-on-dark">{w.h}</h3>
-                  <p className="mt-2 text-[0.95rem] leading-relaxed text-on-dark/85">{w.p}</p>
-                </div>
-              </li>
-            ))}
-          </ul>
+        <div className="mt-12 grid gap-8 lg:grid-cols-2 lg:gap-14">
+          {why.map((w) => (
+            <article key={w.h} className="flex flex-col rounded-lg bg-primary/72 p-7 ring-1 ring-accent/30">
+              <span className="channel-tile mb-6" aria-hidden><w.icon className="size-7" /></span>
+              <h3 className="font-display text-[clamp(1.4rem,2vw,1.9rem)] font-bold leading-tight text-on-dark">
+                {w.h}
+              </h3>
+              <p className="mt-4 text-[1.05rem] leading-relaxed text-on-dark/90">{w.p}</p>
+              <div className="mt-auto border-t border-on-dark/15 pt-6">
+                <TextLink onDark href={w.href}>{w.cta}</TextLink>
+              </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
