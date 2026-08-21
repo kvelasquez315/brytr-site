@@ -93,7 +93,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         trail={trail}
         footnote={
           <>
-            Written by Brytr Co from installing and repairing this product in the Omaha metro. Not
+            Written by Brytr Co from installing this product in the Omaha metro. Not
             sponsored and not manufacturer copy.{" "}
             <Link href="/blog" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
               The other eleven
