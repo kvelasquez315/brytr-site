@@ -16,7 +16,7 @@ import { site } from "@/content/site";
  *
  * What it is now. The problem with every FAQ page is that the answers are behind a click,
  * so somebody scanning for one fact has to open six accordions to find out we are not going
- * to give them a price. So the centrepiece is THE SHORT ANSWERS: the eight questions people
+ * to give them a price. So the centerpiece is THE SHORT ANSWERS: the eight questions people
  * actually arrive with, answered in one line each, in the open, with a link down to the long
  * version. Then all of the groups in ONE section rather than five identical ones.
  *
@@ -37,12 +37,68 @@ const trail = [{ name: "Home", href: "/" }, { name: "FAQ", href: "/faq" }];
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z]+/g, "-");
 
-const groups = [
-  { h: "Before you buy", items: homeFaqs.slice(0, 4) },
-  { h: "Product and specs", items: serviceFaqsFor("permanent lighting").slice(0, 4) },
-  { h: "Install", items: homeFaqs.slice(4) },
-  { h: "Cost and financing", items: pricingFaqs },
-  { h: "Service and warranty", items: serviceFaqsFor("permanent lighting").slice(4) },
+/* GROUPED BY QUESTION, NOT BY ARRAY INDEX.
+ *
+ * These used to be `.slice()` calls over the shared arrays, which put whatever happened to
+ * sit at those indices under whatever heading came next. Two things went wrong. The service
+ * array opens with `How long does ${name} take to install?`, so on this page the question
+ * about install duration was filed under "Product and specs" — and homeFaqs carries "How long
+ * does an install take?", so the same question appeared twice on one page under two different
+ * headings. Grouping by the question itself means a heading is a claim about its contents
+ * rather than an accident of ordering, and a duplicate is visible in this file. */
+const service = serviceFaqsFor("permanent lighting");
+const pick = (src: typeof homeFaqs, ...qs: string[]) =>
+  qs.map((q) => src.find((f) => f.q === q)).filter((f): f is (typeof src)[number] => !!f);
+
+/* `wide` spans the grid and splits its own items into two columns. Cost and financing is the
+ * biggest group by some way — nine questions against three or four — so it earns the full width
+ * and gives the layout a full last row instead of a lone card in a wide one. */
+const groups: { h: string; note: string; items: typeof homeFaqs; wide?: boolean }[] = [
+  {
+    h: "Before you buy",
+    note: "The ones that decide whether this is even the right product for the house.",
+    items: pick(homeFaqs,
+      "Can you actually see it during the day?",
+      "What does it cost?",
+      "Does it damage my soffit or fascia?",
+      "Will my HOA allow it?"),
+  },
+  {
+    h: "Product and specs",
+    note: "What is actually screwed to the building, and what it does after that.",
+    items: pick(service,
+      "Is this permanent or seasonal?",
+      "Can I add to it later?",
+      "Will it work with my existing smart home?"),
+  },
+  {
+    h: "Install",
+    note: "One day on your property, and what it asks of you while it happens.",
+    items: [
+      ...pick(homeFaqs,
+        "How long does an install take?",
+        "Do I need to be home for the install?",
+        "Can it be installed in winter?"),
+    ],
+  },
+  {
+    h: "Service and warranty",
+    note: "The part that matters in year four, when nobody is selling you anything.",
+    items: [
+      ...pick(homeFaqs, "What happens when a section stops working?"),
+      ...pick(service,
+        "What warranty comes with it?",
+        "Do you service other brands?",
+        "What areas do you cover?",
+        "How do I get a number?"),
+    ],
+  },
+  {
+    h: "Cost and financing",
+    note: "Why the number is shaped the way it is, and what moves it.",
+    items: pricingFaqs,
+    wide: true,
+  },
 ];
 const all = groups.flatMap((g) => g.items);
 
@@ -52,7 +108,7 @@ const all = groups.flatMap((g) => g.items);
 const shortAnswers: { q: string; a: string; to: string }[] = [
   {
     q: "Can you see it in the daytime?",
-    a: "Barely, and that is the point. Colour-matched aluminium tucked into the eave line, which reads as trim from the street.",
+    a: "Barely, and that is the point. Color-matched aluminum tucked into the eave line, which reads as trim from the street.",
     to: "Before you buy",
   },
   {
@@ -92,7 +148,7 @@ const shortAnswers: { q: string; a: string; to: string }[] = [
   },
 ];
 
-/* THE HONEST LIMIT. Three things no FAQ page can answer, and why. */
+/* THE HONEST LIMIT. The things no FAQ page can answer, and why. */
 const cannot: { h: string; p: string }[] = [
   {
     h: "What your house costs",
@@ -100,7 +156,7 @@ const cannot: { h: string; p: string }[] = [
   },
   {
     h: "Whether your covenant allows it",
-    p: "Several of the newer west Omaha developments have specific language about permanent exterior lighting and no two sets of rules read the same. We pull yours and read it rather than guessing from the neighbourhood name.",
+    p: "Several of the newer west Omaha developments have specific language about permanent exterior lighting and no two sets of rules read the same. We pull yours and read it rather than guessing from the neighborhood name.",
   },
   {
     h: "Whether your fascia is sound",
@@ -120,7 +176,7 @@ export default function FaqPage() {
         objectPosition="50% 38%"
         eyebrow="Questions"
         h1="Everything people ask us."
-        lede="In the words customers actually use, grouped by where in the decision they come up. The eight we get most are answered in the open, in one line each, so you do not have to click anything to find out what we will and will not tell you."
+        lede="In the words customers actually use, grouped by where in the decision they come up. The ones we get most are answered in the open, in one line each, so you do not have to click anything to find out what we will and will not tell you."
         trail={trail}
         footnote={
           <>
@@ -131,13 +187,13 @@ export default function FaqPage() {
       />
 
       {/* ── THE SHORT ANSWERS ──
-        * The centrepiece. Answers in the open, because the whole failure of an
+        * The centerpiece. Answers in the open, because the whole failure of an
         * FAQ page is that the useful part is behind a click. */}
       <section className="section bg-background">
         <div className="shell">
           <SectionHead
             eyebrow="No clicking required"
-            title="The eight we get most, answered here."
+            title="The ones we get most, answered here."
             lede="Each of these has a longer answer further down. These are the short versions, and they do not say anything the long versions contradict."
           />
 
@@ -184,23 +240,39 @@ export default function FaqPage() {
                     className="inline-flex items-baseline gap-2.5 rounded-sm border border-on-dark/22 px-4 py-2.5 text-sm text-on-dark-muted transition-colors duration-[--dur-fast] hover:border-accent hover:text-on-dark"
                   >
                     {g.h}
-                    <span className="u text-xs text-accent">{g.items.length}</span>
                   </a>
                 </li>
               ))}
             </ul>
           </nav>
 
-          <div className="mt-10 space-y-12">
+          {/* TWO COLUMNS, NOT ONE.
+            * The accordion used to run down a single max-w-[82ch] column inside a 100rem
+            * shell, which left roughly 540px of bare background beside it for the whole
+            * height of the section — about 3,400px of nothing, the largest blank area on the
+            * site, on its longest page. The questions are self-contained, so they simply go
+            * two-up: same content, none invented, and the page is a third shorter. */}
+          <div className="mt-10 grid gap-x-14 gap-y-12 lg:grid-cols-2">
             {groups.map((g) => (
-              <div key={g.h} id={slug(g.h)} className="scroll-mt-28">
-                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-accent pb-3">
+              <div key={g.h} id={slug(g.h)} className={`scroll-mt-28 ${g.wide ? "lg:col-span-2" : ""}`}>
+                {/* The note stacks UNDER the rule rather than sitting to the right of the
+                  * heading. Standing rule: body copy never sits beside a heading. It was
+                  * right-aligned there because it replaced a "N questions" counter, and it
+                  * inherited the counter's slot along with its position. */}
+                <div className="border-b-2 border-accent pb-3">
                   <h3 className="font-display text-[clamp(1.3rem,2.4vw,1.75rem)] font-bold text-foreground">
                     {g.h}
                   </h3>
-                  <p className="u text-sm text-muted-foreground">{g.items.length} questions</p>
                 </div>
-                <div className="mt-6 max-w-[82ch]"><Faq items={g.items} /></div>
+                <p className="mt-3 max-w-[54ch] text-sm leading-relaxed text-muted-foreground">{g.note}</p>
+                {g.wide ? (
+                  <div className="mt-5 grid gap-x-14 lg:grid-cols-2">
+                    <Faq items={g.items.slice(0, Math.ceil(g.items.length / 2))} />
+                    <Faq items={g.items.slice(Math.ceil(g.items.length / 2))} />
+                  </div>
+                ) : (
+                  <div className="mt-5"><Faq items={g.items} /></div>
+                )}
               </div>
             ))}
           </div>
@@ -214,11 +286,12 @@ export default function FaqPage() {
             <SectionHead
               onDark
               eyebrow="The honest limit"
-              title="Three questions no FAQ page can answer."
+              title="Questions no FAQ page can answer."
             />
             <p className="mt-5 text-lg leading-relaxed text-on-dark/85">
-              An FAQ page that answers everything is an FAQ page that has guessed at something. These
-              three need somebody at your house, and two of them need somebody up a ladder.
+              An FAQ page that answers everything is an FAQ page that has guessed at something.
+              These need somebody standing at your house, and most of them need somebody up a
+              ladder.
             </p>
             <a
               href={site.phoneHref}
@@ -227,7 +300,7 @@ export default function FaqPage() {
               {site.phone}
             </a>
             <p className="mt-2.5 text-sm text-on-dark-muted">
-              All three get answered on one phone call and one visit.
+              All of them get answered on one phone call and one visit.
             </p>
             <div className="mt-6 flex flex-wrap gap-x-7 gap-y-2">
               <TextLink onDark href="/free-design-consultation">Book the visit</TextLink>
