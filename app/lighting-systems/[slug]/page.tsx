@@ -19,8 +19,8 @@ import { Jsonld, breadcrumb, faqSchema } from "@/lib/schema";
  *     took a hex value as a prop — the one thing the brand lock forbids outside globals.css
  *   · the same three cost drivers ("home size / story count / run complexity"), which is
  *     /pricing's arithmetic printed a ninth time
- *   · `priceFrom` set at 3.2rem, which on six of the eight pages rendered the words
- *     "Signature add-on" as if they were a price
+ *   · a `priceFrom` field set at 3.2rem, which on six of the eight pages rendered a
+ *     positioning word as if it were a price
  *   · Product JSON-LD carrying the BUSINESS's aggregateRating — 5.0 from 196 Google reviews
  *     attached to a product, which is not what those reviews are of
  *   · the other seven systems as seven identical cards at the bottom of all eight pages
@@ -30,7 +30,7 @@ import { Jsonld, breadcrumb, faqSchema } from "@/lib/schema";
  * content/system-detail.ts, which adds the three things the template was missing: the
  * photograph that belongs to this system, where it sits in the lineup, and WHERE WE WOULD
  * NOT QUOTE IT. That last one is the section a single-brand dealer cannot publish, and it
- * is the reason the two-tier claim on the rest of the site means anything.
+ * is what stops eight pages of manufacturer copy reading as a brochure.
  *
  * Archetype: spec hero (photograph + the top specs, no form) → the spec sheet in full →
  * what it does well facing where it falls short → where it sits → head to head where one
@@ -58,18 +58,13 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
    * question and answering it with the whole job's duration, so those pages get their own
    * first question and keep the rest. */
   const generic = serviceFaqsFor(s.name);
-  const partish = s.tier === "Component" || s.tier === "Control";
-  /* See SystemDetail.against — Basic's sheet is only readable next to Signature's numbers. */
-  const against = d?.against ? systems.find((x) => x.slug === d.against) : undefined;
-  const faqs = partish
-    ? [
-        {
-          q: `Is ${s.name} quoted separately?`,
-          a: "No. It is part of the tier it belongs to, measured with the rest of the house, and it appears on the same written quote rather than as an add-on afterwards.",
-        },
-        ...generic.slice(1),
-      ]
-    : generic;
+  const faqs = [
+    {
+      q: `Is ${s.name} quoted separately?`,
+      a: "No. It is measured with the rest of the house and it appears on the same written quote rather than as an add-on afterwards.",
+    },
+    ...generic.slice(1),
+  ];
   const rel = compares.find((c) => c.a.includes(s.name.split(" ")[0]) || c.b.includes(s.name.split(" ")[0]));
   const alsoSee = (d?.alsoSee ?? [])
     .map((sl) => systems.find((o) => o.slug === sl))
@@ -132,27 +127,11 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
               <SpecTable
                 onDark={false}
                 caption={`Specifications for ${s.name}`}
-                rows={
-                  against
-                    ? s.specs.map((x) => ({
-                        spec: x.label,
-                        a: x.value,
-                        b: against.specs.find((y) => y.label === x.label)?.value ?? "—",
-                      }))
-                    : s.specs.map((x) => ({ spec: x.label, a: x.value }))
-                }
-                headA={against ? s.tier : "Value"}
-                headB={against ? against.tier : undefined}
-                /* Named the rated-life and weather rows specifically, which the component and
-                 * control sheets do not carry — a footnote citing a row that is not on screen
-                 * is a reader catching us out. */
-                source={
-                  d?.specSource
-                    ? d.specSource
-                    : s.tier === "Component" || s.tier === "Control"
-                    ? "Manufacturer figures where the manufacturer publishes them. Anything about how it is installed, or how it behaves on a house we have wired, is ours."
-                    : "Rated life and weather ratings are the manufacturer's published figures. Anything about how it is installed is ours."
-                }
+                rows={s.specs.map((x) => ({ spec: x.label, a: x.value }))}
+                headA="Value"
+                /* The footnote only cites rows this sheet actually carries. A footnote about a
+                 * row that is not on screen is a reader catching us out. */
+                source="Manufacturer figures where the manufacturer publishes them. Anything about how it is installed, or how it behaves on a house we have wired, is ours."
               />
             </div>
           </div>
@@ -160,16 +139,12 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
           <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
             <p className="label text-accent">How this one is priced</p>
             <h3 className="mt-3 font-display text-xl font-bold text-on-dark">
-              {s.tier === "Component" || s.tier === "Control"
-                ? "Not priced on its own."
-                : "By the foot, not by the package."}
+              Not priced on its own.
             </h3>
             <p className="mt-3 text-[0.95rem] leading-relaxed text-on-dark-muted">
               {s.tier === "Control"
                 ? "The app and the controller are part of every install rather than a line item. There is no subscription and nothing to renew."
-                : s.tier === "Component"
-                ? "This is hardware inside a quote rather than a product you buy from us. What you are quoted is the tier it belongs to, measured on your own roofline."
-                : "Linear feet of roofline against a per-foot rate for the tier, then corners, zones and anything added on the same visit. One number for the whole scope, in writing, before we schedule."}
+                : "This is hardware inside a quote rather than a product you buy from us. What you are quoted is the job it belongs to, measured on your own roofline."}
             </p>
             <div className="mt-6 border-t border-on-dark/12 pt-5">
               <TextLink onDark href="/pricing">How the number is built</TextLink>
@@ -178,7 +153,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
               <p className="label text-on-dark-muted">What you are not paying for</p>
               <ul className="mt-4 divide-y divide-on-dark/10 border-y border-on-dark/10">
                 {[
-                  ["No design fee", "The consultation, the design and the written quote are free, on either tier."],
+                  ["No design fee", "The consultation, the design and the written quote are free."],
                   ["No travel charge", "Anywhere inside the metro. Outstate runs are batched into route days at the same price."],
                   ["No subscription", "The app and the controller are part of the install. Nothing renews and nothing expires."],
                   ["No line on install day", "If it was not on the quote you signed, it is not on the invoice."],
@@ -191,14 +166,12 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
               </ul>
             </div>
 
-            {/* This line used to print on all nine pages. On a component or the app it was
-              * pitching a choice the page does not offer — a reader on /app-and-controls was
-              * being told one of two tiers is wrong for their house by a page that sells
-              * neither. */}
+            {/* This line used to pitch a choice these pages do not offer: a reader on
+              * /app-and-controls was being told which of two packages was wrong for their
+              * house by a page that sells neither. */}
             <p className="mt-6 text-sm leading-relaxed text-on-dark-muted">
-              {s.tier === "Component" || s.tier === "Control"
-                ? "It goes on whichever tier you end up on, and it is measured with the rest of the house rather than quoted on its own."
-                : "Two tiers means one of them is wrong for your house. We will tell you which."}
+              It is measured with the rest of the house rather than quoted on its own, and it lands on
+              the same written quote as the roofline.
             </p>
             <div className="mt-4">
               <TextLink onDark href="/free-design-consultation">Get it measured</TextLink>
@@ -208,18 +181,13 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
       </section>
 
       {/* ── WHAT IT DOES WELL, FACING WHERE IT DOES NOT ──
-        * The exclusion is the point. Every one of the eight has one written for
-        * it, including both of our own tiers. */}
+        * The exclusion is the point, and every line in the lineup has one written for it. */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow={s.ownTier ? "Our own tier, honestly" : "After installing it"}
-            title={s.ownTier ? `Where ${s.tier} is right, and where it is not.` : `${s.name}: the honest read.`}
-            lede={
-              s.ownTier
-                ? "We sell this one. Which is exactly why the right-hand column has to exist — a company with two tiers and no opinion about which house needs which is a company with one tier and a brochure."
-                : "We install this hardware, so we have no reason to oversell it and none to trash it. Both columns are what we would tell you standing in your driveway."
-            }
+            eyebrow="After installing it"
+            title={`${s.name}: the honest read.`}
+            lede="We install this hardware, so we have no reason to oversell it and none to trash it. Both columns are what we would tell you standing in your driveway."
           />
 
           {/* NOT items-start. The two columns hold different numbers of rows — six wins against a
@@ -235,7 +203,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
               <div className="border-b border-border bg-primary px-6 py-4">
                 <p className="label flex items-center gap-3 text-on-dark">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
-                  {s.ownTier ? "What you get" : "What it does well"}
+                  What it does well
                 </p>
               </div>
               <ul className="divide-y divide-border">
@@ -244,9 +212,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
                 ))}
               </ul>
               <p className="mt-auto border-t border-border bg-muted px-6 py-4 text-sm leading-relaxed text-muted-foreground">
-                {s.ownTier
-                  ? "Every line here is something we would repeat standing in your driveway, because we are the ones who have to come back to it."
-                  : "We install this hardware, so none of this is a guess about somebody else's product."}
+                We install this hardware, so none of this is a guess about somebody else&rsquo;s product.
               </p>
             </div>
 
@@ -276,9 +242,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
                 </ul>
               )}
               <p className="mt-auto border-t border-border bg-muted px-6 py-4 text-sm leading-relaxed text-muted-foreground">
-                {s.ownTier
-                  ? "We would rather lose the upgrade than have you notice this in year two."
-                  : "You would find all of this out anyway. We would rather you found it here."}
+                You would find all of this out anyway. We would rather you found it here.
               </p>
             </div>
           </div>
@@ -314,16 +278,14 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
               onDark
               eyebrow="Where it sits"
               title={
-                s.ownTier
-                  ? "One of two things that go on a house."
-                  : s.tier === "Control"
+                s.tier === "Control"
                   ? "The layer over everything else."
-                  : "Hardware inside a tier, not a tier."
+                  : "One line of the lineup, not a system on its own."
               }
             />
             <p className="mt-5 text-lg leading-relaxed text-on-dark/85">{d?.position ?? s.short}</p>
             <ul className="mt-7 space-y-3">
-              <Check onDark>Installed by our own crews on either tier</Check>
+              <Check onDark>Installed by our own crews, never subcontracted</Check>
               <Check onDark>Named on the quote rather than implied</Check>
               <Check onDark>Manufacturer terms plus our workmanship coverage</Check>
             </ul>
@@ -352,14 +314,9 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
                       <span className="font-display text-[1.05rem] font-bold text-on-dark group-hover:underline">
                         {o.name}
                       </span>
-                      {/* Amber only on our own tiers. This printed COMPONENT in the brand
-                        * accent next to "Jellyfish Lighting" — a third-party name wearing
-                        * our colour. */}
-                      <span
-                        className={`u shrink-0 text-xs uppercase tracking-[0.08em] ${
-                          o.ownTier ? "text-accent" : "text-on-dark-muted"
-                        }`}
-                      >
+                      {/* Never the brand accent. This printed COMPONENT in amber next to
+                        * "Jellyfish Lighting", a third-party name wearing our colour. */}
+                      <span className="u shrink-0 text-xs uppercase tracking-[0.08em] text-on-dark-muted">
                         {o.tier}
                       </span>
                     </span>
