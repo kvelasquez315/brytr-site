@@ -77,7 +77,7 @@ export function PageHero({
   trail: { name: string; href: string }[];
   aside?: React.ReactNode;
   /* Figures that stand on their own. NOT a count of whatever list follows the hero —
-   * "11 services" above eleven service cards is the page counting itself out loud. */
+     "11 services" above eleven service cards is the page counting itself out loud. */
   stats?: [string, string][];
   footnote?: React.ReactNode;
   variant?: HeroVariant;
@@ -115,11 +115,20 @@ export function PageHero({
     </>
   );
 
-  /* type-only: one column, generous measure, nothing else in the room */
+  /* type-only: one column, generous measure, nothing else in the room.
+   *
+   * `max-w-[70rem]` here was wrong and visible. `.shell` caps at --container (100rem), so at
+   * 1440 the shell's own left edge is the 2rem gutter — x=32. Capping this hero at 70rem
+   * centred it instead, putting the H1 at x=192 while the body section below it stayed at 32.
+   * Every legal page therefore stepped 160px to the left the moment you scrolled past the
+   * hero. The measure belongs on the text, not on the container, so the whole document keeps
+   * one left edge — and 76ch matches the body copy on the legal pages exactly. */
   if (variant === "type") {
     return (
       <section className="bg-primary">
-        <div className="shell max-w-[70rem] py-14 lg:py-20">{Type}</div>
+        <div className="shell py-14 lg:py-20">
+          <div className="max-w-[76ch]">{Type}</div>
+        </div>
       </section>
     );
   }
@@ -169,10 +178,57 @@ export function SpecTable({
   source?: string;
 }) {
   const hi = highlightA ? "border-x-2 border-accent" : "";
+  /* A two-column sheet (Spec / Value) fits a 390px phone at this type size, so it gets no
+   * min-width and never scrolls sideways. A three-column sheet is two brands compared, which
+   * genuinely needs the width, so that one keeps the 40rem floor and scrolls inside its own box.
+   *
+   * `min-w-0` is load-bearing, not tidying. This table sits inside a grid item on the system,
+   * compare and service pages, and a grid item defaults to `min-width: auto` — meaning it
+   * refuses to shrink below its content's min-content width. The 40rem table therefore pushed
+   * its own grid column to 640px and took the whole document with it: every system page was
+   * 656px wide inside a 390px viewport, so the entire page scrolled sideways rather than the
+   * table. `overflow-x-auto` cannot contain anything until the box is allowed to be narrower
+   * than what is inside it. */
+  const floor = headB ? "min-w-[40rem]" : "";
+
+  /* AND A THREE-COLUMN SHEET RESTACKS ON A PHONE RATHER THAN SCROLLING.
+   *
+   * Containing the overflow was not the same as fixing it. At 390px the head-to-head table
+   * showed the Spec column, the left brand clipped mid-word ("Dedicated warm whit"), and the
+   * right brand — half of the comparison — entirely off-screen with no scrollbar, no fade and
+   * no hint that it existed. Then a footnote underneath explained a column the reader never
+   * saw. A comparison that hides one of the two things being compared is not a comparison.
+   *
+   * So below `sm` the same rows render as blocks: the spec, then both brands labelled and
+   * stacked. Nothing scrolls sideways and both columns are always present. Only one of the two
+   * markups is ever displayed, so only one is ever in the accessibility tree. */
+  const stack = headB ? (
+    <dl className={`grid gap-px overflow-hidden rounded-lg ring-1 sm:hidden ${onDark ? "bg-on-dark/12 ring-on-dark/12" : "bg-border ring-border"}`}>
+      {rows.map((r) => (
+        <div key={r.spec} className={onDark ? "bg-primary px-5 py-4" : "bg-card px-5 py-4"}>
+          <dt className={`text-sm font-semibold ${onDark ? "text-on-dark" : "text-foreground"}`}>{r.spec}</dt>
+          <dd className="mt-2.5 grid gap-2">
+            <div>
+              <p className={`label ${highlightA ? "text-accent" : onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>{headA}</p>
+              <p className={`mt-0.5 text-[0.95rem] leading-relaxed ${onDark ? "on-dark-cell" : "text-foreground"}`}>{r.a}</p>
+            </div>
+            <div className={`border-t pt-2 ${onDark ? "border-on-dark/10" : "border-border"}`}>
+              <p className={`label ${onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>{headB}</p>
+              <p className={`mt-0.5 text-[0.95rem] leading-relaxed ${
+                onDark ? (highlightA ? "on-dark-cell-muted" : "on-dark-cell") : (highlightA ? "text-muted-foreground" : "text-foreground")
+              }`}>{r.b}</p>
+            </div>
+          </dd>
+        </div>
+      ))}
+    </dl>
+  ) : null;
+
   return (
-    <div>
-      <div className={`overflow-x-auto rounded-lg ring-1 ${onDark ? "ring-on-dark/12" : "ring-border"}`}>
-        <table className="w-full min-w-[40rem] border-collapse text-left">
+    <div className="min-w-0">
+      {stack}
+      <div className={`min-w-0 overflow-x-auto rounded-lg ring-1 ${headB ? "hidden sm:block" : ""} ${onDark ? "ring-on-dark/12" : "ring-border"}`}>
+        <table className={`w-full ${floor} border-collapse text-left`}>
           <caption className="sr-only">{caption}</caption>
           <thead>
             <tr className={onDark ? "bg-raise" : "bg-primary"}>
@@ -361,7 +417,6 @@ export function PageCta({
             {head}
             <div className="mt-9 border-t border-border pt-7">{readNext}</div>
           </div>
-
           <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
             <p className="label text-accent">Call the shop</p>
             <a
