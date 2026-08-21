@@ -10,7 +10,10 @@
  * a single-story ranch, and a two-story with a garage wing. Linear feet changes with it.
  */
 
-export type Lit = { hex: string; label: string };
+/* `hex` is optional so a caller that just wants the default lit state does not have to
+ * restate the hex, which is the only way an inline colour was reaching a component from
+ * outside globals.css / sections.css. The fallback below is the single source of it. */
+export type Lit = { hex?: string; label: string };
 export type Massing = "gable" | "ranch" | "wing";
 
 type Geo = {
@@ -147,7 +150,7 @@ export function Elevation({
         </>
       )}
 
-      {/* ── THE CHANNEL ──────────────────────────────────────────
+      {/* ── THE CHANNEL ──
           A continuous line of light, not a row of dots. Dots read as a string of
           Christmas bulbs, which is the exact thing this product is not. */}
       {runs.map((d, i) => (
