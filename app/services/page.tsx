@@ -18,7 +18,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
  * right child. So the centerpiece is a DECISION TREE keyed to what a homeowner actually
  * says out loud — outline the house / give the yard depth / we live out back — with what
  * to start with and what people add afterwards, drawn as three lengths of channel. Then
- * the full eleven as a grouped rack (a list, not eleven more cards), then the one thing
+ * every service as a grouped rack (a list, not one more card each), then the one thing
  * only this page has to settle: homes versus businesses.
  *
  * Archetype: the home page's hero, then decision tree, then grouped rack. Every page on
@@ -71,7 +71,7 @@ const branches: {
   },
 ];
 
-/* The eleven, grouped by the surface they attach to. A hub reads better as a list of
+/* Every service, grouped by the surface it attaches to. A hub reads better as a list of
  * places on a property than as a grid of equally-weighted tiles. */
 const groups: { heading: string; note: string; slugs: string[] }[] = [
   {
@@ -92,7 +92,7 @@ const groups: { heading: string; note: string; slugs: string[] }[] = [
   {
     heading: "What you do with it after",
     note: "Same hardware, different night",
-    slugs: ["permanent-christmas-lights", "holiday-seasonal-scenes", "gameday-lighting", "repairs-and-service"],
+    slugs: ["permanent-christmas-lights", "holiday-seasonal-scenes", "gameday-lighting"],
   },
 ];
 
@@ -183,8 +183,8 @@ export default function ServicesHub() {
         </div>
       </section>
 
-      {/* ── THE FULL ELEVEN, AS A RACK ──
-        * Grouped by the surface it attaches to. Not eleven cards. */}
+      {/* ── EVERY SERVICE, AS A RACK ──
+        * Grouped by the surface it attaches to. Not a card each. */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
@@ -244,12 +244,12 @@ export default function ServicesHub() {
       </section>
 
       {/* ── THE RANGE, IN PHOTOGRAPHS ──
-        * This page is a decision tree followed by a rack of eleven rows: it is navigation, and
+        * This page is a decision tree followed by a rack of rows: it is navigation, and
         * navigation with no pictures is a sitemap. Four frames spanning roofline, landscape,
         * overhead and a colour scene, so a reader can see the categories rather than read them. */}
       <PhotoStrip
         eyebrow="All of it, one controller"
-        /* Not "Four of the eleven" — that counted the rack above AND the row below, in one
+        /* Not "Four of the ten" — that counted the rack above AND the row below, in one
           * line. The reader can see how many pictures there are. */
         title="Different houses, different jobs, one controller."
         lede="Everything above attaches to the same channel and the same app, which is why most people end up adding a second and a third thing a season later rather than buying it all at once."
