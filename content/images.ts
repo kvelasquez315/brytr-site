@@ -21,14 +21,40 @@ export type Slot = {
 };
 
 export const images: Record<string, Slot> = {
-  /* the hero pair — the SAME house, the SAME frame, two saved scenes.
-   * Registered to the pixel, so the drag handle wipes one into the other. */
-  heroWarm: { src: "/img/hero-warm-white.jpg",
-    alt: "An Omaha home with Brytr permanent lighting set to everyday warm white",
-    subject: "Front elevation, warm white. Pairs with heroScene — same frame.", ratio: "16/9", priority: true },
-  heroScene: { src: "/img/hero-game-day.jpg",
-    alt: "The same Omaha home with its Brytr lighting switched to red and blue game day colors",
-    subject: "Same frame as heroWarm, color scene on.", ratio: "16/9", priority: true },
+  /* THE HERO PAIR — the same house, the same frame, two saved scenes, registered so the
+   * drag handle wipes one into the other.
+   *
+   * These used to be hero-warm-white.jpg and hero-game-day.jpg, and the first of those is
+   * NOT warm white. Its runs read as a soft pink across the whole elevation — the brick goes
+   * rose and the white siding goes pink — and it was captioned "everyday warm white" in eight
+   * places, which put the site's single most important product claim (that warm white is
+   * where the system sits all year, and colour is the occasional scene) underneath a
+   * photograph of the wrong colour of light.
+   *
+   * The fix was available in the archive and nobody had noticed: the pool-deck shoot is one
+   * property photographed on one evening in both states. hero-bg.jpg and scene-warm-white.jpg
+   * are genuinely warm white; g-pool-red / -blue / -green / -pink are the same camera
+   * position in colour, at the same 16:9. Measured mean luma difference between
+   * scene-warm-white and g-pool-red across a 400px reduction is 12.8, which is colour, not
+   * movement — so the registration the wipe depends on survives the swap.
+   *
+   * So the drag line now genuinely shows the everyday setting against an occasion scene, on
+   * one house, which is the argument it always claimed to be making.
+   *
+   * hero-warm-white.jpg is still in the archive and still used elsewhere. Every caption on it
+   * now describes what is in the frame: a soft pink, not warm white. */
+  heroWarm: { src: "/img/scene-warm-white.jpg",
+    alt: "An Omaha home, pergola and pool deck on everyday warm white at dusk",
+    subject: "The everyday setting. Pairs with heroScene — same house, same frame.", ratio: "16/9", priority: true },
+  heroScene: { src: "/img/g-pool-red.jpg",
+    alt: "The same Omaha home, pergola and pool deck with every run switched to red",
+    subject: "Same frame as heroWarm, one colour scene on.", ratio: "16/9", priority: true },
+
+  /* The home page hero background is a wider crop of the same warm-white evening. It used to
+   * borrow heroScene's alt text, so the hero described a photograph it was not showing. */
+  heroBg: { src: "/img/hero-bg.jpg",
+    alt: "An Omaha home at dusk with the roofline, pergola, seat walls and fire bowls all lit on everyday warm white",
+    subject: "Wide crop of the warm-white evening. Home hero only.", ratio: "21/9", priority: true },
 
   channelCloseUp: { src: "/img/channel-detail.jpg",
     alt: "Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along every gable and eave",
@@ -110,9 +136,9 @@ export const galleryShots: GalleryShot[] = [
   { src: "/img/g-moonrise.jpg", span: true, ratio: "21/9", scene: "Blue and white",
     alt: "An Omaha home lit blue and white under a rising moon, with an uplit tree in the front yard",
     caption: "Roofline, gable accents and landscape uplights running as one system. Omaha, Nebraska." },
-  { src: "/img/hero-warm-white.jpg", ratio: "16/9", scene: "Everyday warm white",
-    alt: "An Omaha home on everyday warm white",
-    caption: "The setting most customers leave on year round." },
+  { src: "/img/hero-warm-white.jpg", ratio: "16/9", scene: "One soft pink, every run",
+    alt: "An Omaha home with every roofline run set to the same soft pink",
+    caption: "One saved scene pushed to the whole elevation, gables and eaves together." },
   { src: "/img/hero-game-day.jpg", ratio: "16/9", scene: "Game day",
     alt: "The same Omaha home switched to red and blue",
     caption: "Same house, same fixture, one tap later." },
