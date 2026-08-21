@@ -5,7 +5,7 @@ export type System = {
   slug: string;
   name: string;
   maker: string;
-  tier: "Signature" | "Basic" | "Component" | "Control";
+  tier: "Component" | "Control";
   short: string;
   title: string;
   h1: string;
@@ -15,82 +15,16 @@ export type System = {
   lede: string;
   specs: Spec[];
   wins: string[];
-  limits?: string[];   // omitted for Brytr's own tiers
-  priceFrom?: string;
-  ownTier?: boolean;
+  limits?: string[];
 };
 
 export const systems: System[] = [
-  {
-    slug: "brytr-signature",
-    name: "The Brytr Signature System",
-    maker: "Built on Haven Evolution",
-    tier: "Signature",
-    short: "The premium tier. What most of our customers install.",
-    title: "The Brytr Signature System | Premium Permanent Lighting",
-    h1: "The Brytr Signature system.",
-    keyword: "brytr signature",
-    icon: "twoTiers",
-    ownTier: true,
-    lede:
-      "Our core offering, built on Haven Evolution hardware. Highest chip density, the full color range, the best app, and the longest warranty we can stand behind.",
-    specs: [
-      { label: "LED spacing", value: "4 in." },
-      { label: "Color range", value: "RGB + dedicated warm white" },
-      { label: "Channel", value: "Extruded aluminum, color matched" },
-      { label: "Control", value: "Haven app, unlimited scenes" },
-      { label: "Zones", value: "Unlimited, per elevation" },
-      { label: "Dimming", value: "1 to 100 percent, per zone" },
-      { label: "Weather rating", value: "IP66" },
-      { label: "LED rating", value: "25 years" },
-      { label: "Price tier", value: "Premium" },
-    ],
-    wins: [
-      "Genuine warm white, not color-mixed white",
-      "Densest LED spacing means smooth gradients, not dots",
-      "Deepest zoning and scheduling control",
-      "Longest warranty in our lineup",
-    ],
-    priceFrom: "Premium tier",
-  },
-  {
-    slug: "brytr-basic",
-    name: "The Brytr Basic System",
-    maker: "Built on Jellyfish",
-    tier: "Basic",
-    short: "The value tier. Honest about what you give up.",
-    title: "The Brytr Basic System | Value Permanent Lighting",
-    h1: "The Brytr Basic system.",
-    keyword: "brytr basic",
-    icon: "twoTiers",
-    ownTier: true,
-    lede:
-      "Our value tier on Jellyfish hardware. A real permanent system at a lower entry point, and we will tell you plainly where it differs from Signature rather than after you sign.",
-    specs: [
-      { label: "LED spacing", value: "Wider than Signature" },
-      { label: "Color range", value: "RGB with mixed white" },
-      { label: "Channel", value: "Aluminum, standard finishes" },
-      { label: "Control", value: "Manufacturer app" },
-      { label: "Zones", value: "Supported, fewer" },
-      { label: "Dimming", value: "Supported" },
-      { label: "Weather rating", value: "Sealed channel" },
-      { label: "LED rating", value: "Shorter than Signature" },
-      { label: "Price tier", value: "Value" },
-    ],
-    wins: [
-      "Lower entry price on the same idea",
-      "Same permanent install, not a seasonal product",
-      "Serviced by us, on the same crews",
-      "Right answer on a smaller roofline or a tighter budget",
-    ],
-    priceFrom: "Value tier",
-  },
   {
     slug: "haven-evolution",
     name: "Haven Lighting Evolution",
     maker: "Haven Lighting",
     tier: "Component",
-    short: "The hardware under our Signature tier.",
+    short: "The roofline channel and the diodes that sit in it.",
     title: "Haven Lighting Evolution: Full Review and Omaha Install",
     h1: "Haven Lighting Evolution, reviewed by an installer.",
     keyword: "haven lighting",
@@ -106,7 +40,6 @@ export const systems: System[] = [
       { label: "App", value: "Haven, iOS and Android" },
       { label: "Weather rating", value: "IP66" },
       { label: "Warranty", value: "Manufacturer backed" },
-      { label: "Our tier", value: "Signature" },
     ],
     wins: [
       "A dedicated white channel is the single biggest quality difference in this category",
@@ -135,7 +68,6 @@ export const systems: System[] = [
       { label: "Color range", value: "RGB + warm white" },
       { label: "Control", value: "Same app as Evolution" },
       { label: "Weather rating", value: "Exterior rated" },
-      { label: "Our tier", value: "Signature add-on" },
     ],
     wins: ["Wall-wash effect a trim light cannot produce", "Shares the app and scenes with the roofline"],
     limits: ["Requires suitable overhang depth", "Not a substitute for roofline trim lighting"],
@@ -157,7 +89,6 @@ export const systems: System[] = [
       { label: "Color range", value: "RGB + warm white" },
       { label: "Control", value: "Same app as the roofline" },
       { label: "Install", value: "Buried low-voltage runs" },
-      { label: "Our tier", value: "Signature add-on" },
     ],
     wins: ["One app for the whole property", "Scenes span roofline and landscape together"],
     limits: ["Trenching required on established beds", "Separate transformer on larger runs"],
@@ -179,7 +110,6 @@ export const systems: System[] = [
       { label: "Color range", value: "RGB + warm white" },
       { label: "Control", value: "Same app, own zone" },
       { label: "Cable", value: "Exterior rated, concealed" },
-      { label: "Our tier", value: "Signature add-on" },
     ],
     wins: ["Stays up through winter", "Dims with the rest of the property"],
     limits: ["Needs a real structure to span", "Not a roofline substitute"],
@@ -189,14 +119,14 @@ export const systems: System[] = [
     name: "Jellyfish Lighting",
     maker: "Jellyfish Lighting",
     tier: "Component",
-    short: "The hardware under our Basic tier.",
+    short: "The other permanent system we install.",
     title: "Jellyfish Lighting: Cost, Specs and Honest Review",
     h1: "Jellyfish Lighting: cost, specs, and an honest installer review.",
     keyword: "jellyfish lighting",
     volume: "15,000/mo",
     icon: "twoTiers",
     lede:
-      "We install Jellyfish as our Basic tier, which means we have no reason to oversell it and no reason to trash it. Here is what it costs, what it does well, and where it falls short of Haven.",
+      "We install Jellyfish too, which means we have no reason to oversell it and no reason to trash it. Here is what it costs, what it does well, and where it falls short of Haven.",
     specs: [
       { label: "Manufacturer", value: "Jellyfish Lighting" },
       { label: "LED spacing", value: "Wider than Haven Evolution" },
@@ -205,7 +135,6 @@ export const systems: System[] = [
       { label: "App", value: "Jellyfish app" },
       { label: "Zones", value: "Supported" },
       { label: "Warranty", value: "Manufacturer backed" },
-      { label: "Our tier", value: "Basic" },
     ],
     wins: [
       "Meaningfully cheaper than Haven Evolution on the same roofline",
@@ -217,7 +146,7 @@ export const systems: System[] = [
       "Mixed white reads cooler and slightly uneven next to a dedicated white channel",
       "Wider LED spacing is visible on long straight runs",
       "App is workable rather than good",
-      "Shorter rated life than the Signature system",
+      "Shorter rated life than Haven Evolution",
     ],
   },
   {
