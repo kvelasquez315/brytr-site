@@ -4,6 +4,7 @@ import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, BandCta, SectionHead } from "@/components/sections/page-parts";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 import { galleryShots } from "@/content/images";
+import { reviewProof } from "@/content/reviews";
 
 export const metadata: Metadata = {
   title: "Permanent Lighting Gallery | Real Omaha Installs",
@@ -30,7 +31,7 @@ export default function Gallery() {
         h1="Finished installs, after dark."
         lede="Every photograph on this page is a Brytr system on a real Omaha home — the same fixture holding warm white on a Tuesday and scarlet on a Saturday. No renders, no stock houses, no borrowed photos."
         trail={trail}
-        stats={[["5.0", "from 177 Google reviews"], ["18", "cities served"], ["1.2M", "lights installed"]]}
+        stats={[[reviewProof.average, `from ${reviewProof.count} ${reviewProof.platform} reviews`], ["18", "cities served"], ["1.2M", "lights installed"]]}
       />
 
       <section className="section bg-background">
