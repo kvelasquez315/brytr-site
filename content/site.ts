@@ -37,7 +37,12 @@ export const site = {
     { figure: "1.2M", label: "Lights installed in Omaha", icon: "installCount" },
     { figure: "5.0", label: "Average from 196 Google reviews", icon: "stars" },
     { figure: "W2", label: "Crews, never subcontracted", icon: "hardHat" },
-    { figure: "25 yr", label: "LED rating on the Signature system", icon: "warranty" },
+    /* This slot held "25 yr — LED rating on the Signature system", which was an invented number
+     * on an invented tier. It was swapped for IP66, but that rating came out of the same batch
+     * of specs I wrote without a source, so it is not safe either. Replaced with the one thing
+     * in this row the client confirmed on camera: we do not leave until the customer has seen it
+     * both ways. If Haven publishes an ingress rating, put it back with the datasheet to hand. */
+    { figure: "2 states", label: "Verified lit after dark and in daylight", icon: "dayNight" },
   ],
 } as const;
 
