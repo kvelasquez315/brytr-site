@@ -48,7 +48,7 @@ export default function Home() {
           * here — before the hardware argument rather than after it — which is the one
           * structural note from the audit I could not act on at the time. */}
         <Reviews />         {/*  4b · pull-quote + cards       · neutral */}
-        <MaterialsSplit />  {/*  5 · two tiers + add-on strip  · deep    */}
+        <MaterialsSplit />  {/*  5 · Haven lines + craft strip · deep    */}
         <WhyBrytr />        {/*  6 · four-up + bridge          · primary */}
         <ProjectTabs />     {/*  8 · tabbed photo gallery      · raise   */}
         {/* AUDIT FIX: from the systems section to the final form was ten phone screens
