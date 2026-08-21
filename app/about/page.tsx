@@ -28,7 +28,7 @@ import { reviewProof } from "@/content/reviews";
  * page with no faces. Portraits are on the shot list; when they land, these become photos
  * and the layout does not move.
  *
- * Archetype: home hero → thesis split with the two shelves → six-card cost ledger →
+ * Archetype: home hero → thesis split with the Haven lineup → six-card cost ledger →
  * founder two-up → sourced numbers band. Closer: one, the phone band.
  */
 
@@ -37,31 +37,31 @@ export const metadata: Metadata = {
    * /contact. The brand is already in the title, so the template would repeat it. */
   title: { absolute: "About Brytr Co | Family Owned, Omaha" },
   description:
-    "Brytr Co is Zac Van Buren and Sam Greguska: two lighting tiers instead of one, W2 crews instead of subcontractors, and service on systems we did not sell. Permanent outdoor lighting across the Omaha metro.",
+    "Brytr Co is Zac Van Buren and Sam Greguska: the whole Haven line rather than one piece of it, W2 crews instead of subcontractors, and more than one brand on the truck. Permanent outdoor lighting across the Omaha metro.",
   alternates: { canonical: "/about" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "About", href: "/about" }];
 
-/* THE CENTERPIECE. Four structural decisions, each one costing something specific. The
+/* THE CENTERPIECE. Structural decisions, each one costing something specific. The
  * chip is the taxonomy — margin, time, or the sale itself — because "we put customers
  * first" is a sentence and "this one costs us the sale" is a fact you can check. */
 const costs: { chip: string; h: string; p: string; cost: string }[] = [
   {
     chip: "Costs us margin",
-    h: "Two shelves, not one.",
-    p: "Almost every permanent lighting company in this metro is a dealer for a single manufacturer, which is a normal way to run the business and means the recommendation is settled before anyone looks at your house. We stock a premium system and a value system and quote whichever one your roofline actually calls for.",
+    h: "More than one brand on the truck.",
+    p: "Almost every permanent lighting company in this metro is a dealer for a single manufacturer, which is a normal way to run the business and means the recommendation is settled before anyone looks at your house. We lead with Haven, we install every line of it, and where a house does not call for it we say so and quote what it does.",
     cost: "Two sets of stock, two sets of training, two warranty processes to keep straight.",
   },
   {
     chip: "Costs us the sale",
     h: "We will tell you the cheaper one is right.",
-    p: "A simple single-story roofline with two elevations and no color ambition does not need the premium tier, and we say so at the table rather than after you have signed. Sometimes that is a worse day for us and a better system for you.",
-    cost: "The difference between the two quotes, on every house where the answer is Basic.",
+    p: "A simple single-story roofline with two elevations and no color ambition does not need the most expensive hardware we carry, and we say so at the table rather than after you have signed. Sometimes that is a worse day for us and a better system for you.",
+    cost: "The difference between the two quotes, on every house where the cheaper answer is the right one.",
   },
   {
     chip: "Costs us margin",
     h: "The crew are our employees.",
-    p: "Permanent lighting is fastened into your fascia board and sealed, and almost every failure we get called out to fix is workmanship rather than product. Subcontracting the install would make us more money per job and cost us the only thing this company actually sells.",
+    p: "Permanent lighting is fastened into your fascia board and sealed, and the failures in this trade are workmanship far more often than product. Subcontracting the install would make us more money per job and cost us the only thing this company actually sells.",
     cost: "Payroll, insurance and training instead of an invoice per install.",
   },
   {
@@ -76,12 +76,6 @@ const costs: { chip: string; h: string; p: string; cost: string }[] = [
     p: "The number on your quote is the number next month. There is no signing bonus, no discount for deciding tonight, and if you go quiet after the visit, so do we. Every one of those is a tool that measurably increases close rate and every one of them is a tool we do not use.",
     cost: "Deals that would have closed under pressure, and do not.",
   },
-  {
-    chip: "Costs us margin",
-    h: "We service other people's systems.",
-    p: "If a previous installer has stopped answering the phone we will take the system over, including brands we would never have sold you. It is the least profitable work we do and it is how a fair number of our customers first meet us.",
-    cost: "Diagnostic time on hardware we have no relationship with and no margin on.",
-  },
 ];
 
 export default function About() {
@@ -95,7 +89,7 @@ export default function About() {
         objectPosition="50% 42%"
         eyebrow="About Brytr"
         h1="Built by the two people who show up on the roof."
-        lede="Brytr exists because every permanent lighting quote in this metro came from somebody selling exactly one brand and calling it the only good option. We carry two, run our own crews, and take over work we did not sell."
+        lede="Brytr exists because every permanent lighting quote in this metro came from somebody selling exactly one brand and calling it the only good option. We carry two and we run our own crews, from the measure to the handover."
         trail={trail}
         footnote={
           <>
@@ -112,7 +106,7 @@ export default function About() {
           <div>
             <p className="eyebrow">Why the company exists</p>
             <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
-              A premium shelf and a value shelf.
+              More than one brand, on purpose.
             </h2>
             <div className="prose-body mt-6 space-y-4">
               <p className="text-lg text-foreground">
@@ -122,10 +116,11 @@ export default function About() {
                 happens to sell.
               </p>
               <p className="text-base text-muted-foreground">
-                So Brytr was set up to carry both ends of the market from the start. A premium system
-                where the fixture, the channel and the app are worth the money, and a value system that
-                is a genuinely good answer on a simpler house. The quote names which one, on the page,
-                rather than leaving you to work out what you are buying.
+                So Brytr was set up to carry more than one from the start. Haven Lighting is what we
+                lead with and we install every line of it, from the roofline channel down to the bed
+                fixtures. Where a simpler house does not call for it, we say so and quote what it does
+                call for. The quote names the hardware, on the page, rather than leaving you to work
+                out what you are buying.
               </p>
               <p className="text-base text-muted-foreground">
                 That one decision is why the rest of the company looks the way it does. If your
@@ -143,21 +138,31 @@ export default function About() {
             <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
               <p className="label flex items-center gap-3 text-foreground">
                 <span className="block h-4 w-1 bg-accent" aria-hidden />
-                The two shelves
+                The Haven lineup
               </p>
-              <p className="text-xs text-muted-foreground">Named on every quote</p>
+              <p className="text-xs text-muted-foreground">Named on the quote, not implied</p>
             </div>
             <ul className="divide-y divide-border">
               {[
                 {
-                  t: "The Brytr Signature System",
-                  s: "Premium",
-                  when: "Complex rooflines, multiple elevations, anyone who will actually use color and scenes. Where the extrusion, the optics and the controller earn the difference.",
+                  t: "Haven Evolution",
+                  s: "Roofline",
+                  when: "The channel routed into the eave and the diodes that sit in it. A dedicated warm white channel rather than a mixed one, which is the difference you look at every night of the year.",
                 },
                 {
-                  t: "The Brytr Basic System",
-                  s: "Value",
-                  when: "Simpler rooflines, one or two elevations, warm white most of the year. A real system rather than a stripped one, and the honest answer on a lot of houses.",
+                  t: "Haven Q Series",
+                  s: "Soffit",
+                  when: "Fixtures inside the overhang, for where the light needs to come down the face of the house rather than along the trim line.",
+                },
+                {
+                  t: "Haven 9 Series",
+                  s: "Landscape",
+                  when: "Path lights, uplights and bed washers, on the same controller and the same app as the roofline above them.",
+                },
+                {
+                  t: "Haven X Bistro",
+                  s: "Overhead",
+                  when: "Permanent bistro runs for pergolas, patio covers and gazebos. Rated cable and real terminations rather than a seasonal string.",
                 },
               ].map((x) => (
                 <li key={x.t} className="px-6 py-5">
@@ -168,10 +173,10 @@ export default function About() {
               ))}
             </ul>
             <p className="border-t border-border bg-muted px-6 py-5 text-sm leading-relaxed text-muted-foreground">
-              We also service and take over systems from the other manufacturers in this market, whether
-              or not we would have sold them to you.{" "}
-              <Link href="/services/repairs-and-service" className="font-semibold text-foreground hover:text-accent-deep">
-                Repairs and takeovers
+              All of it runs from the one controller and the one app, which is why most people add the
+              second and the third thing a season later rather than buying everything at once.{" "}
+              <Link href="/services" className="font-semibold text-foreground hover:text-accent-deep">
+                Everything we install
               </Link>.
             </p>
           </div>
@@ -187,7 +192,7 @@ export default function About() {
             onDark
             eyebrow="Checkable, not heartfelt"
             title="Decisions that make us less money."
-            lede="Every company on your shortlist will tell you it puts customers first. That sentence is free. These six are not — each one has a price attached, and the price is written next to it."
+            lede="Every company on your shortlist will tell you it puts customers first. That sentence is free. These are not: each one has a price attached, and the price is written next to it."
           />
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -289,7 +294,7 @@ export default function About() {
               {[
                 ["1.2M", "lights installed locally", "Brytr's own count"],
                 [reviewProof.average, `from ${reviewProof.count} reviews`, `${reviewProof.platform}, ${reviewProof.checked}`],
-                ["2", "systems stocked", "Signature and Basic"],
+                ["2", "brands stocked", "Haven and Jellyfish"],
                 ["W2", "crews, never subcontracted", "Payroll, not per-install"],
               ].map(([f, l, src]) => (
                 <div key={l}>
