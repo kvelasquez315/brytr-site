@@ -32,7 +32,6 @@ const havenRows = (bName: string, b: Partial<Record<string, string>>): Row[] => 
   { spec: "Weather rating", a: "IP66", b: b.ip ?? "Sealed channel" },
   { spec: "Rated LED life", a: "25 years", b: b.life ?? "Shorter" },
   { spec: "Professionally installed", a: "Yes, our W2 crews", b: b.install ?? "Varies by dealer" },
-  { spec: "Serviceable by Brytr", a: "Yes", b: b.service ?? "Yes, we service it" },
   { spec: "Price tier", a: "Premium", b: b.price ?? "Lower" },
 ];
 
@@ -237,7 +236,7 @@ export const compares: Compare[] = [
       { spec: "App", a: "Workable", b: "Good" },
       { spec: "Dealer network", a: "Broad", b: "Narrower" },
       { spec: "Typical install cost", a: "Lower", b: "Higher" },
-      { spec: "Brytr carries it", a: "Yes, as our Basic tier", b: "No, but we service it" },
+      { spec: "Brytr carries it", a: "Yes, we install it", b: "No" },
     ],
     costA: "Value tier", costB: "Mid tier",
   },
