@@ -6,7 +6,7 @@ import { PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 import { reviews, reviewProof } from "@/content/reviews";
-import { IcHardHat, IcVerified, IcTwoTiers, IcWarranty, IcSameDay, IcRepair } from "@/components/icons";
+import { IcHardHat, IcVerified, IcTwoTiers, IcWarranty, IcSameDay } from "@/components/icons";
 
 /* /reviews — WAVE 2, PAGE 3 of the page-by-page pass.
  *
@@ -84,8 +84,8 @@ const practice: { icon: typeof IcHardHat; h: string; p: string; href: string }[]
   },
   {
     icon: IcTwoTiers,
-    h: "Two systems, one recommendation",
-    p: "We stock a premium and a value tier and quote the one your roofline calls for, including when that is the cheaper one.",
+    h: "One recommendation, not a default",
+    p: "We install more than one brand and quote the one your roofline actually calls for, including when that is the cheaper one.",
     href: "/lighting-systems",
   },
   {
@@ -99,12 +99,6 @@ const practice: { icon: typeof IcHardHat; h: string; p: string; href: string }[]
     h: "One number, answered locally",
     p: "A service call goes to the people who installed it. Not a portal, not a franchise dispatcher, not a manufacturer's queue.",
     href: "/contact",
-  },
-  {
-    icon: IcRepair,
-    h: "We take over other installs",
-    p: "Including brands we would not have sold you, and systems whose installer has stopped answering. It is how a fair number of these reviews started.",
-    href: "/services/repairs-and-service",
   },
 ];
 
