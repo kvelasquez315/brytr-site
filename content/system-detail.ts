@@ -16,6 +16,18 @@
  */
 
 export type SystemDetail = {
+  /** Show this sheet as a two-column comparison against another system's specs.
+   *
+   *  Written for Basic. Its nine values are "Wider than Signature", "Shorter than Signature",
+   *  "Supported, fewer" — not one absolute figure, in a table headed "spec by spec" and
+   *  footnoted "nothing rounded up in either direction". We do not hold Jellyfish's published
+   *  numbers and we are not going to invent them, so the honest fix is not to fill the gaps
+   *  but to put Signature's real figure in the next column, where "wider" becomes a claim you
+   *  can size against 4 in. It also stops this page rendering as Signature's page with the
+   *  values swapped, which is what it was. */
+  against?: string;
+  /** Overrides the sheet's source footnote where the default would overclaim. */
+  specSource?: string;
   photo: string;
   photoAlt: string;
   objectPosition?: string;
@@ -36,12 +48,15 @@ export const systemDetail: Record<string, SystemDetail> = {
       "Our premium tier, built on Haven Evolution hardware. Roughly two thirds of what we install.",
     notFor: {
       h: "Where we would not quote Signature",
-      p: "A single-story ranch with one elevation lit, on warm white all year, where nobody in the house is going to open the app twice. The dedicated white channel and the tight LED pitch are the two things you are paying the premium for, and on a short simple run in one colour you will struggle to see either from the street. On that house we quote Basic and say why.",
+      p: "A single-story ranch with one elevation lit, on warm white all year, where nobody in the house is going to open the app twice. The dedicated white channel and the tight LED pitch are the two things you are paying the premium for, and on a short simple run in one color you will struggle to see either from the street. On that house we quote Basic and say why.",
     },
     alsoSee: ["brytr-basic", "haven-evolution", "app-and-controls"],
   },
 
   "brytr-basic": {
+    against: "brytr-signature",
+    specSource:
+      "The Signature column is the manufacturer's published figure. The Basic column is our own read from installing and servicing this hardware — where the value is relative rather than a number, that is because we do not hold the manufacturer's published figure for it, and we would rather say so than print one we cannot stand behind. Ask at the consultation and we will get it in writing before you sign.",
     photo: "/img/g-ranch-blue.jpg",
     photoAlt: "An Omaha ranch home in blue with a lit rock garden",
     objectPosition: "50% 48%",
@@ -49,7 +64,7 @@ export const systemDetail: Record<string, SystemDetail> = {
       "Our value tier, built on Jellyfish hardware. A real system rather than a stripped one.",
     notFor: {
       h: "Where we would not quote Basic",
-      p: "A long straight two-story eave line, or a household that genuinely intends to run colour most nights. Wider LED spacing shows on a long unbroken run in a way it never does across a broken-up roofline, and mixed white reads a shade cooler and slightly less even than a dedicated white channel. If either of those is your house, paying twice to fix it later is the expensive route.",
+      p: "A long straight two-story eave line, or a household that genuinely intends to run color most nights. Wider LED spacing shows on a long unbroken run in a way it never does across a broken-up roofline, and mixed white reads a shade cooler and slightly less even than a dedicated white channel. If either of those is your house, paying twice to fix it later is the expensive route.",
     },
     alsoSee: ["brytr-signature", "jellyfish-lighting", "haven-evolution"],
   },
