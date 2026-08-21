@@ -1,20 +1,81 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { cities, metroCities, outstateCities, iowaCities } from "@/content/cities";
 import { Shell } from "@/app/layout-shell";
-import { PageHero, PageCta, BandCta, CityTiles, ServiceRows, SectionHead, Check, TextLink } from "@/components/sections/page-parts";
+import { ServiceLeaflet } from "@/components/sections/service-leaflet";
+import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
 import { Jsonld, breadcrumb, localBusiness } from "@/lib/schema";
+
+/* /service-areas — WAVE 5, PAGE 1 of the page-by-page pass.
+ *
+ * What it was: no photograph in the hero, a stat row counting the list underneath it, then
+ * THREE consecutive sections of the identical city rack, an OpenStreetMap iframe (the same
+ * grey-box embed the home page map replaced three iterations ago, with "centerd" misspelt
+ * in its title attribute), all eleven service rows again, and two closers.
+ *
+ * What it is now. The honest subject of this page is not a list of towns, it is a RADIUS —
+ * and a radius is only meaningful if you say what changes as you go out. So the centrepiece
+ * is the drive-time ladder: all eighteen towns in one table ordered by minutes from the
+ * shop, with the band each one falls into and what that band actually promises. The place
+ * where the promise changes is the interesting line on the page, and it is drawn.
+ *
+ * The Leaflet map moves into the hero, where it belongs on the one page whose subject is
+ * geography, and comes off the iframe entirely.
+ *
+ * Archetype: map hero → the drive-time ladder → the three bands → why the radius stops.
+ * Closer: the form.
+ */
 
 export const metadata: Metadata = {
   title: "Service Areas: Omaha Metro, Lincoln and Eastern Nebraska",
-  description: "Brytr installs permanent outdoor lighting across 18 cities: the Omaha metro, Council Bluffs, Lincoln, Fremont, Ashland, Norfolk, Columbus and Grand Island.",
+  description:
+    "Where Brytr installs permanent outdoor lighting: the Omaha metro, Council Bluffs, Lincoln, Fremont, Ashland, Norfolk, Columbus and Grand Island — with the real drive time from our shop and what each one means for a service call.",
   alternates: { canonical: "/service-areas" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Service areas", href: "/service-areas" }];
 
-const groups = [
-  { h: "Omaha metro", list: metroCities, bg: "bg-background", note: "Core territory. Same-week service calls." },
-  { h: "Lincoln and eastern Nebraska", list: outstateCities, bg: "bg-raise", dark: true, note: "Scheduled routes, no travel premium." },
-  { h: "Western Iowa", list: iowaCities, bg: "bg-muted", note: "Same crews, same materials, same warranty." },
+/* THE LADDER. Sorted by real drive time, because the number is the argument. "In town" is
+ * Omaha; everything else is minutes, and the two-hour entries are hours. */
+const minutes = (drive: string) => {
+  if (/in town/i.test(drive)) return 0;
+  const h = /(\d+)\s*hr/.exec(drive);
+  const m = /(\d+)\s*min/.exec(drive);
+  return (h ? parseInt(h[1], 10) * 60 : 0) + (m ? parseInt(m[1], 10) : 0);
+};
+const ladder = [...cities].sort((a, b) => minutes(a.drive) - minutes(b.drive));
+
+const bandFor = (tier: string) =>
+  tier === "metro" ? "Same week" : tier === "iowa" ? "Same week, over the river" : "Scheduled route";
+
+const bandStyle: Record<string, string> = {
+  "Same week": "border-accent/50 text-accent-ink",
+  "Same week, over the river": "border-accent/50 text-accent-ink",
+  "Scheduled route": "border-border text-muted-foreground",
+};
+
+/* THE THREE BANDS, and what each actually commits us to. */
+const bands: { h: string; count: number; promise: string; p: string; href: string }[] = [
+  {
+    h: "The metro",
+    count: metroCities.length,
+    promise: "Service inside the week",
+    p: "Everything within about thirty-five minutes of the shop on C Street. This is where most of what we have installed is, and it is why a dark run in December here is a visit rather than a project.",
+    href: `/service-areas/${metroCities[0].slug}`,
+  },
+  {
+    h: "Over the river",
+    count: iowaCities.length,
+    promise: "Same crews, same warranty",
+    p: "Council Bluffs is twenty minutes from us, which is closer than half the Nebraska metro. Iowa-side installs get the same crews, the same materials and the same workmanship terms, and there is no border premium on the quote.",
+    href: `/service-areas/${iowaCities[0].slug}`,
+  },
+  {
+    h: "Outstate Nebraska",
+    count: outstateCities.length,
+    promise: "Batched into route days",
+    p: "Lincoln out to Grand Island. We batch installs into route days rather than driving out for one house, which is exactly why the pricing is the same as the metro instead of carrying a travel charge. A service call here is scheduled rather than same-week, and we say so before you sign.",
+    href: `/service-areas/${outstateCities[0].slug}`,
+  },
 ];
 
 export default function AreasHub() {
@@ -22,61 +83,194 @@ export default function AreasHub() {
     <Shell>
       <Jsonld data={breadcrumb(trail)} />
       <Jsonld data={localBusiness()} />
+
       <PageHero
+        /* map variant: same photographic treatment as every other hero, with the Leaflet
+         * map in the right column instead of the form. This is the one page whose subject
+         * IS geography, so it is the one page that should carry the map. */
+        variant="map"
+        photo="/img/g-ranch-blue-white.jpg"
+        photoAlt="A long Omaha ranch elevation lit blue and white with landscape uplighting"
+        objectPosition="50% 45%"
         eyebrow="Where we work"
-        h1="Where Brytr installs."
-        lede="Eighteen cities across the Omaha metro, western Iowa and eastern Nebraska. Every one has its own page with drive time, neighborhoods and local project detail."
+        h1="Eighteen towns, and the drive to each one."
+        lede="A service area is only worth publishing if it says what changes as you go out. Inside the metro a warranty call is the same week. Out past Lincoln it is a scheduled route, and the pricing is the same either way."
         trail={trail}
-        stats={[["18", "cities"], [`${metroCities.length}`, "in the metro"], ["1.2M", "lights installed"]]}
+        footnote={
+          <>
+            Pinned from real coordinates, centred on the shop at 13436 C St. The honest limit on the
+            radius is how far we will drive for a warranty call in February.
+          </>
+        }
+        aside={
+          <div className="overflow-hidden rounded-lg bg-card p-2 shadow-[var(--shadow-lg)]">
+            <ServiceLeaflet className="aspect-4/3 w-full" />
+          </div>
+        }
       />
 
-      {groups.map((g) => (
-        <section key={g.h} className={`section ${g.bg}`}>
-          <div className="shell">
-            <SectionHead onDark={g.dark} eyebrow={`${g.list.length} ${g.list.length === 1 ? "city" : "cities"}`} title={g.h} lede={g.note} />
-            <div className="mt-9"><CityTiles onDark={g.dark} list={g.list} /></div>
-          </div>
-        </section>
-      ))}
-
-      <section className="section bg-primary">
-        <div className="shell grid gap-10 lg:grid-cols-[52fr_48fr] lg:gap-14">
-          <div>
-            <SectionHead onDark eyebrow="How far we travel" title="Why the radius is what it is." />
-            <div className="prose-body mt-6 space-y-4">
-              <p className="text-lg text-on-dark">
-                Permanent lighting is a fifteen year relationship, so the honest limit on our service area
-                is how far we will drive for a warranty call in February.
-              </p>
-              <p className="text-on-dark-muted">
-                Inside the metro that is a same-week visit. Out to Lincoln and eastern Nebraska we run
-                scheduled routes, which is why the pricing is the same rather than carrying a travel
-                premium. Past Grand Island we would be selling you a system we cannot service properly,
-                so we do not.
-              </p>
-            </div>
-            <div className="mt-7"><TextLink onDark href="/services/repairs-and-service">See repairs and system takeover</TextLink></div>
-          </div>
-          <div className="overflow-hidden rounded-lg ring-1 ring-on-dark/12">
-            <iframe
-              title="Map of the Brytr Co service area centerd on Omaha, Nebraska"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              className="aspect-4/3 w-full border-0"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-98.6%2C40.2%2C-95.2%2C42.2&layer=mapnik&marker=41.2565%2C-95.9345"
-            />
-          </div>
-        </div>
-      </section>
-
+      {/* ── THE DRIVE-TIME LADDER ──
+        * The centrepiece. Eighteen towns in one table, ordered by minutes,
+        * with the band each falls into. */}
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead eyebrow="In every city" title="Every service, everywhere we work." />
-          <div className="mt-9"><ServiceRows /></div>
+          <SectionHead
+            eyebrow="Ordered by minutes, not alphabetically"
+            title="How far, and what that changes."
+            lede="Every town we drive to, sorted by the actual drive from the shop. The right-hand column is the part that matters: the promise is not the same at twenty minutes and at two hours, and pretending otherwise is how people end up waiting."
+          />
+
+          <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+            <div className="hidden bg-primary px-6 py-4 lg:grid lg:grid-cols-[30fr_14fr_24fr_32fr] lg:gap-8">
+              <p className="label text-on-dark-muted">Town</p>
+              <p className="label text-on-dark-muted">Drive</p>
+              <p className="label flex items-center gap-3 text-on-dark">
+                <span className="block h-4 w-1 bg-accent" aria-hidden />
+                Service call
+              </p>
+              <p className="label text-on-dark-muted">Neighbourhoods on its page</p>
+            </div>
+            <ul className="divide-y divide-border">
+              {ladder.map((c) => {
+                const band = bandFor(c.tier);
+                return (
+                  <li key={c.slug}>
+                    <Link
+                      href={`/service-areas/${c.slug}`}
+                      className="group grid gap-2 px-6 py-4 transition-colors duration-[--dur-fast] hover:bg-muted lg:grid-cols-[30fr_14fr_24fr_32fr] lg:items-baseline lg:gap-8"
+                    >
+                      <span className="font-display text-[1.05rem] font-bold text-foreground group-hover:underline">
+                        {c.name}
+                        {c.state === "IA" ? ", Iowa" : ""}
+                      </span>
+                      <span className="u text-sm font-medium text-accent-ink">{c.drive}</span>
+                      <span>
+                        <span
+                          className={`u inline-flex rounded-sm border px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] ${bandStyle[band]}`}
+                        >
+                          {band}
+                        </span>
+                      </span>
+                      <span className="text-sm leading-relaxed text-muted-foreground">
+                        {c.neighborhoods.slice(0, 3).join(", ")}
+                        {c.neighborhoods.length > 3 ? ` and ${c.neighborhoods.length - 3} more` : ""}
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+
+          <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
+            Drive times are from the shop at 13436 C St in normal traffic, not at rush hour and not with a
+            trailer. Neighbourhood lists are real subdivisions, and every one of those pages says to ring
+            us anyway if yours is not on it.
+          </p>
         </div>
       </section>
 
-      <BandCta title="Not sure if you are in the radius?" body="Call and ask. If we cannot service it properly we will tell you rather than sell you." />
+      {/* ── THE THREE BANDS ── */}
+      <section className="section bg-muted">
+        <div className="shell">
+          <SectionHead
+            eyebrow="What each band commits us to"
+            title="Three promises, and they are not the same promise."
+            lede="The pricing does not change as you go out. What changes is how fast we can get back to you, and that is worth knowing before rather than after."
+          />
+          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+            {bands.map((b) => (
+              <article
+                key={b.h}
+                className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
+              >
+                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
+                  <p className="label flex items-center gap-3 text-foreground">
+                    <span className="block h-4 w-1 bg-accent" aria-hidden />
+                    {b.h}
+                  </p>
+                  <p className="u text-sm text-muted-foreground">
+                    {b.count} {b.count === 1 ? "town" : "towns"}
+                  </p>
+                </div>
+                <div className="flex-1 px-6 py-5">
+                  <h3 className="font-display text-xl font-bold leading-snug text-foreground">
+                    {b.promise}
+                  </h3>
+                  <p className="mt-2.5 text-[0.95rem] leading-relaxed text-muted-foreground">{b.p}</p>
+                </div>
+                <div className="border-t border-border px-6 py-4">
+                  <TextLink href={b.href}>See a page in this band</TextLink>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY IT STOPS WHERE IT STOPS ── */}
+      <section className="section bg-primary">
+        <div className="shell grid items-start gap-10 lg:grid-cols-[50fr_50fr] lg:gap-14">
+          <div>
+            <SectionHead onDark eyebrow="The edge of it" title="Why the radius stops where it does." />
+            <div className="prose-body mt-6 space-y-4">
+              <p className="text-lg leading-relaxed text-on-dark">
+                Permanent lighting is a fifteen year relationship with a building. So the honest limit on
+                a service area is not how far a van will go for an install — it is how far it will go for
+                a warranty call, in February, for one dark section.
+              </p>
+              <p className="text-base leading-relaxed text-on-dark-muted">
+                Inside the metro that is the same week. Out through Lincoln and eastern Nebraska we run
+                scheduled routes, which is why there is no travel premium on the quote. Past Grand Island
+                we would be selling a system we could not service properly, so we do not — and if you
+                ring from out there we will say so on the call rather than drive out and load the number.
+              </p>
+            </div>
+            <div className="mt-8 flex flex-wrap gap-x-7 gap-y-2">
+              <TextLink onDark href="/services/repairs-and-service">Repairs and takeovers</TextLink>
+              <TextLink onDark href="/warranty">What is covered</TextLink>
+            </div>
+          </div>
+
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="rounded-lg bg-raise p-6 ring-1 ring-on-dark/10">
+              <p className="label flex items-center gap-3 text-on-dark">
+                <span className="block h-4 w-1 bg-accent" aria-hidden />
+                Same everywhere
+              </p>
+              <ul className="mt-5 divide-y divide-on-dark/10 border-t border-on-dark/10">
+                {[
+                  "Per-foot pricing, with no travel charge added",
+                  "Our own crews, on our own payroll",
+                  "Both warranty layers, written on the quote",
+                  "The covenant submission handled by us",
+                  "The curb check and the scene walk at dusk",
+                ].map((x) => (
+                  <li key={x} className="py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">{x}</li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-lg bg-raise p-6 ring-1 ring-on-dark/10">
+              <p className="label flex items-center gap-3 text-on-dark">
+                <span className="block h-4 w-1 bg-on-dark/25" aria-hidden />
+                Different as you go out
+              </p>
+              <ul className="mt-5 divide-y divide-on-dark/10 border-t border-on-dark/10">
+                {[
+                  "How fast a service call gets scheduled",
+                  "Whether your install shares a day with a neighbour's",
+                  "How long we will hold a route date before it moves",
+                  "Whether we can drop by to look at something small",
+                  "Past Grand Island: we will turn the work down",
+                ].map((x) => (
+                  <li key={x} className="py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">{x}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <PageCta />
     </Shell>
   );
