@@ -61,7 +61,7 @@ const beats: { at: string; h: string; p: string; who: string }[] = [
   {
     at: "0:40",
     h: "We measure.",
-    p: "A wheel along every elevation, corners counted, zones agreed, tier chosen. This is the part that makes the number real instead of a range.",
+    p: "A wheel along every elevation, corners counted, zones agreed, hardware chosen. This is the part that makes the number real instead of a range.",
     who: "Quiet. Bring a drink",
   },
   {
@@ -82,7 +82,7 @@ const sheet: { k: string; v?: string; blank?: string }[] = [
   { k: "Rear elevation", blank: "linear ft, or none" },
   { k: "Mitered corners", blank: "count" },
   { k: "Zones", blank: "count" },
-  { k: "Tier", v: "Signature or Basic — named, not implied" },
+  { k: "Hardware", v: "The line and the manufacturer, named not implied" },
   { k: "Add-ons", blank: "landscape, hardscape, bistro" },
   { k: "Total, for the whole scope", blank: "one number" },
   { k: "Warranty", v: "Manufacturer and workmanship, both stated" },
@@ -211,7 +211,7 @@ export default function Consult() {
                   ["A sample run, powered", "The actual channel and diodes, lit, so you can see the beam and the gap between fixtures up close."],
                   ["A measuring wheel", "Every elevation walked and written down, not paced out."],
                   ["The app, on a phone", "We change the color on the sample while you watch, so scenes are a thing you have used before you buy them."],
-                  ["Both tiers, side by side", "Signature and Basic in your hand, so the difference is a thing you felt rather than a row in a table."],
+                  ["The quote, before we leave", "Written on the property and handed to you, so you are holding a number rather than waiting on an email."],
                 ].map(([h, p]) => (
                   <li key={h} className="py-4">
                     <p className="font-display text-[0.95rem] font-bold text-foreground">{h}</p>
