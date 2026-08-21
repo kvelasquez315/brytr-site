@@ -86,7 +86,7 @@ export const compares: Compare[] = [
     volume: "1,700/mo",
     a: "Haven Evolution", b: "Trimlight",
     verdict:
-      "Trimlight is a large national franchise, which cuts both ways: consistent product, but your experience depends entirely on which franchisee shows up. We are one crew, in one market, and you can ask your neighbour about us.",
+      "Trimlight is a large national franchise, which cuts both ways: consistent product, but your experience depends entirely on which franchisee shows up. We are one crew, in one market, and you can ask your neighbor about us.",
     aWinsHead: "Choose Haven Evolution if",
     bWinsHead: "Choose Trimlight if",
     aWins: ["You want a local owner accountable for the install", "Dedicated white channel", "One app across roofline and landscape"],
