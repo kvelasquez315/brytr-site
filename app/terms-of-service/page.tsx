@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Shell } from "@/app/layout-shell";
-import { Breadcrumb, SectionHead } from "@/components/sections/page-parts";
+import { PageHero } from "@/components/sections/page-parts";
 import { site } from "@/content/site";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 
@@ -17,15 +16,18 @@ export default function Page() {
   return (
     <Shell>
       <Jsonld data={breadcrumb(trail)} />
-      <section className="bg-primary">
-        <div className="shell py-12">
-          <Breadcrumb trail={trail} />
-          <h1 className="mt-2 text-[clamp(1.9rem,3.6vw,2.8rem)] text-on-dark">Terms of service</h1>
-          <p className="mt-4 max-w-[70ch] text-lg text-on-dark/85">The terms that apply to this website. The terms that apply to an actual install are in your written quote, which is the document that governs the work.</p>
-        </div>
-      </section>
+      {/* type variant: no photograph, no form, no closing band. A legal page should
+        * look plain, and plain is the correct design for what this is. */}
+      <PageHero
+        variant="type"
+        eyebrow="Legal"
+        h1="Terms of service"
+        lede="The terms that apply to this website. The terms that apply to an actual install are in your written quote, which is the document that governs the work."
+        trail={trail}
+      />
       <section className="section bg-background">
-        <div className="shell max-w-[76ch]">
+        <div className="shell">
+          <div className="max-w-[76ch]">
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">About this site</h2>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">This site is published by Brytr Co, a permanent outdoor lighting installer based in Omaha, Nebraska. It exists to explain what we do and to let you request a consultation.</p>
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Quotes and pricing</h2>
@@ -45,6 +47,7 @@ export default function Page() {
               <a href={site.phoneHref} className="u text-foreground underline decoration-accent decoration-2 underline-offset-4">{site.phone}</a>{" "}
               and ask for Zac or Sam. We would rather answer it directly.
             </p>
+          </div>
           </div>
         </div>
       </section>
