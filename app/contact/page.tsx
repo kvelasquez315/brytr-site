@@ -254,11 +254,11 @@ export default function Contact() {
               {site.phone}
             </a>
             <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
-              Best for anything urgent and for service calls on an existing system, including systems we
-              did not install.
+              Best for anything urgent, and for a service call on a system we installed. It reaches the
+              people who put it up rather than a dispatcher.
             </p>
             <div className="mt-5">
-              <TextLink href="/services/repairs-and-service">Service and takeovers</TextLink>
+              <TextLink href="/warranty">What is covered</TextLink>
             </div>
           </div>
 
