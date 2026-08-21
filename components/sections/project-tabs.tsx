@@ -163,7 +163,7 @@ export function ProjectTabs() {
           * "West Omaha" also had to go once the fourth tab arrived: that property is west OF
           * Omaha, outside the city, and a heading that is true of three tabs out of four is a
           * heading that is wrong. The city detail belongs on each tab, where it is accurate. */}
-        <SectionHead onDark title="Houses around Omaha, photographed the night they ran." lede={tab.blurb} />
+        <SectionHead onDark title="Houses lit by our lights around Omaha." lede={tab.blurb} />
 
         <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-b border-on-dark/12" role="tablist" aria-label="Project categories">
           {tabs.map((t, i) => (
