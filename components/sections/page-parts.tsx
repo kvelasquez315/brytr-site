@@ -441,7 +441,7 @@ export function PageCta({
     ["1 day", "typical install"],
     [reviewProof.average, `from ${reviewProof.count} reviews`],
     ["W2", "our own crews"],
-    ["2 tiers", "premium and value"],
+    ["Free", "design consultation"],
   ];
 
   if (variant === "phone") {
