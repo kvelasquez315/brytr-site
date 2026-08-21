@@ -36,7 +36,7 @@ export const services: Service[] = [
       "App control with unlimited saved scenes",
       "Day and night verification before we leave",
     ],
-    system: "brytr-signature",
+    system: "haven-evolution",
   },
   {
     slug: "permanent-christmas-lights",
@@ -57,7 +57,7 @@ export const services: Service[] = [
       "No storage, no tangles, no rental",
       "Works the other 335 days a year too",
     ],
-    system: "brytr-signature",
+    system: "haven-evolution",
   },
   {
     slug: "permanent-roofline-lighting",
@@ -212,23 +212,6 @@ export const services: Service[] = [
       "Brand color matching",
       "Zoned control per elevation",
       "Scheduled with your hours",
-    ],
-  },
-  {
-    slug: "repairs-and-service",
-    name: "Permanent Lighting Repair and System Takeover",
-    short: "We service systems we did not sell.",
-    title: "Permanent Lighting Repair and System Takeover | Brytr",
-    h1: "We fix permanent lighting we did not install.",
-    keyword: "permanent lighting repair",
-    icon: "repair",
-    lede:
-      "Dead sections, failed controllers, water in a channel, an installer who stopped answering. We take over other brands' systems, including Jellyfish, Gemstone, Trimlight and Oelo.",
-    includes: [
-      "Diagnostics on any brand",
-      "Controller and power supply replacement",
-      "Channel re-seating and re-sealing",
-      "Full run replacement where repair is not worth it",
     ],
   },
 ];

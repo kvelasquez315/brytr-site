@@ -19,7 +19,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
  *     the reader is a page with nothing to say in that slot.
  *   · the first five spec rows as two cards, then all fourteen rows again as a table
  *   · "150 to 400 typical linear feet" — a figure about Brytr's own jobs nobody confirmed
- *   · a "we carry both tiers" section identical on all nine
+ *   · a "we carry more than one of these" section identical on all nine
  *   · the other eight comparisons as eight identical cards, on all nine pages
  *   · two closers
  *
@@ -109,7 +109,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             ? "Neither of these is our premium system, so there is no version of this page that helps us. It exists because people ask, and because an answer from somebody with nothing to gain is worth more than an answer from either manufacturer."
             : frame === "labor"
             ? "One of these is a company and the other is a Saturday. Comparing them on spec misses the point entirely, so this page compares the work — who does it, how long it takes, and who you ring when a section dies."
-            : "We install two of the brands on this market and service five more, so what is below comes from pulling failed sections off houses as much as from spec sheets. Where we have not verified something, the page says which thing."
+            : "We install two of the brands on this market, which is more than the company quoting against us, and it is the reason the other column here is allowed to win. Where we have not verified something, the page says which thing."
         }
         trail={trail}
         footnote={
@@ -198,8 +198,8 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                 frame === "labor"
                   ? "Everything in the left column is what our own crews do. The right column is what a competent DIY install involves, not a worst case."
                   : frame === "referee"
-                  ? "Both columns are our own read from servicing these systems. Neither manufacturer has given us a datasheet, and we have not asked either of them to review this page."
-                  : `The ${c.a} column is the manufacturer's published spec. The ${c.b} column is our own read from systems we have serviced, which is worth something and is not the same as a datasheet.`
+                  ? "Both columns are our own read as installers in this market. Neither manufacturer has given us a datasheet, and we have not asked either of them to review this page."
+                  : `The ${c.a} column is the manufacturer's published spec. The ${c.b} column is our own read as installers in this market, which is worth something and is not the same as a datasheet.`
               }
             />
           </div>
@@ -263,7 +263,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             title="Where each of these actually wins."
             lede={
               frame === "compete"
-                ? "The right-hand column is real. We stock a value tier as well as a premium one, which is what lets us give the other option honest reasons rather than token ones."
+                ? "The right-hand column is real. We install more than one of these, which is what lets us give the other option honest reasons rather than token ones."
                 : frame === "labor"
                 ? "There are people who should absolutely do this themselves, and the right-hand column is written for them rather than at them."
                 : "Two products, no stake, and the deciding factor at the bottom is not either datasheet."
@@ -289,7 +289,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       </section>
 
       {/* ── THE FRAME-SPECIFIC SECTION ──
-        * compete → we carry both tiers, so we can lose honestly.
+        * compete → we install more than one of these, so we can lose honestly.
         * referee → the deciding factor is the installer, and here is how to judge one.
         * labor  → what a DIY install actually costs you that is not money. */}
       {frame === "compete" && (
@@ -298,7 +298,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             <div>
               <p className="eyebrow">Why we can say this</p>
               <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
-                We carry a cheaper one too.
+                We install a cheaper one too.
               </h2>
               <div className="prose-body mt-6 space-y-4">
                 <p className="text-lg text-foreground">
@@ -306,14 +306,14 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                   predict it before they park.
                 </p>
                 <p className="text-base text-muted-foreground">
-                  Brytr stocks a premium tier and a value tier. That is the only reason this page can give
-                  the other option real reasons to win, and it is why we will occasionally talk you down a
-                  tier — a worse day for us and a better system for you.
+                  Brytr installs Haven and we install Jellyfish. That is the only reason this page can
+                  give the other option real reasons to win, and it is why we will occasionally talk you
+                  into the cheaper hardware: a worse day for us and a better system for you.
                 </p>
               </div>
               <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2">
-                <TextLink href="/lighting-systems">Both tiers, side by side</TextLink>
-                <TextLink href="/services/repairs-and-service">We service what we do not sell</TextLink>
+                <TextLink href="/lighting-systems">Everything we install</TextLink>
+                <TextLink href="/warranty">What our own terms cover</TextLink>
               </div>
             </div>
 
@@ -326,9 +326,9 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               </div>
               <ul className="divide-y divide-border">
                 {[
-                  ["A complex or two-story roofline", "Signature, on Haven Evolution.", "/lighting-systems/brytr-signature"],
-                  ["A simple single-story run", "Basic, on Jellyfish, and we will say so.", "/lighting-systems/brytr-basic"],
-                  ["A system already on the house", "Neither. We take it over and repair it.", "/services/repairs-and-service"],
+                  ["A complex or two-story roofline", "Haven Evolution, on the roofline.", "/lighting-systems/haven-evolution"],
+                  ["A simple single-story run", "Jellyfish, and we will say so.", "/lighting-systems/jellyfish-lighting"],
+                  ["Landscape or a pergola on the same visit", "Priced with the roofline, on the same controller.", "/services/landscape-lighting"],
                 ].map(([h, p, href]) => (
                   <li key={h}>
                     <Link
@@ -392,13 +392,13 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                   and there are people who will fit one well and be pleased with it for years.
                 </p>
                 <p className="text-base text-muted-foreground">
-                  What the price does not include is the list on the right. Every item on it is something
-                  we get called out to fix on somebody else&rsquo;s weekend project, which makes it an
-                  honest list and a biased one at the same time.
+                  What the price does not include is the list on the right. Every item on it is a cost
+                  that does not appear on the box, which makes it an honest list and a biased one at the
+                  same time.
                 </p>
               </div>
               <div className="mt-7">
-                <TextLink href="/services/repairs-and-service">What we charge to put one right</TextLink>
+                <TextLink href="/how-it-works">What a professional install day involves</TextLink>
               </div>
             </div>
 
@@ -470,9 +470,9 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         <PageCta
           variant="phone"
           title="We will tell you which of the two to buy."
-          body="Free, on the phone, with no version of the answer that benefits us. We install neither of these as our premium tier and we will service whichever one you end up with."
+          body="Free, on the phone, with no version of the answer that benefits us. We do not lead with either of these, so there is no version of this answer that puts money in our pocket."
           omit={["/compare"]}
-          panelLink={{ href: "/services/repairs-and-service", label: "Service and takeovers" }}
+          panelLink={{ href: "/lighting-systems", label: "The systems we do install" }}
         />
       ) : (
         /* The two branches are a ternary, not two closers — a neutral comparison closes on the

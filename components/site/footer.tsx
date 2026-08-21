@@ -23,7 +23,7 @@ export function Footer() {
           * contact block. On a single-column list that made "Service areas" nearly twice the height
           * of anything else, so every other column stopped well short of the divider — measured at
           * roughly 280 x 400px of empty under "Systems". Giving the nineteen towns two internal
-          * columns brings that block to about ten rows, in line with the eleven services, and the
+          * columns brings that block to about ten rows, in line with the services column, and the
           * ragged bottoms collapse to a row or two rather than a block.
           *
           * The link lists also go two-up below lg. Stacked single-file they made a 2,500px ribbon
