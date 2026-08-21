@@ -25,7 +25,7 @@ import { Jsonld, breadcrumb, faqSchema } from "@/lib/schema";
  * staple gun.
  *
  * The driver list is now the arithmetic instead of a countdown: linear feet × story rate
- * + corners + zones + tier = one number, drawn as an equation with the operators between
+ * + corners + zones + hardware = one number, drawn as an equation with the operators between
  * the terms. Same information, no numerals-as-decoration.
  *
  * Archetype: home hero → two-up argument → dark ledger → equation strip → spec table →
@@ -60,7 +60,7 @@ const terms: { op?: string; h: string; p: string }[] = [
   { op: "×", h: "Story rate", p: "A two-story costs more per foot than a ranch. That is access and time on a ladder, not more material." },
   { op: "+", h: "Corners", p: "Every dormer, valley, turret and bay is another mitered transition, cut and sealed by hand." },
   { op: "+", h: "Zones", p: "How many elevations you want to control on their own — front only, front and sides, or the whole envelope." },
-  { op: "+", h: "Tier", p: "Signature or Basic, plus any landscape, hardscape or bistro run added on the same visit." },
+  { op: "+", h: "Hardware", p: "Which manufacturer's line goes on the house, plus any landscape, hardscape or bistro run added on the same visit." },
 ];
 
 export default function Pricing() {
@@ -115,7 +115,7 @@ export default function Pricing() {
               {
                 h: "On the phone, before we come out",
                 l: [
-                  ["The per-foot basis", "For Signature and for Basic, both, so you can do your own arithmetic."],
+                  ["The per-foot basis", "For either of the systems we install, so you can do your own arithmetic."],
                   ["A range for your roofline", "Pace the front and read us the number off your phone map."],
                   ["What each add-on costs", "Landscape per fixture, bistro per span, hardscape per foot."],
                   ["Whether your covenant is a problem", "We pull the rules, read them, and file the submission ourselves."],
@@ -130,7 +130,7 @@ export default function Pricing() {
                   ["Advertise a monthly payment", "Yours depends on your credit file, not on our headline."],
                   ["Hold a price hostage to today", "The number on your sheet is the number next month."],
                   ["Add a line on install day", "If it was not on the signed quote, it is not on the invoice."],
-                  ["Sell you the tier you do not need", "Basic is a real answer and we will say so."],
+                  ["Sell you hardware you do not need", "The cheaper line is a real answer and we will say so."],
                 ],
                 foot: "None of this is generosity. It is just how the quote is built.",
               },
@@ -346,7 +346,7 @@ export default function Pricing() {
             <div className="min-w-0 flex-1">
               <p className="font-display text-xl font-bold text-on-dark">One number for the whole scope, in writing.</p>
               <p className="mt-1.5 text-sm text-on-dark-muted">
-                Itemized by elevation, tier and zone, signed before we schedule, and unchanged on
+                Itemized by elevation, hardware and zone, signed before we schedule, and unchanged on
                 install day.
               </p>
             </div>
@@ -406,7 +406,7 @@ export default function Pricing() {
             <dl className="mt-6 divide-y divide-on-dark/12 border-y border-on-dark/12">
               {[
                 ["Linear feet measured", "Front, sides and any rear elevation, itemized separately"],
-                ["System tier", "Signature or Basic, named on the quote rather than implied"],
+                ["Hardware", "The manufacturer and the line, named on the quote rather than implied"],
                 ["Zones", "How many independently controlled areas, and which elevations they cover"],
                 ["Corners and transitions", "Counted, because miters are labor and labor is the number"],
                 ["Add-ons", "Landscape, hardscape or bistro, each priced on its own line"],
@@ -438,7 +438,7 @@ export default function Pricing() {
                 </p>
                 <dl className="mt-5 divide-y divide-on-dark/12 border-y border-on-dark/12">
                   {[["Roofline measured", "244 linear ft"], ["Elevations lit", "Front and both sides"],
-                    ["Zones", "3"], ["Tier", "Signature"], ["Install", "1 day"], ["Landscape added", "4 uplights"]].map(([k, v]) => (
+                    ["Zones", "3"], ["System", "Haven Evolution"], ["Install", "1 day"], ["Landscape added", "4 uplights"]].map(([k, v]) => (
                     <div key={k} className="flex items-baseline justify-between gap-4 py-3">
                       <dt className="text-sm text-on-dark-muted">{k}</dt>
                       <dd className="u text-sm font-medium text-on-dark">{v}</dd>
