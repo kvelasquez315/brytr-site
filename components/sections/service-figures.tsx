@@ -412,40 +412,6 @@ function ParapetFigure() {
   );
 }
 
-/* ── 11. REPAIRS: what a dead section actually is ── */
-function TakeoverFigure() {
-  return (
-    <Frame
-      label="What a dead section usually is"
-      caption="A run that has gone dark past a point is almost never a whole strip. It is one termination, one splice or one supply — which is why we diagnose before we quote."
-      tall
-    >
-      <svg viewBox="0 0 100 26" className="w-full" role="img" aria-label="A channel run lit at one end and dark past a failed termination">
-        <path d="M4 8h92v9a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4Z" fill={INK} opacity=".6" />
-        <Diodes y={13} x0={9} x1={54} n={9} r={1.4} />
-        <g fill={INK} opacity=".22">
-          {[60, 66, 72, 78, 84, 90].map((x) => <circle key={x} cx={x} cy="13" r="1.4" />)}
-        </g>
-        <path d="M57 4v18" stroke={INK} strokeWidth="1.2" opacity=".55" strokeDasharray="2 2" />
-        <path className="text-accent" d="M55.4 2.4h3.2v3.2h-3.2z" fill={INK} />
-      </svg>
-      <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-        {[
-          ["A termination that was taped", "Water tracks in, corrodes the joint, and everything past it goes out."],
-          ["A failed power supply", "One leg of a long run drops. The strip is usually fine."],
-          ["A controller nobody can source", "Common on installs from companies that have since stopped answering."],
-          ["Channel fastened through shingles", "The reason some of these calls start as a roof leak rather than a lighting fault."],
-        ].map(([h, p]) => (
-          <li key={h} className="border-t border-on-dark/10 pt-3">
-            <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
-            <p className="mt-1 text-sm text-on-dark-muted">{p}</p>
-          </li>
-        ))}
-      </ul>
-    </Frame>
-  );
-}
-
 const figures: Record<FigureKey, () => React.ReactElement> = {
   zones: ZonesFigure,
   calendar: CalendarFigure,
@@ -457,7 +423,6 @@ const figures: Record<FigureKey, () => React.ReactElement> = {
   scenes: ScenesFigure,
   gameday: GamedayFigure,
   parapet: ParapetFigure,
-  takeover: TakeoverFigure,
 };
 
 export function ServiceFigure({ figure }: { figure: FigureKey }) {
