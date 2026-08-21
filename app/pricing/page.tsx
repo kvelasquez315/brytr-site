@@ -14,7 +14,7 @@ import { Jsonld, breadcrumb, faqSchema } from "@/lib/schema";
  * 1-2-3-4-5 row — the exact pattern the client called lazy on the home page — three
  * equally-weighted cards, and two closers stacked at the bottom.
  *
- * What it is now. The centrepiece is THE FIVE YEAR LEDGER: five years across, two ways of
+ * What it is now. The centerpiece is THE FIVE YEAR LEDGER: five years across, two ways of
  * getting lights on a house down the side, and what actually happens in each year in the
  * cells. It counts EVENTS, not dollars, because we have no permission to publish a price
  * and a made-up five-year cost would be worse than no table at all. One install in Year 1
@@ -56,7 +56,7 @@ const bids = [
 const terms: { op?: string; h: string; p: string }[] = [
   { h: "Linear feet", p: "Measured on site, elevation by elevation. The single biggest term, and the reason a firm number needs a visit." },
   { op: "×", h: "Story rate", p: "A two-story costs more per foot than a ranch. That is access and time on a ladder, not more material." },
-  { op: "+", h: "Corners", p: "Every dormer, valley, turret and bay is another mitred transition, cut and sealed by hand." },
+  { op: "+", h: "Corners", p: "Every dormer, valley, turret and bay is another mitered transition, cut and sealed by hand." },
   { op: "+", h: "Zones", p: "How many elevations you want to control on their own — front only, front and sides, or the whole envelope." },
   { op: "+", h: "Tier", p: "Signature or Basic, plus any landscape, hardscape or bistro run added on the same visit." },
 ];
@@ -156,7 +156,7 @@ export default function Pricing() {
       </section>
 
       {/* ── THE FIVE YEAR LEDGER ──
-        * The centrepiece. Counts events, states its assumptions, invents nothing. */}
+        * The centerpiece. Counts events, states its assumptions, invents nothing. */}
       <section className="section bg-primary">
         <div className="shell">
           <SectionHead
@@ -193,7 +193,7 @@ export default function Pricing() {
                       <span className="run-seg" aria-hidden />
                       <span className="block font-display text-[0.95rem] font-bold text-on-dark">Install</span>
                       <span className="mt-1 block text-xs leading-relaxed text-on-dark-muted">
-                        One day. Ladders up once, mitred, sealed, scenes saved with you.
+                        One day. Ladders up once, mitered, sealed, scenes saved with you.
                       </span>
                     </div>
                   </td>
@@ -261,14 +261,18 @@ export default function Pricing() {
           </p>
 
           {/* the arithmetic that comes straight off the table, and nothing that does not */}
+          {/* `ours` decides the colour. All three of these used to be amber, which put the
+            * competitor's ladder count — the number this section is arguing AGAINST — in the
+            * brand accent at 2rem. Amber is the colour of our own light; it does not get to
+            * dress somebody else's row. */}
           <dl className="mt-8 grid gap-5 sm:grid-cols-3">
-            {[
-              ["1", "install, in the first week you own it"],
-              ["10", "trips up a ladder on the other row — twice a year, five years"],
-              ["0", "Januaries spent taking anything down"],
-            ].map(([f, l]) => (
+            {([
+              ["1", "install, in the first week you own it", true],
+              ["10", "trips up a ladder on the other row — twice a year, five years", false],
+              ["0", "Januaries spent taking anything down", true],
+            ] as [string, string, boolean][]).map(([f, l, ours]) => (
               <div key={l} className="rounded-lg bg-raise px-5 py-5 ring-1 ring-on-dark/10">
-                <dt className="u text-[2rem] font-medium leading-none text-accent">{f}</dt>
+                <dt className={`u text-[2rem] font-medium leading-none ${ours ? "text-accent" : "text-on-dark"}`}>{f}</dt>
                 <dd className="mt-2.5 text-sm leading-relaxed text-on-dark-muted">{l}</dd>
               </div>
             ))}
@@ -280,7 +284,7 @@ export default function Pricing() {
             would be a guess about both. Ask us at the consultation and we will put your two numbers
             beside each other on paper.{" "}
             <Link href="/compare" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              Compare the ten systems
+              Compare the systems we are asked about
             </Link>.
           </p>
         </div>
@@ -293,7 +297,7 @@ export default function Pricing() {
         <div className="shell">
           <SectionHead
             eyebrow="How the number is built"
-            title="Feet times a rate, then four additions."
+            title="Feet times a rate, then what the house adds."
             lede="In order of how much each one moves the total. Nothing else goes into it — there is no design fee, no travel charge inside the metro and no line for the consultation."
           />
 
@@ -384,7 +388,7 @@ export default function Pricing() {
                 ["Linear feet measured", "Front, sides and any rear elevation, itemized separately"],
                 ["System tier", "Signature or Basic, named on the quote rather than implied"],
                 ["Zones", "How many independently controlled areas, and which elevations they cover"],
-                ["Corners and transitions", "Counted, because mitres are labour and labour is the number"],
+                ["Corners and transitions", "Counted, because miters are labor and labor is the number"],
                 ["Add-ons", "Landscape, hardscape or bistro, each priced on its own line"],
                 ["Warranty terms", "Manufacturer and workmanship, both stated in full"],
               ].map(([k, v]) => (
@@ -428,7 +432,7 @@ export default function Pricing() {
               <div className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
                 <p className="label text-accent-ink">Also worth reading</p>
                 <ul className="mt-4 space-y-3 border-t border-border pt-4">
-                  {[["Compare all ten brands", "/compare"], ["What the warranty covers", "/warranty"],
+                  {[["Compare the brands we are asked about", "/compare"], ["What the warranty covers", "/warranty"],
                     ["What install day looks like", "/how-it-works"], ["Are permanent lights worth it?", "/blog/are-permanent-christmas-lights-worth-it"]].map(([t, h]) => (
                     <li key={h}><Link href={h} className="text-sm font-semibold text-foreground hover:text-accent-deep">{t}</Link></li>
                   ))}
