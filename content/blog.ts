@@ -25,11 +25,11 @@ export const posts: Post[] = [
   B({ slug: "how-to-choose-a-permanent-lighting-installer", title: "How to Choose a Permanent Lighting Installer",
     h1: "How to choose a permanent lighting installer, and the questions that make a salesperson uncomfortable.", keyword: "permanent christmas light installers near me",
     category: "Before you buy", read: "7 min",
-    dek: "This is a building material fastened to your fascia. Ask these ten questions before you sign anything, and pay attention to which ones make the salesperson uncomfortable.",
+    dek: "This is a building material fastened to your fascia. Ask these questions before you sign anything, and pay attention to which ones make the salesperson uncomfortable.",
     links: { label: "Book a free design consultation", href: "/free-design-consultation" },
     body: [
       { p: "Anyone can buy a channel and a controller. The variable is whether the company still exists in year five, whether the person on your roof is an employee, and whether they will tell you when the cheaper option is the right one." },
-      { h: "The ten questions" },
+      { h: "The questions to ask" },
       { list: [
         "Are your installers employees or subcontractors?",
         "How many brands do you carry, and why that one?",
@@ -37,7 +37,6 @@ export const posts: Post[] = [
         "Show me a daytime photo of a finished install from the street.",
         "What exactly does the warranty cover, and who administers it?",
         "Will you service this if I sell the house?",
-        "Do you repair other brands? (A yes means they can actually diagnose.)",
         "What happens if one section fails in year four?",
         "Do you handle the HOA submission?",
         "Can I see the written quote before install day, with no line items added later?",
@@ -151,7 +150,7 @@ export const posts: Post[] = [
     h1: "Can permanent lights be installed in a Nebraska winter?", keyword: "winter permanent light installation",
     category: "Install", read: "5 min",
     dek: "Yes, and we do it all winter. What changes is method, not whether the work happens. Here is what cold actually affects.",
-    links: { label: "Repairs and system takeover", href: "/services/repairs-and-service" },
+    links: { label: "How install day works", href: "/how-it-works" },
     body: [
       { p: "The honest constraint is not temperature, it is sealant and adhesive cure behavior, plus safe footing on the roof. Both are managed by changing method rather than by refusing the work." },
       { h: "What cold actually changes" },
