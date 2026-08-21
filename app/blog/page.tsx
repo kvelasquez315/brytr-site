@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { posts, categories } from "@/content/blog";
-import { categoryNote, photoForPost } from "@/content/blog-detail";
+import { categoryNote, photoForPost, startHere } from "@/content/blog-detail";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead } from "@/components/sections/page-parts";
 import { Jsonld, breadcrumb } from "@/lib/schema";
@@ -26,7 +26,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Permanent Lighting Resources",
   description:
-    "Twelve honest guides to permanent outdoor lighting: cost, warranties, HOA approval, DIY versus professional install, winter installs, and what actually fails.",
+    "Honest guides to permanent outdoor lighting in Omaha: cost, warranties, HOA approval, DIY versus professional install, winter installs, and what actually fails.",
   alternates: { canonical: "/blog" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Resources", href: "/blog" }];
@@ -72,15 +72,19 @@ export default function BlogHub() {
               <h2 className="mt-2 font-display text-[1.35rem] font-bold leading-snug text-foreground group-hover:underline">
                 {feat.title}
               </h2>
-              <p className="mt-2.5 text-[0.95rem] leading-relaxed text-muted-foreground">{feat.dek}</p>
+              <p className="mt-2.5 text-[0.95rem] leading-relaxed text-muted-foreground">
+                {startHere[feat.slug] ?? feat.dek}
+              </p>
             </div>
           </Link>
         }
       />
 
       {/* ── THE JUMP RACK ──
-        * These used to be chips that looked like filters and did nothing. They
-        * are anchors now, and each one says how many pieces are under it. */}
+        * These used to be chips that looked like filters and did nothing: static list
+        * items, the first styled active, no state, nothing clickable. They are real
+        * anchors now. They also used to carry a count of each group in amber, which is
+        * the no-counting rule and a misuse of the accent in one span. */}
       <section className="bg-raise">
         <div className="shell py-10">
           <p className="label text-accent">Jump to</p>
@@ -92,7 +96,6 @@ export default function BlogHub() {
                   className="inline-flex items-baseline gap-2.5 rounded-sm border border-on-dark/22 px-4 py-2.5 text-sm text-on-dark-muted transition-colors duration-[--dur-fast] hover:border-accent hover:text-on-dark"
                 >
                   {g.category}
-                  <span className="u text-xs text-accent">{g.items.length}</span>
                 </a>
               </li>
             ))}
@@ -116,27 +119,35 @@ export default function BlogHub() {
           <div className="mt-10 space-y-12">
             {grouped.map((g) => (
               <div key={g.category} id={slugify(g.category)} className="scroll-mt-28">
-                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b-2 border-accent pb-3">
+                {/* Note under the rule, not beside the heading. */}
+                <div className="border-b-2 border-accent pb-3">
                   <h3 className="font-display text-[clamp(1.3rem,2.4vw,1.75rem)] font-bold text-foreground">
                     {g.category}
                   </h3>
-                  <p className="text-sm text-muted-foreground">{g.note}</p>
                 </div>
-                <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+                <p className="mt-3 max-w-[70ch] text-sm leading-relaxed text-muted-foreground">{g.note}</p>
+                {/* TWO COLUMNS OF ROWS.
+                  * Cards in a three-up grid left three of the four groups ending on a hole.
+                  * Full-width rows fixed the holes and created a worse problem: a readable
+                  * measure is about 80 characters, so every row used the left 800px of a
+                  * 1400px container and left the rest bare. Two columns of rows is the answer
+                  * to both — the width is used, the measure stays readable, and an odd group
+                  * leaves half a short row rather than a third of a tall one. */}
+                <ul className="mt-5 grid gap-x-14 sm:grid-cols-2">
                   {g.items.map((p) => (
-                    <li key={p.slug}>
+                    <li key={p.slug} className="border-t border-border">
                       <Link
                         href={`/blog/${p.slug}`}
-                        className="flex h-full flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5"
+                        className="group block h-full px-1 py-5 transition-colors duration-[--dur-fast] hover:bg-muted"
                       >
-                        <h4 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">
-                          {p.title}
-                        </h4>
-                        <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">
+                        <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1">
+                          <h4 className="font-display text-[1.05rem] font-bold leading-snug text-foreground group-hover:underline">
+                            {p.title}
+                          </h4>
+                          <p className="u shrink-0 text-xs text-muted-foreground">{p.read}</p>
+                        </div>
+                        <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">
                           {p.dek}
-                        </p>
-                        <p className="u mt-4 border-t border-border pt-3 text-xs text-muted-foreground">
-                          {p.read} read
                         </p>
                       </Link>
                     </li>
