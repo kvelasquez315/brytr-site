@@ -9,9 +9,9 @@ import { Button } from "@/components/ui/button";
  *
  * The nav is centered in the HEADER, not in the space left over beside the wordmark:
  * the bar is a three-column grid with equal 1fr rails either side of the nav, so the
- * links sit on the page's centre line no matter how wide the wordmark or the phone
- * number gets. `mx-auto` inside a flex row would only centre the nav in the remainder,
- * which is what makes most sites look almost-but-not-quite centred.
+ * links sit on the page's center line no matter how wide the wordmark or the phone
+ * number gets. `mx-auto` inside a flex row would only center the nav in the remainder,
+ * which is what makes most sites look almost-but-not-quite centered.
  *
  * Anything with more than one page under it gets a panel: lighting systems, services,
  * comparisons, service areas. The panels are full-bleed rather than anchored to their
@@ -93,7 +93,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
             <Wordmark />
           </Link>
 
-          {/* ── centered nav ─────────────────────────────────────────── */}
+          {/* ── centered nav ── */}
           <nav className="hidden items-center gap-6 lg:flex xl:gap-7" aria-label="Main">
             {nav.map((n) => (
               <div key={n.href} className="relative">
@@ -150,7 +150,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
           </div>
         </div>
 
-        {/* ── desktop panel ────────────────────────────────────────── */}
+        {/* ── desktop panel ── */}
         {active && (
           <div
             className="absolute inset-x-0 top-full hidden border-b border-t border-on-dark/10 bg-primary shadow-[var(--shadow-dark)] lg:block"
@@ -205,7 +205,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
           </div>
         )}
 
-        {/* ── mobile sheet, with the same children as accordions ───── */}
+        {/* ── mobile sheet, with the same children as accordions ── */}
         {open && (
           <div className="max-h-[calc(100dvh-8rem)] overflow-y-auto border-t border-on-dark/10 bg-primary lg:hidden">
             <div className="shell flex flex-col py-4">

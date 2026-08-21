@@ -1,19 +1,47 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services, serviceBySlug } from "@/content/services";
+import { images } from "@/content/images";
+import { detailFor } from "@/content/service-detail";
 import { systemBySlug } from "@/content/systems";
 import { serviceFaqsFor } from "@/content/faqs";
+import { PhotoStrip, PhotoPair } from "@/components/sections/photo-parts";
 import { iconMap } from "@/content/icon-map";
 import { metroCities } from "@/content/cities";
 import { Shell } from "@/app/layout-shell";
 import { Faq } from "@/components/sections/faq";
-import { Photo, photoExists } from "@/components/ui/photo";
-import { Elevation } from "@/components/sections/elevation";
+import { ServiceFigure } from "@/components/sections/service-figures";
 import {
-  PageHero, PageCta, BandCta, SpecTable, CityTiles, SectionHead, Check, TextLink,
+  PageHero, PageCta, SpecTable, SectionHead, Check, TextLink,
 } from "@/components/sections/page-parts";
 import { Jsonld, breadcrumb, serviceSchema, faqSchema } from "@/lib/schema";
+
+/* ONE TEMPLATE, ELEVEN PAGES — and it used to show that.
+ *
+ * Before this pass every one of the eleven service pages carried: the same six "Step 1…6"
+ * cards with identical copy, the same Quick Facts table (including "Roof types: shingle,
+ * metal, tile, flat" on the landscape page), the same permanent-versus-hanging comparison
+ * table (on the hardscape page, where nobody hangs anything seasonally), the same drawn
+ * elevation in the same slot, the same four related services from `slice(0, 4)`, and the
+ * same eighteen city tiles. Eleven URLs, one page.
+ *
+ * Everything that should differ now comes from content/service-detail.ts:
+ *   · the facts panel is written for the service, and is true of it
+ *   · what is in the quote is that service's list, with no step numbers
+ *   · the CENTERPIECE is unique to the service — the eave in section on roofline, beam
+ *     angle against overhang depth on soffit, a wall in section on hardscape, the year as
+ *     a calendar on Christmas, Saturday beside Sunday on gameday
+ *   · the hanging-lights comparison only appears where it is an honest comparison
+ *   · what people also look at is chosen, in order, not sliced off the array
+ *   · the page closes on a photograph of that service, so eleven pages do not all show
+ *     the same house
+ *
+ * Hero: the home page's, on this service's own photograph. Closer: the no-form variant,
+ * because the hero already carries the form and two lead forms on one page is the mistake
+ * the shared layer was carrying.
+ */
 
 export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
@@ -30,6 +58,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
+/* The one comparison that recurs — but only on the pages where somebody genuinely has the
+ * choice between installing this once and doing it again every year. */
 const compareRows = [
   { spec: "First year cost", a: "Higher, once", b: "Lower, every year" },
   { spec: "Ten year cost", a: "One install", b: "Ten rentals or ten purchases" },
@@ -45,14 +75,30 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const { slug } = await params;
   const s = serviceBySlug(slug);
   if (!s) notFound();
+  const d = detailFor(s.slug);
   const sys = s.system ? systemBySlug(s.system) : undefined;
   const faqs = serviceFaqsFor(s.name);
-  const related = services.filter((r) => r.slug !== s.slug).slice(0, 4);
+  const alsoSee = (d?.alsoSee ?? [])
+    .map((sl) => services.find((r) => r.slug === sl))
+    .filter((r): r is (typeof services)[number] => !!r && r.slug !== s.slug);
   const trail = [
     { name: "Home", href: "/" },
     { name: "Services", href: "/services" },
     { name: s.name, href: `/services/${s.slug}` },
   ];
+
+  /* The hero photograph is THIS service's own shot wherever the archive has one, so eleven
+   * pages open on eleven different houses rather than on one stock hero. Commercial and
+   * repairs have no photograph of their own yet — they borrow the closest real thing and
+   * are on the shot list. */
+  const heroFallback: Record<string, string> = {
+    "commercial-outdoor-lighting": "/img/g-pool-blue.jpg",
+    "repairs-and-service": "/img/channel-detail.jpg",
+    "holiday-seasonal-scenes": "/img/scene-halloween.jpg",
+    "gameday-lighting": "/img/scene-husker-red.jpg",
+  };
+  const heroPhoto =
+    (s.photo && images[s.photo]?.src) || heroFallback[s.slug] || "/img/hero-bg.jpg";
 
   return (
     <Shell>
@@ -61,46 +107,42 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <Jsonld data={faqSchema(faqs)} />
 
       <PageHero
+        photo={heroPhoto}
+        photoAlt={(s.photo && images[s.photo]?.alt) || `${s.name} on a Brytr install in the Omaha metro`}
+        objectPosition="50% 58%"
         eyebrow={s.name}
         h1={s.h1}
         lede={s.lede}
         trail={trail}
         footnote={
           <>
-            Installed once by our own crews and verified in daylight and after dark before we leave.{" "}
-            <Link href="/pricing" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">How pricing works</Link>.
+            Installed once by our own crews, and checked in daylight and after dark before we
+            leave.{" "}
+            <Link href="/pricing" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
+              How pricing works
+            </Link>.
           </>
         }
-        stats={[["1 day", "typical install"], ["18", "cities served"], ["2 tiers", "premium and value"]]}
       />
 
-      {/* 2 — answer block + quick facts · bone */}
+      {/* ── WHAT IT IS, AND THE FACTS THAT ONLY APPLY TO IT ── */}
       <section className="section bg-background">
         <div className="shell grid gap-10 lg:grid-cols-[58fr_42fr] lg:gap-14">
           <div>
-            <SectionHead title={`What ${s.name} means, in plain terms.`} />
-            <div className="prose-body mt-6 space-y-4 text-lg text-foreground">
-              <p>{s.lede}</p>
-              <p className="text-base text-muted-foreground">
-                It is installed once, by our own W2 crew, and it stays on the house. There is nothing
-                to hang in November and nothing to take down in January. Every run is verified in
-                daylight and again after dark before we leave the property.
-              </p>
+            <SectionHead title={`What ${s.name.toLowerCase()} actually is.`} />
+            <div className="prose-body mt-6 space-y-4">
+              <p className="text-lg text-foreground">{s.lede}</p>
+              {/* Per-service now. See the comment on ServiceDetail.secondPara. */}
+              <p className="text-base text-muted-foreground">{d?.secondPara}</p>
             </div>
             <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
               {s.includes.map((i) => <Check key={i}>{i}</Check>)}
             </ul>
           </div>
+
           <dl className="h-fit rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-            <p className="label text-muted-foreground">Quick facts</p>
-            {[
-              ["Install time", "One day, most homes"],
-              ["Season", "Year round, including winter"],
-              ["Warranty", "Manufacturer plus our workmanship"],
-              ["Pricing basis", "Linear foot plus complexity"],
-              ["Roof types", "Shingle, metal, tile, flat"],
-              ["Service area", "18 cities, Omaha to Lincoln"],
-            ].map(([k, v]) => (
+            <p className="label text-muted-foreground">{s.name}, in short</p>
+            {(d?.facts ?? []).map(([k, v]) => (
               <div key={k} className="flex items-baseline justify-between gap-4 border-b border-border py-3.5 last:border-0">
                 <dt className="text-sm text-muted-foreground">{k}</dt>
                 <dd className="u text-right text-sm font-medium text-foreground">{v}</dd>
@@ -111,140 +153,220 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* 3 — what is included · bone-deep */}
+      {/* ── THE CENTERPIECE ──
+        * One per service, and no two services share one. */}
+      {d && (
+        <section className="section bg-raise">
+          {/* THE DRAWING IS CAPPED, NOT STRETCHED.
+            *
+            * Every figure is drawn on a 0-100 grid at a fixed aspect, and the container was the
+            * full shell — so at 1440 the svg rendered 1328px wide and its internal margins scaled
+            * up with it. On the hardscape section the drawing itself used the middle sixty percent
+            * of that box, which put roughly 180px of empty above it, 130px below, and a 280 x 300px
+            * field of nothing at the top right. A technical drawing does not get better at 1328px;
+            * it just takes its own whitespace with it.
+            *
+            * Capped at 62rem and centred. Same drawing, a third less dead panel, and it reads as a
+            * plate on a page rather than as a section that failed to fill. */}
+          <div className="shell">
+            <div className="mx-auto max-w-[62rem]">
+              <ServiceFigure figure={d.figure} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* ── WHAT IS IN THE QUOTE ── */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
             eyebrow="What is included"
             title="Everything in the written quote."
-            lede="No line items appear on install day that were not on the quote you signed."
+            lede="Nothing appears on install day that was not on the quote you signed."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              ["Design", "We walk the property after dark and design to what you actually want lit, not to a package."],
-              ["Materials", "Extruded aluminum channel color matched to your fascia, addressable LEDs, sealed terminations."],
-              ["Install", "Our own crew. Fastened into fascia and sealed, never through shingles. Mitered at every corner."],
-              ["Controls", "Controller sited and commissioned, app set up on your phone, scenes built with you."],
-              ["Verification", "Daylight sightline check from the curb, then every scene walked with you after dark."],
-              ["Aftercare", "One number to call. We hold the workmanship warranty alongside the manufacturer."],
-            ].map(([h, p], i) => (
-              <article key={h} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-                <p className="label text-accent-ink">Step {i + 1}</p>
-                <h3 className="mt-2 text-lg text-foreground">{h}</h3>
-                <p className="mt-2 text-[0.95rem] text-muted-foreground">{p}</p>
-              </article>
+          <ul className="mt-10 grid items-start gap-x-10 gap-y-6 lg:grid-cols-2">
+            {(d?.included ?? []).map(([h, p]) => (
+              <li key={h} className="border-t border-border pt-5">
+                <h3 className="font-display text-lg font-bold text-foreground">{h}</h3>
+                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{p}</p>
+              </li>
             ))}
-          </div>
+          </ul>
+
           {sys && (
-            <div className="mt-8 flex flex-wrap items-center gap-4 rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-lg bg-primary px-6 py-5 shadow-[var(--shadow-dark)]">
               <div className="min-w-0 flex-1">
-                <p className="label text-accent-ink">Matching system</p>
-                <p className="mt-1 font-display text-lg font-bold text-foreground">{sys.name}</p>
-                <p className="mt-1 text-sm text-muted-foreground">{sys.short}</p>
+                <p className="label text-accent">The hardware under it</p>
+                <p className="mt-1 font-display text-lg font-bold text-on-dark">{sys.name}</p>
+                <p className="mt-1 text-sm text-on-dark-muted">{sys.short}</p>
               </div>
-              <TextLink href={`/lighting-systems/${sys.slug}`}>See the system</TextLink>
+              <TextLink onDark href={`/lighting-systems/${sys.slug}`}>See the spec</TextLink>
             </div>
           )}
         </div>
       </section>
 
-      {/* 4 — full-bleed drawn band · breather between dense sections */}
-      <section className="bg-primary">
-        <div className="shell py-12">
-          {photoExists(s.photo) ? (
-            <Photo slot={s.photo!} sizes="100vw" />
-          ) : (
-            <div className="grid items-center gap-8 lg:grid-cols-[1fr_20rem]">
-              <div className="overflow-hidden rounded-lg ring-1 ring-on-dark/12">
-                <Elevation night massing="wing" lit={{ hex: "#f5c518", label:"warm white" }} className="block w-full" />
-              </div>
-              <div>
-                <p className="eyebrow eyebrow--on-dark">Measured elevation</p>
-                <p className="mt-4 text-on-dark-muted">
-                  This is how a run is drawn before anything is fastened to your house: eave line,
-                  channel position, zone breaks and linear feet.
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
+      {/* ── PHOTOGRAPHS OF THIS SERVICE ──
+        * Assigned per slug in content/service-detail.ts rather than rotated from a pool. On a
+        * city page a lit roofline is equally true anywhere in the metro; on a service page the
+        * frame has to be of the service, so a shared pool would eventually put a Christmas
+        * gable on the hardscape page. Three or four here, and the caption is written against
+        * what is in that particular frame. */}
+      {d?.shots?.length ? (
+        <PhotoStrip
+          eyebrow={`${s.name}, installed`}
+          title="What it looks like once the crew has gone."
+          /* THE LEDE IS PER-SERVICE, and it had to become per-service for two reasons.
+           *
+           * It used to read "Photographed on nights these were already running, rather than lit
+           * for a camera" — a template constant, on eleven pages. On the repairs page all three
+           * photographs are broad daylight and their own captions say so ("A daytime call", "What
+           * a correct run looks like at noon"), so the section was calling its own images liars.
+           * A provenance claim cannot be hard-coded above a set of photographs that varies.
+           *
+           * And it was one more string-for-string identical line in a template that already had
+           * six of them. `proofCaption` is written per service and was sitting in a section further
+           * down this page that has since been deleted, so it does the job here. */
+          lede={
+            d.proofCaption ??
+            "Our own installs, photographed as they were rather than staged for a camera."
+          }
+          shots={d.shots}
+          ground="raise"
+        />
+      ) : null}
 
-      {/* 5 — comparison table · bone */}
-      <section className="section bg-background">
-        <div className="shell">
-          <SectionHead
-            eyebrow="The comparison"
-            title="Permanent versus doing it again every year."
-            lede="This is the calculation almost nobody runs before they call, and it is the one that decides it."
-          />
-          <div className="mt-10">
-            <SpecTable
-              onDark={false}
-              caption="Permanent lighting compared with hanging lights every season"
-              rows={compareRows}
-              headA="Permanent"
-              headB="Hung each season"
-              highlightA
+      {/* ── THE COMPARISON, WHERE IT IS HONEST ── */}
+      {d?.compare && (
+        <section className="section bg-background">
+          <div className="shell">
+            <SectionHead
+              eyebrow="The comparison"
+              title="Installed once, against doing it again every year."
+              lede="This is the calculation almost nobody runs before they call, and it is usually the one that decides it."
             />
+            <div className="mt-10">
+              <SpecTable
+                onDark={false}
+                caption="Permanent lighting compared with hanging lights every season"
+                rows={compareRows}
+                headA="Permanent"
+                headB="Hung each season"
+                highlightA
+                source="Ladder time, storage and takedown are the parts customers tell us they underestimated."
+              />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* 6 — related services · charcoal */}
-      <section className="section bg-raise">
-        <div className="shell">
-          <SectionHead onDark title="What people usually add." />
-          <div className="mt-9 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {related.map((r) => {
-              const I = iconMap[r.icon];
-              return (
-                <Link key={r.slug} href={`/services/${r.slug}`} className="flex flex-col rounded-lg bg-primary p-5 ring-1 ring-on-dark/10 transition-all duration-[--dur-base] hover:-translate-y-0.5 hover:ring-accent/40">
-                  <span className="channel-tile mb-4" aria-hidden><I className="size-7" /></span>
-                  <h3 className="text-lg text-on-dark">{r.name}</h3>
-                  <p className="mt-2 text-sm text-on-dark-muted">{r.short}</p>
-                  <ul className="mt-4 flex-1 space-y-1.5">
-                    {r.includes.slice(0, 2).map((x) => <Check key={x} onDark>{x}</Check>)}
-                  </ul>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+      {/* ── TWO FRAMES OF THE SAME SUBJECT ──
+        * Only on the services where such a pair genuinely exists. Two photographs of two
+        * different houses side by side under a "before and after" style heading is the kind of
+        * thing this trade does constantly and it is a lie; these are registered frames of one
+        * subject, and where a service has none, this renders nothing. */}
+      {d?.pair ? (
+        <PhotoPair
+          eyebrow="The same house, twice"
+          title={d.pair.title}
+          lede={d.pair.lede}
+          a={d.pair.a}
+          b={d.pair.b}
+          aLabel={d.pair.aLabel}
+          bLabel={d.pair.bLabel}
+          ground="muted"
+        />
+      ) : null}
 
-      {/* 7 — city tiles · bone */}
+      {/* THE PROOF SHOT SECTION WAS DELETED HERE.
+        * It was one photograph of this service, eyebrowed "Our own work", with proofCaption beside
+        * it and a link to the gallery. The strip above it is three or four photographs of the same
+        * service, and seven of the eleven services have `compare: false`, which drops the section
+        * between the two — so on those seven pages the reader met two consecutive photo-plus-
+        * caption sections carrying the same eyebrow. proofCaption is now the strip's lede, which is
+        * where it always belonged, and the gallery is reachable from the nav and the closer. */}
+
+      {/* ── WHAT PEOPLE LOOK AT NEXT ── */}
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead title={`${s.name}, across 18 cities.`} />
-          <div className="mt-9"><CityTiles /></div>
+          <SectionHead title="What people look at next." />
+          <div className="mt-9 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+            <ul className="divide-y divide-border">
+              {alsoSee.map((r) => {
+                const I = iconMap[r.icon];
+                return (
+                  <li key={r.slug}>
+                    <Link
+                      href={`/services/${r.slug}`}
+                      className="group flex items-center gap-4 px-6 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
+                    >
+                      <span className="channel-tile channel-tile--light !size-10 shrink-0" aria-hidden>
+                        <I className="size-6" />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-display text-[1.05rem] font-bold text-foreground group-hover:underline">
+                          {r.name}
+                        </span>
+                        <span className="mt-0.5 block text-sm text-muted-foreground">{r.short}</span>
+                      </span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </div>
       </section>
 
-      {/* 8 — FAQ · bone-deep */}
+      {/* ── QUESTIONS ── */}
       <section className="section bg-muted">
         <div className="shell grid gap-10 lg:grid-cols-[1fr_20rem] lg:gap-14">
           <div>
-            <SectionHead eyebrow="Questions" title={`${s.name}: the eight we get most.`} />
-            <div className="mt-8"><Faq items={faqs} /></div>
+            <SectionHead eyebrow="Questions" title={`${s.name}: what people ask before they book.`} />
+            {/* The "Nearest crews" aside is h-fit, so it ended a third of the way down while
+              * the accordion carried on alone — roughly 350px of bare column beside the rest
+              * of the questions, on all eleven service pages. Two-up from xl, where the
+              * column is wide enough for two readable measures. */}
+            <div className="mt-8 grid gap-x-12 xl:grid-cols-2">
+              <Faq items={faqs.slice(0, Math.ceil(faqs.length / 2))} />
+              <Faq items={faqs.slice(Math.ceil(faqs.length / 2))} />
+            </div>
           </div>
-          <aside className="h-fit rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)]">
+          {/* NOT h-fit. A previous pass split the accordion two-up to shorten the left column and
+            * left this panel `h-fit`, so it still ran out before the questions did — measured at
+            * 408 x 265px of bare page in the bottom-right of this section, on all eleven service
+            * pages and, in the same shape, on all eighteen city pages.
+            *
+            * The panel stretches and its footer link is pushed to the bottom. The slack is now
+            * inside a card, which reads as padding, instead of outside one, which reads as a hole. */}
+          <aside className="flex flex-col rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)]">
             <h3 className="text-xl text-on-dark">Nearest crews</h3>
-            <ul className="mt-4 space-y-2.5">
+            <p className="mt-2 text-sm text-on-dark-muted">Drive from our shop on C Street.</p>
+            <ul className="mt-4 divide-y divide-on-dark/10 border-t border-on-dark/10">
               {metroCities.slice(0, 6).map((c) => (
                 <li key={c.slug}>
-                  <Link href={`/service-areas/${c.slug}`} className="flex justify-between text-sm text-on-dark-muted hover:text-accent">
-                    <span>{c.name}</span><span className="u">{c.drive}</span>
+                  <Link href={`/service-areas/${c.slug}`} className="flex justify-between gap-4 py-2.5 text-sm text-on-dark-muted hover:text-accent">
+                    <span>{c.name}</span><span className="u text-accent">{c.drive}</span>
                   </Link>
                 </li>
               ))}
             </ul>
-            <div className="mt-6 border-t border-on-dark/12 pt-5"><TextLink onDark href="/service-areas">All service areas</TextLink></div>
+            <p className="mt-5 text-sm leading-relaxed text-on-dark-muted">
+              Drive time changes what we can promise about a service call. It does not change who
+              turns up, what goes on the house, or the price per foot.
+            </p>
+            <div className="mt-auto border-t border-on-dark/12 pt-4">
+              <TextLink onDark href="/service-areas">Every town we drive to</TextLink>
+            </div>
           </aside>
         </div>
       </section>
 
-      <PageCta />
+      <PageCta variant="phone" 
+        /* The questions section above is bg-muted, so the closer would have landed on the same ground and the page would
+          * have ended in one undifferentiated block. */
+        ground="background"
+      />
     </Shell>
   );
 }
