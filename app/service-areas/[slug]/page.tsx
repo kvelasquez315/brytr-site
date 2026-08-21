@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { cities, cityBySlug } from "@/content/cities";
 import { services } from "@/content/services";
 import { serviceFaqsFor } from "@/content/faqs";
+import { reviewProof } from "@/content/reviews";
 import { Shell } from "@/app/layout-shell";
 import { Faq } from "@/components/sections/faq";
 import { Elevation } from "@/components/sections/elevation";
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     /* Deliberately distinct from the homepage title so two pages never compete. */
     title: `Permanent Outdoor Lighting ${c.name} ${c.state} | Installed Once`,
-    description: `Permanent outdoor lighting installed in ${c.name}, ${c.state}. Roofline, landscape, hardscape and bistro runs by our own crews. ${c.drive} from the shop. 5.0 from 177 reviews.`,
+    description: `Permanent outdoor lighting installed in ${c.name}, ${c.state}. Roofline, landscape, hardscape and bistro runs by our own crews. ${c.drive} from the shop. ${reviewProof.average} from ${reviewProof.count} reviews.`,
     alternates: { canonical: `/service-areas/${c.slug}` },
   };
 }
@@ -62,10 +63,10 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               : c.tier === "iowa"
               ? `Iowa-side installs get the same crews, materials and warranty as anything in Nebraska.`
               : `We run scheduled routes out here rather than same-day calls, and the pricing is the same as the metro.`}{" "}
-            <Link href="/how-it-works" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">See the five-step process</Link>.
+            <Link href="/how-it-works" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">What install day looks like</Link>.
           </>
         }
-        stats={[["5.0", "from 177 reviews"], ["1.2M", "lights installed"], ["1 day", "typical install"]]}
+        stats={[[reviewProof.average, `from ${reviewProof.count} reviews`], ["1.2M", "lights installed"], ["1 day", "typical install"]]}
       />
 
       {/* 2 — local proof strip · charcoal */}
