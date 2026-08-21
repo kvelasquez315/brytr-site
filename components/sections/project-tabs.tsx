@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { SectionHead, TextLink } from "@/components/ui/bits";
-import { IcRoofline, IcPathLight, IcPergola } from "@/components/icons";
+import { IcRoofline, IcPathLight, IcPergola, IcSchedule } from "@/components/icons";
 
 /* 14 — RECENT PROJECTS · tabbed photo gallery · raise
  * Tabs use an underlined tab bar, NOT the rounded chips from the scene rail, so the
@@ -45,11 +45,13 @@ const tabs: Project[] = [
     shots: [
       { src: "/img/g-moonrise.jpg", label: "Blue and white", note: "Gables in color, eaves left white, tree uplights holding warm.",
         alt: "A two-story Omaha home lit blue and white under a rising moon, with an uplit tree in the front yard" },
-      /* Labelled "white", not "warm white": in this frame the runs read as a clean
-       * white with a faint pink cast, and captioning it 2700K would be describing a
-       * setting the photograph does not show. */
-      { src: "/img/hero-warm-white.jpg", label: "The everyday setting", note: "Every run on white, which is where this house sits most nights of the year.",
-        alt: "The same two-story Omaha home with every roofline run set to white" },
+      /* An earlier pass labelled this "white, not warm white" on the grounds that the runs
+       * read as a clean white with a faint pink cast. Looked at again on a large screen it is
+       * not a cast — the gables and the brick are pink. Calling it white was the same error
+       * one shade quieter, so it now says what is in the frame. See the note on heroWarm in
+       * content/images.ts for the whole story. */
+      { src: "/img/hero-warm-white.jpg", label: "One color, every run", note: "The same saved scene pushed to every run on the house, gables and eaves together.",
+        alt: "The same two-story Omaha home with every roofline run set to the same soft pink" },
       { src: "/img/g-gable-detail.jpg", label: "Gable line, up close", note: "The run follows the gable and turns the corner without a break.",
         alt: "Close view of the lit channel following two gable edges on an Omaha home" },
       { src: "/img/christmas-detail.jpg", label: "Red and green, alternating", note: "Every other pixel, scheduled to a date range and left alone.",
@@ -108,6 +110,43 @@ const tabs: Project[] = [
         alt: "An Omaha home and pool deck lit red at dusk with fire bowls burning" },
     ],
   },
+  /* THE FOURTH, AND THE ONE WITH A CLOCK ON IT.
+   *
+   * The three above were photographed over an evening each, and the frames within a tab are
+   * minutes apart. This one is a sequence: a drone held one hover point while the scenes were
+   * switched from a phone underneath it, so all five frames land between 20:40:29 and 20:41:59
+   * and the logged position moves under two feet from the first to the last.
+   *
+   * Which makes it the only tab on this page — and the only set on the site — that settles the
+   * standing suspicion about every gallery in this trade, ours included: that the warm white
+   * photograph and the coloured photograph are two different houses. Here they provably are not.
+   * The section heading already says these were photographed the night they ran; this is the tab
+   * that can prove the sentence. */
+  {
+    key: "Brick and cedar ranch, west of Omaha",
+    icon: IcSchedule,
+    spec: "One hover point · five scenes · ninety seconds",
+    blurb:
+      "The most ordinary elevation on this page, which is why it is the useful one: a hip roof, a three-car garage and a low brick-and-cedar front. A drone held its position while the scenes were cycled, so every frame here is the same roof, the same sky and the same camera with only the controller changing.",
+    facts: [
+      ["Elevation", "Single-story, hip roof"],
+      ["What is lit", "Roofline, eaves, garage band"],
+      ["Whole set spans", "1 min 30 sec"],
+      ["Photographed", "September 2025"],
+    ],
+    shots: [
+      { src: "/img/seq-security.jpg", label: "Dimmed warm white", note: "Enough to find the door and read the driveway by. Where most people leave it.",
+        alt: "A brick and cedar ranch west of Omaha with the roofline run dimmed to a low warm white" },
+      { src: "/img/seq-everyday.jpg", label: "The everyday setting", note: "Roofline, eaves and the band over the garage, warm and not bright.",
+        alt: "The same ranch at dusk with the roofline, eaves and garage band on everyday warm white" },
+      { src: "/img/seq-warm-christmas.jpg", label: "Warm white, full output", note: "For a lot of houses this is the entire Christmas scene, with no colour in it.",
+        alt: "The same ranch with every point along the roofline and eaves at full warm white" },
+      { src: "/img/seq-red-green.jpg", label: "December", note: "Red and green alternating. Same fixtures, same evening, one setting changed.",
+        alt: "The same ranch with the roofline alternating red and green" },
+      { src: "/img/seq-gameday.jpg", label: "Scarlet, white peaks", note: "White held at the peaks, so the roof still reads as a roof under the colour.",
+        alt: "The same ranch washed red across the whole elevation with white left at the roof peaks" },
+    ],
+  },
 ];
 
 export function ProjectTabs() {
@@ -116,7 +155,15 @@ export function ProjectTabs() {
   return (
     <section className="section bg-raise">
       <div className="shell">
-        <SectionHead onDark title="Three west Omaha houses, shot the night they ran." lede={tab.blurb} />
+        {/* The title counted the houses. The rule is that headings do not carry numbers and
+          * do not count the thing underneath them — the reader can see how many tabs there
+          * are. What is worth saying is that these were photographed on the night the system
+          * ran rather than staged, which is the part a reader cannot see.
+          *
+          * "West Omaha" also had to go once the fourth tab arrived: that property is west OF
+          * Omaha, outside the city, and a heading that is true of three tabs out of four is a
+          * heading that is wrong. The city detail belongs on each tab, where it is accurate. */}
+        <SectionHead onDark title="Houses around Omaha, photographed the night they ran." lede={tab.blurb} />
 
         <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 border-b border-on-dark/12" role="tablist" aria-label="Project categories">
           {tabs.map((t, i) => (

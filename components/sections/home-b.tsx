@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
-import { services } from "@/content/services";
-import { cities, metroCities, outstateCities, iowaCities } from "@/content/cities";
+
+import { cities } from "@/content/cities";
 import { reviews, reviewProof } from "@/content/reviews";
 import { homeFaqs } from "@/content/faqs";
 import { compares } from "@/content/compares";
 import { posts } from "@/content/blog";
+import { photoForPost } from "@/content/blog-detail";
 import { ServiceLeaflet } from "./service-leaflet";
 import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
@@ -130,7 +131,7 @@ export function Founders() {
             <p className="mt-4 text-muted-foreground">
               So they built the opposite. Brytr stocks a premium system and a value system, runs its own
               W2 crews rather than subcontracting the install, and services other companies&rsquo; work
-              when those companies stop answering. It's a less profitable way to run a lighting company
+              when those companies stop answering. It&rsquo;s a less profitable way to run a lighting company
               and a much better way to keep a five-star average.
             </p>
             <p className="mt-4 text-muted-foreground">
@@ -257,27 +258,13 @@ export function ServiceArea() {
           </div>
 
           <div className="flex flex-col gap-4">
-            <ServiceLeaflet className="aspect-4/3 lg:aspect-auto lg:min-h-[22rem] lg:flex-1" />
-
-            {/* what the pins mean, next to the pins */}
-            <ul className="flex flex-wrap gap-x-6 gap-y-2 rounded-md bg-primary px-4 py-3 ring-1 ring-on-dark/10">
-              <li className="flex items-center gap-2 text-sm text-on-dark-muted">
-                <span className="size-2.5 rounded-full bg-accent shadow-[0_0_10px_2px_var(--brand-accent)]" aria-hidden />
-                Metro, same week
-              </li>
-              <li className="flex items-center gap-2 text-sm text-on-dark-muted">
-                <span className="size-2.5 rounded-full bg-on-dark/70" aria-hidden />
-                Outstate, by route day
-              </li>
-              <li className="flex items-center gap-2 text-sm text-on-dark-muted">
-                <span className="h-0 w-6 border-t border-dashed border-accent" aria-hidden />
-                Roughly a half hour from the shop
-              </li>
-            </ul>
+            {/* The legend used to be a sibling <ul> right here. It is a prop now, so it cannot
+              * outlive the map it describes — see the note on `legend` in ServiceLeaflet. */}
+            <ServiceLeaflet legend className="aspect-4/3 lg:aspect-auto lg:min-h-[22rem] lg:flex-1" />
 
             <div className="grid gap-4 sm:grid-cols-3">
               {[
-                ["Same week in the metro", "Inside the dashed ring a crew can be on your roofline within days of the quote being signed."],
+                ["Same week in the metro", "Within about half an hour of the shop, a crew can be on your roofline within days of the quote being signed."],
                 ["Both sides of the river", "Council Bluffs and western Iowa run on the same schedule as Omaha, not as an afterthought."],
                 ["Outstate by route day", "Lincoln, Columbus, Norfolk and the towns west are grouped into route days, so the drive is ours."],
               ].map(([h, p]) => (
@@ -294,22 +281,49 @@ export function ServiceArea() {
   );
 }
 
-/* 15 — SEASON CTA BAND · short band · primary */
+/* 15 — THE DEADLINE BAND · primary
+ *
+ * This was the second closer on the page and the emptiest band on it. Centred text in a 1440px
+ * field: a 38ch heading, a 60ch paragraph, and the same two buttons — consultation and phone —
+ * that the page's actual closer carries three sections later, and that the hero carries as a
+ * form above the fold. The page therefore made the identical ask three times with the same
+ * component, and the rule is one closer per page.
+ *
+ * It still has a job the closer does not: there is a real cut-off, and a reader who does not
+ * know it cannot act on it. So the band keeps the deadline and loses the duplicate ask. The two
+ * outcomes are a small ledger on the right rather than a sentence, because "before this date /
+ * after this date" is a table pretending to be prose, and one text link replaces the button
+ * pair — the buttons live in the closer, which is where a closer's buttons belong. */
 export function CtaBand() {
   return (
     <section className="bg-primary">
-      <div className="shell py-16 text-center">
-        <h2 className="mx-auto max-w-[38ch] text-[clamp(1.7rem,3vw,2.4rem)] text-on-dark">
-          Install season runs out before the holidays do.
-        </h2>
-        <p className="mx-auto mt-4 max-w-[60ch] text-on-dark-muted">
-          Design consultations booked before November 15 install in time for Christmas. After that we
-          are into the new year.
-        </p>
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Button asChild size="lg"><Link href="/free-design-consultation">Get a free design consultation</Link></Button>
-          <Button asChild size="lg" variant="outline-dark"><a href={site.phoneHref} className="u">{site.phone}</a></Button>
+      <ChannelEdge />
+      <div className="shell grid items-center gap-8 py-14 lg:grid-cols-[1fr_30rem] lg:gap-16">
+        <div>
+          <p className="label text-accent">Booking now</p>
+          <h2 className="mt-4 max-w-[26ch] text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.06] text-on-dark">
+            Install season runs out before the holidays do.
+          </h2>
+          <div className="mt-7">
+            <TextLink onDark href="/free-design-consultation">
+              Book the on-site measure
+            </TextLink>
+          </div>
         </div>
+        <dl className="divide-y divide-on-dark/12 overflow-hidden rounded-lg bg-raise ring-1 ring-on-dark/10">
+          <div className="flex items-baseline justify-between gap-6 px-6 py-4">
+            <dt className="text-sm text-on-dark-muted">Booked before November 15</dt>
+            <dd className="u shrink-0 text-right text-sm font-medium text-on-dark">Lit for Christmas</dd>
+          </div>
+          <div className="flex items-baseline justify-between gap-6 px-6 py-4">
+            <dt className="text-sm text-on-dark-muted">Booked after that</dt>
+            <dd className="u shrink-0 text-right text-sm font-medium text-on-dark">Into the new year</dd>
+          </div>
+          <div className="flex items-baseline justify-between gap-6 px-6 py-4">
+            <dt className="text-sm text-on-dark-muted">The measure itself</dt>
+            <dd className="u shrink-0 text-right text-sm font-medium text-on-dark">An hour, after dark</dd>
+          </div>
+        </dl>
       </div>
     </section>
   );
@@ -434,15 +448,6 @@ function StarRow({ tone = "dark" }: { tone?: "dark" | "light" }) {
   );
 }
 
-/* Straight off the Google profile: the tags Google itself pulls out of the reviews, with
- * its own counts. Not our summary of what customers say — Google's. */
-const mentioned: [string, string][] = [
-  ["Professional team", "46"],
-  ["Outdoor lighting", "10"],
-  ["Early installation", "5"],
-  ["Roofline lighting", "4"],
-];
-
 export function Reviews() {
   /* PROOF, AT SIZE.
    *
@@ -455,7 +460,7 @@ export function Reviews() {
    * and one review set at pull-quote size instead of six equal cards. */
   if (reviews.length === 0) {
     return (
-      <section className="section bg-muted">
+      <section className="section bg-background">
         <div className="shell">
           <SectionHead
             eyebrow="Omaha says"
@@ -482,11 +487,30 @@ export function Reviews() {
     );
   }
 
+  /* The left column used to be the pull-quote plus a panel of Google's own review tags with
+   * their counts — "Professional team 46", "Outdoor lighting 10". The client, on that panel:
+   * "add another review here instead of this."
+   *
+   * Right, and for a reason worth writing down. A tag with a number beside it is a summary of
+   * reviews sitting in a section whose whole job is to show the reviews themselves. It also
+   * broke two house rules at once: it counted things, and it put a figure where the reader
+   * wanted a sentence. There were eight real reviews on file and only five on the page, so
+   * the fix was already in the content. Six now: one at pull-quote size, one beneath it, four
+   * beside. */
   const featured = reviews.find((r) => r.feature) ?? reviews[0];
-  const rest = reviews.filter((r) => r !== featured).slice(0, 4); // an even 2 x 2 beside the pull-quote
+  const others = reviews.filter((r) => r !== featured);
+  const second = others[0];
+  const rest = others.slice(1, 5); // an even 2 x 2 beside the left column
 
+  /* bg-background, not bg-muted. MaterialsSplit directly below this is bg-muted, so the two
+   * sections ran together as one unbroken warm field for 2,700px with no step at the seam — and
+   * both of them open with an amber eyebrow over a display heading over one paragraph over a card
+   * grid, so there was nothing else telling them apart either.
+   *
+   * A JSX comment cannot be the first child of a `return (`, which is how this took three
+   * attempts: `return ( {/* ... *\/} <section>` parses as an object literal, not an element. */
   return (
-    <section className="section bg-muted">
+    <section className="section bg-background">
       <div className="shell">
         <SectionHead
           eyebrow="Omaha says"
@@ -535,19 +559,20 @@ export function Reviews() {
               </footer>
             </blockquote>
 
-            {/* Google's own review tags, with Google's own counts — so the column ends level
-              * with the cards beside it and what it adds is data rather than padding. */}
-            <div className="flex-1 rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-              <p className="label text-accent-ink">Mentioned most in the reviews</p>
-              <dl className="mt-4 divide-y divide-border">
-                {mentioned.map(([k, v]) => (
-                  <div key={k} className="flex items-baseline justify-between gap-4 py-2.5 first:pt-0">
-                    <dt className="text-sm text-muted-foreground">{k}</dt>
-                    <dd className="u text-sm font-medium text-foreground">{v}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+            {/* A sixth review rather than a summary of the other five. `flex-1` so this column
+              * still ends level with the 2 x 2 beside it. */}
+            {second ? (
+              <blockquote className="flex flex-1 flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+                <StarRow />
+                <p className="mt-4 flex-1 text-[1.05rem] leading-relaxed text-muted-foreground">
+                  &ldquo;{second.text}&rdquo;
+                </p>
+                <footer className="mt-5 border-t border-border pt-3 text-sm text-muted-foreground">
+                  <span className="font-display font-bold text-foreground">{second.name}</span>
+                  {second.when ? ` · ${second.when}` : ""} · Google review
+                </footer>
+              </blockquote>
+            ) : null}
           </div>
 
           <ul className="grid gap-5 sm:grid-cols-2">
@@ -599,7 +624,7 @@ export function Financing() {
           </ul>
           <p className="mt-7 text-sm text-on-dark-muted">
             Exact terms come from our lending partner and we will show you the real numbers at the
-            consultation. We don't advertise a monthly payment that only applies to a perfect credit file.
+            consultation. We don&rsquo;t advertise a monthly payment that only applies to a perfect credit file.
           </p>
           <div className="mt-6"><TextLink onDark href="/pricing">See full pricing</TextLink></div>
         </div>
@@ -732,12 +757,20 @@ export function CompareGrid() {
  * The blog had twelve finished articles and not one internal link from the homepage,
  * which is a straight SEO defect as well as a wasted trust signal. Three posts, the
  * ones that answer pre-purchase questions. */
-/* One real photograph per article, chosen because it shows what the piece is about. */
-const postArt: Record<string, string> = {
-  "are-permanent-christmas-lights-worth-it": "/img/christmas-detail.jpg",
-  "permanent-lights-vs-hanging-christmas-lights": "/img/g-gable-detail.jpg",
-  "how-to-choose-a-permanent-lighting-installer": "/img/channel-detail.jpg",
-};
+/* TWO SOURCES OF TRUTH IS HOW ONE PHOTOGRAPH ENDS UP ON A PAGE THREE TIMES.
+ *
+ * This used to be a local `postArt` map naming a file per slug — and content/blog-detail.ts
+ * already had a `postPhotos` map doing the identical job for the twelve article pages and the
+ * blog index. Two maps, same purpose, maintained by hand. They drifted the moment the archive
+ * grew, and the result was visible on the flagship page: christmas-detail.jpg appeared in this
+ * row AND in the project tabs, g-gable-detail.jpg appeared here AND in the project tabs, and
+ * channel-detail.jpg appeared here AND in the hardware section. A visitor scrolling the home
+ * page saw the same three houses twice each and had every reason to conclude the archive was
+ * thinner than it is.
+ *
+ * So this reads the one map. Adding a photograph to an article now changes it everywhere it
+ * appears, which is the only arrangement that stays true. The alt text comes with it, rather
+ * than being an empty string as it was here. */
 
 export function Writing() {
   const featured = [
@@ -766,11 +799,12 @@ export function Writing() {
               <Link href={`/blog/${p.slug}`} className="group flex flex-1 flex-col">
                 <span className="relative block aspect-16/9 overflow-hidden bg-primary">
                   <Image
-                    src={postArt[p.slug] ?? "/img/g-gable-detail.jpg"}
-                    alt=""
+                    src={photoForPost(p.slug)?.photo ?? "/img/home-shake-brick.jpg"}
+                    alt={photoForPost(p.slug)?.photoAlt ?? ""}
                     fill
                     sizes="(min-width:1024px) 32vw, 100vw"
                     className="object-cover"
+                    style={{ objectPosition: photoForPost(p.slug)?.objectPosition ?? "50% 50%" }}
                   />
                 </span>
                 <span className="flex flex-1 flex-col p-6">

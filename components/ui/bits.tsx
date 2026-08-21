@@ -131,7 +131,7 @@ export function QuoteForm({
         )}
         <div>
           <Label htmlFor={`${variant}-city`}>City</Label>
-          <Select id={`${variant}-city`} name="city" defaultValue={city ?? ""}>
+          <Select id={`${variant}-city`} name="city" defaultValue={city ?? ""} required>
             <option value="">Select your city</option>
             {cities.map((c) => (
               <option key={c.slug} value={c.name}>{c.name}{c.state === "IA" ? ", IA" : ""}</option>
@@ -142,7 +142,13 @@ export function QuoteForm({
           <Label htmlFor={`${variant}-scope`}>
             {variant === "financing" ? "Estimated roofline" : "What are you lighting"}
           </Label>
-          <Select id={`${variant}-scope`} name="scope">
+          {/* This had no empty option, so "Roofline" was not a placeholder — it was the
+            * default, and a form left alone submitted "Roofline" for somebody who came for
+            * landscape. Both selects now start empty and ask. */}
+          <Select id={`${variant}-scope`} name="scope" defaultValue="" required>
+            <option value="">
+              {variant === "financing" ? "Roughly how much" : "Choose one"}
+            </option>
             {variant === "financing" ? (
               <>
                 <option>Under 150 linear ft</option>

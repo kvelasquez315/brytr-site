@@ -1,106 +1,367 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Shell } from "@/app/layout-shell";
-import { PageHero, PageCta, BandCta, SectionHead, Check, TextLink, CityTiles, ServiceRows, SpecTable } from "@/components/sections/page-parts";
+import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
+import { PhotoSplit } from "@/components/sections/photo-parts";
+
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { site } from "@/content/site";
+
+/* /warranty — WAVE 2, PAGE 4 of the page-by-page pass.
+ *
+ * What it was: no photograph in the hero, a "365 days a year" stat that means nothing, a
+ * ghost-numeral 1-2-3 claim row at 3.4rem — the pattern the client called lazy — one
+ * coverage table, and two closers stacked at the bottom. It also asserted two terms nobody
+ * at Brytr has confirmed to us: that coverage transfers with the house, and that service
+ * runs year round including winter. Both are plausible and both are exactly the kind of
+ * thing a customer would later hold the company to, so they are gone until the client
+ * confirms them.
+ *
+ * What it is now. The page's job is to answer two questions — what is covered, and who
+ * turns up — so it answers them in that order and refuses to pad. The centerpiece is
+ * COVERED FACING NOT COVERED, in plain language, because every warranty page in this trade
+ * publishes only the left column and that is why nobody believes any of them.
+ *
+ * The honest gap is stated rather than filled: we do not publish component TERMS, because
+ * the durations belong to the manufacturers and Brytr has not cleared a set of numbers for
+ * publication. Printing plausible ones would be the single worst thing this site could do.
+ * Instead the last section is the five questions worth asking any installer, ours included.
+ *
+ * Archetype: home hero → covered/not-covered facing lists → who-turns-up split → the five
+ * questions. Closer: one, the phone band.
+ */
+
 export const metadata: Metadata = {
-  title: "Warranty and 365 Day Service Promise",
-  description: "What Brytr's permanent lighting warranty covers: manufacturer coverage on hardware plus our own workmanship coverage on the install, in writing before you sign.",
+  title: "Warranty: What Is Covered and Who Comes Out",
+  description:
+    "What Brytr's permanent lighting warranty covers, what it does not, and who administers the claim: manufacturer coverage on the hardware, Brytr's own coverage on the install, both printed on the quote before you sign.",
   alternates: { canonical: "/warranty" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Warranty", href: "/warranty" }];
 
-const rows = [
-  { spec: "LED diodes", a: "Manufacturer", b: "Longest term in the system" },
-  { spec: "Controller", a: "Manufacturer", b: "Shorter than the LED term" },
-  { spec: "Power supply", a: "Manufacturer", b: "Shortest-lived component in any system" },
-  { spec: "Channel and extrusion", a: "Manufacturer", b: "Finish and corrosion" },
-  { spec: "Fastening and sealing", a: "Brytr workmanship", b: "Our work, our problem" },
-  { spec: "Water ingress at terminations", a: "Brytr workmanship", b: "The most common real-world failure" },
-  { spec: "Diagnosis and call-out", a: "Brytr", b: "We come out. One number to call." },
-  { spec: "Damage from roof work by others", a: "Not covered", b: "Tell your roofer we exist before they start" },
+/* COVERED. `by` is the party who pays, which is the split that removes the argument. */
+const covered: { h: string; by: "Manufacturer" | "Brytr"; p: string }[] = [
+  {
+    h: "The diodes themselves",
+    by: "Manufacturer",
+    p: "The longest term in the system, and the component least likely to be what has gone wrong.",
+  },
+  {
+    h: "Controller and power supply",
+    by: "Manufacturer",
+    p: "Shorter terms than the diodes. The power supply is the shortest-lived part of any permanent lighting system, ours included, and a dark run is usually this rather than the LEDs.",
+  },
+  {
+    h: "Channel finish and corrosion",
+    by: "Manufacturer",
+    p: "The extrusion and its coating. Color fade and corrosion on the aluminum itself sit with whoever extruded it.",
+  },
+  {
+    h: "Fastening and sealing",
+    by: "Brytr",
+    p: "Every screw we drove and every bead we ran. If a fixing works loose or a penetration weeps, that is our workmanship and our cost, with no manufacturer in the conversation.",
+  },
+  {
+    h: "Water at terminations and joints",
+    by: "Brytr",
+    p: "The most common real-world failure in this trade and almost always an install fault rather than a product fault. It is the reason we seal at the moment the screw goes in.",
+  },
+  {
+    h: "Miters, transitions and end caps",
+    by: "Brytr",
+    p: "Anywhere we cut the channel. A joint that opens up at a valley is a joint we cut.",
+  },
+  {
+    h: "Diagnosis and the call-out",
+    by: "Brytr",
+    p: "Working out which of the two columns above a fault belongs to is our job, not yours. You get one number either way.",
+  },
+  {
+    h: "Filing the manufacturer claim",
+    by: "Brytr",
+    p: "We raise it, evidence it and chase it. You do not deal with a portal, a distributor or a warranty department.",
+  },
+];
+
+/* NOT COVERED. Publishing this column is the whole point of the page. */
+const notCovered: { h: string; p: string }[] = [
+  {
+    h: "Roof, gutter or solar work by somebody else",
+    p: "A roofer working over our channel, or a gutter crew leaning a ladder on it, is not a warranty claim. Tell whoever is quoting the work that the lighting is there and we will happily talk to them first.",
+  },
+  {
+    h: "Storm, hail and impact damage",
+    p: "That is a homeowner's insurance question rather than a warranty one. We will quote the repair and we will write whatever your adjuster needs, but we are not the ones covering it.",
+  },
+  {
+    h: "Anything another installer has modified",
+    p: "If a run has been cut into, extended or re-terminated by somebody else, we cannot stand behind the part of the system we no longer recognize. We can still quote putting it right.",
+  },
+  {
+    h: "A new elevation or an extension",
+    p: "Adding the back of the house, a new pergola or a garage built after the fact is new work priced as new work. It ties into the controller you already have.",
+  },
+  {
+    h: "Changing your mind about the design",
+    p: "Wanting a different color, a different schedule or a different zone is a settings conversation and usually a five minute phone call. Wanting the channel moved is a quote.",
+  },
+  {
+    h: "Cosmetic marks from something hitting it",
+    p: "A ladder, a branch or a stray ball on the diffuser. We will replace the section; it is not a defect.",
+  },
+];
+
+/* THE FIVE QUESTIONS. Written to be asked of everybody quoting the job, including us. */
+const questions: { q: string; a: string }[] = [
+  {
+    q: "Who holds the workmanship coverage — you, or the manufacturer?",
+    a: "We do, and it is separate from the hardware terms. A single blanket warranty that does not distinguish the two is a warranty that gets argued about, because product failures and install failures are settled by different parties.",
+  },
+  {
+    q: "Who physically turns up when something goes dark?",
+    a: "One of our own crew. Not a franchise dispatcher, not a subcontractor who happens to be free, and not the manufacturer — they have no way of getting to your fascia board.",
+  },
+  {
+    q: "Is the workmanship coverage in the paperwork I sign, or in a brochure?",
+    a: "On the quote itself, with the manufacturer terms for whichever tier you chose printed beside it. If either only exists on a website, it is marketing rather than a term.",
+  },
+  {
+    q: "What happens if you go out of business?",
+    a: "The manufacturer terms survive us; the workmanship terms do not, and no installer in this trade can honestly tell you otherwise. That is the argument for asking how long a company has been at one address and who answers its phone.",
+  },
+  {
+    q: "Will you service the system if I did not buy it from you?",
+    a: "Yes, including brands we do not sell. It comes with no warranty from us on parts we did not install, and it is still the fastest way to get a dark run lit again.",
+  },
 ];
 
 export default function Warranty() {
   return (
     <Shell>
       <Jsonld data={breadcrumb(trail)} />
+
       <PageHero
+        photo="/img/g-blue-white.jpg"
+        photoAlt="An Omaha brick two-story with three gables, the walk and beds all lit, blue on the walls with the gables in warm white"
+        objectPosition="50% 50%"
         eyebrow="Warranty"
         h1="What is covered, and who comes out."
-        lede="A warranty is only worth the person administering it. Manufacturer coverage on the hardware, our own workmanship coverage on the install, and we are the ones who show up."
+        lede="A warranty is worth exactly as much as the person administering it. There are two layers on every Brytr install — the manufacturer's on the hardware and ours on the work — and we are the ones who show up for either."
         trail={trail}
-        stats={[["2", "layers of coverage"], ["1", "number to call"], ["365", "days a year"]]}
+        footnote={
+          <>
+            This system has to still look like this in year five, which is the only test a warranty page
+            is really about.{" "}
+            <Link
+              href="/services/repairs-and-service"
+              className="text-on-dark underline decoration-accent decoration-2 underline-offset-4"
+            >
+              Repairs and takeovers
+            </Link>.
+          </>
+        }
       />
 
+      {/* ── COVERED, FACING NOT COVERED ──
+        * The centerpiece. Everybody in this trade publishes the left column.
+        * The right column is the one that tells you whether to trust the left. */}
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead eyebrow="Coverage" title="Split by who is responsible." lede="Most warranty disputes in this trade are really arguments about whether a failure was product or workmanship. Splitting it up front removes the argument." />
-          <div className="mt-10"><SpecTable onDark={false} caption="Warranty coverage by component" rows={rows} headA="Covered by" headB="Notes" /></div>
-        </div>
-      </section>
+          <SectionHead
+            eyebrow="Both columns"
+            title="What is covered, and what is not."
+            lede="Most warranty arguments in this trade are really arguments about whether a failure was the product or the install. Splitting it before anything goes wrong removes the argument, and publishing the exclusions is the part that makes the rest believable."
+          />
 
-      <section className="section bg-primary">
-        <div className="shell grid gap-10 lg:grid-cols-[52fr_48fr] lg:gap-14">
-          <div>
-            <SectionHead onDark eyebrow="The promise" title="We come out." />
-            <div className="prose-body mt-6 space-y-4">
-              <p className="text-lg text-on-dark">
-                The single most useful thing about a locally owned installer is that a warranty claim is a
-                phone call rather than a process.
-              </p>
-              <p className="text-on-dark-muted">
-                We hold the workmanship coverage ourselves and we administer the manufacturer claim on your
-                behalf. You do not deal with the manufacturer, fill in a portal, or find out that the
-                franchisee who installed it has closed.
+          <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
+            {/* COVERED */}
+            <div className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+              <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border bg-primary px-6 py-4">
+                <p className="label flex items-center gap-3 text-on-dark">
+                  <span className="block h-4 w-1 bg-accent" aria-hidden />
+                  Covered
+                </p>
+                <p className="text-xs text-on-dark-muted">Who pays is named on each line</p>
+              </div>
+              <ul className="divide-y divide-border">
+                {covered.map((c) => (
+                  <li key={c.h} className="px-6 py-4">
+                    <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                      <h3 className="font-display text-[1rem] font-bold text-foreground">{c.h}</h3>
+                      <span
+                        className={`u shrink-0 rounded-sm border px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] ${
+                          c.by === "Brytr"
+                            ? "border-accent-ink/40 text-accent-ink"
+                            : "border-border text-muted-foreground"
+                        }`}
+                      >
+                        {c.by}
+                      </span>
+                    </div>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{c.p}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* NOT COVERED */}
+            <div className="overflow-hidden rounded-lg bg-muted ring-1 ring-border">
+              <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
+                {/* This used to be the same standing bar as "Covered" in grey. Two columns
+                  * badged identically and told apart by colour alone is a colour-deficiency
+                  * failure, and it also spends the section marker on the negative column. An
+                  * open box against a filled bar reads without colour at all. */}
+                <p className="label flex items-center gap-3 text-foreground">
+                  <span className="block size-3 border-2 border-foreground/35" aria-hidden />
+                  Not covered
+                </p>
+                <p className="text-xs text-muted-foreground">We will still quote the fix</p>
+              </div>
+              <ul className="divide-y divide-border">
+                {notCovered.map((c) => (
+                  <li key={c.h} className="px-6 py-4">
+                    <h3 className="font-display text-[1rem] font-bold text-foreground">{c.h}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{c.p}</p>
+                  </li>
+                ))}
+              </ul>
+              <p className="border-t border-border bg-card px-6 py-5 text-sm leading-relaxed text-muted-foreground">
+                None of these mean we will not help. They mean the work is quoted rather than free, and
+                you will be told which it is before anybody starts.
               </p>
             </div>
           </div>
-          <ul className="h-fit space-y-3 rounded-lg bg-raise p-7 ring-1 ring-on-dark/10">
-            <Check onDark>One number to call, for either kind of failure</Check>
-            <Check onDark>We handle the manufacturer claim for you</Check>
-            <Check onDark>Service available year round, including winter</Check>
-            <Check onDark>Coverage transfers if you sell the house</Check>
-            <Check onDark>We also service systems we did not install</Check>
-          </ul>
+
+          {/* THE HONEST GAP. Do not fill this in with invented numbers. */}
+          <div className="mt-8 rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
+            <p className="label text-accent">On the terms themselves</p>
+            <h3 className="mt-3 font-display text-xl font-bold text-on-dark">
+              We do not publish the year counts on this page.
+            </h3>
+            <p className="mt-3 max-w-[80ch] text-[0.95rem] leading-relaxed text-on-dark-muted">
+              The hardware terms belong to the manufacturers and differ by tier, by component and by
+              production year. A number typed onto a marketing page is the number somebody quotes back at
+              you in year six, so the durations live on your quote instead, printed for the exact system
+              you are buying and dated. Ask for them on the phone and you will have them before anybody
+              visits.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-x-7 gap-y-2">
+              <TextLink onDark href="/lighting-systems">Which tier is which</TextLink>
+              <TextLink onDark href="/pricing">What else is on the quote</TextLink>
+            </div>
+          </div>
         </div>
       </section>
 
+      {/* ── THE PEOPLE THE WARRANTY IS A PROMISE FROM ──
+        * A warranty page is a wall of terms, and terms are worth exactly as much as the outfit
+        * behind them. The section below this is titled "who turns up"; this is what that looks
+        * like. It is also the only photograph on the site with a person on a roof in it, which
+        * is the single most relevant image a warranty page could carry. */}
+      <PhotoSplit
+        photo="crewRoofFascia"
+        tall
+        side="right"
+        ground="raise"
+        eyebrow="Who the promise is from"
+        title="A warranty is only worth the crew standing behind it."
+        link={{ href: "/about", label: "Who Brytr actually is" }}
+      >
+        <p>
+          Every term on this page is underwritten by people on our own payroll. That is not a
+          slogan — it is the mechanism. A subcontracted crew has no reason to care whether a
+          fixing holds for eight years, because they will not be the ones coming back to it.
+        </p>
+        <p>
+          Almost every failure we are called out to repair on someone else&rsquo;s system is a
+          fixing or a sealing failure rather than a component failure. Which is to say: it is a
+          labour problem, and labour is the part a hardware warranty never covers.
+        </p>
+      </PhotoSplit>
+
+      {/* ── WHO TURNS UP ── */}
       <section className="section bg-muted">
+        <div className="shell grid items-start gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
+          <div>
+            <p className="eyebrow">The part that matters</p>
+            <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
+              A claim should be a phone call.
+            </h2>
+            <div className="prose-body mt-6 space-y-4">
+              <p className="text-lg text-foreground">
+                The single most useful thing about a locally owned installer is that something going
+                wrong is a conversation rather than a process. You ring the number on your quote and one
+                of the two people who own the company picks it up.
+              </p>
+              <p className="text-base text-muted-foreground">
+                We hold the workmanship coverage ourselves and we administer the manufacturer side on
+                your behalf. You never file anything, never chase a distributor, and never find out that
+                the crew who installed it was a subcontractor with no ongoing obligation.
+              </p>
+            </div>
+            <a
+              href={site.phoneHref}
+              className="u mt-8 block text-[clamp(1.6rem,3vw,2.1rem)] font-medium leading-none text-foreground hover:text-accent-deep"
+            >
+              {site.phone}
+            </a>
+            <p className="mt-2.5 text-sm text-muted-foreground">
+              The same number that is on your quote, on this page and on the van.
+            </p>
+          </div>
+
+          <ol className="divide-y divide-border border-y border-border">
+            {[
+              ["You call", "Tell us which elevation, and whether it is the whole run or a section. That one detail usually tells us what the part is before we leave the shop."],
+              ["We diagnose on site", "Controller, power supply, a termination or the diodes. We can narrow it quickly because we installed it and we have the elevation drawings."],
+              ["We fix it under whichever layer applies", "Manufacturer or our own workmanship. Deciding which of the two it is takes place between us and them, not between you and either of us."],
+              ["You get told what it was", "In plain language, including when the honest answer is that it was our fault. A pattern of failures is worth more to us than a repaired run."],
+            ].map(([h, p], i) => (
+              <li key={h} className="py-5">
+                <p className="label text-accent-ink">{["First", "Then", "Then", "Afterwards"][i]}</p>
+                <h3 className="mt-1.5 font-display text-[1.05rem] font-bold text-foreground">{h}</h3>
+                <p className="mt-1.5 text-[0.95rem] leading-relaxed text-muted-foreground">{p}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* ── THE FIVE QUESTIONS ──
+        * Written to be asked of every quote on the reader's kitchen table,
+        * which is the only version of this section worth publishing. */}
+      <section className="section bg-primary">
         <div className="shell">
           <SectionHead
-            eyebrow="Making a claim"
-            title="What actually happens when something fails."
-            lede="Three steps, one phone number, and no arbitration between us and a manufacturer while you wait."
+            onDark
+            eyebrow="Ask all three quotes"
+            title="Questions worth asking any installer."
+            lede="Including us. Every one of these has an answer that is easy to give and hard to fake, and the pattern of who dodges which one tells you most of what you need."
           />
-          <ol className="mt-10 grid gap-8 sm:grid-cols-3">
-            {[
-              ["You call us", "The same number that is on this page and on your quote. Not a portal and not a franchise dispatcher."],
-              ["We diagnose on site", "Controller, power supply, termination or LED. We can tell which because we installed it."],
-              ["We fix it under whichever coverage applies", "Manufacturer or our own workmanship. Deciding which one is our job, not yours."],
-            ].map(([h, p2], i) => (
-              <li key={h} className="relative">
-                <span className="u pointer-events-none absolute -top-3 left-0 text-[3.4rem] font-medium leading-none text-foreground/25" aria-hidden>{i + 1}</span>
-                <div className="relative pt-8">
-                  <h3 className="text-lg text-foreground">{h}</h3>
-                  <p className="mt-2 text-[0.95rem] text-muted-foreground">{p2}</p>
+
+          <ol className="mt-10 divide-y divide-on-dark/12 border-y border-on-dark/12">
+            {questions.map((x) => (
+              <li key={x.q} className="grid gap-3 py-6 lg:grid-cols-[44fr_56fr] lg:gap-12">
+                <h3 className="font-display text-[1.15rem] font-bold leading-snug text-on-dark">
+                  &ldquo;{x.q}&rdquo;
+                </h3>
+                <div>
+                  <p className="label text-accent">Our answer</p>
+                  <p className="mt-1.5 text-[0.95rem] leading-relaxed text-on-dark-muted">{x.a}</p>
                 </div>
               </li>
             ))}
           </ol>
-          <div className="mt-10 rounded-lg bg-card p-7 shadow-[var(--shadow-lg)]">
-            <h3 className="text-xl text-foreground">Coverage transfers with the house</h3>
-            <p className="mt-2.5 max-w-[74ch] text-[0.95rem] text-muted-foreground">
-              If you sell, the system stays and so does the coverage. Tell us and we will move the record
-              to the new owner. It is a small thing that matters at closing, and it is one of the reasons
-              a permanent system reads as a building feature rather than as a gadget.
-            </p>
-          </div>
+
+          <p className="mt-7 max-w-[76ch] text-sm leading-relaxed text-on-dark-muted">
+            The fourth one is the uncomfortable one and we have answered it straight, because an
+            installer who claims their own workmanship coverage outlives their own company is telling you
+            something about how the rest of their answers work.
+          </p>
         </div>
       </section>
 
-      <BandCta title="Read the warranty before you sign." body="We will put the whole thing in writing at the consultation, not after." />
-      <PageCta />
+      <PageCta variant="phone" omit={["/warranty"]} />
     </Shell>
   );
 }
