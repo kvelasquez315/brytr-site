@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
 import { PhotoSplit } from "@/components/sections/photo-parts";
@@ -25,9 +24,9 @@ import { site } from "@/content/site";
  * The honest gap is stated rather than filled: we do not publish component TERMS, because
  * the durations belong to the manufacturers and Brytr has not cleared a set of numbers for
  * publication. Printing plausible ones would be the single worst thing this site could do.
- * Instead the last section is the five questions worth asking any installer, ours included.
+ * Instead the last section is the questions worth asking any installer, ours included.
  *
- * Archetype: home hero → covered/not-covered facing lists → who-turns-up split → the five
+ * Archetype: home hero → covered/not-covered facing lists → who-turns-up split → the
  * questions. Closer: one, the phone band.
  */
 
@@ -123,15 +122,11 @@ const questions: { q: string; a: string }[] = [
   },
   {
     q: "Is the workmanship coverage in the paperwork I sign, or in a brochure?",
-    a: "On the quote itself, with the manufacturer terms for whichever tier you chose printed beside it. If either only exists on a website, it is marketing rather than a term.",
+    a: "On the quote itself, with the manufacturer terms for the hardware you chose printed beside it. If either only exists on a website, it is marketing rather than a term.",
   },
   {
     q: "What happens if you go out of business?",
     a: "The manufacturer terms survive us; the workmanship terms do not, and no installer in this trade can honestly tell you otherwise. That is the argument for asking how long a company has been at one address and who answers its phone.",
-  },
-  {
-    q: "Will you service the system if I did not buy it from you?",
-    a: "Yes, including brands we do not sell. It comes with no warranty from us on parts we did not install, and it is still the fastest way to get a dark run lit again.",
   },
 ];
 
@@ -151,13 +146,7 @@ export default function Warranty() {
         footnote={
           <>
             This system has to still look like this in year five, which is the only test a warranty page
-            is really about.{" "}
-            <Link
-              href="/services/repairs-and-service"
-              className="text-on-dark underline decoration-accent decoration-2 underline-offset-4"
-            >
-              Repairs and takeovers
-            </Link>.
+            is really about.
           </>
         }
       />
@@ -239,14 +228,14 @@ export default function Warranty() {
               We do not publish the year counts on this page.
             </h3>
             <p className="mt-3 max-w-[80ch] text-[0.95rem] leading-relaxed text-on-dark-muted">
-              The hardware terms belong to the manufacturers and differ by tier, by component and by
+              The hardware terms belong to the manufacturers and differ by manufacturer, by component and by
               production year. A number typed onto a marketing page is the number somebody quotes back at
               you in year six, so the durations live on your quote instead, printed for the exact system
               you are buying and dated. Ask for them on the phone and you will have them before anybody
               visits.
             </p>
             <div className="mt-6 flex flex-wrap gap-x-7 gap-y-2">
-              <TextLink onDark href="/lighting-systems">Which tier is which</TextLink>
+              <TextLink onDark href="/lighting-systems">What we install</TextLink>
               <TextLink onDark href="/pricing">What else is on the quote</TextLink>
             </div>
           </div>
