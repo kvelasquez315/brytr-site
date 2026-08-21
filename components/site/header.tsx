@@ -1,7 +1,9 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { site } from "@/content/site";
+import { brandLogo } from "@/content/badges";
 import type { NavItem } from "@/content/nav";
 import { Button } from "@/components/ui/button";
 
@@ -24,8 +26,27 @@ import { Button } from "@/components/ui/button";
  * — so a keyboard user tabs to it, gets the panel, and can tab straight into it. */
 
 function Wordmark({ className }: { className?: string }) {
-  /* Set from the brand's display face until the client's logo file is dropped in
-     /public/img/logo.svg. Not an invented mark — it is the name, set correctly. */
+  /* The real mark when the file exists, the name set in the brand's display face until it
+   * does — see the note on `brandLogo` in content/badges.ts. The fallback is not an invented
+   * mark: it is the word, set correctly, with the amber dot the rest of the site already uses.
+   *
+   * Height-constrained with width:auto rather than sized to a box, so a lockup of any
+   * proportion drops in without being letterboxed or stretched. `priority` because this is
+   * above the fold on all eighty-one pages. */
+  if (brandLogo) {
+    return (
+      <span className={className}>
+        <Image
+          src={brandLogo.src}
+          alt={brandLogo.alt}
+          width={brandLogo.width}
+          height={brandLogo.height}
+          priority
+          className="h-8 w-auto lg:h-9"
+        />
+      </span>
+    );
+  }
   return (
     <span className={className}>
       <span className="font-display text-2xl font-black tracking-[-0.04em] text-on-dark">brytr</span>
