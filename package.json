@@ -11,7 +11,12 @@
     "slopcheck": "bash scripts/slopcheck.sh .",
     "fonts": "node scripts/fonts.mjs",
     "prebuild": "node scripts/fonts.mjs",
-    "postinstall": "node scripts/fonts.mjs"
+    "postinstall": "node scripts/fonts.mjs",
+    "photokeys": "node scripts/photo-keys.mjs",
+    "check": "tsc --noEmit && node scripts/photo-keys.mjs && node scripts/hex-lock.mjs && node scripts/section-rhythm.mjs && node scripts/contrast.mjs && bash scripts/slopcheck.sh",
+    "herocontrast": "python3 scripts/hero-contrast.py",
+    "rhythm": "node scripts/section-rhythm.mjs",
+    "hexlock": "node scripts/hex-lock.mjs"
   },
   "dependencies": {
     "@fontsource/archivo": "^5.3.0",
