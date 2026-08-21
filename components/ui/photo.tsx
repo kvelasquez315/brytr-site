@@ -6,6 +6,7 @@ const ratioClass: Record<Slot["ratio"], string> = {
   "16/9": "aspect-video",
   "4/3": "aspect-4/3",
   "21/9": "aspect-21/9",
+  "3/4": "aspect-3/4",
   "4/5": "aspect-4/5",
   "1/1": "aspect-square",
 };

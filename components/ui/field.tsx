@@ -12,14 +12,25 @@ export function Input({ className, ...p }: React.InputHTMLAttributes<HTMLInputEl
   return <input className={cn(base, className)} {...p} />;
 }
 
+/* `invalid:` is how a select gets a placeholder.
+ *
+ * A select has no placeholder attribute, so an <option value=""> renders in the same weight
+ * and colour as a real answer. On the quote form that meant "Select your city" and "Roofline"
+ * looked exactly like values somebody had already chosen — the two fields that need a decision
+ * were the two that looked decided, so they got skipped. A required select whose value is ""
+ * matches :invalid, which is the one hook available without client state. */
 export function Select({ className, children, ...p }: React.SelectHTMLAttributes<HTMLSelectElement>) {
   return (
-    <select className={cn(base, "appearance-none bg-[length:0] pr-9", className)} {...p}>
+    <select
+      className={cn(base, "appearance-none bg-[length:0] pr-9 invalid:text-muted-foreground/70", className)}
+      {...p}
+    >
       {children}
     </select>
   );
 }
 
 export function Textarea({ className, ...p }: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea className={cn(base, "h-auto py-3 leading-relaxed")} {...p} />;
+  /* className was accepted and then dropped on the floor. */
+  return <textarea className={cn(base, "h-auto py-3 leading-relaxed", className)} {...p} />;
 }
