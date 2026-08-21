@@ -29,17 +29,16 @@ import type { Shot } from "@/content/photo-sets";
 
 export type FigureKey =
   | "zones" | "calendar" | "eave" | "beam" | "wall"
-  | "fixtures" | "pergola" | "scenes" | "gameday" | "parapet" | "takeover";
+  | "fixtures" | "pergola" | "scenes" | "gameday" | "parapet";
 
 export type ServiceDetail = {
   /** The second paragraph of "What X actually is."
    *
-   *  This used to be one hardcoded sentence in the template, printed on all eleven pages:
+   *  This used to be one hardcoded sentence in the template, printed on every service page:
    *  "It is installed once, by our own crew, and it stays on the building. Nothing goes up in
-   *  November and nothing comes down in January." True of a new roofline install. Read by
-   *  somebody on /services/repairs-and-service with a dead run on a system we did not sell,
-   *  it is a non-answer — and it was the loudest reason that page and the permanent-outdoor-
-   *  lighting page read as one document. */
+   *  November and nothing comes down in January." True of a new roofline install, and a
+   *  non-answer on the landscape and hardscape pages, which is the loudest reason several of
+   *  these pages used to read as one document. */
   secondPara: string;
   facts: [string, string][];
   included: [string, string][];
@@ -153,7 +152,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     compare: true,
     facts: [
       ["Fastened into", "Fascia, never shingles"],
-      ["LED spacing", "4 in. on the Signature system"],
+      ["LED spacing", "4 in. on Haven Evolution"],
       ["Corners", "Mitered at every transition"],
       ["Terminations", "Sealed end caps, not tape"],
       ["By day", "Reads as trim"],
@@ -164,7 +163,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       ["Concealed conductor", "The wire runs inside the channel. Nothing drops down a downspout or crosses a soffit."],
       ["Color matched", "Channel finished to your fascia color, so the hardware disappears in daylight."],
     ],
-    alsoSee: ["soffit-lighting", "permanent-outdoor-lighting", "permanent-christmas-lights", "repairs-and-service"],
+    alsoSee: ["soffit-lighting", "permanent-outdoor-lighting", "permanent-christmas-lights", "landscape-lighting"],
     proofShot: "/img/roofline-detail.jpg",
     proofCaption: "The run following the gable and turning the corner without a break.",
   },
@@ -369,38 +368,9 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       ["Property manager workflow", "One point of contact, one invoice format, one schedule across several addresses."],
       ["Branded scenes", "Company colors saved as scenes, scheduled to seasons and event nights."],
     ],
-    alsoSee: ["permanent-outdoor-lighting", "permanent-roofline-lighting", "repairs-and-service", "hardscape-lighting"],
+    alsoSee: ["permanent-outdoor-lighting", "permanent-roofline-lighting", "holiday-seasonal-scenes", "hardscape-lighting"],
   },
 
-  "repairs-and-service": {
-    /* No photograph on this site shows a failed system, because Brytr photographs finished
-     * work rather than other people's problems. Rather than stage one, these three are about
-     * the labour: who is on the roof, what the fixing looks like, and what a run should read
-     * like in daylight once it is right. */
-    shots: [
-      { photo: "crewRoofFascia", caption: "Our own crew on the roof. Almost every dead run we get called to was fitted by somebody who was not going to be there when it failed." },
-      { photo: "installDayGarage", caption: "A daytime call. Diagnosis happens in daylight; the verification happens after dark, on the same visit." },
-      { photo: "dayBrickGable", caption: "What a correct run looks like at noon — colour matched, fixed to the fascia, nothing sagging off a shingle edge." },
-    ],
-    secondPara:
-      "Most of this is somebody else's system. We take over installs we did not sell, diagnose the run rather than replacing the whole elevation, and tell you when a system is worth keeping and when you are being asked to pay for a repair that will not hold.",
-    figure: "takeover",
-    compare: false,
-    facts: [
-      ["Brands serviced", "Any, including ones we do not sell"],
-      ["Common causes", "Water, controllers, bad terminations"],
-      ["Diagnostics", "On site, both states checked"],
-      ["Outcome", "Repair, or replace the run"],
-      ["Warranty after", "Ours on what we touch"],
-    ],
-    included: [
-      ["Diagnosis before a quote", "We find out what actually failed. A dead section is usually a termination, not a strip."],
-      ["Controller and supply", "Replaced with hardware we can get parts for, not whatever the last installer left."],
-      ["Re-seating and re-sealing", "Channel refastened into fascia and closed properly where the original install was not."],
-      ["Honest replacement call", "Where a repair will not hold, we say so and price the run instead of billing the attempt."],
-    ],
-    alsoSee: ["permanent-roofline-lighting", "permanent-outdoor-lighting", "commercial-outdoor-lighting", "soffit-lighting"],
-  },
 };
 
 export const detailFor = (slug: string) => serviceDetail[slug];
