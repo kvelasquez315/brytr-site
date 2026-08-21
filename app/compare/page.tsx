@@ -16,8 +16,8 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
  *
  * What it is now. A comparison hub written by somebody who sells two of the brands has
  * exactly one thing nobody else on this market can publish: WHERE WE STAND ON EACH ONE.
- * So the matrix has a fourth column — install it, service it, or would not put it on your
- * house — and the "would not" rows are what make the rest of the table worth reading.
+ * So the matrix has a fourth column: we install it, we do not carry it, or we would not put
+ * it on your house. The "would not" rows are what make the rest of the table worth reading.
  *
  * Then the nine head-to-heads, grouped by what kind of argument each one is: ours against a
  * brand you are probably also being quoted, us refereeing two we have no stake in, and
@@ -31,7 +31,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Every Permanent Lighting Brand Compared (2026)",
   description:
-    "The permanent outdoor lighting brands on the Omaha market, compared by an installer who carries two of them and services five more: Haven, Jellyfish, Gemstone, Trimlight, Oelo, EverLights, Minleon, Govee and the OEM supply behind several of them.",
+    "The permanent outdoor lighting brands on the Omaha market, compared by an installer who carries two of them and will say which of the rest he would not fit: Haven, Jellyfish, Gemstone, Trimlight, Oelo, EverLights, Minleon, Govee and the OEM supply behind several of them.",
   alternates: { canonical: "/compare" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Compare", href: "/compare" }];
@@ -39,55 +39,55 @@ const trail = [{ name: "Home", href: "/" }, { name: "Compare", href: "/compare" 
 /* THE MARKET, WITH OUR STANCE. The fourth column is the only thing on this page a
  * single-brand dealer cannot write, and the "Would not" rows are what make the other two
  * columns believable. */
-type Stance = "Install" | "Service" | "Would not";
+type Stance = "Install" | "Not ours" | "Would not";
 const market: { brand: string; maker: string; what: string; stance: Stance; note: string }[] = [
   {
     brand: "Haven Evolution",
     maker: "Haven Lighting",
     what: "Dedicated warm white channel, 4 in. LED pitch, the best app of anything we install.",
     stance: "Install",
-    note: "Our Signature tier is built on it.",
+    note: "The roofline system we lead with.",
   },
   {
     brand: "Jellyfish Lighting",
     maker: "Jellyfish Lighting",
     what: "Color-mixed white, wider pitch, meaningfully cheaper on the same roofline.",
     stance: "Install",
-    note: "Our Basic tier is built on it.",
+    note: "We install it too, and say where it falls short.",
   },
   {
     brand: "Gemstone Lights",
     maker: "Gemstone",
     what: "A good channel profile and a better white than most of the value tier. A real competitor.",
-    stance: "Service",
-    note: "We will take one over and repair it.",
+    stance: "Not ours",
+    note: "We do not carry it, and it is the closest thing here to a fair fight.",
   },
   {
     brand: "Trimlight",
     maker: "Trimlight, as a franchise",
     what: "Consistent product nationally. The install is whoever holds your territory.",
-    stance: "Service",
-    note: "We repair them. We are not one.",
+    stance: "Not ours",
+    note: "We do not carry it, and we are not a franchise.",
   },
   {
     brand: "Oelo",
     maker: "Oelo",
     what: "Sold locally, distinctive channel, solid build. Worth looking at if you have seen one.",
-    stance: "Service",
-    note: "We will service it.",
+    stance: "Not ours",
+    note: "Sold locally, and not something we quote.",
   },
   {
     brand: "EverLights",
     maker: "EverLights",
     what: "One of the first names in the category, and still how a lot of people search for it.",
-    stance: "Service",
-    note: "Mature product, we will service it.",
+    stance: "Not ours",
+    note: "A mature product we do not carry.",
   },
   {
     brand: "Minleon / Rainmin",
     maker: "Minleon",
     what: "Installer-channel product built for animated shows rather than for everyday warm white.",
-    stance: "Service",
+    stance: "Not ours",
     note: "Different job, honestly done.",
   },
   {
@@ -115,7 +115,7 @@ const market: { brand: string; maker: string; what: string; stance: Stance; note
 
 const stanceStyle: Record<Stance, string> = {
   Install: "border-accent/50 text-accent-ink",
-  Service: "border-border text-foreground",
+  "Not ours": "border-border text-foreground",
   "Would not": "border-border text-muted-foreground",
 };
 
@@ -126,7 +126,7 @@ const argumentGroups: { heading: string; note: string; frame: string; slugs: str
     heading: "Ours against the one you are also being quoted",
     note: "Where we have a stake, and say so",
     frame:
-      "On these, our premium system is in the left column. Each page gives the other side real reasons to win, because we sell a value tier too and can afford to.",
+      "On these, the system we lead with is in the left column. Each page gives the other side real reasons to win, because we install more than one of them and can afford to.",
     slugs: [
       "haven-vs-jellyfish-lighting",
       "haven-vs-gemstone-lights",
@@ -189,7 +189,7 @@ export default function CompareHub() {
         objectPosition="50% 48%"
         eyebrow="Honest comparison"
         h1="We install two of these and would not put three of them on your house."
-        lede="Every comparison page in this category is written by somebody who sells exactly one of the products on it. We sell two, service five, and have taken three off houses — which is the only reason this page can tell you where our own premium system loses."
+        lede="Every comparison page in this category is written by somebody who sells exactly one of the products on it. We install two of them, and we will tell you which of the rest we would not fit, which is the only reason this page can also tell you where our own premium system loses."
         trail={trail}
         footnote={
           <>
@@ -210,7 +210,7 @@ export default function CompareHub() {
           <dl className="mt-7 grid gap-px overflow-hidden rounded-lg bg-on-dark/12 ring-1 ring-on-dark/12 md:grid-cols-3">
             {[
               ["We install it", "Stocked, quoted, installed by our own crews and covered by our own workmanship terms."],
-              ["We service it", "Not ours to sell. We will still take one over, diagnose it and repair it."],
+              ["Not ours", "We do not carry it and we will still tell you where it is good. Nothing here is scored to make ours win."],
               ["We would not", "We have removed these rather than installed them, and we will say why."],
             ].map(([k, v]) => (
               <div key={k} className="bg-primary px-6 py-6">
@@ -267,8 +267,8 @@ export default function CompareHub() {
           </div>
 
           <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-            No column here is highlighted and no brand is scored out of ten. Everything in the middle
-            column about a product we do not sell is our own read from servicing it, not the
+            No column here is highlighted and no brand is scored out of ten. Everything said about a
+            product we do not carry is our own read as installers in this market rather than the
             manufacturer&rsquo;s datasheet, and each comparison page says what we have not verified.
           </p>
         </div>
@@ -346,9 +346,9 @@ export default function CompareHub() {
             <SectionHead onDark eyebrow="Methodology" title="How these were judged." />
             <div className="prose-body mt-6 space-y-4">
               <p className="text-lg leading-relaxed text-on-dark">
-                Most of what is on these pages comes from pulling failed sections off houses rather
-                than from reading spec sheets. That is a real qualification and it is also a biased
-                sample: we mostly meet the installs that went wrong.
+                Most of what is on these pages comes from fitting two of these systems ourselves,
+                on real rooflines, rather than from reading spec sheets. That is a real
+                qualification and it is also a narrow one.
               </p>
               <p className="text-base leading-relaxed text-on-dark-muted">
                 So where we have no direct experience, the page says so by name rather than filling the
@@ -359,7 +359,7 @@ export default function CompareHub() {
             </div>
             <div className="mt-8 flex flex-wrap gap-x-7 gap-y-2">
               <TextLink onDark href="/lighting-systems">The two we actually sell</TextLink>
-              <TextLink onDark href="/services/repairs-and-service">Takeovers and repairs</TextLink>
+              <TextLink onDark href="/warranty">What our own terms cover</TextLink>
             </div>
           </div>
 
@@ -374,8 +374,8 @@ export default function CompareHub() {
                   "White quality: side by side after dark, never off a datasheet",
                   "Channel: from the curb at noon, which is where it matters",
                   "App: on whether a customer still opens it in year two",
-                  "Failure modes: from systems we have actually repaired",
-                  "Price: as a tier, because per-foot varies house to house",
+                  "Failure modes: on what actually fails in this category, not on a rated diode life",
+                  "Price: as a band, because per-foot varies house to house",
                 ].map((x) => (
                   <li key={x} className="py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">{x}</li>
                 ))}
@@ -390,7 +390,7 @@ export default function CompareHub() {
                 {[
                   "A manufacturer sending us their current datasheet",
                   "A generation change in the hardware, which happens often",
-                  "Enough service calls on one brand to see a pattern",
+                  "A pattern of failures on something we install, which changes our own recommendation first",
                   "A local dealer changing hands, on the franchise comparisons",
                   "Anybody showing us we have a fact wrong — tell us and we will fix it",
                 ].map((x) => (
