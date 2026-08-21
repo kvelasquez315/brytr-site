@@ -51,7 +51,23 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
   const s = systemBySlug(slug);
   if (!s) notFound();
   const d = detailForSystem(s.slug);
-  const faqs = serviceFaqsFor(s.name);
+  /* serviceFaqsFor opens with "How long does ${name} take to install?", answered "most
+   * residential jobs are a single day". On a component or the app that is asking the wrong
+   * question and answering it with the whole job's duration, so those pages get their own
+   * first question and keep the rest. */
+  const generic = serviceFaqsFor(s.name);
+  const partish = s.tier === "Component" || s.tier === "Control";
+  /* See SystemDetail.against — Basic's sheet is only readable next to Signature's numbers. */
+  const against = d?.against ? systems.find((x) => x.slug === d.against) : undefined;
+  const faqs = partish
+    ? [
+        {
+          q: `Is ${s.name} quoted separately?`,
+          a: "No. It is part of the tier it belongs to, measured with the rest of the house, and it appears on the same written quote rather than as an add-on afterwards.",
+        },
+        ...generic.slice(1),
+      ]
+    : generic;
   const rel = compares.find((c) => c.a.includes(s.name.split(" ")[0]) || c.b.includes(s.name.split(" ")[0]));
   const alsoSee = (d?.alsoSee ?? [])
     .map((sl) => systems.find((o) => o.slug === sl))
@@ -92,7 +108,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
           <>
             {d?.position ?? s.short}{" "}
             <Link href="/lighting-systems" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              How the eight fit together
+              How the whole lineup fits together
             </Link>.
           </>
         }
@@ -136,9 +152,27 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
               <SpecTable
                 onDark={false}
                 caption={`Specifications for ${s.name}`}
-                rows={s.specs.map((x) => ({ spec: x.label, a: x.value }))}
-                headA="Value"
-                source="Rated life and weather ratings are the manufacturer's published figures. Anything about how it is installed is ours."
+                rows={
+                  against
+                    ? s.specs.map((x) => ({
+                        spec: x.label,
+                        a: x.value,
+                        b: against.specs.find((y) => y.label === x.label)?.value ?? "—",
+                      }))
+                    : s.specs.map((x) => ({ spec: x.label, a: x.value }))
+                }
+                headA={against ? s.tier : "Value"}
+                headB={against ? against.tier : undefined}
+                /* Named the rated-life and weather rows specifically, which the component and
+                 * control sheets do not carry — a footnote citing a row that is not on screen
+                 * is a reader catching us out. */
+                source={
+                  d?.specSource
+                    ? d.specSource
+                    : s.tier === "Component" || s.tier === "Control"
+                    ? "Manufacturer figures where the manufacturer publishes them. Anything about how it is installed, or how it behaves on a house we have wired, is ours."
+                    : "Rated life and weather ratings are the manufacturer's published figures. Anything about how it is installed is ours."
+                }
               />
             </div>
           </div>
@@ -177,8 +211,14 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
               </ul>
             </div>
 
+            {/* This line used to print on all nine pages. On a component or the app it was
+              * pitching a choice the page does not offer — a reader on /app-and-controls was
+              * being told one of two tiers is wrong for their house by a page that sells
+              * neither. */}
             <p className="mt-6 text-sm leading-relaxed text-on-dark-muted">
-              Two tiers means one of them is wrong for your house. We will tell you which.
+              {s.tier === "Component" || s.tier === "Control"
+                ? "It goes on whichever tier you end up on, and it is measured with the rest of the house rather than quoted on its own."
+                : "Two tiers means one of them is wrong for your house. We will tell you which."}
             </p>
             <div className="mt-4">
               <TextLink onDark href="/free-design-consultation">Get it measured</TextLink>
@@ -219,8 +259,12 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
 
             <div className="overflow-hidden rounded-lg bg-card ring-1 ring-border">
               <div className="border-b border-border px-6 py-4">
+                {/* An open box, not the same standing bar in grey. Two columns badged
+                  * identically and told apart by colour alone fails for anyone with a colour
+                  * deficiency, and it spends the section marker on the negative column. Same
+                  * fix as the Covered / Not covered pair on /warranty. */}
                 <p className="label flex items-center gap-3 text-foreground">
-                  <span className="block h-4 w-1 bg-foreground/25" aria-hidden />
+                  <span className="block size-3 border-2 border-foreground/35" aria-hidden />
                   {d?.notFor.h ?? "Where it falls short"}
                 </p>
               </div>
@@ -249,7 +293,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
       </section>
 
       {/* ── WHERE IT SITS ──
-        * Three chosen neighbours, in order, rather than the other seven sliced
+        * Three chosen neighbors, in order, rather than the other seven sliced
         * off the array on all eight pages. */}
       <section className="section bg-primary">
         <div className="shell grid items-start gap-10 lg:grid-cols-[42fr_58fr] lg:gap-14">
@@ -296,7 +340,14 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
                       <span className="font-display text-[1.05rem] font-bold text-on-dark group-hover:underline">
                         {o.name}
                       </span>
-                      <span className="u shrink-0 text-xs uppercase tracking-[0.08em] text-accent">
+                      {/* Amber only on our own tiers. This printed COMPONENT in the brand
+                        * accent next to "Jellyfish Lighting" — a third-party name wearing
+                        * our colour. */}
+                      <span
+                        className={`u shrink-0 text-xs uppercase tracking-[0.08em] ${
+                          o.ownTier ? "text-accent" : "text-on-dark-muted"
+                        }`}
+                      >
                         {o.tier}
                       </span>
                     </span>
@@ -338,7 +389,12 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
       <section className="section bg-background">
         <div className="shell">
           <SectionHead eyebrow="Questions" title={`${s.name}: what people ask.`} />
-          <div className="mt-8 max-w-[82ch]"><Faq items={faqs} /></div>
+          {/* Two columns. This was one 82ch column in a 100rem shell, so the right ~570px of
+            * the section was bare on all nine system pages, identically. */}
+          <div className="mt-8 grid gap-x-14 lg:grid-cols-2">
+            <Faq items={faqs.slice(0, Math.ceil(faqs.length / 2))} />
+            <Faq items={faqs.slice(Math.ceil(faqs.length / 2))} />
+          </div>
         </div>
       </section>
 
