@@ -3,105 +3,323 @@ import { services } from "@/content/services";
 import { iconMap } from "@/content/icon-map";
 import Link from "next/link";
 import { Shell } from "@/app/layout-shell";
-import { PageHero, PageCta, BandCta, CityTiles, SectionHead, Check, TextLink } from "@/components/sections/page-parts";
-import { Photo, photoExists } from "@/components/ui/photo";
+import { PageHero, PageCta, CityTiles, SectionHead, TextLink } from "@/components/sections/page-parts";
+import { PhotoStrip } from "@/components/sections/photo-parts";
 import { Jsonld, breadcrumb } from "@/lib/schema";
+
+/* /services — WAVE 1, PAGE 1 of the page-by-page pass.
+ *
+ * What this page was: the old home page. Eleven identical cards plus a twelfth CTA tile,
+ * a numbered 1-2-3 list with big ghost numerals (the pattern the client called lazy), a
+ * hero stats row that counted the eleven cards below it ("11 services"), and "Not sure
+ * which one you need?" printed twice — once as a card, once as a closing band.
+ *
+ * What it is now. A hub's job is not to show every child; it is to get somebody to the
+ * right child. So the centerpiece is a DECISION TREE keyed to what a homeowner actually
+ * says out loud — outline the house / give the yard depth / we live out back — with what
+ * to start with and what people add afterwards, drawn as three lengths of channel. Then
+ * the full eleven as a grouped rack (a list, not eleven more cards), then the one thing
+ * only this page has to settle: homes versus businesses.
+ *
+ * Archetype: the home page's hero, then decision tree, then grouped rack. Every page on
+ * this site opens the way the home page does — same photograph treatment, same consultation
+ * form in the right column — and what differs is the section that comes after it. Closer:
+ * one, the form.
+ */
 
 export const metadata: Metadata = {
   title: "Outdoor Lighting Company in Omaha, NE",
-  description: "Eleven permanent outdoor lighting services for Omaha homes: roofline, Christmas, soffit, landscape, hardscape, pergola, gameday, commercial and repairs.",
+  description:
+    "Permanent outdoor lighting services for Omaha homes: roofline, Christmas, soffit, landscape, hardscape, pergola, gameday, commercial and repairs. One channel, one app.",
   alternates: { canonical: "/services" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Services", href: "/services" }];
+
+/* THE DECISION TREE. Each branch starts with what somebody says when we walk up the
+ * driveway, not with a product name. `start` is what we would install first and why;
+ * `then` is what the same customers add later, in the order they usually add it. The
+ * pairing order is our recommendation, which is a judgement we are allowed to make — it
+ * is labelled as ours rather than dressed up as data. */
+const branches: {
+  said: string;
+  start: string;          // slug
+  why: string;
+  then: string[];         // slugs, in the order people add them
+  wiring: string;         // how the NEXT run ties in — different on every branch, because
+                          // it is a different wiring job on every branch
+}[] = [
+  {
+    said: "“I want the house outlined.”",
+    start: "permanent-roofline-lighting",
+    why: "The eave line is the run you will use every night of the year, and it is the one that reads from the street.",
+    then: ["soffit-lighting", "holiday-seasonal-scenes", "gameday-lighting"],
+    wiring: "Soffit runs and saved scenes hang off the roofline controller, so the second run is a wiring afternoon rather than a second system.",
+  },
+  {
+    said: "“The yard looks flat after dark.”",
+    start: "landscape-lighting",
+    why: "Uplighting mature trees changes the elevation more than trim lighting does, and it works in July as well as December.",
+    then: ["hardscape-lighting", "permanent-outdoor-lighting"],
+    wiring: "Bed, tree and wall fixtures land on one transformer, so the yard can grow a zone at a time without trenching twice.",
+  },
+  {
+    said: "“We live out back in the summer.”",
+    start: "patio-pergola-bistro-lighting",
+    why: "An overhead run on a pergola or patio cover earns its money more months of the year than a roofline does.",
+    then: ["hardscape-lighting", "landscape-lighting"],
+    wiring: "A pergola run ties back to the house controller, so the patio and the roofline answer to the same tap in the app.",
+  },
+];
+
+/* The eleven, grouped by the surface they attach to. A hub reads better as a list of
+ * places on a property than as a grid of equally-weighted tiles. */
+const groups: { heading: string; note: string; slugs: string[] }[] = [
+  {
+    heading: "On the house",
+    note: "Channel routed into the building itself",
+    slugs: ["permanent-outdoor-lighting", "permanent-roofline-lighting", "soffit-lighting"],
+  },
+  {
+    heading: "On the ground",
+    note: "Beds, trees, walls and walks",
+    slugs: ["landscape-lighting", "hardscape-lighting"],
+  },
+  {
+    heading: "On structures",
+    note: "Anything that is not the house or the ground",
+    slugs: ["patio-pergola-bistro-lighting", "commercial-outdoor-lighting"],
+  },
+  {
+    heading: "What you do with it after",
+    note: "Same hardware, different night",
+    slugs: ["permanent-christmas-lights", "holiday-seasonal-scenes", "gameday-lighting", "repairs-and-service"],
+  },
+];
+
+const bySlug = (slug: string) => services.find((s) => s.slug === slug)!;
 
 export default function ServicesHub() {
   return (
     <Shell>
       <Jsonld data={breadcrumb(trail)} />
+
       <PageHero
+        photo="/img/whole-home.jpg"
+        photoAlt="A two-story Omaha home with its roofline, gables and front trees lit at night"
+        objectPosition="50% 62%"
         eyebrow="What we install"
-        h1="Every surface worth lighting on an Omaha property."
-        lede="Every one of these runs on the same channel, the same controller and the same app, so you can start with a roofline and add landscape or a pergola run later without replacing anything."
+        h1="Everything worth lighting on an Omaha property."
+        lede="Roofline, soffit, beds, trees, walls, pergolas and storefronts — all of it on one channel, one controller and one app, so what you install first does not limit what you add later."
         trail={trail}
-        stats={[["11", "services"], ["18", "cities served"], ["1.2M", "lights installed"]]}
+        footnote="Photographed on a finished Brytr install in west Omaha."
       />
 
+      {/* ── THE DECISION TREE ──
+        * The centerpiece, and the thing this page has that no other page does. */}
       <section className="section bg-background">
         <div className="shell">
-          <SectionHead eyebrow="The full list" title="Pick the one you came for." />
-          <div className="mt-10 grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((s) => {
-              const I = iconMap[s.icon];
+          <SectionHead
+            eyebrow="Start here"
+            title="What people say first, and what it changes."
+            lede="Whichever one it is, the first run is different — and so is what you end up adding a year or two later. This is the order we would do it in, and why."
+          />
+
+          <ol className="mt-10 grid gap-5 lg:grid-cols-3">
+            {branches.map((b) => {
+              const first = bySlug(b.start);
+              const I = iconMap[first.icon];
               return (
-                <article key={s.slug} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5">
-                  {photoExists(s.photo) ? (
-                    <Photo slot={s.photo!} className="mb-5" sizes="(min-width:1024px) 30vw, 100vw" />
-                  ) : (
-                    <span className="channel-tile channel-tile--light mb-5" aria-hidden><I className="size-7" /></span>
-                  )}
-                  <h2 className="font-display text-xl font-bold text-foreground">{s.name}</h2>
-                  <p className="mt-2.5 text-[0.95rem] text-muted-foreground">{s.short}</p>
-                  <ul className="mt-4 space-y-2">{s.includes.slice(0, photoExists(s.photo) ? 3 : 4).map((i) => <Check key={i}>{i}</Check>)}</ul>
-                  <div className="mt-5"><TextLink href={`/services/${s.slug}`}>See {s.name}</TextLink></div>
-                </article>
+                <li
+                  key={b.start}
+                  className="flex flex-col rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10"
+                >
+                  <p className="font-display text-lg font-bold leading-snug text-on-dark">{b.said}</p>
+
+                  {/* the run: a lit node for what we would install first, banked nodes for
+                    * what gets added later, on one continuous channel */}
+                  <div className="mt-7 flex gap-5">
+                    <span className="run-spine" aria-hidden />
+                    <div className="min-w-0 flex-1">
+                      <div>
+                        <p className="label text-accent">Start with</p>
+                        <h3 className="mt-1.5 font-display text-xl font-bold leading-tight text-on-dark">
+                          <Link href={`/services/${first.slug}`} className="hover:text-accent">{first.name}</Link>
+                        </h3>
+                        <p className="mt-2 text-[0.95rem] leading-relaxed text-on-dark-muted">{b.why}</p>
+                      </div>
+
+                      <p className="label mt-7 text-on-dark-muted">What people add next</p>
+                      <ul className="mt-3 space-y-2.5">
+                        {b.then.map((sl) => {
+                          const s = bySlug(sl);
+                          return (
+                            <li key={sl}>
+                              {/* name over note, not name beside note: "Soffit Lighting" wrapped
+                                * to two lines next to its own caption and the baselines fought */}
+                              <Link
+                                href={`/services/${sl}`}
+                                className="group block border-b border-on-dark/10 pb-2.5 hover:text-accent"
+                              >
+                                <span className="block font-display text-[0.95rem] font-bold text-on-dark/90 group-hover:text-accent">
+                                  {s.name}
+                                </span>
+                                <span className="mt-0.5 block text-xs text-on-dark-muted">{s.short}</span>
+                              </Link>
+                            </li>
+                          );
+                        })}
+                      </ul>
+                    </div>
+                  </div>
+
+                  <p className="mt-auto pt-7">
+                    <span className="channel-tile !size-10 float-left mr-3.5" aria-hidden><I className="size-6" /></span>
+                    <span className="block text-sm leading-relaxed text-on-dark-muted">{b.wiring}</span>
+                  </p>
+                </li>
               );
             })}
-
-            {/* twelfth tile — completes the row rather than leaving a hole in it */}
-            <article className="flex flex-col justify-between rounded-lg bg-primary p-6 shadow-[var(--shadow-dark)] ring-1 ring-accent/20">
-              <div>
-                <span className="channel-tile mb-5" aria-hidden />
-                <h2 className="font-display text-xl font-bold text-on-dark">Not sure which one you need?</h2>
-                <p className="mt-2.5 text-[0.95rem] text-on-dark-muted">
-                  We design on site after dark, when you can actually see what we are proposing. Free,
-                  and there is no obligation.
-                </p>
-              </div>
-              <div className="mt-6">
-                <Link
-                  href="/free-design-consultation"
-                  className="u inline-flex h-11 items-center rounded-md bg-accent px-5 text-sm font-semibold text-accent-foreground"
-                >
-                  Book a consultation
-                </Link>
-                <p className="label mt-4 text-on-dark-muted">
-                  Or call <a href="tel:+14028103973" className="text-on-dark">402-810-3973</a>
-                </p>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="section bg-primary">
-        <div className="shell">
-          <SectionHead onDark eyebrow="Not sure yet" title="The questions that usually settle it." />
-          <ol className="mt-10 grid gap-8 sm:grid-cols-3">
-            {[
-              ["Is it mostly for the holidays?", "Then you want a roofline run. Everything else is an addition to it, and you can add later."],
-              ["Do you sit outside in summer?", "Then a pergola or patio run earns its keep more than the roofline does."],
-              ["Is the front of the house the point?", "Then landscape uplighting on mature trees does more per dollar than trim lighting."],
-            ].map(([h, p], i) => (
-              <li key={h} className="relative">
-                <span className="u pointer-events-none absolute -top-3 left-0 text-[3.4rem] font-medium leading-none text-on-dark/30" aria-hidden>{i + 1}</span>
-                <div className="relative pt-8">
-                  <h3 className="text-lg text-on-dark">{h}</h3>
-                  <p className="mt-2 text-[0.95rem] text-on-dark-muted">{p}</p>
-                </div>
-              </li>
-            ))}
           </ol>
         </div>
       </section>
 
+      {/* ── THE FULL ELEVEN, AS A RACK ──
+        * Grouped by the surface it attaches to. Not eleven cards. */}
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="Available in" title="Every service, everywhere we drive." />
+          <SectionHead
+            eyebrow="The full list"
+            title="Grouped by what it attaches to."
+            lede="Every one of these has its own page, with its own photographs and its own spec."
+          />
+
+          {/* MULTI-COLUMN, NOT A GRID, and the reason is the group sizes.
+            *
+            * The four groups hold three, two, two and four rows. In a two-column grid with
+            * `items-start` that pairs 3 against 2 and 2 against 4, so the shorter card in each row
+            * stopped 88px and 176px short of its neighbour — the second one leaving a 675 x 176px
+            * hole under a card. Switching to `items-stretch` does not fix it, it just moves the
+            * void inside the short card instead of beside it.
+            *
+            * CSS columns have no concept of a row, so cards pack against each other and a size
+            * difference costs nothing. `break-inside-avoid` keeps a card whole. */}
+          <div className="mt-10 gap-5 lg:columns-2 lg:gap-5 [&>*]:mb-5 lg:[&>*]:break-inside-avoid">
+            {groups.map((g) => (
+              <div key={g.heading} className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+                <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
+                  <p className="label flex items-center gap-3 text-foreground">
+                    <span className="block h-4 w-1 bg-accent" aria-hidden />
+                    {g.heading}
+                  </p>
+                  <p className="text-sm text-muted-foreground">{g.note}</p>
+                </div>
+                <ul className="divide-y divide-border">
+                  {g.slugs.map((sl) => {
+                    const s = bySlug(sl);
+                    const I = iconMap[s.icon];
+                    return (
+                      <li key={sl}>
+                        <Link
+                          href={`/services/${sl}`}
+                          className="group flex items-start gap-4 px-6 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
+                        >
+                          <span className="channel-tile channel-tile--light !size-10 shrink-0" aria-hidden>
+                            <I className="size-6" />
+                          </span>
+                          <span className="min-w-0">
+                            <span className="block font-display text-[1.05rem] font-bold text-foreground group-hover:underline">
+                              {s.name}
+                            </span>
+                            <span className="mt-1 block text-sm leading-relaxed text-muted-foreground">{s.short}</span>
+                          </span>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── THE RANGE, IN PHOTOGRAPHS ──
+        * This page is a decision tree followed by a rack of eleven rows: it is navigation, and
+        * navigation with no pictures is a sitemap. Four frames spanning roofline, landscape,
+        * overhead and a colour scene, so a reader can see the categories rather than read them. */}
+      <PhotoStrip
+        eyebrow="All of it, one controller"
+        /* Not "Four of the eleven" — that counted the rack above AND the row below, in one
+          * line. The reader can see how many pictures there are. */
+        title="Different houses, different jobs, one controller."
+        lede="Everything above attaches to the same channel and the same app, which is why most people end up adding a second and a third thing a season later rather than buying it all at once."
+        shots={[
+          { photo: "homeBrickGablesGold", caption: "Roofline. The gables, the eaves and the soffit, on the everyday warm white." },
+          { photo: "landscapeTreeBeds", caption: "Landscape. Beds, trunks and paths, coming up with the house rather than on their own timer." },
+          { photo: "patioTimberStone", caption: "Overhead and hardscape. A run along a beam and step lights on the stairs." },
+          { photo: "gamedayRedBlueGables", caption: "And the part you actually touch: a saved scene, on for four hours, off by itself." },
+        ]}
+        cols={4}
+        ground="raise"
+      />
+
+      {/* ── HOMES AND BUSINESSES ──
+        * The one question only the hub has to settle, and the only place the
+        * commercial service gets its own argument. */}
+      <section className="section bg-primary">
+        <div className="shell">
+          <SectionHead
+            onDark
+            eyebrow="Who it is for"
+            title="The same channel goes on a storefront. The job around it is different."
+            lede="We install for homeowners and for businesses, and the hardware does not change. The scheduling, the access and the paperwork do."
+          />
+          <div className="mt-10 grid gap-5 lg:grid-cols-2">
+            {[
+              {
+                h: "On a house",
+                p: "One day for most homes. We work off ladders, miter at every transition, and walk every scene with you after dark before we leave.",
+                l: ["Covenant paperwork pulled and submitted", "Zoned per elevation so the back can stay off", "Scenes saved with you standing there"],
+                href: "/services/permanent-outdoor-lighting",
+                cta: "See a whole-home install",
+              },
+              {
+                h: "On a building",
+                p: "Parapets, canopies and multifamily. Longer runs, scheduled around trading hours, and usually a property manager rather than an owner in the conversation.",
+                l: ["Runs measured off elevations, not guesswork", "Installed outside business hours where needed", "One contact for a portfolio of addresses"],
+                href: "/services/commercial-outdoor-lighting",
+                cta: "See commercial work",
+              },
+            ].map((c) => (
+              <article key={c.h} className="flex flex-col rounded-lg bg-raise p-7 ring-1 ring-on-dark/10">
+                <h3 className="font-display text-2xl font-bold text-on-dark">{c.h}</h3>
+                <p className="mt-3 text-[1.05rem] leading-relaxed text-on-dark/85">{c.p}</p>
+                <ul className="mt-6 flex-1 divide-y divide-on-dark/10 border-y border-on-dark/10">
+                  {c.l.map((i) => (
+                    <li key={i} className="py-3 text-[0.95rem] text-on-dark-muted">{i}</li>
+                  ))}
+                </ul>
+                <div className="mt-6">
+                  <TextLink onDark href={c.href}>{c.cta}</TextLink>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHERE ── */}
+      <section className="section bg-background">
+        <div className="shell">
+          <SectionHead
+            eyebrow="Available in"
+            title="Every one of these, everywhere we drive."
+            lede="Each town has its own page, with the drive from our shop and the installs we have photographed nearby."
+          />
           <div className="mt-9"><CityTiles /></div>
         </div>
       </section>
 
-      <BandCta title="Not sure which one you need?" body="We design it on site after dark, when you can actually see what we are proposing." />
       <PageCta />
     </Shell>
   );
