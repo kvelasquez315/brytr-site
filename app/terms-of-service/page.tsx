@@ -31,11 +31,11 @@ export default function Page() {
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">About this site</h2>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">This site is published by Brytr Co, a permanent outdoor lighting installer based in Omaha, Nebraska. It exists to explain what we do and to let you request a consultation.</p>
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Quotes and pricing</h2>
-          <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">Nothing on this website is a quote or an offer. Prices are described as tiers and ranges because the actual number depends on a measured survey of your property.</p>
+          <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">Nothing on this website is a quote or an offer. Prices are described as ranges because the actual number depends on a measured survey of your property.</p>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">A binding price only exists once we have measured on site and given you a written quote. If anything on this site conflicts with your written quote, the written quote governs.</p>
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Accuracy</h2>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">We try to keep product specifications, service areas and comparisons accurate and current. Manufacturers change specifications without telling installers, so treat any spec here as indicative and ask us to confirm anything you are relying on.</p>
-          <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">Comparisons of other manufacturers reflect our own experience installing and repairing this category. They are opinion, offered in good faith, and other installers will reasonably disagree.</p>
+          <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">Comparisons of other manufacturers reflect our own experience installing in this category. They are opinion, offered in good faith, and other installers will reasonably disagree.</p>
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Illustrations</h2>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">Some images on this site are measured elevation drawings rather than photographs, and are labelled as such where they appear. They illustrate how the system is built and are not a representation of a specific property.</p>
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Liability</h2>
