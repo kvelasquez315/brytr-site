@@ -129,8 +129,8 @@ export function Founders() {
               single brand and be told it was the only good option.
             </p>
             <p className="mt-4 text-muted-foreground">
-              So they built the opposite. Brytr stocks a premium system and a value system, runs its own
-              W2 crews rather than subcontracting the install, and services other companies&rsquo; work
+              So they built the opposite. Brytr installs every line Haven makes and Jellyfish besides, runs
+              its own W2 crews rather than subcontracting the install, and services other companies&rsquo; work
               when those companies stop answering. It&rsquo;s a less profitable way to run a lighting company
               and a much better way to keep a five-star average.
             </p>
@@ -150,12 +150,11 @@ export function Founders() {
 const vsRows: [string, string, string][] = [
   ["Who does the install", "Our own W2 crew", "Subcontracted, often a different crew each week"],
   ["When something breaks", "We come out, we hold the warranty", "You chase the manufacturer"],
-  ["Brands offered", "Premium and value, both stocked", "One brand, so one recommendation"],
+  ["Brands offered", "Haven and Jellyfish, both installed", "One brand, so one recommendation"],
   ["Day and night verification", "yes", "no"],
   ["Written warranty terms up front", "yes", "no"],
   ["Quote method", "On-site measure, written quote", "Phone estimate, revised on the day"],
   ["Financing", "yes", "no"],
-  ["Services other brands", "yes", "no"],
 ];
 function Yes() { return <span className="inline-flex items-center gap-2 text-on-dark"><svg viewBox="0 0 16 16" className="size-4 text-accent" fill="none" aria-hidden><path d="m2.5 8.4 3.2 3.2L13.5 4" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"/></svg>Yes</span>; }
 function No() { return <span className="inline-flex items-center gap-2 text-on-dark-muted"><svg viewBox="0 0 16 16" className="size-4" fill="none" aria-hidden><path d="M4.5 4.5l7 7M11.5 4.5l-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/></svg>No</span>; }
@@ -298,32 +297,27 @@ export function CtaBand() {
   return (
     <section className="bg-primary">
       <ChannelEdge />
-      <div className="shell grid items-center gap-8 py-14 lg:grid-cols-[1fr_30rem] lg:gap-16">
+      {/* ONE DATE, ONE BUTTON.
+        *
+        * This was a headline beside a three-row ledger: booked before November 15 / booked after
+        * that / the measure itself. The client on camera: this does not look good, just make it a
+        * big thing that says book before November 15 with a booking button, and take those three
+        * things out. He is right about why. A mid-page band exists to be acted on, and a ledger
+        * asks to be read and compared first — three rows of dates is a table where a decision
+        * should be. The one row that carried the deadline is now the headline itself, at four
+        * times the size, and the only other object in the band is the button. */}
+      <div className="shell flex flex-col items-start gap-8 py-16 lg:flex-row lg:items-center lg:justify-between lg:gap-16 lg:py-20">
         <div>
           <p className="label text-accent">Booking now</p>
-          <h2 className="mt-4 max-w-[26ch] text-[clamp(1.7rem,3vw,2.4rem)] leading-[1.06] text-on-dark">
-            Install season runs out before the holidays do.
+          <h2 className="mt-4 max-w-[22ch] text-[clamp(2.1rem,4.4vw,3.6rem)] leading-[1.0] text-on-dark">
+            Book before November 15 to be lit for Christmas.
           </h2>
-          <div className="mt-7">
-            <TextLink onDark href="/free-design-consultation">
-              Book the on-site measure
-            </TextLink>
-          </div>
         </div>
-        <dl className="divide-y divide-on-dark/12 overflow-hidden rounded-lg bg-raise ring-1 ring-on-dark/10">
-          <div className="flex items-baseline justify-between gap-6 px-6 py-4">
-            <dt className="text-sm text-on-dark-muted">Booked before November 15</dt>
-            <dd className="u shrink-0 text-right text-sm font-medium text-on-dark">Lit for Christmas</dd>
-          </div>
-          <div className="flex items-baseline justify-between gap-6 px-6 py-4">
-            <dt className="text-sm text-on-dark-muted">Booked after that</dt>
-            <dd className="u shrink-0 text-right text-sm font-medium text-on-dark">Into the new year</dd>
-          </div>
-          <div className="flex items-baseline justify-between gap-6 px-6 py-4">
-            <dt className="text-sm text-on-dark-muted">The measure itself</dt>
-            <dd className="u shrink-0 text-right text-sm font-medium text-on-dark">An hour, after dark</dd>
-          </div>
-        </dl>
+        <div className="shrink-0">
+          <Button asChild size="lg">
+            <Link href="/free-design-consultation">Book the on-site measure</Link>
+          </Button>
+        </div>
       </div>
     </section>
   );
@@ -352,7 +346,7 @@ const steps: [string, string, string, string][] = [
     "We show you the app and the scene library on a house like yours, so you're not buying from a brochure.",
     "A look at the system running"],
   ["In writing", "On-site measure and written quote",
-    "Linear feet, elevations, zones, tier. You get a real number in writing, not a range on the phone.",
+    "Linear feet, elevations, zones, hardware. You get a real number in writing, not a range on the phone.",
     "A number you can hold us to"],
   ["Install day", "Installed by our own crew",
     "One day for most homes. Channel into fascia, sealed, mitered at every corner, wire concealed.",
@@ -430,7 +424,7 @@ const proofFacts = [
   { icon: IcStars, h: `${reviewProof.average} average, ${reviewProof.count} reviews`, p: "Every one of them on Google, where you can read them yourself rather than take our word for it." },
   { icon: IcHardHat, h: "W2 crews on every install", p: "Not a subcontractor network. The same people who quoted your job are the ones on the ladder." },
   { icon: IcVerified, h: "Verified in daylight and dark", p: "We don't close a job until you've signed off on both states of the system." },
-  { icon: IcTwoTiers, h: "Two tiers, honestly compared", p: "We publish where our cheaper system beats our expensive one. Ask a single-brand dealer to do that." },
+  { icon: IcTwoTiers, h: "Compared by the installer", p: "We publish where the cheaper hardware beats the expensive hardware we lead with. Ask a single-brand dealer to do that." },
   { icon: IcWarranty, h: "Warranty in writing, up front", p: "Manufacturer coverage plus our workmanship coverage, both on paper before you sign." },
   { icon: IcMeasured, h: "1.2M lights installed locally", p: "All of it in and around Omaha. This is the only market we work in." },
 ];
@@ -514,7 +508,7 @@ export function Reviews() {
       <div className="shell">
         <SectionHead
           eyebrow="Omaha says"
-          title="Every one of these was written by somebody in this metro."
+          title="See what our clients have to say."
         />
 
         {/* the score, at a size you cannot miss, with the profile one tap away */}
@@ -676,22 +670,13 @@ export function FinalCta() {
             <Check>Financing available</Check>
           </ul>
 
-          {/* AUDIT FIX. This column ran out ~200px before the form did, leaving a hole in
-            * the bottom-left of the page's last screen. What fills it is the proof a
-            * homeowner wants at the moment they decide to call — and every figure here is
-            * one Brytr can stand behind. Nothing invented. */}
-          <dl className="mt-9 grid gap-x-8 gap-y-6 border-t border-border pt-7 sm:grid-cols-3">
-            {[
-              [reviewProof.average, `Average of ${reviewProof.count} ${reviewProof.platform} reviews`],
-              ["1.2M", "Lights installed around Omaha"],
-              ["W2", "Our own crews, never subcontracted"],
-            ].map(([big, small]) => (
-              <div key={small}>
-                <dt className="u font-display text-3xl font-bold leading-none text-foreground">{big}</dt>
-                <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">{small}</dd>
-              </div>
-            ))}
-          </dl>
+          {/* THE THREE FIGURES ARE OUT. 5.0, 1.2M installed and W2 crews sat here as a stat
+            * row; the client on camera, at the closing form: get rid of those three things. A
+            * stat row at the point of decision reads as a brochure panel, and the review score
+            * is already in the band under every hero on the site, so two of the three were a
+            * third statement of something stated twice. Watch the column height here — this
+            * block was filling a ~200px hole beside the form, and if that hole comes back the
+            * fix is the grid ratio, not another panel of numbers. */}
 
           <div className="mt-8 flex flex-wrap items-baseline gap-x-5 gap-y-2 border-t border-border pt-7">
             <p className="text-sm text-muted-foreground">Or call us directly</p>

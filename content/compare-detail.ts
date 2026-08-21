@@ -7,9 +7,9 @@
  *
  * Six of the nine comparisons build their spec table from one shared row set with the
  * competitor's name and a handful of overrides dropped in. The Haven column of that table is
- * the manufacturer's published spec. The other column is our own read from systems we have
- * serviced and sections we have pulled off houses — which is worth something, and is not the
- * same thing as a datasheet. `unknowns` says so per competitor, out loud, on the page.
+ * the manufacturer's published spec. The other column is our own read as installers working
+ * in this market, which is worth something, and is not the same thing as a datasheet.
+ * `unknowns` says so per competitor, out loud, on the page.
  *
  * PHOTOGRAPHS. Every shot on these pages is a Brytr install, and the footnote on every one
  * of them says that the other system is not pictured. Photographing our own work and
@@ -46,8 +46,8 @@ export const compareDetail: Record<string, CompareDetail> = {
     photoAlt: "Close view of the lit channel following two gable edges on an Omaha home",
     objectPosition: "50% 45%",
     unknowns: [
-      "Gemstone's current published LED pitch and rated life. We have serviced their installs; we have not been given their datasheet.",
-      "How their warranty administration actually performs, because the claims we have seen were handled by the original dealer rather than by us.",
+      "Gemstone's current published LED pitch and rated life. We have never been given their datasheet and we are not going to guess at it.",
+      "How their warranty administration actually performs, because every claim on a Gemstone system goes to the dealer who fitted it.",
       "Their pricing. Dealer pricing in this market is not published by anybody, ours included.",
     ],
     alsoSee: ["jellyfish-vs-gemstone-lights", "haven-vs-trimlight"],
@@ -72,7 +72,7 @@ export const compareDetail: Record<string, CompareDetail> = {
     objectPosition: "50% 55%",
     unknowns: [
       "Oelo's rated life and weather rating figures.",
-      "How their channel behaves on an aluminum fascia over five winters. We have serviced a small number of their installs and it is not enough to generalise from.",
+      "How their channel behaves on an aluminum fascia over five winters. We have not fitted one, so anything we said about it would be a guess.",
     ],
     alsoSee: ["haven-vs-gemstone-lights", "haven-vs-minleon-rainmin"],
   },
@@ -83,7 +83,7 @@ export const compareDetail: Record<string, CompareDetail> = {
     objectPosition: "50% 45%",
     unknowns: [
       "Which Govee kit you would buy. The range is wide, it changes constantly, and the weather rating on the cheapest kits is not the same as on the dearest.",
-      "How long a well-installed DIY kit lasts on a Nebraska fascia. We only ever see the ones that failed, which makes us the wrong people to ask.",
+      "How long a well-installed DIY kit lasts on a Nebraska fascia. We do not fit them, which makes us the wrong people to ask.",
     ],
     alsoSee: ["haven-vs-jellyfish-lighting", "haven-vs-ghouly"],
   },
