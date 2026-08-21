@@ -15,92 +15,82 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
  * the brand lock forbids. Then two spec tables in a row, a stats band repeating two figures
  * the hero had already printed, a third spec table, and two closers.
  *
- * What it is now. The hub's job is the DECISION, and there is only one: premium or value.
- * So the centerpiece is that decision as a single table with a third column saying why each
- * row matters, and the tier we recommend most lit down its edge — plus, underneath it, the
- * list of everything that is identical between the two, which is the part that stops the
- * table reading as an upsell.
+ * THEN IT WAS A PACKAGE PAGE, WHICH WAS WORSE. The rebuild was organised around a choice
+ * between two named tiers, a premium one and a value one, with a nine-row table comparing
+ * them and three house profiles recommending one or the other. None of it was real: the
+ * company does not sell packages, the tier names were mine, and the rows carried figures
+ * nobody had given me. The client, plainly, on camera: they do not have packages, talk
+ * about the light they actually install, which is Haven.
  *
- * Then the six things that are not alternatives at all: the hardware under each tier, the
- * three add-ons, and the control layer. Nobody explains that relationship anywhere in this
- * trade, and it is the reason people think they are choosing between eight products.
+ * So the page is the Haven lineup now. The roofline run is the system; the soffit,
+ * landscape and overhead lines are additions to it; the app operates all of it. Every value
+ * in the sheet below is a spec that already sits in content/systems.ts against the product
+ * it describes, and the rated-life row is gone because that figure was invented.
  *
- * Archetype: spec hero (photograph + the choice as a panel, no form) → the one table →
- * the lineup by role → three house profiles. Closer: the form, because the hero has not
- * carried one.
+ * Archetype: spec hero (photograph + no form) → the roofline and the app → the sheet with
+ * a consequence column → the lineup by role → three property shapes. Closer: the form,
+ * because the hero has not carried one.
  */
 
 export const metadata: Metadata = {
   title: "Permanent Lighting Systems We Install",
   description:
-    "Every permanent lighting system Brytr installs: the Signature tier on Haven Evolution, the Basic tier on Jellyfish, and the soffit, landscape, bistro and control add-ons that bolt on to either.",
+    "The permanent lighting we install in Omaha: Haven Evolution on the roofline, the Q Series soffit fixtures, the 9 Series landscape line, the X Bistro overhead runs, and the app that operates all of it.",
   alternates: { canonical: "/lighting-systems" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Lighting systems", href: "/lighting-systems" }];
 
-/* THE ONE TABLE. Third column is the whole point — a spec with no consequence attached is
- * a number, and a number does not help anybody choose. */
-const decision: { spec: string; sig: string; basic: string; why: string }[] = [
+/* THE ROOFLINE SHEET. Third column is the whole point: a spec with no consequence attached
+ * is a number, and a number does not help anybody decide anything. Every value in the
+ * middle column is a Haven figure already carried on the product's own page. */
+const sheet: { spec: string; value: string; why: string }[] = [
   {
     spec: "White light",
-    sig: "Dedicated warm white channel",
-    basic: "Color-mixed white",
-    why: "The single biggest visible difference in this category. Mixed white reads a shade cooler and slightly less even, and warm white is the setting most houses sit on all year.",
+    value: "Dedicated warm white channel",
+    why: "The single biggest visible difference in this category. A color-mixed white reads a shade cooler and slightly less even, and warm white is the setting most houses sit on all year.",
   },
   {
     spec: "LED spacing",
-    sig: "4 in.",
-    basic: "Wider",
-    why: "Closer spacing reads as a continuous line. On a broken-up roofline you will not notice; on a long straight two-story eave you will.",
+    value: "4 in.",
+    why: "Closer spacing reads as a continuous line rather than a string of points. On a broken-up roofline you will not notice; on a long straight two-story eave you will.",
   },
   {
-    spec: "Color range",
-    sig: "RGB plus white",
-    basic: "RGB",
-    why: "Both do color. Only the Signature tier does color and true white from separate emitters.",
+    spec: "Diffuser",
+    value: "Frosted polycarbonate",
+    why: "What you look at from the street is the diffuser, not the diode. It is the part that decides whether the run is a line of light or a row of bright dots.",
+  },
+  {
+    spec: "Channel finish",
+    value: "Color matched to your fascia",
+    why: "This is the daylight test. A matched extrusion reads as trim from the curb; a stock white channel on a bronze fascia does not.",
   },
   {
     spec: "Zones",
-    sig: "Unlimited, per elevation",
-    basic: "Fewer",
+    value: "Per elevation and per fixture type",
     why: "Zones are what let the back of the house stay dark while the front is lit. They are wired on install day, so this is decided before anybody drills.",
   },
   {
     spec: "Dimming",
-    sig: "1 to 100 percent, per zone",
-    basic: "Supported",
-    why: "Per-zone dimming is how a color stays clean rather than turning to a glare. It matters most on a low ranch elevation close to the street.",
-  },
-  {
-    spec: "Channel finish",
-    sig: "Color matched to your trim",
-    basic: "Stock finishes",
-    why: "This is the daylight test. A matched extrusion reads as trim from the curb; a stock white channel on a bronze fascia does not.",
+    value: "1 to 100 percent",
+    why: "Dimming is how a color stays clean rather than turning to glare. It matters most on a low ranch elevation close to the street.",
   },
   {
     spec: "Weather rating",
-    sig: "IP66",
-    basic: "Sealed channel",
-    why: "Both survive a Nebraska winter. Neither survives a bad install, which is why the fastening and sealing sit under our own warranty rather than the manufacturer's.",
-  },
-  {
-    spec: "Rated life",
-    sig: "25 years",
-    basic: "Shorter",
-    why: "Manufacturer ratings on the diodes, not a promise from us. The exact terms for the system you choose are printed on your quote.",
+    value: "IP66",
+    why: "It survives a Nebraska winter. It does not survive a bad install, which is why the fastening and the sealing sit under our own warranty rather than the manufacturer's.",
   },
   {
     spec: "App",
-    sig: "Haven",
-    basic: "Jellyfish",
-    why: "Both do scenes, schedules and zones. The Haven app is the better one to live with, and that is a real part of the price gap.",
+    value: "Haven, iOS and Android",
+    why: "Scenes, sunset scheduling, zoning and dimming, on the same app whether the light is on the roofline, in the beds or over the patio.",
   },
 ];
 
-/* WHAT IS THE SAME. Printing this is what keeps the table above from reading as a
- * pressure device. */
+/* WHAT THE SHEET DOES NOT COVER. Printing this is what keeps the sheet above from reading
+ * as a hardware brochure: none of it is on a datasheet and all of it decides whether the
+ * run is still right in year three. */
 const identical: string[] = [
-  "The same crews, on our own payroll, on both tiers",
+  "The same crews, on our own payroll, on every job",
   "The same fastening method into the fascia board, never through a shingle",
   "Every penetration sealed at the moment it is made",
   "Mitered corners at every gable, dormer, bay and valley",
@@ -108,21 +98,22 @@ const identical: string[] = [
   "The same workmanship coverage from us, whichever hardware is on the house",
 ];
 
-/* THE LINEUP BY ROLE. Eight products, four roles — and the roles are the thing nobody
- * explains, which is why people arrive thinking they have eight choices to make. */
+/* THE TWO THINGS EVERY JOB HAS. The roofline run, and the layer that operates it. */
+const core: { slug: string; role: string }[] = [
+  { slug: "haven-evolution", role: "The roofline" },
+  { slug: "app-and-controls", role: "The controls" },
+];
+
+/* THE LINEUP BY ROLE. Seven pages, four roles, and the roles are the thing nobody
+ * explains, which is why people arrive thinking they have seven choices to make. */
 const roles: { heading: string; note: string; slugs: string[] }[] = [
   {
-    heading: "What you choose between",
-    note: "One of these two goes on your house",
-    slugs: ["brytr-signature", "brytr-basic"],
+    heading: "Where the run itself goes",
+    note: "The roofline, on every job",
+    slugs: ["haven-evolution"],
   },
   {
-    heading: "The hardware underneath",
-    note: "The manufacturer product each tier is built on",
-    slugs: ["haven-evolution", "jellyfish-lighting"],
-  },
-  {
-    heading: "What bolts on to either tier",
+    heading: "What goes on with it",
     note: "Additions, not alternatives",
     slugs: ["haven-q-series", "haven-9-series-landscape-lights", "haven-x-bistro-lights"],
   },
@@ -131,10 +122,15 @@ const roles: { heading: string; note: string; slugs: string[] }[] = [
     note: "The layer you actually touch",
     slugs: ["app-and-controls"],
   },
+  {
+    heading: "The other system we install",
+    note: "Reviewed by the people who fit it",
+    slugs: ["jellyfish-lighting"],
+  },
 ];
 
-/* THREE HOUSES. The recommendation logic, published, because a company with one brand
- * cannot write this section and a company with two has no excuse not to. */
+/* THREE PROPERTIES. The recommendation logic, published, because the shape of the building
+ * decides what goes on it and almost nobody in this trade writes that down. */
 const houses: { h: string; profile: string[]; verdict: string; slug: string }[] = [
   {
     h: "A single-story ranch, front elevation only",
@@ -144,8 +140,8 @@ const houses: { h: string; profile: string[]; verdict: string; slug: string }[] 
       "Nobody in the house is going to open the app weekly",
     ],
     verdict:
-      "Basic, and we will say so at the table. You would be paying the premium for a dedicated white channel and a tighter pitch you will not be able to pick out from the street on a run this length.",
-    slug: "brytr-basic",
+      "The roofline run and nothing else, and we will say so at the table. On a run this length in one color, the money is better spent getting the line straight and the corners mitered than on anything added to it.",
+    slug: "haven-evolution",
   },
   {
     h: "A two-story with dormers and a long eave line",
@@ -155,8 +151,8 @@ const houses: { h: string; profile: string[]; verdict: string; slug: string }[] 
       "Color on gamedays and holidays, white the rest of the year",
     ],
     verdict:
-      "Signature. This is the house where both of the things you are paying for are visible from the curb, and where mixed white next to a dedicated channel is a difference you would notice every night.",
-    slug: "brytr-signature",
+      "The roofline run, plus soffit fixtures wherever the overhang is deep enough to take them. This is the house where the spacing and the matched channel are visible from the curb, and where the wash off the soffit does something the trim line cannot.",
+    slug: "haven-q-series",
   },
   {
     h: "A property rather than a house",
@@ -166,8 +162,8 @@ const houses: { h: string; profile: string[]; verdict: string; slug: string }[] 
       "Scenes that span the house and the yard together",
     ],
     verdict:
-      "Signature, plus the add-ons on the same visit. The saving on doing the landscape and the overhead run while the crew is already on site is most of the cost of a second visit.",
-    slug: "brytr-signature",
+      "The roofline run plus the ground-level and overhead lines on the same visit. The saving on doing the beds and the pergola while the crew is already on site is most of the cost of a second visit.",
+    slug: "haven-9-series-landscape-lights",
   },
 ];
 
@@ -183,44 +179,42 @@ export default function SystemsHub() {
         photoAlt="Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along every gable and eave"
         objectPosition="50% 55%"
         eyebrow="The materials"
-        h1="Two systems on the shelf, and one of them is wrong for your house."
-        lede="Most installers carry one brand and therefore arrive with the recommendation already made. We stock a premium tier and a value tier, which is the only reason we can tell you which one you actually need — including when it is the cheaper one."
+        h1="The lines we install, and what each one is actually for."
+        lede="Haven Lighting makes the roofline channel, the soffit and architectural fixtures, the ground-level lights and the overhead bistro runs. We install all of it, which is why everything on a property answers to one app instead of three."
         trail={trail}
       />
 
-      {/* ── THE TWO SYSTEMS, SIDE BY SIDE ──
-        * This was a stack of two cards in a 28rem hero column. Side by side at full width is
-        * what the page is actually about: two things, and you pick one. A column that narrow
-        * forced them into a vertical list, which reads as first and second rather than as a
-        * choice — and the whole argument of this page is that the cheaper one is sometimes the
-        * right answer. */}
-      {/* bg-muted: the comparison table immediately below is on bg-background, and this
-        * section landed on the same ground when I moved it out of the hero. */}
+      {/* ── THE ROOFLINE, AND THE LAYER THAT RUNS IT ──
+        * This slot used to hold two invented tiers side by side, as though the page were
+        * asking you to pick one. Nobody picks. Every job is the roofline run plus the app,
+        * so those are the two panels. */}
+      {/* bg-muted: the sheet immediately below is on bg-background, and this section landed
+        * on the same ground when I moved it out of the hero. */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="The whole decision"
-            /* Not "Two systems" — the two cards are directly underneath and counting them in
+            eyebrow="Where every job starts"
+            /* Not "the two things": the panels are directly underneath and counting them in
               * the heading is the habit I keep having to be told about. */
-            title="One of these is named on your quote."
-            lede="Everything else on this page bolts on to whichever of these you pick, so this is the only choice that changes the shape of the job."
+            title="The roofline run, and the app that operates it."
+            lede="Everything else on this page is added to these, so this is the part of the quote that is on every job we do."
           />
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
-            {["brytr-signature", "brytr-basic"].map((sl) => {
-              const sy = bySlug(sl);
-              const d = systemDetail[sl];
+            {core.map((c) => {
+              const sy = bySlug(c.slug);
+              const d = systemDetail[c.slug];
               return (
-                <article key={sl} className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+                <article key={c.slug} className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
                   <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                     <p className="label flex items-center gap-3 text-foreground">
                       <span className="block h-4 w-1 bg-accent" aria-hidden />
-                      {sy.tier}
+                      {c.role}
                     </p>
                     <p className="text-xs text-muted-foreground">{sy.maker}</p>
                   </div>
                   <div className="flex flex-1 flex-col px-6 py-6">
                     <h3 className="font-display text-[1.3rem] font-bold leading-snug text-foreground">
-                      <Link href={`/lighting-systems/${sl}`} className="hover:text-accent-deep">{sy.name}</Link>
+                      <Link href={`/lighting-systems/${c.slug}`} className="hover:text-accent-deep">{sy.name}</Link>
                     </h3>
                     <p className="mt-3 text-[1.02rem] leading-relaxed text-muted-foreground">
                       {d?.position ?? sy.short}
@@ -234,7 +228,7 @@ export default function SystemsHub() {
                       ))}
                     </dl>
                     <div className="mt-auto border-t border-border pt-5">
-                      <TextLink href={`/lighting-systems/${sl}`}>The full sheet for {sy.name}</TextLink>
+                      <TextLink href={`/lighting-systems/${c.slug}`}>The full sheet for {sy.name}</TextLink>
                     </div>
                   </div>
                 </article>
@@ -244,41 +238,36 @@ export default function SystemsHub() {
         </div>
       </section>
 
-      {/* ── THE ONE TABLE ──
-        * The decision, with a consequence written against every row. */}
+      {/* ── THE SHEET ──
+        * The roofline hardware, with a consequence written against every row. */}
       <section className="section bg-background">
         <div className="shell">
           <SectionHead
-            eyebrow="Premium against value"
-            title="Every row, and what it actually costs you."
-            lede="Every permanent lighting company publishes a spec table. Almost none of them say what a spec does to the house, which is the only part that helps you choose. The third column is that."
+            eyebrow="The roofline hardware"
+            title="Every row, and what it actually does to the house."
+            lede="Every permanent lighting company publishes a spec table. Almost none of them say what a spec does to a building, which is the only part that helps you judge one. The third column is that."
           />
 
           <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
-            <div className="hidden bg-primary px-6 py-4 lg:grid lg:grid-cols-[20fr_23fr_20fr_37fr] lg:gap-8">
+            <div className="hidden bg-primary px-6 py-4 lg:grid lg:grid-cols-[22fr_26fr_52fr] lg:gap-8">
               <p className="label text-on-dark-muted">Spec</p>
               <p className="label flex items-center gap-3 text-on-dark">
                 <span className="block h-4 w-1 bg-accent" aria-hidden />
-                Signature
+                Haven Evolution
               </p>
-              <p className="label text-on-dark-muted">Basic</p>
               <p className="label text-on-dark-muted">Why it matters</p>
             </div>
             <ul className="divide-y divide-border">
-              {decision.map((r) => (
-                <li key={r.spec} className="grid gap-3 px-6 py-5 lg:grid-cols-[20fr_23fr_20fr_37fr] lg:gap-8">
+              {sheet.map((r) => (
+                <li key={r.spec} className="grid gap-3 px-6 py-5 lg:grid-cols-[22fr_26fr_52fr] lg:gap-8">
                   <p className="font-display text-[0.95rem] font-bold text-foreground">{r.spec}</p>
-                  {/* the recommended column is marked by a SURFACE shift and the amber
-                    * tick in the header, not by a colored strip down the side of the cell.
-                    * slopcheck flags the strip, and it is right to: a colored left border
-                    * on a block is as reliable a tell as an em-dash in a sentence. */}
+                  {/* the value column is marked by a SURFACE shift and the amber tick in the
+                    * header, not by a colored strip down the side of the cell. slopcheck flags
+                    * the strip, and it is right to: a colored left border on a block is as
+                    * reliable a tell as an em-dash in a sentence. */}
                   <div className="rounded-sm bg-muted px-4 py-3 lg:-my-1">
-                    <p className="label mb-1 text-accent-ink lg:hidden">Signature</p>
-                    <p className="text-[0.95rem] font-medium text-foreground">{r.sig}</p>
-                  </div>
-                  <div>
-                    <p className="label mb-1 text-muted-foreground lg:hidden">Basic</p>
-                    <p className="text-[0.95rem] text-muted-foreground">{r.basic}</p>
+                    <p className="label mb-1 text-accent-ink lg:hidden">Haven Evolution</p>
+                    <p className="text-[0.95rem] font-medium text-foreground">{r.value}</p>
                   </div>
                   <p className="text-sm leading-relaxed text-muted-foreground">{r.why}</p>
                 </li>
@@ -286,11 +275,12 @@ export default function SystemsHub() {
             </ul>
           </div>
 
-          {/* what does NOT differ. The table above is only honest with this under it. */}
+          {/* what the sheet cannot tell you. The rows above are only honest with this
+            * under them. */}
           <div className="mt-8 rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
-            <p className="label text-accent">And this is the same on both</p>
+            <p className="label text-accent">And none of this is on a datasheet</p>
             <h3 className="mt-3 max-w-[46ch] font-display text-xl font-bold text-on-dark">
-              The cheaper tier is not a cheaper install.
+              The hardware is the half of this you can shop.
             </h3>
             <ul className="mt-6 grid gap-x-10 gap-y-0 lg:grid-cols-2">
               {identical.map((x) => (
@@ -303,8 +293,9 @@ export default function SystemsHub() {
               ))}
             </ul>
             <p className="mt-6 max-w-[76ch] text-sm leading-relaxed text-on-dark-muted">
-              What differs is the hardware. A Basic install done properly outlasts a Signature install
-              done badly, which is the whole reason we do not subcontract either of them.
+              Good hardware fastened badly fails before cheap hardware fastened properly does, and
+              the failures in this category are workmanship far more often than product. That is the
+              whole reason we do not subcontract any of it.
             </p>
           </div>
         </div>
@@ -312,7 +303,7 @@ export default function SystemsHub() {
 
       {/* ── WHAT THE SPEC ROWS TURN INTO ──
         * Twenty thousand characters of hardware argument on this page and, until now, not one
-        * photograph below the hero. Every row in the table above is a claim about what a part
+        * photograph below the hero. Every row in the sheet above is a claim about what a part
         * does to a building, and a spec table cannot settle any of them.
         *
         * The pair is chosen deliberately: the daylight frame answers the row about colour
@@ -322,7 +313,7 @@ export default function SystemsHub() {
       <PhotoPair
         eyebrow="The rows, on a building"
         title="Two specifications you can check yourself."
-        lede="Most of the table above has to be taken on trust. These two do not: whether the channel disappears in daylight, and how far apart the points sit. Both are visible from your own driveway on any install in this metro."
+        lede="Most of the sheet above has to be taken on trust. These two do not: whether the channel disappears in daylight, and how far apart the points sit. Both are visible from your own driveway on any install in this metro."
         a="dayBrickGable"
         b="homeEaveDownlights"
         aLabel="Colour matched to the fascia. This is the row about finish, photographed at noon rather than asserted."
@@ -331,14 +322,14 @@ export default function SystemsHub() {
       />
 
       {/* ── THE LINEUP, BY ROLE ──
-        * Eight products, four roles. People arrive thinking they have eight
-        * choices; they have one, plus some additions. */}
+        * Seven pages, four roles. People arrive thinking they have seven
+        * choices; they have a roofline run, plus some additions. */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
             eyebrow="The full lineup"
-            title="Only one of these is actually a choice."
-            lede="Two tiers, the two manufacturer products they are built on, three add-ons that go on either, and the app. Grouped by what each one is for, because that relationship is what nobody in this trade explains."
+            title="Most of these are additions, not alternatives."
+            lede="The roofline run, the three Haven lines that go on with it, the app that operates all of it, and the other manufacturer we install. Grouped by what each one is for, because that relationship is what nobody in this trade explains."
           />
 
           <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
@@ -383,16 +374,16 @@ export default function SystemsHub() {
         </div>
       </section>
 
-      {/* ── THREE HOUSES ──
-        * The recommendation logic, published. A single-brand dealer cannot
-        * write this section; a two-brand one has no excuse not to. */}
+      {/* ── THREE PROPERTIES ──
+        * The recommendation logic, published. What goes on a house is decided
+        * by the shape of the house, and one of these three is us saying buy less. */}
       <section className="section bg-primary">
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="Which one we would quote you"
-            title="What we would put on your house, by the shape of it."
-            lede="These are the three shapes almost every enquiry falls into. The verdicts are ours, they are what we would say standing in your driveway, and one of the three is us talking ourselves down a tier."
+            eyebrow="What we would put on it"
+            title="What we would quote you, by the shape of the property."
+            lede="These are the three shapes almost every enquiry falls into. The verdicts are ours, they are what we would say standing in your driveway, and one of the three is us talking you out of buying more."
           />
 
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -410,7 +401,7 @@ export default function SystemsHub() {
                     ))}
                   </ul>
                   <div className="mt-6 flex-1">
-                    <p className="label text-accent">What we would quote</p>
+                    <p className="label text-accent">Where it starts</p>
                     <p className="mt-1.5 font-display text-lg font-bold text-on-dark">{s.name}</p>
                     <p className="mt-2 text-[0.95rem] leading-relaxed text-on-dark-muted">{x.verdict}</p>
                   </div>
@@ -435,8 +426,8 @@ export default function SystemsHub() {
         </div>
       </section>
 
-      <PageCta omit={["/compare"]} 
-        /* The which-one-we-would-quote section above is bg-primary, so the closer would have landed on the same ground and the page would
+      <PageCta omit={["/compare"]}
+        /* The what-we-would-quote section above is bg-primary, so the closer would have landed on the same ground and the page would
           * have ended in one undifferentiated block. */
         ground="muted"
       />
