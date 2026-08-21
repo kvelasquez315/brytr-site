@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/content/site";
 import { images } from "@/content/images";
@@ -17,13 +16,15 @@ import { QuoteForm } from "@/components/ui/bits";
  * width and does not compete with the hero photograph. */
 
 export function Hero() {
-  const bg = images.heroScene;
+  /* Was images.heroScene, which is a different photograph — the hero was announcing a red
+   * colour scene to a screen reader while showing warm white. */
+  const bg = images.heroBg;
 
   return (
     <section className="relative isolate overflow-hidden bg-primary">
       {/* the photograph */}
       <Image
-        src="/img/hero-bg.jpg"
+        src={bg.src as string}
         alt={bg.alt}
         fill
         priority
@@ -33,7 +34,7 @@ export function Hero() {
       <div className="hero-scrim absolute inset-0" aria-hidden />
 
       <div className="shell relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_28rem] lg:gap-16 lg:py-24 xl:gap-24">
-        {/* ── left: short, keyword-forward ─────────────────────────── */}
+        {/* ── left: short, keyword-forward ── */}
         <div className="max-w-[46rem]">
           <p className="label text-accent">
             Omaha, Nebraska · Installed year round
@@ -60,7 +61,7 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ── right: the form, in the hero ─────────────────────────── */}
+        {/* ── right: the form, in the hero ── */}
         <div className="lg:justify-self-end lg:w-[28rem]">
           <QuoteForm variant="compact" heading="Get a free design consultation" />
         </div>
