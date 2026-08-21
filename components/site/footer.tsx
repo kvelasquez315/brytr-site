@@ -15,7 +15,18 @@ export function Footer() {
   return (
     <footer className="bg-primary pb-24 lg:pb-0">
       <div className="shell pt-16">
-        <div className="grid gap-10 lg:grid-cols-5">
+        {/* SIX COLUMN UNITS, NOT FIVE, and the service-area list takes two of them.
+          *
+          * The five columns held 3 blocks of copy, 11 links, 8 links, 19 links and 6 links plus a
+          * contact block. On a single-column list that made "Service areas" nearly twice the height
+          * of anything else, so every other column stopped well short of the divider — measured at
+          * roughly 280 x 400px of empty under "Systems". Giving the nineteen towns two internal
+          * columns brings that block to about ten rows, in line with the eleven services, and the
+          * ragged bottoms collapse to a row or two rather than a block.
+          *
+          * The link lists also go two-up below lg. Stacked single-file they made a 2,500px ribbon
+          * of forty-five identical links on a phone, which is a scroll tax and not a navigation. */}
+        <div className="grid gap-10 lg:grid-cols-6">
           <div className="lg:col-span-1">
             <p className="font-display text-2xl font-black tracking-[-0.04em] text-on-dark">
               brytr<span className="ml-0.5 inline-block size-2 translate-y-[-0.35rem] rounded-full bg-accent" />
@@ -36,7 +47,7 @@ export function Footer() {
 
           <nav aria-label="Services" className="lg:col-span-1">
             <h2 className="label text-accent">Services</h2>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
               {services.map((s) => (
                 <li key={s.slug}>
                   <Link href={`/services/${s.slug}`} className="text-sm text-on-dark-muted hover:text-accent">{s.name}</Link>
@@ -47,7 +58,7 @@ export function Footer() {
 
           <nav aria-label="Lighting systems" className="lg:col-span-1">
             <h2 className="label text-accent">Systems</h2>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
               {systems.map((s) => (
                 <li key={s.slug}>
                   <Link href={`/lighting-systems/${s.slug}`} className="text-sm text-on-dark-muted hover:text-accent">{s.name}</Link>
@@ -56,9 +67,9 @@ export function Footer() {
             </ul>
           </nav>
 
-          <nav aria-label="Service areas" className="lg:col-span-1">
+          <nav aria-label="Service areas" className="lg:col-span-2">
             <h2 className="label text-accent">Service areas</h2>
-            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
+            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5">
               {cities.map((c) => (
                 <li key={c.slug}>
                   <Link href={`/service-areas/${c.slug}`} className="text-sm text-on-dark-muted hover:text-accent">{c.name}</Link>
@@ -69,7 +80,7 @@ export function Footer() {
 
           <div className="lg:col-span-1">
             <h2 className="label text-accent">Company</h2>
-            <ul className="mt-4 space-y-2.5">
+            <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5 lg:grid-cols-1">
               {company.map(([l, h]) => (
                 <li key={h}><Link href={h} className="text-sm text-on-dark-muted hover:text-accent">{l}</Link></li>
               ))}
