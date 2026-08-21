@@ -100,8 +100,8 @@ export const relatedByCategory: Record<string, string[]> = {
     "permanent-christmas-lights",
     "permanent-roofline-lighting",
   ],
-  Install: ["permanent-roofline-lighting", "soffit-lighting", "repairs-and-service"],
-  Product: ["permanent-outdoor-lighting", "repairs-and-service", "holiday-seasonal-scenes"],
+  Install: ["permanent-roofline-lighting", "soffit-lighting", "permanent-outdoor-lighting"],
+  Product: ["permanent-outdoor-lighting", "permanent-roofline-lighting", "holiday-seasonal-scenes"],
   Local: ["permanent-christmas-lights", "gameday-lighting", "landscape-lighting"],
 };
 
