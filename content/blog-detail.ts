@@ -2,7 +2,7 @@
  *
  * content/blog.ts holds the writing, and the writing is real: twelve pieces with their own
  * argument, their own lists and their own callouts. What the template was missing was
- * everything around it. The post page had no photograph at all (a flat colour band for a
+ * everything around it. The post page had no photograph at all (a flat color band for a
  * hero), and its "Related services" panel was `services.slice(0, 3)` — the same three rows
  * on all twelve posts, which is filler dressed as navigation.
  *
@@ -68,7 +68,7 @@ export const postPhotos: Record<string, PostPhoto> = {
   },
   "how-long-do-permanent-led-lights-last": {
     photo: "/img/hero-warm-white.jpg",
-    photoAlt: "An Omaha home with Brytr permanent lighting set to everyday warm white",
+    photoAlt: "An Omaha home with every Brytr roofline run set to the same soft pink",
     objectPosition: "50% 60%",
   },
   "installing-permanent-lights-in-nebraska-winter": {
@@ -99,10 +99,21 @@ export const relatedByCategory: Record<string, string[]> = {
 
 /* One line of framing per category, used as the group note on the hub. */
 export const categoryNote: Record<string, string> = {
-  "Before you buy": "The five decisions that happen before anybody quotes anything.",
+  "Before you buy": "The decisions that happen before anybody quotes anything.",
   Install: "What happens to the building, and what it does to your fascia.",
   Product: "Hardware and terms, including the ones that are hard to compare.",
   Local: "Things that are only true in Omaha, or only true in Nebraska.",
+};
+
+/* Why the featured post is the one to start with.
+ *
+ * The hub's hero panel used to print the featured post's own dek, which is the same sentence
+ * printed again in that post's card a few hundred pixels below it — the same text twice on one
+ * screen. This is editorial framing rather than a restatement, so the panel says something the
+ * card does not. */
+export const startHere: Record<string, string> = {
+  "are-permanent-christmas-lights-worth-it":
+    "Start here because it is the question underneath all the others, and because the answer is not always yes.",
 };
 
 export const photoForPost = (slug: string) => postPhotos[slug];
