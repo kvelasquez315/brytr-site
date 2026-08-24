@@ -18,7 +18,13 @@ import { Elevation } from "./elevation";
  * rather than warm white, so this section was captioning the wrong colour of light as the
  * default. See the note on the hero pair in content/images.ts — the pool-deck shoot turned
  * out to be one property photographed in both states, which is what this device needed all
- * along. */
+ * along.
+ *
+ * THE HEADER SAYS WHAT THIS IS NOW. It used to open "One house, two taps" over "The same
+ * roofline, on a Tuesday and on a Saturday", which is a nice line and tells a homeowner nothing.
+ * This section is the demo of the single feature the product is bought for, and a reader
+ * scrolling past could not tell. "How the color works" over "Warm white every night. Any color
+ * when you want it." names it. */
 
 const warmSpecs = [
   ["Everyday scene", "Warm white, roofline and grounds"],
@@ -70,9 +76,9 @@ export function SceneWipe() {
       <div className="shell">
         <SectionHead
           onDark
-          eyebrow="One house, two taps"
-          title="The same roofline, on a Tuesday and on a Saturday."
-          lede="Drag the line. Both halves are the same Omaha property from the same camera position on the same evening — the everyday warm white on the left, a saved color scene on the right. Nothing was recolored and nothing was rewired between the two. That is the same channel on the same fascia, one tap apart, and it is the reason nobody in this house owns a ladder in January."
+          eyebrow="How the color works"
+          title="Warm white every night. Any color when you want it."
+          lede="Drag the line to see it. Both halves are the same Omaha house from the same camera position on the same evening — everyday warm white on the left, a saved color scene on the right. Nothing was repainted and nothing was rewired between the two: it is one tap in the app."
         />
 
         <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_20rem]">

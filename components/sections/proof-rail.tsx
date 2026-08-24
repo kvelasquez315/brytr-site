@@ -1,105 +1,128 @@
 import Link from "next/link";
+import Image from "next/image";
 import { site } from "@/content/site";
 import { reviewProof } from "@/content/reviews";
 import { googleLogo } from "@/content/badges";
+import { iconMap, type IconKey } from "@/content/icon-map";
 
-/* THE TRUST BAR.
+/* THE TRUST BAND, built to propertypest.com's, which is what the client asked for.
  *
- * The client's read of the last one: it looked like shit, and it did. Two problems, and only
- * one of them was styling.
+ * WHAT THEIRS ACTUALLY IS, with the page open in front of me rather than remembered: a SOLID
+ * dark-green band sitting directly under the hero, full width. On the left, the colour Google "G",
+ * then 5.0 at display size with a rust star row beside it, and "Rated 5.0 across 230+ Google
+ * reviews" underneath in small grey. On the right, three items, each a thin circular outlined icon
+ * above two lines of small caps: LICENSED & INSURED, AACM & CAI MEMBER, OPEN MON-SAT 8AM-5PM.
  *
- * THE CONTENT WAS HALF WRONG. It carried the Google score and then three service tiles —
- * Roofline, Landscape, Patio and pergola — with small icons. Those are not trust signals, they
- * are navigation, and they were a menu of the section immediately below them. So the strip was
- * doing two unrelated jobs in one row, which is why no amount of styling was going to save it.
+ * freedomexteriorsusa.com does the same job one step further: the band under its hero is four
+ * figures - 8+ YEARS, 100% LICENSED & INSURED, 26yr WARRANTIES, 4.9 AVERAGE GOOGLE RATING - each
+ * with a short accent rule under the number and a caps label below, divided by hairlines. Same
+ * idea: the strip under the hero is where a homeowner checks whether you are worth calling.
  *
- * THE MODEL IS propertypest.com, which the client named. Its bar is four real credentials in a
- * row: the 5.0 across 230+ Google reviews with the stars, licensed and insured, the association
- * memberships, and the opening hours. Every item is something a homeowner weighs before calling.
+ * SO THIS IS SOLID AGAIN, AND THAT REVERSES AN EARLIER INSTRUCTION ON PURPOSE. The client asked
+ * once for a translucent overlay floating on the hero photograph, and that is what shipped. He has
+ * now asked for Property Pest's, and Property Pest's is a solid band. The newer instruction wins.
+ * It also fixes two real problems the overlay had: it could only be absolutely positioned inside a
+ * `relative` hero, so the interior pages had to render a different version of it, and at 390px it
+ * was three rows tall and sat on top of the quote form.
  *
- * WHAT WE CAN HONESTLY PUT UP IS THE GOOGLE PART AND THE HOURS. Brytr has no license number,
- * insurance certificate or trade membership on file here, and inventing a badge is the one thing
- * a trust bar must never do — a fabricated credential is worse than a thin bar. Asked; the client
- * said replicate the Google part and no badges on the right. The hours he did give: nine to nine,
- * six days, closed Sunday. They are real, so they are here and in the LocalBusiness schema.
+ * WHAT WE CAN HONESTLY PUT ON THE RIGHT. Property Pest's three are a licence, an association
+ * membership and opening hours. Brytr has no licence number, insurance certificate or trade
+ * membership on file here, and inventing a badge is the one thing a trust bar must never do - a
+ * fabricated credential is worse than a thin bar. So the three are things the client has actually
+ * confirmed: the hours he gave (nine to nine, six days, closed Sunday), the W2 crews, and the
+ * day-and-night verification he described on camera. If he sends the licence and the certificate,
+ * they belong here and they replace these.
  *
- * AND ON THE HOME PAGE IT IS NOT A SOLID BAND ANY MORE. It used to be a separate navy strip
- * bolted under the hero, which is what made it read as a component rather than as part of the
- * page. With `overlay` it floats over the bottom of the hero photograph on a translucent ground,
- * so the photograph runs behind it.
- *
- * WHY THE DEFAULT IS THE SOLID BAND AND NOT THE OVERLAY. The overlay is absolutely positioned,
- * so it only works as a CHILD of the hero section, which has to be `relative`. Every interior
- * page renders this as a SIBLING after its hero, where an absolute box would escape to the
- * nearest positioned ancestor and land at the foot of the document. Defaulting to the overlay
- * would therefore break seventy-odd pages the moment it shipped. So the caller opts in, the
- * home hero opts in, and the interior pages keep the band until the design language is
- * propagated to them -- which is the next phase and rewrites this call site anyway. The three
- * legal pages, whose hero is type on a flat ground with no photograph, keep the band for good.
+ * THE GOOGLE MARK IS STILL THE ONE MISSING PIECE. Property Pest's band leads with the real
+ * four-colour G and ours cannot until the official review-display asset pack is on disk. A
+ * trademark gets used in its owner's own colours from its owner's own pack, or not at all: not
+ * traced from memory, not lifted off their page, not set in Archivo. `googleLogo` in
+ * content/badges.ts is the slot, and this component renders it the moment a file lands. Until then
+ * the score sits on our own star row with the word Google in plain type, which is honest and reads
+ * as deliberate rather than broken.
  */
-export function ProofRail({ overlay = false }: { overlay?: boolean }) {
-  const body = (
-    <div className="shell flex flex-wrap items-center gap-x-10 gap-y-4 py-4">
-      <Link
-        href={reviewProof.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        data-spot
-        className="group flex items-center gap-2 sm:gap-3"
-      >
-        <span className="flex items-center gap-0.5" aria-hidden>
-          {[0, 1, 2, 3, 4].map((i) => (
-            <svg key={i} viewBox="0 0 20 20" className="size-4 text-accent sm:size-[1.05rem]" fill="currentColor">
-              <path d="M10 1.6l2.47 5.2 5.53.72-4.06 3.9 1.03 5.6L10 14.3l-4.97 2.72 1.03-5.6L2 7.52l5.53-.72z" />
-            </svg>
-          ))}
-        </span>
-        <span className="text-[0.9rem] text-on-dark sm:text-[0.95rem]">
-          {/* Until the official Google mark is on disk this is a sentence, not a lockup with a
-            * hole in it. See the note on `googleLogo` in content/badges.ts. */}
-          Rated <span className="u font-bold">{reviewProof.average}</span> across{" "}
-          <span className="u font-bold">{reviewProof.count}</span>
-          {googleLogo ? "" : " Google"} reviews
-          {/* The arrow is a hover affordance, and there is no hover on a phone. It also cost
-            * the line its last twenty pixels at 390px and wrapped onto a row of its own. */}
-          <span className="ml-1.5 hidden text-on-dark-muted transition-transform duration-[--dur-fast] group-hover:translate-x-0.5 sm:inline-block" aria-hidden>
-            &rarr;
+
+/* Every one of these is a fact the client confirmed. Nothing goes in this row otherwise. */
+const CREDENTIALS: { icon: IconKey; a: string; b: string }[] = [
+  { icon: "schedule", a: "Open Mon to Sat", b: "9am to 9pm, closed Sunday" },
+  { icon: "hardHat", a: "Our own W2 crews", b: "Never subcontracted" },
+  { icon: "dayNight", a: "Checked after dark", b: "And again in daylight" },
+];
+
+export function ProofRail() {
+  return (
+    <section className="border-b border-on-dark/10 bg-primary">
+      <div className="shell flex flex-wrap items-center justify-between gap-x-10 gap-y-8 py-7">
+        {/* THE SCORE. Property Pest sets the number at display size with the stars beside it and
+          * the sentence underneath, which is why theirs reads at a glance and our old one-line
+          * version did not. */}
+        <Link
+          href={reviewProof.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          data-spot
+          className="group flex items-center gap-4"
+        >
+          {googleLogo && (
+            <Image src={googleLogo} alt="Google" width={34} height={34} className="size-[2.125rem] shrink-0" />
+          )}
+          <span>
+            <span className="flex items-center gap-3">
+              <span className="u font-display text-[2rem] font-bold leading-none text-on-dark">
+                {reviewProof.average}
+              </span>
+              <span className="flex items-center gap-0.5" aria-hidden>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <svg key={i} viewBox="0 0 20 20" className="size-[1.05rem] text-accent" fill="currentColor">
+                    <path d="M10 1.6l2.47 5.2 5.53.72-4.06 3.9 1.03 5.6L10 14.3l-4.97 2.72 1.03-5.6L2 7.52l5.53-.72z" />
+                  </svg>
+                ))}
+              </span>
+            </span>
+            <span className="mt-1.5 block text-[0.9rem] text-on-dark-muted">
+              Rated {reviewProof.average} across{" "}
+              <span className="u font-semibold text-on-dark">{reviewProof.count}</span>
+              {googleLogo ? "" : " Google"} reviews
+              <span className="ml-1.5 inline-block transition-transform duration-[--dur-fast] group-hover:translate-x-0.5" aria-hidden>
+                &rarr;
+              </span>
+            </span>
           </span>
-        </span>
-      </Link>
+        </Link>
 
-      <span className="hidden h-4 w-px bg-on-dark/25 sm:block" aria-hidden />
-
-      <p className="text-[0.95rem] text-on-dark-muted">{site.hours.openLabel}</p>
-
-      <span className="hidden h-4 w-px bg-on-dark/25 sm:block" aria-hidden />
-
-      <p className="text-[0.95rem] text-on-dark-muted">
-        {site.city} metro, Lincoln and western Iowa
-      </p>
-    </div>
-  );
-
-  /* A SCRIM, NOT FROSTED GLASS. The first version used backdrop-blur and slopcheck failed it as
-   * glassmorphism, which is on the banned list for good reason. The client asked for translucent,
-   * not frosted, and those are different things: a scrim is a density of the brand's own dark over
-   * a photograph, the same device the hero type already sits on. Blur is the SaaS tell.
-   * Translucency is just a surface.
-   *
-   * (The comment above this originally sat directly after `return (`, where a JSX comment parses
-   * as an object literal and the build dies. Third time this session. It goes above the return.) */
-  /* AND THE OVERLAY IS DESKTOP-ONLY. At 390px this bar is three rows tall, and absolutely
-   * positioning it at the foot of the hero laid it straight over the bottom of the quote form:
-   * the scrim sat on "We reply the same day" and the star row collided with the submit button.
-   * A photograph has room for a bar across it only when the bar is one row. So below `lg` it
-   * stays in the flow as the hero's last child -- a solid band at the base of the section,
-   * which is what it was before and is correct at that width. */
-  if (overlay) {
-    return (
-      <div className="relative border-t border-on-dark/15 bg-primary lg:absolute lg:inset-x-0 lg:bottom-0 lg:z-10 lg:bg-primary/78">
-        {body}
+        {/* THE CREDENTIALS. Circular outlined icon over two lines, hairline between each, exactly
+          * the shape of Property Pest's right-hand side. Our own icons, not imported glyphs. */}
+        <ul className="flex flex-wrap items-stretch gap-x-8 gap-y-6 sm:gap-x-10">
+          {CREDENTIALS.map((c, i) => {
+            const I = iconMap[c.icon];
+            return (
+              <li
+                key={c.a}
+                className={`flex items-center gap-3.5 ${i ? "sm:border-l sm:border-on-dark/12 sm:pl-8" : ""}`}
+              >
+                <span
+                  className="grid size-11 shrink-0 place-items-center rounded-full border border-on-dark/25 text-accent"
+                  aria-hidden
+                >
+                  <I className="size-5" />
+                </span>
+                <span className="min-w-0">
+                  <span className="block text-[0.85rem] font-semibold leading-tight text-on-dark">{c.a}</span>
+                  <span className="mt-0.5 block text-[0.8rem] leading-tight text-on-dark-muted">{c.b}</span>
+                </span>
+              </li>
+            );
+          })}
+        </ul>
       </div>
-    );
-  }
-  return <section className="border-t border-on-dark/15 bg-primary">{body}</section>;
+
+      {/* The service area, which Property Pest carries in its top utility strip rather than in the
+        * band. We have no top strip, so it sits here as one quiet line. */}
+      <div className="shell pb-6">
+        <p className="text-[0.85rem] text-on-dark-muted">
+          Installing across {site.region}.
+        </p>
+      </div>
+    </section>
+  );
 }

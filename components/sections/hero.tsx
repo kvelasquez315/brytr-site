@@ -3,7 +3,6 @@ import { site } from "@/content/site";
 import { images } from "@/content/images";
 import { Button } from "@/components/ui/button";
 import { QuoteForm } from "@/components/ui/bits";
-import { ProofRail } from "@/components/sections/proof-rail";
 
 /* 3 — HERO · full-bleed photograph, form in the hero.
  *
@@ -34,7 +33,7 @@ export function Hero() {
       />
       <div className="hero-scrim absolute inset-0" aria-hidden />
 
-      <div className="shell relative grid items-center gap-10 pb-14 pt-16 lg:grid-cols-[1fr_28rem] lg:gap-16 lg:pb-32 lg:pt-28 xl:gap-24">
+      <div className="shell relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_28rem] lg:gap-16 lg:py-28 xl:gap-24">
         {/* ── left: short, keyword-forward ── */}
         <div className="max-w-[46rem]">
           {/* THE EYEBROW IS GONE. "Omaha, Nebraska · Installed year round" in small amber
@@ -67,10 +66,10 @@ export function Hero() {
         </div>
       </div>
 
-      {/* The trust bar floats on the photograph rather than sitting under it as its own navy
-        * band. Extra bottom padding on the grid above so the type never runs under it, and
-        * `overlay` is explicit because the bar is only absolute-positionable in here. */}
-      <ProofRail overlay />
+      {/* THE AMBER LINE IS BACK as the hero's base edge, and it is doing a real job again. The
+        * trust band below is also bg-primary, so without it the photograph just stops and the two
+        * dark surfaces read as one. This is the signature device separating them. */}
+      <div className="hero-baseline absolute inset-x-0 bottom-0 h-0.5" aria-hidden />
     </section>
   );
 }

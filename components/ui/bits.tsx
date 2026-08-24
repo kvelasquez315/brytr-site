@@ -8,22 +8,46 @@ import { Input, Label, Select, Textarea } from "@/components/ui/field";
 export function SectionHead({
   eyebrow, title, lede, onDark, className, align = "left",
 }: { eyebrow?: string; title: string; lede?: string; onDark?: boolean; className?: string; align?: "left" | "center" }) {
-  /* RULE: body copy never sits beside a heading. Eyebrow, then title, then lede,
-   * stacked. A two-column head reads as a magazine deck and breaks the vertical
-   * rhythm of the page — and it was a lazy way to fill a wide container. Width gets
-   * filled with content, not by moving the paragraph sideways.
+  /* EVERY SECTION ON THE SITE COMES THROUGH HERE, and that is the point.
    *
-   * RULE: no numbers in a heading. Headings paint a picture; they do not count the
-   * items underneath them. "Eleven ways to light a property" became "Every surface
-   * worth lighting on a property". */
+   * The client, scrolling the live home page: "the site itself is still very confusing... I'm not
+   * sure what I'm looking at when I'm scrolling through. It needs to be like I know what I'm
+   * looking at." He named freedomexteriorsusa.com, so I opened it, and the thing it does on every
+   * single section is the same three-part header:
+   *
+   *   OUR SERVICES                 <- a small label in the accent colour, with a rule beside it
+   *   ROOFING, SIDING, WINDOWS     <- a big headline that NAMES the section in plain words
+   *   One trusted Georgia          <- exactly one line explaining what you are about to read
+   *   contractor for the whole
+   *   outside of your home.
+   *
+   * WHY OURS FAILED. The headlines were clever instead of plain. The colour-change section opened
+   * "The same roofline, on a Tuesday and on a Saturday" with no label at all, so a homeowner
+   * scrolling past had no idea they had arrived at the demo of the product's main feature. The
+   * reviews section had no eyebrow. A reader could not name a single section from its heading.
+   *
+   * THE RULE IS NOW MECHANICAL: the eyebrow says what KIND of section this is, the title says
+   * what it IS in words a homeowner would use, and the lede is one sentence. Routing every
+   * section through one component is what stops the next one from being different.
+   *
+   * The amber rule beside the eyebrow is `.channel-mark`, the site's own signature device - the
+   * channel in cross-section. Freedom brackets its centred labels with rules on both sides; on a
+   * left-aligned head one leading rule does the same job and it is already the brand's mark.
+   *
+   * RULE, UNCHANGED: body copy never sits beside a heading. Eyebrow, title, lede, stacked. A
+   * two-column head reads as a magazine deck and breaks the page's vertical rhythm.
+   * RULE, UNCHANGED: no numbers in a heading. Headings name the thing; they do not count the
+   * items underneath them. */
   return (
-    <div className={cn(align === "center" && "mx-auto max-w-[52rem] text-center", className)}>
+    <div className={cn(align === "center" && "mx-auto max-w-[54rem] text-center", className)}>
       {eyebrow && (
         <p className={cn("eyebrow", onDark && "eyebrow--on-dark", align === "center" && "justify-center")}>
+          <span className="channel-mark" aria-hidden />
           {eyebrow}
+          {align === "center" && <span className="channel-mark" aria-hidden />}
         </p>
       )}
-      <h2 className={cn(eyebrow && "mt-4", "text-[clamp(1.85rem,3.4vw,2.9rem)]", onDark ? "text-on-dark" : "text-foreground")}>
+      <h2 className={cn(eyebrow && "mt-4", "display-hero", onDark ? "text-on-dark" : "text-foreground")}>
         {title}
       </h2>
       {lede && (
