@@ -3,11 +3,8 @@ import { navTree } from "@/content/nav";
 import { Footer } from "@/components/site/footer";
 import { Hero } from "@/components/sections/hero";
 import { SceneWipe } from "@/components/sections/scene-wipe";
-import { ProofRail, ServicesBento, MaterialsSplit, WhyBrytr } from "@/components/sections/home-a";
-import { ProjectTabs } from "@/components/sections/project-tabs";
-import {
-  Writing, ServiceArea, ProcessRow, FinalCta, CtaBand, Reviews,
-} from "@/components/sections/home-b";
+import { ProofRail } from "@/components/sections/home-a";
+import { Installs, Proof, Work, Hardware, Closer } from "@/components/sections/home-v2";
 import { Jsonld, localBusiness } from "@/lib/schema";
 
 export default function Home() {
@@ -16,49 +13,35 @@ export default function Home() {
       <Jsonld data={localBusiness()} />
       <Header nav={navTree} />
       <main>
-        {/* Thirteen sections, down from twenty. The cut was made on DESIGN duplication,
-          * not on content value: the page had four separate lead forms, five card grids,
-          * five two-column splits and two comparison sections. What went, and why:
+        {/* SEVEN SECTIONS, DOWN FROM THIRTEEN. The client's brief was trugreen.com: how little
+          * you need when the typography and the photography are doing the work. Measured on the
+          * old page: 66 boxed containers, 28 headings, 172 amber elements, 12.3 viewports, and
+          * 187 pieces of 13-15px text against 13 large ones. Every section was a heading over a
+          * grid of small rectangles, and the photography was inside the rectangles.
           *
-          *  QuickQuote   form #2 of 4. The hero has one and FinalCta has one.
-          *  Financing    form #3, and a /pricing subject. Page kept, section cut.
-          *  CtaBand      cut here, then brought back mid-page in the audit: the stretch
-          *               from the systems section to the final form had nothing to act on.
-          *  SceneRail    said the same thing as SceneWipe with more pixels. The eight
-          *               scene photographs all live on /gallery.
-          *  AppSplit     the app interface was drawn in HTML rather than photographed.
-          *               Comes back when Zac sends a real screenshot.
-          *  Reviews      content/reviews.ts is deliberately empty — no real review text
-          *               exists yet — so the section rendered as numbers we already
-          *               state in the band above it.
-          *  VersusTable  same argument as the brand comparisons, twice.
-          *  CompareGrid  white cards and text with no photography. The nine comparison
-          *               pages are strong; a card grid of them on the homepage was not.
-          *               Reached from the systems section and the nav instead.
-          *  HomeFaq      client asked for no FAQ on the homepage. The FAQPage schema
-          *               went with it — structured data has to describe what is on the
-          *               page, and /faq still carries both.
+          * WHAT LEFT THE HOME PAGE, AND WHERE IT LIVES NOW. Nothing was deleted. Each of these
+          * was already a full page, said better, and the home page was repeating it:
           *
-          * Every archetype below is used exactly once. */}
-        <Hero />            {/*  1 · full-bleed photo + form   · photo   */}
-        <ProofRail />       {/*  2 · one compact row           · primary */}
-        <ServicesBento />   {/*  3 · card grid                 · neutral */}
-        <SceneWipe />       {/*  4 · THE SIGNATURE             · raise   */}
-        {/* Real Google review text finally exists (content/reviews.ts), so proof lands
-          * here — before the hardware argument rather than after it — which is the one
-          * structural note from the audit I could not act on at the time. */}
-        <Reviews />         {/*  4b · pull-quote + cards       · neutral */}
-        <MaterialsSplit />  {/*  5 · Haven lines + craft strip · deep    */}
-        <WhyBrytr />        {/*  6 · four-up + bridge          · primary */}
-        <ProjectTabs />     {/*  8 · tabbed photo gallery      · raise   */}
-        {/* AUDIT FIX: from the systems section to the final form was ten phone screens
-          * with nothing to act on. One short centered band here, which is also an
-          * archetype the page does not otherwise use. */}
-        <CtaBand />         {/*  8b · deadline + date ledger    · primary */}
-        <ServiceArea />     {/*  9 · photo + city tiles        · neutral */}
-        <ProcessRow />      {/* 10 · numbered row              · primary */}
-        <Writing />         {/* 11 · three article cards       · neutral */}
-        <FinalCta />        {/* 13 · split + full form         · primary */}
+          *   the hardware craft band  →  /lighting-systems
+          *   the crews argument       →  /about
+          *   the deadline band        →  folded into the hero and the closer
+          *   the towns and drive times→  /service-areas   (its map was also failing live)
+          *   the five-step process    →  /how-it-works
+          *   the questions            →  /faq
+          *   the three article cards  →  /blog
+          *   the tabbed house detail  →  /recent-projects
+          *
+          * THE GROUND CHANGE IS THE ONLY DIVIDER, and it alternates the whole way down:
+          * photograph, muted, raise, background, primary, muted, background, then the dark
+          * footer. No rules, no borders, nothing drawn between two sections. */}
+        <Hero />          {/* 1 · full-bleed photograph + the form   · photo      */}
+        <ProofRail />     {/*     the trust band, hero furniture     · primary    */}
+        <Installs />      {/* 2 · one tall tile, then two            · muted      */}
+        <SceneWipe />     {/* 3 · THE SIGNATURE, the only widget     · raise      */}
+        <Proof />         {/* 4 · one quote at display size          · background */}
+        <Work />          {/* 5 · photographs of finished installs   · primary    */}
+        <Hardware />      {/* 6 · Haven, set as type not as panels   · muted      */}
+        <Closer />        {/* 7 · the form, and the phone number     · background */}
       </main>
       <Footer />
       <MobileCallBar />
