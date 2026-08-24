@@ -3,7 +3,7 @@ import { navTree } from "@/content/nav";
 import { Footer } from "@/components/site/footer";
 import { Hero } from "@/components/sections/hero";
 import { SceneWipe } from "@/components/sections/scene-wipe";
-import { Installs, Proof, Band, Work, Hardware, Closer } from "@/components/sections/home-v2";
+import { Installs, Proof, Band, Work, Hardware, Crew, Closer } from "@/components/sections/home-v2";
 import { Jsonld, localBusiness } from "@/lib/schema";
 
 export default function Home() {
@@ -32,15 +32,23 @@ export default function Home() {
           *
           * THE GROUND CHANGE IS THE ONLY DIVIDER, and it alternates the whole way down:
           * photograph, muted, raise, background, primary, muted, background, then the dark
-          * footer. No rules, no borders, nothing drawn between two sections. */}
-        <Hero />          {/* 1 · photograph, form, trust bar on it  · photo      */}
-        <Installs />      {/* 2 · one tall tile, then two            · muted      */}
-        <SceneWipe />     {/* 3 · THE SIGNATURE, the only widget     · raise      */}
-        <Proof />         {/* 4 · one quote at display size          · background */}
-        <Band />          {/*     the amber band, a colour landmark   · accent     */}
-        <Work />          {/* 6 · photographs of finished installs   · primary    */}
-        <Hardware />      {/* 7 · Haven, set as type not as panels   · muted      */}
-        <Closer />        {/* 8 · the form, and the phone number     · background */}
+          * footer. No rules, no borders, nothing drawn between two sections.
+          *
+          * NINE NOW, AND EVERY ONE A DIFFERENT SHAPE. The client's fourth read was "insanely
+          * boxy", and he was right: the page had become four grids of identical cards. The fix
+          * was subtraction, not rearrangement — see the note at the top of home-v2.tsx. The
+          * crew argument came back off /about as its own full-width dark ground, because the
+          * version of it that lived inside the hardware section was a rounded navy panel
+          * floating in a cream field, which is the most card-like thing a layout can do. */}
+        <Hero />          {/* 1 · photograph, form, trust bar on it   · photo      */}
+        <Installs />      {/* 2 · staggered wide rows, flush photos   · muted      */}
+        <SceneWipe />     {/* 3 · the signature, the only widget      · raise      */}
+        <Proof />         {/* 4 · big number, quotes on bare ground   · background */}
+        <Band />          {/* 5 · the amber band, a colour landmark   · accent     */}
+        <Work />          {/* 6 · filmstrip off the right edge        · primary    */}
+        <Hardware />      {/* 7 · Haven as a hairline-ruled list      · muted      */}
+        <Crew />          {/* 8 · stat strip, full-width dark ground  · primary    */}
+        <Closer />        {/* 9 · the form, and the phone number      · background */}
       </main>
       <Footer />
       <MobileCallBar />
