@@ -192,15 +192,21 @@
      with trugreen.com as the reference for how little you actually need. Measured on the
      old home page: 66 boxed containers, 28 headings, 172 amber elements, 12.3 viewports,
      and 187 separate pieces of 13-15px text against 13 large ones. The page was a mosaic.
-     Air is the fix, and air has to be structural or every section reclaims it. */
-  --section-y: 9rem;
-  --section-y-sm: 4.75rem;
+     Air was part of the fix and it was overdone: 9rem of section padding plus an 80px
+     headline read as an empty page rather than a calm one. 6rem, and the calm comes from
+     order instead of from distance. */
+  --section-y: 6rem;
+  --section-y-sm: 3.5rem;
   /* 84rem / 1344px. Was 100rem (1600px), and that was the root cause of the clutter
      rather than a fix for it: at 1600px every section had 1,600px to justify, so each one
      grew a grid of small boxes to fill the width. Apple locks text at ~980px and grids at
-     1440px for exactly this reason. A narrower measure means a section can be one headline
-     and one photograph and still look deliberate instead of empty. */
-  --container: 84rem;
+     1440px for exactly this reason.
+
+     REVISED. 84rem went too far the other way. At 1,344px with one column of content the
+     sections did not fill, and the client's read was exactly that: "we're not filling up the
+     site". 90rem / 1440px is the working width. The fix for a section that will not fill is
+     structure -- two and three column composition -- not a narrower page. */
+  --container: 90rem;
   /* Prose and single-argument sections. A 1,344px paragraph is unreadable, and the old page
      solved that by pushing copy sideways into columns instead of narrowing the column. */
   --container-prose: 58rem;
@@ -330,21 +336,22 @@
      population of 13px labels in between, so nothing read as big and everything read as
      detail. Display to lead to body is now roughly 3.4x, 1.4x. */
   .display-hero {
-    font-size: clamp(2.75rem, 5.4vw, 5rem);
-    line-height: 0.98;
-    letter-spacing: -0.032em;
+    font-size: clamp(2.15rem, 3.4vw, 3.375rem);
+    line-height: 1.04;
+    letter-spacing: -0.028em;
   }
   .display-section {
-    font-size: clamp(2.05rem, 3.6vw, 3.25rem);
-    line-height: 1.02;
-    letter-spacing: -0.03em;
+    font-size: clamp(1.6rem, 2.2vw, 2.125rem);
+    line-height: 1.1;
+    letter-spacing: -0.022em;
   }
-  /* One line under a headline, and usually the only body copy in the section. */
+  /* One line under a headline. 58ch, not 46: at 46 a lead wrapped after five words and
+     left the right half of the section empty, which is how "simple" turned into "unfinished". */
   .lead {
     font-family: var(--font-body);
-    font-size: clamp(1.1rem, 1.5vw, 1.375rem);
-    line-height: 1.5;
-    max-width: 46ch;
+    font-size: clamp(1.05rem, 1.15vw, 1.1875rem);
+    line-height: 1.55;
+    max-width: 58ch;
   }
   .shell-prose {
     width: 100%;
@@ -361,6 +368,13 @@
      under a card or a button. This site had --shadow-lg and --shadow-dark on cards all over
      the page, which is what made 66 rectangles all read as objects competing for the same
      plane. Photographs get weight; UI does not. */
+  /* Genuinely edge to edge, escaping the shell. The old tiles were huge AND inset, which is
+     the worst of both: oversized pictures that still left a margin down each side. A photograph
+     is either sized inside the grid with content beside it, or it runs the whole width. */
+  .bleed {
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
   .photo-weight {
     box-shadow: 0 3px 30px 0 rgb(0 0 0 / 0.22);
   }
