@@ -34,7 +34,7 @@ export function Hero() {
       />
       <div className="hero-scrim absolute inset-0" aria-hidden />
 
-      <div className="shell relative grid items-center gap-10 pb-28 pt-20 lg:grid-cols-[1fr_28rem] lg:gap-16 lg:pb-32 lg:pt-28 xl:gap-24">
+      <div className="shell relative grid items-center gap-10 pb-14 pt-16 lg:grid-cols-[1fr_28rem] lg:gap-16 lg:pb-32 lg:pt-28 xl:gap-24">
         {/* ── left: short, keyword-forward ── */}
         <div className="max-w-[46rem]">
           {/* THE EYEBROW IS GONE. "Omaha, Nebraska · Installed year round" in small amber

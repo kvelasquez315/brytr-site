@@ -45,22 +45,24 @@ export function ProofRail({ overlay = false }: { overlay?: boolean }) {
         target="_blank"
         rel="noopener noreferrer"
         data-spot
-        className="group flex items-center gap-3"
+        className="group flex items-center gap-2 sm:gap-3"
       >
         <span className="flex items-center gap-0.5" aria-hidden>
           {[0, 1, 2, 3, 4].map((i) => (
-            <svg key={i} viewBox="0 0 20 20" className="size-[1.05rem] text-accent" fill="currentColor">
+            <svg key={i} viewBox="0 0 20 20" className="size-4 text-accent sm:size-[1.05rem]" fill="currentColor">
               <path d="M10 1.6l2.47 5.2 5.53.72-4.06 3.9 1.03 5.6L10 14.3l-4.97 2.72 1.03-5.6L2 7.52l5.53-.72z" />
             </svg>
           ))}
         </span>
-        <span className="text-[0.95rem] text-on-dark">
+        <span className="text-[0.9rem] text-on-dark sm:text-[0.95rem]">
           {/* Until the official Google mark is on disk this is a sentence, not a lockup with a
             * hole in it. See the note on `googleLogo` in content/badges.ts. */}
           Rated <span className="u font-bold">{reviewProof.average}</span> across{" "}
           <span className="u font-bold">{reviewProof.count}</span>
           {googleLogo ? "" : " Google"} reviews
-          <span className="ml-1.5 inline-block text-on-dark-muted transition-transform duration-[--dur-fast] group-hover:translate-x-0.5" aria-hidden>
+          {/* The arrow is a hover affordance, and there is no hover on a phone. It also cost
+            * the line its last twenty pixels at 390px and wrapped onto a row of its own. */}
+          <span className="ml-1.5 hidden text-on-dark-muted transition-transform duration-[--dur-fast] group-hover:translate-x-0.5 sm:inline-block" aria-hidden>
             &rarr;
           </span>
         </span>
@@ -86,9 +88,15 @@ export function ProofRail({ overlay = false }: { overlay?: boolean }) {
    *
    * (The comment above this originally sat directly after `return (`, where a JSX comment parses
    * as an object literal and the build dies. Third time this session. It goes above the return.) */
+  /* AND THE OVERLAY IS DESKTOP-ONLY. At 390px this bar is three rows tall, and absolutely
+   * positioning it at the foot of the hero laid it straight over the bottom of the quote form:
+   * the scrim sat on "We reply the same day" and the star row collided with the submit button.
+   * A photograph has room for a bar across it only when the bar is one row. So below `lg` it
+   * stays in the flow as the hero's last child -- a solid band at the base of the section,
+   * which is what it was before and is correct at that width. */
   if (overlay) {
     return (
-      <div className="absolute inset-x-0 bottom-0 z-10 border-t border-on-dark/15 bg-primary/78">
+      <div className="relative border-t border-on-dark/15 bg-primary lg:absolute lg:inset-x-0 lg:bottom-0 lg:z-10 lg:bg-primary/78">
         {body}
       </div>
     );
