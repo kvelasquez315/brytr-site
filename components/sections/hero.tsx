@@ -33,20 +33,19 @@ export function Hero() {
       />
       <div className="hero-scrim absolute inset-0" aria-hidden />
 
-      <div className="shell relative grid items-center gap-10 py-16 lg:grid-cols-[1fr_28rem] lg:gap-16 lg:py-24 xl:gap-24">
+      <div className="shell relative grid items-center gap-10 py-20 lg:grid-cols-[1fr_28rem] lg:gap-16 lg:py-32 xl:gap-24">
         {/* ── left: short, keyword-forward ── */}
         <div className="max-w-[46rem]">
-          <p className="label text-accent">
-            Omaha, Nebraska · Installed year round
-          </p>
-
-          <h1 className="mt-4 text-[clamp(2.4rem,4vw,4rem)] leading-[0.98] text-on-dark">
+          {/* THE EYEBROW IS GONE. "Omaha, Nebraska · Installed year round" in small amber
+            * above the headline was the first of sixty-odd labels on the old page, and the
+            * city is already in the headline underneath it. A headline can start on its own. */}
+          <h1 className="display-hero text-on-dark">
             Permanent Outdoor Lighting in Omaha, NE
           </h1>
 
-          <p className="mt-5 text-lg leading-relaxed text-on-dark/90">
-            Roofline, landscape and pergola lighting installed once — then every color and
-            every holiday for the life of your home.
+          <p className="lead mt-7 text-on-dark/90">
+            Roofline, landscape and pergola lighting installed once, then every color and every
+            holiday for the life of your home.
           </p>
 
           {/* The form is right there, so a second "get a consultation" button would be
@@ -54,7 +53,7 @@ export function Hero() {
             * path for anyone who would rather talk than type. Everything else that used
             * to live under here (review score, install count, service area) is in the
             * band directly below, so it is not repeated. */}
-          <div className="mt-8">
+          <div className="mt-10">
             <Button asChild size="lg">
               <a href={site.phoneHref}>{site.phone}</a>
             </Button>
