@@ -188,10 +188,22 @@
   --dur-slow: 400ms;
 
   /* ---- rhythm ------------------------------------------------------ */
-  --section-y: 6.5rem;
-  --section-y-sm: 3.5rem;
-  --container: 100rem;   /* 1600px. Was 90rem, which left ~240px of dead
-                            gutter each side on a 1920 monitor and read thin. */
+  /* REDESIGN, ROUND TWO. The client's read of the old page: "very jumbled and weird",
+     with trugreen.com as the reference for how little you actually need. Measured on the
+     old home page: 66 boxed containers, 28 headings, 172 amber elements, 12.3 viewports,
+     and 187 separate pieces of 13-15px text against 13 large ones. The page was a mosaic.
+     Air is the fix, and air has to be structural or every section reclaims it. */
+  --section-y: 9rem;
+  --section-y-sm: 4.75rem;
+  /* 84rem / 1344px. Was 100rem (1600px), and that was the root cause of the clutter
+     rather than a fix for it: at 1600px every section had 1,600px to justify, so each one
+     grew a grid of small boxes to fill the width. Apple locks text at ~980px and grids at
+     1440px for exactly this reason. A narrower measure means a section can be one headline
+     and one photograph and still look deliberate instead of empty. */
+  --container: 84rem;
+  /* Prose and single-argument sections. A 1,344px paragraph is unreadable, and the old page
+     solved that by pushing copy sideways into columns instead of narrowing the column. */
+  --container-prose: 58rem;
 }
 
 @theme inline {
@@ -309,6 +321,50 @@
   @media (min-width: 768px) {
     .section { padding-block: var(--section-y); }
   }
+  /* ---- THE TYPE SCALE ---------------------------------------------
+     It used to live as a `text-[clamp(...)]` on every individual heading, which is how a
+     site ends up with 80px, 58px, 51px, 46px, 33px and 29px all on one page: nine different
+     display sizes, none of them decisive. Three sizes now, defined once.
+
+     The jumps are deliberately large. The old scale ran 46px headline to 15px body with a
+     population of 13px labels in between, so nothing read as big and everything read as
+     detail. Display to lead to body is now roughly 3.4x, 1.4x. */
+  .display-hero {
+    font-size: clamp(2.75rem, 5.4vw, 5rem);
+    line-height: 0.98;
+    letter-spacing: -0.032em;
+  }
+  .display-section {
+    font-size: clamp(2.05rem, 3.6vw, 3.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.03em;
+  }
+  /* One line under a headline, and usually the only body copy in the section. */
+  .lead {
+    font-family: var(--font-body);
+    font-size: clamp(1.1rem, 1.5vw, 1.375rem);
+    line-height: 1.5;
+    max-width: 46ch;
+  }
+  .shell-prose {
+    width: 100%;
+    max-width: var(--container-prose);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+  @media (min-width: 768px) {
+    .shell-prose { padding-inline: 2rem; }
+  }
+
+  /* THE ONE SHADOW, and it belongs to photography.
+     Apple's system has exactly one drop shadow and it sits under product imagery, never
+     under a card or a button. This site had --shadow-lg and --shadow-dark on cards all over
+     the page, which is what made 66 rectangles all read as objects competing for the same
+     plane. Photographs get weight; UI does not. */
+  .photo-weight {
+    box-shadow: 0 3px 30px 0 rgb(0 0 0 / 0.22);
+  }
+
   .shell {
     width: 100%;
     max-width: var(--container);
