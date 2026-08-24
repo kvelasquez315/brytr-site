@@ -159,7 +159,7 @@ export function Proof() {
   );
 }
 
-/* ── 6 · THE HARDWARE ───────────────────────────────────────────────────────────────────
+/* ── 6 · THE HARDWARE ──────────────────────────────────────────────────────────────
  *
  * Four names and one line each, set as type rather than boxed. This was four dark panels
  * with amber bars down their left edge; the panels were doing nothing the words were not
@@ -213,7 +213,7 @@ export function Hardware() {
   );
 }
 
-/* ── 7 · THE CLOSER ────────────────────────────────────────────────────────────────────
+/* ── 7 · THE CLOSER ───────────────────────────────────────────────────────────────────
  *
  * The form, the phone number, and nothing else. The old closer carried a four-item list, a
  * three-figure stat row and a phone band. A page that has already made its argument should
@@ -247,7 +247,7 @@ export function Closer() {
   );
 }
 
-/* ── 5 · THE WORK ───────────────────────────────────────────────────────────────────────
+/* ── 5 · THE WORK ──────────────────────────────────────────────────────────────────────
  *
  * Photographs of finished installs, on the dark ground, at a size where you can actually see
  * the run. The section that stood here was a four-tab switcher over a six-cell grid, every
