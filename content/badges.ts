@@ -13,23 +13,36 @@ export const googleLogo: string | null = null;
 
 /* BRYTR'S OWN MARK.
  *
- * Set `brandLogo` to the path of the real logo file once it is on disk and the header and
- * footer switch to it automatically. `width`/`height` are the file's own pixel dimensions —
- * next/image needs the intrinsic ratio, and getting it wrong is how a logo ends up subtly
- * stretched in the one place it is most visible.
+ * Two files, both from the artwork the client sent: `brytr-logo.png` is his master, the black
+ * wordmark with the amber spark, and `brytr-logo-light.png` is the same lockup for a dark
+ * ground. Only the light one is wired here, because the header and the footer are the only two
+ * places a logo appears on this site and both sit on `--brand-primary`. On that navy the black
+ * master is very nearly invisible. The master is kept for print and for any light surface later.
  *
- * Until then the header sets the name in the brand's display face. That is not an invented
- * mark: it is the word "brytr", set correctly, with the amber dot that appears everywhere else
- * on the site. A traced approximation of the real logo would be worse than either — it would
- * look almost right, which is the one thing a logo may never look.
+ * THE LIGHT VERSION IS DERIVED, NOT REDRAWN, and that distinction is why it is allowed at all.
+ * The file he sent is a two-colour composite over transparency: black (0,0,0) and amber
+ * (255,186,66), with every antialiased edge carried in the alpha channel. Because black is the
+ * zero vector every pixel is exactly `f * amber`, and `f` is recoverable from the red channel
+ * alone. Recomposing at the same `f` against white instead of black turns the wordmark white,
+ * leaves the spark on its exact original amber, and lands every edge pixel on the correct
+ * intermediate, so nothing fringes. Verified after the fact: 96.5% pure white, 3.5% amber at
+ * (255,186,66), no third colour anywhere. Brytr publishes this lockup themselves as
+ * BRYTR-LOGO-WHITE-Y.png, so this is the same mark and not an invention.
  *
- * The lockup wanted here is the WHITE-AND-YELLOW one, because both the header and the footer
- * sit on the dark ground. The black-and-yellow file is for light surfaces and there are none
- * behind a logo on this site. A vector (SVG, or the AI/EPS original) is worth chasing over the
- * 1024px PNG on the current site: the header renders it at roughly 150px wide on a 3x display,
- * which a raster at that size will not survive cleanly.
+ * `width`/`height` are the file's real pixels. next/image needs the intrinsic ratio, and the one
+ * place a wrong ratio shows is the one place the mark is most visible. Rendered
+ * height-constrained with `w-auto`, so a different lockup drops in without being letterboxed.
+ *
+ * NOTE ON THE AMBER. The spark is #FFBA42. The site's `--brand-accent` is #F5C518 and its
+ * comment claims to be "logo yellow", which it never was: it was picked before anyone had seen
+ * the logo. See the note in app/globals.css.
  */
-export const brandLogo: { src: string; width: number; height: number; alt: string } | null = null;
+export const brandLogo: { src: string; width: number; height: number; alt: string } | null = {
+  src: "/img/brytr-logo-light.png",
+  width: 2048,
+  height: 906,
+  alt: "Brytr Co",
+};
 
 export const reviewProofBadge = {
   score: "5.0",
