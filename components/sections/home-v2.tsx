@@ -6,7 +6,7 @@ import { images } from "@/content/images";
 import { reviews, reviewProof } from "@/content/reviews";
 import { googleLogo } from "@/content/badges";
 import { Button } from "@/components/ui/button";
-import { QuoteForm } from "@/components/ui/bits";
+import { QuoteForm, SectionHead } from "@/components/ui/bits";
 
 /* BUILT FROM THE REFERENCES THIS TIME, WITH THE REFERENCES ACTUALLY OPEN.
  *
@@ -34,9 +34,14 @@ import { QuoteForm } from "@/components/ui/bits";
  * the exact opposite of what I shipped. Everything below is those four things, in Brytr's navy,
  * cream and amber instead of Property Pest's green, cream and rust.
  *
- * AND THE CLIENT OUTRANKS THE REFERENCE WHERE THEY DISAGREE. Property Pest's trust bar is a solid
- * band with three credential badges; he asked for a translucent overlay on the hero with no
- * badges, so that is what it is. He asked for Google-style review cards, so they are back.
+ * AND EVERY SECTION NOW NAMES ITSELF. The client, scrolling the live page: "I'm not sure what I'm
+ * looking at when I'm scrolling through." freedomexteriorsusa.com labels every section - OUR
+ * SERVICES, WHY HOMEOWNERS CHOOSE US, WHO WE ARE, AREAS WE SERVE - with an accent eyebrow, a plain
+ * headline that names the section, and one line of explanation. Every header below goes through
+ * SectionHead, so none of them can drift apart. See the note on it in components/ui/bits.
+ *
+ * AND THE CLIENT OUTRANKS THE REFERENCE WHERE THEY DISAGREE. He asked for Google-style review
+ * cards, so they are back and they are not moving again.
  */
 
 /* ---- the shared vocabulary, so the page reads as one system ------------------ */
@@ -82,7 +87,7 @@ function Stars({ className, size = "1rem" }: { className?: string; size?: string
 }
 
 /* ==============================================================================
- * 2 - WHAT WE INSTALL - the bento: one tall photo card, two stacked beside it
+ * 3 - OUR SERVICES - the bento: one tall photo card, two stacked beside it
  *
  * WHAT THIS REPLACES. Three full-width rows, photograph one side and copy the other, alternating
  * down the page. The client: "text on the side of images going all the way down, just taking up a
@@ -106,18 +111,15 @@ export function Installs() {
   return (
     <section className="section bg-muted">
       <div className="shell">
+        {/* NAMED, NOT CLEVER. "Every surface worth lighting" is a slogan; "What we install on a
+          * house" tells a homeowner scrolling past exactly what they have arrived at. */}
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-          <div>
-            <p className="eyebrow">What we install</p>
-            <h2 className="display-hero mt-3 max-w-[24ch] text-foreground">
-              Every surface worth lighting.
-            </h2>
-            <p className="lead mt-4 text-muted-foreground">
-              One channel, one controller, one app. Start with the roofline and add to it whenever
-              you like.
-            </p>
-          </div>
-          <Button asChild size="md"><Link href="/services">Everything we install</Link></Button>
+          <SectionHead
+            eyebrow="Our services"
+            title="What we install on a house"
+            lede="One channel, one controller, one app. Start with the roofline and add the beds, the soffit or the pergola whenever you like."
+          />
+          <Button asChild size="md"><Link href="/services">See all services</Link></Button>
         </div>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.02fr_1fr]">
@@ -188,7 +190,7 @@ export function Installs() {
 }
 
 /* ==============================================================================
- * 4 - WHAT PEOPLE SAY - the Google review cards, restored
+ * 7 - REVIEWS - the Google review cards
  *
  * These were three white cards with a star row, and the client had asked for them in exactly those
  * words: "Design these so they look like actual review cards from Google and use the Google logo
@@ -199,6 +201,9 @@ export function Installs() {
  * Property Pest's version is the same object: white 14px card, star row along the top, the quote,
  * then the name in bold with "Verified Google review" beside it in grey. Above the row: headline,
  * a star row with a one-line subhead, and an outlined pill to read the rest.
+ *
+ * THE SECTION SITS LATE NOW, where Freedom puts its testimonials. It used to be fourth, which
+ * spent the page's proof before the reader had seen any of the work it was about.
  *
  * WHAT IS REAL AND WHAT IS NOT:
  *   the text     verbatim from the review, never tidied or shortened
@@ -216,17 +221,21 @@ export function Proof() {
   return (
     <section className="section bg-background">
       <div className="shell">
+        {/* This section had NO eyebrow at all, which is why three quotes appeared out of nowhere
+          * when you scrolled onto it. */}
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <div>
-            <h2 className="display-hero max-w-[22ch] text-foreground">
-              What Omaha homeowners say.
-            </h2>
-            <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2">
+            <SectionHead
+              eyebrow="Reviews"
+              title="What Omaha homeowners say"
+              lede="Real reviews, quoted word for word, from people whose houses are in the photographs above."
+            />
+            <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2">
               <Stars size="1.1rem" />
               <p className="text-base text-muted-foreground">
-                Real, verbatim reviews. <span className="u font-semibold text-foreground">{reviewProof.average}</span>{" "}
+                <span className="u font-semibold text-foreground">{reviewProof.average}</span>{" "}
                 across <span className="u font-semibold text-foreground">{reviewProof.count}</span>{" "}
-                {googleLogo ? "" : "Google "}reviews.
+                {googleLogo ? "" : "Google "}reviews
               </p>
             </div>
           </div>
@@ -264,12 +273,13 @@ export function Proof() {
 }
 
 /* ==============================================================================
- * 5 - THE BAND - the amber landmark
+ * 8 - THE BAND - the amber call to action
  *
- * TruGreen runs a coloured call-to-action band across the middle of its home page, and it does two
- * jobs at once: it is the strongest colour on the page, and it is a landmark, so a reader
- * scrolling knows where they are. Amber is defensible on a lighting site because amber IS the
- * product. Full width, no container, and the button is a pill like everything else now.
+ * TruGreen runs a coloured call-to-action band across the middle of its home page, and Freedom puts
+ * a photographic one just before its footer with two buttons on it. It does two jobs at once: it is
+ * the strongest colour on the page, and it is a landmark, so a reader scrolling knows where they
+ * are. Amber is defensible on a lighting site because amber IS the product. No eyebrow on this one
+ * on purpose - it is an instruction, not a section to read.
  * ============================================================================ */
 export function Band() {
   return (
@@ -300,7 +310,7 @@ export function Band() {
 }
 
 /* ==============================================================================
- * 6 - THE WORK - the bento gallery
+ * 5 - OUR WORK - the bento gallery
  *
  * THE HORIZONTAL SCROLL IS GONE. The client: "some random scroll going on, like a little page
  * where we have the whole gallery at." Right again - a scroll container on a home page hides most
@@ -330,16 +340,12 @@ export function Work() {
     <section className="section bg-primary">
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-          <div>
-            <p className="eyebrow eyebrow--on-dark">Finished installs</p>
-            <h2 className="display-hero mt-3 max-w-[22ch] text-on-dark">
-              Houses lit by our lights around Omaha.
-            </h2>
-            <p className="lead mt-4 text-on-dark-muted">
-              Photographed on the property at night with the system running, so what you are
-              looking at is the output rather than a rendering of it.
-            </p>
-          </div>
+          <SectionHead
+            onDark
+            eyebrow="Our work"
+            title="Houses we have lit around Omaha"
+            lede="Every photograph here is a finished Brytr install, shot on the property at night with the system running. None of it is a rendering."
+          />
           <Button asChild size="md"><Link href="/gallery">See the full gallery</Link></Button>
         </div>
 
@@ -402,15 +408,7 @@ export function Work() {
 }
 
 /* ==============================================================================
- * 7 - HAVEN, AND WHY US - one section, Property Pest's closing composition
- *
- * This was two sections: a hairline-ruled list of Haven lines, then a separate full-width dark band
- * carrying the crew arguments. Both were flat type on flat ground, and the pair ran two screens.
- *
- * Property Pest closes with a left column of eyebrow, headline, body and a DARK STAT CARD carrying
- * four figures in its accent colour, beside a right column of white cards. That composition holds
- * both of these arguments at once in one screen, and the stat card is where the crew facts belong:
- * they are absolutes, not paragraphs.
+ * 6 - WHY HOMEOWNERS CHOOSE US - Haven, and the crew
  *
  * THE LOGOS ARE STILL A SLOT. Haven and Jellyfish are somebody else's trademarks: used in their
  * own colours from their own asset pack, or not used. `systemLogo` in content/badges.ts renders one
@@ -433,41 +431,28 @@ const CREW_FACTS: [string, string][] = [
   ["Hidden", "Wire runs concealed, and capped at the end"],
 ];
 
+/* RESTRUCTURED SO THE SECTION ANNOUNCES ITSELF. This was a two-column mash: a headline squeezed
+ * into a 27rem column beside four cards, with the crew figures in a panel under the headline. You
+ * could not tell where the section began or what it was about, and the headline wrapped to four
+ * lines at that measure.
+ *
+ * Freedom Exteriors' shape instead: the header runs the full width of the section, the cards sit
+ * under it in one clean row, and the figures go in a full-width strip at the foot - which is
+ * exactly what its under-hero band does with 8+ YEARS / 100% LICENSED / 26yr / 4.9 STAR.
+ *
+ * (The comment you are reading sits ABOVE the return. A block comment between `return (` and the
+ * JSX parses as an expression and the build dies. Fourth time this session.) */
 export function Hardware() {
   return (
     <section className="section bg-muted">
-      <div className="shell grid gap-10 lg:grid-cols-[minmax(0,27rem)_minmax(0,1fr)] lg:gap-16">
-        <div>
-          <p className="eyebrow">The hardware, and the crew</p>
-          <h2 className="display-section mt-3 text-foreground">
-            We lead with Haven, and install every line of it.
-          </h2>
-          <p className="lead mt-4 text-muted-foreground">
-            One manufacturer for the roofline, the soffit, the ground and the overhead runs, so the
-            whole property answers to the same app. Installed by the people who quoted it.
-          </p>
+      <div className="shell">
+        <SectionHead
+          eyebrow="Why homeowners choose us"
+          title="We lead with Haven, and install every line of it"
+          lede="One manufacturer for the roofline, the soffit, the ground and the overhead runs, so the whole property answers to the same app - installed by the same crew that quoted it."
+        />
 
-          <div className="mt-7 rounded-lg bg-primary p-7">
-            <dl className="grid gap-x-6 gap-y-6 sm:grid-cols-2">
-              {CREW_FACTS.map(([f, l]) => (
-                <div key={l}>
-                  <dt className="u font-display text-[1.6rem] font-bold leading-none text-accent">{f}</dt>
-                  <dd className="mt-2 text-[0.9rem] leading-snug text-on-dark-muted">{l}</dd>
-                </div>
-              ))}
-            </dl>
-            <Link
-              href="/how-it-works"
-              data-spot
-              className="group mt-7 inline-block border-t border-on-dark/15 pt-5 font-semibold text-on-dark underline decoration-accent decoration-2 underline-offset-4"
-            >
-              See how an install runs, start to finish
-              <Arrow />
-            </Link>
-          </div>
-        </div>
-
-        <div className="grid gap-5 sm:grid-cols-2">
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {HAVEN.map((h) => {
             const img = images[h.photo];
             return (
@@ -483,7 +468,7 @@ export function Hardware() {
                       src={img.src}
                       alt={img.alt}
                       fill
-                      sizes="(min-width:640px) 22vw, 100vw"
+                      sizes="(min-width:1024px) 23vw, (min-width:640px) 45vw, 100vw"
                       className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.05]"
                     />
                   </div>
@@ -502,26 +487,51 @@ export function Hardware() {
             );
           })}
         </div>
+
+        {/* THE FIGURES, as a full-width strip. Four absolutes divided by hairlines, the shape of
+          * Freedom's under-hero band. Every one confirmed by the client: nothing goes in a stat
+          * strip without a source, because an invented figure in a stat strip is the most quotable
+          * lie on a website. */}
+        <div className="mt-10 rounded-lg bg-primary px-7 py-8 sm:px-9">
+          <dl className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
+            {CREW_FACTS.map(([f, l], i) => (
+              <div key={l} className={i ? "lg:border-l lg:border-on-dark/15 lg:pl-8" : ""}>
+                <dt className="u font-display text-[1.75rem] font-bold leading-none text-accent">{f}</dt>
+                <dd className="mt-2.5 text-[0.9rem] leading-snug text-on-dark-muted">{l}</dd>
+              </div>
+            ))}
+          </dl>
+          {/* The rule goes on a full-width wrapper. It was on the inline-block link itself, so it
+            * only spanned the width of the text and read as a stray dash. */}
+          <div className="mt-8 border-t border-on-dark/15 pt-6">
+            <Link
+              href="/how-it-works"
+              data-spot
+              className="group font-semibold text-on-dark underline decoration-accent decoration-2 underline-offset-4"
+            >
+              See how an install runs, start to finish
+              <Arrow />
+            </Link>
+          </div>
+        </div>
       </div>
     </section>
   );
 }
 
 /* ==============================================================================
- * 8 - THE CLOSER
+ * 9 - FREE CONSULTATION - the closer
  * ============================================================================ */
 export function Closer() {
   return (
     <section className="section bg-background">
       <div className="shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_30rem] lg:items-start lg:gap-20">
         <div>
-          <h2 className="display-hero max-w-[18ch] text-foreground">
-            See it on your house before you buy.
-          </h2>
-          <p className="lead mt-4 text-muted-foreground">
-            We come out after dark, walk the property, and show you the design on your own
-            elevation. No charge, and no obligation.
-          </p>
+          <SectionHead
+            eyebrow="Free consultation"
+            title="See it on your house before you buy"
+            lede="We come out after dark, walk the property, and show you the design on your own elevation. No charge and no obligation."
+          />
           <p className="mt-8 text-base text-muted-foreground">Or call us directly</p>
           <a
             href={site.phoneHref}
