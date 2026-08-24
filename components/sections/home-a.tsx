@@ -2,14 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { site } from "@/content/site";
 import { services } from "@/content/services";
-import { iconMap, type IconKey } from "@/content/icon-map";
+import { iconMap } from "@/content/icon-map";
 
 import { Photo, photoExists } from "@/components/ui/photo";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Check, TextLink, QuoteForm } from "@/components/ui/bits";
 import { Spotlight } from "@/components/ui/spotlight";
-import { IcVerified, IcHardHat, IcSceneStack, IcFasciaMount, IcMiter, IcConcealedWire, IcEndCap } from "@/components/icons";
-import { cn } from "@/lib/utils";
+import { IcVerified, IcHardHat, IcFasciaMount, IcMiter, IcConcealedWire, IcEndCap } from "@/components/icons";
 
 
 /* 4 — QUICK QUOTE + STATS · asymmetric split · neutral */
@@ -82,69 +81,6 @@ export { ProofRail } from "./proof-rail";
  * version of the same one. Nothing was cut: all eleven services are still linked, and
  * every one still has its own page. Bullet counts run two to four so the cards stop
  * looking stamped out. */
-/* WHERE IT GOES, TOP DOWN.
- *
- * Grouped by the physical place on the property, because that is the only thing about them a
- * homeowner on the home page needs: the same controller reaches all of it. Ordered the way it
- * sits on a house — under the eave, then overhead, then at grade — rather than in whatever
- * order the service pages happen to have been written in.
- *
- * NO BLURB PER PLACE. Each one used to carry a line of its own — "Beds, trunks, seat walls and
- * step risers" — sitting beside "Path, uplighting, tree wash and beds" and "Built into walls,
- * steps and coping". The place line was a summary of the two services next to it, which is how
- * a row ends up looking full while saying one thing twice. The place is the label; the services
- * carry the detail they already have.
- *
- * TWO THINGS ARE DELIBERATELY NOT IN HERE, and both used to be rendered as if they were places.
- * The app is not a place: it is the one thing every run above has in common, so putting it in
- * the fourth row of a four-row table of locations put it on the same footing as a flower bed.
- * And repairs are not on our system at all — that is work on somebody else's, often a brand we
- * would never have sold. Each gets its own shape below. */
-const places: { where: string; icon: IconKey; slugs: string[] }[] = [
-  { where: "On the house", icon: "soffit", slugs: ["soffit-lighting", "commercial-outdoor-lighting"] },
-  { where: "Overhead", icon: "pergola", slugs: ["patio-pergola-bistro-lighting"] },
-  { where: "At ground level", icon: "pathLight", slugs: ["landscape-lighting", "hardscape-lighting"] },
-];
-
-/* The control layer. Not a place — the reason the places are worth grouping at all. */
-const control = {
-  what: "The part you actually touch, saved and scheduled — the one thing every run above has in common.",
-  slugs: ["holiday-seasonal-scenes", "gameday-lighting"],
-};
-
-/* A SERVICE, AS A TARGET.
- *
- * All eight of these were rendered as underlined words inside a sentence — "Beds, trunks, seat
- * walls and step risers — Landscape Lighting and Hardscape Lighting." That is the lowest
- * affordance available for the only things in the block anybody would want to click, and it
- * made five rows identical apart from the nouns.
- *
- * The first pass made them chips: better targets, but a chip is one word wide, so right-aligning
- * two of them in a 1,392px row just moved the empty space from the middle to the middle. They
- * carry each service's own `short` line now — "Recessed and track options under the overhang",
- * "Husker red on a Saturday, one tap" — which is copy that already existed, is specific, and
- * fills the row with a reason to click rather than with air. `basis` keeps a card at a readable
- * width instead of stretching one lone card across the whole row. */
-function ServiceCard({ slug }: { slug: string }) {
-  const svc = services.find((x) => x.slug === slug);
-  if (!svc) return null;
-  return (
-    <Link
-      href={`/services/${slug}`}
-      data-spot
-      className={cn(
-        "group block flex-1 basis-[19.5rem] rounded-md bg-on-dark/8 px-4 py-3.5 ring-1 ring-on-dark/15",
-        "transition-colors duration-[--dur-fast] hover:bg-on-dark/14 hover:ring-accent/60"
-      )}
-    >
-      <span className="block font-display text-[0.95rem] font-bold leading-tight text-on-dark decoration-accent decoration-2 underline-offset-4 group-hover:underline">
-        {svc.name}
-      </span>
-      <span className="mt-1.5 block text-[0.85rem] leading-snug text-on-dark-muted">{svc.short}</span>
-    </Link>
-  );
-}
-
 const LEAD_SERVICES = [
   "permanent-outdoor-lighting",
   "permanent-christmas-lights",
@@ -204,71 +140,21 @@ export function ServicesBento() {
           })}
         </div>
 
-        {/* WHAT THE SECTION LEDE ACTUALLY PROMISED.
+        {/* THE "ONE CONTROLLER" PANEL IS GONE.
           *
-          * This was eight equal cells — icon, name, one line — under the heading "Also on the
-          * same system". Eight names is not an argument, and the lede above it had already made
-          * the only point the block existed to support ("one channel, one controller and one
-          * app, so you can add to it whenever you like"). So the cells restated a claim instead
-          * of evidencing it, which is why it read as furniture next to the three cards above.
+          * Four versions of this block existed and the client removed the fourth on sight. Worth
+          * recording why, because the failure was not in any of the four designs. It started as
+          * eight tiles headed "Also on the same system", became a grouped ledger, then a ledger
+          * with the services as real cards. Each pass fixed the version before it and none of them
+          * fixed the reason it was there.
           *
-          * Grouping it by place fixed the argument and left the DESIGN wrong: five rows of a
-          * 13rem label beside a single sentence, identical apart from the nouns, the width
-          * filled by pushing prose sideways rather than by content. Two shapes now, because
-          * there are two kinds of thing here and they were drawn the same: the places on the
-          * property, and the app that reaches all of them. */}
-        <div className="mt-5 overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)]">
-          <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-on-dark/12 px-6 py-4">
-            <p className="label flex items-center gap-3 text-on-dark">
-              <span className="block h-4 w-1 bg-accent" aria-hidden />
-              One controller, the whole property
-            </p>
-            <p className="text-sm text-on-dark-muted">Added at install, or any year after</p>
-          </div>
-
-          {/* THE PLACES. Row height varies with how many services actually land there, so the
-            * rhythm comes from the content instead of from a fixed rail. */}
-          <ul className="divide-y divide-on-dark/10">
-            {places.map((g) => {
-              const I = iconMap[g.icon];
-              return (
-                <li
-                  key={g.where}
-                  className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-3 px-6 py-5 md:grid-cols-[auto_11rem_minmax(0,1fr)] md:gap-x-6 md:gap-y-4"
-                >
-                  <span className="channel-tile !size-11" aria-hidden><I className="size-6" /></span>
-                  <p className="font-display text-[1.05rem] font-bold leading-tight text-on-dark">{g.where}</p>
-                  {/* col-span-2 below md so the tile and the place name share one line on a
-                    * phone instead of eating two — three rows of that is 90px of nothing. */}
-                  <div className="col-span-2 flex flex-wrap gap-3 md:col-span-1">
-                    {g.slugs.map((sl) => <ServiceCard key={sl} slug={sl} />)}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-
-          {/* THE CONTROL LAYER, on its own ground. It is what the three rows above have in
-            * common, so it sits under all of them rather than beside them as a fourth. Same
-            * three-column spine as the rows, so it reads as the sum of them and not as a
-            * separate widget that happened to land here. */}
-          <div className="grid grid-cols-[auto_minmax(0,1fr)] items-center gap-x-4 gap-y-3 border-t border-on-dark/10 bg-raise px-6 py-6 md:grid-cols-[auto_11rem_minmax(0,1fr)] md:gap-x-6 md:gap-y-4">
-            <span className="channel-tile !size-11" aria-hidden><IcSceneStack className="size-6" /></span>
-            <div>
-              <p className="label text-accent">What you set it to</p>
-              <p className="mt-1.5 font-display text-[1.05rem] font-bold leading-tight text-on-dark">
-                Every run above
-              </p>
-            </div>
-            <div className="col-span-2 flex flex-wrap items-center gap-3 md:col-span-1">
-              {control.slugs.map((sl) => <ServiceCard key={sl} slug={sl} />)}
-              <p className="basis-[19.5rem] text-[0.85rem] leading-snug text-on-dark-muted">
-                {control.what}
-              </p>
-            </div>
-          </div>
-
-        </div>
+          * The section lede already says it: one channel, one controller, one app, add to it
+          * whenever you like. The panel restated that sentence as a diagram. A homeowner on the
+          * home page does not need the full inventory of eight secondary services grouped by where
+          * they bolt on; they need the three they came for, which are the cards above, and a way
+          * to talk to somebody. The eight are all one click away in the nav and on /services.
+          *
+          * If something goes back in this slot it should be a photograph, not a directory. */}
 
         {/* the qualifying questions, as a wide band, not a third card.
           *
