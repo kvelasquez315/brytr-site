@@ -14,6 +14,18 @@ export const site = {
    * profile exactly, is what ties the two together for the local pack. */
   address: { street: "13436 C St", city: "Omaha", state: "NE", zip: "68144" },
   state: "NE",
+  /* HOURS, CONFIRMED BY THE CLIENT. Nine to nine, six days, closed Sunday. These were absent
+   * from the site and from the LocalBusiness schema on purpose: a previous version guessed them,
+   * and wrong hours in structured data is worse than none, because Google will show a homeowner
+   * a closed sign that is not true. Asked, answered, so they are real now. `openLabel` is the
+   * one-line form for the trust bar; `week` is the machine form the schema needs. */
+  hours: {
+    openLabel: "Open Mon to Sat, 9am to 9pm",
+    week: [
+      { days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"], opens: "09:00", closes: "21:00" },
+    ],
+    closed: ["Sunday"],
+  },
   region: "Omaha metro, Lincoln, western Iowa and eastern Nebraska",
   url: "https://brytrco.com",
   founders: [

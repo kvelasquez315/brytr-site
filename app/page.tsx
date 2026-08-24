@@ -3,7 +3,6 @@ import { navTree } from "@/content/nav";
 import { Footer } from "@/components/site/footer";
 import { Hero } from "@/components/sections/hero";
 import { SceneWipe } from "@/components/sections/scene-wipe";
-import { ProofRail } from "@/components/sections/home-a";
 import { Installs, Proof, Band, Work, Hardware, Closer } from "@/components/sections/home-v2";
 import { Jsonld, localBusiness } from "@/lib/schema";
 
@@ -34,8 +33,7 @@ export default function Home() {
           * THE GROUND CHANGE IS THE ONLY DIVIDER, and it alternates the whole way down:
           * photograph, muted, raise, background, primary, muted, background, then the dark
           * footer. No rules, no borders, nothing drawn between two sections. */}
-        <Hero />          {/* 1 · full-bleed photograph + the form   · photo      */}
-        <ProofRail />     {/*     the trust band, hero furniture     · primary    */}
+        <Hero />          {/* 1 · photograph, form, trust bar on it  · photo      */}
         <Installs />      {/* 2 · one tall tile, then two            · muted      */}
         <SceneWipe />     {/* 3 · THE SIGNATURE, the only widget     · raise      */}
         <Proof />         {/* 4 · one quote at display size          · background */}

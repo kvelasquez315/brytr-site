@@ -25,10 +25,25 @@ export const localBusiness = (city?: string) => ({
   areaServed: cities.map((c) => ({ "@type": "City", name: c.name, addressRegion: c.state })),
   aggregateRating: { "@type": "AggregateRating", ratingValue: reviewProof.average, reviewCount: String(reviewProof.count), bestRating: "5" },
   sameAs: [site.social.facebook, site.social.instagram, reviewProof.url],
-  /* openingHours removed on purpose: the hours that used to be here were never confirmed
-   * by the client, and publishing wrong hours in schema is worse than publishing none.
-   * The Google profile shows "closes 9 PM" but not the full week — ask Zac and put the
-   * real week back. */
+  /* THE REAL WEEK, restored. This block was empty with a note to ask the client, because an
+   * earlier version had guessed the hours and wrong hours in structured data is worse than
+   * none: Google will show a homeowner a closed sign that is not true. He has now confirmed
+   * nine to nine, Monday through Saturday, closed Sunday. Sunday is stated explicitly rather
+   * than omitted, because an absent day reads as unknown rather than as closed. */
+  openingHoursSpecification: [
+    ...site.hours.week.map((w) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: w.days,
+      opens: w.opens,
+      closes: w.closes,
+    })),
+    ...site.hours.closed.map((d) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: [d],
+      opens: "00:00",
+      closes: "00:00",
+    })),
+  ],
 });
 
 export const breadcrumb = (trail: { name: string; href: string }[]) => ({
