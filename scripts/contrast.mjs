@@ -1,9 +1,40 @@
 /* APCA + WCAG check on every text/background pair the site actually uses.
-   Run: node scripts/contrast.mjs   (exits non-zero if any pair misses target) */
+   Run: node scripts/contrast.mjs   (exits non-zero if any pair misses target)
+
+   THE PALETTE IS READ OUT OF app/globals.css, NOT COPIED HERE.
+   It used to be a hardcoded object in this file, which made this script a second source of truth
+   for the brand colours: the exact failure hex-lock.mjs exists to prevent, sitting inside the
+   gate that is supposed to police it. It went unnoticed because a stale copy still passes. It was
+   caught when --brand-accent changed from #f5c518 to the real logo yellow #ffba42 and this script
+   reported byte-identical numbers to the run before it, which is impossible if it were measuring
+   the change. Parsed now, so a token can never drift away from the value being tested, and a
+   missing token is a hard failure rather than a silent stale reading. */
+import { readFileSync } from "node:fs";
+
+const css = readFileSync("app/globals.css", "utf8");
+const token = (name) => {
+  const m = new RegExp(`--${name}:\\s*(#[0-9a-fA-F]{6})\\b`).exec(css);
+  if (!m) {
+    console.error(`\nFAIL  token --${name} not found in app/globals.css.`);
+    console.error("This script reads the palette from the stylesheet. If a token was renamed,");
+    console.error("rename it here too rather than pasting its value back in.\n");
+    process.exit(1);
+  }
+  return m[1].toLowerCase();
+};
 const P = {
-  primary: "#111820", raise: "#202b38", neutral: "#f1ede4", neutralDeep: "#e7e1d4",
-  card: "#ffffff", ink: "#0c0f13", onDark: "#f7f6f3", onDarkMuted: "#ccd3da",
-  muted: "#47443d", accent: "#f5c518", accentDeep: "#d9a400", accentInk: "#4f3e0d",
+  primary:     token("brand-primary"),
+  raise:       token("brand-raise"),
+  neutral:     token("brand-neutral"),
+  neutralDeep: token("brand-neutral-deep"),
+  card:        token("card"),
+  ink:         token("brand-ink"),
+  onDark:      token("on-dark"),
+  onDarkMuted: token("on-dark-muted"),
+  muted:       token("muted-foreground"),
+  accent:      token("brand-accent"),
+  accentDeep:  token("brand-accent-deep"),
+  accentInk:   token("brand-accent-ink"),
 };
 const hex = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16));
 const lin = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
