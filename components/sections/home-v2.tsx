@@ -4,6 +4,7 @@ import { site } from "@/content/site";
 import { services } from "@/content/services";
 import { images } from "@/content/images";
 import { reviews, reviewProof } from "@/content/reviews";
+import { googleLogo } from "@/content/badges";
 import { Button } from "@/components/ui/button";
 import { QuoteForm } from "@/components/ui/bits";
 
@@ -134,11 +135,74 @@ export function Installs() {
 
 /* ── 4 · WHAT PEOPLE SAY ───────────────────────────────────────────────────────────────
  *
- * Three quotes across the row with the score beside the heading. Round two set one quote at
- * 34px across half the page and left the other half blank, which is a magazine pull-quote,
- * not proof. Three real reviews reading across is both calmer and fuller than six in boxes
- * or one in a void.
+ * Real Google review cards. Round three set them as three bare quotes in columns, which read
+ * as copy we had written about ourselves. A card with the reviewer, a star row and the source
+ * on it reads as somebody else's words, which is the entire point of a testimonial.
+ *
+ * WHAT IS REAL ON THESE CARDS AND WHAT IS NOT:
+ *   the text     verbatim from the review, never tidied or shortened
+ *   the name     as Google shows it
+ *   the date     only where Google gave one. Four of the six have no date, so four cards
+ *                have no date. Inventing "3 weeks ago" to make a row look even is the exact
+ *                kind of small lie that makes a real review look fabricated.
+ *   the stars    every one of these is five stars, which is why the average is 5.0
+ *   the avatar   the reviewer's initial on a neutral disc. NOT a photograph: we do not have
+ *                their profile pictures and generating a face for a real named customer is
+ *                not a thing this site will ever do.
+ *
+ * THE GOOGLE MARK IS A SLOT, NOT A DRAWING. `googleLogo` in content/badges.ts. A trademark
+ * gets used in its own colours from the owner's own asset pack or it does not get used: not
+ * traced from memory, not pulled off a web page, not set in our display face. Google publishes
+ * an official pack for review displays. Until that file is on disk the card credits the source
+ * in plain type, which is honest and looks deliberate rather than broken.
  */
+function Stars({ className }: { className?: string }) {
+  /* Five stars is not a trademark and this is the same glyph the trust band under the hero
+   * uses, so the mark means one thing across the site. */
+  return (
+    <span className={`flex items-center gap-0.5 ${className ?? ""}`} aria-label="Five out of five stars">
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg key={i} viewBox="0 0 20 20" className="size-[1.05rem] text-accent" fill="currentColor" aria-hidden>
+          <path d="M10 1.6l2.47 5.2 5.53.72-4.06 3.9 1.03 5.6L10 14.3l-4.97 2.72 1.03-5.6L2 7.52l5.53-.72z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+function ReviewCard({ r }: { r: (typeof reviews)[number] }) {
+  return (
+    <article className="flex flex-col rounded-xl bg-card p-7 ring-1 ring-border">
+      <header className="flex items-start gap-4">
+        <span
+          className="grid size-11 shrink-0 place-items-center rounded-full bg-muted font-display text-lg font-bold text-foreground"
+          aria-hidden
+        >
+          {r.name.trim().charAt(0)}
+        </span>
+        <div className="min-w-0 flex-1">
+          <p className="font-display text-[1.05rem] font-bold leading-tight text-foreground">{r.name}</p>
+          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+            <Stars />
+            {r.when && <span className="text-sm text-muted-foreground">{r.when}</span>}
+          </div>
+        </div>
+        {googleLogo ? (
+          <Image src={googleLogo} alt="Google" width={20} height={20} className="mt-0.5 size-5 shrink-0" />
+        ) : null}
+      </header>
+
+      <p className="mt-5 flex-1 text-[1.02rem] leading-relaxed text-muted-foreground">
+        &ldquo;{r.text}&rdquo;
+      </p>
+
+      <p className="mt-6 border-t border-border pt-4 text-sm text-muted-foreground">
+        {googleLogo ? "Review on Google" : "Posted on Google"}
+      </p>
+    </article>
+  );
+}
+
 export function Proof() {
   const three = reviews.slice(0, 3);
   return (
@@ -157,19 +221,8 @@ export function Proof() {
           </p>
         </div>
 
-        <div className="mt-12 grid gap-10 border-t border-border pt-10 md:grid-cols-3 md:gap-8">
-          {three.map((r) => (
-            <blockquote key={r.name} className="flex flex-col">
-              <p className="flex-1 text-[1.05rem] leading-relaxed text-muted-foreground">
-                &ldquo;{r.text}&rdquo;
-              </p>
-              <footer className="mt-5 text-sm font-semibold text-foreground">
-                {r.name}
-                <span className="mx-2 font-normal text-muted-foreground" aria-hidden>·</span>
-                <span className="font-normal text-muted-foreground">Google review</span>
-              </footer>
-            </blockquote>
-          ))}
+        <div className="mt-12 grid gap-6 md:grid-cols-3">
+          {three.map((r) => <ReviewCard key={r.name} r={r} />)}
         </div>
       </div>
     </section>
