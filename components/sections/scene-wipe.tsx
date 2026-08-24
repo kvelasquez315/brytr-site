@@ -92,11 +92,11 @@ export function SceneWipe() {
               * They used to derive height from an in-flow child, which meant anything else
               * landing in flow changed one layer and not the other.
               *
-              * The ring and the radius came off in the de-box pass. A crop is not a card:
-              * `overflow-hidden` with nothing drawn around it is just the edge of a picture. */}
+              * The radius is back. It came off in the de-box round on a false premise; both
+              * references put their media in 14px cards, and so does the rest of this page. */}
             <div
               ref={track}
-              className={`relative overflow-hidden ${hasPair ? "aspect-video" : ""}`}
+              className={`relative overflow-hidden rounded-lg ${hasPair ? "aspect-video" : ""}`}
             >
               {hasPair && scene.src && warm.src ? (
                 <>
@@ -141,11 +141,9 @@ export function SceneWipe() {
             </div>
           </div>
 
-          {/* spec panel — swaps with the state, so the right side is full either way */}
-          {/* No radius and no ring on this column any more. It was a rounded, outlined panel
-            * floating beside the wipe, which is the same card tell the whole page just had
-            * stripped out of it. The change of ground is the only separation it needs. */}
-          <div className="flex flex-col bg-primary p-6 lg:p-7">
+          {/* spec panel — swaps with the state, so the right side is full either way. A card
+            * again, at the same 14px as everything else on the page. */}
+          <div className="flex flex-col rounded-lg bg-primary p-6 lg:p-7">
             <p className="label text-accent">
               {mostlyScene ? "Saved scene" : "Everyday setting"}
             </p>

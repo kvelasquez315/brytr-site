@@ -159,7 +159,23 @@
 }
 
 /* ---- shape ------------------------------------------------------- */
-  --radius: 0.1875rem; /* 3px. Squared, like the reference. Nothing on this site is a pill. */
+  /* MEASURED OFF THE REFERENCES, not remembered. This line used to read "3px. Squared, like the
+   * reference. Nothing on this site is a pill." That was wrong twice over, and it is the reason
+   * the whole site read as undesigned. I had never opened either reference — I ran them through a
+   * markdown converter, which strips every class, and concluded from the absence of `rounded-*`
+   * in the output that neither site used a radius.
+   *
+   * What is actually there, read out of the live DOM:
+   *   propertypest.com   cards at 14.4px. EIGHTY-THREE fully-rounded pills (buttons, chips,
+   *                      town tags). Shadow is almost nothing: rgba(26,26,24,.06) 0 1px 2px.
+   *   trugreen.com       the comparison is three ~14px cards, one dark and two pale. Every
+   *                      button is a pill.
+   *
+   * So: 14px is the card, 10px is the small card and the input, and the pill is a real part of
+   * the vocabulary rather than a thing to avoid. */
+  --radius: 0.625rem;      /* 10px - inputs, small cards */
+  --radius-card: 0.875rem; /* 14px - the card, matching both references */
+  --radius-pill: 9999px;   /* buttons and chips */
 
   /* ---- type — three roles ------------------------------------------ */
   --font-display: var(--font-archivo), "Archivo", sans-serif;
@@ -175,9 +191,13 @@
   --shadow-md:
     0 4px 12px color-mix(in oklab, var(--brand-ink) 8%, transparent),
     0 2px 4px color-mix(in oklab, var(--brand-ink) 6%, transparent);
+  /* The card shadow, taken off propertypest.com: rgba(26,26,24,.06) 0 1px 2px. Barely there.
+   * Ours was a 28px lift, which is what made every card read as a panel floating above the page
+   * instead of a surface sitting on it. A card is defined by its edge and its ground, not by
+   * how far off the page it hovers. */
   --shadow-lg:
-    0 1px 2px color-mix(in oklab, var(--brand-ink) 5%, transparent),
-    0 12px 28px -12px color-mix(in oklab, var(--brand-ink) 16%, transparent);
+    0 1px 2px color-mix(in oklab, var(--brand-ink) 6%, transparent),
+    0 1px 3px color-mix(in oklab, var(--brand-ink) 4%, transparent);
   --shadow-dark:
     0 18px 40px -18px color-mix(in oklab, black 70%, transparent);
 
@@ -240,10 +260,11 @@
   --font-body:    var(--font-body);
   --font-utility: var(--font-display);  /* alias only — the SVG drawings label in Archivo */
 
-  --radius-sm: 2px;
-  --radius-md: 2px;
-  --radius-lg: 3px;
-  --radius-xl: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-full: var(--radius-pill);
 
   --shadow-sm:   var(--shadow-sm);
   --shadow-md:   var(--shadow-md);
@@ -446,7 +467,6 @@
   .channel-tile--light {
     background: var(--brand-primary);
   }
-
   /* Micro-labels — eyebrows, spec keys, figcaption tags.
    *
    * These used the mono utility face, which put IBM Plex Mono on ~50 decorative
