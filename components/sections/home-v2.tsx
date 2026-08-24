@@ -8,7 +8,7 @@ import { googleLogo } from "@/content/badges";
 import { Button } from "@/components/ui/button";
 import { QuoteForm } from "@/components/ui/bits";
 
-/* ═══ THE THIRD DESIGN, AND WHAT THE SECOND ONE GOT WRONG ═══════════════════════════════
+/* THE THIRD DESIGN, AND WHAT THE SECOND ONE GOT WRONG
  *
  * Round one was a mosaic: 66 boxed containers, 28 headings, 172 amber elements, 187 pieces of
  * 13-15px text against 13 large ones. The client called it jumbled and he was right.
@@ -32,7 +32,7 @@ import { QuoteForm } from "@/components/ui/bits";
  *
  * TruGreen is not sparse. It is *ordered*. Every section is a two or three column
  * composition that fills its width, headlines are short enough to sit on one or two lines,
- * and there are bullet lists — which round two had stripped out as clutter. What makes it
+ * and there are bullet lists -- which round two had stripped out as clutter. What makes it
  * feel calm is that each section has ONE structure, repeated cleanly, not that each section
  * is nearly empty.
  *
@@ -55,56 +55,71 @@ import { QuoteForm } from "@/components/ui/bits";
  *   THE GROUND CHANGE IS THE DIVIDER.  So is this.
  */
 
-/* ── 2 · WHAT WE INSTALL ───────────────────────────────────────────────────────────────
+/* 2 - WHAT WE INSTALL
  *
- * Three equal cards filling the row, the way TruGreen's contact section and comparison
- * section both do it. Round two made this one 21:9 tile the width of the column with two
- * beneath, which left an enormous picture and a lot of nothing. Each card: photograph at
- * 4:3, name, one line, three things it includes. That is enough to fill a third of 1,440px
- * without a single decorative element.
+ * STAGGERED ROWS, NOT A CARD GRID. The client, on the version that stood here: still very
+ * blocky and robotic, looks very AI. He is right, and the reason is that every section on the
+ * page had become the same object -- a symmetric grid of equal-width rectangles. Three of those
+ * in a row is what "AI-generated" looks like, regardless of how well each one is set.
+ *
+ * propertypest.com, which he named, does not repeat one archetype. Its five pest cards are a
+ * five-across row with a right-aligned arrow; its three service types are WIDE ROWS with the
+ * image on the left and the copy on the right; its process is a numbered vertical timeline; its
+ * areas are plain multi-column lists. Different shape per section, so nothing reads as a
+ * template being refilled.
+ *
+ * So this section takes the wide-row pattern: photograph one side, copy the other, alternating
+ * sides down the three. It is the same content as the three cards, arranged so the eye moves
+ * across rather than scanning three identical columns, and it gives the page an archetype the
+ * photograph grid and the review cards do not use. The arrow is Property Pest's affordance and
+ * it is worth stealing: a card with a destination marked reads as designed, a card without one
+ * reads as generated.
  */
 const LEAD = ["permanent-outdoor-lighting", "permanent-christmas-lights", "permanent-roofline-lighting"];
 
-function ServiceCard({ slug }: { slug: string }) {
+function Arrow() {
+  return (
+    <span className="ml-2 inline-block transition-transform duration-[--dur-fast] group-hover:translate-x-1" aria-hidden>
+      &rarr;
+    </span>
+  );
+}
+
+function ServiceRow({ slug, flip }: { slug: string; flip?: boolean }) {
   const svc = services.find((s) => s.slug === slug);
   const img = svc?.photo ? images[svc.photo] : undefined;
   if (!svc) return null;
   return (
-    <article className="flex flex-col">
+    <Link
+      href={`/services/${svc.slug}`}
+      data-spot
+      className="group grid items-center gap-8 lg:grid-cols-2 lg:gap-14"
+    >
       {img?.src && (
-        <Link href={`/services/${svc.slug}`} data-spot className="group block overflow-hidden">
-          <div className="relative aspect-16/10 w-full overflow-hidden bg-primary">
-            <Image
-              src={img.src}
-              alt={img.alt}
-              fill
-              sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-              className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.03]"
-            />
-          </div>
-        </Link>
+        <div className={`relative aspect-16/10 w-full overflow-hidden rounded-lg bg-primary ${flip ? "lg:order-2" : ""}`}>
+          <Image
+            src={img.src}
+            alt={img.alt}
+            fill
+            sizes="(min-width:1024px) 50vw, 100vw"
+            className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.03]"
+          />
+        </div>
       )}
-      <h3 className="mt-6 font-display text-[1.45rem] font-bold leading-tight tracking-[-0.02em] text-foreground">
-        <Link href={`/services/${svc.slug}`} className="hover:underline decoration-accent decoration-2 underline-offset-4">
-          {svc.name}
-        </Link>
-      </h3>
-      <p className="mt-2.5 text-[1.05rem] leading-relaxed text-muted-foreground">{svc.short}</p>
-      <ul className="mt-5 flex-1 space-y-2 border-t border-border pt-5">
-        {svc.includes.slice(0, 3).map((i) => (
-          <li key={i} className="text-[0.98rem] leading-snug text-muted-foreground">{i}</li>
-        ))}
-      </ul>
-      <div className="mt-6">
-        <Link
-          href={`/services/${svc.slug}`}
-          data-spot
-          className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4"
-        >
+      <div className={flip ? "lg:order-1" : ""}>
+        <h3 className="display-section text-foreground">{svc.name}</h3>
+        <p className="lead mt-3 text-muted-foreground">{svc.short}</p>
+        <ul className="mt-6 space-y-2.5 border-t border-border pt-5">
+          {svc.includes.slice(0, 3).map((i) => (
+            <li key={i} className="text-[1rem] leading-snug text-muted-foreground">{i}</li>
+          ))}
+        </ul>
+        <p className="mt-6 font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4">
           {svc.name === "Permanent Christmas Lights" ? "See it at Christmas" : "See how it goes on"}
-        </Link>
+          <Arrow />
+        </p>
       </div>
-    </article>
+    </Link>
   );
 }
 
@@ -125,15 +140,15 @@ export function Installs() {
           <Button asChild size="md"><Link href="/services">Everything we install</Link></Button>
         </div>
 
-        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-          {LEAD.map((s) => <ServiceCard key={s} slug={s} />)}
+        <div className="mt-14 space-y-16 lg:space-y-20">
+          {LEAD.map((s, i) => <ServiceRow key={s} slug={s} flip={i % 2 === 1} />)}
         </div>
       </div>
     </section>
   );
 }
 
-/* ── 4 · WHAT PEOPLE SAY ───────────────────────────────────────────────────────────────
+/* 4 - WHAT PEOPLE SAY
  *
  * Real Google review cards. Round three set them as three bare quotes in columns, which read
  * as copy we had written about ourselves. A card with the reviewer, a star row and the source
@@ -229,7 +244,7 @@ export function Proof() {
   );
 }
 
-/* ── 5 · THE WORK ──────────────────────────────────────────────────────────────────────
+/* 5 - THE WORK
  *
  * THE FULL-BLEED BAND IS GONE, and it was a genuine bug rather than a taste call.
  * `aspect-21/9` and `max-h-[24rem]` were fighting each other: the element wanted to be
@@ -245,12 +260,12 @@ export function Proof() {
  * again: pick one.
  */
 const WORK: { key: string; scene: string; note: string }[] = [
-  { key: "homeBrickGablesGold", scene: "Warm white",       note: "A complicated roof. More gables means more corners to get right." },
-  { key: "seqRedGreen",         scene: "Red and green",     note: "The same house, the December scene, one tap apart." },
-  { key: "poolPergolaDusk",     scene: "Pergola run",       note: "Pool at dusk. The reason people buy the overhead run." },
-  { key: "homeShakeBrick",      scene: "Warm white",        note: "Downlights along every eave and gable on a traditional elevation." },
-  { key: "homeWideRanch",       scene: "One long run",      note: "The hardest elevation to light. A straight run shows every sag." },
-  { key: "homePrairieTwilight", scene: "Civil twilight",    note: "The twenty minutes when this product looks its best." },
+  { key: "homeBrickGablesGold", scene: "Warm white", note: "A complicated roof. More gables means more corners to get right." },
+  { key: "seqRedGreen", scene: "Red and green", note: "The same house, the December scene, one tap apart." },
+  { key: "poolPergolaDusk", scene: "Pergola run", note: "Pool at dusk. The reason people buy the overhead run." },
+  { key: "homeShakeBrick", scene: "Warm white", note: "Downlights along every eave and gable on a traditional elevation." },
+  { key: "homeWideRanch", scene: "One long run", note: "The hardest elevation to light. A straight run shows every sag." },
+  { key: "homePrairieTwilight", scene: "Civil twilight", note: "The twenty minutes when this product looks its best." },
 ];
 
 export function Work() {
@@ -315,7 +330,10 @@ export function Work() {
                 />
               </div>
               <div className="flex flex-1 flex-col px-5 py-4">
-                <p className="font-display text-[1.05rem] font-bold leading-tight text-on-dark">{w.scene}</p>
+                <p className="font-display text-[1.05rem] font-bold leading-tight text-on-dark">
+                  {w.scene}
+                  <Arrow />
+                </p>
                 <p className="mt-1.5 text-[0.9rem] leading-snug text-on-dark-muted">{w.note}</p>
               </div>
             </Link>
@@ -326,7 +344,7 @@ export function Work() {
   );
 }
 
-/* ── 6 · THE HARDWARE, AND WHY US ──────────────────────────────────────────────────────
+/* 6 - THE HARDWARE, AND WHY US
  *
  * Two columns, and the client's read of the flat version was right twice over: it needed
  * colour, and he asked about logos.
@@ -441,7 +459,7 @@ export function Hardware() {
   );
 }
 
-/* ── 7 · THE CLOSER ───────────────────────────────────────────────────────────────────
+/* 7 - THE CLOSER
  *
  * Text and the form, two columns, with the phone number as the fallback for anyone who would
  * rather talk. Short, because the page has already made its case.
@@ -472,7 +490,7 @@ export function Closer() {
   );
 }
 
-/* ── 5b · THE BAND ────────────────────────────────────────────────────────────────────
+/* 5b - THE BAND
  *
  * The client, on the third pass: not enough design or colour. He is right, and the page had
  * none of the one device that fixes both at once. TruGreen puts a coloured call-to-action
