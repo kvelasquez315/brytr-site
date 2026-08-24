@@ -231,20 +231,30 @@ export function Proof() {
 
 /* ── 5 · THE WORK ──────────────────────────────────────────────────────────────────────
  *
- * The one place a photograph genuinely runs the full width of the browser, and it earns it
- * because it is the product working. Underneath, a three-up row at 4:3 rather than two more
- * enormous tiles. Round two had a 21:9 and two 4:3 tiles all inset inside the shell, so the
- * pictures were both oversized and framed by empty margin.
+ * THE FULL-BLEED BAND IS GONE, and it was a genuine bug rather than a taste call.
+ * `aspect-21/9` and `max-h-[24rem]` were fighting each other: the element wanted to be
+ * 21:9 (on a 1,900px screen that is 814px tall) and the max-height clamped it to 384px, so
+ * `object-cover` had to throw away the top and bottom of the frame. The client's read was
+ * exactly right, "way too wide, and cutting off most of the house, so you can't even really
+ * see it". A 21:9 letterbox is a cinema crop and a house is not a cinema subject: the whole
+ * elevation, roofline to grade, is the thing worth looking at.
+ *
+ * Six photographs at 3:2 in two rows of three, inside the shell. Modest per picture, fills
+ * 1,440px, whole houses visible, and the same three-up rhythm the services row uses so the
+ * page has one grid rather than four. Never an aspect ratio and a max-height on the same box
+ * again: pick one.
  */
 const WORK: [string, string][] = [
+  ["homeBrickGablesGold", "Warm white, brick and gables"],
   ["seqRedGreen", "Red and green, alternating"],
   ["poolPergolaDusk", "Pool house and pergola"],
   ["homeShakeBrick", "Warm white, shake and brick"],
+  ["homeWideRanch", "A single-story ranch, full width"],
+  ["homePrairieTwilight", "Prairie front at twilight"],
 ];
 
 export function Work() {
-  const wide = images.homeBrickGablesGold;
-  const row = WORK.map(([k, cap]) => [images[k], cap] as const).filter(([i]) => i?.src);
+  const shots = WORK.map(([k, cap]) => [images[k], cap] as const).filter(([i]) => i?.src);
   return (
     <section className="section bg-primary">
       <div className="shell">
@@ -268,20 +278,18 @@ export function Work() {
             </Link>
           </div>
         </div>
-      </div>
 
-      {wide?.src && (
-        <div className="bleed relative mt-10 aspect-21/9 max-h-[24rem] w-screen overflow-hidden">
-          <Image src={wide.src} alt={wide.alt} fill sizes="100vw" className="object-cover" priority={false} />
-        </div>
-      )}
-
-      <div className="shell mt-6">
-        <div className="grid gap-6 sm:grid-cols-3">
-          {row.map(([i, cap]) => (
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {shots.map(([i, cap]) => (
             <figure key={i.src as string}>
-              <div className="relative aspect-16/9 w-full overflow-hidden">
-                <Image src={i.src as string} alt={i.alt} fill sizes="(min-width:640px) 33vw, 100vw" className="object-cover" />
+              <div className="relative aspect-3/2 w-full overflow-hidden">
+                <Image
+                  src={i.src as string}
+                  alt={i.alt}
+                  fill
+                  sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                  className="object-cover"
+                />
               </div>
               <figcaption className="mt-3 text-sm text-on-dark-muted">{cap}</figcaption>
             </figure>
