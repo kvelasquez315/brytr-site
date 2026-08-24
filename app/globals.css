@@ -8,7 +8,16 @@
   /* ---- BRAND (from DESIGN.md) -------------------------------------- */
   --brand-primary:   #111820; /* night sky above a lit roofline — dominant ~60% */
   --brand-secondary: #4a5560; /* anodized aluminum channel body — ~30% */
-  --brand-accent:    #f5c518; /* logo yellow / 2700K LED — ~10%, CTA + signature only */
+  /* THE LOGO YELLOW IS NOT THIS YELLOW, and that is a live decision, not an oversight.
+     The logo the client sent uses #ffba42 for its spark. This token is #f5c518, a lemon picked
+     from the 2700K LED reference before anyone here had seen the mark, and the comment below has
+     been claiming to be "logo yellow" ever since. With the wordmark now in the header there are
+     two yellows within 200px of each other: the spark, and the CTA button beside it.
+     Switching to #ffba42 costs one contrast pair. Black on #ffba42 measures APCA Lc 73.2 against
+     this project's Lc 75 floor (WCAG 11.3:1, so still well past AA) and no ink is dark enough to
+     recover it: pure #000000 only reaches 73.7. So the choice is brand truth against a
+     self-imposed contrast bar, and it is the client's brand. Left at #f5c518 pending his call. */
+  --brand-accent:    #f5c518; /* 2700K LED lemon — NOT the logo's #ffba42, see above */
   --brand-neutral:   #f1ede4; /* warm limestone, the daytime state */
   --brand-ink:       #0c0f13; /* near-black text */
 
