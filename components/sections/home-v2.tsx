@@ -72,7 +72,7 @@ function ServiceCard({ slug }: { slug: string }) {
     <article className="flex flex-col">
       {img?.src && (
         <Link href={`/services/${svc.slug}`} data-spot className="group block overflow-hidden">
-          <div className="relative aspect-4/3 w-full overflow-hidden bg-primary">
+          <div className="relative aspect-16/10 w-full overflow-hidden bg-primary">
             <Image
               src={img.src}
               alt={img.alt}
@@ -218,7 +218,7 @@ export function Work() {
       </div>
 
       {wide?.src && (
-        <div className="bleed relative mt-12 aspect-21/9 max-h-[34rem] w-screen overflow-hidden">
+        <div className="bleed relative mt-10 aspect-21/9 max-h-[24rem] w-screen overflow-hidden">
           <Image src={wide.src} alt={wide.alt} fill sizes="100vw" className="object-cover" priority={false} />
         </div>
       )}
@@ -227,7 +227,7 @@ export function Work() {
         <div className="grid gap-6 sm:grid-cols-3">
           {row.map(([i, cap]) => (
             <figure key={i.src as string}>
-              <div className="relative aspect-4/3 w-full overflow-hidden">
+              <div className="relative aspect-16/9 w-full overflow-hidden">
                 <Image src={i.src as string} alt={i.alt} fill sizes="(min-width:640px) 33vw, 100vw" className="object-cover" />
               </div>
               <figcaption className="mt-3 text-sm text-on-dark-muted">{cap}</figcaption>
@@ -347,6 +347,46 @@ export function Closer() {
           </a>
         </div>
         <QuoteForm variant="compact" heading="Get a free design consultation" />
+      </div>
+    </section>
+  );
+}
+
+/* ── 5b · THE BAND ────────────────────────────────────────────────────────────────────
+ *
+ * The client, on the third pass: not enough design or colour. He is right, and the page had
+ * none of the one device that fixes both at once. TruGreen puts a coloured call-to-action
+ * band across the middle of its home page, and it does two jobs: it is the strongest colour
+ * on the page, and it is a landmark, so a reader scrolling knows where they are.
+ *
+ * Amber, full width, with the brand's own dark on top of it. This is the one place the accent
+ * gets to be a surface instead of a detail, and it is defensible on a lighting site because
+ * amber IS the product: it is the colour coming out of the channel. The deadline is real and
+ * it is the same one the header strip carries.
+ */
+export function Band() {
+  return (
+    <section className="bg-accent">
+      <div className="shell flex flex-wrap items-center justify-between gap-x-12 gap-y-7 py-14">
+        <div>
+          <h2 className="display-section max-w-[26ch] text-accent-foreground">
+            Book before November 15 to be lit for Christmas.
+          </h2>
+          <p className="mt-3 text-lg text-accent-foreground/80">
+            One visit to design it, one day to install it, and nobody on a ladder in December.
+          </p>
+        </div>
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
+          <Link
+            href="/free-design-consultation"
+            className="tap-44 inline-flex h-12 items-center rounded-md bg-primary px-7 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-raise"
+          >
+            Book the on-site measure
+          </Link>
+          <a href={site.phoneHref} className="u text-lg font-bold text-accent-foreground underline decoration-2 underline-offset-4">
+            {site.phone}
+          </a>
+        </div>
       </div>
     </section>
   );
