@@ -44,6 +44,17 @@ export const brandLogo: { src: string; width: number; height: number; alt: strin
   alt: "Brytr Co",
 };
 
+/* MANUFACTURER MARKS. Haven and Jellyfish are somebody else's trademarks, and the rule is the
+ * same one that governs the Google mark above: used in their own colours from their own asset
+ * pack, or not used. Not traced from memory, not lifted off a dealer page, not set in Archivo.
+ *
+ * Keyed by the slug in content/systems.ts, so `systemLogo["haven-evolution"]` is the Haven mark.
+ * The hardware rows on the home page and the system pages render one the moment a file is here.
+ * Haven's dealer kit has the artwork; their rep can send it. Until then those rows carry a real
+ * photograph of what the line actually does, which is more use to a homeowner than a wordmark.
+ */
+export const systemLogo: Record<string, string | null> = {};
+
 export const reviewProofBadge = {
   score: "5.0",
   count: "196",
