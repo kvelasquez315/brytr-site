@@ -23,13 +23,21 @@ import { googleLogo } from "@/content/badges";
  * said replicate the Google part and no badges on the right. The hours he did give: nine to nine,
  * six days, closed Sunday. They are real, so they are here and in the LocalBusiness schema.
  *
- * AND IT IS NOT A SOLID BAND ANY MORE. It used to be a separate navy strip bolted under the
- * hero, which is what made it read as a component rather than as part of the page. It now floats
- * over the bottom of the hero photograph on a translucent ground, so the photograph runs behind
- * it. `overlay={false}` is the fallback for the three legal pages, whose hero is type on a flat
- * ground with no photograph to sit on.
+ * AND ON THE HOME PAGE IT IS NOT A SOLID BAND ANY MORE. It used to be a separate navy strip
+ * bolted under the hero, which is what made it read as a component rather than as part of the
+ * page. With `overlay` it floats over the bottom of the hero photograph on a translucent ground,
+ * so the photograph runs behind it.
+ *
+ * WHY THE DEFAULT IS THE SOLID BAND AND NOT THE OVERLAY. The overlay is absolutely positioned,
+ * so it only works as a CHILD of the hero section, which has to be `relative`. Every interior
+ * page renders this as a SIBLING after its hero, where an absolute box would escape to the
+ * nearest positioned ancestor and land at the foot of the document. Defaulting to the overlay
+ * would therefore break seventy-odd pages the moment it shipped. So the caller opts in, the
+ * home hero opts in, and the interior pages keep the band until the design language is
+ * propagated to them -- which is the next phase and rewrites this call site anyway. The three
+ * legal pages, whose hero is type on a flat ground with no photograph, keep the band for good.
  */
-export function ProofRail({ overlay = true }: { overlay?: boolean }) {
+export function ProofRail({ overlay = false }: { overlay?: boolean }) {
   const body = (
     <div className="shell flex flex-wrap items-center gap-x-10 gap-y-4 py-4">
       <Link

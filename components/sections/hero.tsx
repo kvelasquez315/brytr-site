@@ -68,8 +68,9 @@ export function Hero() {
       </div>
 
       {/* The trust bar floats on the photograph rather than sitting under it as its own navy
-        * band. Extra bottom padding on the grid above so the type never runs under it. */}
-      <ProofRail />
+        * band. Extra bottom padding on the grid above so the type never runs under it, and
+        * `overlay` is explicit because the bar is only absolute-positionable in here. */}
+      <ProofRail overlay />
     </section>
   );
 }
