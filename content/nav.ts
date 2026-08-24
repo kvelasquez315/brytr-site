@@ -5,6 +5,16 @@ import { metroCities, iowaCities, outstateCities } from "./cities";
 
 /* THE HEADER MENU.
  *
+ * REGROUPED. It read as six multi-word items in our own vocabulary: Lighting Systems,
+ * Services, Compare, Service Areas, Gallery, About. Two of those were the same subject
+ * ("Lighting Systems" and "Compare" are both about which hardware), and "Services" versus
+ * "Lighting Systems" is a distinction only somebody who works here can make.
+ *
+ * trugreen.com labels its whole menu in five plain single words: Lawn, Pest, Residential,
+ * Commercial, Careers. That is the standard to hold. So: Lighting, Systems, Gallery, Pricing,
+ * Areas, About. Compare folded into Systems as a second column, and Pricing was promoted out
+ * of the footer because it is the first thing a homeowner goes looking for.
+ *
  * Derived from the same arrays the pages are generated from, so a slug can never drift
  * out of the menu — add a service to content/services.ts and it appears here on the next
  * build. Nothing is hand-listed.
@@ -32,23 +42,27 @@ export type NavItem = {
 
 export const navTree: NavItem[] = [
   {
-    label: "Lighting Systems",
+    label: "Systems",
     href: "/lighting-systems",
     groups: [
       {
         heading: "What we install",
         links: systems.map((s) => ({ label: s.name, href: `/lighting-systems/${s.slug}` })),
       },
+      {
+        heading: "Against the other brands",
+        links: compares.map((c) => ({ label: `${c.a} vs ${c.b}`, href: `/compare/${c.slug}` })),
+      },
     ],
     feature: {
       label: "More than one brand, on purpose",
       body: "We install Haven and we install Jellyfish, which is why these comparisons can give the other side real reasons to win.",
       href: "/compare",
-      cta: "See how they differ",
+      cta: "Compare every brand",
     },
   },
   {
-    label: "Services",
+    label: "Lighting",
     href: "/services",
     groups: [
       {
@@ -64,23 +78,7 @@ export const navTree: NavItem[] = [
     },
   },
   {
-    label: "Compare",
-    href: "/compare",
-    groups: [
-      {
-        heading: "Brand by brand",
-        links: compares.map((c) => ({ label: `${c.a} vs ${c.b}`, href: `/compare/${c.slug}` })),
-      },
-    ],
-    feature: {
-      label: "We sell both sides",
-      body: "These comparisons are written by the crew that installs the hardware, not by a brand.",
-      href: "/compare",
-      cta: "Read every comparison",
-    },
-  },
-  {
-    label: "Service Areas",
+    label: "Areas",
     href: "/service-areas",
     groups: [
       {
@@ -107,5 +105,7 @@ export const navTree: NavItem[] = [
     },
   },
   { label: "Gallery", href: "/gallery" },
+  /* Pricing was three clicks deep and it is the first thing a homeowner looks for. */
+  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
 ];
