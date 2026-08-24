@@ -4,7 +4,7 @@ import { Footer } from "@/components/site/footer";
 import { Hero } from "@/components/sections/hero";
 import { SceneWipe } from "@/components/sections/scene-wipe";
 import { ProofRail } from "@/components/sections/home-a";
-import { Installs, Proof, Work, Hardware, Closer } from "@/components/sections/home-v2";
+import { Installs, Proof, Band, Work, Hardware, Closer } from "@/components/sections/home-v2";
 import { Jsonld, localBusiness } from "@/lib/schema";
 
 export default function Home() {
@@ -39,9 +39,10 @@ export default function Home() {
         <Installs />      {/* 2 · one tall tile, then two            · muted      */}
         <SceneWipe />     {/* 3 · THE SIGNATURE, the only widget     · raise      */}
         <Proof />         {/* 4 · one quote at display size          · background */}
-        <Work />          {/* 5 · photographs of finished installs   · primary    */}
-        <Hardware />      {/* 6 · Haven, set as type not as panels   · muted      */}
-        <Closer />        {/* 7 · the form, and the phone number     · background */}
+        <Band />          {/*     the amber band, a colour landmark   · accent     */}
+        <Work />          {/* 6 · photographs of finished installs   · primary    */}
+        <Hardware />      {/* 7 · Haven, set as type not as panels   · muted      */}
+        <Closer />        {/* 8 · the form, and the phone number     · background */}
       </main>
       <Footer />
       <MobileCallBar />
