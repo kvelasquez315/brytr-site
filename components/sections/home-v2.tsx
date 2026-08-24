@@ -159,7 +159,7 @@ export function Proof() {
   );
 }
 
-/* ── 6 · THE HARDWARE ─────────────────────────────────────────────────────────────────
+/* ── 6 · THE HARDWARE ──────────────────────────────────────────────────────────────────
  *
  * Four names and one line each, set as type rather than boxed. This was four dark panels
  * with amber bars down their left edge; the panels were doing nothing the words were not
