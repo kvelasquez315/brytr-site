@@ -244,17 +244,17 @@ export function Proof() {
  * page has one grid rather than four. Never an aspect ratio and a max-height on the same box
  * again: pick one.
  */
-const WORK: [string, string][] = [
-  ["homeBrickGablesGold", "Warm white, brick and gables"],
-  ["seqRedGreen", "Red and green, alternating"],
-  ["poolPergolaDusk", "Pool house and pergola"],
-  ["homeShakeBrick", "Warm white, shake and brick"],
-  ["homeWideRanch", "A single-story ranch, full width"],
-  ["homePrairieTwilight", "Prairie front at twilight"],
+const WORK: { key: string; scene: string; note: string }[] = [
+  { key: "homeBrickGablesGold", scene: "Warm white",       note: "A complicated roof. More gables means more corners to get right." },
+  { key: "seqRedGreen",         scene: "Red and green",     note: "The same house, the December scene, one tap apart." },
+  { key: "poolPergolaDusk",     scene: "Pergola run",       note: "Pool at dusk. The reason people buy the overhead run." },
+  { key: "homeShakeBrick",      scene: "Warm white",        note: "Downlights along every eave and gable on a traditional elevation." },
+  { key: "homeWideRanch",       scene: "One long run",      note: "The hardest elevation to light. A straight run shows every sag." },
+  { key: "homePrairieTwilight", scene: "Civil twilight",    note: "The twenty minutes when this product looks its best." },
 ];
 
 export function Work() {
-  const shots = WORK.map(([k, cap]) => [images[k], cap] as const).filter(([i]) => i?.src);
+  const shots = WORK.map((w) => ({ ...w, img: images[w.key] })).filter((w) => w.img?.src);
   return (
     <section className="section bg-primary">
       <div className="shell">
@@ -279,20 +279,46 @@ export function Work() {
           </div>
         </div>
 
+        {/* A CARD, NOT A CONTACT SHEET. Six bare photographs with a line of text floating under
+          * each one is a contact sheet: the caption belongs to nothing, so the whole row reads as
+          * pictures dumped on a page. The client, again and fairly: missing some sort of design.
+          *
+          * Each frame is an object now: photograph, then a caption bar on the raised surface
+          * carrying the scene and the one thing about that elevation worth knowing.
+          *
+          * I also tried making the first cell span two columns for a bento rhythm. It looked worse:
+          * a tall wide cell beside a short one leaves a hole under the short one, and six items in
+          * a 2-1-3 arrangement finishes on a lone card with two empty tracks beside it. Six equal
+          * cards in two clean rows is the calmer thing and the fuller thing at once.
+          *
+          * I put an amber rule along the top of the caption bar and slopcheck failed it, which is
+          * the THIRD time this session I have reached for a coloured strip on a card. The gate is
+          * right and the instinct is wrong: a strip is decoration standing in for structure. The
+          * structure here is the surface step from photograph to raised bar, which is the site's
+          * own separation order. The colour in this section is in the photographs, which is where
+          * a lighting company's colour should come from. */}
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {shots.map(([i, cap]) => (
-            <figure key={i.src as string}>
+          {shots.map((w) => (
+            <Link
+              key={w.key}
+              href="/gallery"
+              data-spot
+              className={`group flex flex-col overflow-hidden rounded-lg bg-raise ring-1 ring-on-dark/10 transition-shadow duration-[--dur-fast] hover:ring-accent/40`}
+            >
               <div className="relative aspect-3/2 w-full overflow-hidden">
                 <Image
-                  src={i.src as string}
-                  alt={i.alt}
+                  src={w.img.src as string}
+                  alt={w.img.alt}
                   fill
                   sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.03]"
                 />
               </div>
-              <figcaption className="mt-3 text-sm text-on-dark-muted">{cap}</figcaption>
-            </figure>
+              <div className="flex flex-1 flex-col px-5 py-4">
+                <p className="font-display text-[1.05rem] font-bold leading-tight text-on-dark">{w.scene}</p>
+                <p className="mt-1.5 text-[0.9rem] leading-snug text-on-dark-muted">{w.note}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </div>
@@ -302,22 +328,28 @@ export function Work() {
 
 /* ── 6 · THE HARDWARE, AND WHY US ──────────────────────────────────────────────────────
  *
- * Two columns, filling the width: the Haven line-up on the left as a proper list, the two
- * things about the crew the client confirmed on camera on the right. This is TruGreen's
- * support section — text with a list on one side, substance on the other — and it is the
- * shape that fills 1,440px without a single decorative object.
+ * Two columns, and the client's read of the flat version was right twice over: it needed
+ * colour, and he asked about logos.
+ *
+ * THE LOGOS ARE THE SAME WALL AS THE GOOGLE MARK. Haven and Jellyfish are somebody else's
+ * trademarks. They get used in their own colours from their own asset pack or they do not get
+ * used: not traced from memory, not lifted off a dealer page, not set in Archivo. `systemLogo`
+ * is a slot in content/badges.ts and each row renders one the moment a file is on disk. Ask
+ * Haven's rep for the dealer kit; they all have one.
+ *
+ * WHAT ACTUALLY FIXES THE COLOUR IS BETTER THAN A LOGO. Each of these four lines IS a place on
+ * the property, and there is a real photograph of every one: the eave, the soffit, the beds,
+ * the pergola. A thumbnail per row turns a text table into four things you can see, and the
+ * colour arrives from the work rather than from a decorative fill. The crew column moves onto
+ * the dark surface so the section is two blocks with real contrast instead of one flat field.
  */
-const HAVEN = [
-  ["Haven Evolution", "The roofline channel and the diodes that sit in it.", "haven-evolution"],
-  ["Haven Q Series", "Soffit and architectural fixtures, recessed or on track.", "haven-q-series"],
-  ["Haven 9 Series", "Ground level: path, uplight and bed fixtures.", "haven-9-series-landscape-lights"],
-  ["Haven X Bistro", "Overhead runs on a pergola, a patio or a structure.", "haven-x-bistro-lights"],
+const HAVEN: { name: string; what: string; slug: string; photo: string }[] = [
+  { name: "Haven Evolution", what: "The roofline channel and the diodes that sit in it.", slug: "haven-evolution", photo: "detailGableMiter" },
+  { name: "Haven Q Series", what: "Soffit and architectural fixtures, recessed or on track.", slug: "haven-q-series", photo: "serviceSoffit" },
+  { name: "Haven 9 Series", what: "Ground level: path, uplight and bed fixtures.", slug: "haven-9-series-landscape-lights", photo: "serviceLandscape" },
+  { name: "Haven X Bistro", what: "Overhead runs on a pergola, a patio or a structure.", slug: "haven-x-bistro-lights", photo: "servicePatio" },
 ];
 
-/* NO ICONS ON THIS LIST. The four glyphs that were here are drawn for a dark ground inside a
- * channel tile; at 28px on warm neutral they read as small dark smudges rather than as marks,
- * and they were decorating a list that already says what it means. TruGreen's equivalent
- * section is a plain list too. */
 const CREW: [string, string][] = [
   ["Our own crews, never subcontracted", "The people on your roof are Brytr employees on Brytr payroll, and it is the same crew from the measure to the handover."],
   ["Day and night verification", "We do not leave until you have seen it lit after dark and seen how it reads from the street in daylight."],
@@ -328,7 +360,7 @@ const CREW: [string, string][] = [
 export function Hardware() {
   return (
     <section className="section bg-muted">
-      <div className="shell grid gap-14 lg:grid-cols-2 lg:gap-20">
+      <div className="shell grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
         <div>
           <h2 className="display-section max-w-[20ch] text-foreground">
             We lead with Haven, and we install every line of it.
@@ -337,22 +369,40 @@ export function Hardware() {
             One manufacturer for the roofline, the soffit, the ground and the overhead runs, so the
             whole property answers to the same app.
           </p>
-          <dl className="mt-8 divide-y divide-border border-y border-border">
-            {HAVEN.map(([name, what, slug]) => (
-              <div key={slug} className="flex flex-wrap items-baseline gap-x-6 gap-y-1 py-4">
-                <dt className="w-[11rem] shrink-0">
+
+          <ul className="mt-8 space-y-4">
+            {HAVEN.map((h) => {
+              const img = images[h.photo];
+              return (
+                <li key={h.slug}>
                   <Link
-                    href={`/lighting-systems/${slug}`}
+                    href={`/lighting-systems/${h.slug}`}
                     data-spot
-                    className="font-display text-[1.05rem] font-bold text-foreground underline decoration-transparent decoration-2 underline-offset-4 transition-colors duration-[--dur-fast] hover:decoration-accent"
+                    className="group flex items-center gap-5 overflow-hidden rounded-lg bg-card p-3 ring-1 ring-border transition-shadow duration-[--dur-fast] hover:ring-accent/50"
                   >
-                    {name}
+                    {img?.src && (
+                      <span className="relative block size-20 shrink-0 overflow-hidden rounded-md bg-primary">
+                        <Image
+                          src={img.src}
+                          alt={img.alt}
+                          fill
+                          sizes="80px"
+                          className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.06]"
+                        />
+                      </span>
+                    )}
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-display text-[1.05rem] font-bold text-foreground group-hover:underline decoration-accent decoration-2 underline-offset-4">
+                        {h.name}
+                      </span>
+                      <span className="mt-1 block text-[0.95rem] leading-snug text-muted-foreground">{h.what}</span>
+                    </span>
                   </Link>
-                </dt>
-                <dd className="min-w-0 flex-1 text-[0.98rem] text-muted-foreground">{what}</dd>
-              </div>
-            ))}
-          </dl>
+                </li>
+              );
+            })}
+          </ul>
+
           <div className="mt-7">
             <Link href="/lighting-systems" className="font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4">
               See every system
@@ -360,22 +410,31 @@ export function Hardware() {
           </div>
         </div>
 
-        <div>
-          <h2 className="display-section max-w-[20ch] text-foreground">
+        {/* The dark block. This column was cream on cream, which is why the section read as one
+          * flat field with a gutter down the middle. */}
+        <div className="flex flex-col rounded-lg bg-primary p-8 lg:p-10">
+          <h2 className="display-section max-w-[20ch] text-on-dark">
             The people who quote your roof install it.
           </h2>
-          <p className="lead mt-4 text-muted-foreground">
+          <p className="lead mt-4 text-on-dark-muted">
             That is the reason Zac and Sam started Brytr, and it is still the part of this they
             will not hand to anybody else.
           </p>
-          <ul className="mt-8 grid gap-7 sm:grid-cols-2">
+          <ul className="mt-8 grid flex-1 gap-6 sm:grid-cols-2">
             {CREW.map(([h, p]) => (
-              <li key={h} className="border-t border-border pt-5">
-                <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{h}</h3>
-                <p className="mt-2 text-[0.95rem] leading-snug text-muted-foreground">{p}</p>
+              <li key={h} className="border-t border-on-dark/15 pt-4">
+                <h3 className="font-display text-[1.02rem] font-bold leading-snug text-on-dark">{h}</h3>
+                <p className="mt-2 text-[0.92rem] leading-snug text-on-dark-muted">{p}</p>
               </li>
             ))}
           </ul>
+          {/* The block ran taller than its four items and finished on a void. This is the link the
+            * bottom of it was asking for anyway. */}
+          <div className="mt-8 border-t border-on-dark/15 pt-6">
+            <Link href="/how-it-works" className="font-semibold text-on-dark underline decoration-accent decoration-2 underline-offset-4">
+              See how an install runs, start to finish
+            </Link>
+          </div>
         </div>
       </div>
     </section>
