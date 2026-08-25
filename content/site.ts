@@ -1,7 +1,20 @@
 /* Confirmed facts only. Anything not verified from the client is absent by design.
- * Verified: 196 five-star Google reviews · 5.0 average (Google Business Profile, 20 Aug 2026) · 1.2M lights installed locally
- * W2 crews (not subcontracted) · founders Zac Van Buren & Sam Greguska
- * Phone 402-810-3973 · Omaha, NE · carries both Haven Evolution and Jellyfish
+ *
+ * Verified: 5.0 average from 201 Google reviews (profile, corrected by the client 25 Aug 2026;
+ * the live number lives in content/reviews.ts and nowhere else) · 1.2M lights installed locally
+ * · founders Zac Van Buren & Sam Greguska · phone 402-810-3973 · Omaha, NE · carries both Haven
+ * Evolution and Jellyfish.
+ *
+ * REMOVED 25 Aug 2026, because it was never true: "W2 crews (not subcontracted)". The client's
+ * crews ARE subcontractors. That claim was mine, it went out across sixteen files, and it was
+ * the kind of thing a competitor could have used. The site now says NOTHING about who holds the
+ * ladder — at the client's instruction, and it is the right call: a claim that does not exist
+ * cannot be wrong. Do not reintroduce a staffing claim of any kind without it in writing.
+ *
+ * ALSO REMOVED: the whole `stats` array. It was unused by any component, and three of its four
+ * entries were false or unverifiable — the W2 line, a hardcoded review count that had already
+ * drifted, and "Verified lit after dark and in daylight", which describes something Brytr does
+ * not do. Dead code that lies is worse than dead code.
  */
 export const site = {
   name: "Brytr Co",
@@ -44,18 +57,6 @@ export const site = {
     facebook: "https://www.facebook.com/BrytrlightingNE",
     instagram: "https://www.instagram.com/brytrco",
   },
-  /* Every figure here is confirmed. Do not add one that is not. */
-  stats: [
-    { figure: "1.2M", label: "Lights installed in Omaha", icon: "installCount" },
-    { figure: "5.0", label: "Average from 196 Google reviews", icon: "stars" },
-    { figure: "W2", label: "Crews, never subcontracted", icon: "hardHat" },
-    /* This slot held "25 yr — LED rating on the Signature system", which was an invented number
-     * on an invented tier. It was swapped for IP66, but that rating came out of the same batch
-     * of specs I wrote without a source, so it is not safe either. Replaced with the one thing
-     * in this row the client confirmed on camera: we do not leave until the customer has seen it
-     * both ways. If Haven publishes an ingress rating, put it back with the datasheet to hand. */
-    { figure: "2 states", label: "Verified lit after dark and in daylight", icon: "dayNight" },
-  ],
 } as const;
 
 export const nav = [
