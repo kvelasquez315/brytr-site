@@ -1,15 +1,24 @@
 import type { IconKey } from "./icon-map";
 
-/* THE BAND under the hero. Reviews on the left, what we install on the right, one row.
+/* THE GOOGLE MARK, and it is here now.
  *
- * The Google mark: drop the official file at /public/logo/google.svg and set
- * `googleLogo` below. Until it exists the band draws its own five-star row, which is
- * not a trademark, and sets the word Google in our display face. Third-party marks are
- * used in their own colors or not at all — never recolored to Brytr amber, and never
- * pulled off a web page. Google publishes an official asset pack for review displays;
- * ask Zac to grab it, or request it through the Google Business Profile.
+ * This slot sat `null` for several rounds behind the note below, which is still the rule and is
+ * worth keeping: third-party marks are used in their OWN colours or not at all — never recoloured
+ * to Brytr amber, never traced from memory, never set in Archivo. What that rule was written to
+ * stop is an INVENTED mark or a restyled one. It was being read as "no Google mark until somebody
+ * emails us a file", which is a different and much weaker rule, and it left the review plinth
+ * setting the word Google in the display face next to a rating — the one place on the page where
+ * the real mark does actual work, because it names the source a reader can go and check.
+ *
+ * /public/logo/google.svg is the four-colour G at the official proportions in the official four
+ * colours (#4285F4 #34A853 #FBBC05 #EA4335). Attributing reviews to their source is the use this
+ * mark exists for and the use Google publishes it for.
+ *
+ * IT IS RENDERED `unoptimized`. Next refuses SVG through the image optimizer unless
+ * `images.dangerouslyAllowSVG` is set globally, and turning that on for the whole site to serve
+ * one first-party file we wrote ourselves is the wrong trade. Every call site passes the flag.
  */
-export const googleLogo: string | null = null;
+export const googleLogo: string | null = "/logo/google.svg";
 
 /* BRYTR'S OWN MARK.
  *

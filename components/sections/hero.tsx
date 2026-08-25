@@ -61,20 +61,34 @@ export function Hero() {
   const bg = images.heroBg;
 
   return (
-    <section className="bg-primary">
+    /* THE SECTION FILLS THE FIRST SCREEN ON DESKTOP. The client: "the hero should be a bit longer
+     * and fill up the screen on desktop because right now it's a bit short and I'm seeing the next
+     * section before."
+     *
+     * 7.25rem is the chrome above it: the amber announcement strip (min-h-10 plus py-2, so 40px)
+     * and the sticky header (h-19, 76px). Subtracting it means the plinth lands exactly on the fold
+     * rather than the photograph running under it.
+     *
+     * `svh` not `vh`, because on mobile browsers `vh` is the viewport WITHOUT the collapsing
+     * address bar, so a 100vh hero is taller than the screen it is meant to fit. It is gated to lg
+     * anyway - on a phone the hero is as tall as its content and no taller.
+     *
+     * min-height, not height. On a short laptop (1440x700) the content plus padding exceeds the
+     * available 584px and the section grows instead of clipping the form card. */
+    <section className="bg-primary lg:flex lg:min-h-[calc(100svh-7.25rem)] lg:flex-col">
       {/* ── the photograph ── */}
-      <div className="relative isolate overflow-hidden">
+      <div className="relative isolate flex overflow-hidden lg:flex-1">
         <Image
           src={bg.src as string}
           alt={bg.alt}
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[52%_42%]"
+          className="object-cover object-center"
         />
         <div className="hero-scrim absolute inset-0" aria-hidden />
 
-        <div className="shell relative grid items-center gap-12 py-16 lg:grid-cols-[1fr_27rem] lg:gap-16 lg:py-24">
+        <div className="shell relative grid w-full items-center gap-12 py-16 lg:grid-cols-[1fr_27rem] lg:gap-16 lg:py-20">
           <div className="max-w-[38rem]">
             {/* Nothing above the H1. That is the single biggest difference between this hero and
               * the one it replaces. */}
@@ -137,12 +151,16 @@ export function Hero() {
         <span className="text-[1.05rem] text-on-dark-muted">
           across <span className="u font-semibold text-on-dark">{reviewProof.count}</span> reviews on{" "}
           {googleLogo ? (
+            /* `unoptimized` because Next refuses SVG through the image optimizer unless
+              * images.dangerouslyAllowSVG is set for the whole site, and this is one first-party
+              * file we wrote. See the note in content/badges.ts. */
             <Image
               src={googleLogo}
               alt="Google"
               width={22}
               height={22}
-              className="inline-block size-[1.375rem] translate-y-[-0.1rem]"
+              unoptimized
+              className="inline-block size-[1.375rem] translate-y-[-0.15rem]"
             />
           ) : (
             <span className="font-display font-bold text-on-dark">Google</span>

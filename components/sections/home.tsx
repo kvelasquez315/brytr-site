@@ -62,10 +62,10 @@ import { Faq } from "@/components/sections/faq";
  * different and much larger number, and not what is in the document, which is larger again for a
  * reason worth knowing about (see the note on the FAQ in section 8).
  *
- * THE GROUND ALTERNATES AND NEVER RUNS MORE THAN TWO DEEP:
+ * THE GROUND, AND A DELIBERATE DEPARTURE FROM THE RULE AT THE TOP OF globals.css:
  *
  *     1 Hero        primary + photograph   dark
- *     2 SceneWipe   raise                  dark
+ *     2 SceneWipe   background             light
  *     3 Services    muted                  light
  *     4 WhoWeAre    background             light
  *     5 HowWeWork   raise                  dark
@@ -74,9 +74,18 @@ import { Faq } from "@/components/sections/faq";
  *     8 Faqs        background             light
  *     9 Closer      muted                  light   -> into the primary footer
  *
- * scripts/section-rhythm.mjs enforces that no two adjacent sections share a ground. The two-deep
- * rule is the one written at the top of globals.css and is not machine-checked; the old page broke
- * it with five light sections in a row.
+ * scripts/section-rhythm.mjs enforces that no two adjacent sections share a ground, and this
+ * passes: no two neighbours are the same surface anywhere down the page.
+ *
+ * WHAT IT DOES BREAK is the unenforced note in globals.css - "support surfaces so the page never
+ * runs 3 light or 3 dark in a row" - at sections 2, 3 and 4. That is on instruction. The client:
+ * "the site in general just looks dark, which is very weird for a lighting company." SceneWipe was
+ * on `raise`, directly under a night-photograph hero, so the first two screens of the site were
+ * both dark and the impression was set before a reader reached anything light. Moving it to
+ * `background` is what fixes that, and it costs a three-light run made of three DIFFERENT surfaces
+ * (background, muted, background) which alternate visibly. Six light sections to three dark, where
+ * the page it replaced ran five lights in a row and still read as dark because the two darkest
+ * were the first two.
  */
 
 /* ---------- shared parts ---------------------------------------------------- */
@@ -507,7 +516,10 @@ export function Reviews() {
  * ========================================================================= */
 const WORK: { key: string; scene: string }[] = [
   { key: "homePrairieTwilight", scene: "Civil twilight, warm white" },
-  { key: "seqRedGreen", scene: "The December scene" },
+  /* Was seqRedGreen, which is the ninety-second-sequence house from the SAME hover point as the
+   * new hero photograph - so the hero and the second tile of this grid would have been one
+   * property. Same scene, different house. */
+  { key: "christmasRedGreenGables", scene: "The December scene" },
   { key: "poolPergolaDusk", scene: "Pergola run at dusk" },
   { key: "homeBrickGablesGold", scene: "Gables, warm white" },
   { key: "homeShakeBrick", scene: "Eave downlights" },

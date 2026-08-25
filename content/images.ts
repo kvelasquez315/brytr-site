@@ -88,9 +88,36 @@ export const images: Record<string, Slot> = {
    * reads as a line of individual warm points along the whole roofline instead of a smudge. That
    * is exposure, not invention — no light was added, nothing was hue-shifted, and the source file
    * is in the archive as home-ranch-bluehour.jpg for anyone who wants to check. */
-  heroBg: { src: "/img/hero-front.jpg",
-    alt: "A long brick ranch in the Omaha metro at blue hour, the whole roofline picked out in warm white points",
-    subject: "Wide front elevation, blue hour. Home hero only — must not be a property used elsewhere on that page.", ratio: "21/9", priority: true },
+  /* THE HOME HERO IS seq-everyday.jpg NOW, AND IT WAS PICKED BY MEASUREMENT.
+   *
+   * The client: "can we pick a different image for the hero that makes it look a bit lighter?
+   * Right now this just looks so dark. The site in general just looks dark, which is very weird
+   * for a lighting company." He is right, and no caption in this file could have settled which
+   * frame is lighter — every candidate here is described as "at dusk" or "at blue hour", and blue
+   * hour on a clear evening and blue hour into overcast are three stops apart under the same word.
+   *
+   * So scripts/hero-pick.mjs decodes every wide file and ranks them by measured relative
+   * luminance. hero-front.jpg, the frame this slot used to hold, came TWELFTH of twelve — the
+   * darkest of every wide photograph in the library, at 0.184. seq-everyday.jpg is 0.271, which is
+   * 47% brighter, and it clears the contrast bar under the type at 7.7:1.
+   *
+   * Everything above it in that ranking was disqualified on content rather than on brightness:
+   * seq-red-green is the December scene, seq-gameday is a red wash, seq-security is the run
+   * deliberately dimmed, seq-warm-christmas is captioned as Christmas, detail-arch-day is a turret
+   * detail rather than an elevation. A hero has to show the everyday setting on a front elevation,
+   * and this is the brightest frame in the library that does.
+   *
+   * IT IS 16/9 AND THAT IS AN IMPROVEMENT, not a compromise. The hero now fills the viewport, so
+   * its box runs about 2.0:1 on a 1440x900 screen. A 21/9 source cropped into that loses nothing
+   * horizontally and 16/9 loses about 100px vertically, which is far gentler than the reverse.
+   *
+   * THE ONE RULE THIS SLOT HAS is that the hero must not be a property used elsewhere on the same
+   * page. seq-everyday is the ninety-second sequence house, and seq-red-green — the SAME house
+   * from the SAME hover point — was the second tile in RecentWork. That tile is now
+   * christmasRedGreenGables, a different house on the same scene. */
+  heroBg: { src: "/img/seq-everyday.jpg",
+    alt: "A brick and cedar ranch west of Omaha at dusk, its roofline, eaves and garage band picked out in everyday warm white",
+    subject: "Wide front elevation, dusk, everyday warm white. Home hero only — must not be a property used elsewhere on that page.", ratio: "16/9", priority: true },
 
   channelCloseUp: { src: "/img/channel-detail.jpg",
     alt: "Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along every gable and eave",

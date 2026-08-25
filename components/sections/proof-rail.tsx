@@ -49,7 +49,7 @@ export function ProofRail() {
           className="group mt-8 inline-flex flex-wrap items-center justify-center gap-x-5 gap-y-3 rounded-full bg-card px-8 py-4 shadow-[var(--shadow-lg)]"
         >
           {googleLogo && (
-            <Image src={googleLogo} alt="Google" width={30} height={30} className="size-[1.875rem] shrink-0" />
+            <Image src={googleLogo} alt="Google" width={30} height={30} unoptimized className="size-[1.875rem] shrink-0" />
           )}
           <span className="u font-display text-[1.75rem] font-bold leading-none text-foreground">
             {reviewProof.average}

@@ -110,6 +110,28 @@
  * 78%. That costs less of the photograph than it sounds: the form card starts at 67% of the
  * width, so the only part of the image that was ever fully visible is the 52–67% band, and that
  * band is what the new 52%→68% falloff is shaped around. */
+/* THE RAMP NOW CLEARS AT 64% INSTEAD OF 78%, AND THE TYPE BAND IS UNTOUCHED.
+ *
+ * The stops above 44% were shaped for a 62ch hero lede whose right edge landed at 52% of a 1440
+ * viewport. The hero was rebuilt to the client's reference and its H1 column is capped at 38rem,
+ * which ends at 42% — so the ramp was holding 68% primary across ten points of width that no
+ * longer has any type standing on it, and then taking another ten to clear. That is a third of the
+ * photograph veiled for nothing, on a page for a company that sells light.
+ *
+ * MEASURED BEFORE AND AFTER, because the alternative is guessing and this exact gradient is where
+ * a real contrast failure shipped once already. scripts/hero-pick.mjs composites the ramp over the
+ * actual JPEG in linear light and reports the 95th-percentile background luminance under the type
+ * — the bright patches, not the average, since that is where contrast actually breaks:
+ *
+ *     current    97% / 86%    p95 ratio 7.7:1    ok
+ *     tightened  97% / 86%    p95 ratio 7.7:1    ok      <- this one, 14 points more photograph
+ *     eased      90% / 78%    p95 ratio 5.6:1    under the 7.0 house bar
+ *     light      84% / 70%    p95 ratio 4.5:1    FAIL
+ *
+ * So the honest limit is here. The left 44% of this hero cannot get meaningfully brighter while
+ * near-white type stands on it: easing the ramp even to 90% breaks the 7.0 bar the site holds body
+ * copy to everywhere it controls the surface. Making the hero brighter than this means taking the
+ * type off the photograph, not thinning the scrim under it. */
 .hero-scrim {
   background:
     linear-gradient(
@@ -117,9 +139,9 @@
       color-mix(in oklab, var(--brand-primary) 97%, transparent) 0%,
       color-mix(in oklab, var(--brand-primary) 93%, transparent) 26%,
       color-mix(in oklab, var(--brand-primary) 86%, transparent) 44%,
-      color-mix(in oklab, var(--brand-primary) 68%, transparent) 54%,
-      color-mix(in oklab, var(--brand-primary) 24%, transparent) 68%,
-      transparent 78%
+      color-mix(in oklab, var(--brand-primary) 60%, transparent) 50%,
+      color-mix(in oklab, var(--brand-primary) 18%, transparent) 58%,
+      transparent 64%
     ),
     linear-gradient(
       to top,

@@ -86,13 +86,27 @@ export function SceneWipe() {
   const mostlyScene = pct < 50;
 
   return (
-    <section className="section bg-raise">
+    /* THE GROUND WENT LIGHT, from bg-raise to bg-background.
+     *
+     * The client: "the site in general just looks dark, which is very weird for a lighting
+     * company." He is right and this section was the biggest single cause of it - the hero is a
+     * night photograph under a heavy scrim and this sat immediately below it on raise, so the
+     * FIRST TWO SCREENS of the site were both dark and the impression was set before a reader had
+     * scrolled past anything light.
+     *
+     * It is also the better ground for what is in it. The whole section is two night photographs
+     * of a lit house; on warm limestone they are the dark element and the page around them is
+     * bright, which is the right way round for a company whose product is light. On raise the
+     * photographs and their surroundings were the same value and the demo had no frame.
+     *
+     * The spec panel stays dark. It is a card, not a section, and a dark card on a light ground
+     * is how the rest of the page already handles a panel that needs to hold its own weight. */
+    <section className="section bg-background">
       <div className="shell">
         {/* The onward link sits on the RIGHT OF THE HEAD, the same as RecentWork, Reviews and the
           * FAQ. Left-aligned on its own it left roughly 600 x 150px of empty band beside the lede. */}
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <SectionHead
-            onDark
             scale="section"
             className="max-w-[46rem]"
             eyebrow="How the colour works"
@@ -101,7 +115,7 @@ export function SceneWipe() {
           />
           <Link
             href="/gallery"
-            className="tap-44 inline-flex h-12 shrink-0 items-center gap-2.5 rounded-full border border-on-dark/25 px-7 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-on-dark/10"
+            className="tap-44 inline-flex h-12 shrink-0 items-center gap-2.5 rounded-full bg-primary px-7 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-raise"
           >
             See every scene
             <span aria-hidden>&rarr;</span>
@@ -111,11 +125,11 @@ export function SceneWipe() {
         <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_19rem]">
           <div>
             <div className="flex items-center justify-between px-1 pb-3">
-              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-on-dark-muted" : "text-accent"}`}>
+              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-muted-foreground" : "text-accent-ink"}`}>
                 Warm white
               </span>
-              <span className="label text-on-dark-muted">Drag the line</span>
-              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-accent" : "text-on-dark-muted"}`}>
+              <span className="label text-muted-foreground">Drag the line</span>
+              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-accent-ink" : "text-muted-foreground"}`}>
                 One colour
               </span>
             </div>
