@@ -7,41 +7,36 @@ import { reviews, reviewProof } from "@/content/reviews";
 import { googleLogo } from "@/content/badges";
 import { Button } from "@/components/ui/button";
 import { QuoteForm, SectionHead } from "@/components/ui/bits";
+import { iconMap, type IconKey } from "@/content/icon-map";
 
-/* BUILT FROM THE REFERENCES THIS TIME, WITH THE REFERENCES ACTUALLY OPEN.
+/* SIX ROUNDS OF RESTYLING, AND THE PROBLEM WAS THE CONTENT.
  *
- * Four rounds went wrong for one reason: I never looked at propertypest.com or trugreen.com. I ran
- * them through a markdown converter, which strips every CSS class, saw no `rounded-*` in the
- * output, and concluded neither site used a radius. On that basis I deleted every card on this
- * page, wrote a build gate to keep them out, and removed the Google review cards the client had
- * asked for in so many words. His read of the result was "insanely boxy" and "atrocious". Both
- * were fair.
+ * The client kept saying the same thing and I kept hearing it as a design note: "very jumbled with
+ * random things, not pointing out what it's actually talking about", "I'm not really sure what I'm
+ * looking at." I answered with layout five times and with section labels once. None of it worked,
+ * because the words on the page were the problem.
  *
- * WHAT IS ACTUALLY ON THOSE TWO PAGES, read off the live DOM:
+ * WHAT WAS ACTUALLY WRONG, found by reading content/services.ts instead of the CSS:
  *
- *   propertypest.com   Cards on every section, 14.4px radius, on cream and dark-green grounds.
- *                      EIGHTY-THREE fully-rounded pills: buttons, chips, town tags. A shadow so
- *                      faint it is almost absent (rgba(26,26,24,.06) 0 1px 2px). Bento asymmetry
- *                      throughout: the pests block is one tall photo card beside a 2x2 of small
- *                      photo-topped cards; the audience block is one tall photo card beside two
- *                      stacked cards with a photo strip down their left edge. Reviews are white
- *                      cards with a rust star row and "Verified Google review" under the name.
+ *   THE SERVICES SECTION LISTED THE SAME PRODUCT THREE TIMES. "Permanent Outdoor Lighting",
+ *   "Permanent Christmas Lights" and "Permanent Roofline Lighting" are one product, one PART of it,
+ *   and one USE of it. Three headings that all say permanent lighting, and no way for a homeowner
+ *   to tell them apart, because there is nothing to tell apart.
  *
- *   trugreen.com       The comparison is three ~14px cards, one near-black and two pale mint.
- *                      Every button is a pill. Big short headline, one accent green.
+ *   "WHY HOMEOWNERS CHOOSE US" ANSWERED WITH SKU NAMES. Haven Evolution, Haven Q Series, Haven 9
+ *   Series, Haven X Bistro. Somebody else's part numbers, under a heading promising reasons.
  *
- * So the vocabulary is THE CARD, THE PILL, THE BENTO, and photography inside the cards. Which is
- * the exact opposite of what I shipped. Everything below is those four things, in Brytr's navy,
- * cream and amber instead of Property Pest's green, cream and rust.
+ *   THE MENU SAID THE SAME WORD TWICE. "Systems" and "Lighting" as separate top-level items, while
+ *   the page said "services" - three words for one thing. Fixed in content/nav.ts.
  *
- * AND EVERY SECTION NOW NAMES ITSELF. The client, scrolling the live page: "I'm not sure what I'm
- * looking at when I'm scrolling through." freedomexteriorsusa.com labels every section - OUR
- * SERVICES, WHY HOMEOWNERS CHOOSE US, WHO WE ARE, AREAS WE SERVE - with an accent eyebrow, a plain
- * headline that names the section, and one line of explanation. Every header below goes through
- * SectionHead, so none of them can drift apart. See the note on it in components/ui/bits.
+ * So: the product once, then the four places it goes. Reasons where reasons were promised. And the
+ * hardware moved to /lighting-systems, where the person who wants a part number is already headed.
  *
- * AND THE CLIENT OUTRANKS THE REFERENCE WHERE THEY DISAGREE. He asked for Google-style review
- * cards, so they are back and they are not moving again.
+ * THE VISUAL VOCABULARY IS UNCHANGED and still taken off the references with the pages open:
+ * propertypest.com is cards at 14.4px on cream and dark-green grounds with eighty-three pills and a
+ * shadow so faint it is almost absent; trugreen.com is three ~14px cards and pill buttons;
+ * freedomexteriorsusa.com labels every section with an accent eyebrow, a plain headline and one line
+ * of explanation. Cards, pills, bento, photography inside the cards, and a header on every section.
  */
 
 /* ---- the shared vocabulary, so the page reads as one system ------------------ */
@@ -71,7 +66,7 @@ function DotList({ items, onDark }: { items: string[]; onDark?: boolean }) {
   );
 }
 
-/* Five stars: not a trademark, and the same glyph the trust bar uses so the mark means one thing
+/* Five stars: not a trademark, and the same glyph the trust band uses so the mark means one thing
  * across the site. The Google wordmark stays a slot rather than a drawing. Property Pest writes
  * "Verified Google review" in plain type under the name, which is the honest version of this. */
 function Stars({ className, size = "1rem" }: { className?: string; size?: string }) {
@@ -87,18 +82,38 @@ function Stars({ className, size = "1rem" }: { className?: string; size?: string
 }
 
 /* ==============================================================================
- * 3 - OUR SERVICES - the bento: one tall photo card, two stacked beside it
+ * 3 - OUR SERVICES - ONE product, then the places it goes
  *
- * WHAT THIS REPLACES. Three full-width rows, photograph one side and copy the other, alternating
- * down the page. The client: "text on the side of images going all the way down, just taking up a
- * ton of space for services." Right on both counts - three services took three screens, and every
- * row was the same shape as the last.
+ * THIS IS THE REAL FIX, AND IT IS NOT A STYLING ONE. Six rounds of restyling never touched the
+ * actual problem, which the client kept describing accurately and I kept mishearing: "very jumbled
+ * with random things, not pointing out what it's actually talking about."
  *
- * Property Pest's audience block is the pattern: a tall photo card with the type set over the
- * bottom of the photograph, and two shorter cards stacked beside it, each with a narrow photo
- * strip down its left edge. Three services, one screen, three different card shapes.
+ * WHAT WAS HERE. Three cards headed "Permanent Outdoor Lighting", "Permanent Christmas Lights" and
+ * "Permanent Roofline Lighting". Those are not three services. They are ONE product (a permanent
+ * channel of addressable LEDs on the house), plus one PART of it (the roofline is where the channel
+ * goes), plus one USE of it (at Christmas you set the scene to red and green). A homeowner read
+ * three headings that all said "permanent lighting" and could not tell what the difference was,
+ * because there is no difference. That is the jumble.
+ *
+ * WHAT IT IS NOW, which is what the client chose: the product ONCE, explained in a wide card at the
+ * top, and then the four PLACES it goes underneath - roofline, landscape, patio and pergola,
+ * hardscape. Christmas is named inside the product card as a use of the same lights, which is the
+ * truth and keeps the search term on the page. Five things on screen, and each one answers a
+ * different question instead of restating the last.
+ *
+ * Each place card carries an amber icon tile. That is the site's own channel-tile device, it makes
+ * the four cards scannable as categories rather than a wall of photographs, and it is a deliberate
+ * answer to "the design of it is just boring" - the accent was doing almost nothing on this page.
  * ============================================================================ */
-const LEAD = ["permanent-outdoor-lighting", "permanent-christmas-lights", "permanent-roofline-lighting"];
+const PRODUCT = "permanent-outdoor-lighting";
+
+/* The four places, in the order a house gets done. Every slug is a real page. */
+const PLACES: { slug: string; label: string; icon: IconKey }[] = [
+  { slug: "permanent-roofline-lighting", label: "Roofline and eaves", icon: "roofline" },
+  { slug: "landscape-lighting", label: "Beds, trees and paths", icon: "pathLight" },
+  { slug: "patio-pergola-bistro-lighting", label: "Patio and pergola", icon: "pergola" },
+  { slug: "hardscape-lighting", label: "Walls, steps and coping", icon: "hardscape" },
+];
 
 function svc(slug: string) {
   const s = services.find((x) => x.slug === slug);
@@ -106,83 +121,104 @@ function svc(slug: string) {
 }
 
 export function Installs() {
-  const [tall, ...rest] = LEAD.map(svc);
-  if (!tall) return null;
+  const product = svc(PRODUCT);
+  const places = PLACES.map((p) => ({ ...p, svc: svc(p.slug) })).filter((p) => p.svc);
+  if (!product) return null;
   return (
     <section className="section bg-muted">
       <div className="shell">
-        {/* NAMED, NOT CLEVER. "Every surface worth lighting" is a slogan; "What we install on a
-          * house" tells a homeowner scrolling past exactly what they have arrived at. */}
-        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-          <SectionHead
-            eyebrow="Our services"
-            title="What we install on a house"
-            lede="One channel, one controller, one app. Start with the roofline and add the beds, the soffit or the pergola whenever you like."
-          />
-          <Button asChild size="md"><Link href="/services">See all services</Link></Button>
-        </div>
+        <SectionHead
+          eyebrow="Our services"
+          title="One system. Every place you want light."
+          lede="One channel of LEDs and one app, installed once. Start at the roofline and add the rest whenever you like - it is the same system running all of it."
+        />
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.02fr_1fr]">
-          <Link
-            href={`/services/${tall.slug}`}
-            data-spot
-            className="group relative flex min-h-[26rem] flex-col justify-end overflow-hidden rounded-lg bg-primary p-7 sm:p-9"
-          >
-            {tall.img?.src && (
+        {/* THE PRODUCT, once. A wide card so it reads as the thing itself rather than as one of
+          * four equal options, which is what the old three-up grid made it. */}
+        <div className="mt-10 grid overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+          {product.img?.src && (
+            <div className="relative aspect-16/10 w-full lg:aspect-auto lg:min-h-[24rem]">
               <Image
-                src={tall.img.src}
-                alt={tall.img.alt}
+                src={product.img.src}
+                alt={product.img.alt}
                 fill
                 sizes="(min-width:1024px) 50vw, 100vw"
-                className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.03]"
+                className="object-cover"
               />
-            )}
-            {/* Scrimmed at the BOTTOM ONLY. At via-primary/70 this covered the middle of an already
-              * dark night photograph and the card read as a black rectangle with type on it. */}
-            <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/45 via-45% to-transparent" aria-hidden />
-            <div className="relative">
-              <p className="eyebrow eyebrow--on-dark">The whole property</p>
-              <h3 className="display-section mt-2 text-on-dark">{tall.name}</h3>
-              <p className="mt-3 max-w-[42ch] text-[0.98rem] leading-relaxed text-on-dark-muted">{tall.short}</p>
-              <DotList items={tall.includes.slice(0, 3)} onDark />
-              <p className="label mt-6 text-accent">
-                Explore the whole-home system
-                <Arrow />
-              </p>
             </div>
-          </Link>
-
-          <div className="grid gap-6">
-            {rest.filter(Boolean).map((s) => (
+          )}
+          <div className="p-8 lg:p-10">
+            <p className="eyebrow">The product</p>
+            <h3 className="display-section mt-3 text-foreground">Permanent outdoor lighting</h3>
+            <p className="mt-4 text-[1.02rem] leading-relaxed text-muted-foreground">
+              A slim channel of addressable LEDs, color-matched to your fascia so it disappears in
+              daylight, wired once and run from your phone. Warm white every night of the year, and
+              any color you want on the nights you want it.
+            </p>
+            <DotList items={product.includes.slice(0, 3)} />
+            <div className="mt-7 flex flex-wrap items-center gap-x-7 gap-y-3">
+              <Button asChild size="md">
+                <Link href={`/services/${product.slug}`}>How the system works</Link>
+              </Button>
+              {/* Christmas is a USE of the product, not a separate service, so it is named here
+                * rather than given a card of its own. It is also the term people search for, which
+                * is why the link stays on the home page. */}
               <Link
-                key={s!.slug}
-                href={`/services/${s!.slug}`}
+                href="/services/permanent-christmas-lights"
                 data-spot
-                className="group grid overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] sm:grid-cols-[10rem_minmax(0,1fr)]"
+                className="group font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4"
               >
-                {s!.img?.src && (
-                  <div className="relative aspect-16/10 sm:aspect-auto">
+                Nobody on a ladder in December
+                <Arrow />
+              </Link>
+            </div>
+          </div>
+        </div>
+
+        {/* THE PLACES it goes. Four, each answering "can you do my ___", which is the question a
+          * homeowner actually arrives with. */}
+        <p className="eyebrow mt-12">
+          <span className="channel-mark" aria-hidden />
+          Where it goes
+        </p>
+        <div className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {places.map((p) => {
+            const I = iconMap[p.icon];
+            return (
+              <Link
+                key={p.slug}
+                href={`/services/${p.slug}`}
+                data-spot
+                className="group flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
+              >
+                {p.svc!.img?.src && (
+                  <div className="relative aspect-4/3 w-full overflow-hidden">
                     <Image
-                      src={s!.img.src}
-                      alt={s!.img.alt}
+                      src={p.svc!.img.src}
+                      alt={p.svc!.img.alt}
                       fill
-                      sizes="(min-width:640px) 10rem, 100vw"
+                      sizes="(min-width:1024px) 23vw, (min-width:640px) 45vw, 100vw"
                       className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.05]"
                     />
                   </div>
                 )}
-                <div className="p-6 sm:p-7">
-                  <h3 className="font-display text-[1.3rem] font-bold leading-tight text-foreground">{s!.name}</h3>
-                  <p className="mt-2 text-[0.95rem] leading-snug text-muted-foreground">{s!.short}</p>
-                  <DotList items={s!.includes.slice(0, 2)} />
-                  <p className="label mt-5 text-accent-ink">
-                    {s!.name === "Permanent Christmas Lights" ? "See it at Christmas" : "See how it goes on"}
-                    <Arrow />
+                <div className="flex flex-1 flex-col p-5">
+                  <span
+                    className="grid size-10 place-items-center rounded-md bg-accent text-accent-foreground"
+                    aria-hidden
+                  >
+                    <I className="size-6" />
+                  </span>
+                  <p className="mt-4 font-display text-[1.08rem] font-bold leading-tight text-foreground group-hover:underline decoration-accent decoration-2 underline-offset-4">
+                    {p.label}
+                  </p>
+                  <p className="mt-1.5 flex-1 text-[0.9rem] leading-snug text-muted-foreground">
+                    {p.svc!.short}
                   </p>
                 </div>
               </Link>
-            ))}
-          </div>
+            );
+          })}
         </div>
       </div>
     </section>
@@ -221,8 +257,6 @@ export function Proof() {
   return (
     <section className="section bg-background">
       <div className="shell">
-        {/* This section had NO eyebrow at all, which is why three quotes appeared out of nowhere
-          * when you scrolled onto it. */}
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <div>
             <SectionHead
@@ -408,111 +442,92 @@ export function Work() {
 }
 
 /* ==============================================================================
- * 6 - WHY HOMEOWNERS CHOOSE US - Haven, and the crew
+ * 6 - WHY HOMEOWNERS CHOOSE US - reasons, not part numbers
  *
- * THE LOGOS ARE STILL A SLOT. Haven and Jellyfish are somebody else's trademarks: used in their
- * own colours from their own asset pack, or not used. `systemLogo` in content/badges.ts renders one
- * per row the moment a file lands. Until then each card carries a real photograph of what that line
- * actually does, which is more use to a homeowner than a wordmark anyway.
+ * WHAT WAS HERE: four cards headed "Haven Evolution", "Haven Q Series", "Haven 9 Series" and
+ * "Haven X Bistro", under a heading that promised reasons to choose Brytr. Those are a
+ * manufacturer's SKU names. Nobody shopping for lights on their house knows what a Q Series is, and
+ * a section titled "why choose us" that answers with somebody else's part numbers is the clearest
+ * case on the page of the client's "random things, not pointing out what it's actually talking
+ * about". The client chose reasons; the SKU cards move to /lighting-systems, where the person who
+ * wants that detail is already looking for it.
+ *
+ * The four reasons are the four things the client has actually confirmed about how Brytr works. No
+ * warranty term, no licence number, no years-in-business, because none of those are on file here and
+ * an invented credential is the one thing this section must never carry.
+ *
+ * Haven still gets its credit and its internal link, in one line at the foot, which is the right
+ * weight for it: the brand matters to the six people who research hardware and to nobody else.
  * ============================================================================ */
-const HAVEN: { name: string; what: string; slug: string; photo: string }[] = [
-  { name: "Haven Evolution", what: "The roofline channel and the diodes that sit in it.", slug: "haven-evolution", photo: "detailGableMiter" },
-  { name: "Haven Q Series", what: "Soffit and architectural fixtures, recessed or on track.", slug: "haven-q-series", photo: "serviceSoffit" },
-  { name: "Haven 9 Series", what: "Ground level: path, uplight and bed fixtures.", slug: "haven-9-series-landscape-lights", photo: "serviceLandscape" },
-  { name: "Haven X Bistro", what: "Overhead runs on a pergola, a patio or a structure.", slug: "haven-x-bistro-lights", photo: "servicePatio" },
+const REASONS: { icon: IconKey; title: string; body: string }[] = [
+  {
+    icon: "hardHat",
+    title: "Our own crews, never subcontracted",
+    body: "The people on your roof are Brytr employees on Brytr payroll, and it is the same crew from the measure to the handover.",
+  },
+  {
+    icon: "dayNight",
+    title: "Checked after dark and in daylight",
+    body: "We do not leave until you have seen it lit at night and seen how the channel reads from the street by day.",
+  },
+  {
+    icon: "weatherSealed",
+    title: "Into fascia, never shingles",
+    body: "Every penetration sealed as it is made, and mitered at every valley, dormer and return so the run turns the corner cleanly.",
+  },
+  {
+    icon: "measured",
+    title: "Wire runs you cannot find",
+    body: "Nothing dropped down a downspout or dragged across a soffit. The run is concealed the whole way and a sealed cap closes it.",
+  },
 ];
 
-/* Four absolutes, every one of them confirmed by the client. Nothing goes in a stat card without a
- * source: an invented figure in a stat card is the most quotable lie on a website. */
-const CREW_FACTS: [string, string][] = [
-  ["W2", "Our own crews, never subcontracted"],
-  ["Twice", "Verified after dark and again in daylight"],
-  ["Fascia", "Every fixing into board, never shingles"],
-  ["Hidden", "Wire runs concealed, and capped at the end"],
-];
-
-/* RESTRUCTURED SO THE SECTION ANNOUNCES ITSELF. This was a two-column mash: a headline squeezed
- * into a 27rem column beside four cards, with the crew figures in a panel under the headline. You
- * could not tell where the section began or what it was about, and the headline wrapped to four
- * lines at that measure.
- *
- * Freedom Exteriors' shape instead: the header runs the full width of the section, the cards sit
- * under it in one clean row, and the figures go in a full-width strip at the foot - which is
- * exactly what its under-hero band does with 8+ YEARS / 100% LICENSED / 26yr / 4.9 STAR.
- *
- * (The comment you are reading sits ABOVE the return. A block comment between `return (` and the
- * JSX parses as an expression and the build dies. Fourth time this session.) */
 export function Hardware() {
   return (
     <section className="section bg-muted">
       <div className="shell">
         <SectionHead
           eyebrow="Why homeowners choose us"
-          title="We lead with Haven, and install every line of it"
-          lede="One manufacturer for the roofline, the soffit, the ground and the overhead runs, so the whole property answers to the same app - installed by the same crew that quoted it."
+          title="The crew that quotes it is the crew that installs it"
+          lede="Permanent lighting is drilled into your house once. These are the four things we do differently, and they are the reason it still looks right in five years."
         />
 
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {HAVEN.map((h) => {
-            const img = images[h.photo];
+          {REASONS.map((r) => {
+            const I = iconMap[r.icon];
             return (
-              <Link
-                key={h.slug}
-                href={`/lighting-systems/${h.slug}`}
-                data-spot
-                className="group flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
-              >
-                {img?.src && (
-                  <div className="relative aspect-16/10 w-full overflow-hidden">
-                    <Image
-                      src={img.src}
-                      alt={img.alt}
-                      fill
-                      sizes="(min-width:1024px) 23vw, (min-width:640px) 45vw, 100vw"
-                      className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.05]"
-                    />
-                  </div>
-                )}
-                <div className="flex flex-1 flex-col p-5">
-                  <p className="font-display text-[1.08rem] font-bold leading-tight text-foreground group-hover:underline decoration-accent decoration-2 underline-offset-4">
-                    {h.name}
-                  </p>
-                  <p className="mt-1.5 flex-1 text-[0.9rem] leading-snug text-muted-foreground">{h.what}</p>
-                  <p className="label mt-4 text-accent-ink">
-                    See the line
-                    <Arrow />
-                  </p>
-                </div>
-              </Link>
+              <div key={r.title} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+                <span
+                  className="grid size-11 place-items-center rounded-md bg-accent text-accent-foreground"
+                  aria-hidden
+                >
+                  <I className="size-6" />
+                </span>
+                <h3 className="mt-5 font-display text-[1.05rem] font-bold leading-snug text-foreground">
+                  {r.title}
+                </h3>
+                <p className="mt-2.5 flex-1 text-[0.92rem] leading-relaxed text-muted-foreground">{r.body}</p>
+              </div>
             );
           })}
         </div>
 
-        {/* THE FIGURES, as a full-width strip. Four absolutes divided by hairlines, the shape of
-          * Freedom's under-hero band. Every one confirmed by the client: nothing goes in a stat
-          * strip without a source, because an invented figure in a stat strip is the most quotable
-          * lie on a website. */}
-        <div className="mt-10 rounded-lg bg-primary px-7 py-8 sm:px-9">
-          <dl className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-            {CREW_FACTS.map(([f, l], i) => (
-              <div key={l} className={i ? "lg:border-l lg:border-on-dark/15 lg:pl-8" : ""}>
-                <dt className="u font-display text-[1.75rem] font-bold leading-none text-accent">{f}</dt>
-                <dd className="mt-2.5 text-[0.9rem] leading-snug text-on-dark-muted">{l}</dd>
-              </div>
-            ))}
-          </dl>
-          {/* The rule goes on a full-width wrapper. It was on the inline-block link itself, so it
-            * only spanned the width of the text and read as a stray dash. */}
-          <div className="mt-8 border-t border-on-dark/15 pt-6">
-            <Link
-              href="/how-it-works"
-              data-spot
-              className="group font-semibold text-on-dark underline decoration-accent decoration-2 underline-offset-4"
-            >
-              See how an install runs, start to finish
-              <Arrow />
-            </Link>
-          </div>
+        {/* Haven, at the weight it deserves: one line and a link, not four cards of part numbers.
+          * The trademark is used as a word here, which is fair use of a brand name we stock - the
+          * LOGO is still a slot in content/badges.ts and still needs their dealer kit. */}
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-x-8 gap-y-4 rounded-lg bg-primary px-7 py-6">
+          <p className="text-[0.98rem] text-on-dark-muted">
+            We lead with Haven and install every line of it - the roofline channel, the soffit
+            fixtures, the ground lighting and the overhead runs.
+          </p>
+          <Link
+            href="/lighting-systems"
+            data-spot
+            className="group shrink-0 font-semibold text-on-dark underline decoration-accent decoration-2 underline-offset-4"
+          >
+            See the hardware
+            <Arrow />
+          </Link>
         </div>
       </div>
     </section>
