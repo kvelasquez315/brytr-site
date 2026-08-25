@@ -6,17 +6,29 @@ import { Button } from "@/components/ui/button";
 import { Input, Label, Select, Textarea } from "@/components/ui/field";
 
 export function SectionHead({
-  eyebrow, title, lede, onDark, className, align = "left", icon, big,
+  eyebrow, title, lede, onDark, className, align = "left", icon, scale = "hero",
 }: {
   eyebrow?: string; title: string; lede?: string; onDark?: boolean; className?: string;
   align?: "left" | "center";
   /* phoenixroofingandrepair.com pairs a small accent GLYPH with every eyebrow rather than a rule -
-   * a little house mark that repeats on all thirteen sections and does more to tie the page
-   * together than any of its type choices. Pass an icon and it replaces the channel-mark. */
+   * a little house mark that repeats on every section and does more to tie the page together than
+   * any of its type choices. Pass an icon and it replaces the channel-mark. */
   icon?: IconKey;
-  /* Phoenix sets ONE heading on the page bigger than the rest: "What Our Clients Say" at 64px
-   * against 50px everywhere else. That is the page's loudest moment and it lands on the reviews. */
-  big?: boolean;
+  /* TWO HEADING SIZES, AND THE HOME PAGE IS WHY.
+   *
+   * Every section heading on the site was `display-hero` - clamp(2.15rem, 3.4vw, 3.375rem), which
+   * tops out at 54px. So did the H1. On a page with twelve sections that produced thirteen headings
+   * all at the same 54px, and a reader scrolling it has no way to tell the page's title from a
+   * subhead two thousand pixels down. Everything shouting is the same as nothing shouting, and it
+   * was a large part of what the client was reacting to.
+   *
+   *   "hero"     54px. The page's H1, and the one section per page allowed to be the loud moment.
+   *   "section"  34px, `display-section`, which already existed and was used on exactly two
+   *              sections. It is now what an ordinary section heading looks like.
+   *
+   * The default stays "hero" deliberately: twenty other pages call this component and none of them
+   * were part of this brief. The home page opts in to "section" and sets the hierarchy properly. */
+  scale?: "hero" | "section";
 }) {
   /* EVERY SECTION ON THE SITE COMES THROUGH HERE, and that is the point.
    *
@@ -36,13 +48,14 @@ export function SectionHead({
    * scrolling past had no idea they had arrived at the demo of the product's main feature. The
    * reviews section had no eyebrow. A reader could not name a single section from its heading.
    *
-   * THE RULE IS NOW MECHANICAL: the eyebrow says what KIND of section this is, the title says
-   * what it IS in words a homeowner would use, and the lede is one sentence. Routing every
-   * section through one component is what stops the next one from being different.
+   * THE RULE IS NOW MECHANICAL: the eyebrow says what KIND of section this is, the title says what
+   * it IS in words a homeowner would use, and the lede is one sentence.
    *
-   * The amber rule beside the eyebrow is `.channel-mark`, the site's own signature device - the
-   * channel in cross-section. Freedom brackets its centred labels with rules on both sides; on a
-   * left-aligned head one leading rule does the same job and it is already the brand's mark.
+   * THE LEDE IS ALSO OPTIONAL, AND ON THE HOME PAGE IT IS MOSTLY OMITTED NOW. It was passed on all
+   * thirteen sections, which is thirteen paragraphs of explanation stacked on top of thirteen
+   * headings that already said the same thing in plainer words. A lede earns its place when the
+   * section needs a sentence the heading cannot carry - the drag demo needs one, a grid of
+   * photographs does not.
    *
    * RULE, UNCHANGED: body copy never sits beside a heading. Eyebrow, title, lede, stacked. A
    * two-column head reads as a magazine deck and breaks the page's vertical rhythm.
@@ -63,8 +76,8 @@ export function SectionHead({
       )}
       <h2
         className={cn(
-          eyebrow && "mt-4",
-          big ? "text-[clamp(2.5rem,4.4vw,4rem)] leading-[1.02] tracking-[-0.03em]" : "display-hero",
+          eyebrow && "mt-3",
+          scale === "hero" ? "display-hero" : "display-section",
           onDark ? "text-on-dark" : "text-foreground"
         )}
       >
@@ -73,7 +86,7 @@ export function SectionHead({
       {lede && (
         <p
           className={cn(
-            "mt-4 max-w-[68ch] text-lg",
+            "mt-4 max-w-[62ch] text-lg",
             align === "center" && "mx-auto",
             onDark ? "text-on-dark-muted" : "text-muted-foreground"
           )}
@@ -144,15 +157,28 @@ export function ChannelEdge({ className }: { className?: string }) {
   return <div className={cn("channel-edge", className)} aria-hidden />;
 }
 
-/* ---- the lead form. Three variants appear on the homepage by design ---- */
+/* ---- the lead form -------------------------------------------------------- */
 export function QuoteForm({
   variant = "full", city, heading, submitLabel = "Get my free design consultation", dark,
-}: { variant?: "compact" | "full" | "financing"; city?: string; heading?: string; submitLabel?: string; dark?: boolean }) {
-  /* `dark` is separate from `variant` on purpose. The dark treatment used to be welded to the
+}: { variant?: "mini" | "compact" | "full" | "financing"; city?: string; heading?: string; submitLabel?: string; dark?: boolean }) {
+  /* FOUR VARIANTS, AND `mini` IS THE NEW ONE.
+   *
+   * The home page carried two forms with ten fields between them, one of them sitting on top of the
+   * hero photograph. A six-field form is the densest object it is possible to put in a hero: six
+   * labels, six inputs, two of them selects, a submit button and a note, all competing with the
+   * headline for the same attention.
+   *
+   * `mini` is name, phone, city. Three fields, and deliberately no email - this is a trade that
+   * calls people back, and the next question ("what are you lighting?") is better asked by a person
+   * on the phone than by a select element sitting on a photograph. The full conversation still
+   * happens: the closing form at the foot of the page is `compact`, and the dedicated
+   * /free-design-consultation page is `full`.
+   *
+   * `dark` is separate from `variant` on purpose. The dark treatment used to be welded to the
    * financing variant, which also swaps every label and option to linear-foot language. The hero
-   * needs the dark card with the ordinary questions on it, which is what phoenixroofingandrepair.com
-   * does - their hero form is a dark translucent panel sitting on the roof photograph. */
+   * needs the dark card with the ordinary questions on it. */
   const onDark = variant === "financing" || !!dark;
+  const mini = variant === "mini";
   return (
     <form
       className={cn(
@@ -161,7 +187,7 @@ export function QuoteForm({
           ? "form-on-dark bg-raise shadow-[var(--shadow-dark)] ring-1 ring-accent/15"
           : "bg-card shadow-[var(--shadow-lg)]"
       )}
-      /* No backend wired yet — see README. Renders its own success and error states. */
+      /* No backend wired yet - see README. Renders its own success and error states. */
       action="/free-design-consultation"
       method="get"
     >
@@ -170,66 +196,70 @@ export function QuoteForm({
       )}
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="sm:col-span-2">
-          <Label htmlFor={`${variant}-name`}>Full name</Label>
-          <Input id={`${variant}-name`} name="name" required autoComplete="name" placeholder="Jordan Miller" />
+          <Label htmlFor={variant + "-name"}>Full name</Label>
+          <Input id={variant + "-name"} name="name" required autoComplete="name" placeholder="Jordan Miller" />
         </div>
         <div>
-          <Label htmlFor={`${variant}-phone`}>Phone</Label>
-          <Input id={`${variant}-phone`} name="phone" type="tel" required autoComplete="tel" className="u" placeholder="402-555-0134" />
+          <Label htmlFor={variant + "-phone"}>Phone</Label>
+          <Input id={variant + "-phone"} name="phone" type="tel" required autoComplete="tel" className="u" placeholder="402-555-0134" />
         </div>
-        <div>
-          <Label htmlFor={`${variant}-email`}>Email</Label>
-          <Input id={`${variant}-email`} name="email" type="email" required autoComplete="email" placeholder="you@example.org" />
-        </div>
+        {!mini && (
+          <div>
+            <Label htmlFor={variant + "-email"}>Email</Label>
+            <Input id={variant + "-email"} name="email" type="email" required autoComplete="email" placeholder="you@example.org" />
+          </div>
+        )}
         {variant === "full" && (
           <div className="sm:col-span-2">
-            <Label htmlFor={`${variant}-street`}>Street address</Label>
-            <Input id={`${variant}-street`} name="street" autoComplete="street-address" placeholder="1400 N 90th St" />
+            <Label htmlFor={variant + "-street"}>Street address</Label>
+            <Input id={variant + "-street"} name="street" autoComplete="street-address" placeholder="1400 N 90th St" />
           </div>
         )}
         <div>
-          <Label htmlFor={`${variant}-city`}>City</Label>
-          <Select id={`${variant}-city`} name="city" defaultValue={city ?? ""} required>
+          <Label htmlFor={variant + "-city"}>City</Label>
+          <Select id={variant + "-city"} name="city" defaultValue={city ?? ""} required>
             <option value="">Select your city</option>
             {cities.map((c) => (
               <option key={c.slug} value={c.name}>{c.name}{c.state === "IA" ? ", IA" : ""}</option>
             ))}
           </Select>
         </div>
-        <div>
-          <Label htmlFor={`${variant}-scope`}>
-            {variant === "financing" ? "Estimated roofline" : "What are you lighting"}
-          </Label>
-          {/* This had no empty option, so "Roofline" was not a placeholder — it was the
-            * default, and a form left alone submitted "Roofline" for somebody who came for
-            * landscape. Both selects now start empty and ask. */}
-          <Select id={`${variant}-scope`} name="scope" defaultValue="" required>
-            <option value="">
-              {variant === "financing" ? "Roughly how much" : "Choose one"}
-            </option>
-            {variant === "financing" ? (
-              <>
-                <option>Under 150 linear ft</option>
-                <option>150 to 250 linear ft</option>
-                <option>250 to 400 linear ft</option>
-                <option>Over 400 linear ft</option>
-                <option>Not sure yet</option>
-              </>
-            ) : (
-              <>
-                <option>Roofline</option>
-                <option>Landscape</option>
-                <option>Patio or pergola</option>
-                <option>Hardscape</option>
-                <option>Not sure yet</option>
-              </>
-            )}
-          </Select>
-        </div>
+        {!mini && (
+          <div>
+            <Label htmlFor={variant + "-scope"}>
+              {variant === "financing" ? "Estimated roofline" : "What are you lighting"}
+            </Label>
+            {/* This had no empty option, so "Roofline" was not a placeholder - it was the
+              * default, and a form left alone submitted "Roofline" for somebody who came for
+              * landscape. Both selects now start empty and ask. */}
+            <Select id={variant + "-scope"} name="scope" defaultValue="" required>
+              <option value="">
+                {variant === "financing" ? "Roughly how much" : "Choose one"}
+              </option>
+              {variant === "financing" ? (
+                <>
+                  <option>Under 150 linear ft</option>
+                  <option>150 to 250 linear ft</option>
+                  <option>250 to 400 linear ft</option>
+                  <option>Over 400 linear ft</option>
+                  <option>Not sure yet</option>
+                </>
+              ) : (
+                <>
+                  <option>Roofline</option>
+                  <option>Landscape</option>
+                  <option>Patio or pergola</option>
+                  <option>Hardscape</option>
+                  <option>Not sure yet</option>
+                </>
+              )}
+            </Select>
+          </div>
+        )}
         {variant === "full" && (
           <div className="sm:col-span-2">
-            <Label htmlFor={`${variant}-notes`}>Notes</Label>
-            <Textarea id={`${variant}-notes`} name="notes" rows={3} placeholder="Two story, dormers on the front elevation." />
+            <Label htmlFor={variant + "-notes"}>Notes</Label>
+            <Textarea id={variant + "-notes"} name="notes" rows={3} placeholder="Two story, dormers on the front elevation." />
           </div>
         )}
       </div>

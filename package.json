@@ -16,7 +16,8 @@
     "check": "tsc --noEmit && node scripts/photo-keys.mjs && node scripts/hex-lock.mjs && node scripts/section-rhythm.mjs && node scripts/contrast.mjs && bash scripts/slopcheck.sh",
     "herocontrast": "python3 scripts/hero-contrast.py",
     "rhythm": "node scripts/section-rhythm.mjs",
-    "hexlock": "node scripts/hex-lock.mjs"
+    "hexlock": "node scripts/hex-lock.mjs",
+    "words": "node scripts/wordcount.mjs"
   },
   "dependencies": {
     "@fontsource/archivo": "^5.3.0",

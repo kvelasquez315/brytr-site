@@ -2,73 +2,72 @@ import { Header, MobileCallBar } from "@/components/site/header";
 import { navTree } from "@/content/nav";
 import { Footer } from "@/components/site/footer";
 import { Hero } from "@/components/sections/hero";
-import { ProofRail } from "@/components/sections/proof-rail";
 import { SceneWipe } from "@/components/sections/scene-wipe";
 import {
-  WhoWeAre,
   Services,
+  WhoWeAre,
   HowWeWork,
-  Founders,
-  WhyTrust,
   Reviews,
   RecentWork,
-  CallToAction,
   Faqs,
   Closer,
-} from "@/components/sections/home-phx";
-import { Jsonld, localBusiness } from "@/lib/schema";
+  faqItems,
+} from "@/components/sections/home";
+import { Jsonld, localBusiness, faqSchema } from "@/lib/schema";
 
 export default function Home() {
   return (
     <>
       <Jsonld data={localBusiness()} />
+      {/* FAQPage, which /pricing and /faq already emit and this page did not.
+        *
+        * It matters more here than on either of those, because a collapsed Radix accordion item's
+        * answer is NOT in the rendered HTML - only the open one is. So the eleven answers in
+        * section 8 are about 700 words a reader can reach in one click and a crawler cannot reach
+        * at all, and this is the only route by which they count. Built from the same `faqItems`
+        * array the accordion renders, so the markup cannot drift from what a reader sees - which is
+        * the one condition Google actually enforces on this schema type. */}
+      <Jsonld data={faqSchema(faqItems)} />
       <Header nav={navTree} />
       <main>
-        {/* THIRTEEN SECTIONS, IN PHOENIXROOFINGANDREPAIR.COM'S ORDER, SLOT FOR SLOT.
+        {/* NINE SECTIONS, DOWN FROM THIRTEEN.
           *
-          * The brief: "Look at phoenixroofingandrepair.com and basically copy their exact layout
-          * of their website, just with our brand colors and information and pictures. The layout
-          * should be exactly the same." So the page below is their page. I opened it in Chrome and
-          * measured it rather than reading a markdown conversion of it - the mistake that cost
-          * three rounds earlier - and what came back was thirteen sections in a fixed order, a
-          * card radius of 12px with 38 pill elements, one soft warm shadow, and H2s at 50px/800
-          * in a condensed face with a single 64px exception over the reviews.
+          * The thirteen were phoenixroofingandrepair.com's, in their order, on an explicit brief to
+          * copy that layout slot for slot. The client's read of the built result: "the design of
+          * this website is just awful, there is way too much text going on and it needs to be
+          * simplified."
           *
-          * WHAT MAPS ONE-TO-ONE. Their hero with the badge row above the headline and a dark form
-          * card on the photograph; their who-we-are with a photo mosaic against a 2x2 feature
-          * grid; their five photo service cards plus a sixth dark promo card; their split with
-          * four icon rows against a tall photograph; their founders; their why-trust ticks; their
-          * dark staggered review band; their work grid; their coloured call-to-action; their card
-          * accordion; their closing form.
+          * Measured on the page that produced that verdict: 13 sections, 39 headings, 2 forms with
+          * 10 fields, 65 fully-rounded elements, and every one of the 12 section headings set at
+          * the same 54px as the h1. The rating - 5.0 from 196 Google reviews - was stated in six
+          * separate places. See the header comment in components/sections/home.tsx for what came
+          * out and why.
           *
-          * WHERE I DEPART FROM THEM, AND IT IS ONLY EVER FOR THE SAME REASON. Phoenix's second
-          * section is eight industry marks - GAF Master Elite, HAAG, TRI, BBB A+, Inc. 5000.
-          * Brytr holds none of those. That slot keeps Phoenix's shape and carries the one thing
-          * that is true and checkable, the Google rating, which is also what the client asked for
-          * two rounds ago: "It should just have reviews and then the Google logo." Their video
-          * testimonial card is a photograph here because there is no video. Their award card is a
-          * review. Nothing on this page is a credential Brytr does not hold.
+          * FOUR SECTIONS WERE DELETED OUTRIGHT rather than shrunk, because each one existed to make
+          * a point the page already made somewhere else:
           *
-          * THE COLOUR TRANSLATION. Their orange #FD7206 is our amber, their near-black #1E1E1E is
-          * our navy, their cream #FFF6F0 is our warm neutral, their dark brown gradient is our
-          * raise. Every value comes from a token in globals.css - there is no hex in this tree.
+          *   ProofRail     a whole section for one number the hero states 400px above it
+          *   Founders      two cards and six tick rows for a fact that is one sentence
+          *   WhyTrust      seven ticks, four of them the HowWeWork items restated
+          *   CallToAction  an amber band asking for the same click as the closing section
           *
-          * THE GROUND ALTERNATES THE WHOLE WAY DOWN and never repeats across a seam: photograph,
-          * cream, white, cream, white, cream, dark, white, dark, cream, amber, white, cream, into
-          * the footer. No rules drawn between sections. */}
-        <Hero />          {/*  1 · photograph, badge row, dark form card      · photo      */}
-        <ProofRail />     {/*  2 · their certifications slot → the rating     · muted      */}
-        <WhoWeAre />      {/*  3 · WHO WE ARE - photo mosaic | 2x2 features   · background */}
-        <Services />      {/*  4 · OUR SERVICES - 5 photo cards + 1 dark      · muted      */}
-        <HowWeWork />     {/*  5 · HOW WE WORK - 4 icon rows | tall photo     · background */}
-        <Founders />      {/*  6 · their two-brothers slot - Zac and Sam      · muted      */}
-        <SceneWipe />     {/*  7 · their find-your-service slot - the wipe    · raise      */}
-        <WhyTrust />      {/*  8 · WHY HOMEOWNERS TRUST US - ticks | photo    · background */}
-        <Reviews />       {/*  9 · WHAT OUR CLIENTS SAY - staggered cards     · raise      */}
-        <RecentWork />    {/* 10 · RECENT WORK - the photo grid               · muted      */}
-        <CallToAction />  {/* 11 · their ready-for-a-roof band, two pills     · accent     */}
-        <Faqs />          {/* 12 · MOST ASKED - the card accordion            · background */}
-        <Closer />        {/* 13 · the form above the footer                  · muted      */}
+          * THE DRAG DEMO MOVED FROM SEVENTH TO SECOND. It is the only thing on this site that no
+          * competitor in the metro has, and it was three thousand pixels down behind five sections
+          * of claims. The proof now comes directly after the hero and the claims come after it.
+          *
+          * THE GROUND ALTERNATES AND NEVER RUNS MORE THAN TWO DEEP - photograph, raise, muted,
+          * background, raise, muted, primary, background, muted, into the primary footer. The old
+          * page ran five light sections in a row. No rules are drawn between sections; the ground
+          * change IS the seam. */}
+        <Hero />          {/* 1 · photograph, one line of proof, 3-field form  · photo      */}
+        <SceneWipe />     {/* 2 · the drag demo, promoted from slot 7          · raise      */}
+        <Services />      {/* 3 · five photo cards, each card is the link      · muted      */}
+        <WhoWeAre />      {/* 4 · photo mosaic | features + the founders line  · background */}
+        <HowWeWork />     {/* 5 · four items | daylight photo. Absorbs trust   · raise      */}
+        <Reviews />       {/* 6 · the one loud heading, three real reviews     · muted      */}
+        <RecentWork />    {/* 7 · night photographs on the night ground        · primary    */}
+        <Faqs />          {/* 8 · eight questions, and the page's SEO ballast  · background */}
+        <Closer />        {/* 9 · one close: form, phone, hours. Was two       · muted      */}
       </main>
       <Footer />
       <MobileCallBar />

@@ -6,26 +6,37 @@ import { images } from "@/content/images";
 import { SectionHead } from "@/components/ui/bits";
 import { Elevation } from "./elevation";
 
-/* THE SIGNATURE: The Dusk Line — now its own full-width section.
+/* THE SIGNATURE: The Dusk Line.
  *
- * One draggable amber line. Both halves are the SAME house from the SAME camera position on
- * the same evening, registered so the handle wipes one into the other — which is the whole
- * product argument in one gesture. It used to sit in the hero as a card, which put a widget
- * where the hero photograph belonged. If either photo is missing the handle wipes the two
- * drawn states instead.
+ * One draggable amber line. Both halves are the SAME house from the SAME camera position on the
+ * same evening, registered so the handle wipes one into the other - which is the whole product
+ * argument in one gesture. If either photo is missing the handle wipes the two drawn states instead.
  *
- * The left half is genuinely the everyday setting again. It briefly was not: the pair used
- * to be hero-warm-white.jpg against hero-game-day.jpg, and the first of those is a soft pink
- * rather than warm white, so this section was captioning the wrong colour of light as the
- * default. See the note on the hero pair in content/images.ts — the pool-deck shoot turned
- * out to be one property photographed in both states, which is what this device needed all
- * along.
+ * IT IS NOW THE SECOND SECTION ON THE PAGE. It was the seventh, roughly three thousand pixels down,
+ * behind a rating band, a photo mosaic, a six-card service grid, a four-row split and a founders
+ * section. This is the demo of the single feature the product is bought for and the only thing on
+ * the site no competitor in the metro has; it does not belong in slot seven. Everything that used
+ * to sit above it is a claim, and this is the proof, so it goes directly under the hero and the
+ * claims come after.
  *
- * THE HEADER SAYS WHAT THIS IS NOW. It used to open "One house, two taps" over "The same
- * roofline, on a Tuesday and on a Saturday", which is a nice line and tells a homeowner nothing.
- * This section is the demo of the single feature the product is bought for, and a reader
- * scrolling past could not tell. "How the color works" over "Warm white every night. Any color
- * when you want it." names it. */
+ * THE LEDE WAS FOUR LINES AND IS NOW ONE. It read: "Drag the line to see it. Both halves are the
+ * same Omaha house from the same camera position on the same evening - everyday warm white on the
+ * left, a saved colour scene on the right. Nothing was repainted and nothing was rewired between
+ * the two: it is one tap in the app." Every clause of that is true and the section needs a reader
+ * to believe it, but it is 47 words spent describing an interaction that is sitting right there
+ * with a handle on it. The claim that actually needs stating is that it is one house and one
+ * evening, because that is the part a sceptic will doubt. The rest is what dragging it shows.
+ *
+ * THE SPEC PANEL LOST ITS PARAGRAPH. Below the four spec rows there was a further sentence per
+ * state ("Any two colours can be saved as their own scene and scheduled to a date range, so the
+ * house changes without anyone touching it.") and then a caption. The four rows already say it in
+ * the form a reader can scan, which is the point of a spec panel.
+ *
+ * The left half is genuinely the everyday setting. It briefly was not: the pair used to be
+ * hero-warm-white.jpg against hero-game-day.jpg, and the first of those is a soft pink rather than
+ * warm white, so this section was captioning the wrong colour of light as the default. See the note
+ * on the hero pair in content/images.ts.
+ */
 
 const warmSpecs = [
   ["Everyday scene", "Warm white, roofline and grounds"],
@@ -34,7 +45,7 @@ const warmSpecs = [
   ["Runs from", "The app, or the wall switch"],
 ];
 const sceneSpecs = [
-  ["Saved scene", "One color, every run"],
+  ["Saved scene", "One colour, every run"],
   ["Zones on it", "House, pergola, walls and deck"],
   ["Switch time", "One tap, no ladder"],
   ["Scheduled by", "Date range, set once"],
@@ -76,17 +87,17 @@ export function SceneWipe() {
 
   return (
     <section className="section bg-raise">
-      {/* The onward link sits on the RIGHT OF THE HEAD, the same as Reviews, RecentWork and the
-        * FAQ. Left-aligned on its own it left roughly 600 x 150px of empty band beside the lede,
-        * which on a page whose first rule is density is not a neutral choice. */}
       <div className="shell">
+        {/* The onward link sits on the RIGHT OF THE HEAD, the same as RecentWork, Reviews and the
+          * FAQ. Left-aligned on its own it left roughly 600 x 150px of empty band beside the lede. */}
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <SectionHead
             onDark
-            className="max-w-[56rem]"
-            eyebrow="How the color works"
-            title="Warm white every night. Any color when you want it."
-            lede="Drag the line to see it. Both halves are the same Omaha house from the same camera position on the same evening — everyday warm white on the left, a saved color scene on the right. Nothing was repainted and nothing was rewired between the two: it is one tap in the app."
+            scale="section"
+            className="max-w-[46rem]"
+            eyebrow="How the colour works"
+            title="Warm white every night. Any colour when you want it."
+            lede="Drag the line. It is one house, one camera position, one evening - nothing was rewired between the two halves."
           />
           <Link
             href="/gallery"
@@ -97,7 +108,7 @@ export function SceneWipe() {
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_20rem]">
+        <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_19rem]">
           <div>
             <div className="flex items-center justify-between px-1 pb-3">
               <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-on-dark-muted" : "text-accent"}`}>
@@ -105,24 +116,21 @@ export function SceneWipe() {
               </span>
               <span className="label text-on-dark-muted">Drag the line</span>
               <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-accent" : "text-on-dark-muted"}`}>
-                One color
+                One colour
               </span>
             </div>
 
-            {/* The aspect ratio lives on the TRACK and both photographs are absolutely
-              * positioned inside it, so the two layers are the same box by construction.
-              * They used to derive height from an in-flow child, which meant anything else
-              * landing in flow changed one layer and not the other.
-              *
-              * The radius is back. It came off in the de-box round on a false premise; both
-              * references put their media in 14px cards, and so does the rest of this page. */}
+            {/* The aspect ratio lives on the TRACK and both photographs are absolutely positioned
+              * inside it, so the two layers are the same box by construction. They used to derive
+              * height from an in-flow child, which meant anything else landing in flow changed one
+              * layer and not the other. */}
             <div
               ref={track}
               className={`relative overflow-hidden rounded-lg ${hasPair ? "aspect-video" : ""}`}
             >
               {hasPair && scene.src && warm.src ? (
                 <>
-                  {/* base layer: the color scene */}
+                  {/* base layer: the colour scene */}
                   <Image src={scene.src} alt={scene.alt} fill sizes="(min-width:1024px) 62vw, 100vw" className="object-cover" />
 
                   {/* warm-white layer, clipped left of the line */}
@@ -144,11 +152,11 @@ export function SceneWipe() {
               <button
                 data-dusk
                 role="slider"
-                aria-label="Drag to switch the roofline between everyday warm white and a saved color scene"
+                aria-label="Drag to switch the roofline between everyday warm white and a saved colour scene"
                 aria-valuemin={6}
                 aria-valuemax={94}
                 aria-valuenow={Math.round(pct)}
-                aria-valuetext={mostlyScene ? "Mostly the saved color scene" : "Mostly everyday warm white"}
+                aria-valuetext={mostlyScene ? "Mostly the saved colour scene" : "Mostly everyday warm white"}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowLeft") { e.preventDefault(); setPct((v) => Math.max(6, v - 5)); }
                   if (e.key === "ArrowRight") { e.preventDefault(); setPct((v) => Math.min(94, v + 5)); }
@@ -163,29 +171,23 @@ export function SceneWipe() {
             </div>
           </div>
 
-          {/* spec panel — swaps with the state, so the right side is full either way. A card
-            * again, at the same 14px as everything else on the page. */}
-          <div className="flex flex-col rounded-lg bg-primary p-6 lg:p-7">
+          {/* The spec panel swaps with the state, so the right side is full either way. */}
+          <div className="flex flex-col rounded-lg bg-primary p-6">
             <p className="label text-accent">
               {mostlyScene ? "Saved scene" : "Everyday setting"}
             </p>
             <h3 className="mt-3 text-xl text-on-dark">
-              {mostlyScene ? "One color, the whole property" : "Warm white, every night"}
+              {mostlyScene ? "One colour, the whole property" : "Warm white, every night"}
             </h3>
             <dl className="mt-6 divide-y divide-on-dark/10 border-y border-on-dark/10">
               {(mostlyScene ? sceneSpecs : warmSpecs).map(([k, v]) => (
                 <div key={k} className="flex items-baseline justify-between gap-4 py-3.5">
                   <dt className="text-sm text-on-dark-muted">{k}</dt>
-                  <dd className="u text-sm font-medium text-on-dark">{v}</dd>
+                  <dd className="u text-right text-sm font-medium text-on-dark">{v}</dd>
                 </div>
               ))}
             </dl>
-            <p className="mt-6 flex-1 text-[0.95rem] text-on-dark-muted">
-              {mostlyScene
-                ? "Any two colors can be saved as their own scene and scheduled to a date range, so the house changes without anyone touching it."
-                : "This is the setting most customers leave on year round. Color is the exception, not the point."}
-            </p>
-            <p className="label mt-6 border-t border-on-dark/10 pt-4 text-on-dark-muted">
+            <p className="label mt-auto pt-6 text-on-dark-muted">
               Photographed on a completed Omaha install
             </p>
           </div>
