@@ -9,6 +9,7 @@ import { googleLogo } from "@/content/badges";
 import { homeFaqs, pricingFaqs } from "@/content/faqs";
 import { SectionHead, QuoteForm } from "@/components/ui/bits";
 import { Faq } from "@/components/sections/faq";
+import { ServiceLeaflet } from "@/components/sections/service-leaflet";
 
 /* THE HOME PAGE SECTIONS.
  *
@@ -323,22 +324,70 @@ export function WhoWeAre() {
   const shot = images.installDayGarage;
   return (
     <section className="section bg-background">
-      <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
-        <div className="flex flex-col">
-          <SectionHead
-            scale="section"
-            eyebrow="Who we are"
-            title="Omaha's permanent lighting company"
-            lede="We fit one run of colour-matched channel to your roofline, beds, patio and walls, and it stays there. No ladders in November, no boxes in the garage, and no crew you have never met."
-          />
+      <div className="shell">
+        {/* ── who we are ── */}
+        <div className="grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
+          <div className="flex flex-col">
+            <SectionHead
+              scale="section"
+              eyebrow="Who we are"
+              title="Omaha's permanent lighting company"
+              lede="We fit one run of colour-matched channel to your roofline, beds, patio and walls, and it stays there. No ladders in November, no boxes in the garage, and nobody on your roof you have not already met."
+            />
+            <div className="mt-auto flex flex-wrap items-center gap-4 pt-9">
+              <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
+              <DarkPill href="/about">More about us</DarkPill>
+            </div>
+          </div>
 
-          {/* THE TOWNS, NAMED. Twenty of them, in four columns, as plain text rather than pills or
-            * cards - "do you come to my town" is a lookup, and a lookup wants a list. This is the
-            * densest honest thing available for this section: real information a reader can scan
-            * in two seconds, rather than four claims restating the sections either side of it. */}
-          <div className="mt-9 border-t border-border pt-7">
+          {/* The photograph runs the full height of the row, with the one confirmed figure as an
+            * opaque card on its bottom edge - no scrim needed, and no gap above or below it. */}
+          <div className="relative min-h-[24rem]">
+            {shot?.src && (
+              <div className="relative h-full w-full overflow-hidden rounded-lg bg-primary">
+                <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 24rem, 100vw" className="object-cover" />
+              </div>
+            )}
+            <div className="absolute inset-x-5 bottom-5 rounded-lg bg-card p-5 shadow-[var(--shadow-dark)]">
+              <p className="u font-display text-[2.5rem] font-bold leading-none text-accent-ink">1.2M</p>
+              <h3 className="mt-1.5 font-display text-[1rem] font-bold leading-snug text-foreground">
+                Lights installed around Omaha
+              </h3>
+            </div>
+          </div>
+        </div>
+
+        {/* ── where we work ──
+          *
+          * THE MAP IS THE SECTION NOW, and the list is what sits beside it. The client asked for
+          * "an embedded leaflet map right there that has pins on all of our different locations",
+          * and the component to do it already existed: components/sections/service-leaflet.tsx,
+          * built for /service-areas, in exactly this pairing. Every city in content/cities.ts
+          * already carries real coordinates, so nothing is plotted by hand.
+          *
+          * IT IS THE ONE PIECE OF DECORATION-FREE COLOUR ON A LIGHT PAGE, and it earns it: each
+          * town is an amber pin with a real glow, so the map reads as a map OF LIGHTS rather than
+          * a scatter plot. That is the product, drawn as geography.
+          *
+          * THE LIST STAYS. A map answers "where roughly" and a list answers "is my town on it",
+          * and those are different questions - the second one is the one a homeowner in Gretna is
+          * actually asking. The map's own tile-failure fallback is written on the assumption that
+          * the list is beside it, so removing the list would break the error state too.
+          *
+          * No legend. It exists on the component and is genuinely useful on /service-areas, but
+          * here it is a third thing to read in a section that has already had two rebuilds for
+          * being cluttered. Hovering a pin gives the town and the drive from the shop. */}
+        <div className="mt-14 grid items-stretch gap-8 border-t border-border pt-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
+          <ServiceLeaflet className="min-h-[22rem] w-full lg:min-h-[26rem]" />
+
+          <div className="flex flex-col">
             <p className="label text-accent-ink">Where we work</p>
-            <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3 xl:grid-cols-4">
+            <h3 className="mt-3 font-display text-[1.35rem] font-bold leading-tight text-foreground">
+              Eighteen towns, and the drive from our shop
+            </h3>
+            {/* "Do you come to my town" is a lookup, and a lookup wants a list rather than pills
+              * or cards. Each name is its own page. */}
+            <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2">
               {cities.map((c) => (
                 <li key={c.slug}>
                   <Link
@@ -351,27 +400,9 @@ export function WhoWeAre() {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className="mt-auto flex flex-wrap items-center gap-4 border-t border-border pt-7">
-            <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
-            <DarkPill href="/service-areas">See every service area</DarkPill>
-          </div>
-        </div>
-
-        {/* The photograph runs the full height of the section, with the one confirmed figure as an
-          * opaque card on its bottom edge - no scrim needed, and no gap above or below it. */}
-        <div className="relative min-h-[24rem]">
-          {shot?.src && (
-            <div className="relative h-full w-full overflow-hidden rounded-lg bg-primary">
-              <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 24rem, 100vw" className="object-cover" />
+            <div className="mt-auto pt-7">
+              <DarkPill href="/service-areas">See every service area</DarkPill>
             </div>
-          )}
-          <div className="absolute inset-x-5 bottom-5 rounded-lg bg-card p-5 shadow-[var(--shadow-dark)]">
-            <p className="u font-display text-[2.5rem] font-bold leading-none text-accent-ink">1.2M</p>
-            <h3 className="mt-1.5 font-display text-[1rem] font-bold leading-snug text-foreground">
-              Lights installed around Omaha
-            </h3>
           </div>
         </div>
       </div>
