@@ -36,8 +36,14 @@ export function Faq({ items, onDark }: { items: FaqItem[]; onDark?: boolean }) {
               {/* The chevron fills with the accent when the card is open, which is Phoenix's tell
                 * for which one you are reading. */}
               <span
+                /* The CLOSED chevron carries a soft amber wash rather than grey. On a page of six
+                  * white cards the grey circles were the only mark on any of them, and six grey
+                  * dots is what "needs more colour" was pointing at. This stays inside the rule
+                  * that amber is CTA-and-active-state only: a chevron is the control, and the wash
+                  * is what tells you the row is one you can open. Full amber is still reserved for
+                  * the row that IS open. */
                 className={`grid size-9 shrink-0 place-items-center rounded-full transition-colors duration-[--dur-fast] group-data-[state=open]:bg-accent group-data-[state=open]:text-accent-foreground ${
-                  onDark ? "bg-on-dark/10 text-on-dark-muted" : "bg-muted text-muted-foreground"
+                  onDark ? "bg-on-dark/10 text-on-dark-muted" : "bg-accent/15 text-accent-ink"
                 }`}
                 aria-hidden
               >

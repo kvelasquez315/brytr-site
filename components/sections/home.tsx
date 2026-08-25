@@ -70,12 +70,16 @@ import { Faq } from "@/components/sections/faq";
  * - not the JSX, which is a much larger and irrelevant number:
  *
  *     1,740  before, all of it prose a reader scrolls past
- *       679  after, prose a reader scrolls past
- *       526  the FAQ, mostly folded into collapsed cards but in the HTML (see section 8)
- *     1,205  total indexable, against the 800 floor the client set for SEO
+ *       687  after, prose a reader scrolls past
+ *       306  the FAQ, mostly folded into collapsed cards but in the HTML (see section 8)
+ *       993  total indexable, against the 800 floor the client set for SEO
  *
- * So the page a reader meets is 61% shorter while the page a crawler reads is only 31% shorter.
- * That gap is the whole trick, and it is why the FAQ is the one section that got LONGER.
+ * So the page a reader meets is 60% shorter while the page a crawler reads is 43% shorter. That gap
+ * is the whole trick, and it is bought by `forceMount` on the accordion rather than by padding.
+ *
+ * THE MARGIN IS 193 WORDS AND IT USED TO BE 405. Cutting the FAQ from eleven questions to six was
+ * the client's call and the right one visually, but it spent half the headroom - so the next round
+ * of trimming visible prose has to check this number rather than assume it.
  *
  * THE GROUND, AND A DELIBERATE DEPARTURE FROM THE RULE AT THE TOP OF globals.css:
  *
@@ -123,6 +127,22 @@ function DarkPill({ href, children }: { href: string; children: React.ReactNode 
       className="tap-44 inline-flex h-12 items-center rounded-full bg-primary px-7 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-raise"
     >
       {children}
+    </Link>
+  );
+}
+
+/* The booking CTA, repeated. The client asked for "more calls to action throughout": the page had
+ * one in the hero, one on the Services promo card and one at the very bottom, which left the whole
+ * middle - the drag demo, who we are, how we work, the reviews, the work grid - with nothing to
+ * click but soft onward links to other pages. This now closes WhoWeAre, HowWeWork and the FAQ. */
+function AccentPill({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <Link
+      href={href}
+      className="tap-44 inline-flex h-12 items-center gap-2.5 rounded-full bg-accent px-7 font-semibold text-accent-foreground transition-colors duration-[--dur-fast] hover:bg-accent-deep"
+    >
+      {children}
+      <span aria-hidden>&rarr;</span>
     </Link>
   );
 }
@@ -261,18 +281,34 @@ export function Services() {
 }
 
 /* ==========================================================================
- * 4 - WHO WE ARE. A four-photograph mosaic with the one confirmed figure set into it, against a
- * copy column.
+ * 4 - WHO WE ARE. One photograph, the one confirmed figure set onto it, four cards, two buttons.
  *
- * THE FOUR FEATURES LOST THEIR PARAGRAPHS. They read, for example, "Whole property / Roofline,
- * soffit, beds, patio and hardscape on one channel and one app." - a title plus a twelve-word
- * sentence, four times, immediately under a lede that had already said the same thing. They are now
- * a title and a phrase. The phrase is there to be glanced at, not read.
+ * REDESIGNED, BECAUSE IT WAS UGLY AND THE CLIENT SAID SO. "That one really needs to be designed a
+ * lot better. Right now, it is very ugly."
  *
- * ZAC AND SAM ARRIVE HERE. Deleting their section did not delete them: the fact that the founders
- * still run the walk-arounds is the single most persuasive thing in that whole deleted section, and
- * it is one sentence. The two cards, the two avatar monograms and the six tick rows were the parts
- * that were not persuasive.
+ * He is right, and it is worth being precise about why, because the section was not badly built -
+ * it was built for a component that no longer exists. It had a four-crop photo mosaic with a figure
+ * card wedged into the middle of it, and a copy column of four features each introduced by an icon
+ * tile. Take the icons out - which he also asked for, correctly - and what is left of the right
+ * column is four hairlines with text under them. Text under a rule is not a design; it is what a
+ * design looks like when you remove the part that was carrying it.
+ *
+ * WHAT IT IS NOW:
+ *
+ *   ONE PHOTOGRAPH INSTEAD OF FOUR. The mosaic was four 24vw crops of four different scenes, each
+ *   too small to read as anything. One 26rem portrait of an install actually in progress - daylight,
+ *   van open, two people working - says "this is who we are" better than four thumbnails, and it is
+ *   a daylight frame, which the page needs more of.
+ *
+ *   THE FIGURE SITS ON THE PHOTOGRAPH. 1.2M was in a card jammed between two rows of the mosaic,
+ *   which is why the mosaic needed all that flex-grow arithmetic to avoid leaving a hole. As an
+ *   opaque card inset on the photograph's bottom edge it needs no scrim, holds its own contrast,
+ *   and is a composed moment rather than a gap-filler.
+ *
+ *   THE FOUR FEATURES ARE CARDS. White on warm limestone, with real padding. A card gives each
+ *   claim an edge and a ground, which is what the icon tile was faking.
+ *
+ *   AND IT ENDS ON A BOOKING BUTTON rather than a soft link to /about.
  * ========================================================================= */
 const ABOUT_FEATURES: { title: string; body: string }[] = [
   { title: "Whole property", body: "Roofline, beds, patio and hardscape, one app" },
@@ -282,69 +318,43 @@ const ABOUT_FEATURES: { title: string; body: string }[] = [
 ];
 
 export function WhoWeAre() {
-  const m = [images.installDayGarage, images.crewRoofFascia, images.walkthroughDusk, images.installDayPavilion];
+  const shot = images.installDayGarage;
   return (
     <section className="section bg-background">
-      <div className="shell grid items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
-        {/* THE MOSAIC IS A FLEX COLUMN, NOT A GRID, and that is load-bearing.
-          *
-          * It was `grid gap-4` with three fixed rows, so its height was whatever four 4:3 crops and
-          * a card happened to add up to - 720px against a copy column of 925px, leaving a 290px
-          * hole in the bottom left of the section. That is the site's worst failure mode arriving by
-          * arithmetic rather than by layout.
-          *
-          * Now the two photo rows GROW. The section's height is set by the copy column, the rows
-          * split whatever is left after the figure card, and the crops go to `h-full` above lg so
-          * they fill rather than letterbox. Both columns end on the same line at every width. */}
-        <div className="flex flex-col gap-4">
-          <div className="grid grid-cols-2 gap-4 lg:min-h-0 lg:flex-1">
-            {m.slice(0, 2).map((img, i) =>
-              img?.src ? (
-                <div key={i} className="relative aspect-4/3 overflow-hidden rounded-lg bg-primary lg:aspect-auto lg:h-full">
-                  <Image src={img.src} alt={img.alt} fill sizes="(min-width:1024px) 24vw, 45vw" className="object-cover" />
-                </div>
-              ) : null
-            )}
-          </div>
-
-          {/* The one hard figure the client confirmed on camera, set into the mosaic. Its
-            * two-line explanation came off: "not a national franchise total" is a comparison
-            * nobody was making. */}
-          <div className="flex items-center gap-6 rounded-lg bg-muted p-6">
-            <p className="u shrink-0 font-display text-[2.75rem] font-bold leading-none text-accent-ink">1.2M</p>
-            <h3 className="font-display text-[1.1rem] font-bold leading-snug text-foreground">
+      <div className="shell grid items-center gap-12 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-16">
+        {/* ONE PHOTOGRAPH, NOT FOUR, with the figure set onto its bottom edge. */}
+        <div className="relative">
+          {shot?.src && (
+            <div className="relative aspect-3/4 overflow-hidden rounded-lg bg-primary">
+              <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 26rem, 100vw" className="object-cover" />
+            </div>
+          )}
+          <div className="absolute inset-x-5 bottom-5 rounded-lg bg-card p-5 shadow-[var(--shadow-dark)]">
+            <p className="u font-display text-[2.5rem] font-bold leading-none text-accent-ink">1.2M</p>
+            <h3 className="mt-1.5 font-display text-[1rem] font-bold leading-snug text-foreground">
               Lights installed around Omaha
             </h3>
           </div>
-
-          <div className="grid grid-cols-2 gap-4 lg:min-h-0 lg:flex-1">
-            {m.slice(2, 4).map((img, i) =>
-              img?.src ? (
-                <div key={i} className="relative aspect-4/3 overflow-hidden rounded-lg bg-primary lg:aspect-auto lg:h-full">
-                  <Image src={img.src} alt={img.alt} fill sizes="(min-width:1024px) 24vw, 45vw" className="object-cover" />
-                </div>
-              ) : null
-            )}
-          </div>
         </div>
 
-        <div className="flex flex-col">
+        <div>
           <SectionHead
             scale="section"
             eyebrow="Who we are"
             title="Permanent lighting installers, based in Omaha"
           />
 
-          <dl className="mt-8 grid gap-x-10 gap-y-7 border-t border-border pt-8 sm:grid-cols-2">
+          <dl className="mt-9 grid gap-4 sm:grid-cols-2">
             {ABOUT_FEATURES.map((f) => (
-              <div key={f.title} className="border-t border-border pt-4">
-                <dt className="font-display text-[1.02rem] font-bold leading-snug text-foreground">{f.title}</dt>
-                <dd className="mt-1.5 text-[0.9rem] leading-snug text-muted-foreground">{f.body}</dd>
+              <div key={f.title} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+                <dt className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{f.title}</dt>
+                <dd className="mt-2 text-[0.92rem] leading-snug text-muted-foreground">{f.body}</dd>
               </div>
             ))}
           </dl>
 
-          <div className="mt-auto pt-8">
+          <div className="mt-9 flex flex-wrap items-center gap-4">
+            <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
             <DarkPill href="/about">More about us</DarkPill>
           </div>
         </div>
@@ -394,20 +404,35 @@ export function HowWeWork() {
             lede="Permanent lighting is drilled into your fascia and left there. How it is fixed and sealed is the whole difference between a run that still looks right in five years and one that does not."
           />
 
-          <ul className="mt-9 grid gap-7 sm:grid-cols-2">
-            {HOW_ITEMS.map((h) => (
-              <li key={h.title} className="border-t border-on-dark/20 pt-4">
-                <h3 className="font-display text-[1.02rem] font-bold leading-snug text-on-dark">{h.title}</h3>
-                <p className="mt-1.5 text-[0.9rem] leading-snug text-on-dark-muted">{h.body}</p>
-              </li>
-            ))}
-          </ul>
+          {/* THE RUN. One continuous length of channel down the left of the four steps, with the
+            * steps clipped onto it - `.run-spine` from app/sections.css, the same device and the
+            * same diode pitch as the decision tree on /services.
+            *
+            * This is what replaced the icon tiles, and it is the answer to "I would rather we bring
+            * our own visual sense to it". A pictogram of a hard hat is a picture of a different
+            * thing; a length of lit channel beside four steps about how the channel gets installed
+            * is the product itself doing the work. It is also the only amber in the section, and
+            * amber reading vertically down a dark ground is most of the colour this page has. */}
+          <div className="mt-9 flex gap-6">
+            <span className="run-spine" aria-hidden />
+            <ul className="grid flex-1 gap-6">
+              {HOW_ITEMS.map((h) => (
+                <li key={h.title}>
+                  <h3 className="font-display text-[1.08rem] font-bold leading-snug text-on-dark">{h.title}</h3>
+                  <p className="mt-1.5 text-[0.92rem] leading-snug text-on-dark-muted">{h.body}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-          {/* The one line worth keeping out of the deleted WhyTrust section: it is the section's
-            * whole argument, and it is the reason there are no invented seals on this page. */}
-          <div className="mt-auto flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-on-dark/15 pt-8">
-            <LightPill href="/how-it-works">How an install runs</LightPill>
-            <p className="max-w-[34ch] text-[0.92rem] leading-snug text-on-dark-muted">
+          <div className="mt-auto pt-9">
+            <div className="flex flex-wrap items-center gap-4">
+              <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
+              <LightPill href="/how-it-works">How an install runs</LightPill>
+            </div>
+            {/* The one line worth keeping out of the deleted WhyTrust section: it is that
+              * section's whole argument, and the reason there are no invented seals on this page. */}
+            <p className="mt-5 max-w-[42ch] text-[0.92rem] leading-snug text-on-dark-muted">
               Every claim on this page goes in writing before you sign.
             </p>
           </div>
@@ -452,14 +477,26 @@ export function Reviews() {
           <DarkPill href="/reviews">Read all {reviewProof.count}</DarkPill>
         </div>
 
-        {/* Staggered: the middle column drops, which is what stops three cards reading as a bar. */}
-        <div className="mt-12 grid items-start gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {three.map((r, i) => (
+        {/* THE STAGGER IS GONE. The middle card dropped 40px and the third 20px, inherited from
+          * Phoenix, whose argument for it was that three equal cards read as a bar. The client:
+          * "the review sections need to be aligned in a row. Right now, one is higher than the
+          * other, and they need to be perfectly aligned."
+          *
+          * He is right, and the stagger was solving a problem these cards do not have. Phoenix
+          * staggers because their cards are all the same height, so a flat row really is a bar.
+          * Ours hold three verbatim Google reviews of different lengths, so the ROW already has
+          * variety - and offsetting cards that are already unequal reads as a mistake rather than
+          * as a rhythm.
+          *
+          * `items-stretch` (the grid default, so `items-start` came off) plus `flex-1` on the
+          * blockquote means all three tops AND all three footers line up exactly, whatever the
+          * quotes do in between. That is the alignment he asked for, and it is the reason the
+          * quote length no longer shows. */}
+        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {three.map((r) => (
             <article
               key={r.name}
-              className={`flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ${
-                i === 1 ? "lg:mt-10" : i === 2 ? "lg:mt-5" : ""
-              }`}
+              className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)]"
             >
               {/* THE GOOGLE MARK REPLACES THE DECORATIVE QUOTE GLYPH that used to sit in this
                 * corner - a 48px amber ellipsis at 25% opacity, which was there to fill the corner
@@ -575,60 +612,78 @@ export function RecentWork() {
 }
 
 /* ==========================================================================
- * 8 - THE QUESTIONS. Eleven of the twenty-five in content/faqs.ts, with the rest on /faq.
+ * 8 - THE QUESTIONS. Six of the twenty-five in content/faqs.ts, beside a dark booking panel.
  *
- * A COLLAPSED ANSWER IS NOT IN THE HTML, and that is worth writing down because it is easy to
- * believe the opposite and I did.
+ * SHORTER, AND WITH SOMETHING TO LOOK AT. The client: "the FAQs need to be a whole lot shorter and
+ * use more color. We also need more calls to action throughout." Those were two notes and this
+ * section answers both, because they had the same cause: eleven full-width white cards on warm
+ * limestone is a thousand pixels of beige with nothing in it but chevrons, and it was the longest
+ * section on the page by some distance.
  *
- * Grepping the home page's response for the text of a CLOSED answer finds it, which looks like
- * proof that Radix server-renders accordion content either way. It is not. What the grep finds is
- * Next's RSC flight payload - the `self.__next_f.push([...])` script at the foot of the document -
- * which carries every prop passed to a client component whether it is rendered or not. Inside
- * <main>, only the one open item's answer exists; Radix unmounts the rest. Checked both ways:
+ *   ELEVEN BECOMES SIX. Chosen, not sliced - the six a homeowner actually opens with. Can you see
+ *   it by day, what does it cost, how long does it take, does it damage the fascia, what happens
+ *   when it breaks, and is the consultation free. The other nineteen are on /faq, one click away
+ *   and linked from the panel.
  *
- *     answer of the OPEN item      in <main> DOM: yes    in document: yes
- *     answer of a CLOSED item      in <main> DOM: NO     in document: yes  (flight data only)
+ *   THE COLOUR IS A NAVY PANEL BESIDE THEM, not a tint on the cards. Amber stays what it is on
+ *   this site - the CTA - so it arrives as the button inside that panel rather than as decoration
+ *   on six accordion rows. The panel also fills the left column, so a section that was one tall
+ *   pale list is now a composition.
  *
- * So these eleven answers are roughly 700 words that a reader can get to in one click and a crawler
- * cannot get to at all. That is the reason app/page.tsx now emits FAQPage schema off this same
- * array - it is the only route by which the answers reach Google, and it is built from `faqItems`
- * rather than a copy so the markup cannot drift from what the accordion shows.
+ *   AND IT IS A CALL TO ACTION. A reader who has just read six answers is the most likely person
+ *   on the page to book, and until now the section handed them a text link to more questions.
  *
- * WHY THREE QUESTIONS COME FROM `pricingFaqs`. Nine sections landed the page at 834 words against
- * an 800 floor - cleared by 34, which is one edit from breaking. Padding a paragraph would be the
- * wrong fix. These three are genuinely what a homeowner asks on a first visit (what it costs,
- * whether there is finance, whether the cheap option is a worse install) and they were already
- * written, on /pricing, where somebody who has not decided yet never sees them. Picked by question
- * text rather than copied, so the two pages cannot drift apart.
+ * THE WORDCOUNT COST IS REAL AND WORTH NAMING. Those five dropped questions were about 230 words of
+ * indexable text. The page can afford it - see the count in the header comment - but the FAQ is the
+ * cheapest wordcount on this page and it is now carrying less of it, so the visible prose has less
+ * room to shrink in future rounds than it did.
+ *
+ * A COLLAPSED ANSWER IS ONLY IN THE HTML BECAUSE OF `forceMount`, and that is worth writing down
+ * because it is easy to believe the opposite and I did. Grepping the response for a CLOSED answer
+ * finds it, which looks like proof that Radix server-renders accordion content either way. It is
+ * not: what the grep finds is Next's RSC flight payload, which carries every prop passed to a
+ * client component whether it renders or not. Inside <main>, only the open item existed. See the
+ * note in components/sections/faq.tsx. app/page.tsx emits FAQPage schema off this same array, so
+ * the markup cannot drift from what the accordion shows.
  * ========================================================================= */
-const pick = (src: typeof pricingFaqs, ...qs: string[]) =>
-  qs.map((q) => src.find((f) => f.q === q)).filter((f): f is (typeof src)[number] => !!f);
+const pick = <T extends { q: string }>(src: readonly T[], ...qs: string[]) =>
+  qs.map((q) => src.find((f) => f.q === q)).filter((f): f is T => !!f);
 
 export const faqItems = [
-  ...homeFaqs,
   ...pick(
-    pricingFaqs,
-    "Is there a charge for the consultation?",
-    "Is financing available?",
-    "Is the cheaper hardware a worse install?"
+    homeFaqs,
+    "Can you actually see it during the day?",
+    "What does it cost?",
+    "How long does an install take?",
+    "Does it damage my soffit or fascia?",
+    "What happens when a section stops working?"
   ),
+  ...pick(pricingFaqs, "Is there a charge for the consultation?"),
 ];
 
 export function Faqs() {
   return (
     <section className="section bg-background">
-      <div className="shell">
-        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
+      <div className="shell grid items-start gap-10 lg:grid-cols-[22rem_minmax(0,1fr)] lg:gap-16">
+        <div className="rounded-lg bg-primary p-8">
           <SectionHead
+            onDark
             scale="section"
             eyebrow="Most asked"
-            title="Questions homeowners ask us first"
+            title="Questions homeowners ask first"
           />
-          <DarkPill href="/faq">Read every question</DarkPill>
+          <p className="mt-4 text-[0.95rem] leading-relaxed text-on-dark-muted">
+            The rest of them, and the answers we give on the walk-around, are on the FAQ page.
+          </p>
+          {/* `items-start` so the two pills hug their labels. Without it the column stretches them
+            * to the panel width and both read as full-width bars, which makes the secondary link
+            * look as loud as the booking button. */}
+          <div className="mt-8 flex flex-col items-start gap-3">
+            <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
+            <LightPill href="/faq">Read every question</LightPill>
+          </div>
         </div>
-        <div className="mt-10">
-          <Faq items={faqItems} />
-        </div>
+        <Faq items={faqItems} />
       </div>
     </section>
   );
