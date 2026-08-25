@@ -85,12 +85,14 @@ export function SectionHead({
   );
 }
 
-/* The little accent glyph that sits beside every section eyebrow, Phoenix's device. */
+/* The little glyph beside every section eyebrow, Phoenix's device. NOT amber - it inherits the
+ * eyebrow's own colour, so it is quiet on light grounds and quiet on dark ones, and it stops
+ * being the twelfth and thirteenth place on the page where yellow turns up. */
 export function SectionMark({ icon }: { icon: IconKey }) {
   const I = iconMap[icon];
   return (
-    <span className="grid size-7 shrink-0 place-items-center text-accent" aria-hidden>
-      <I className="size-6" />
+    <span className="grid size-6 shrink-0 place-items-center" aria-hidden>
+      <I className="size-[1.35rem]" />
     </span>
   );
 }

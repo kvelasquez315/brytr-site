@@ -75,7 +75,7 @@ export function SceneWipe() {
   const mostlyScene = pct < 50;
 
   return (
-    <section className="section bg-raise">
+    <section className="section bg-primary">
       {/* The onward link sits on the RIGHT OF THE HEAD, the same as Reviews, RecentWork and the
         * FAQ. Left-aligned on its own it left roughly 600 x 150px of empty band beside the lede,
         * which on a page whose first rule is density is not a neutral choice. */}
@@ -100,11 +100,11 @@ export function SceneWipe() {
         <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_20rem]">
           <div>
             <div className="flex items-center justify-between px-1 pb-3">
-              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-on-dark-muted" : "text-accent"}`}>
+              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-on-dark-muted" : "text-on-dark"}`}>
                 Warm white
               </span>
               <span className="label text-on-dark-muted">Drag the line</span>
-              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-accent" : "text-on-dark-muted"}`}>
+              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-on-dark" : "text-on-dark-muted"}`}>
                 One color
               </span>
             </div>
@@ -163,10 +163,11 @@ export function SceneWipe() {
             </div>
           </div>
 
-          {/* spec panel — swaps with the state, so the right side is full either way. A card
-            * again, at the same 14px as everything else on the page. */}
-          <div className="flex flex-col rounded-lg bg-primary p-6 lg:p-7">
-            <p className="label text-accent">
+          {/* Spec panel — swaps with the state, so the right side is full either way.
+            * ON NAVY, not night. The section ground moved to #111820 for the page's light/dark
+            * alternation, and this panel was #111820 too, so it disappeared into it. */}
+          <div className="flex flex-col rounded-lg bg-raise p-6 lg:p-7">
+            <p className="label text-on-dark-muted">
               {mostlyScene ? "Saved scene" : "Everyday setting"}
             </p>
             <h3 className="mt-3 text-xl text-on-dark">
