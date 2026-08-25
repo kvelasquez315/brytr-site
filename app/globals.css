@@ -361,6 +361,25 @@
     line-height: 1.04;
     letter-spacing: -0.028em;
   }
+  /* THE HOME HERO H1, AND NOTHING ELSE ON THE SITE.
+   *
+   * Four sizes rather than three, which needs justifying because the comment above this block
+   * argues for three. The reference the client brought (edentreepros.com) has a hero that works
+   * for one reason above all others: the H1 is roughly 64px and it is the only thing in its half
+   * of the photograph. Everything that would compete with it — a badge row, a bold subhead, a
+   * second button — is either absent or has been moved out to the strip beneath the image.
+   *
+   * At 54px, `display-hero` is the right size for a section heading that has to share a page with
+   * eight others. It is not the right size for the one line of type an eighty-one-page site is
+   * introduced by, on top of a full-bleed photograph, with nothing else beside it.
+   *
+   * Tighter tracking and leading than `display-hero` because both improve as type gets larger:
+   * at 64px the default -0.028em reads loose and 1.04 leading reads airy. */
+  .display-hero-lg {
+    font-size: clamp(2.5rem, 4.6vw, 4rem);
+    line-height: 0.99;
+    letter-spacing: -0.034em;
+  }
   .display-section {
     font-size: clamp(1.6rem, 2.2vw, 2.125rem);
     line-height: 1.1;

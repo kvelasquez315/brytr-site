@@ -159,8 +159,15 @@ export function ChannelEdge({ className }: { className?: string }) {
 
 /* ---- the lead form -------------------------------------------------------- */
 export function QuoteForm({
-  variant = "full", city, heading, submitLabel = "Get my free design consultation", dark,
-}: { variant?: "mini" | "compact" | "full" | "financing"; city?: string; heading?: string; submitLabel?: string; dark?: boolean }) {
+  variant = "full", city, heading, submitLabel = "Get my free design consultation", dark, className,
+}: {
+  variant?: "mini" | "compact" | "full" | "financing";
+  city?: string; heading?: string; submitLabel?: string; dark?: boolean;
+  /* Passed through to the <form>, and it exists for one caller: the home hero, which sets
+   * `bg-background` so the card lands on warm limestone rather than white. `cn` is tailwind-merge,
+   * so a background passed here beats the one in the base list rather than fighting it. */
+  className?: string;
+}) {
   /* FOUR VARIANTS, AND `mini` IS THE NEW ONE.
    *
    * The home page carried two forms with ten fields between them, one of them sitting on top of the
@@ -185,7 +192,8 @@ export function QuoteForm({
         "rounded-lg p-6 sm:p-7",
         onDark
           ? "form-on-dark bg-raise shadow-[var(--shadow-dark)] ring-1 ring-accent/15"
-          : "bg-card shadow-[var(--shadow-lg)]"
+          : "bg-card shadow-[var(--shadow-lg)]",
+        className
       )}
       /* No backend wired yet - see README. Renders its own success and error states. */
       action="/free-design-consultation"
@@ -194,8 +202,12 @@ export function QuoteForm({
       {heading && (
         <h3 className={cn("mb-5 text-xl", onDark ? "text-on-dark" : "text-foreground")}>{heading}</h3>
       )}
+      {/* MINI PUTS NAME AND PHONE ON ONE ROW AND THE CITY UNDER THEM, which is the reference
+        * form's shape (edentreepros.com: name + phone paired, then a full-width field, then the
+        * select). Three fields in an L rather than three stacked full-width rows takes about 90px
+        * off the card's height, and on a hero card height is the whole argument. */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="sm:col-span-2">
+        <div className={mini ? "" : "sm:col-span-2"}>
           <Label htmlFor={variant + "-name"}>Full name</Label>
           <Input id={variant + "-name"} name="name" required autoComplete="name" placeholder="Jordan Miller" />
         </div>
@@ -215,7 +227,7 @@ export function QuoteForm({
             <Input id={variant + "-street"} name="street" autoComplete="street-address" placeholder="1400 N 90th St" />
           </div>
         )}
-        <div>
+        <div className={mini ? "sm:col-span-2" : ""}>
           <Label htmlFor={variant + "-city"}>City</Label>
           <Select id={variant + "-city"} name="city" defaultValue={city ?? ""} required>
             <option value="">Select your city</option>

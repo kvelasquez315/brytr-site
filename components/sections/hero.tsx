@@ -6,114 +6,149 @@ import { reviewProof } from "@/content/reviews";
 import { googleLogo } from "@/content/badges";
 import { QuoteForm } from "@/components/ui/bits";
 
-/* THE HERO.
+/* THE HERO, built to edentreepros.com's, which the client brought as the reference: "I want the
+ * hero to be more designed like how this Eden one here is designed. It has the banner at the
+ * bottom, just with reviews and the Google logo, an image, and an optimized H1 form."
  *
- * WHAT THIS USED TO BE, and why it went. It was phoenixroofingandrepair.com's hero copied slot
- * for slot: a star row AND a separate Google rating line, a two-line headline that ran the primary
- * keyword and three secondary ones together ("Permanent Outdoor Lighting in Omaha / Roofline,
- * Landscape & Patio Experts"), a bold subhead restating the offer, a four-line paragraph under
- * that, two buttons, and a six-field form card. Nine separate things to read before a homeowner
- * has seen the photograph.
+ * WHAT EDEN'S ACTUALLY IS, read off the screenshot rather than remembered:
  *
- * The client's verdict on the result was "way too much text... it needs to be simplified", and the
- * hero is where that verdict is earned or lost, because it is the only section most visitors see.
+ *   a full-bleed photograph with an even green-tinted scrim over the whole frame
+ *   left column   a 64px H1 on two lines, one paragraph, and ONE button - a pale pill with a
+ *                 phone glyph, "Call 402-332-2839". Nothing above the H1 at all.
+ *   right column  a CREAM form card, "Free Estimate within 24 Hours", name and phone paired on
+ *                 one row, a full-width field under them, a select, and a full-width green submit
+ *   under it      a dark strip flush to the bottom of the photograph carrying one centred line:
+ *                 4.9, five gold stars, "across 300+ reviews on", the Google mark. Nothing else.
  *
- * WHAT IT IS NOW. Four things: the rating on one line, the headline, one sentence, and the ask.
+ * WHY IT READS AS DESIGNED AND OURS DID NOT. The H1 is the only thing in its half of the picture.
+ * Everything that would have competed with it has been moved somewhere else rather than deleted -
+ * the proof is in the strip, the second call to action is the form. Ours had the rating stacked
+ * above the H1, so the first thing a reader met was a number, and the headline was the third
+ * element down at 54px in a column that also carried two buttons.
  *
- *   THE RATING IS ONE ELEMENT, NOT TWO. There was a five-star row and then, beside it, a Google
- *   mark with "5.0 average rating (196 reviews)" — the same claim twice in 40px of each other.
- *   Now: stars, mark, one phrase.
+ * WHAT CHANGED HERE:
  *
- *   THE HEADLINE CARRIES ONE KEYWORD. "Permanent outdoor lighting in Omaha" is the term this page
- *   ranks for. Roofline, landscape and patio each have their own page and their own H1, and stuffing
- *   all four into one H1 helps none of them.
+ *   THE RATING MOVED OUT AND GOT BIGGER. It was a small inline row above the H1. It is now the
+ *   plinth under the photograph, at 36px, centred, on its own. This is also - exactly - what the
+ *   client asked for two rounds ago, quoted in proof-rail.tsx: "The trust banner has way too much
+ *   in it. It should just have reviews and then the Google logo."
  *
- *   THE SUBHEAD AND THE PARAGRAPH ARE GONE. Between them they said: free, on site, after dark,
- *   your own house, the metro plus Lincoln plus western Iowa, one channel, colour-matched, roofline
- *   and beds and patio, phone control, W2 crews, not subcontracted, verified lit and in daylight.
- *   Twelve claims in the hero. Eleven of them are made again further down the page in the section
- *   built to make them. One sentence stays.
+ *   THE H1 WENT UP TO 64px. See `.display-hero-lg` in globals.css for why that is a fourth type
+ *   size rather than a reuse of the section scale.
  *
- *   THE FORM IS THREE FIELDS. Name, phone, city — see the note on `mini` in ui/bits.tsx. The six
- *   -field version was the densest object on the page and it sat on top of the photograph.
+ *   THE FORM CARD WENT LIGHT. It was `bg-raise`, a dark translucent panel, because the previous
+ *   reference (Phoenix) uses one. Eden's is cream, and on a night photograph cream wins: it is the
+ *   highest-contrast object in the frame, which is what you want for the one element on the page
+ *   whose entire job is to get filled in. `bg-background` is Brytr's warm limestone - the token's
+ *   own comment calls it "the daytime state" - and the inputs inside it are already `bg-card`
+ *   white, so the card gets Eden's cream-card-with-white-fields separation without touching
+ *   field.tsx.
  *
- * THE BADGE SLOT STILL CANNOT BE PHOENIX'S. They lead with a BBB Accredited A+ seal because they
- * hold one. Brytr has no accreditation, no trade membership and no manufacturer tier on file, so
- * the row carries the one credential that is real and checkable: the Google rating. `googleLogo`
- * in content/badges.ts is still waiting on the official asset from the Business Profile.
+ *   TWO BUTTONS BECAME ONE, AND IT IS THE PHONE. There were two: an amber "Book a free design" and
+ *   an outlined "Call". With a form card sitting 200px to the right whose submit is amber and asks
+ *   for the same thing, the amber button on the left was a third route to one action. Eden's split
+ *   is the right one - the form is the booking path, the single button is for somebody who would
+ *   rather talk than type - and it leaves amber doing exactly one job in this section.
+ *
+ * THE GOOGLE MARK IS STILL MISSING AND IS STILL NOT BEING DRAWN. `googleLogo` in
+ * content/badges.ts is `null`; the four-colour G is a trademark and the rule in that file is that
+ * it gets used from Google's own asset pack for review displays or not at all. So the plinth sets
+ * the word Google in the display face beside a five-star row we drew ourselves, which is not
+ * anybody's trademark. Drop the official file at /public/logo/google.svg, set `googleLogo`, and
+ * the real mark appears here with no other change - the markup already branches for it.
  */
 export function Hero() {
   const bg = images.heroBg;
 
   return (
-    <section className="relative isolate overflow-hidden bg-primary">
-      <Image
-        src={bg.src as string}
-        alt={bg.alt}
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-[52%_42%]"
-      />
-      <div className="hero-scrim absolute inset-0" aria-hidden />
+    <section className="bg-primary">
+      {/* ── the photograph ── */}
+      <div className="relative isolate overflow-hidden">
+        <Image
+          src={bg.src as string}
+          alt={bg.alt}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[52%_42%]"
+        />
+        <div className="hero-scrim absolute inset-0" aria-hidden />
 
-      <div className="shell relative grid items-center gap-12 py-16 lg:grid-cols-[1fr_26rem] lg:gap-20 lg:py-24">
-        <div className="max-w-[38rem]">
-          {/* ONE LINE OF PROOF. Stars, the mark, the claim. Not stars AND a separate rating. */}
-          <Link
-            href={reviewProof.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="tap-44 inline-flex items-center gap-3 text-on-dark"
-          >
-            <span className="flex items-center gap-0.5" aria-hidden>
-              {[0, 1, 2, 3, 4].map((i) => (
-                <svg key={i} viewBox="0 0 20 20" className="size-[1.15rem] text-accent" fill="currentColor">
-                  <path d="M10 1.6l2.47 5.2 5.53.72-4.06 3.9 1.03 5.6L10 14.3l-4.97 2.72 1.03-5.6L2 7.52l5.53-.72z" />
-                </svg>
-              ))}
-            </span>
-            {googleLogo && (
-              <Image src={googleLogo} alt="" width={18} height={18} className="size-[1.125rem]" />
-            )}
-            <span className="text-[0.95rem] font-semibold">
-              <span className="u">{reviewProof.average}</span> from{" "}
-              <span className="u">{reviewProof.count}</span>{" "}
-              {googleLogo ? "" : `${reviewProof.platform} `}reviews
-            </span>
-          </Link>
+        <div className="shell relative grid items-center gap-12 py-16 lg:grid-cols-[1fr_27rem] lg:gap-16 lg:py-24">
+          <div className="max-w-[38rem]">
+            {/* Nothing above the H1. That is the single biggest difference between this hero and
+              * the one it replaces. */}
+            <h1 className="display-hero-lg text-on-dark">Permanent outdoor lighting in Omaha</h1>
 
-          <h1 className="display-hero mt-6 text-on-dark">Permanent outdoor lighting in Omaha</h1>
+            <p className="mt-6 max-w-[44ch] text-[1.15rem] leading-relaxed text-on-dark/90">
+              Warm white every night, any colour when you want it, and nobody on a ladder in
+              December.
+            </p>
 
-          <p className="mt-5 max-w-[46ch] text-[1.15rem] leading-relaxed text-on-dark/90">
-            Warm white every night, any colour when you want it, and nobody on a ladder in December.
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <Link
-              href="/free-design-consultation"
-              className="tap-44 inline-flex h-13 items-center gap-2.5 rounded-full bg-accent px-7 font-semibold text-accent-foreground transition-colors duration-[--dur-fast] hover:bg-accent-deep"
-            >
-              Book a free design
-              <span aria-hidden>&rarr;</span>
-            </Link>
             <a
               href={site.phoneHref}
-              className="tap-44 inline-flex h-13 items-center gap-2.5 rounded-full border border-on-dark/40 px-7 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-on-dark/10"
+              className="tap-44 mt-9 inline-flex h-14 items-center gap-3 rounded-full bg-card px-8 text-[1.05rem] font-semibold text-foreground transition-colors duration-[--dur-fast] hover:bg-muted"
             >
+              <svg viewBox="0 0 20 20" className="size-[1.15rem] text-accent-ink" fill="currentColor" aria-hidden>
+                <path d="M4.2 2.5A1.7 1.7 0 0 1 6.5 3l1 1.7a1.7 1.7 0 0 1-.3 2.1l-.7.7a9 9 0 0 0 3.9 3.9l.7-.7a1.7 1.7 0 0 1 2.1-.3l1.7 1a1.7 1.7 0 0 1 .5 2.3l-.7 1a2.4 2.4 0 0 1-2.8.9C8 14.3 5.2 11.5 3.5 7.9a2.4 2.4 0 0 1 .3-2.7z" />
+              </svg>
               Call {site.phone}
             </a>
           </div>
+
+          <div className="lg:w-[27rem] lg:justify-self-end">
+            <QuoteForm
+              variant="mini"
+              heading="Free design consultation"
+              submitLabel="Request my free design"
+              className="bg-background shadow-[var(--shadow-dark)]"
+            />
+          </div>
         </div>
 
-        {/* The form card, dark, so it reads as part of the photograph rather than a white box
-          * dropped on top of it. Three fields — the rest of the conversation happens on the phone. */}
-        <div className="lg:w-[26rem] lg:justify-self-end">
-          <QuoteForm variant="mini" dark heading="Get a free design consultation" submitLabel="Book my free design" />
-        </div>
+        {/* The channel edge, which now divides the photograph from the plinth instead of closing
+          * the section. It is the site's own signature device doing structural work: the lit run
+          * along the bottom of the picture, with the ground below it. */}
+        <div className="hero-baseline absolute inset-x-0 bottom-0 h-0.5" aria-hidden />
       </div>
 
-      <div className="hero-baseline absolute inset-x-0 bottom-0 h-0.5" aria-hidden />
+      {/* ── the plinth: one line, centred, and nothing else on it ──
+        *
+        * No `bg-*` class of its own, deliberately. It shows the section's own `bg-primary`, which
+        * keeps scripts/section-rhythm.mjs seeing ONE ground for the whole hero rather than two
+        * adjacent `bg-primary` events. The photograph's own bottom gradient is heavier than flat
+        * primary, so the strip still reads as a separate band beneath the image. */}
+      <Link
+        href={reviewProof.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="shell flex flex-wrap items-center justify-center gap-x-5 gap-y-2 py-6 text-center"
+      >
+        <span className="u font-display text-[2.25rem] font-bold leading-none text-on-dark">
+          {reviewProof.average}
+        </span>
+        <span className="flex items-center gap-1" aria-hidden>
+          {[0, 1, 2, 3, 4].map((i) => (
+            <svg key={i} viewBox="0 0 20 20" className="size-[1.4rem] text-accent" fill="currentColor">
+              <path d="M10 1.6l2.47 5.2 5.53.72-4.06 3.9 1.03 5.6L10 14.3l-4.97 2.72 1.03-5.6L2 7.52l5.53-.72z" />
+            </svg>
+          ))}
+        </span>
+        <span className="text-[1.05rem] text-on-dark-muted">
+          across <span className="u font-semibold text-on-dark">{reviewProof.count}</span> reviews on{" "}
+          {googleLogo ? (
+            <Image
+              src={googleLogo}
+              alt="Google"
+              width={22}
+              height={22}
+              className="inline-block size-[1.375rem] translate-y-[-0.1rem]"
+            />
+          ) : (
+            <span className="font-display font-bold text-on-dark">Google</span>
+          )}
+        </span>
+      </Link>
     </section>
   );
 }
