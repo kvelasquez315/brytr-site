@@ -3,48 +3,55 @@ import Image from "next/image";
 import { reviewProof } from "@/content/reviews";
 import { googleLogo } from "@/content/badges";
 
-/* THE TRUST BAND. One thing on it: the Google rating.
+/* THE BAND UNDER THE HERO. Phoenix's slot, filled with the one credential Brytr actually has.
  *
- * The client, on the version that carried the score plus three credential items plus the service
- * area: "The trust banner has way too much in it. It should just have reviews and then the Google
- * logo." So that is all it is now - the mark, the score, the star row, the count, and a link to
- * read them. Six pieces of information became three, on one centred line.
+ * WHAT PHOENIX PUTS HERE: a pale cream band, a centred orange eyebrow "CERTIFICATIONS &
+ * MEMBERSHIPS", a centred headline "Certified & Backed by Roofing Industry Experts", then a row of
+ * EIGHT real industry marks - GAF Master Elite, two HAAG certifications, TRI, BBB Accredited A+,
+ * NARPM, AACM, Inc. 5000 - and a centred orange link to the full list.
  *
- * WHAT CAME OFF, AND WHERE IT WENT. The hours, the W2 crews and the day-and-night check were three
- * icon items down the right-hand side. The crews and the verification are arguments, not badges, and
- * they now live in the "Why homeowners choose us" section where they get a sentence each instead of
- * four words. The hours are in the footer and in the LocalBusiness schema, which is where a
- * homeowner and Google respectively actually look for them. The service-area line is the whole point
- * of the Service Areas menu and the section on /service-areas.
+ * WHY OURS CANNOT BE THAT, and this is the one place the copy-it-exactly brief runs into a wall:
+ * Brytr holds none of those. No BBB accreditation, no trade membership, no manufacturer tier, no
+ * Inc. 5000 ranking. A row of invented seals is the single worst thing a page like this can carry -
+ * it is the difference between a site that reads as trustworthy and one that is lying - so the slot
+ * keeps Phoenix's SHAPE (cream band, centred eyebrow, centred headline, the mark, a centred link)
+ * and fills it with the credential that is real and verifiable: the Google rating.
  *
- * THE GOOGLE MARK IS THE ONE THING I CANNOT DRAW, and this is the third time it has come up, so:
- * `googleLogo` in content/badges.ts is a slot, and the moment a file sits at /public/logo/google.svg
- * and that constant points to it, the real four-colour G appears here at 30px with no other change.
- * It has to be the official file from Google's own asset pack - their review-display assets are
- * downloadable from the Google Business Profile - because a trademark gets used in its owner's
- * colours from its owner's pack or not at all. Not traced from memory, not screenshotted off
- * propertypest.com, not set in Archivo. Until the file lands, the band says the word Google in plain
- * type beside our own star row, which is honest and reads as deliberate rather than broken.
+ * This is also exactly what the client asked for two rounds ago: "The trust banner has way too much
+ * in it. It should just have reviews and then the Google logo." One thing on it, in Phoenix's frame.
  *
- * CENTRED, because with one item on it a left-aligned row leaves two thirds of a full-width dark
- * band empty and the band reads as unfinished. Property Pest can left-align theirs because they have
- * three credentials holding the right-hand side down.
+ * THE GOOGLE MARK REMAINS THE MISSING FILE. `googleLogo` in content/badges.ts is the slot; drop the
+ * official review-display asset from the Google Business Profile at /public/logo/google.svg and the
+ * real four-colour G appears here and in the hero badge row with no other change. A trademark gets
+ * used from its owner's own pack or not at all.
+ *
+ * IF THE CREDENTIALS ARRIVE, THIS BECOMES PHOENIX'S ROW EXACTLY: licence number, insurance
+ * certificate, Haven dealer tier, any association. Send the files and the marks go in.
  */
 export function ProofRail() {
   return (
-    <section className="border-b border-on-dark/10 bg-primary">
-      <div className="shell flex items-center justify-center py-6">
+    <section className="border-y border-border bg-muted py-12">
+      <div className="shell text-center">
+        <p className="eyebrow justify-center">
+          <span className="channel-mark" aria-hidden />
+          Reviews and rating
+          <span className="channel-mark" aria-hidden />
+        </p>
+        <h2 className="display-section mx-auto mt-4 max-w-[30ch] text-foreground">
+          Rated {reviewProof.average} by {reviewProof.count} Omaha homeowners
+        </h2>
+
         <Link
           href={reviewProof.url}
           target="_blank"
           rel="noopener noreferrer"
           data-spot
-          className="group flex flex-wrap items-center justify-center gap-x-4 gap-y-2"
+          className="group mt-8 inline-flex flex-wrap items-center justify-center gap-x-5 gap-y-3 rounded-full bg-card px-8 py-4 shadow-[var(--shadow-lg)]"
         >
           {googleLogo && (
             <Image src={googleLogo} alt="Google" width={30} height={30} className="size-[1.875rem] shrink-0" />
           )}
-          <span className="u font-display text-[1.75rem] font-bold leading-none text-on-dark">
+          <span className="u font-display text-[1.75rem] font-bold leading-none text-foreground">
             {reviewProof.average}
           </span>
           <span className="flex items-center gap-0.5" aria-hidden>
@@ -54,15 +61,22 @@ export function ProofRail() {
               </svg>
             ))}
           </span>
-          <span className="text-[0.95rem] text-on-dark-muted">
-            Rated {reviewProof.average} across{" "}
-            <span className="u font-semibold text-on-dark">{reviewProof.count}</span>
-            {googleLogo ? "" : " Google"} reviews
-            <span className="ml-1.5 inline-block transition-transform duration-[--dur-fast] group-hover:translate-x-0.5" aria-hidden>
-              &rarr;
-            </span>
+          <span className="text-[0.95rem] text-muted-foreground">
+            Every one from an Omaha homeowner
           </span>
         </Link>
+
+        <p className="mt-6">
+          <Link
+            href="/reviews"
+            className="group font-semibold text-accent-ink underline decoration-accent decoration-2 underline-offset-4"
+          >
+            Read all {reviewProof.count} reviews
+            <span className="ml-1.5 inline-block transition-transform duration-[--dur-fast] group-hover:translate-x-1" aria-hidden>
+              &rarr;
+            </span>
+          </Link>
+        </p>
       </div>
     </section>
   );
