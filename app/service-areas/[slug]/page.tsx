@@ -329,7 +329,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <SectionHead
               eyebrow={`${c.drive} each way`}
               title={`${c.name} is a route day, and that is why the price is the same.`}
-              lede="We do not drive two hours for one house. We batch installs out here into route days, which is the only way the per-foot number can match the metro instead of carrying a travel charge — and it is worth understanding before you book, because it changes the scheduling rather than the work."
+              lede="We batch installs out here into route days. That is what keeps the per-foot number the same as the metro, and it changes the scheduling rather than the work."
             />
 
             <div className="mt-10 grid items-start gap-10 lg:grid-cols-[54fr_46fr] lg:gap-14">
@@ -396,10 +396,10 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               * a second trip is a route day — so each band says its own thing. */
             lede={
               c.tier === "metro"
-                ? "Everything we offer is available at this address, and in the metro it is normal for two or three of these to go on the same visit — the crew is already there and the controller is already being commissioned."
+                ? "Everything we offer is available here, and in the metro it is normal for two or three to go on the same visit."
                 : c.tier === "iowa"
-                ? "Everything we offer is available at this address. Over the river it starts with the roofline more often than it does in the metro, and the landscape and patio work tends to get added a season later once people have lived with it."
-                : "Everything we offer is available at this address, and out here people tend to do all of it at once rather than in stages — a second visit is a route day, so it is worth scoping the whole property while the crew is on it."
+                ? "Everything we offer is available here. Over the river it starts with the roofline more often, and the rest tends to follow a season later."
+                : "Everything we offer is available here, and out here it is worth scoping the whole property at once: a second visit is a route day."
             }
           />
           <div className="mt-9"><ServiceRows only={servicesFor(c.tier)} columns={2} /></div>

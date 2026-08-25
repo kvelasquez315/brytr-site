@@ -43,7 +43,7 @@ export const compares: Compare[] = [
     keyword: "haven lighting vs jellyfish",
     a: "Haven Evolution", b: "Jellyfish Lighting",
     verdict:
-      "We install both. On a large or complex roofline, or anywhere you will actually use warm white every night, Haven Evolution is worth the difference. On a simple single-story roofline or a tighter budget, Jellyfish is the honest answer and we will say so.",
+      "We install both. On a large or complex roofline, Haven Evolution is worth the difference. On a simple one-storey or a tighter budget, Jellyfish is the honest answer.",
     aWinsHead: "Choose Haven Evolution if",
     bWinsHead: "Choose Jellyfish if",
     aWins: [

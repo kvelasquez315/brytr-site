@@ -245,7 +245,7 @@ export default function SystemsHub() {
           <SectionHead
             eyebrow="The roofline hardware"
             title="Every row, and what it actually does to the house."
-            lede="Every permanent lighting company publishes a spec table. Almost none of them say what a spec does to a building, which is the only part that helps you judge one. The third column is that."
+            lede="Every company publishes a spec table. Almost none say what a spec does to a building, which is the only part that helps you judge one. The third column is that."
           />
 
           <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
@@ -329,7 +329,7 @@ export default function SystemsHub() {
           <SectionHead
             eyebrow="The full lineup"
             title="Most of these are additions, not alternatives."
-            lede="The roofline run, the three Haven lines that go on with it, the app that operates all of it, and the other manufacturer we install. Grouped by what each one is for, because that relationship is what nobody in this trade explains."
+            lede="The roofline run, the three Haven lines that go with it, the app, and the other manufacturer we fit. Grouped by what each is for."
           />
 
           <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
@@ -383,7 +383,7 @@ export default function SystemsHub() {
             onDark
             eyebrow="What we would put on it"
             title="What we would quote you, by the shape of the property."
-            lede="These are the three shapes almost every enquiry falls into. The verdicts are ours, they are what we would say standing in your driveway, and one of the three is us talking you out of buying more."
+            lede="The three shapes almost every enquiry falls into. The verdicts are ours, and one of the three is us talking you out of buying more."
           />
 
           <div className="mt-10 grid gap-5 lg:grid-cols-3">

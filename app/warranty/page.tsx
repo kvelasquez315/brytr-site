@@ -159,7 +159,7 @@ export default function Warranty() {
           <SectionHead
             eyebrow="Both columns"
             title="What is covered, and what is not."
-            lede="Most warranty arguments in this trade are really arguments about whether a failure was the product or the install. Splitting it before anything goes wrong removes the argument, and publishing the exclusions is the part that makes the rest believable."
+            lede="Most warranty arguments here are really about whether a failure was the product or the install. Splitting it before anything goes wrong removes the argument."
           />
 
           <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">

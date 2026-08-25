@@ -148,7 +148,7 @@ export default function AreasHub() {
           <SectionHead
             eyebrow="Ordered by minutes, not alphabetically"
             title="How far, and what that changes."
-            lede="Every town we drive to, sorted by the actual drive from the shop. The right-hand column is the part that matters: the promise is not the same at twenty minutes and at two hours, and pretending otherwise is how people end up waiting."
+            lede="Every town we drive to, sorted by the real drive from the shop. The promise is not the same at twenty minutes and at two hours."
           />
 
           <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">

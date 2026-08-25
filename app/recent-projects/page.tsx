@@ -40,7 +40,7 @@ const projects = [
     where: "West Omaha",
     shot: "Photographed October 2, 2025",
     lede:
-      "The shape we quote most often: a brick front, three gables at different heights, and an arched entry that wants its own treatment. The channel carries the eave line across all three gables without a visible break, and the gables are zoned separately from the eaves so they can hold a different color.",
+      "The shape we quote most often: a brick front, three gables at different heights, and an arched entry. The gables are zoned separately from the eaves.",
     lead: {
       src: "/img/whole-home.jpg",
       alt: "A brick two-story Omaha home with roofline, gable and landscape lighting on at night",
@@ -69,7 +69,7 @@ const projects = [
     where: "West Omaha",
     shot: "Photographed October 14, 2025",
     lede:
-      "A low ranch is the hardest elevation in this trade. There is no gable to carry the eye, so the run itself has to hold a straight line for its whole length or the whole thing looks crooked. This one adds bed washes and boulder uplights so the ground plane does some of the work.",
+      "A low ranch is the hardest elevation in this trade: no gable to carry the eye, so the run has to hold its own line for its whole length.",
     lead: {
       src: "/img/g-ranch-blue-white.jpg",
       alt: "A long single-story Omaha ranch elevation lit blue and white with landscape uplighting",
@@ -98,7 +98,7 @@ const projects = [
     where: "West Omaha",
     shot: "Photographed October 19, 2025",
     lede:
-      "Everything at the back of the property on one system: the house roofline, a freestanding pergola, under-cap washers along the limestone retaining wall, and the pool deck. Each element is its own zone, which is what lets the house go scarlet while the seating area stays warm.",
+      "The whole back of the property on one system, and each element is its own zone — so the house can go scarlet while the seating area stays warm.",
     lead: {
       src: "/img/scene-warm-white.jpg",
       alt: "An Omaha home, pergola and pool deck on warm white at dusk",
@@ -139,7 +139,7 @@ const projects = [
     where: "West of Omaha",
     shot: "Photographed September 30, 2025",
     lede:
-      "A hip roof, a three-car garage and a low brick-and-cedar front: the most ordinary elevation on this page, which is why it is the useful one. A drone held its position while the scenes were cycled from a phone, so every frame below is the same roof, the same sky and the same camera with only the controller changing. The whole set spans ninety seconds.",
+      "One roof, one hover point, ninety seconds. Every frame below is the same sky and the same camera, with only the scene changing.",
     lead: {
       src: "/img/seq-everyday.jpg",
       alt: "A brick and cedar ranch west of Omaha at dusk, its roofline, eaves and garage band on everyday warm white",

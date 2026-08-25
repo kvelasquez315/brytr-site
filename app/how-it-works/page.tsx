@@ -133,7 +133,7 @@ export default function HowItWorks() {
             onDark
             eyebrow="The whole job, in section"
             title="The same board, through the day."
-            lede="This is your fascia from the first hour to the last. Nothing in the first three frames is lit, because three quarters of install day happens with the system dark — which is exactly why the parts nobody photographs are the parts worth asking about."
+            lede="Your fascia from the first hour to the last. Nothing in the first three frames is lit, because most of install day happens with the system dark."
           />
           <div className="mt-10"><InstallDaySequence /></div>
           <p className="mt-7 max-w-[76ch] text-sm leading-relaxed text-on-dark-muted">
@@ -208,7 +208,7 @@ export default function HowItWorks() {
           <SectionHead
             eyebrow="Where we differ"
             title="What is not standard in this trade."
-            lede="Every installer says they do good work, which is why the claim is worthless on its own. So here is each one with the alternative written next to it — including the ones that cost us time we do not bill for."
+            lede="Every installer says they do good work, which is why the claim is worthless alone. So here is each one with the alternative beside it."
           />
 
           <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">

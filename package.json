@@ -17,7 +17,8 @@
     "herocontrast": "python3 scripts/hero-contrast.py",
     "rhythm": "node scripts/section-rhythm.mjs",
     "hexlock": "node scripts/hex-lock.mjs",
-    "words": "node scripts/wordcount.mjs"
+    "words": "node scripts/wordcount.mjs",
+    "type": "node scripts/typography.mjs"
   },
   "dependencies": {
     "@fontsource/archivo": "^5.3.0",

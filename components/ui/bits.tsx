@@ -2,7 +2,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export function SectionHead({
-  eyebrow, title, lede, onDark, className, align = "left", scale = "hero",
+  eyebrow, title, lede, onDark, className, align = "left", scale = "section",
 }: {
   eyebrow?: string; title: string; lede?: string; onDark?: boolean; className?: string;
   align?: "left" | "center";
@@ -14,12 +14,21 @@ export function SectionHead({
    * subhead two thousand pixels down. Everything shouting is the same as nothing shouting, and it
    * was a large part of what the client was reacting to.
    *
-   *   "hero"     54px. The page's H1, and the one section per page allowed to be the loud moment.
-   *   "section"  34px, `display-section`, which already existed and was used on exactly two
-   *              sections. It is now what an ordinary section heading looks like.
+   *   "section"  34px, `display-section`. THE DEFAULT, and what an ordinary section heading is.
+   *   "hero"     54px. Opt in, for the one section on a page allowed to be the loud moment.
    *
-   * The default stays "hero" deliberately: twenty other pages call this component and none of them
-   * were part of this brief. The home page opts in to "section" and sets the hierarchy properly. */
+   * THE DEFAULT FLIPPED, AND THAT IS THE SINGLE BIGGEST TYPOGRAPHY CHANGE ON THE SITE. It was
+   * "hero", scoped that way on purpose while only the home page was being rebuilt - twenty other
+   * pages call this component and none of them were in that brief.
+   *
+   * They are now. Every one of those pages was carrying four to six section headings at exactly the
+   * same 54px as its own H1, which is the failure the home page was rebuilt to fix: if everything
+   * is the loudest thing on the page, a reader scrolling has no way to tell the page's title from a
+   * subhead two thousand pixels down. Flipping the default fixes all twenty at once and leaves
+   * `scale="hero"` available where a section has earned it.
+   *
+   * `PageHero` is untouched by this - it renders its own <h1> with its own clamp - so page titles
+   * keep their size and only the sections under them come down. */
   scale?: "hero" | "section";
 }) {
   /* EVERY SECTION ON THE SITE COMES THROUGH HERE, and that is the point.

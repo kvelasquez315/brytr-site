@@ -108,7 +108,7 @@ export default function Contact() {
           <SectionHead
             eyebrow="Which one to use"
             title="Every way in, and none of them interchangeable."
-            lede="The number is in the header of every page on this site, so the useful thing to publish is not how to reach us but which route suits what you are actually asking — including what each one is bad at."
+            lede="The number is in the header of every page, so the useful thing to publish is which route suits what you are actually asking — including what each one is bad at."
           />
 
           <ul className="mt-10 grid gap-5 lg:grid-cols-2">

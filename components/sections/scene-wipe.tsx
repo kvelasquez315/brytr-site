@@ -111,7 +111,6 @@ export function SceneWipe() {
           * FAQ. Left-aligned on its own it left roughly 600 x 150px of empty band beside the lede. */}
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <SectionHead
-            scale="section"
             className="max-w-[46rem]"
             eyebrow="How the colour works"
             title="Warm white every night. Any colour when you want it."

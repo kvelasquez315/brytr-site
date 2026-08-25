@@ -206,7 +206,6 @@ export function Services() {
           * answers are directly underneath it. A paragraph here would be explaining the grid. */}
         <SectionHead
           align="center"
-          scale="section"
           eyebrow="Services"
           title="What are you looking to light?"
         />
@@ -371,7 +370,6 @@ export function WhoWeAre() {
         <div className="grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
           <div className="flex flex-col">
             <SectionHead
-              scale="section"
               eyebrow="Who we are"
               title="The difference a local crew makes"
               lede="Brytr is an Omaha company. The shop, the van and the crew are all here, and so is everyone who will be on your roof."
@@ -506,7 +504,6 @@ export function HowWeWork() {
         <div className="flex flex-col">
           <SectionHead
             onDark
-            scale="section"
             eyebrow="How we work"
             title="Installed once, and installed properly"
             /* Was thirty-five words over three lines. The reference holds a section lede to twelve
@@ -580,6 +577,12 @@ export function Reviews() {
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <SectionHead
+            /* THE ONE LOUD HEADING ON THIS PAGE, and it now has to say so. It used to rely on
+              * SectionHead defaulting to "hero"; that default flipped to "section" when the
+              * redesign rolled out to the other twenty templates, which silently took this
+              * heading down to 34px with them. Relying on a default to be the exception was the
+              * bug - the exception is the thing that should be written down. */
+            scale="hero"
             eyebrow="Our reviews"
             title="What our clients say"
             lede={`Rated ${reviewProof.average} across ${reviewProof.count} ${reviewProof.platform} reviews.`}
@@ -678,7 +681,6 @@ export function RecentWork() {
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <SectionHead
             onDark
-            scale="section"
             eyebrow="Our projects, photographed on site"
             title="Recent work around Omaha"
           />
@@ -778,7 +780,6 @@ export function Faqs() {
         <div className="rounded-lg bg-primary p-8">
           <SectionHead
             onDark
-            scale="section"
             eyebrow="Most asked"
             title="Questions homeowners ask first"
           />
@@ -820,7 +821,6 @@ export function Closer() {
       <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-20">
         <div className="flex flex-col">
           <SectionHead
-            scale="section"
             eyebrow="Free consultation"
             title="See it on your house before you buy"
             lede="We come out after dark, walk the property, and show you the design on your own elevation. No charge and no obligation."

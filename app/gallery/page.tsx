@@ -314,7 +314,7 @@ export default function Gallery() {
               * directly above this section. Leaving the old sentence in place would have been the
               * site telling a reader to disbelieve a photograph it had just shown them. */
             title="How to judge any of these, including ours."
-            lede="Permanent lighting is judged twice: how it performs after dark, and whether you can see the hardware at noon. Both questions are answered on this page — the second one immediately above. Here is what to look for in either."
+            lede="Permanent lighting is judged twice: how it looks after dark, and whether you can see the hardware at noon. Both are answered on this page."
           />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
             {[

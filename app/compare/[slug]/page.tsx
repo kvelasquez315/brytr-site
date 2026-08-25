@@ -354,7 +354,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             <SectionHead
               eyebrow="The actual deciding factor"
               title="On this comparison, the installer matters more than the box."
-              lede="Both of these are competent products in the same part of the market. Which one ends up better on your house is decided almost entirely by whoever fastens it there — so here is how to judge that instead."
+              lede="Both are competent products in the same part of the market. Which is better on your house is decided by whoever fastens it there."
             />
             <ul className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {[

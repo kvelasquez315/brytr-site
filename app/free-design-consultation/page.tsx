@@ -123,7 +123,7 @@ export default function Consult() {
           <SectionHead
             eyebrow="What you are agreeing to"
             title="Roughly an hour, and this is where it goes."
-            lede="The objection is never the price of the consultation, because there is not one. It is the hour. So here is the hour, minute by minute, and the thing you are holding at the end of it."
+            lede="The objection is never the price, because there is not one. It is the hour. So here is the hour, minute by minute, and the thing you are holding at the end of it."
           />
 
           <div className="mt-10 grid items-start gap-10 lg:grid-cols-[58fr_42fr] lg:gap-14">
