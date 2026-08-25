@@ -314,11 +314,53 @@ export function Services() {
  * footer. Twenty towns, named, is also real information rather than a claim, which is what fills a
  * section honestly. Blank space is what you get when a layout has less to say than it has room.
  *
- * THE PHOTOGRAPH RUNS THE FULL HEIGHT of the section rather than being centred beside a shorter
- * column - `items-stretch` and `h-full`. `items-center` was the direct cause of the blank space he
- * is looking at: a 555px portrait beside a 400px column centres both and leaves 77px of nothing
- * above and below the copy.
+ * FOURTH PASS, AND THIS ONE WENT AND LOOKED AT THE REFERENCE. "This section here just isn't doing
+ * it for me. There's not much going on here. Look at TrueGreen.com for inspiration on how sections
+ * should be laid out and how typography should be."
+ *
+ * So I opened trugreen.com and read it section by section instead of working from memory, and it
+ * corrected an assumption I was about to build on. Three things it actually does:
+ *
+ *   HEADLINES ARE THREE TO NINE WORDS.  "The difference local pros make." "Let's talk lawn."
+ *                                       "Nobody makes lawn care easier than TruGreen."
+ *   BODY COPY IS TWELVE TO TWENTY-FOUR. One or two sentences, never a block.
+ *   THERE ARE NO STATISTIC ROWS.        Not one on the page. Their content device - the thing that
+ *                                       fills every section - is a ROW OF CARDS.
+ *
+ * That last one is why it was worth fetching rather than remembering: "add more to it" plus "not
+ * much going on" reads like an argument for a row of big numbers, and I would have built one. The
+ * reference says cards.
+ *
+ * WHAT WAS WRONG HERE, measured against that. The headline was fine at four words. The lede was
+ * THIRTY-SEVEN words over three lines, against their twelve-to-twenty-four. And under it: nothing
+ * at all, then a 150px hole, then two buttons - because `mt-auto` pinned the buttons to the bottom
+ * of a column whose height came from the photograph beside it. A paragraph and two buttons cannot
+ * fill 480px and should not have been asked to.
+ *
+ * Now: a six-word headline, a twenty-four-word lede, three cards, then the buttons directly under
+ * them. The cards carry the three things that are true of the COMPANY and are not claimed anywhere
+ * else on the page - local rather than franchised, two brands rather than one, and the same crew
+ * from the measure to the handover. That last one is where the old "never subcontracted" line went:
+ * same argument, said as a service rather than as a tax status.
+ *
+ * THE PHOTOGRAPH RUNS THE FULL HEIGHT of the row - `items-stretch` and `h-full`. `items-center`
+ * was the cause of an earlier version of the same complaint: a 555px portrait beside a 400px
+ * column centres both and leaves 77px of nothing above and below the copy.
  * ========================================================================= */
+const ABOUT_CARDS: { title: string; body: string }[] = [
+  {
+    title: "Local, not a franchise",
+    body: "The shop is on C Street in west Omaha and every crew drives out of it. No territory partner, no dispatcher in another state.",
+  },
+  {
+    title: "Two brands on the truck",
+    body: "We fit both Haven and Jellyfish, so the system we put on your house is the one that suits it rather than the only one we sell.",
+  },
+  {
+    title: "The same crew, start to finish",
+    body: "The people who measure your roofline after dark are the people who fit it, and the people who come back to it.",
+  },
+];
 
 export function WhoWeAre() {
   const shot = images.installDayGarage;
@@ -331,10 +373,25 @@ export function WhoWeAre() {
             <SectionHead
               scale="section"
               eyebrow="Who we are"
-              title="Omaha's permanent lighting company"
-              lede="We fit one run of colour-matched channel to your roofline, beds, patio and walls, and it stays there. No ladders in November, no boxes in the garage, and nobody on your roof you have not already met."
+              title="The difference a local crew makes"
+              lede="Brytr is an Omaha company. The shop, the van and the crew are all here, and so is everyone who will be on your roof."
             />
-            <div className="mt-auto flex flex-wrap items-center gap-4 pt-9">
+
+            {/* THREE CARDS, WHICH IS WHAT WAS MISSING. */}
+            <ul className="mt-8 grid gap-4">
+              {ABOUT_CARDS.map((c) => (
+                <li key={c.title} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+                  <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{c.title}</h3>
+                  <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{c.body}</p>
+                </li>
+              ))}
+            </ul>
+
+            {/* `mt-9`, NOT `mt-auto`. mt-auto pinned these buttons to the bottom of a column whose
+              * height was set by the photograph beside it, so with only a paragraph above them the
+              * 150px in between was dead. That gap is the thing in his screenshot. Content sets the
+              * height now, and the row sits under the last card. */}
+            <div className="mt-9 flex flex-wrap items-center gap-4">
               <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
               <DarkPill href="/about">More about us</DarkPill>
             </div>
@@ -452,7 +509,9 @@ export function HowWeWork() {
             scale="section"
             eyebrow="How we work"
             title="Installed once, and installed properly"
-            lede="Permanent lighting is drilled into your fascia and left there. How it is fixed and sealed is the whole difference between a run that still looks right in five years and one that does not."
+            /* Was thirty-five words over three lines. The reference holds a section lede to twelve
+              * to twenty-four; this is twenty-one and makes the same point. */
+            lede="This gets drilled into your fascia and left there. How it is fixed and sealed is the difference at year five."
           />
 
           {/* THE RUN. One continuous length of channel down the left of the four steps, with the
