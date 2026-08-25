@@ -93,8 +93,16 @@
   --draw-runline-night: #4d596a;
 
   /* HERO — a full-bleed photograph carries the hero, per the reference layout.
- * Two stacked gradients: one right-ward wash so left-column type stays legible over
- * a lit brick facade, one upward wash so the form card's edge has something to sit on.
+ *
+ * ONE gradient now, not two. There used to be a second, upward wash — ink at 46% along the bottom
+ * edge, gone by 32% up — whose only job was to give the form card's edge something to sit on. That
+ * card is opaque warm limestone with its own shadow now, so it needs nothing under it, and the wash
+ * was darkening the bottom third of the photograph across its FULL width for no remaining reason.
+ * The client, twice: the hero is too dark, and "it's that black overlay". This is the part of the
+ * overlay that was genuinely doing nothing.
+ *
+ * It costs nothing in contrast. The type sits in the vertical middle of the hero, above where that
+ * wash had any strength, so the measured p95 ratio under the H1 and the paragraph is unchanged.
  * Kept here because no hex may appear in a component. */
 /* THE STOPS WERE MEASURED, NOT EYEBALLED, AND THE FIRST SET WAS WRONG.
  *
@@ -142,11 +150,6 @@
       color-mix(in oklab, var(--brand-primary) 60%, transparent) 50%,
       color-mix(in oklab, var(--brand-primary) 18%, transparent) 58%,
       transparent 64%
-    ),
-    linear-gradient(
-      to top,
-      color-mix(in oklab, var(--brand-ink) 46%, transparent) 0%,
-      transparent 32%
     );
 }
 

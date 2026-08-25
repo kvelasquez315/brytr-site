@@ -12,20 +12,24 @@ import { Elevation } from "./elevation";
  * same evening, registered so the handle wipes one into the other - which is the whole product
  * argument in one gesture. If either photo is missing the handle wipes the two drawn states instead.
  *
- * IT IS NOW THE SECOND SECTION ON THE PAGE. It was the seventh, roughly three thousand pixels down,
- * behind a rating band, a photo mosaic, a six-card service grid, a four-row split and a founders
- * section. This is the demo of the single feature the product is bought for and the only thing on
- * the site no competitor in the metro has; it does not belong in slot seven. Everything that used
- * to sit above it is a claim, and this is the proof, so it goes directly under the hero and the
- * claims come after.
+ * IT IS THE THIRD SECTION, AND IT WAS BRIEFLY THE SECOND. It started as the seventh - three
+ * thousand pixels down, behind a rating band, a photo mosaic, a service grid, a four-row split and
+ * a founders section - which is far too deep for the demo of the feature the product is bought for.
+ * Promoting it to second overcorrected. The client: "I do like the interactive, but I don't think
+ * it should be the first thing at all... what we do is the main thing. What do we do should be more
+ * of what is right away instead of an interactive thing."
  *
- * THE LEDE WAS FOUR LINES AND IS NOW ONE. It read: "Drag the line to see it. Both halves are the
- * same Omaha house from the same camera position on the same evening - everyday warm white on the
- * left, a saved colour scene on the right. Nothing was repainted and nothing was rewired between
- * the two: it is one tap in the app." Every clause of that is true and the section needs a reader
- * to believe it, but it is 47 words spent describing an interaction that is sitting right there
- * with a handle on it. The claim that actually needs stating is that it is one house and one
- * evening, because that is the part a sceptic will doubt. The rest is what dragging it shows.
+ * That is the right read. An interactive control as the first thing after the hero asks a visitor
+ * to play with something before anyone has told them what is being sold. Services answers "what do
+ * you do" in five photographs and five words each; this then proves the part of that answer nobody
+ * believes. Claim, then proof, in that order - just not five sections apart.
+ *
+ * THE LEDE IS GONE ENTIRELY. Four lines, then one, and now none. The client on the one that was
+ * left: "I do not think that we need that text below the heading. It is just there for no reason."
+ * Right, and the reason is structural rather than editorial - the three labels immediately beneath
+ * it read "Warm white / Drag the line / One colour", so the sentence was captioning a control that
+ * captions itself. The heading names the section, the labels say what to do, and the thing itself
+ * is the argument.
  *
  * THE SPEC PANEL LOST ITS PARAGRAPH. Below the four spec rows there was a further sentence per
  * state ("Any two colours can be saved as their own scene and scheduled to a date range, so the
@@ -101,7 +105,7 @@ export function SceneWipe() {
      *
      * The spec panel stays dark. It is a card, not a section, and a dark card on a light ground
      * is how the rest of the page already handles a panel that needs to hold its own weight. */
-    <section className="section bg-background">
+    <section className="section bg-muted">
       <div className="shell">
         {/* The onward link sits on the RIGHT OF THE HEAD, the same as RecentWork, Reviews and the
           * FAQ. Left-aligned on its own it left roughly 600 x 150px of empty band beside the lede. */}
@@ -111,7 +115,6 @@ export function SceneWipe() {
             className="max-w-[46rem]"
             eyebrow="How the colour works"
             title="Warm white every night. Any colour when you want it."
-            lede="Drag the line. It is one house, one camera position, one evening - nothing was rewired between the two halves."
           />
           <Link
             href="/gallery"

@@ -5,7 +5,6 @@ import { services } from "@/content/services";
 import { images } from "@/content/images";
 import { reviews, reviewProof } from "@/content/reviews";
 import { homeFaqs, pricingFaqs } from "@/content/faqs";
-import { iconMap, type IconKey } from "@/content/icon-map";
 import { SectionHead, QuoteForm } from "@/components/ui/bits";
 import { Faq } from "@/components/sections/faq";
 
@@ -145,12 +144,12 @@ function Stars({ size = "1rem" }: { size?: string }) {
  * LINK, so the button was never anything but a second copy of the card's own href taking up 48px.
  * The detail lives on the service page, which is where somebody who has chosen goes.
  * ========================================================================= */
-const SERVICE_CARDS: { slug: string; label: string; icon: IconKey }[] = [
-  { slug: "permanent-roofline-lighting", label: "Roofline and eaves", icon: "roofline" },
-  { slug: "landscape-lighting", label: "Landscape and beds", icon: "pathLight" },
-  { slug: "patio-pergola-bistro-lighting", label: "Patio and pergola", icon: "pergola" },
-  { slug: "hardscape-lighting", label: "Walls, steps and coping", icon: "hardscape" },
-  { slug: "soffit-lighting", label: "Soffit and architectural", icon: "soffit" },
+const SERVICE_CARDS: { slug: string; label: string }[] = [
+  { slug: "permanent-roofline-lighting", label: "Roofline and eaves" },
+  { slug: "landscape-lighting", label: "Landscape and beds" },
+  { slug: "patio-pergola-bistro-lighting", label: "Patio and pergola" },
+  { slug: "hardscape-lighting", label: "Walls, steps and coping" },
+  { slug: "soffit-lighting", label: "Soffit and architectural" },
 ];
 
 export function Services() {
@@ -160,23 +159,20 @@ export function Services() {
   }).filter(Boolean);
 
   return (
-    <section className="section bg-muted">
+    <section className="section bg-background">
       <div className="shell">
         {/* No lede. The heading is a question a homeowner can answer in one word, and the five
           * answers are directly underneath it. A paragraph here would be explaining the grid. */}
         <SectionHead
           align="center"
           scale="section"
-          icon="wholeHome"
           eyebrow="Services"
           title="What are you looking to light?"
         />
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {cards.map((c) => {
-            const I = iconMap[c!.icon];
-            return (
-              <Link
+          {cards.map((c) => (
+            <Link
                 key={c!.slug}
                 href={`/services/${c!.slug}`}
                 data-spot
@@ -192,12 +188,6 @@ export function Services() {
                       className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.04]"
                     />
                   )}
-                  <span
-                    className="absolute left-4 top-4 grid size-11 place-items-center rounded-full bg-card text-accent-ink shadow-[var(--shadow-lg)]"
-                    aria-hidden
-                  >
-                    <I className="size-6" />
-                  </span>
                 </div>
                 <div className="flex flex-1 flex-col p-6">
                   <h3 className="font-display text-[1.2rem] font-bold leading-tight text-foreground">
@@ -206,9 +196,8 @@ export function Services() {
                   </h3>
                   <p className="mt-2 text-[0.95rem] leading-snug text-muted-foreground">{c!.svc.short}</p>
                 </div>
-              </Link>
-            );
-          })}
+            </Link>
+          ))}
 
           {/* The sixth cell. Phoenix puts a quiz here; ours is the consultation, which is the same
             * offer without a quiz we do not have. A real install photograph rather than a portrait,
@@ -266,11 +255,11 @@ export function Services() {
  * it is one sentence. The two cards, the two avatar monograms and the six tick rows were the parts
  * that were not persuasive.
  * ========================================================================= */
-const ABOUT_FEATURES: { icon: IconKey; title: string; body: string }[] = [
-  { icon: "wholeHome", title: "Whole property", body: "Roofline, beds, patio and hardscape, one app" },
-  { icon: "hardHat", title: "Our own crews", body: "W2 employees, never subcontracted" },
-  { icon: "seasonal", title: "Every night of the year", body: "Warm white by default, colour when you want it" },
-  { icon: "dayNight", title: "Checked twice", body: "Signed off lit, then again in daylight" },
+const ABOUT_FEATURES: { title: string; body: string }[] = [
+  { title: "Whole property", body: "Roofline, beds, patio and hardscape, one app" },
+  { title: "Our own crews", body: "W2 employees, never subcontracted" },
+  { title: "Every night of the year", body: "Warm white by default, colour when you want it" },
+  { title: "Checked twice", body: "Signed off lit, then again in daylight" },
 ];
 
 export function WhoWeAre() {
@@ -323,36 +312,18 @@ export function WhoWeAre() {
         <div className="flex flex-col">
           <SectionHead
             scale="section"
-            icon="roofline"
             eyebrow="Who we are"
             title="Permanent lighting installers, based in Omaha"
           />
 
           <dl className="mt-8 grid gap-x-10 gap-y-7 border-t border-border pt-8 sm:grid-cols-2">
-            {ABOUT_FEATURES.map((f) => {
-              const I = iconMap[f.icon];
-              return (
-                <div key={f.title} className="flex gap-4">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-md bg-muted text-accent-ink" aria-hidden>
-                    <I className="size-6" />
-                  </span>
-                  <div>
-                    <dt className="font-display text-[1.02rem] font-bold leading-snug text-foreground">{f.title}</dt>
-                    <dd className="mt-1 text-[0.9rem] leading-snug text-muted-foreground">{f.body}</dd>
-                  </div>
-                </div>
-              );
-            })}
+            {ABOUT_FEATURES.map((f) => (
+              <div key={f.title} className="border-t border-border pt-4">
+                <dt className="font-display text-[1.02rem] font-bold leading-snug text-foreground">{f.title}</dt>
+                <dd className="mt-1.5 text-[0.9rem] leading-snug text-muted-foreground">{f.body}</dd>
+              </div>
+            ))}
           </dl>
-
-          {/* Where the deleted Founders section went. */}
-          <p className="mt-8 border-t border-border pt-8 text-[1.05rem] leading-relaxed text-muted-foreground">
-            Started by{" "}
-            <span className="font-semibold text-foreground">
-              {site.founders.map((f) => f.name).join(" and ")}
-            </span>
-            , who both still run the walk-arounds themselves.
-          </p>
 
           <div className="mt-auto pt-8">
             <DarkPill href="/about">More about us</DarkPill>
@@ -383,11 +354,11 @@ export function WhoWeAre() {
  * THE RATING CARD CAME OFF THE PHOTOGRAPH. It was the fourth of six places the page said 5.0 / 196.
  * The photograph is better without a card over it, and Reviews is directly below.
  * ========================================================================= */
-const HOW_ITEMS: { icon: IconKey; title: string; body: string }[] = [
-  { icon: "measured", title: "Measured on site, after dark", body: "Against your own materials, not a catalogue" },
-  { icon: "weatherSealed", title: "Into fascia, never shingles", body: "Every penetration sealed as it is made" },
-  { icon: "zones", title: "One app, every zone", body: "House, pergola, walls and beds, on saved scenes" },
-  { icon: "warranty", title: "We hold the warranty", body: "No portal between you and the crew" },
+const HOW_ITEMS: { title: string; body: string }[] = [
+  { title: "Measured on site, after dark", body: "Against your own materials, not a catalogue" },
+  { title: "Into fascia, never shingles", body: "Every penetration sealed as it is made" },
+  { title: "One app, every zone", body: "House, pergola, walls and beds, on saved scenes" },
+  { title: "We hold the warranty", body: "No portal between you and the crew" },
 ];
 
 export function HowWeWork() {
@@ -399,27 +370,18 @@ export function HowWeWork() {
           <SectionHead
             onDark
             scale="section"
-            icon="hardHat"
             eyebrow="How we work"
             title="Installed once, and installed properly"
             lede="Permanent lighting is drilled into your fascia and left there. How it is fixed and sealed is the whole difference between a run that still looks right in five years and one that does not."
           />
 
           <ul className="mt-9 grid gap-7 sm:grid-cols-2">
-            {HOW_ITEMS.map((h) => {
-              const I = iconMap[h.icon];
-              return (
-                <li key={h.title} className="flex gap-4">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-md bg-primary text-accent" aria-hidden>
-                    <I className="size-6" />
-                  </span>
-                  <div>
-                    <h3 className="font-display text-[1.02rem] font-bold leading-snug text-on-dark">{h.title}</h3>
-                    <p className="mt-1 text-[0.9rem] leading-snug text-on-dark-muted">{h.body}</p>
-                  </div>
-                </li>
-              );
-            })}
+            {HOW_ITEMS.map((h) => (
+              <li key={h.title} className="border-t border-on-dark/20 pt-4">
+                <h3 className="font-display text-[1.02rem] font-bold leading-snug text-on-dark">{h.title}</h3>
+                <p className="mt-1.5 text-[0.9rem] leading-snug text-on-dark-muted">{h.body}</p>
+              </li>
+            ))}
           </ul>
 
           {/* The one line worth keeping out of the deleted WhyTrust section: it is the section's
@@ -464,7 +426,6 @@ export function Reviews() {
       <div className="shell">
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <SectionHead
-            icon="stars"
             eyebrow="Our reviews"
             title="What our clients say"
             lede={`Rated ${reviewProof.average} across ${reviewProof.count} ${reviewProof.platform} reviews.`}
@@ -535,7 +496,6 @@ export function RecentWork() {
           <SectionHead
             onDark
             scale="section"
-            icon="christmas"
             eyebrow="Our projects, photographed on site"
             title="Recent work around Omaha"
           />
@@ -625,7 +585,6 @@ export function Faqs() {
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <SectionHead
             scale="section"
-            icon="verified"
             eyebrow="Most asked"
             title="Questions homeowners ask us first"
           />
@@ -661,7 +620,6 @@ export function Closer() {
         <div className="flex flex-col">
           <SectionHead
             scale="section"
-            icon="measured"
             eyebrow="Free consultation"
             title="See it on your house before you buy"
             lede="We come out after dark, walk the property, and show you the design on your own elevation. No charge and no obligation."

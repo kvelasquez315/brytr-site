@@ -44,6 +44,28 @@ const text = main
 
 const words = text.split(" ").filter((w) => /[a-z0-9]/i.test(w));
 
+/* SPLIT THE FAQ OUT, because otherwise this number flatters the page.
+ *
+ * The accordion renders with `forceMount`, so every answer is in the document whether its card is
+ * open or not - that is what makes them count for SEO and what a reader gets in one click. But ten
+ * of the eleven are `display:none` until clicked, so counting them alongside the visible prose
+ * would let a page "pass" an 800-word floor while showing a reader almost nothing.
+ *
+ * SPLIT BY SECTION, NOT BY `data-state`. The first attempt matched elements carrying both
+ * data-state="closed" and `hidden`, which is fragile twice over: attribute order is not guaranteed,
+ * and a non-greedy match to the first `</div>` cannot survive nesting. It reported 455 folded words
+ * against a 394-word delta - two numbers that cannot both be right. Slicing <main> at section
+ * boundaries needs no assumptions about attribute order or nesting depth. */
+const faqChunk = main.split("<section").find((s) => s.includes("Questions homeowners ask")) ?? "";
+const faqWords = faqChunk
+  .replace(/<(script|style)[\s\S]*?<\/\1>/g, " ")
+  .replace(/<[^>]+>/g, " ")
+  .replace(/&[a-z]+;|&#\d+;/g, " ")
+  .replace(/\s+/g, " ")
+  .trim()
+  .split(" ")
+  .filter((w) => /[a-z0-9]/i.test(w));
+
 /* The inventory. These are the three counts the client's complaint was actually about:
  * how many bands there are, how many things claim to be a heading, and how many forms. */
 const sections = [...main.matchAll(/<section\b/g)].length;
@@ -56,7 +78,9 @@ const buttons = [...main.matchAll(/rounded-full/g)].length;
 
 console.log(`\n  ${path}`);
 console.log(`  ${"─".repeat(46)}`);
-console.log(`  words in <main>   ${words.length}`);
+console.log(`  words in <main>   ${words.length}   (all indexable)`);
+console.log(`    the 8 sections  ${words.length - faqWords.length}   (prose a reader meets scrolling)`);
+console.log(`    the FAQ         ${faqWords.length}   (mostly folded into collapsed cards)`);
 console.log(`  sections          ${sections}`);
 console.log(`  headings          ${h1} h1 · ${h2} h2 · ${h3} h3  (${h1 + h2 + h3} total)`);
 console.log(`  forms             ${forms}  (${fields} fields)`);

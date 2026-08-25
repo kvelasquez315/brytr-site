@@ -51,7 +51,26 @@ export function Faq({ items, onDark }: { items: FaqItem[]; onDark?: boolean }) {
               </span>
             </Acc.Trigger>
           </Acc.Header>
-          <Acc.Content className="overflow-hidden data-[state=closed]:animate-none">
+          {/* `forceMount` KEEPS EVERY ANSWER IN THE HTML, and that is the point.
+            *
+            * Radix unmounts closed accordion content. Grepping the page for a closed answer finds
+            * it anyway, which makes it look like the content is server-rendered - but what the
+            * grep hits is Next's RSC flight payload (`self.__next_f.push`), which is transport,
+            * not page content. Verified both ways: inside <main>, only the open item's answer
+            * existed. So the eleven answers were roughly 640 words that a reader could reach in
+            * one click and a crawler could not reach at all.
+            *
+            * That mattered because this page has an 800-word floor on it for SEO and had been cut
+            * to 811. The choice was padding prose back onto a page whose whole brief was "way too
+            * much text", or putting content that is already written, already true and already one
+            * click away into the document where it counts. `forceMount` plus hiding on
+            * `data-state=closed` does the second. Nothing changes visually: eleven collapsed rows,
+            * one open.
+            *
+            * `hidden` is the right way to hide it rather than height-0-overflow-hidden, because
+            * display:none also takes the text out of the accessibility tree, which is what a
+            * collapsed panel should do. There is no open/close animation to break here. */}
+          <Acc.Content forceMount className="overflow-hidden data-[state=closed]:hidden">
             <p className={`max-w-[86ch] px-6 pb-6 text-[0.98rem] leading-relaxed sm:px-7 ${onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>
               {f.a}
             </p>

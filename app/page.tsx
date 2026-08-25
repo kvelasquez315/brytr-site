@@ -51,17 +51,28 @@ export default function Home() {
           *   WhyTrust      seven ticks, four of them the HowWeWork items restated
           *   CallToAction  an amber band asking for the same click as the closing section
           *
-          * THE DRAG DEMO MOVED FROM SEVENTH TO SECOND. It is the only thing on this site that no
-          * competitor in the metro has, and it was three thousand pixels down behind five sections
-          * of claims. The proof now comes directly after the hero and the claims come after it.
+          * SERVICES IS SECOND AND THE DRAG DEMO IS THIRD. The demo started seventh, which is far
+          * too deep for the feature the product is bought for; second was an overcorrection. The
+          * client: "I do like the interactive, but I don't think it should be the first thing at
+          * all... what we do is the main thing." So the page answers "what do you do" in five
+          * photographs, and THEN proves the part of that answer nobody believes.
           *
-          * THE GROUND ALTERNATES AND NEVER RUNS MORE THAN TWO DEEP - photograph, raise, muted,
-          * background, raise, muted, primary, background, muted, into the primary footer. The old
-          * page ran five light sections in a row. No rules are drawn between sections; the ground
-          * change IS the seam. */}
+          * NO ICONS ANYWHERE ON THIS PAGE. There were ten: seven section-head glyphs and three
+          * sets of tiles, all out of content/icon-map.tsx. "I can't even tell what's going on with
+          * them... I would rather we bring our own visual sense to it with our images." Every one
+          * is gone - see the note in components/sections/home.tsx for what replaced them.
+          *
+          * AND THE FOUNDERS ARE NOT MENTIONED. "I don't want to mention them. We shouldn't be
+          * mentioning them." Their section went two rounds ago; the one sentence that survived
+          * into WhoWeAre is gone too. They keep /about.
+          *
+          * THE GROUND runs photograph, background, muted, background, raise, muted, primary,
+          * background, muted, into the primary footer - six light sections to three dark, where
+          * the page this replaced read as dark because its two darkest were its first two. No
+          * rules are drawn between sections; the ground change IS the seam. */}
         <Hero />          {/* 1 · photograph, one line of proof, 3-field form  · photo      */}
-        <SceneWipe />     {/* 2 · the drag demo, promoted from slot 7          · raise      */}
-        <Services />      {/* 3 · five photo cards, each card is the link      · muted      */}
+        <Services />      {/* 2 · WHAT WE DO, first. Five cards, card is link  · background */}
+        <SceneWipe />     {/* 3 · the drag demo. Proof, after the claim        · muted      */}
         <WhoWeAre />      {/* 4 · photo mosaic | features + the founders line  · background */}
         <HowWeWork />     {/* 5 · four items | daylight photo. Absorbs trust   · raise      */}
         <Reviews />       {/* 6 · the one loud heading, three real reviews     · muted      */}
