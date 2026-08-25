@@ -100,18 +100,9 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
         photo={d?.photo ?? "/img/channel-detail.jpg"}
         photoAlt={d?.photoAlt ?? `${s.name} on a finished Brytr install in the Omaha metro`}
         objectPosition={d?.objectPosition ?? "50% 50%"}
-        eyebrow={s.maker}
         h1={s.h1}
         lede={s.lede}
         trail={trail}
-        footnote={
-          <>
-            {d?.position ?? s.short}{" "}
-            <Link href="/lighting-systems" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              How the whole lineup fits together
-            </Link>.
-          </>
-        }
       />
 
       {/* ── THE SPEC SHEET, IN FULL ── */}

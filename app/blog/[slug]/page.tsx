@@ -86,19 +86,9 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         photo={pic?.photo ?? "/img/hero-bg.jpg"}
         photoAlt={pic?.photoAlt ?? "A finished Brytr install in the Omaha metro at night"}
         objectPosition={pic?.objectPosition ?? "50% 50%"}
-        eyebrow={`${p.category} · ${p.read} read`}
         h1={p.h1}
         lede={p.dek}
         trail={trail}
-        footnote={
-          <>
-            Written by Brytr Co from installing this product in the Omaha metro. Not
-            sponsored and not manufacturer copy.{" "}
-            <Link href="/blog" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              The other eleven
-            </Link>.
-          </>
-        }
       />
 
       {/* ── THE ARTICLE ──

@@ -110,19 +110,9 @@ export default function HowItWorks() {
         photo="/img/g-gable-detail.jpg"
         photoAlt="Close view of two Omaha gables with the channel following the rake line and mitered at the peak, one gable red and one blue"
         objectPosition="50% 30%"
-        eyebrow="Install day"
         h1="One day, and all of it happens to one board."
         lede="Permanent lighting is a carpentry job with an electrical job inside it. Everything that decides whether you like it in five years happens in the eight inches between your shingles and your gutter, on the day the van turns up."
         trail={trail}
-        footnote={
-          <>
-            Photographed on a finished Brytr install. The miter at the peak of each gable is cut on the
-            angle, not bent around it.{" "}
-            <Link href="/warranty" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              What the warranty covers
-            </Link>.
-          </>
-        }
       />
 
       {/* ── THE FASCIA, FOUR TIMES ──

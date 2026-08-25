@@ -178,7 +178,6 @@ export default function SystemsHub() {
         photo="/img/channel-detail.jpg"
         photoAlt="Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along every gable and eave"
         objectPosition="50% 55%"
-        eyebrow="The materials"
         h1="The lines we install, and what each one is actually for."
         lede="Haven Lighting makes the roofline channel, the soffit and architectural fixtures, the ground-level lights and the overhead bistro runs. We install all of it, which is why everything on a property answers to one app instead of three."
         trail={trail}

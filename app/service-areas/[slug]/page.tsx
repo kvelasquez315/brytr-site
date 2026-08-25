@@ -109,7 +109,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         photo={pic?.photo ?? "/img/whole-home.jpg"}
         photoAlt={pic?.photoAlt ?? "A finished Brytr install in the Omaha metro at night"}
         objectPosition={pic?.objectPosition ?? "50% 55%"}
-        eyebrow={`${c.name}, ${c.state} · ${bandLabel}`}
         h1={`Permanent outdoor lighting in ${c.name}.`}
         lede={`We install and service permanent exterior lighting throughout ${c.name}${
           c.tier === "metro"
@@ -126,30 +125,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           * skimming both got no signal that one of them was a disclosure. It now gets a
           * ruled-off block and says the word out loud. A surface shift rather than a coloured
           * left strip, which slopcheck rejects on principle and is right to. */
-        footnote={
-          c.tier === "outstate" ? (
-            <span className="block max-w-[62ch] rounded-sm bg-on-dark/[0.07] px-4 py-3">
-              <span className="label block text-on-dark">Worth saying about this photograph</span>
-              <span className="mt-1.5 block">
-                It is a Brytr install in the Omaha metro, not in {c.name}. We have not
-                photographed a job out here yet, and we are not going to caption a metro house
-                as a local one.{" "}
-                <Link href="/recent-projects" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-                  The rest of what we do not have
-                </Link>.
-              </span>
-            </span>
-          ) : (
-            <>
-              {c.tier === "metro"
-                ? "Photographed on a Brytr install in the metro. Core territory, so a service call here gets scheduled the same week."
-                : "Photographed on a Brytr install on the Nebraska side. Iowa work gets the same crews, materials and warranty, with no border premium on the quote."}{" "}
-              <Link href="/how-it-works" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-                What install day looks like
-              </Link>.
-            </>
-          )
-        }
       />
 
       {/* ── THE BAND STRIP ──

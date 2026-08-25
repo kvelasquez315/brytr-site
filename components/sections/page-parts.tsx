@@ -7,7 +7,7 @@ import { services } from "@/content/services";
 import { reviewProof } from "@/content/reviews";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Check, TextLink, QuoteForm } from "@/components/ui/bits";
-import { ProofRail } from "@/components/sections/proof-rail";
+import { SiteHero, TrustPlinth } from "@/components/sections/site-hero";
 
 /* SHARED PAGE FURNITURE — and the reason the interior pages looked alike.
  *
@@ -81,105 +81,63 @@ type HeroVariant = "photo" | "type";
 const FALLBACK_HERO = "/img/hero-bg.jpg";
 
 export function PageHero({
-  eyebrow, h1, lede, trail, stats, footnote,
-  variant = "photo",
-  photo,
-  photoAlt = "",
-  objectPosition = "50% 50%",
+  h1, lede, trail, variant = "photo", photo, photoAlt = "", objectPosition = "50% 50%",
 }: {
-  eyebrow: string; h1: string; lede: string;
+  h1: string; lede: string;
   trail: { name: string; href: string }[];
-  /* Figures that stand on their own, never a count of the list that follows the hero. */
-  stats?: [string, string][];
-  footnote?: React.ReactNode;
   variant?: HeroVariant;
   photo?: string;
   photoAlt?: string;
   objectPosition?: string;
 }) {
-  const Type = (
-    <>
-      <Breadcrumb trail={trail} />
-      <p className="eyebrow eyebrow--on-dark">{eyebrow}</p>
-      <h1 className="mt-4 text-[clamp(2.1rem,4.2vw,3.4rem)] leading-[1.02] text-on-dark">
-        {h1}
-      </h1>
-      <p className="mt-5 max-w-[62ch] text-lg text-on-dark/85">{lede}</p>
-      {variant !== "type" && (
-        /* One button, and it is the phone number — the form is in the hero, so a second
-         * "get a consultation" button would be competing with itself. Same call the home
-         * page makes. */
-        <div className="mt-8">
-          <Button asChild size="lg"><a href={site.phoneHref} className="u">{site.phone}</a></Button>
-        </div>
-      )}
-      {stats && (
-        <dl className="mt-9 grid max-w-[34rem] grid-cols-3 divide-x divide-on-dark/12 rounded-lg bg-raise ring-1 ring-on-dark/10">
-          {stats.map(([f, l]) => (
-            <div key={l} className="px-4 py-5">
-              <dt className="u text-xl font-medium leading-none text-on-dark">{f}</dt>
-              <dd className="mt-2 text-xs leading-snug text-on-dark-muted">{l}</dd>
-            </div>
-          ))}
-        </dl>
-      )}
-      {footnote && <div className="mt-6 max-w-[54ch] text-sm text-on-dark-muted">{footnote}</div>}
-    </>
-  );
-
-  /* type-only: one column, generous measure, nothing else in the room.
+  /* PageHero IS SiteHero NOW, plus a breadcrumb.
    *
-   * `max-w-[70rem]` here was wrong and visible. `.shell` caps at --container (100rem), so at
-   * 1440 the shell's own left edge is the 2rem gutter — x=32. Capping this hero at 70rem
-   * centred it instead, putting the H1 at x=192 while the body section below it stayed at 32.
-   * Every legal page therefore stepped 160px to the left the moment you scrolled past the
-   * hero. The measure belongs on the text, not on the container, so the whole document keeps
-   * one left edge — and 76ch matches the body copy on the legal pages exactly. */
+   * It used to be a hand-copy of the home page hero - its own comment said "the home page's hero,
+   * unconditionally" - and then the home hero was rebuilt five times and this was not. By the time
+   * the client asked for them to match, they had drifted on eight points: h1 size, the tagline, the
+   * lede measure, the button, the form variant, the trust band, the column width and the height.
+   *
+   * Closing those eight by hand would have left the mechanism that opened them. One component now
+   * renders every hero on the site, so "the only thing different is the wording" holds because
+   * there is nothing else left to differ.
+   *
+   * THREE PROPS WENT. `eyebrow` - the home hero has nothing above its h1 on purpose, and the
+   * breadcrumb directly above already names the section. `footnote` - an extra paragraph under
+   * the button on eighteen pages, one of which restated the rating directly above a plinth that
+   * states the rating. `stats` - a three-figure row that zero pages passed.
+   */
   if (variant === "type") {
+    /* THE ONE EXCEPTION, AND IT IS DELIBERATE: /privacy-policy, /terms-of-service and
+     * /accessibility get the type-only hero with no lead form on it. A quote form on the page
+     * explaining what we do with your phone number is the single place the client's own rule works
+     * against him. The trust plinth still runs underneath, so the three of them still open like the
+     * rest of the site. Flagged to him rather than decided quietly. */
     return (
-      <>
-        <section className="bg-primary">
-          <div className="shell py-14 lg:py-20">
-            <div className="max-w-[76ch]">{Type}</div>
+      <section className="bg-primary">
+        <div className="shell py-14 lg:py-20">
+          <div className="max-w-[76ch]">
+            <Breadcrumb trail={trail} />
+            <h1 className="display-hero-lg text-on-dark">{h1}</h1>
+            <p className="mt-5 font-display text-[1.3rem] font-bold tracking-[-0.02em] text-accent">
+              {site.tagline}
+            </p>
+            <p className="mt-3 max-w-[62ch] text-[1.15rem] leading-relaxed text-on-dark/90">{lede}</p>
           </div>
-        </section>
-        {/* The band, but not the form. A quote form on a privacy policy is the one place the
-          * client's rule would work against him: it asks for a phone number on the page that
-          * explains what we do with phone numbers. The trust band carries over, so these three
-          * pages still belong to the same site. */}
-        <ProofRail />
-      </>
+        </div>
+        <TrustPlinth />
+      </section>
     );
   }
 
-  /* The home page's hero, unconditionally: photograph behind, type on the scrim, form on the
-   * right at 28rem, amber line on the base edge, trust band immediately under it. */
   return (
-    <>
-      <section className="relative isolate overflow-hidden bg-primary">
-        <Image
-          src={photo ?? FALLBACK_HERO}
-          alt={photoAlt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-          style={{ objectPosition }}
-        />
-        <div className="hero-scrim absolute inset-0" aria-hidden />
-
-        <div className="shell relative grid items-center gap-10 py-14 lg:grid-cols-[1fr_28rem] lg:gap-14 lg:py-20">
-          <div className="max-w-[46rem]">{Type}</div>
-          <div className="lg:w-[28rem] lg:justify-self-end">
-            <QuoteForm variant="compact" heading="Get a free design consultation" />
-          </div>
-        </div>
-
-        {/* the one amber line, same as home */}
-        <div className="hero-baseline absolute inset-x-0 bottom-0 h-0.5" aria-hidden />
-      </section>
-      <ProofRail />
-    </>
+    <SiteHero
+      h1={h1}
+      lede={lede}
+      photo={photo}
+      photoAlt={photoAlt}
+      objectPosition={objectPosition}
+      breadcrumb={<Breadcrumb trail={trail} />}
+    />
   );
 }
 

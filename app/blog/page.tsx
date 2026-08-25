@@ -53,7 +53,6 @@ export default function BlogHub() {
         photo={featPic?.photo ?? "/img/christmas-detail.jpg"}
         photoAlt={featPic?.photoAlt ?? "A finished Brytr install in the Omaha metro at night"}
         objectPosition="50% 48%"
-        eyebrow="Resources"
         h1="Answers before you buy, including the ones that do not flatter us."
         lede="Written from installing this product rather than from a manufacturer's brochure. Nothing here is sponsored, nothing is a press release, and where our own premium system loses, it says so."
         trail={trail}

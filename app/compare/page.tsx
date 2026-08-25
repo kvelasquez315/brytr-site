@@ -187,17 +187,9 @@ export default function CompareHub() {
         photo="/img/g-pool-blue.jpg"
         photoAlt="An Omaha home, pergola and pool deck lit blue at dusk"
         objectPosition="50% 48%"
-        eyebrow="Honest comparison"
         h1="We install two of these and would not put three of them on your house."
         lede="Every comparison page in this category is written by somebody who sells exactly one of the products on it. We install two of them, and we will tell you which of the rest we would not fit, which is the only reason this page can also tell you where our own premium system loses."
         trail={trail}
-        footnote={
-          <>
-            Photographed on a Brytr install. None of the other systems on this page are pictured anywhere
-            on this site, because passing our work off as theirs, or theirs as ours, is the one thing a
-            comparison page must not do.
-          </>
-        }
       />
 
       {/* ── WHERE WE STAND, AND ON WHAT ──

@@ -87,16 +87,9 @@ export default function About() {
         photo="/img/g-ranch-blue-white.jpg"
         photoAlt="A single-story Omaha home in October with the roofline, front beds, rock steps and walk all lit, the entry gable set to blue"
         objectPosition="50% 42%"
-        eyebrow="About Brytr"
         h1="Built by the two people who show up on the roof."
         lede="Brytr exists because every permanent lighting quote in this metro came from somebody selling exactly one brand and calling it the only good option. We carry two and we run our own crews, from the measure to the handover."
         trail={trail}
-        footnote={
-          <>
-            A real customer&rsquo;s front yard in October, decorations and all. Roofline, beds, rock steps
-            and walk are all on the same controller.
-          </>
-        }
       />
 
       {/* ── THE THESIS ──

@@ -20,7 +20,6 @@ export default function Page() {
         * look plain, and plain is the correct design for what this is. */}
       <PageHero
         variant="type"
-        eyebrow="Legal"
         h1="Accessibility"
         lede="What we have done, what we know is imperfect, and how to tell us if something on this site does not work for you."
         trail={trail}

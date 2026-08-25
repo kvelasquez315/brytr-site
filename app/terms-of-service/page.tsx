@@ -20,7 +20,6 @@ export default function Page() {
         * look plain, and plain is the correct design for what this is. */}
       <PageHero
         variant="type"
-        eyebrow="Legal"
         h1="Terms of service"
         lede="The terms that apply to this website. The terms that apply to an actual install are in your written quote, which is the document that governs the work."
         trail={trail}

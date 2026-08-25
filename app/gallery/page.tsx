@@ -156,21 +156,9 @@ export default function Gallery() {
         photo="/img/scene-game-day.jpg"
         photoAlt="An Omaha ranch home with its roofline in red over white for game day"
         objectPosition="50% 48%"
-        eyebrow="Gallery"
         h1="The same fixture, every way we have shot it."
         lede="Every photograph on this page is a Brytr system on a real Omaha home — no renders, no stock houses, no borrowed shots. Grouped by what the system is set to rather than by house, because the point is that none of these needed different hardware."
         trail={trail}
-        footnote={
-          <>
-            Homeowner addresses stay private, so each shot is captioned by scene rather than by street.{" "}
-            <Link
-              href="/recent-projects"
-              className="text-on-dark underline decoration-accent decoration-2 underline-offset-4"
-            >
-              Three of these installs, told properly
-            </Link>.
-          </>
-        }
       />
 
       {/* ── THE NINETY-SECOND SEQUENCE ──

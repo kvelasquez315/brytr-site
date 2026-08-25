@@ -106,11 +106,9 @@ export default function ServicesHub() {
         photo="/img/whole-home.jpg"
         photoAlt="A two-story Omaha home with its roofline, gables and front trees lit at night"
         objectPosition="50% 62%"
-        eyebrow="What we install"
         h1="Everything worth lighting on an Omaha property."
         lede="Roofline, soffit, beds, trees, walls, pergolas and storefronts — all of it on one channel, one controller and one app, so what you install first does not limit what you add later."
         trail={trail}
-        footnote="Photographed on a finished Brytr install in west Omaha."
       />
 
       {/* ── THE DECISION TREE ──

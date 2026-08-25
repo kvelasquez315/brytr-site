@@ -73,16 +73,9 @@ export default function Pricing() {
         photo="/img/g-blue-elevation.jpg"
         photoAlt="A brick two-story in Omaha with three gables and the whole front roofline lit, blue with the gables picked out in pink"
         objectPosition="50% 55%"
-        eyebrow="Pricing"
         h1="What permanent lighting actually costs."
         lede="It is priced by linear foot of roofline plus complexity, which is why a real number needs somebody on a ladder with a wheel. We would rather publish how the pricing is built than make you call to find out."
         trail={trail}
-        footnote={
-          <>
-            Three gables and two elevations lit on this one. The shape of a house is most of the
-            difference between two quotes with the same footage on them.
-          </>
-        }
       />
 
       {/* ── THE HONEST NOTE ──

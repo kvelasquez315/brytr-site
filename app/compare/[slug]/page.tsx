@@ -102,7 +102,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         photo={d?.photo ?? "/img/channel-detail.jpg"}
         photoAlt={d?.photoAlt ?? "A finished Brytr install in the Omaha metro at night"}
         objectPosition={d?.objectPosition ?? "50% 50%"}
-        eyebrow={frameLabel}
         h1={c.h1}
         lede={
           frame === "referee"
@@ -112,13 +111,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             : "We install two of the brands on this market, which is more than the company quoting against us, and it is the reason the other column here is allowed to win. Where we have not verified something, the page says which thing."
         }
         trail={trail}
-        footnote={
-          <>
-            Photographed on a Brytr install. {c.b} is not pictured anywhere on this site, because
-            captioning our own work as somebody else&rsquo;s is the one thing a comparison page must not
-            do.
-          </>
-        }
       />
 
       {/* ── THE VERDICT ──

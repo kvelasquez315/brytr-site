@@ -139,16 +139,9 @@ export default function Warranty() {
         photo="/img/g-blue-white.jpg"
         photoAlt="An Omaha brick two-story with three gables, the walk and beds all lit, blue on the walls with the gables in warm white"
         objectPosition="50% 50%"
-        eyebrow="Warranty"
         h1="What is covered, and who comes out."
         lede="A warranty is worth exactly as much as the person administering it. There are two layers on every Brytr install — the manufacturer's on the hardware and ours on the work — and we are the ones who show up for either."
         trail={trail}
-        footnote={
-          <>
-            This system has to still look like this in year five, which is the only test a warranty page
-            is really about.
-          </>
-        }
       />
 
       {/* ── COVERED, FACING NOT COVERED ──

@@ -167,16 +167,9 @@ export default function FaqPage() {
         photo="/img/g-pool-firebowl.jpg"
         photoAlt="An Omaha back garden at night: a lit seat wall, a fire bowl on a pier, and the house roofline behind set to red"
         objectPosition="50% 38%"
-        eyebrow="Questions"
         h1="Everything people ask us."
         lede="In the words customers actually use, grouped by where in the decision they come up. The ones we get most are answered in the open, in one line each, so you do not have to click anything to find out what we will and will not tell you."
         trail={trail}
-        footnote={
-          <>
-            A back garden on a finished install: seat wall, fire bowl and roofline, all on the same
-            controller. If your question is not here, ring and ask.
-          </>
-        }
       />
 
       {/* ── THE SHORT ANSWERS ──

@@ -108,19 +108,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         photo={heroPhoto}
         photoAlt={(s.photo && images[s.photo]?.alt) || `${s.name} on a Brytr install in the Omaha metro`}
         objectPosition="50% 58%"
-        eyebrow={s.name}
         h1={s.h1}
         lede={s.lede}
         trail={trail}
-        footnote={
-          <>
-            Installed once by our own crews, and checked in daylight and after dark before we
-            leave.{" "}
-            <Link href="/pricing" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              How pricing works
-            </Link>.
-          </>
-        }
       />
 
       {/* ── WHAT IT IS, AND THE FACTS THAT ONLY APPLY TO IT ── */}

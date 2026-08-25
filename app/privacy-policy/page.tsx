@@ -20,7 +20,6 @@ export default function Page() {
         * look plain, and plain is the correct design for what this is. */}
       <PageHero
         variant="type"
-        eyebrow="Legal"
         h1="Privacy policy"
         lede="What we collect when you send us a form, what we do with it, and what we will not do with it."
         trail={trail}

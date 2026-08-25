@@ -88,16 +88,9 @@ export default function Contact() {
         photo="/img/g-twilight-yard.jpg"
         photoAlt="An Omaha back garden at twilight: a hipped roofline picked out in pink, warm light in the windows, ferns and a big weeping evergreen in the foreground"
         objectPosition="34% 62%"
-        eyebrow="Contact"
         h1="Talk to Zac or Sam."
         lede="Calls go to the two people who own the company, not to a call center and not to a lead service that resells your details. If we are on a roof, we ring you back."
         trail={trail}
-        footnote={
-          <>
-            {reviewProof.average} from {reviewProof.count} {reviewProof.platform} reviews, read on{" "}
-            {reviewProof.checked}. We cover the Omaha metro, Lincoln, eastern Nebraska and western Iowa.
-          </>
-        }
       />
 
       {/* ── THE FOUR ROUTES IN ──

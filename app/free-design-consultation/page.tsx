@@ -99,7 +99,6 @@ export default function Consult() {
         photo="/img/hero-warm-white.jpg"
         photoAlt="An Omaha two-story with every roofline run on the same soft pink, and the front walk and beds lit as well as the roofline"
         objectPosition="22% 62%"
-        eyebrow="No charge, no obligation"
         /* "See it on your house before you buy." is the closer on eleven pages. It cannot
           * also be this page's proposition — a headline that ends every other page reads as
           * furniture by the time you get here, and it left this page with no line of its own.
@@ -107,13 +106,6 @@ export default function Consult() {
         h1="One hour after dark, and you keep the drawing."
         lede="We come out, walk the property after dark, design it with you, measure the roofline, and leave you holding a written quote. If you decide against it you have lost an hour and gained a plan — the drawing and the number are yours either way."
         trail={trail}
-        footnote={
-          <>
-            One saved scene on a finished install, photographed after dark — the state most people
-            have not pictured, which is the whole reason we do the design on your property at night
-            rather than across a desk.
-          </>
-        }
       />
 
       {/* ── THE HOUR ──

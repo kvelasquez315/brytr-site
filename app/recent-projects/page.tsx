@@ -172,7 +172,6 @@ export default function RecentProjects() {
         photo="/img/patio-pergola.jpg"
         photoAlt="Lit pergola, pool deck and fire bowls at an Omaha home at dusk"
         objectPosition="50% 52%"
-        eyebrow="Recent work"
         h1="Finished installs, photographed on site after dark."
         /* Was "Three Brytr installs in west Omaha, shot after dark across a single October".
           * A fourth arrived, photographed in September, west OF Omaha, and in daylight-into-dusk
@@ -181,15 +180,6 @@ export default function RecentProjects() {
           * the sentence has to be rewritten every time the archive changes, and it never is. */
         lede="Not renders and not stock houses. Brytr installs around the Omaha metro, photographed on the properties with the systems running, and described by elevation and by what is lit. Homeowner addresses stay private, so none of them are named."
         trail={trail}
-        footnote={
-          <>
-            Above: house roofline, a freestanding pergola, under-cap wall washers and the pool
-            deck, each on its own zone.{" "}
-            <Link href="/gallery" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-              The same shots, organized by scene
-            </Link>.
-          </>
-        }
       />
 
       {projects.map((p, i) => (

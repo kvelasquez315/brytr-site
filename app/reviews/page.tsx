@@ -123,16 +123,9 @@ export default function Reviews() {
         photo="/img/g-moonrise.jpg"
         photoAlt="An Omaha home under a full moon with its roofline and gables lit, blue with the gables in warm white"
         objectPosition="50% 48%"
-        eyebrow="Reviews"
         h1="What Omaha homeowners say after the crew leaves."
         lede="We would rather send you to the profile than retype our own reviews, so this page does both: the ones we quote in full, and what all of them keep coming back to."
         trail={trail}
-        footnote={
-          <>
-            Read on Brytr&rsquo;s own Google Business Profile on {reviewProof.checked}. It only ever goes
-            up, so check the profile before quoting the number anywhere else.
-          </>
-        }
       />
 
       {/* ── THE RATING, AND WHAT THE REVIEWS MENTION ──

@@ -90,16 +90,9 @@ export default function AreasHub() {
         photo="/img/g-ranch-blue-white.jpg"
         photoAlt="A long Omaha ranch elevation lit blue and white with landscape uplighting"
         objectPosition="50% 45%"
-        eyebrow="Where we work"
         h1="Every town we drive to, and how long it takes."
         lede="A service area is only worth publishing if it says what changes as you go out. Inside the metro a warranty call is the same week. Out past Lincoln it is a scheduled route, and the pricing is the same either way."
         trail={trail}
-        footnote={
-          <>
-            Pinned from real coordinates, centered on the shop at 13436 C St. The honest limit on the
-            radius is how far we will drive for a warranty call in February.
-          </>
-        }
       />
 
       {/* ── THE MAP ──
