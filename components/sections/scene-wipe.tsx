@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { images } from "@/content/images";
 import { SectionHead } from "@/components/ui/bits";
@@ -30,11 +31,13 @@ const warmSpecs = [
   ["Everyday scene", "Warm white, roofline and grounds"],
   ["Channel finish", "Matched to fascia"],
   ["Schedule", "Dusk to 11:00 pm"],
+  ["Runs from", "The app, or the wall switch"],
 ];
 const sceneSpecs = [
   ["Saved scene", "One color, every run"],
   ["Zones on it", "House, pergola, walls and deck"],
   ["Switch time", "One tap, no ladder"],
+  ["Scheduled by", "Date range, set once"],
 ];
 
 export function SceneWipe() {
@@ -73,13 +76,26 @@ export function SceneWipe() {
 
   return (
     <section className="section bg-raise">
+      {/* The onward link sits on the RIGHT OF THE HEAD, the same as Reviews, RecentWork and the
+        * FAQ. Left-aligned on its own it left roughly 600 x 150px of empty band beside the lede,
+        * which on a page whose first rule is density is not a neutral choice. */}
       <div className="shell">
-        <SectionHead
-          onDark
-          eyebrow="How the color works"
-          title="Warm white every night. Any color when you want it."
-          lede="Drag the line to see it. Both halves are the same Omaha house from the same camera position on the same evening — everyday warm white on the left, a saved color scene on the right. Nothing was repainted and nothing was rewired between the two: it is one tap in the app."
-        />
+        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
+          <SectionHead
+            onDark
+            className="max-w-[56rem]"
+            eyebrow="How the color works"
+            title="Warm white every night. Any color when you want it."
+            lede="Drag the line to see it. Both halves are the same Omaha house from the same camera position on the same evening — everyday warm white on the left, a saved color scene on the right. Nothing was repainted and nothing was rewired between the two: it is one tap in the app."
+          />
+          <Link
+            href="/gallery"
+            className="tap-44 inline-flex h-12 shrink-0 items-center gap-2.5 rounded-full border border-on-dark/25 px-7 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-on-dark/10"
+          >
+            See every scene
+            <span aria-hidden>&rarr;</span>
+          </Link>
+        </div>
 
         <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_20rem]">
           <div>

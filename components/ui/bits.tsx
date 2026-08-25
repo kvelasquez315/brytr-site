@@ -6,8 +6,18 @@ import { Button } from "@/components/ui/button";
 import { Input, Label, Select, Textarea } from "@/components/ui/field";
 
 export function SectionHead({
-  eyebrow, title, lede, onDark, className, align = "left",
-}: { eyebrow?: string; title: string; lede?: string; onDark?: boolean; className?: string; align?: "left" | "center" }) {
+  eyebrow, title, lede, onDark, className, align = "left", icon, big,
+}: {
+  eyebrow?: string; title: string; lede?: string; onDark?: boolean; className?: string;
+  align?: "left" | "center";
+  /* phoenixroofingandrepair.com pairs a small accent GLYPH with every eyebrow rather than a rule -
+   * a little house mark that repeats on all thirteen sections and does more to tie the page
+   * together than any of its type choices. Pass an icon and it replaces the channel-mark. */
+  icon?: IconKey;
+  /* Phoenix sets ONE heading on the page bigger than the rest: "What Our Clients Say" at 64px
+   * against 50px everywhere else. That is the page's loudest moment and it lands on the reviews. */
+  big?: boolean;
+}) {
   /* EVERY SECTION ON THE SITE COMES THROUGH HERE, and that is the point.
    *
    * The client, scrolling the live home page: "the site itself is still very confusing... I'm not
@@ -42,12 +52,22 @@ export function SectionHead({
     <div className={cn(align === "center" && "mx-auto max-w-[54rem] text-center", className)}>
       {eyebrow && (
         <p className={cn("eyebrow", onDark && "eyebrow--on-dark", align === "center" && "justify-center")}>
-          <span className="channel-mark" aria-hidden />
+          {icon ? (
+            <SectionMark icon={icon} />
+          ) : (
+            <span className="channel-mark" aria-hidden />
+          )}
           {eyebrow}
-          {align === "center" && <span className="channel-mark" aria-hidden />}
+          {align === "center" && !icon && <span className="channel-mark" aria-hidden />}
         </p>
       )}
-      <h2 className={cn(eyebrow && "mt-4", "display-hero", onDark ? "text-on-dark" : "text-foreground")}>
+      <h2
+        className={cn(
+          eyebrow && "mt-4",
+          big ? "text-[clamp(2.5rem,4.4vw,4rem)] leading-[1.02] tracking-[-0.03em]" : "display-hero",
+          onDark ? "text-on-dark" : "text-foreground"
+        )}
+      >
         {title}
       </h2>
       {lede && (
@@ -62,6 +82,16 @@ export function SectionHead({
         </p>
       )}
     </div>
+  );
+}
+
+/* The little accent glyph that sits beside every section eyebrow, Phoenix's device. */
+export function SectionMark({ icon }: { icon: IconKey }) {
+  const I = iconMap[icon];
+  return (
+    <span className="grid size-7 shrink-0 place-items-center text-accent" aria-hidden>
+      <I className="size-6" />
+    </span>
   );
 }
 
@@ -116,9 +146,13 @@ export function ChannelEdge({ className }: { className?: string }) {
 
 /* ---- the lead form. Three variants appear on the homepage by design ---- */
 export function QuoteForm({
-  variant = "full", city, heading, submitLabel = "Get my free design consultation",
-}: { variant?: "compact" | "full" | "financing"; city?: string; heading?: string; submitLabel?: string }) {
-  const onDark = variant === "financing";
+  variant = "full", city, heading, submitLabel = "Get my free design consultation", dark,
+}: { variant?: "compact" | "full" | "financing"; city?: string; heading?: string; submitLabel?: string; dark?: boolean }) {
+  /* `dark` is separate from `variant` on purpose. The dark treatment used to be welded to the
+   * financing variant, which also swaps every label and option to linear-foot language. The hero
+   * needs the dark card with the ordinary questions on it, which is what phoenixroofingandrepair.com
+   * does - their hero form is a dark translucent panel sitting on the roof photograph. */
+  const onDark = variant === "financing" || !!dark;
   return (
     <form
       className={cn(
