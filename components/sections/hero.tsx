@@ -2,8 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/content/site";
 import { images } from "@/content/images";
-import { reviewProof } from "@/content/reviews";
-import { googleLogo } from "@/content/badges";
 import { QuoteForm } from "@/components/ui/bits";
 
 /* THE HERO, built to phoenixroofingandrepair.com's, which the client asked to be copied exactly.
@@ -46,6 +44,10 @@ import { QuoteForm } from "@/components/ui/bits";
  *    removed it as dead code and it is not: page-parts.tsx still renders it on two interior
  *    templates. It has left the home page, that is all.
  *
+ *    AND THEN IT LEFT THIS FILE TOO, one round later. The client sent a reference for a proper
+ *    Google trust bar, so the rating is now the TrustBar strip immediately below this section -
+ *    see its note in home-phx.tsx. This file no longer imports reviewProof or googleLogo.
+ *
  * 4. THE FORM CARD gets a real shadow, --shadow-hero-card. It is the only big shadow on the
  *    site and it is earned: this card sits on a photograph rather than a flat ground, and at
  *    1px it dissolved into the picture.
@@ -83,26 +85,11 @@ export function Hero() {
             daylight. Omaha metro, Lincoln and western Iowa.
           </p>
 
-          {/* THE RATING LINE, which used to be a 318px section of its own directly below this
-            * one - no images, one fact, and a scroll to get to it. At the top of the hero it is
-            * read before anything else on the page. The stars are one of exactly two places
-            * yellow is still allowed; the other is the CTA button below. */}
-          <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2">
-            <span className="flex items-center gap-0.5" aria-label="Rated five out of five">
-              {[0, 1, 2, 3, 4].map((i) => (
-                <svg key={i} viewBox="0 0 20 20" className="size-[1.15rem] text-accent" fill="currentColor" aria-hidden>
-                  <path d="M10 1.6l2.47 5.2 5.53.72-4.06 3.9 1.03 5.6L10 14.3l-4.97 2.72 1.03-5.6L2 7.52l5.53-.72z" />
-                </svg>
-              ))}
-            </span>
-            {googleLogo && (
-              <Image src={googleLogo} alt="Google" width={20} height={20} className="size-5" />
-            )}
-            <Link href="/reviews" className="tap-44 text-[0.95rem] text-on-dark underline decoration-on-dark/40 underline-offset-4">
-              <span className="font-semibold">{reviewProof.average}</span> from{" "}
-              {reviewProof.count} {googleLogo ? "" : "Google "}reviews
-            </Link>
-          </div>
+          {/* THE RATING MOVED OUT OF THE HERO COPY and into the TrustBar strip directly
+            * below this section - the client sent a reference for it. It was an inline line
+            * here for exactly one round; keeping both would have put "5.0 from 196 Google
+            * reviews" twice within about 40 vertical pixels. See the note on TrustBar in
+            * home-phx.tsx for why that strip is a div rather than a ninth section. */}
 
           {/* ONE yellow button per section, maximum. The phone is the secondary action, so it
             * is an outline on the photograph rather than a second filled pill - two solid
