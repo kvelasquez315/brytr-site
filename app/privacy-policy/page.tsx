@@ -6,7 +6,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How Brytr Co collects, uses and stores the information you send through this site.",
+  description: "How Brytr Co collects, uses and stores the information you send through this site, who it is shared with, how long it is kept, and how to ask us to delete it.",
   alternates: { canonical: "/privacy-policy" },
   robots: { index: false, follow: true },
 };

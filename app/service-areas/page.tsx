@@ -29,9 +29,9 @@ import { Jsonld, breadcrumb, localBusiness } from "@/lib/schema";
  */
 
 export const metadata: Metadata = {
-  title: "Service Areas: Omaha Metro, Lincoln and Eastern Nebraska",
+  title: "Service Areas: Omaha, Lincoln and Beyond",
   description:
-    "Where Brytr installs permanent outdoor lighting: the Omaha metro, Council Bluffs, Lincoln, Fremont, Ashland, Norfolk, Columbus and Grand Island — with the real drive time from our shop and what each one means for a service call.",
+    "Where Brytr installs permanent outdoor lighting: the Omaha metro, Council Bluffs, Lincoln, Norfolk, Columbus and Grand Island, with the real drive to each.",
   alternates: { canonical: "/service-areas" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Service areas", href: "/service-areas" }];

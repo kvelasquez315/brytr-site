@@ -6,7 +6,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Accessibility Statement",
-  description: "How the Brytr Co website is built for accessibility, and how to tell us about a barrier.",
+  description: "How the Brytr Co website is built for accessibility: the standard we hold it to, what we test, the parts we know are imperfect, and how to tell us about a barrier.",
   alternates: { canonical: "/accessibility" },
   robots: { index: false, follow: true },
 };

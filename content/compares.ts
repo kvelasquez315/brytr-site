@@ -110,7 +110,7 @@ export const compares: Compare[] = [
   },
   {
     slug: "haven-vs-govee",
-    title: "Haven vs Govee: DIY Kit or Professional Install? | Brytr",
+    title: "Haven vs Govee: DIY Kit or Pro Install?",
     h1: "Haven versus Govee: a professional install or a DIY kit.",
     keyword: "govee permanent outdoor lights",
     volume: "36,000/mo",
@@ -166,7 +166,7 @@ export const compares: Compare[] = [
   },
   {
     slug: "haven-vs-ghouly",
-    title: "Who Actually Makes Permanent Lights? Haven vs Ghouly | Brytr",
+    title: "Haven vs Ghouly: Who Makes the Lights?",
     h1: "Who actually manufactures your permanent lights?",
     keyword: "who makes permanent lights",
     a: "Haven Evolution", b: "Ghouly and other OEM supply",
@@ -216,7 +216,7 @@ export const compares: Compare[] = [
   },
   {
     slug: "jellyfish-vs-gemstone-lights",
-    title: "Jellyfish vs Gemstone Lights: Honest Comparison | Brytr",
+    title: "Jellyfish vs Gemstone: Honest Comparison",
     h1: "Jellyfish versus Gemstone Lights.",
     keyword: "gemstone vs jellyfish lighting",
     volume: "150/mo",

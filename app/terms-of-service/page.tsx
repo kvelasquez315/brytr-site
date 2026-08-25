@@ -6,7 +6,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
-  description: "The terms that apply to using the Brytr Co website and to requesting a quote.",
+  description: "The terms that apply to using the Brytr Co website and to requesting a quote, including what a published price does and does not commit us to.",
   alternates: { canonical: "/terms-of-service" },
   robots: { index: false, follow: true },
 };

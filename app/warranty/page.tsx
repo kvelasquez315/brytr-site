@@ -33,7 +33,7 @@ import { site } from "@/content/site";
 export const metadata: Metadata = {
   title: "Warranty: What Is Covered and Who Comes Out",
   description:
-    "What Brytr's permanent lighting warranty covers, what it does not, and who administers the claim: manufacturer coverage on the hardware, Brytr's own coverage on the install, both printed on the quote before you sign.",
+    "What the Brytr permanent lighting warranty covers, what it does not, and who administers the claim. All of it printed on your quote before you sign.",
   alternates: { canonical: "/warranty" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Warranty", href: "/warranty" }];

@@ -36,7 +36,31 @@ export const metadata: Metadata = {
   /* The review count comes from content/reviews.ts. It was hardcoded here as 177 while the
    * Google Business Profile said 196, on the site's default description. */
   description: `Permanent outdoor lighting installed once for Omaha homes. Smart app control, every color, every holiday. ${reviewProof.average} from ${reviewProof.count} ${reviewProof.platform} reviews. Free design consultation.`,
-  openGraph: { type: "website", locale: "en_US", siteName: "Brytr Co" },
+  /* THE SHARE CARD, and it was missing on all seventy-four pages.
+   *
+   * `openGraph` declared a type, a locale and a site name and no image, so every link to this site
+   * pasted into Facebook, LinkedIn, iMessage or a text thread rendered as a bare grey box with a
+   * URL in it. For a company whose entire product is photographs of lit houses, that is the worst
+   * possible first impression, and it is one object in one file.
+   *
+   * The frame is the home hero - scripts/hero-pick.mjs measured it as the brightest wide everyday-
+   * warm-white photograph in the library. 1200x630 is the size every platform crops to.
+   *
+   * Declared here rather than per page so it applies everywhere by default. A page with a better
+   * image of its own can still override `openGraph.images`; none does yet, and a good default beats
+   * seventy-four bare cards. */
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    siteName: "Brytr Co",
+    images: [{
+      url: "/img/seq-everyday.jpg",
+      width: 1200,
+      height: 630,
+      alt: "A brick and cedar ranch west of Omaha at dusk, its roofline picked out in warm white",
+    }],
+  },
+  twitter: { card: "summary_large_image" },
   robots: { index: true, follow: true },
 };
 

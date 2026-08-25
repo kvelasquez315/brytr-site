@@ -37,7 +37,7 @@ export const metadata: Metadata = {
    * /contact. The brand is already in the title, so the template would repeat it. */
   title: { absolute: "About Brytr Co | Family Owned, Omaha" },
   description:
-    "Brytr Co is Zac Van Buren and Sam Greguska: the whole Haven line rather than one piece of it, the same crew from the measure to the handover, and more than one brand on the truck. Permanent outdoor lighting across the Omaha metro.",
+    "The whole Haven line rather than one piece of it, the same crew from the measure to the handover, and more than one brand on the truck. Omaha metro.",
   alternates: { canonical: "/about" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "About", href: "/about" }];

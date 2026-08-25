@@ -26,7 +26,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Recent Permanent Lighting Projects | Omaha",
   description:
-    "Brytr permanent lighting installs in the Omaha metro, photographed on site: a brick two-story, a single-story ranch, a pool house with a freestanding pergola, and and a ranch photographed through every scene from one drone position.",
+    "Brytr permanent lighting installs in the Omaha metro, photographed on site: a brick two-story, a single-story ranch, and a pool house with a pergola.",
   alternates: { canonical: "/recent-projects" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Recent projects", href: "/recent-projects" }];

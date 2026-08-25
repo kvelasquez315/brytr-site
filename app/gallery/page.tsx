@@ -32,7 +32,7 @@ import { galleryShots } from "@/content/images";
 export const metadata: Metadata = {
   title: "Permanent Lighting Gallery | Real Omaha Installs",
   description:
-    "Brytr permanent lighting on finished Omaha homes, grouped by what the system is set to: the everyday warm white, saved occasion scenes, one color across every zone, and two-zone splits.",
+    "Brytr permanent lighting on finished Omaha homes, grouped by what the system is set to: everyday warm white, saved scenes, and two-zone splits.",
   alternates: { canonical: "/gallery" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Gallery", href: "/gallery" }];

@@ -32,7 +32,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "How It Works: Install Day, Start to Finish",
   description:
-    "What actually happens on a Brytr install day in Omaha: the fascia measured off the ladder, channel fastened and sealed as we go, mitered corners, then the daylight curb check and every scene walked with you after dark.",
+    "What happens on a Brytr install day in Omaha: fascia measured off the ladder, channel sealed as we go, mitered corners, then the curb check after dark.",
   alternates: { canonical: "/how-it-works" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "How it works", href: "/how-it-works" }];

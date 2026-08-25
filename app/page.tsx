@@ -13,7 +13,18 @@ import {
   Closer,
   faqItems,
 } from "@/components/sections/home";
+import type { Metadata } from "next";
 import { Jsonld, localBusiness, faqSchema } from "@/lib/schema";
+
+/* THE HOME PAGE WAS THE ONE ROUTE WITH NO CANONICAL. The other seventy-three declare their own; this
+ * one inherited the root layout, which sets `metadataBase` but no `alternates`, so nothing was
+ * emitted. It matters most here and least everywhere else: the home page is the URL that collects
+ * ?utm_source, ?fbclid and ?gclid from every ad, email and social post, and without a canonical each
+ * of those is a separate URL competing with the real one for the site's most important ranking.
+ *
+ * Title and description are inherited from the layout deliberately - they are already written for
+ * this page, and repeating them here is two places to update and one place to forget. */
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function Home() {
   return (

@@ -31,7 +31,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Every Permanent Lighting Brand Compared (2026)",
   description:
-    "The permanent outdoor lighting brands on the Omaha market, compared by an installer who carries two of them and will say which of the rest he would not fit: Haven, Jellyfish, Gemstone, Trimlight, Oelo, EverLights, Minleon, Govee and the OEM supply behind several of them.",
+    "The permanent outdoor lighting brands on the Omaha market, compared by an installer who carries two of them: Haven, Jellyfish, Gemstone, Trimlight and more.",
   alternates: { canonical: "/compare" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Compare", href: "/compare" }];

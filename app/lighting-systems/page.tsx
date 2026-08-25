@@ -35,7 +35,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Permanent Lighting Systems We Install",
   description:
-    "The permanent lighting we install in Omaha: Haven Evolution on the roofline, the Q Series soffit fixtures, the 9 Series landscape line, the X Bistro overhead runs, and the app that operates all of it.",
+    "The permanent lighting we install in Omaha: Haven Evolution on the roofline, Q Series soffit, 9 Series landscape, X Bistro overhead, and the app behind it.",
   alternates: { canonical: "/lighting-systems" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Lighting systems", href: "/lighting-systems" }];

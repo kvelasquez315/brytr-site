@@ -29,7 +29,7 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 export const metadata: Metadata = {
   title: "Outdoor Lighting Company in Omaha, NE",
   description:
-    "Permanent outdoor lighting services for Omaha homes: roofline, Christmas, soffit, landscape, hardscape, pergola, gameday, commercial and repairs. One channel, one app.",
+    "Permanent outdoor lighting for Omaha homes: roofline, Christmas, soffit, landscape, hardscape, pergola and gameday. One channel, one app, installed once.",
   alternates: { canonical: "/services" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Services", href: "/services" }];

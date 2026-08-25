@@ -18,7 +18,8 @@
     "rhythm": "node scripts/section-rhythm.mjs",
     "hexlock": "node scripts/hex-lock.mjs",
     "words": "node scripts/wordcount.mjs",
-    "type": "node scripts/typography.mjs"
+    "type": "node scripts/typography.mjs",
+    "seo": "node scripts/seo.mjs"
   },
   "dependencies": {
     "@fontsource/archivo": "^5.3.0",

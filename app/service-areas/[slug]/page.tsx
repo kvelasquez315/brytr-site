@@ -50,8 +50,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!c) return {};
   return {
     /* Deliberately distinct from the homepage title so two pages never compete. */
-    title: `Permanent Outdoor Lighting ${c.name} ${c.state} | Installed Once`,
-    description: `Permanent outdoor lighting installed in ${c.name}, ${c.state}. Roofline, landscape, hardscape and bistro runs by our own crews. ${c.drive} from the shop. ${reviewProof.average} from ${reviewProof.count} reviews.`,
+    title: `${c.name} ${c.state} Permanent Lighting Installer`,
+    description: `Permanent outdoor lighting installed in ${c.name}, ${c.state}. Roofline, landscape, hardscape and bistro runs. ${c.drive} from our shop.`,
     alternates: { canonical: `/service-areas/${c.slug}` },
   };
 }
