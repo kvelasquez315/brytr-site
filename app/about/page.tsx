@@ -37,7 +37,7 @@ export const metadata: Metadata = {
    * /contact. The brand is already in the title, so the template would repeat it. */
   title: { absolute: "About Brytr Co | Family Owned, Omaha" },
   description:
-    "Brytr Co is Zac Van Buren and Sam Greguska: the whole Haven line rather than one piece of it, W2 crews instead of subcontractors, and more than one brand on the truck. Permanent outdoor lighting across the Omaha metro.",
+    "Brytr Co is Zac Van Buren and Sam Greguska: the whole Haven line rather than one piece of it, our own crews instead of subcontractors, and more than one brand on the truck. Permanent outdoor lighting across the Omaha metro.",
   alternates: { canonical: "/about" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "About", href: "/about" }];
@@ -295,7 +295,7 @@ export default function About() {
                 ["1.2M", "lights installed locally", "Brytr's own count"],
                 [reviewProof.average, `from ${reviewProof.count} reviews`, `${reviewProof.platform}, ${reviewProof.checked}`],
                 ["2", "brands stocked", "Haven and Jellyfish"],
-                ["W2", "crews, never subcontracted", "Payroll, not per-install"],
+                ["Ours", "crews, never subcontracted", "The people who quoted it"],
               ].map(([f, l, src]) => (
                 <div key={l}>
                   <dt className="u text-[clamp(1.8rem,3vw,2.4rem)] font-medium leading-none text-on-dark">{f}</dt>

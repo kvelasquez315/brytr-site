@@ -3,6 +3,7 @@ import Image from "next/image";
 import { site } from "@/content/site";
 import { services } from "@/content/services";
 import { images } from "@/content/images";
+import { cities } from "@/content/cities";
 import { reviews, reviewProof } from "@/content/reviews";
 import { googleLogo } from "@/content/badges";
 import { homeFaqs, pricingFaqs } from "@/content/faqs";
@@ -281,52 +282,89 @@ export function Services() {
 }
 
 /* ==========================================================================
- * 4 - WHO WE ARE. One photograph, the one confirmed figure set onto it, four cards, two buttons.
+ * 4 - WHO WE ARE. Who the company is, and where it will actually drive. One idea, filled.
  *
- * REDESIGNED, BECAUSE IT WAS UGLY AND THE CLIENT SAID SO. "That one really needs to be designed a
- * lot better. Right now, it is very ugly."
+ * THIRD ATTEMPT, AND THE FIRST TWO FAILED FOR THE SAME REASON. Version one was a four-crop photo
+ * mosaic against four icon-tiled features. Version two kept the features, dropped the icons and put
+ * them in cards - "very ugly" became "really kind of sucks", and "we have a lot of blank space
+ * being created". Both of those are true and both come from one mistake that predates either
+ * layout: THIS SECTION HAD NO SUBJECT.
  *
- * He is right, and it is worth being precise about why, because the section was not badly built -
- * it was built for a component that no longer exists. It had a four-crop photo mosaic with a figure
- * card wedged into the middle of it, and a copy column of four features each introduced by an icon
- * tile. Take the icons out - which he also asked for, correctly - and what is left of the right
- * column is four hairlines with text under them. Text under a rule is not a design; it is what a
- * design looks like when you remove the part that was carrying it.
+ * It was four unrelated claims wearing a heading. Whole property (which is what Services, two
+ * sections up, is entirely about). Every night of the year (which is what the drag demo, one
+ * section up, exists to prove). Checked twice (which is a step in How We Work, one section down).
+ * And "W2 employees, never subcontracted".
  *
- * WHAT IT IS NOW:
+ * So it restated three neighbouring sections and no reader could say what it was for. That is
+ * exactly the note from two rounds ago - "a section should not have so much going on to where we
+ * are talking about who we are and how we design it, or how the lighting works" - and I fixed the
+ * styling of it twice without fixing the thing it was pointing at. Four claims that each belong
+ * somewhere else cannot be rescued by better cards.
  *
- *   ONE PHOTOGRAPH INSTEAD OF FOUR. The mosaic was four 24vw crops of four different scenes, each
- *   too small to read as anything. One 26rem portrait of an install actually in progress - daylight,
- *   van open, two people working - says "this is who we are" better than four thumbnails, and it is
- *   a daylight frame, which the page needs more of.
+ * AND THE FOURTH ONE SHOULD NEVER HAVE BEEN THERE. "We probably should not even be mentioning what
+ * our employees are." Right: W2 is a payroll classification. It means something to an accountant
+ * and nothing to a homeowner deciding who to let onto their roof. The service claim underneath it
+ * - the person who quoted your house is the person on the ladder - is worth making, and How We
+ * Work makes it. The tax status is not.
  *
- *   THE FIGURE SITS ON THE PHOTOGRAPH. 1.2M was in a card jammed between two rows of the mosaic,
- *   which is why the mosaic needed all that flex-grow arithmetic to avoid leaving a hole. As an
- *   opaque card inset on the photograph's bottom edge it needs no scrim, holds its own contrast,
- *   and is a composed moment rather than a gap-filler.
+ * WHAT THE SECTION IS FOR NOW: who we are, and where we will drive. That is one subject, it is the
+ * question a homeowner asks second (right after "what is this"), and the page answered it nowhere -
+ * the service area appeared only in one line of small print above the closing form and in the
+ * footer. Twenty towns, named, is also real information rather than a claim, which is what fills a
+ * section honestly. Blank space is what you get when a layout has less to say than it has room.
  *
- *   THE FOUR FEATURES ARE CARDS. White on warm limestone, with real padding. A card gives each
- *   claim an edge and a ground, which is what the icon tile was faking.
- *
- *   AND IT ENDS ON A BOOKING BUTTON rather than a soft link to /about.
+ * THE PHOTOGRAPH RUNS THE FULL HEIGHT of the section rather than being centred beside a shorter
+ * column - `items-stretch` and `h-full`. `items-center` was the direct cause of the blank space he
+ * is looking at: a 555px portrait beside a 400px column centres both and leaves 77px of nothing
+ * above and below the copy.
  * ========================================================================= */
-const ABOUT_FEATURES: { title: string; body: string }[] = [
-  { title: "Whole property", body: "Roofline, beds, patio and hardscape, one app" },
-  { title: "Our own crews", body: "W2 employees, never subcontracted" },
-  { title: "Every night of the year", body: "Warm white by default, colour when you want it" },
-  { title: "Checked twice", body: "Signed off lit, then again in daylight" },
-];
 
 export function WhoWeAre() {
   const shot = images.installDayGarage;
   return (
     <section className="section bg-background">
-      <div className="shell grid items-center gap-12 lg:grid-cols-[minmax(0,26rem)_minmax(0,1fr)] lg:gap-16">
-        {/* ONE PHOTOGRAPH, NOT FOUR, with the figure set onto its bottom edge. */}
-        <div className="relative">
+      <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
+        <div className="flex flex-col">
+          <SectionHead
+            scale="section"
+            eyebrow="Who we are"
+            title="Omaha's permanent lighting company"
+            lede="We fit one run of colour-matched channel to your roofline, beds, patio and walls, and it stays there. No ladders in November, no boxes in the garage, and no crew you have never met."
+          />
+
+          {/* THE TOWNS, NAMED. Twenty of them, in four columns, as plain text rather than pills or
+            * cards - "do you come to my town" is a lookup, and a lookup wants a list. This is the
+            * densest honest thing available for this section: real information a reader can scan
+            * in two seconds, rather than four claims restating the sections either side of it. */}
+          <div className="mt-9 border-t border-border pt-7">
+            <p className="label text-accent-ink">Where we work</p>
+            <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2 sm:grid-cols-3 xl:grid-cols-4">
+              {cities.map((c) => (
+                <li key={c.slug}>
+                  <Link
+                    href={`/service-areas/${c.slug}`}
+                    className="text-[0.95rem] text-muted-foreground transition-colors duration-[--dur-fast] hover:text-accent-ink hover:underline"
+                  >
+                    {c.name}
+                    {c.state === "IA" ? ", IA" : ""}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-auto flex flex-wrap items-center gap-4 border-t border-border pt-7">
+            <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
+            <DarkPill href="/service-areas">See every service area</DarkPill>
+          </div>
+        </div>
+
+        {/* The photograph runs the full height of the section, with the one confirmed figure as an
+          * opaque card on its bottom edge - no scrim needed, and no gap above or below it. */}
+        <div className="relative min-h-[24rem]">
           {shot?.src && (
-            <div className="relative aspect-3/4 overflow-hidden rounded-lg bg-primary">
-              <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 26rem, 100vw" className="object-cover" />
+            <div className="relative h-full w-full overflow-hidden rounded-lg bg-primary">
+              <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 24rem, 100vw" className="object-cover" />
             </div>
           )}
           <div className="absolute inset-x-5 bottom-5 rounded-lg bg-card p-5 shadow-[var(--shadow-dark)]">
@@ -334,28 +372,6 @@ export function WhoWeAre() {
             <h3 className="mt-1.5 font-display text-[1rem] font-bold leading-snug text-foreground">
               Lights installed around Omaha
             </h3>
-          </div>
-        </div>
-
-        <div>
-          <SectionHead
-            scale="section"
-            eyebrow="Who we are"
-            title="Permanent lighting installers, based in Omaha"
-          />
-
-          <dl className="mt-9 grid gap-4 sm:grid-cols-2">
-            {ABOUT_FEATURES.map((f) => (
-              <div key={f.title} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
-                <dt className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{f.title}</dt>
-                <dd className="mt-2 text-[0.92rem] leading-snug text-muted-foreground">{f.body}</dd>
-              </div>
-            ))}
-          </dl>
-
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
-            <DarkPill href="/about">More about us</DarkPill>
           </div>
         </div>
       </div>
@@ -388,6 +404,10 @@ const HOW_ITEMS: { title: string; body: string }[] = [
   { title: "Into fascia, never shingles", body: "Every penetration sealed as it is made" },
   { title: "One app, every zone", body: "House, pergola, walls and beds, on saved scenes" },
   { title: "We hold the warranty", body: "No portal between you and the crew" },
+  /* Moved here from the deleted WhoWeAre feature list, where it was one of four unrelated claims.
+   * It is the last step of an install, so it belongs at the end of the steps. It also gives this
+   * column a fifth row, which is what stops it finishing short of the photograph beside it. */
+  { title: "Checked twice before we leave", body: "Signed off lit after dark, then again in daylight" },
 ];
 
 export function HowWeWork() {

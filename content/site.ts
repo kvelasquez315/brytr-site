@@ -48,7 +48,7 @@ export const site = {
   stats: [
     { figure: "1.2M", label: "Lights installed in Omaha", icon: "installCount" },
     { figure: "5.0", label: "Average from 196 Google reviews", icon: "stars" },
-    { figure: "W2", label: "Crews, never subcontracted", icon: "hardHat" },
+    { figure: "Ours", label: "Crews, never subcontracted", icon: "hardHat" },
     /* This slot held "25 yr — LED rating on the Signature system", which was an invented number
      * on an invented tier. It was swapped for IP66, but that rating came out of the same batch
      * of specs I wrote without a source, so it is not safe either. Replaced with the one thing

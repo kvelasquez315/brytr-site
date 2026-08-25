@@ -437,7 +437,7 @@ export function PageCta({
   const statList: [string, string][] = [
     ["1 day", "typical install"],
     [reviewProof.average, `from ${reviewProof.count} reviews`],
-    ["W2", "our own crews"],
+    ["Ours", "the crew on your roof"],
     ["Free", "design consultation"],
   ];
 
