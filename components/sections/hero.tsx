@@ -94,7 +94,25 @@ export function Hero() {
               * the one it replaces. */}
             <h1 className="display-hero-lg text-on-dark">Permanent outdoor lighting in Omaha</h1>
 
-            <p className="mt-6 max-w-[44ch] text-[1.15rem] leading-relaxed text-on-dark/90">
+            {/* THE TAGLINE, WHICH HAS BEEN SITTING IN content/site.ts UNUSED SINCE THE SITE WAS
+              * BUILT. Six words that say the entire product argument, in the client's own voice,
+              * and they appeared on no page at all.
+              *
+              * freedomexteriorsusa.com - the client's reference for brand fit - repeats one line
+              * twice on its home page, in the hero and again at the close: "We show up when we say
+              * we will, do honest work, and never push a project you don't need." That repetition
+              * is most of what makes the site feel like it belongs to somebody. This does the same
+              * with a line Brytr already owns.
+              *
+              * In amber, because this is the one place a brand line should carry the brand colour,
+              * and because a warm line under a white headline on a night photograph is the product
+              * itself. It does not displace the lede: the tagline is the promise and the lede is
+              * what the promise means in practice. */}
+            <p className="mt-5 font-display text-[1.3rem] font-bold tracking-[-0.02em] text-accent">
+              {site.tagline}
+            </p>
+
+            <p className="mt-3 max-w-[44ch] text-[1.15rem] leading-relaxed text-on-dark/90">
               Warm white every night, any colour when you want it, and nobody on a ladder in
               December.
             </p>

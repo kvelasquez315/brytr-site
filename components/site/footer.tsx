@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { site, nav } from "@/content/site";
+import { ChannelEdge } from "@/components/ui/bits";
 import { brandLogo } from "@/content/badges";
 import { reviewProof } from "@/content/reviews";
 import { services } from "@/content/services";
@@ -16,6 +17,18 @@ const company = [
 export function Footer() {
   return (
     <footer className="bg-primary pb-24 lg:pb-0">
+      {/* THE CHANNEL EDGE, and this is the first time it has ever rendered.
+        *
+        * `ChannelEdge` has been exported from components/ui/bits.tsx since the site was built and
+        * was called by nothing - a 4px amber bar with a 1px navy line down its centre, which is a
+        * length of Brytr's own channel seen end-on. It is the closest thing this brand has to a
+        * signature, and it was dead code.
+        *
+        * Here it is the seam between the page and the footer: the run along the bottom edge of the
+        * building, with the ground underneath. It is also the second and last use on any page -
+        * the hero closes on the same device, and DESIGN.md caps it at two, which is what keeps it
+        * reading as a signature rather than as a divider. */}
+      <ChannelEdge />
       <div className="shell pt-16">
         {/* SIX COLUMN UNITS, NOT FIVE, and the service-area list takes two of them.
           *
@@ -45,9 +58,14 @@ export function Footer() {
                 brytr<span className="ml-0.5 inline-block size-2 translate-y-[-0.35rem] rounded-full bg-accent" />
               </p>
             )}
-            <p className="mt-4 text-sm text-on-dark-muted">
-              Permanent outdoor lighting for Omaha homes. Installed once by our own crews, controlled from
-              your phone, and serviced by the people who put it up.
+            {/* The tagline's second appearance, which is the pattern the client pointed at on
+              * freedomexteriorsusa.com: one line, in the hero and again at the close. */}
+            <p className="mt-4 font-display text-[1.1rem] font-bold tracking-[-0.02em] text-accent">
+              {site.tagline}
+            </p>
+            <p className="mt-3 text-sm text-on-dark-muted">
+              Permanent outdoor lighting for Omaha homes. Installed once, controlled from your phone,
+              and serviced by the people who put it up.
             </p>
             <div className="mt-5 flex gap-3">
               <a href={site.social.facebook} aria-label="Brytr on Facebook" className="grid size-10 place-items-center rounded-md border border-on-dark/20 text-accent hover:border-accent">
