@@ -3,8 +3,8 @@ import { navTree } from "@/content/nav";
 import { Footer } from "@/components/site/footer";
 import { Hero } from "@/components/sections/hero";
 import { SceneWipe } from "@/components/sections/scene-wipe";
+import { TrustBar } from "@/components/sections/trust-bar";
 import {
-  TrustBar,
   WhoWeAre,
   Services,
   HowWeWork,
@@ -48,9 +48,9 @@ export default function Home() {
           * six white cards read better on navy than they ever did on bone.
           *
           * TRUSTBAR IS NOT ONE OF THE EIGHT, and it is unnumbered below for that reason. It is
-          * 72px of chrome reading as the hero's bottom edge, so it sits outside the count - and
+          * 86px of chrome reading as the hero's bottom edge, so it sits outside the count - and
           * it has to, because navy as a ninth SECTION under a night hero would put two darks
-          * together and there is no slack left in the arithmetic. See its note in home-phx.tsx.
+          * together and there is no slack left in the arithmetic. See its own file for the rest.
           *
           * scripts/section-rhythm.mjs now compares RESOLVED GROUNDS rather than class names, so
           * bg-background beside bg-muted fails the way it always should have. This file is the
