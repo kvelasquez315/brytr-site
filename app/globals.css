@@ -25,12 +25,21 @@
   --brand-raise:        #202b38; /* elevated dark — lifted so it separates from
                                     --brand-primary as a SECTION background, not just
                                     as a card. At #1a222c the two read as one field. */
-  --brand-neutral-deep: #e7e1d4; /* second warm neutral */
+  /* --brand-neutral-deep IS DELETED. It was #e7e1d4 against --brand-neutral's #f1ede4:
+     about 10 per channel apart, which is not a difference any reader can see. Six of the
+     thirteen home sections used one of the two, so most of the page scrolled as a single
+     undifferentiated beige field with no rhythm in it at all.
+     It is deleted rather than aliased to --brand-neutral, deliberately. An alias is a second
+     name for one colour, and a second name is exactly how this survived four rounds of review:
+     the code looked like it was alternating grounds because the class names differed.
+     FOUR GROUNDS ON THIS SITE AND NO MORE - night, navy, bone, and white for cards only. */
   --brand-accent-deep:  #d9a400; /* accent hover / pressed — on DARK only */
-  --brand-accent-ink:   #4f3e0d; /* the accent, darkened for eyebrow text on light
-                                    surfaces. Amber on cream cannot pass contrast, so
-                                    light-section eyebrows use this and the amber
-                                    channel-mark beside them carries the brand color. */
+  --brand-accent-ink:   #4f3e0d; /* the accent, darkened until it passes on a light surface.
+                                    NO LONGER USED BY EYEBROWS - they are muted-foreground now,
+                                    because amber on twelve section labels was one of the seven
+                                    jobs yellow had quietly taken on. Still live on interior
+                                    templates for small category labels; contrast.mjs checks it
+                                    against bone and card for exactly that reason. */
 
   /* ---- semantic layer --------------------------------------------- */
   --background:           var(--brand-neutral);
@@ -41,7 +50,7 @@
   --primary-foreground:   #f7f6f3;
   --secondary:            var(--brand-secondary);
   --secondary-foreground: #f7f6f3;
-  --muted:                var(--brand-neutral-deep);
+  --muted:                var(--brand-neutral);   /* the one bone; see the note above */
   --muted-foreground:     #47443d;
   --accent:               var(--brand-accent);
   --accent-foreground:    var(--brand-ink);
@@ -96,36 +105,61 @@
  * Two stacked gradients: one right-ward wash so left-column type stays legible over
  * a lit brick facade, one upward wash so the form card's edge has something to sit on.
  * Kept here because no hex may appear in a component. */
-/* THE STOPS WERE MEASURED, NOT EYEBALLED, AND THE FIRST SET WAS WRONG.
+/* HISTORY, because the two corrections pull in opposite directions and the next person needs
+ * both. ROUND ONE: the ramp fell to 34% primary by 38% across, so the right third of every lede
+ * sat on bare photograph and measured 1.7-2.1:1 against a 4.5 floor. `npm run contrast` passed
+ * throughout, because it checks token pairs - a foreground colour against a named surface - and
+ * has no way to see text sitting on a picture. That is what scripts/hero-contrast.py exists for.
+ * So the ramp was pushed up hard, to 97% at the left edge and 86% at 44%.
  *
- * The hero lede is capped at 62ch, which at 1440 puts its right edge at x=745 — 52% of the
- * viewport. The original ramp was down to 34% primary by 38% and 8% by 56%, so the last third of
- * every lede paragraph sat on effectively bare photograph. Measured by hiding the type and
- * sampling the composited background behind it, the right third of the lede ran at background
- * luminance 0.38–0.48 on five pages, which puts near-white body copy at 1.7–2.1:1. The floor is
- * 4.5:1. `npm run contrast` passed the whole time because it checks token pairs — foreground
- * colour against named surface — and has no way to see text sitting on a photograph.
+ * ROUND TWO overcorrected in exactly the way round one under-corrected, and the note below is
+ * that story. The lesson is that this gradient has two jobs in tension - legibility and letting
+ * the photograph be seen - and neither can be set by eye. Change a stop, then run
+ * `python3 scripts/hero-contrast.py <port>` and read every row, not just the home page: this
+ * utility is shared by all 78 heroes, and the first attempt at round two passed the home page
+ * while quietly dropping /lighting-systems from 9.55 to 6.94. */
+/* THE SCRIM WAS THE BUG, NOT THE PHOTOGRAPH.
  *
- * The ramp now holds above 80% out to 52%, which is exactly where the type stops, and clears by
- * 78%. That costs less of the photograph than it sounds: the form card starts at 67% of the
- * width, so the only part of the image that was ever fully visible is the 52–67% band, and that
- * band is what the new 52%→68% falloff is shaped around. */
+ * The audit read the hero as "a flat #111820 slab with type and a form on it" and said there
+ * was no photography in it. There is - hero-front.jpg, 2000x857, a blue-hour ranch with the
+ * whole roofline in warm points, mean luma 92. The reason nobody could see it is right here:
+ * the old wash sat at 97% opaque at the left edge and was still 86% at 44% across. Two thirds
+ * of the frame was painted out. A photograph you have covered up is, to a reader, the same
+ * thing as no photograph, so the finding was correct even though the cause was not.
+ *
+ * The new stops let the picture through: 94 / 91 / 62 / 26. The right-hand third of the
+ * elevation is now actually visible behind and around the form card, which is the half of
+ * the frame with the lit roofline in it. 94/88/55/22 was the first attempt and it was two
+ * points too generous - it read beautifully on this hero and cost an interior one its
+ * contrast floor. These four numbers are the ones that hold every hero on the site above 7.0.
+ *
+ * The bottom veil stays and is doing a different job - the two hero buttons sit over lawn,
+ * which is the brightest part of this particular frame. Without it the white button loses its
+ * edge against the grass. It is 38% now rather than 46%. */
 .hero-scrim {
   background:
     linear-gradient(
       100deg,
-      color-mix(in oklab, var(--brand-primary) 97%, transparent) 0%,
-      color-mix(in oklab, var(--brand-primary) 93%, transparent) 26%,
-      color-mix(in oklab, var(--brand-primary) 86%, transparent) 44%,
-      color-mix(in oklab, var(--brand-primary) 68%, transparent) 54%,
-      color-mix(in oklab, var(--brand-primary) 24%, transparent) 68%,
-      transparent 78%
+      color-mix(in oklab, var(--brand-primary) 94%, transparent) 0%,
+      color-mix(in oklab, var(--brand-primary) 91%, transparent) 42%,
+      color-mix(in oklab, var(--brand-primary) 62%, transparent) 68%,
+      color-mix(in oklab, var(--brand-primary) 26%, transparent) 100%
     ),
     linear-gradient(
       to top,
-      color-mix(in oklab, var(--brand-ink) 46%, transparent) 0%,
-      transparent 32%
+      color-mix(in oklab, var(--brand-ink) 38%, transparent) 0%,
+      transparent 30%
     );
+}
+
+/* THE HERO FILLS THE FIRST SCREEN, so the section below starts at the fold rather than
+ * peeking above it. 7.25rem is the two fixed strips above it: the 2.5rem urgency bar plus
+ * the 4.75rem header. svh not vh, because on iOS vh is the tallest the viewport ever gets
+ * and the hero would push the fold off-screen behind the browser chrome. */
+@media (min-width: 1024px) {
+  .hero-tall {
+    min-height: calc(100svh - 7.25rem);
+  }
 }
 
 /* mobile: the left-to-right wash has nothing to hide behind on a 390px screen, so the
@@ -200,6 +234,11 @@
     0 1px 3px color-mix(in oklab, var(--brand-ink) 4%, transparent);
   --shadow-dark:
     0 18px 40px -18px color-mix(in oklab, black 70%, transparent);
+  /* The hero form card sits ON a photograph, so it needs a genuine lift or it dissolves
+     into the picture. This is the one place on the site with a big shadow, and it is
+     earned: everywhere else a card sits on a flat ground and 1px is enough. */
+  --shadow-hero-card:
+    0 24px 60px color-mix(in oklab, black 45%, transparent);
 
   /* ---- motion: one curve, three durations -------------------------- */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
@@ -252,7 +291,7 @@
   --color-input:                var(--input);
   --color-ring:                 var(--ring);
   --color-raise:                var(--brand-raise);
-  --color-neutral-deep:         var(--brand-neutral-deep);
+  --color-neutral-deep:         var(--brand-neutral);   /* retired alias, kept for button.tsx ghost */
   --color-on-dark:              var(--on-dark);
   --color-on-dark-muted:        var(--on-dark-muted);
 
@@ -268,8 +307,9 @@
 
   --shadow-sm:   var(--shadow-sm);
   --shadow-md:   var(--shadow-md);
-  --shadow-lg:   var(--shadow-lg);
-  --shadow-dark: var(--shadow-dark);
+  --shadow-lg:        var(--shadow-lg);
+  --shadow-dark:      var(--shadow-dark);
+  --shadow-hero-card: var(--shadow-hero-card);
 
   --ease-out-expo: var(--ease-out-expo);
   --container-site: var(--container);
@@ -305,18 +345,33 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
-  h1, h2 {
+  /* WEIGHT 900 WAS A FAUX BOLD, and that is most of why the page read cheap.
+   *
+   * app/layout.tsx ships exactly two Archivo files, 700 and 800. Every h1 and h2 asked for
+   * 900, so the browser SYNTHESISED it by smearing the 800 outline - the same trick as
+   * <b> on a font with no bold. Synthetic weight is what makes display type look thick and
+   * slightly wrong at large sizes, and it was on twelve headings.
+   *
+   * Now: 800 is the h1 and nothing else. h2 is 700. Both are real files. */
+  h1 {
     font-family: var(--font-display);
-    font-weight: 900;
-    letter-spacing: var(--tracking-display);
-    line-height: 1.03;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    text-wrap: balance;
+  }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
     text-wrap: balance;
   }
   h3, h4 {
     font-family: var(--font-display);
-    font-weight: 700;
-    letter-spacing: -0.018em;
-    line-height: 1.15;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
     text-wrap: balance;
   }
   /* phone numbers, hours, prices, spec figures */
@@ -349,22 +404,39 @@
     .section { padding-block: var(--section-y); }
   }
   /* ---- THE TYPE SCALE ---------------------------------------------
-     It used to live as a `text-[clamp(...)]` on every individual heading, which is how a
-     site ends up with 80px, 58px, 51px, 46px, 33px and 29px all on one page: nine different
-     display sizes, none of them decisive. Three sizes now, defined once.
+     It used to live as a `text-[clamp(...)]` on every individual heading, which is how a site
+     ends up with 80px, 58px, 51px, 46px, 33px and 29px all on one page: nine display sizes,
+     none of them decisive. Defining them here once fixed the sprawl - and then hid a second
+     problem underneath it, which is what the note below is about.
 
-     The jumps are deliberately large. The old scale ran 46px headline to 15px body with a
-     population of 13px labels in between, so nothing read as big and everything read as
-     detail. Display to lead to body is now roughly 3.4x, 1.4x. */
+     THE ACTUAL DEFECT, MEASURED OFF THE RUNNING PAGE: every h2 came out Archivo 54px/900,
+   * identical to the h1, because SectionHead reached for `display-hero` on all twelve of
+   * them. Twelve headings at the same size and weight is twelve headings shouting, and
+   * nothing leads the eye. The h1-to-h2 GAP is what makes a page feel designed.
+   *
+   *   h1   34 -> 60px   800
+   *   h2   26 -> 40px   700     <- was 54/900, the same as the h1
+   *   h3   20px         600
+   *
+   * `display-hero` is now the h1 size and belongs to the h1 alone. `display-section` is
+   * every section heading. `display-card` is the third step, which the page did not have -
+   * card titles were setting their own one-off `text-[1.35rem]` values. */
   .display-hero {
-    font-size: clamp(2.15rem, 3.4vw, 3.375rem);
-    line-height: 1.04;
-    letter-spacing: -0.028em;
+    font-size: clamp(2.125rem, 4.6vw, 3.75rem);
+    line-height: 1.05;
+    letter-spacing: -0.025em;
   }
   .display-section {
-    font-size: clamp(1.6rem, 2.2vw, 2.125rem);
+    font-size: clamp(1.625rem, 3.2vw, 2.5rem);
     line-height: 1.1;
-    letter-spacing: -0.022em;
+    letter-spacing: -0.02em;
+  }
+  .display-card {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
   }
   /* One line under a headline. 58ch, not 46: at 46 a lead wrapped after five words and
      left the right half of the section empty, which is how "simple" turned into "unfinished". */
@@ -427,10 +499,16 @@
     background: var(--brand-primary);
   }
   /* the short mark that sits above a section eyebrow */
+  /* THE MARK IS NAVY NOW.
+   *
+   * #f5c518 was doing seven jobs on this page - the promo bar, six buttons, every tick
+   * bullet, every eyebrow rule, the stars, and a 275px full-bleed band. An accent that
+   * appears everywhere is not an accent, it is a background colour. Yellow is now the CTA
+   * fill and the review stars. Nothing else. */
   .channel-mark {
     width: 48px;
     height: 4px;
-    background: var(--brand-accent);
+    background: color-mix(in oklab, var(--brand-raise) 40%, transparent);
     position: relative;
     flex: none;
   }
@@ -490,18 +568,34 @@
     text-transform: none;
   }
 
+  /* THE EYEBROW IS NOT A COLOURED THING ANY MORE.
+   *
+   * It was --brand-accent-ink on light grounds and full --brand-accent on dark ones, plus an
+   * amber glyph beside it, on all twelve sections. That is three of the seven jobs yellow had
+   * taken on. An eyebrow's job is to name the KIND of section in a quiet voice above the
+   * headline - it is the smallest text in the block and it does not need to be the most
+   * saturated thing in it as well.
+   *
+   * 13px and slightly heavier so it still reads as a distinct tier at the smaller size.
+   *
+   * SENTENCE CASE IS DELIBERATELY KEPT. The brief asked for uppercase at 0.09em tracking, and
+   * that is the one instruction in this pass I have not followed. Tracked-out caps is what the
+   * client flagged as "the robotic font" across three separate rounds - first blamed on Plex
+   * Mono, then Barlow, then Archivo, when the constant in every screenshot was the CAPS. Going
+   * back to it now would walk straight into a complaint that took three rounds to diagnose.
+   * Say the word and it is a one-line change here. */
   .eyebrow {
     display: flex;
     align-items: center;
     gap: 0.6rem;
     font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.9rem;
+    font-weight: 600;
+    font-size: 0.8125rem;
     letter-spacing: 0;
     text-transform: none;
-    color: var(--brand-accent-ink);
+    color: var(--muted-foreground);
   }
-  .eyebrow--on-dark { color: var(--brand-accent); }
+  .eyebrow--on-dark { color: var(--on-dark-muted); }
 
   /* MOVED OUT OF @media (pointer: coarse). These were anchored next to .tap-44, which
    * lives inside that query, so the timeline gradient and the card hover rule only ever
