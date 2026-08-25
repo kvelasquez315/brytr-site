@@ -26,7 +26,6 @@ const P = {
   primary:     token("brand-primary"),
   raise:       token("brand-raise"),
   neutral:     token("brand-neutral"),
-  neutralDeep: token("brand-neutral-deep"),
   card:        token("card"),
   ink:         token("brand-ink"),
   onDark:      token("on-dark"),
@@ -50,20 +49,22 @@ function apca(text, bg) {
 }
 const pairs = [
   ["body on neutral", P.ink, P.neutral, 75, 4.5],
-  ["body on neutral-deep", P.ink, P.neutralDeep, 75, 4.5],
   ["body on card", P.ink, P.card, 75, 4.5],
   ["muted on neutral", P.muted, P.neutral, 75, 4.5],
   ["muted on card", P.muted, P.card, 75, 4.5],
-  ["muted on neutral-deep", P.muted, P.neutralDeep, 75, 4.5],
   ["on-dark on primary", P.onDark, P.primary, 75, 4.5],
   ["on-dark on raise", P.onDark, P.raise, 75, 4.5],
   ["on-dark-muted on primary", P.onDarkMuted, P.primary, 75, 4.5],
   ["on-dark-muted on raise", P.onDarkMuted, P.raise, 75, 4.5],
-  ["accent on primary (eyebrow)", P.accent, P.primary, 60, 4.5],
+  /* The eyebrow no longer uses either accent token - it is muted-foreground on light and
+     on-dark-muted on dark. These two pairs are still live and still worth checking, but for
+     what they actually cover now: the review stars on night grounds, and accent-ink labels on
+     the interior templates. Renamed rather than deleted, because a stale label on a passing
+     gate is how the hardcoded palette went unnoticed in this same file. */
+  ["accent on primary (review stars)", P.accent, P.primary, 60, 4.5],
   ["ink on accent (CTA label)", P.ink, P.accent, 75, 4.5],
-  ["accentInk on neutral (eyebrow)", P.accentInk, P.neutral, 75, 4.5],
-  ["accentInk on card (eyebrow)", P.accentInk, P.card, 75, 4.5],
-  ["accentInk on neutral-deep", P.accentInk, P.neutralDeep, 75, 4.5],
+  ["accentInk on neutral (interior labels)", P.accentInk, P.neutral, 75, 4.5],
+  ["accentInk on card (interior labels)", P.accentInk, P.card, 75, 4.5],
 ];
 let fail = 0;
 console.log("pair".padEnd(34), "APCA".padStart(7), "WCAG".padStart(7), "  result");
