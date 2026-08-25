@@ -8,7 +8,6 @@ import { detailFor } from "@/content/service-detail";
 import { systemBySlug } from "@/content/systems";
 import { serviceFaqsFor } from "@/content/faqs";
 import { PhotoStrip, PhotoPair } from "@/components/sections/photo-parts";
-import { iconMap } from "@/content/icon-map";
 import { metroCities } from "@/content/cities";
 import { Shell } from "@/app/layout-shell";
 import { Faq } from "@/components/sections/faq";
@@ -292,16 +291,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="mt-9 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
             <ul className="divide-y divide-border">
               {alsoSee.map((r) => {
-                const I = iconMap[r.icon];
                 return (
                   <li key={r.slug}>
                     <Link
                       href={`/services/${r.slug}`}
                       className="group flex items-center gap-4 px-6 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
                     >
-                      <span className="channel-tile channel-tile--light !size-10 shrink-0" aria-hidden>
-                        <I className="size-6" />
-                      </span>
                       <span className="min-w-0 flex-1">
                         <span className="block font-display text-[1.05rem] font-bold text-foreground group-hover:underline">
                           {r.name}

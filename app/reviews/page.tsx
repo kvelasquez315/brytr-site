@@ -6,7 +6,6 @@ import { PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 import { reviews, reviewProof } from "@/content/reviews";
-import { IcHardHat, IcVerified, IcTwoTiers, IcWarranty, IcSameDay } from "@/components/icons";
 
 /* /reviews — WAVE 2, PAGE 3 of the page-by-page pass.
  *
@@ -69,33 +68,28 @@ const tags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1] || a[0].locale
 
 /* WHY THE NUMBER IS WHAT IT IS. Practice, not adjectives — every one of these is a thing
  * described elsewhere on the site with its own page. */
-const practice: { icon: typeof IcHardHat; h: string; p: string; href: string }[] = [
+const practice: { h: string; p: string; href: string }[] = [
   {
-    icon: IcHardHat,
     h: "The crew are employees",
     p: "The person who quoted your house is on the ladder at it. There is no subcontractor network between the sale and the work.",
     href: "/about",
   },
   {
-    icon: IcVerified,
     h: "Signed off twice, by you",
     p: "Once from the curb in daylight, once walking every scene after dark. A job is not finished until both of those have happened with you standing there.",
     href: "/how-it-works",
   },
   {
-    icon: IcTwoTiers,
     h: "One recommendation, not a default",
     p: "We install more than one brand and quote the one your roofline actually calls for, including when that is the cheaper one.",
     href: "/lighting-systems",
   },
   {
-    icon: IcWarranty,
     h: "Both warranties, in writing first",
     p: "Manufacturer coverage on the hardware and our own on the workmanship, printed on the quote you sign rather than produced afterwards.",
     href: "/warranty",
   },
   {
-    icon: IcSameDay,
     h: "One number, answered locally",
     p: "A service call goes to the people who installed it. Not a portal, not a franchise dispatcher, not a manufacturer's queue.",
     href: "/contact",
@@ -305,7 +299,6 @@ export default function Reviews() {
           <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {practice.map((f) => (
               <article key={f.h} className="flex flex-col rounded-lg bg-raise p-6 ring-1 ring-on-dark/10">
-                <span className="channel-tile mb-5" aria-hidden><f.icon className="size-7" /></span>
                 <h3 className="font-display text-lg font-bold leading-snug text-on-dark">{f.h}</h3>
                 <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-on-dark-muted">{f.p}</p>
                 <div className="mt-5 border-t border-on-dark/12 pt-4">

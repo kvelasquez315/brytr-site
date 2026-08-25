@@ -486,31 +486,14 @@
     height: 1px;
     background: var(--brand-primary);
   }
-  /* icon container: the channel in cross-section — squared top, rounded bottom,
-     lens line along the top edge. */
-  .channel-tile {
-    position: relative;
-    display: grid;
-    place-items: center;
-    inline-size: 3rem;
-    block-size: 3rem;
-    flex: none;
-    border-radius: 2px 2px 12px 12px;
-    background: var(--brand-raise);
-    color: var(--on-dark);
-    overflow: hidden;
-  }
-  .channel-tile::before {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    top: 0;
-    height: 2px;
-    background: var(--brand-accent);
-  }
-  .channel-tile--light {
-    background: var(--brand-primary);
-  }
+  /* .channel-tile LIVED HERE and is gone with the icon set.
+     It was the icon container: a 3rem box, squared top and rounded bottom, with an amber lens line
+     along its top edge — the channel in cross-section, holding a glyph. Nothing renders a glyph any
+     more (see content/icon-map.ts), so it held nothing.
+
+     The channel device itself survives as .channel-mark and .channel-edge, and those are the right
+     survivors: they are RULES rather than containers, so they mean something on their own instead
+     of needing a picture inside them. */
   /* Micro-labels — eyebrows, spec keys, figcaption tags.
    *
    * These used the mono utility face, which put IBM Plex Mono on ~50 decorative

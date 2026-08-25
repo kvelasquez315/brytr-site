@@ -6,9 +6,8 @@ import { cities, metroCities } from "@/content/cities";
 import { services } from "@/content/services";
 import { reviewProof } from "@/content/reviews";
 import { Button } from "@/components/ui/button";
-import { SectionHead, Check, TextLink, QuoteForm, Tile } from "@/components/ui/bits";
+import { SectionHead, Check, TextLink, QuoteForm } from "@/components/ui/bits";
 import { ProofRail } from "@/components/sections/proof-rail";
-import { iconMap } from "@/content/icon-map";
 
 /* SHARED PAGE FURNITURE — and the reason the interior pages looked alike.
  *
@@ -287,16 +286,14 @@ export function ServiceRows({
   return (
     <ul className={`grid gap-3 sm:grid-cols-2 ${columns === 3 ? "xl:grid-cols-3" : ""}`}>
       {list.map((s) => {
-        const I = iconMap[s.icon];
         return (
           <li key={s.slug}>
             <Link
               href={`/services/${s.slug}`}
-              className={`flex h-full items-start gap-4 rounded-lg p-4 transition-all duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5 ${
+              className={`block h-full rounded-lg p-4 transition-all duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5 ${
                 onDark ? "bg-raise ring-1 ring-on-dark/10 hover:ring-accent/40" : "bg-card shadow-[var(--shadow-lg)]"
               }`}
             >
-              <span className={onDark ? "channel-tile" : "channel-tile channel-tile--light"} aria-hidden><I className="size-7" /></span>
               <span className="min-w-0">
                 <span className={`block font-display text-base font-bold ${onDark ? "text-on-dark" : "text-foreground"}`}>{s.name}</span>
                 <span className={`mt-1 block text-sm ${onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>{s.short}</span>
@@ -532,4 +529,4 @@ export function BandCta({ title, body, note }: { title: string; body: string; no
   );
 }
 
-export { SectionHead, Check, TextLink, QuoteForm, Tile, metroCities };
+export { SectionHead, Check, TextLink, QuoteForm, metroCities };

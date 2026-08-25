@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { services } from "@/content/services";
-import { iconMap } from "@/content/icon-map";
 import Link from "next/link";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, CityTiles, SectionHead, TextLink } from "@/components/sections/page-parts";
@@ -127,7 +126,6 @@ export default function ServicesHub() {
           <ol className="mt-10 grid gap-5 lg:grid-cols-3">
             {branches.map((b) => {
               const first = bySlug(b.start);
-              const I = iconMap[first.icon];
               return (
                 <li
                   key={b.start}
@@ -173,7 +171,6 @@ export default function ServicesHub() {
                   </div>
 
                   <p className="mt-auto pt-7">
-                    <span className="channel-tile !size-10 float-left mr-3.5" aria-hidden><I className="size-6" /></span>
                     <span className="block text-sm leading-relaxed text-on-dark-muted">{b.wiring}</span>
                   </p>
                 </li>
@@ -216,16 +213,12 @@ export default function ServicesHub() {
                 <ul className="divide-y divide-border">
                   {g.slugs.map((sl) => {
                     const s = bySlug(sl);
-                    const I = iconMap[s.icon];
                     return (
                       <li key={sl}>
                         <Link
                           href={`/services/${sl}`}
-                          className="group flex items-start gap-4 px-6 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
+                          className="group block px-6 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
                         >
-                          <span className="channel-tile channel-tile--light !size-10 shrink-0" aria-hidden>
-                            <I className="size-6" />
-                          </span>
                           <span className="min-w-0">
                             <span className="block font-display text-[1.05rem] font-bold text-foreground group-hover:underline">
                               {s.name}

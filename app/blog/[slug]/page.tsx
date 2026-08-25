@@ -6,7 +6,6 @@ import { photoForPost, relatedByCategory } from "@/content/blog-detail";
 import { services } from "@/content/services";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
-import { iconMap } from "@/content/icon-map";
 import { PhotoBand } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
@@ -190,16 +189,12 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
               </div>
               <ul className="divide-y divide-border">
                 {related.map((s) => {
-                  const I = iconMap[s.icon];
                   return (
                     <li key={s.slug}>
                       <Link
                         href={`/services/${s.slug}`}
                         className="group flex items-start gap-3 px-5 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
                       >
-                        <span className="channel-tile channel-tile--light !size-10 shrink-0" aria-hidden>
-                          <I className="size-6" />
-                        </span>
                         <span className="min-w-0">
                           <span className="block text-sm font-semibold text-foreground group-hover:underline">
                             {s.name}

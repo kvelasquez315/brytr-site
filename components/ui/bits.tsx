@@ -1,19 +1,14 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { iconMap, type IconKey } from "@/content/icon-map";
 import { cities } from "@/content/cities";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Select, Textarea } from "@/components/ui/field";
 
 export function SectionHead({
-  eyebrow, title, lede, onDark, className, align = "left", icon, scale = "hero",
+  eyebrow, title, lede, onDark, className, align = "left", scale = "hero",
 }: {
   eyebrow?: string; title: string; lede?: string; onDark?: boolean; className?: string;
   align?: "left" | "center";
-  /* phoenixroofingandrepair.com pairs a small accent GLYPH with every eyebrow rather than a rule -
-   * a little house mark that repeats on every section and does more to tie the page together than
-   * any of its type choices. Pass an icon and it replaces the channel-mark. */
-  icon?: IconKey;
   /* TWO HEADING SIZES, AND THE HOME PAGE IS WHY.
    *
    * Every section heading on the site was `display-hero` - clamp(2.15rem, 3.4vw, 3.375rem), which
@@ -65,13 +60,9 @@ export function SectionHead({
     <div className={cn(align === "center" && "mx-auto max-w-[54rem] text-center", className)}>
       {eyebrow && (
         <p className={cn("eyebrow", onDark && "eyebrow--on-dark", align === "center" && "justify-center")}>
-          {icon ? (
-            <SectionMark icon={icon} />
-          ) : (
-            <span className="channel-mark" aria-hidden />
-          )}
+          <span className="channel-mark" aria-hidden />
           {eyebrow}
-          {align === "center" && !icon && <span className="channel-mark" aria-hidden />}
+          {align === "center" && <span className="channel-mark" aria-hidden />}
         </p>
       )}
       <h2
@@ -95,25 +86,6 @@ export function SectionHead({
         </p>
       )}
     </div>
-  );
-}
-
-/* The little accent glyph that sits beside every section eyebrow, Phoenix's device. */
-export function SectionMark({ icon }: { icon: IconKey }) {
-  const I = iconMap[icon];
-  return (
-    <span className="grid size-7 shrink-0 place-items-center text-accent" aria-hidden>
-      <I className="size-6" />
-    </span>
-  );
-}
-
-export function Tile({ icon, onDark }: { icon: IconKey; onDark?: boolean }) {
-  const I = iconMap[icon];
-  return (
-    <span className={cn("channel-tile", !onDark && "channel-tile--light")} aria-hidden>
-      <I className="size-7" />
-    </span>
   );
 }
 
