@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
 import { PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 import { reviews, reviewProof } from "@/content/reviews";
+import { googleLogo } from "@/content/badges";
 
 /* /reviews — WAVE 2, PAGE 3 of the page-by-page pass.
  *
@@ -237,13 +239,23 @@ export default function Reviews() {
                   rest.length % 2 === 1 && i === rest.length - 1 ? "lg:col-span-2" : ""
                 }`}
               >
+                {googleLogo && (
+                  <Image
+                    src={googleLogo}
+                    alt={`Reviewed on ${reviewProof.platform}`}
+                    width={20}
+                    height={20}
+                    unoptimized
+                    className="mb-5 size-5"
+                  />
+                )}
                 <blockquote className="flex-1 text-[1.05rem] leading-relaxed text-foreground">
                   &ldquo;{r.text}&rdquo;
                 </blockquote>
                 <figcaption className="mt-6 border-t border-border pt-4">
                   <p className="text-sm text-muted-foreground">
                     <span className="font-display font-bold text-foreground">{r.name}</span>
-                    {r.when ? ` · ${r.when}` : ""} · {reviewProof.platform}
+                    {r.when ? ` · ${r.when}` : ""}
                   </p>
                   <ul className="mt-3 flex flex-wrap gap-1.5">
                     {(mentions[r.name] ?? []).map((t) => (

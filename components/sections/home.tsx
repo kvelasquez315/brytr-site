@@ -4,6 +4,7 @@ import { site } from "@/content/site";
 import { services } from "@/content/services";
 import { images } from "@/content/images";
 import { reviews, reviewProof } from "@/content/reviews";
+import { googleLogo } from "@/content/badges";
 import { homeFaqs, pricingFaqs } from "@/content/faqs";
 import { SectionHead, QuoteForm } from "@/components/ui/bits";
 import { Faq } from "@/components/sections/faq";
@@ -55,17 +56,32 @@ import { Faq } from "@/components/sections/faq";
  * their three ticks and their button - the whole card is the link, which is what a card being a
  * link should mean.
  *
- * THE WORDCOUNT, MEASURED RATHER THAN ESTIMATED. 1,740 words in <main> before, 851 after, against a
- * floor of 800 the client set for SEO. Both figures come from scripts/wordcount.mjs, which fetches
- * the rendered page and counts what is actually in <main> - not what is in the JSX, which is a
- * different and much larger number, and not what is in the document, which is larger again for a
- * reason worth knowing about (see the note on the FAQ in section 8).
+ * NO ICONS ANYWHERE. There were ten on this page - seven section-head glyphs and three sets of
+ * tiles. The client: "I can't even tell what's going on with them... I would rather we bring our own
+ * visual sense to it with our images." Section heads fall back to the channel-mark, which is the
+ * brand's amber rule rather than a picture of anything; the feature lists are hairline, bold title,
+ * phrase; the service cards lost the badge that sat on top of a photograph of the same thing. The
+ * whole set is deleted - see content/icon-map.ts.
+ *
+ * AND THE FOUNDERS ARE NOT MENTIONED. "I don't want to mention them. We shouldn't be mentioning
+ * them." Their section went, then the one sentence that survived into WhoWeAre went too.
+ *
+ * THE WORDCOUNT, MEASURED RATHER THAN ESTIMATED, by scripts/wordcount.mjs against the rendered page
+ * - not the JSX, which is a much larger and irrelevant number:
+ *
+ *     1,740  before, all of it prose a reader scrolls past
+ *       679  after, prose a reader scrolls past
+ *       526  the FAQ, mostly folded into collapsed cards but in the HTML (see section 8)
+ *     1,205  total indexable, against the 800 floor the client set for SEO
+ *
+ * So the page a reader meets is 61% shorter while the page a crawler reads is only 31% shorter.
+ * That gap is the whole trick, and it is why the FAQ is the one section that got LONGER.
  *
  * THE GROUND, AND A DELIBERATE DEPARTURE FROM THE RULE AT THE TOP OF globals.css:
  *
  *     1 Hero        primary + photograph   dark
- *     2 SceneWipe   background             light
- *     3 Services    muted                  light
+ *     2 Services    background             light
+ *     3 SceneWipe   muted                  light
  *     4 WhoWeAre    background             light
  *     5 HowWeWork   raise                  dark
  *     6 Reviews     muted                  light
@@ -73,18 +89,21 @@ import { Faq } from "@/components/sections/faq";
  *     8 Faqs        background             light
  *     9 Closer      muted                  light   -> into the primary footer
  *
- * scripts/section-rhythm.mjs enforces that no two adjacent sections share a ground, and this
- * passes: no two neighbours are the same surface anywhere down the page.
+ * Services is second and the drag demo third, which is the client's call and the right one: an
+ * interactive control immediately after the hero asks a visitor to play with something before
+ * anyone has told them what is being sold. Claim, then proof.
  *
- * WHAT IT DOES BREAK is the unenforced note in globals.css - "support surfaces so the page never
- * runs 3 light or 3 dark in a row" - at sections 2, 3 and 4. That is on instruction. The client:
- * "the site in general just looks dark, which is very weird for a lighting company." SceneWipe was
- * on `raise`, directly under a night-photograph hero, so the first two screens of the site were
- * both dark and the impression was set before a reader reached anything light. Moving it to
- * `background` is what fixes that, and it costs a three-light run made of three DIFFERENT surfaces
- * (background, muted, background) which alternate visibly. Six light sections to three dark, where
- * the page it replaced ran five lights in a row and still read as dark because the two darkest
- * were the first two.
+ * scripts/section-rhythm.mjs enforces that no two adjacent sections share a ground, and this passes
+ * - no two neighbours are the same surface anywhere down the page.
+ *
+ * WHAT IT DOES BREAK is the unenforced note at the top of globals.css, "support surfaces so the page
+ * never runs 3 light or 3 dark in a row", at sections 2, 3 and 4. That is on instruction: "the site
+ * in general just looks dark, which is very weird for a lighting company." The drag demo used to sit
+ * on `raise` directly under a night-photograph hero, so the first two screens were both dark and the
+ * impression was set before a reader reached anything light. The three-light run is three DIFFERENT
+ * surfaces (background, muted, background) and they alternate visibly. Six light sections to three
+ * dark, where the page this replaced ran five lights in a row and still read as dark - because the
+ * two darkest were its first two.
  */
 
 /* ---------- shared parts ---------------------------------------------------- */
@@ -438,14 +457,31 @@ export function Reviews() {
           {three.map((r, i) => (
             <article
               key={r.name}
-              className={`relative flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ${
+              className={`flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ${
                 i === 1 ? "lg:mt-10" : i === 2 ? "lg:mt-5" : ""
               }`}
             >
-              <span className="pointer-events-none absolute right-6 top-5 font-display text-[3rem] leading-none text-accent/25" aria-hidden>
-                &rdquo;
-              </span>
-              <Stars />
+              {/* THE GOOGLE MARK REPLACES THE DECORATIVE QUOTE GLYPH that used to sit in this
+                * corner - a 48px amber ellipsis at 25% opacity, which was there to fill the corner
+                * and said nothing. The mark does a job: it tells a reader where the words came
+                * from, which is the only question that matters about a testimonial. Same corner,
+                * same weight, actual information.
+                *
+                * Absolute positioning is gone with it. Stars left, mark right, on one flex row, so
+                * neither can overlap a long first line of the quote. */}
+              <div className="flex items-center justify-between gap-4">
+                <Stars />
+                {googleLogo && (
+                  <Image
+                    src={googleLogo}
+                    alt={`Reviewed on ${reviewProof.platform}`}
+                    width={20}
+                    height={20}
+                    unoptimized
+                    className="size-5 shrink-0"
+                  />
+                )}
+              </div>
               <blockquote className="mt-4 flex-1 text-[0.98rem] leading-relaxed text-muted-foreground">
                 {r.text}
               </blockquote>
