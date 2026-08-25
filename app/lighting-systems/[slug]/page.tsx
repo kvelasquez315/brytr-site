@@ -285,7 +285,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
             />
             <p className="mt-5 text-lg leading-relaxed text-on-dark/85">{d?.position ?? s.short}</p>
             <ul className="mt-7 space-y-3">
-              <Check onDark>Installed by our own crews, never subcontracted</Check>
+              <Check onDark>Fitted and signed off by the crew who measured it</Check>
               <Check onDark>Named on the quote rather than implied</Check>
               <Check onDark>Manufacturer terms plus our workmanship coverage</Check>
             </ul>

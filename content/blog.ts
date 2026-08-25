@@ -28,10 +28,10 @@ export const posts: Post[] = [
     dek: "This is a building material fastened to your fascia. Ask these questions before you sign anything, and pay attention to which ones make the salesperson uncomfortable.",
     links: { label: "Book a free design consultation", href: "/free-design-consultation" },
     body: [
-      { p: "Anyone can buy a channel and a controller. The variable is whether the company still exists in year five, whether the person on your roof is an employee, and whether they will tell you when the cheaper option is the right one." },
+      { p: "Anyone can buy a channel and a controller. The variable is whether the company still exists in year five, whether the person on your roof is the person who quoted it, and whether they will tell you when the cheaper option is the right one." },
       { h: "The questions to ask" },
       { list: [
-        "Are your installers employees or subcontractors?",
+        "Will the people who quote it be the people who fit it?",
         "How many brands do you carry, and why that one?",
         "Does it fasten into the fascia or through the shingles?",
         "Show me a daytime photo of a finished install from the street.",
@@ -80,7 +80,7 @@ export const posts: Post[] = [
       { h: "What a correct install looks like" },
       { list: ["Fasteners into fascia, on a spacing that suits the board", "Every penetration sealed at the time it is made, not afterwards", "No fastening through shingles or into the roof deck", "Mitered and sealed at every corner and transition", "Terminations capped, not taped"] },
       { h: "What causes damage" },
-      { p: "Fastening through the roof covering, over-driving fasteners into soft or rotten fascia, and skipping sealant on a cold day because it is slow. All three are shortcuts, and all three are why we do not subcontract the install." },
+      { p: "Fastening through the roof covering, over-driving fasteners into soft or rotten fascia, and skipping sealant on a cold day because it is slow. All three are shortcuts, and all three are why the crew who measures a house is the crew who fits it." },
       { callout: "If your fascia is already soft or rotten, that gets repaired before anything is mounted to it. Mounting a permanent fixture to failing timber is not an install, it is a deferred problem." },
     ] }),
   B({ slug: "permanent-lighting-warranty-comparison", title: "Permanent Lighting Warranties Compared, Brand by Brand",

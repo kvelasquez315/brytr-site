@@ -359,7 +359,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             <ul className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {[
                 ["Ask for a daylight photo from the curb", "Anybody can make a roofline look good at night. The test is whether you can pick the channel out at noon on a house they finished last year."],
-                ["Ask who is on the ladder", "An employee or a subcontractor. Almost every failure in this trade is workmanship, so this question is the one that predicts year four."],
+                ["Ask who is on the ladder", "Whether the people who quote it are the people who fit it. Almost every failure in this trade is workmanship, so this question is the one that predicts year four."],
                 ["Ask when the sealant goes on", "At the moment the screw is driven, or in one pass at the end of the day. Only one of those keeps water out of a fascia board."],
                 ["Ask how corners are handled", "Cut and mitered, or flexed around. A kink at a valley is visible from the street and cracks first in February."],
                 ["Ask who administers the warranty", "The installer, the manufacturer, or a franchise head office. All three are answers; not knowing is not."],

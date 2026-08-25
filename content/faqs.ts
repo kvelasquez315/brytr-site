@@ -6,7 +6,7 @@ export const homeFaqs: Faq[] = [
   { q: "What does it cost?",
     a: "It is priced by linear foot of roofline plus complexity, so a single-story ranch and a two-story with dormers and a turret are very different numbers. We give you a written quote after an on-site measure, and we publish real ranges on our pricing page rather than making you call to find out." },
   { q: "Does it damage my soffit or fascia?",
-    a: "It fastens into the fascia board, not through the shingles, and every penetration is sealed. Done correctly it is no more invasive than hanging a gutter. Done badly it is a leak, which is most of the reason we do not subcontract the install." },
+    a: "It fastens into the fascia board, not through the shingles, and every penetration is sealed. Done correctly it is no more invasive than hanging a gutter. Done badly it is a leak, so every penetration on your house is sealed as it is made and checked before we leave." },
   { q: "What happens when a section stops working?",
     a: "You call us and we come out. We are the ones who installed it and we hold the warranty alongside the manufacturer, so there is no portal and no dispatcher between you and the crew." },
   { q: "Can it be installed in winter?",

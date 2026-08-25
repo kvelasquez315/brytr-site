@@ -90,7 +90,7 @@ const sheet: { spec: string; value: string; why: string }[] = [
  * as a hardware brochure: none of it is on a datasheet and all of it decides whether the
  * run is still right in year three. */
 const identical: string[] = [
-  "The same crews, on our own payroll, on every job",
+  "The same crew on every job, measure to handover",
   "The same fastening method into the fascia board, never through a shingle",
   "Every penetration sealed at the moment it is made",
   "Mitered corners at every gable, dormer, bay and valley",
@@ -294,8 +294,8 @@ export default function SystemsHub() {
             </ul>
             <p className="mt-6 max-w-[76ch] text-sm leading-relaxed text-on-dark-muted">
               Good hardware fastened badly fails before cheap hardware fastened properly does, and
-              the failures in this category are workmanship far more often than product. That is the
-              whole reason we do not subcontract any of it.
+              the failures in this category are workmanship far more often than product. That is why
+              the crew who measures your house is the crew who fits it and signs it off.
             </p>
           </div>
         </div>

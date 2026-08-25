@@ -37,7 +37,7 @@ export const metadata: Metadata = {
    * /contact. The brand is already in the title, so the template would repeat it. */
   title: { absolute: "About Brytr Co | Family Owned, Omaha" },
   description:
-    "Brytr Co is Zac Van Buren and Sam Greguska: the whole Haven line rather than one piece of it, our own crews instead of subcontractors, and more than one brand on the truck. Permanent outdoor lighting across the Omaha metro.",
+    "Brytr Co is Zac Van Buren and Sam Greguska: the whole Haven line rather than one piece of it, the same crew from the measure to the handover, and more than one brand on the truck. Permanent outdoor lighting across the Omaha metro.",
   alternates: { canonical: "/about" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "About", href: "/about" }];
@@ -60,9 +60,9 @@ const costs: { chip: string; h: string; p: string; cost: string }[] = [
   },
   {
     chip: "Costs us margin",
-    h: "The crew are our employees.",
-    p: "Permanent lighting is fastened into your fascia board and sealed, and the failures in this trade are workmanship far more often than product. Subcontracting the install would make us more money per job and cost us the only thing this company actually sells.",
-    cost: "Payroll, insurance and training instead of an invoice per install.",
+    h: "The same crew, measure to handover.",
+    p: "Permanent lighting is fastened into your fascia board and sealed, and the failures in this trade are workmanship far more often than product. The people who measure your house are the people who fit it, and the people who come back to it — which is the only thing that makes any of the rest of this checkable.",
+    cost: "Training and a slower schedule instead of whoever is free that week.",
   },
   {
     chip: "Costs us a day",
@@ -277,7 +277,7 @@ export default function About() {
         title="What the two of us are actually selling."
         lede="Not a product line. A crew that turns up, a channel fixed into fascia rather than stapled to a shingle, and a run that still holds a straight line in year eight."
         shots={[
-          { photo: "crewRoofFascia", caption: "On the roof. Every person who works on your house is on Brytr payroll, and it is the same crew from the measure to the handover." },
+          { photo: "crewRoofFascia", caption: "On the roof. The same crew from the measure to the handover, and the same crew if anything ever needs looking at." },
           { photo: "installDayGarage", caption: "A working day, in daylight. The design happens after dark; the install happens when we can see the fixings." },
           { photo: "walkthroughDusk", caption: "The handover. We do not leave until you have stood on your own lawn and looked at it lit." },
         ]}
@@ -295,7 +295,7 @@ export default function About() {
                 ["1.2M", "lights installed locally", "Brytr's own count"],
                 [reviewProof.average, `from ${reviewProof.count} reviews`, `${reviewProof.platform}, ${reviewProof.checked}`],
                 ["2", "brands stocked", "Haven and Jellyfish"],
-                ["Ours", "crews, never subcontracted", "The people who quoted it"],
+                ["18", "towns we install in", "Omaha metro to Grand Island"],
               ].map(([f, l, src]) => (
                 <div key={l}>
                   <dt className="u text-[clamp(1.8rem,3vw,2.4rem)] font-medium leading-none text-on-dark">{f}</dt>

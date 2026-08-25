@@ -285,7 +285,7 @@ export default function AreasHub() {
               <ul className="mt-5 divide-y divide-on-dark/10 border-t border-on-dark/10">
                 {[
                   "Per-foot pricing, with no travel charge added",
-                  "Our own crews, on our own payroll",
+                  "The same crew in every town we serve",
                   "Both warranty layers, written on the quote",
                   "The covenant submission handled by us",
                   "The curb check and the scene walk at dusk",

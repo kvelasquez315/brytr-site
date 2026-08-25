@@ -68,11 +68,29 @@ These are deliberately absent from the site rather than invented. Each one has a
   not, delete those three from `content/cities.ts` and the pages disappear.
 - **Trimlight in Omaha**: active competitor? Decides whether that comparison page is worth keeping.
 
-## 3. Forms are not wired
+## 3. Forms are wired
 
-Every form posts to `/free-design-consultation` as a GET placeholder. Before launch, point them at
-LeadConnector (or whatever Nexus is using for this client) and add success and error states. The
-markup is in `components/ui/bits.tsx` → `QuoteForm`, one component for all three variants.
+Every form on the site is one component — `components/ui/quote-form.tsx`, four variants — and it
+posts through one Server Action, `app/actions/lead.ts`, to Brytr's LeadConnector webhook. Tested
+end to end: the webhook returns `{"status":"Success: test request received"}`.
+
+- **The webhook URL** reads `LEAD_WEBHOOK_URL` from the environment and falls back to the endpoint
+  the client supplied. Set the env var to rotate it without a deploy. `.env*` is gitignored, so the
+  fallback is what makes a fresh deploy work without configuration.
+- **It must run on a Node runtime.** The site prerenders 78 pages but is *not* a static export
+  (there is no `output: "export"` in `next.config.ts`). If anyone switches it to one, every form on
+  the site goes dead silently. That is the single thing to check before changing the deploy target.
+- **Server-side on purpose.** A webhook trigger has no auth on it, so posting from the browser would
+  put a write-only endpoint into the page source for anyone to spam. It also means the form still
+  submits with JavaScript disabled.
+- **States are handled**: a success panel replaces the form, a failed post tells the customer to
+  phone instead and never renders as a success, and a required name and phone are enforced on both
+  sides.
+- **There is a honeypot** (`company`), off-screen and out of the tab order. A bot that fills it gets
+  the success message and nothing is sent — telling a bot it failed just invites a retry.
+
+Two test leads were sent during wiring and can be deleted from the CRM: `TEST SUBMISSION - Claude
+Code` and `END TO END TEST Claude Code`, both on phone `402-555-01xx`.
 
 ## 4. Content model
 
@@ -98,12 +116,25 @@ zoom is the density check: if you see stripes of empty background, it is not don
 
 ## 6. Things that are deliberate, so please don't "fix" them
 
-- **The site is mostly dark.** A lighting company rendered in light-mode blue-and-white is arguing
-  against its own product. The four surfaces (`primary`, `raise`, `bone`, `bone-deep`) alternate as
-  the day/night cycle of the thing being sold.
+- ~~**The site is mostly dark.**~~ **Overruled by the client, and the home page now runs six light
+  sections to three dark.** The original argument was that a lighting company rendered in light-mode
+  blue-and-white argues against its own product. His: "the site in general just looks dark, which is
+  very weird for a lighting company." Both are defensible and his is the one that ships. The four
+  surfaces still alternate and `scripts/section-rhythm.mjs` still enforces that no two adjacent
+  sections share a ground.
+- **There are no icons anywhere.** The whole 28-glyph set is deleted, along with
+  `components/icons/index.tsx` and the `.channel-tile` container. "I can't even tell what's going on
+  with them... I would rather we bring our own visual sense to it with our images." Photography and
+  the channel devices (`.channel-mark`, `.channel-edge`, `.run-spine`) carry it instead.
+  `content/icon-map.ts` keeps only the `IconKey` type, which four content files still use as data.
+- **Nothing on the site mentions employment status.** No W-2, no payroll, no subcontracting — "we
+  probably shouldn't even be mentioning what our employees are". The service claim underneath it is
+  kept and said plainly: the people who quote your house are the people who fit it and the people
+  who come back to it.
+- **The founders are not named on the home page.** "I don't want to mention them." They keep
+  `/about`.
 - **Amber is CTA-only.** Not for body text, not for stat numerals, not for decoration. It appears on
-  buttons, the signature channel edge (max twice per page), active states, and one accent detail
-  inside each icon.
+  buttons, the signature channel edge (max twice per page), and active states.
 - **No pure white section backgrounds.** White is for cards.
 - **The comparison pages give the cheaper system real reasons to win.** That is the site's biggest
   trust asset and the reason both columns get identical visual treatment. Do not add a highlight to

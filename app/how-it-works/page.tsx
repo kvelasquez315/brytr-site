@@ -164,8 +164,8 @@ export default function HowItWorks() {
               </p>
               <p className="text-base text-muted-foreground">
                 They are also the six that separate a crew who does this every week from a crew who
-                took the job because it was quiet. All of them are ours — we do not subcontract the
-                install.
+                took the job because it was quiet. All six get made on your property, on the day, by
+                the people who measured it.
               </p>
             </div>
             <div className="mt-7"><TextLink href="/about">Who is actually on your roof</TextLink></div>

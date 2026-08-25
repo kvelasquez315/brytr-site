@@ -1,6 +1,6 @@
 /* Confirmed facts only. Anything not verified from the client is absent by design.
  * Verified: 196 five-star Google reviews · 5.0 average (Google Business Profile, 20 Aug 2026) · 1.2M lights installed locally
- * W2 crews (not subcontracted) · founders Zac Van Buren & Sam Greguska
+ * One crew from measure to handover · founders Zac Van Buren & Sam Greguska
  * Phone 402-810-3973 · Omaha, NE · carries both Haven Evolution and Jellyfish
  */
 export const site = {
@@ -48,7 +48,7 @@ export const site = {
   stats: [
     { figure: "1.2M", label: "Lights installed in Omaha", icon: "installCount" },
     { figure: "5.0", label: "Average from 196 Google reviews", icon: "stars" },
-    { figure: "Ours", label: "Crews, never subcontracted", icon: "hardHat" },
+    { figure: "1 crew", label: "From the measure to the handover", icon: "hardHat" },
     /* This slot held "25 yr — LED rating on the Signature system", which was an invented number
      * on an invented tier. It was swapped for IP66, but that rating came out of the same batch
      * of specs I wrote without a source, so it is not safe either. Replaced with the one thing

@@ -72,8 +72,8 @@ const tags = Object.entries(tagCounts).sort((a, b) => b[1] - a[1] || a[0].locale
  * described elsewhere on the site with its own page. */
 const practice: { h: string; p: string; href: string }[] = [
   {
-    h: "The crew are employees",
-    p: "The person who quoted your house is on the ladder at it. There is no subcontractor network between the sale and the work.",
+    h: "The same crew, start to finish",
+    p: "The person who quoted your house is on the ladder at it, and is the person who comes back if anything needs looking at.",
     href: "/about",
   },
   {

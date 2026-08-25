@@ -72,7 +72,7 @@ export const reviewProofBadge = {
 };
 
 /* The three things we install, as a row of our own icons. Not a credential list — the
- * client asked for reviews only on the trust side, so licensed/insured and W2 crews
+ * client asked for reviews only on the trust side, so licensed/insured and crew claims
  * moved into the body of the page where they can be argued rather than asserted. */
 export type Offering = { name: string; note: string; icon: IconKey; href: string };
 

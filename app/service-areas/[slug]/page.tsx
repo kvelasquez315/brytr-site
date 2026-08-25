@@ -280,7 +280,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <div>
                 <ul className="divide-y divide-border border-y border-border">
                   {[
-                    ["The same crews", "Not a partner and not a subcontractor on the Iowa side. The people who installed in Dundee last week are the people who install in Manawa this week."],
+                    ["The same crews", "The people who installed in Dundee last week are the people who install in Manawa this week. Iowa is not handed to anybody else."],
                     ["The same materials", "The same hardware, the same channel finishes, the same controllers. Nothing is substituted because of a state line."],
                     ["The same warranty", "Manufacturer terms on the hardware and ours on the workmanship, written on the quote exactly as they are in Nebraska."],
                     ["No border premium", "Per-foot pricing, and the bridge is not a line item. Anybody quoting a river surcharge is quoting you for their own inconvenience."],

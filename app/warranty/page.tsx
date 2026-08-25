@@ -118,7 +118,7 @@ const questions: { q: string; a: string }[] = [
   },
   {
     q: "Who physically turns up when something goes dark?",
-    a: "One of our own crew. Not a franchise dispatcher, not a subcontractor who happens to be free, and not the manufacturer — they have no way of getting to your fascia board.",
+    a: "The crew who fitted it. Not a franchise dispatcher and not the manufacturer — they have no way of getting to your fascia board.",
   },
   {
     q: "Is the workmanship coverage in the paperwork I sign, or in a brochure?",
@@ -257,9 +257,9 @@ export default function Warranty() {
         link={{ href: "/about", label: "Who Brytr actually is" }}
       >
         <p>
-          Every term on this page is underwritten by people on our own payroll. That is not a
-          slogan — it is the mechanism. A subcontracted crew has no reason to care whether a
-          fixing holds for eight years, because they will not be the ones coming back to it.
+          Every term on this page is underwritten by the people who did the work. That is not a
+          slogan — it is the mechanism. A crew who will never see your house again has no reason to
+          care whether a fixing holds for eight years.
         </p>
         <p>
           Almost every failure we are called out to repair on someone else&rsquo;s system is a
@@ -285,7 +285,7 @@ export default function Warranty() {
               <p className="text-base text-muted-foreground">
                 We hold the workmanship coverage ourselves and we administer the manufacturer side on
                 your behalf. You never file anything, never chase a distributor, and never find out that
-                the crew who installed it was a subcontractor with no ongoing obligation.
+                the people who fitted it have no ongoing obligation to it.
               </p>
             </div>
             <a
