@@ -4,6 +4,7 @@ import { Footer } from "@/components/site/footer";
 import { Hero } from "@/components/sections/hero";
 import { SceneWipe } from "@/components/sections/scene-wipe";
 import {
+  TrustBar,
   WhoWeAre,
   Services,
   HowWeWork,
@@ -46,10 +47,16 @@ export default function Home() {
           * services grid moved onto navy - with a dark hero, eight slots need four darks, and
           * six white cards read better on navy than they ever did on bone.
           *
+          * TRUSTBAR IS NOT ONE OF THE EIGHT, and it is unnumbered below for that reason. It is
+          * 72px of chrome reading as the hero's bottom edge, so it sits outside the count - and
+          * it has to, because navy as a ninth SECTION under a night hero would put two darks
+          * together and there is no slack left in the arithmetic. See its note in home-phx.tsx.
+          *
           * scripts/section-rhythm.mjs now compares RESOLVED GROUNDS rather than class names, so
           * bg-background beside bg-muted fails the way it always should have. This file is the
           * first entry in that gate's STRICT list. */}
-        <Hero />        {/* 1 · night   · the photograph, the offer, the rating, the form  */}
+        <Hero />        {/* 1 · night   · the photograph, the offer, the form             */}
+        <TrustBar />    {/*     navy    · the Google bar - chrome, not a section            */}
         <WhoWeAre />    {/* 2 · bone    · WHO WE ARE - night frames, features, founders    */}
         <Services />    {/* 3 · navy    · SERVICES - five cards and a consultation card    */}
         <HowWeWork />   {/* 4 · bone    · HOW WE WORK - method, the ticks, the warranty     */}
