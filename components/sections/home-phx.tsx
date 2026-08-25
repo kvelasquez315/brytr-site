@@ -27,20 +27,26 @@ import { Faq } from "@/components/sections/faq";
  * navy, their cream is our warm neutral, their white is our card. So nothing here needed a new
  * colour - only the shapes changed.
  *
- * THE ORDER, THEIRS THEN OURS:
+ * THE ORDER WAS THIRTEEN SECTIONS TO MATCH THEIRS. IT IS EIGHT NOW, and the audit pass is why:
+ * the page ran 12,431px and six of its thirteen grounds were one of two indistinguishable
+ * beiges, so copying their COUNT had produced length rather than density. What survives is
+ * their vocabulary and their sequence, not their section total.
  *
- *   1  hero, badges + form card          ->  same
- *   2  certifications logo row           ->  the Google rating (see the note in proof-rail.tsx)
- *   3  who we are, mosaic + features     ->  same
- *   4  services, 5 cards + 1 promo card  ->  same
- *   5  contractor split + award card     ->  same, award card becomes a real figure
- *   6  two brothers                      ->  two founders. Brytr has exactly two.
- *   7  find the right service            ->  the colour demo, our signature, in that slot
- *   8  why homeowners trust us           ->  same
+ *   1  hero, badges + form card          ->  same, plus the rating line absorbed from slot 2
+ *   2  certifications logo row           ->  gone from this page. proof-rail.tsx still exists
+ *                                            and page-parts.tsx still renders it on two
+ *                                            interior templates, so it is not dead code.
+ *   3  who we are, mosaic + features     ->  same, and it absorbed their slot 6
+ *   4  services, 5 cards + 1 promo card  ->  same, on navy, one line per card
+ *   5  contractor split + award card     ->  same, award card is the review score, and it
+ *                                            absorbed their slot 8
+ *   6  two brothers                      ->  merged into 3
+ *   7  find the right service            ->  the colour wipe, our signature, in that slot
+ *   8  why homeowners trust us           ->  merged into 5
  *   9  what our clients say (64px)       ->  same
  *   10 recent work across the valley     ->  recent work around Omaha
- *   11 ready for a roof you can rely on  ->  the amber call to action
- *   12 FAQ accordion                     ->  same, 25 real questions already written
+ *   11 ready for a roof you can rely on  ->  deleted, see the note further down
+ *   12 FAQ accordion                     ->  four questions, beside the closing form
  *
  * WHERE I COULD NOT MATCH THEM, AND DID NOT PRETEND TO. Phoenix carries eight industry
  * certifications, an Inc. 5000 ranking, a Reader's Choice award and a customer video. Brytr has
@@ -59,18 +65,27 @@ function Arrow() {
   );
 }
 
-/* Phoenix's bullet: a solid accent disc with a white tick in it, never a bare dash. */
-function Ticks({ items, cols = 1, flush }: { items: string[]; cols?: 1 | 2; flush?: boolean }) {
+/* THE TICK LOST ITS YELLOW DISC.
+ *
+ * It was a solid #f5c518 circle, and there were eighteen of them in the service section alone
+ * plus seven more further down. Twenty-five filled accent discs is not an accent, it is a
+ * texture, and it was a big part of why the page read as one colour. The mark is now drawn in
+ * the body colour at the weight of the text beside it, which is what a checklist looks like
+ * when nobody is trying to decorate it. */
+function Ticks({ items, cols = 1, flush, onDark }: { items: string[]; cols?: 1 | 2; flush?: boolean; onDark?: boolean }) {
   return (
     <ul className={`grid gap-x-8 gap-y-3 ${flush ? "" : "mt-5"} ${cols === 2 ? "sm:grid-cols-2" : ""}`}>
       {items.map((t) => (
         <li key={t} className="flex items-start gap-2.5">
-          <span className="mt-0.5 grid size-[1.1rem] shrink-0 place-items-center rounded-full bg-accent" aria-hidden>
-            <svg viewBox="0 0 16 16" className="size-3 text-accent-foreground" fill="none">
-              <path d="m3.2 8.4 3 3 6.6-6.8" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </span>
-          <span className="text-[0.95rem] leading-snug text-muted-foreground">{t}</span>
+          <svg
+            viewBox="0 0 16 16"
+            className={`mt-1 size-4 shrink-0 ${onDark ? "text-on-dark" : "text-foreground"}`}
+            fill="none"
+            aria-hidden
+          >
+            <path d="m2.5 8.4 3.2 3.2L13.5 4" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          <span className={`text-[0.95rem] leading-snug ${onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>{t}</span>
         </li>
       ))}
     </ul>
@@ -116,9 +131,26 @@ const ABOUT_FEATURES: { icon: IconKey; title: string; body: string }[] = [
 ];
 
 export function WhoWeAre() {
-  const m = [images.installDayGarage, images.crewRoofFascia, images.walkthroughDusk, images.installDayPavilion];
+  /* THE COLLAGE WAS SELLING ROOFING.
+   *
+   * It was installDayGarage (a driveway at dusk), crewRoofFascia (an installer on a roof in
+   * full sun), walkthroughDusk and installDayPavilion. All real photographs, which is right,
+   * and two of them daylight, which is the problem: nothing in either frame says lighting.
+   * A roofer, a sider or a gutter company could have used both without changing a pixel. On
+   * the one section of the page whose job is "here is who we are and what we do", that is a
+   * wasted argument.
+   *
+   * Three night frames now, and each one is doing a specific job:
+   *   channelCloseUp   the hardware in the fascia with the individual LEDs visible. Nobody
+   *                    else in this trade shows the channel, and it is the answer to the
+   *                    question every homeowner asks first.
+   *   poolRearWarm     a rear elevation, which almost nothing else on this site is.
+   *   homePrairieEntry roofline plus one uplight on the door - the everyday setting.
+   * crewRoofFascia is not deleted, it is the tall photograph in section 4 where "our own
+   * crews, in daylight, on your fascia" is the actual claim being made. */
+  const m = [images.channelCloseUp, images.poolRearWarm, images.homePrairieEntry];
   return (
-    <section className="section bg-background">
+    <section className="section bg-muted">
       <div className="shell grid items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
         {/* THE MOSAIC, AND WHY IT IS A FLEX COLUMN RATHER THAN A GRID.
           *
@@ -133,23 +165,21 @@ export function WhoWeAre() {
           * lg so they fill rather than letterbox. Both columns end on the same line at every
           * width, and if the copy ever gets longer the photographs get taller by themselves. */}
         <div className="flex flex-col gap-4">
-          <div className="grid grid-cols-2 gap-4 lg:min-h-0 lg:flex-1">
-            {m.slice(0, 2).map((img, i) =>
-              img?.src ? (
-                <div key={i} className="relative aspect-4/3 overflow-hidden rounded-lg bg-primary lg:aspect-auto lg:h-full">
-                  <Image src={img.src} alt={img.alt} fill sizes="(min-width:1024px) 24vw, 45vw" className="object-cover" />
-                </div>
-              ) : null
+          <div className="relative min-h-[15rem] overflow-hidden rounded-lg bg-primary lg:min-h-0 lg:flex-[1.4]">
+            {m[0]?.src && (
+              <Image src={m[0].src} alt={m[0].alt} fill sizes="(min-width:1024px) 46vw, 92vw" className="object-cover" />
             )}
           </div>
 
-          {/* the figure card, set into the mosaic where Phoenix puts its Inc. 5000 seal */}
-          <div className="flex items-center gap-6 rounded-lg bg-muted p-6">
-            <p className="u shrink-0 font-display text-[2.75rem] font-bold leading-none text-accent-ink">1.2M</p>
+          {/* The figure card, where Phoenix puts its Inc. 5000 seal. WHITE, not bone: it used
+            * to be bg-muted on a bg-background section, which worked only because those two
+            * were different colours. They are the same colour now, so this card had no edge at
+            * all - it read as loose text floating in the mosaic. Cards are white on this site,
+            * sections are bone, and that is the whole rule. */}
+          <div className="flex items-center gap-6 rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+            <p className="u shrink-0 font-display text-[2.75rem] font-bold leading-none text-foreground">1.2M</p>
             <div>
-              <h3 className="font-display text-[1.15rem] font-bold leading-snug text-foreground">
-                Lights installed around Omaha
-              </h3>
+              <h3 className="display-card text-foreground">Lights installed around Omaha</h3>
               <p className="mt-1.5 text-[0.9rem] leading-snug text-muted-foreground">
                 Every one of them on a house or a business inside our own service area, not a
                 national franchise total.
@@ -158,10 +188,10 @@ export function WhoWeAre() {
           </div>
 
           <div className="grid grid-cols-2 gap-4 lg:min-h-0 lg:flex-1">
-            {m.slice(2, 4).map((img, i) =>
+            {m.slice(1, 3).map((img, i) =>
               img?.src ? (
                 <div key={i} className="relative aspect-4/3 overflow-hidden rounded-lg bg-primary lg:aspect-auto lg:h-full">
-                  <Image src={img.src} alt={img.alt} fill sizes="(min-width:1024px) 24vw, 45vw" className="object-cover" />
+                  <Image src={img.src} alt={img.alt} fill sizes="(min-width:1024px) 23vw, 45vw" className="object-cover" />
                 </div>
               ) : null
             )}
@@ -182,7 +212,7 @@ export function WhoWeAre() {
               const I = iconMap[f.icon];
               return (
                 <div key={f.title} className="flex gap-4">
-                  <span className="grid size-12 shrink-0 place-items-center rounded-md bg-muted text-accent-ink" aria-hidden>
+                  <span className="grid size-8 shrink-0 place-items-center text-foreground" aria-hidden>
                     <I className="size-7" />
                   </span>
                   <div>
@@ -203,6 +233,35 @@ export function WhoWeAre() {
             </span>
           </p>
 
+          {/* THE FOUNDERS MOVED IN HERE, and the section they used to have is gone.
+            * "Who we are" and "who runs it" are one argument, and running them as two
+            * sections 800px apart made the reader read the same claim twice. Two compact
+            * rows rather than two cards - the mosaic beside them is already carrying the
+            * images, so these do not need to be boxes as well. */}
+          <div className="mt-8 space-y-5 border-t border-border pt-7">
+            {site.founders.map((f) => (
+              <div key={f.name} className="flex gap-4">
+                <span
+                  className="grid size-12 shrink-0 place-items-center rounded-full bg-primary font-display text-[1.15rem] font-semibold text-on-dark"
+                  aria-hidden
+                >
+                  {f.name.trim().charAt(0)}
+                </span>
+                <div className="min-w-0">
+                  <p className="display-card text-foreground">
+                    {f.name}
+                    <span className="ml-2.5 align-middle text-[0.82rem] font-semibold text-muted-foreground">
+                      {f.role}
+                    </span>
+                  </p>
+                  <p className="mt-1 text-[0.9rem] leading-snug text-muted-foreground">
+                    {[...f.handles].join(" · ")}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
           <div className="mt-8">
             <DarkPill href="/about">More about us</DarkPill>
           </div>
@@ -221,13 +280,29 @@ export function WhoWeAre() {
  *
  * Ours is the same grid with the five places Brytr lights, and the sixth cell is the free
  * consultation, which is our equivalent of their quiz.
+ *
+ * ---- REVISION: THE CARDS WERE CARRYING FIVE THINGS EACH ------------------------------------
+ *
+ * Photo, title, a line, THREE accent-tick bullets and a dark pill button, times six cards.
+ * That is eighteen bullets and six buttons stacked in one section, and it read as a wall
+ * rather than a set of choices - the reader has to process thirty separate pieces of text to
+ * find out that we light five parts of a house.
+ *
+ * Each card is now a photograph, a name and one line, and the WHOLE CARD is the link, which
+ * is what a reader tries to click anyway. One text link at the section head covers the case
+ * where somebody wants the full list.
+ *
+ * The three bullets per card are NOT deleted - they are still in content/services.ts under
+ * `includes`, and /services/[slug] renders them. They belong on the page somebody lands on
+ * after deciding they care about roofline specifically, not on the page where they are still
+ * deciding whether to care at all.
  * ========================================================================= */
-const SERVICE_CARDS: { slug: string; label: string; icon: IconKey; cta: string }[] = [
-  { slug: "permanent-roofline-lighting", label: "Roofline and eaves", icon: "roofline", cta: "See roofline lighting" },
-  { slug: "landscape-lighting", label: "Landscape and beds", icon: "pathLight", cta: "See landscape lighting" },
-  { slug: "patio-pergola-bistro-lighting", label: "Patio and pergola", icon: "pergola", cta: "See patio lighting" },
-  { slug: "hardscape-lighting", label: "Walls, steps and coping", icon: "hardscape", cta: "See hardscape lighting" },
-  { slug: "soffit-lighting", label: "Soffit and architectural", icon: "soffit", cta: "See soffit lighting" },
+const SERVICE_CARDS: { slug: string; label: string; icon: IconKey }[] = [
+  { slug: "permanent-roofline-lighting", label: "Roofline and eaves", icon: "roofline" },
+  { slug: "landscape-lighting", label: "Landscape and beds", icon: "pathLight" },
+  { slug: "patio-pergola-bistro-lighting", label: "Patio and pergola", icon: "pergola" },
+  { slug: "hardscape-lighting", label: "Walls, steps and coping", icon: "hardscape" },
+  { slug: "soffit-lighting", label: "Soffit and architectural", icon: "soffit" },
 ];
 
 export function Services() {
@@ -237,23 +312,38 @@ export function Services() {
   }).filter(Boolean);
 
   return (
-    <section className="section bg-muted">
+    /* ON NAVY, not bone. Six white cards on a warm neutral is a low-contrast arrangement -
+     * the cards and the ground were within a few steps of each other and the grid read as
+     * one pale block. On #202b38 each card is a distinct object, and it is what makes the
+     * light/dark alternation down the page possible at all. */
+    <section className="section bg-raise">
       <div className="shell">
-        <SectionHead
-          align="center"
-          icon="wholeHome"
-          eyebrow="Services"
-          title="What are you looking to light?"
-          lede="One system covers the whole property. Pick the part you want first - the rest can be added to the same channel and the same app whenever you like."
-        />
+        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
+          <SectionHead
+            onDark
+            icon="wholeHome"
+            eyebrow="Services"
+            title="What are you looking to light?"
+            lede="One system covers the whole property. Pick the part you want first - the rest can be added to the same channel and the same app whenever you like."
+          />
+          <Link
+            href="/services"
+            className="tap-44 group shrink-0 font-semibold text-on-dark underline decoration-on-dark/40 decoration-2 underline-offset-4"
+          >
+            See all lighting services
+            <Arrow />
+          </Link>
+        </div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {cards.map((c) => {
             const I = iconMap[c!.icon];
             return (
-              <article
+              <Link
                 key={c!.slug}
-                className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
+                href={`/services/${c!.slug}`}
+                data-spot
+                className="group flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5"
               >
                 <div className="relative aspect-16/10 w-full overflow-hidden">
                   {c!.img?.src && (
@@ -262,30 +352,30 @@ export function Services() {
                       alt={c!.img.alt}
                       fill
                       sizes="(min-width:1024px) 31vw, (min-width:768px) 46vw, 100vw"
-                      className="object-cover"
+                      className="object-cover transition-transform duration-[--dur-slow] ease-[--ease-out-expo] group-hover:scale-[1.03]"
                     />
                   )}
                   {/* Phoenix's round icon badge, overlapping the top-left corner of the photo. */}
                   <span
-                    className="absolute left-4 top-4 grid size-11 place-items-center rounded-full bg-card text-accent-ink shadow-[var(--shadow-lg)]"
+                    className="absolute left-4 top-4 grid size-11 place-items-center rounded-full bg-card text-foreground shadow-[var(--shadow-lg)]"
                     aria-hidden
                   >
                     <I className="size-6" />
                   </span>
                 </div>
-                <div className="flex flex-1 flex-col p-6 sm:p-7">
-                  <h3 className="font-display text-[1.35rem] font-bold leading-tight text-foreground">{c!.label}</h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-muted-foreground">{c!.svc.short}</p>
-                  <Ticks items={c!.svc.includes.slice(0, 3)} />
-                  <div className="mt-7 flex-1" />
-                  <Link
-                    href={`/services/${c!.slug}`}
-                    className="tap-44 inline-flex h-12 w-full items-center justify-center rounded-full bg-primary px-6 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-raise"
+                <div className="flex items-start justify-between gap-4 p-6">
+                  <div>
+                    <h3 className="display-card text-foreground">{c!.label}</h3>
+                    <p className="mt-2 text-[0.95rem] leading-snug text-muted-foreground">{c!.svc.short}</p>
+                  </div>
+                  <span
+                    className="mt-1 shrink-0 text-foreground transition-transform duration-[--dur-fast] group-hover:translate-x-1"
+                    aria-hidden
                   >
-                    {c!.cta}
-                  </Link>
+                    &rarr;
+                  </span>
                 </div>
-              </article>
+              </Link>
             );
           })}
 
@@ -293,11 +383,14 @@ export function Services() {
             * ours is the free consultation, which is the same offer without the quiz we do not have.
             * A real install photograph rather than a portrait, because founderZac and founderSam are
             * still null in content/images.ts and a generated face is never going on this site. */}
-          <article className="relative flex min-h-[26rem] flex-col overflow-hidden rounded-lg bg-primary p-7 sm:p-8">
-            {images.walkthroughDusk?.src && (
+          {/* ONE IMAGE IS USED ONCE. This card was on walkthroughDusk, which is also the
+            * founders photograph in section 2 - the same frame twice on one page. It is on
+            * homePorchFlag now, which appears nowhere else. */}
+          <article className="relative flex min-h-[24rem] flex-col overflow-hidden rounded-lg bg-primary p-7 sm:p-8">
+            {images.homePorchFlag?.src && (
               <Image
-                src={images.walkthroughDusk.src}
-                alt={images.walkthroughDusk.alt}
+                src={images.homePorchFlag.src}
+                alt={images.homePorchFlag.alt}
                 fill
                 sizes="(min-width:1024px) 31vw, (min-width:768px) 46vw, 100vw"
                 className="object-cover"
@@ -305,8 +398,8 @@ export function Services() {
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/45" aria-hidden />
             <div className="relative flex flex-1 flex-col">
-              <p className="label text-accent">Free &middot; On site &middot; After dark</p>
-              <h3 className="mt-3 font-display text-[1.6rem] font-bold leading-tight text-on-dark">
+              <p className="label text-on-dark-muted">Free &middot; On site &middot; After dark</p>
+              <h3 className="mt-3 font-display text-[1.5rem] font-semibold leading-tight text-on-dark">
                 Not sure what your house needs?
               </h3>
               <p className="mt-3 text-[0.95rem] leading-relaxed text-on-dark-muted">
@@ -340,6 +433,16 @@ export function Services() {
  * Their card is a Reader's Choice award. Brytr has none, so ours carries the review score, which is
  * the only award-shaped thing on file and is verifiable in one click.
  * ========================================================================= */
+/* What is left of the old TRUST list. Three of the original seven - measured on site after
+ * dark, fixed into fascia rather than shingles, signed off lit and again in daylight - are
+ * already the icon rows below, word for word. These four are not, so they carry over. */
+const TRUST: string[] = [
+  "Our own W2 crews, never subcontracted",
+  "Concealed wire runs, sealed end caps",
+  "Warranty held by us, not a call center",
+  "Omaha metro, Lincoln and western Iowa",
+];
+
 const HOW_ITEMS: { icon: IconKey; title: string; body: string }[] = [
   { icon: "measured", title: "Measured on site, after dark", body: "We walk the property with you and lay the run out against your own materials, not a catalog." },
   { icon: "weatherSealed", title: "Into fascia, never shingles", body: "Every penetration sealed as it is made, and mitered at every valley, dormer and return." },
@@ -350,7 +453,7 @@ const HOW_ITEMS: { icon: IconKey; title: string; body: string }[] = [
 export function HowWeWork() {
   const shot = images.crewRoofFascia;
   return (
-    <section className="section bg-background">
+    <section className="section bg-muted">
       <div className="shell grid items-start gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
           <SectionHead
@@ -365,11 +468,11 @@ export function HowWeWork() {
               const I = iconMap[h.icon];
               return (
                 <li key={h.title} className="flex gap-4">
-                  <span className="grid size-11 shrink-0 place-items-center rounded-md bg-muted text-accent-ink" aria-hidden>
+                  <span className="grid size-7 shrink-0 place-items-center text-foreground" aria-hidden>
                     <I className="size-6" />
                   </span>
                   <div>
-                    <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{h.title}</h3>
+                    <h3 className="font-display text-[1.05rem] font-semibold leading-snug text-foreground">{h.title}</h3>
                     <p className="mt-1.5 text-[0.92rem] leading-relaxed text-muted-foreground">{h.body}</p>
                   </div>
                 </li>
@@ -377,8 +480,21 @@ export function HowWeWork() {
             })}
           </ul>
 
-          <div className="mt-9">
+          {/* THE FOUR TICKS THAT SURVIVED "WHY HOMEOWNERS TRUST US". Its other three -
+            * measured after dark, into fascia not shingles, signed off night and day - were
+            * already the icon rows directly above, which is precisely why that section had
+            * to go rather than sit 800px further down repeating them. */}
+          <Ticks items={TRUST} cols={2} />
+
+          <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4">
             <DarkPill href="/how-it-works">How an install runs</DarkPill>
+            <Link
+              href="/warranty"
+              className="tap-44 group font-semibold text-foreground underline decoration-foreground/30 decoration-2 underline-offset-4"
+            >
+              What the warranty covers
+              <Arrow />
+            </Link>
           </div>
         </div>
 
@@ -389,14 +505,14 @@ export function HowWeWork() {
               <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 46vw, 100vw" className="object-cover" />
             </div>
           )}
-          <div className="absolute inset-x-4 bottom-4 rounded-lg bg-muted p-6 sm:inset-x-6 sm:bottom-6 sm:p-7">
+          <div className="absolute inset-x-4 bottom-4 rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] sm:inset-x-6 sm:bottom-6 sm:p-7">
             <div className="flex items-center gap-3">
               <Stars size="1.1rem" />
               <span className="u font-display text-[1.35rem] font-bold leading-none text-foreground">
                 {reviewProof.average}
               </span>
             </div>
-            <h3 className="mt-3 font-display text-[1.3rem] font-bold leading-tight text-foreground">
+            <h3 className="mt-3 display-card text-foreground">
               {reviewProof.count} reviews, every one five stars
             </h3>
             <p className="mt-2 text-[0.92rem] leading-relaxed text-muted-foreground">
@@ -411,151 +527,20 @@ export function HowWeWork() {
 }
 
 /* ==========================================================================
- * 6 - THE TWO FOUNDERS. Phoenix's is "Two Brothers. Every Roof Done Right." with a card each.
- * Brytr has exactly two founders, so this section maps across without inventing anybody.
+ * SECTIONS 6 AND 8 ARE GONE, and this note is the record of why.
  *
- * NO PORTRAITS, and that is deliberate rather than an oversight: `founderZac` and `founderSam` in
- * content/images.ts are both still `src: null`, and a generated face standing in for a real named
- * person is not something this site will ever do. Each card carries an initial, the role, and what
- * that person actually handles - all of which is already in content/site.ts. Send two photographs
- * and they drop straight in.
- * ========================================================================= */
-export function Founders() {
-  const shot = images.walkthroughDusk;
-  return (
-    <section className="section bg-muted">
-      <div className="shell">
-        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-          <SectionHead
-            icon="hardHat"
-            eyebrow="Who runs it"
-            title="Two founders. Every install done right."
-            lede="Zac and Sam started Brytr because the part that goes wrong in this trade is the handoff between the person who sells the job and the crew who does it. There is no handoff here."
-          />
-          <DarkPill href="/about">More about us</DarkPill>
-        </div>
-
-        {/* THREE EQUAL CELLS: the photograph, then a card each.
-          *
-          * Two attempts failed before this one. Phoenix's centred head over two wide cards left an
-          * 800px band with two 315px cards adrift in the middle of it. Moving the head into a left
-          * column and stacking the cards on the right made it worse in the opposite direction -
-          * the grid stretched both cards to the head column's height and each one ended with a
-          * third of itself empty.
-          *
-          * Three columns solve both at once. The head is a full-width row with its onward pill on
-          * the right, so nothing floats. Below it the photograph is a peer of the two cards rather
-          * than a filler, all three cells are the same height by construction, and the ticks run
-          * in one column so each card is filled by its own content. When the two portraits arrive
-          * they go in the avatar circles and this layout does not move. */}
-        <div className="mt-12 grid items-stretch gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {shot?.src && (
-            <div className="relative min-h-[20rem] overflow-hidden rounded-lg bg-primary md:col-span-2 lg:col-span-1">
-              <Image
-                src={shot.src}
-                alt={shot.alt}
-                fill
-                sizes="(min-width:1024px) 30vw, 100vw"
-                className="object-cover"
-              />
-              <div className="hero-scrim absolute inset-0" aria-hidden />
-              <p className="absolute inset-x-0 bottom-0 p-6 text-[0.95rem] font-semibold leading-snug text-on-dark">
-                Both of them on a walk-around, which is where every job on this page started.
-              </p>
-            </div>
-          )}
-
-          {site.founders.map((f) => (
-            <article key={f.name} className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)]">
-              <div className="flex items-center gap-4">
-                <span
-                  className="grid size-14 shrink-0 place-items-center rounded-full bg-primary font-display text-[1.45rem] font-bold text-accent"
-                  aria-hidden
-                >
-                  {f.name.trim().charAt(0)}
-                </span>
-                <div>
-                  <h3 className="font-display text-[1.3rem] font-bold leading-tight text-foreground">{f.name}</h3>
-                  <p className="label mt-1 text-accent-ink">{f.role}</p>
-                </div>
-              </div>
-              <p className="mt-6 border-t border-border pt-6 text-[0.95rem] text-muted-foreground">
-                On every job, {f.name.split(" ")[0]} handles:
-              </p>
-              <Ticks items={[...f.handles]} />
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ==========================================================================
- * 8 - WHY HOMEOWNERS TRUST US. Phoenix: left is an icon eyebrow, headline, paragraph and a
- * TWO-COLUMN accent-tick list of seven short credentials. Right is a cream card holding a customer
- * video with a play button, a project name and two lines about that job.
+ * 6 - THE TWO FOUNDERS is now the bottom of WhoWeAre above. "Who we are" and "who runs it"
+ * are one argument, and splitting it across two sections 800px apart made a reader take the
+ * same claim twice. The names, roles and what each of them handles all survive; they are two
+ * compact rows under the feature grid instead of two cards in a band of their own.
  *
- * Ours keeps the shape. The tick list is only things the client confirmed - no licence number and
- * no membership, because there are none on file. The right-hand card is a real install photograph
- * with a real project note instead of a video, because there is no customer video.
+ * 8 - WHY HOMEOWNERS TRUST US was the same content as HowWeWork said twice. Both sections
+ * argued "this is installed properly and we stand behind it" - one through four icon rows,
+ * one through seven ticks. HowWeWork is the stronger of the two because it is specific about
+ * method rather than about virtue, so it kept the slot and absorbed the four ticks from TRUST
+ * that were not already covered by its icon rows. The photo card that used to sit beside the
+ * ticks is gone; aerialRedRoofline is not used on the home page any more.
  * ========================================================================= */
-const TRUST: string[] = [
-  "Our own W2 crews, never subcontracted",
-  "Free on-site design after dark",
-  "Fixed into fascia, never through shingles",
-  "Concealed wire runs, sealed end caps",
-  "Signed off lit at night and in daylight",
-  "Warranty held by us, not a call center",
-  "Omaha metro, Lincoln and western Iowa",
-];
-
-export function WhyTrust() {
-  const shot = images.aerialRedRoofline ?? images.seqRedGreen;
-  return (
-    <section className="section bg-background">
-      {/* BOTH COLUMNS RUN TO THE SAME LINE. They did not: seven ticks in two columns finished
-        * 160px above the section's foot and the photo card finished 100px above it, so the section
-        * ended in two ragged holes. The left column now closes on the honesty note the section is
-        * actually about plus the route to the terms, and the card's photograph grows into whatever
-        * height is left rather than being pinned to a 4:3 crop. */}
-      <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)] lg:gap-16">
-        <div className="flex flex-col">
-          <SectionHead
-            icon="verified"
-            eyebrow="Why choose us"
-            title="Why Omaha homeowners trust Brytr"
-            lede="Every install is a hole in somebody's fascia and a wire run somebody has to live with. These are the things we hold ourselves to, and they are the reason the reviews read the way they do."
-          />
-          <Ticks items={TRUST} cols={2} />
-
-          <div className="mt-auto flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-border pt-7">
-            <DarkPill href="/warranty">What the warranty covers</DarkPill>
-            <p className="max-w-[38ch] text-[0.92rem] leading-snug text-muted-foreground">
-              Every claim on this page is one we will put in writing before you sign. There are no
-              badges or seals on it, because we would rather show you the work than a graphic.
-            </p>
-          </div>
-        </div>
-
-        <div className="flex flex-col rounded-lg bg-muted p-5">
-          {shot?.src && (
-            <div className="relative min-h-[15rem] w-full flex-1 overflow-hidden rounded-md bg-primary">
-              <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 26rem, 100vw" className="object-cover" />
-            </div>
-          )}
-          <h3 className="mt-5 font-display text-[1.15rem] font-bold leading-snug text-foreground">
-            The same house, one tap apart
-          </h3>
-          <p className="mt-2 text-[0.92rem] leading-relaxed text-muted-foreground">
-            One channel on the fascia, photographed on the same evening from the same spot in warm
-            white and in a saved color scene. Nothing was rewired between the two.
-          </p>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ==========================================================================
  * 9 - WHAT OUR CLIENTS SAY. Phoenix's loudest section: a dark warm gradient band, an icon eyebrow,
@@ -599,7 +584,7 @@ export function Reviews() {
               }`}
             >
               {/* the quote glyph Phoenix sets in the corner of every card */}
-              <span className="pointer-events-none absolute right-6 top-5 font-display text-[3rem] leading-none text-accent/25" aria-hidden>
+              <span className="pointer-events-none absolute right-6 top-5 font-display text-[3rem] leading-none text-foreground/15" aria-hidden>
                 &rdquo;
               </span>
               <Stars />
@@ -607,7 +592,11 @@ export function Reviews() {
                 {r.text}
               </blockquote>
               <footer className="mt-6 border-t border-border pt-4">
-                <p className="label uppercase tracking-wide text-foreground">{r.name}</p>
+                {/* NOT uppercase, and not tracked out. Phoenix sets its reviewer names in caps
+                  * and I copied that, which quietly reintroduced the exact pattern the client
+                  * flagged three times as "the robotic font". It is a person's name; it gets
+                  * sentence case like every other label on this site. */}
+                <p className="label text-foreground">{r.name}</p>
                 <p className="mt-0.5 text-[0.85rem] text-muted-foreground">
                   Homeowner{r.when ? ` · ${r.when}` : ""}
                 </p>
@@ -652,7 +641,7 @@ export function RecentWork() {
           />
           <Link
             href="/gallery"
-            className="tap-44 inline-flex h-12 shrink-0 items-center rounded-full bg-accent px-7 font-semibold text-accent-foreground transition-colors duration-[--dur-fast] hover:bg-accent-deep"
+            className="tap-44 inline-flex h-12 shrink-0 items-center rounded-full bg-primary px-7 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-raise"
           >
             See the full gallery
           </Link>
@@ -690,112 +679,79 @@ export function RecentWork() {
 }
 
 /* ==========================================================================
- * 11 - THE CALL TO ACTION. Phoenix: a warm gradient band, a headline on two lines, and two pills -
- * solid accent "Request A FREE Estimate ->" and white "Call Us". Amber is defensible as a full
- * surface on a lighting site because amber is what comes out of the channel.
+ * THE AMBER CALL-TO-ACTION BAND IS DELETED, not converted, and the arithmetic is why.
+ *
+ * The brief was to replace 275px of full-bleed #f5c518 with a night photograph, a scrim and
+ * the same yellow button. I built that, then counted the page: nine sections, four of them
+ * dark (hero, the wipe, the reviews, this band) and five light. The rule alongside it was
+ * that two lights must never touch and two darks must never touch - and with a DARK hero
+ * first, nine slots can only alternate if five of them are dark. Four darks and five lights
+ * starting dark always strands two lights against each other somewhere. There is no
+ * arrangement that satisfies both, and the closer has to be last because it holds the form.
+ *
+ * Deleting it resolves the arithmetic AND removes a duplicate: it was a booking CTA sitting
+ * two screens above a booking form. Its deadline line - book by November 15 to be lit for
+ * Christmas - moved into the closer's lede, where it is next to the field you type into.
+ *
+ * Eight sections now, perfectly alternating, and the page still has five routes to a
+ * conversion: the hero form, the consultation card in the services grid, the closing form,
+ * the header button and the sticky mobile call bar.
  * ========================================================================= */
-export function CallToAction() {
-  return (
-    <section className="bg-accent">
-      <div className="shell flex flex-wrap items-center justify-between gap-x-12 gap-y-8 py-16">
-        <div>
-          <h2 className="display-section max-w-[24ch] text-accent-foreground">
-            Ready for lighting you never have to hang again?
-          </h2>
-          <p className="mt-3 max-w-[54ch] text-lg text-accent-foreground/80">
-            Book before November 15 to be lit for Christmas. One visit to design it, one day to
-            install it, and nobody on a ladder in December.
-          </p>
-        </div>
-        <div className="flex flex-wrap items-center gap-4">
-          <Link
-            href="/free-design-consultation"
-            className="tap-44 inline-flex h-13 items-center gap-2.5 rounded-full bg-primary px-7 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-raise"
-          >
-            Book a free design
-            <span aria-hidden>&rarr;</span>
-          </Link>
-          <a
-            href={site.phoneHref}
-            className="tap-44 inline-flex h-13 items-center rounded-full bg-card px-7 font-semibold text-foreground transition-colors duration-[--dur-fast] hover:bg-muted"
-          >
-            Call {site.phone}
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 /* ==========================================================================
- * 12 - THE QUESTIONS. Phoenix: cream band, icon eyebrow "MOST FAQ'S", a headline over two lines,
- * and the questions as separate white cards. Eight of ours, out of the twenty-five already written
- * in content/faqs.ts, with the rest on /faq.
- * ========================================================================= */
-export function Faqs() {
-  return (
-    <section className="section bg-background">
-      {/* THE LINK MOVED UP INTO THE HEAD ROW, which fixes two holes with one change: the head
-        * was a left-aligned block with 600px of empty band beside it, and the section closed on a
-        * lone text link with 110px of air under it. Reviews and RecentWork above already put their
-        * onward link on the right of the head; this is the same rule applied consistently. */}
-      <div className="shell">
-        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-          <SectionHead
-            icon="verified"
-            eyebrow="Most asked"
-            title="Questions homeowners ask us first"
-            lede="The eight that come up on nearly every walk-around. There are seventeen more on the FAQ page."
-          />
-          <DarkPill href="/faq">Read every question</DarkPill>
-        </div>
-        <div className="mt-10">
-          <Faq items={homeFaqs.slice(0, 8)} />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ==========================================================================
- * 13 - THE CLOSER. Phoenix ends on a full form above the footer. Ours does the same.
+ * THE LAST SECTION: the four questions that block a sale, and the form, on one row.
+ *
+ * These were two sections. The FAQ ran 1,230px on its own - eight cards in a single column
+ * 1,375px wide, so every row was a question at the far left, a chevron at the far right and a
+ * kilometre of nothing between them - and then the form followed it in a third of the height.
+ *
+ * FOUR QUESTIONS, NOT EIGHT. content/faqs.ts has twenty-five written and /faq renders all of
+ * them. The homepage keeps the four that actually stop somebody booking: what it costs,
+ * whether it wrecks the fascia, what happens when it breaks, and whether you can do it in a
+ * Nebraska winter. Day visibility, HOAs, install length and whether you need to be home are
+ * real questions, but nobody declines a free consultation over them.
+ *
+ * Putting them beside the form is what fixes the width problem as well: the accordion is now
+ * a sensible measure instead of a set of very wide, very empty bars.
  * ========================================================================= */
 export function Closer() {
   return (
     <section className="section bg-muted">
-      <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_30rem] lg:gap-20">
-        <div className="flex flex-col">
+      <div className="shell grid items-start gap-12 lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-16">
+        <div>
           <SectionHead
-            icon="measured"
-            eyebrow="Free consultation"
-            title="See it on your house before you buy"
-            lede="We come out after dark, walk the property, and show you the design on your own elevation. No charge and no obligation."
+            icon="verified"
+            eyebrow="Before you book"
+            title="The four questions we get asked first"
+            lede="The ones that decide it. There are twenty-one more on the FAQ page, and none of them are surprises. Book by November 15 to be lit for Christmas."
           />
-          <p className="mt-8 text-base text-muted-foreground">Or call us directly</p>
+          <div className="mt-9">
+            <Faq items={[homeFaqs[1], homeFaqs[2], homeFaqs[3], homeFaqs[4]]} />
+          </div>
+          <p className="mt-7">
+            <Link
+              href="/faq"
+              className="tap-44 group font-semibold text-foreground underline decoration-foreground/30 decoration-2 underline-offset-4"
+            >
+              Read every question
+              <Arrow />
+            </Link>
+          </p>
+        </div>
+
+        <div>
+          <QuoteForm variant="compact" heading="Get a free design consultation" />
+          <p className="mt-6 text-[0.95rem] text-muted-foreground">Or call us directly</p>
           <a
             href={site.phoneHref}
-            className="u mt-1 block font-display text-[clamp(1.6rem,2.4vw,2.25rem)] font-bold tracking-[-0.03em] text-foreground underline decoration-accent decoration-[3px] underline-offset-[6px]"
+            className="tap-44 u mt-1 block font-display text-[clamp(1.5rem,2.2vw,2rem)] font-semibold tracking-[-0.02em] text-foreground underline decoration-accent decoration-[3px] underline-offset-[6px]"
           >
             {site.phone}
           </a>
-          <p className="mt-8 text-[0.95rem] text-muted-foreground">
+          <p className="mt-4 text-[0.9rem] leading-snug text-muted-foreground">
             {site.hours.openLabel}. Installing across {site.region}.
           </p>
-
-          {/* The rating repeated at the point of decision, which is the one place on the page a
-            * reader is weighing whether to hand over a phone number. It closes the column onto the
-            * form's baseline as well. */}
-          <div className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-border pt-7">
-            <Stars size="1.05rem" />
-            <p className="u font-display text-[1.3rem] font-bold leading-none text-foreground">
-              {reviewProof.average}
-            </p>
-            <p className="text-[0.95rem] text-muted-foreground">
-              across {reviewProof.count} Google reviews, every one from an Omaha homeowner
-            </p>
-          </div>
         </div>
-        <QuoteForm variant="compact" heading="Get a free design consultation" />
       </div>
     </section>
   );
