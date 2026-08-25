@@ -92,8 +92,14 @@ export function Header({ nav }: { nav: NavItem[] }) {
 
   return (
     <>
-      {/* urgency strip — Freedom slot 0 / Phoenix device */}
-      <div className="bg-accent text-accent-foreground">
+      {/* THE URGENCY STRIP IS NAVY NOW, not amber.
+        *
+        * Yellow was doing seven jobs on the home page - this bar, six buttons, every tick
+        * bullet, every eyebrow rule, the stars and a 275px full-bleed band. The rule from
+        * here on is that #f5c518 is the CTA fill and the review stars, and nothing else. A
+        * band of pure accent across the very top of every page is the loudest element on the
+        * site and it is selling a date, not a job. */}
+      <div className="bg-raise text-on-dark">
         <div className="shell flex min-h-10 items-center justify-center gap-2 py-2 text-center text-xs font-semibold sm:text-sm">
           <span>
             2026 holiday slots are filling.{" "}
