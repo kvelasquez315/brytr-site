@@ -3,31 +3,32 @@ import { systems } from "./systems";
 import { compares } from "./compares";
 import { metroCities, iowaCities, outstateCities } from "./cities";
 
-/* THE HEADER MENU.
+/* THE HEADER MENU. Five items: Services, Gallery, Pricing, Service Areas, About.
  *
- * REGROUPED. It read as six multi-word items in our own vocabulary: Lighting Systems,
- * Services, Compare, Service Areas, Gallery, About. Two of those were the same subject
- * ("Lighting Systems" and "Compare" are both about which hardware), and "Services" versus
- * "Lighting Systems" is a distinction only somebody who works here can make.
+ * WHY IT CHANGED AGAIN. It read Systems / Lighting / Areas / Gallery / Pricing / About, and the
+ * client's verdict on the live site was that "the navigation of it is very weird". He is right, and
+ * the reason is specific: SYSTEMS AND LIGHTING ARE THE SAME WORD TWICE to anybody who does not work
+ * here. One meant the hardware brands, the other meant the jobs, and no homeowner can guess which
+ * is which. Meanwhile the home page said "See all services" - a THIRD word for the same thing - so
+ * the menu and the page did not even agree with each other.
  *
- * trugreen.com labels its whole menu in five plain single words: Lawn, Pest, Residential,
- * Commercial, Careers. That is the standard to hold. So: Lighting, Systems, Gallery, Pricing,
- * Areas, About. Compare folded into Systems as a second column, and Pricing was promoted out
- * of the footer because it is the first thing a homeowner goes looking for.
+ * One word for the thing Brytr sells: Services. The hardware lines and the brand comparisons are
+ * columns inside it, because that is what they are - detail about how a service gets done, not a
+ * separate thing to buy. "Areas" spelled out as "Service Areas", because "Areas" on its own could
+ * mean areas of the house.
  *
- * Derived from the same arrays the pages are generated from, so a slug can never drift
- * out of the menu — add a service to content/services.ts and it appears here on the next
- * build. Nothing is hand-listed.
+ * Derived from the same arrays the pages are generated from, so a slug can never drift out of the
+ * menu - add a service to content/services.ts and it appears here on the next build. Nothing is
+ * hand-listed.
  *
- * This module is imported by SERVER components only, and the finished tree (labels and
- * hrefs, nothing else) is handed to the header as a prop. Importing content/services.ts
- * into the client header instead would ship every word of body copy on all 77 pages into
- * the JavaScript bundle for the sake of eleven link labels.
+ * This module is imported by SERVER components only, and the finished tree (labels and hrefs,
+ * nothing else) is handed to the header as a prop. Importing content/services.ts into the client
+ * header instead would ship every word of body copy on all 77 pages into the JavaScript bundle for
+ * the sake of a dozen link labels.
  *
- * The index pages (/services, /service-areas, ...) stay: the top-level label links to
- * the index and the panel lists its children, which is what the client asked for — a
- * dropdown on anything with multiple pages — and the indexes are also real landing pages
- * in the SEO map.
+ * The index pages (/services, /service-areas, ...) stay: the top-level label links to the index and
+ * the panel lists its children, which is what the client asked for - a dropdown on anything with
+ * multiple pages - and the indexes are also real landing pages in the SEO map.
  */
 
 export type NavLink = { label: string; href: string; note?: string };
@@ -42,32 +43,21 @@ export type NavItem = {
 
 export const navTree: NavItem[] = [
   {
-    label: "Systems",
-    href: "/lighting-systems",
+    label: "Services",
+    href: "/services",
     groups: [
       {
-        heading: "What we install",
+        heading: "What we light",
+        span: 2,
+        links: services.map((s) => ({ label: s.name, href: `/services/${s.slug}` })),
+      },
+      {
+        heading: "The hardware",
         links: systems.map((s) => ({ label: s.name, href: `/lighting-systems/${s.slug}` })),
       },
       {
         heading: "Against the other brands",
         links: compares.map((c) => ({ label: `${c.a} vs ${c.b}`, href: `/compare/${c.slug}` })),
-      },
-    ],
-    feature: {
-      label: "More than one brand, on purpose",
-      body: "We install Haven and we install Jellyfish, which is why these comparisons can give the other side real reasons to win.",
-      href: "/compare",
-      cta: "Compare every brand",
-    },
-  },
-  {
-    label: "Lighting",
-    href: "/services",
-    groups: [
-      {
-        heading: "Permanent lighting",
-        links: services.map((s) => ({ label: s.name, href: `/services/${s.slug}` })),
       },
     ],
     feature: {
@@ -77,8 +67,11 @@ export const navTree: NavItem[] = [
       cta: "Book a free consultation",
     },
   },
+  { label: "Gallery", href: "/gallery" },
+  /* Pricing was three clicks deep and it is the first thing a homeowner looks for. */
+  { label: "Pricing", href: "/pricing" },
   {
-    label: "Areas",
+    label: "Service Areas",
     href: "/service-areas",
     groups: [
       {
@@ -104,8 +97,5 @@ export const navTree: NavItem[] = [
       cta: "Ask about your address",
     },
   },
-  { label: "Gallery", href: "/gallery" },
-  /* Pricing was three clicks deep and it is the first thing a homeowner looks for. */
-  { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
 ];
