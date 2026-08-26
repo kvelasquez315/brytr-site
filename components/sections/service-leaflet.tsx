@@ -54,8 +54,9 @@ const SHOP: [number, number] = [41.2565, -96.1951]; // west Omaha, where the cre
  *
  * NOTE THE AXIS ORDER: Esri serves {z}/{y}/{x}, not Leaflet's usual {z}/{x}/{y}. Getting that wrong
  * does not error either - it renders a coherent map of somewhere else. */
-const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services";
-const ATTR = '&copy; <a href="https://www.esri.com/">Esri</a>';
+const OSM = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+const ATTR =
+  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
 
 export function ServiceLeaflet({
   className = "",
@@ -125,8 +126,8 @@ export function ServiceLeaflet({
       });
 
       /* base: roads and county lines, no type */
-      const base = L.tileLayer(`${ESRI}/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}`, {
-        maxZoom: 16,
+      const base = L.tileLayer(OSM, {
+        maxZoom: 19,
         className: "brytr-tiles-base",
         attribution: ATTR,
       });
@@ -146,25 +147,22 @@ export function ServiceLeaflet({
       /* The ring is a boundary, not a highlight. It was a full-strength amber dash around an
        * amber fill, which together with eleven glowing pins inside it made the metro read as one
        * gold blob. Thinner, dimmer, and no fill - the pins are what should be bright here. */
+      /* The ring got dimmer when the map was dark, because eleven glowing pins inside a bright
+       * amber circle turned the metro into one gold blob. On a light OSM basemap the opposite is
+       * true: 35% amber on beige is invisible. Back to a full-strength dash, still with no fill. */
       const ring = L.circle(SHOP, {
         radius: 48000, // ~30 miles, which is the same-week metro
         color: accent,
-        weight: 1,
-        opacity: 0.35,
-        dashArray: "5 8",
+        weight: 2,
+        opacity: 0.9,
+        dashArray: "6 7",
         fill: false,
       }).addTo(map);
 
-      /* type on its own pane, above the circle and the pins' glow */
-      map.createPane("labels");
-      const labelPane = map.getPane("labels")!;
-      labelPane.style.zIndex = "650";
-      labelPane.style.pointerEvents = "none";
-      L.tileLayer(`${ESRI}/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}`, {
-        maxZoom: 16,
-        pane: "labels",
-        className: "brytr-tiles-labels",
-      }).addTo(map);
+      /* NO SECOND LAYER. The dark canvas needed one - the basemap carried roads and the labels
+       * came separately, so type could ride above the metro ring instead of under it. OSM standard
+       * is a single rendered tile with its labels already in it, so the extra pane would be an
+       * empty layer and a z-index to maintain. */
 
       for (const c of cities) {
         const metro = c.tier === "metro" || c.tier === "iowa";
@@ -259,7 +257,7 @@ export function ServiceLeaflet({
     <>
       <div
         ref={host}
-        className={`brytr-map w-full rounded-lg bg-primary ring-1 ring-on-dark/12 ${className}`}
+        className={`brytr-map w-full rounded-lg bg-muted ring-1 ring-border ${className}`}
         role="application"
         aria-label="Map of the Brytr Co service area. Every city is also listed as a link beside this map."
       />

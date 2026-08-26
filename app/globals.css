@@ -676,7 +676,14 @@
  * map sitting on Leaflet's own #ddd while a tile request was in flight — a white flash
  * in the middle of a night-palette page, and a light-grey slab for anyone whose tiles
  * are slow or blocked. */
-.brytr-map.leaflet-container { background: var(--brand-primary); font-family: var(--font-body); }
+/* THE MAP IS LIGHT NOW. It ran on CARTO's dark basemap, then Esri's dark canvas, and every rule
+   below was written to make near-black tiles legible: a navy container to hide the gap before
+   tiles land, a brightness filter on the tiles themselves, and pins that were lights glowing on a
+   night ground.
+   OpenStreetMap standard is a fully rendered light map with its own labels, roads and land cover.
+   Lifting it in CSS would only wash it out, and an amber glow on beige is invisible - so the pins
+   became solid marks with a dark ring instead of lamps. */
+.brytr-map.leaflet-container { background: var(--brand-neutral-deep); font-family: var(--font-body); }
 .brytr-map .leaflet-tooltip {
   background: var(--brand-primary);
   color: var(--on-dark);
@@ -690,43 +697,39 @@
 }
 .brytr-map .leaflet-tooltip-top::before { border-top-color: color-mix(in oklab, var(--brand-accent) 45%, transparent); }
 .brytr-map .leaflet-control-attribution {
-  background: color-mix(in oklab, var(--brand-ink) 78%, transparent);
-  color: var(--on-dark-muted);
-  font-size: 0.62rem;
+  background: color-mix(in oklab, #ffffff 82%, transparent);
+  color: var(--muted-foreground);
+  font-size: 0.66rem;
 }
-.brytr-map .leaflet-control-attribution a { color: var(--on-dark-muted); }
+.brytr-map .leaflet-control-attribution a { color: var(--brand-accent-ink); }
 .brytr-map .leaflet-bar a {
-  background: var(--brand-primary);
-  color: var(--on-dark);
-  border-color: color-mix(in oklab, var(--on-dark) 18%, transparent);
+  background: #ffffff;
+  color: var(--foreground);
+  border-color: color-mix(in oklab, var(--brand-ink) 14%, transparent);
 }
-.brytr-map .leaflet-bar a:hover { background: var(--brand-raise); }
+.brytr-map .leaflet-bar a:hover { background: var(--brand-neutral); }
 .brytr-map .leaflet-interactive { cursor: pointer; }
 
 /* CARTO's dark basemap is built to sit under bright data on a white page. Dropped onto a
  * night-sky section it goes black-on-black and you cannot find Lincoln. Lifting the tiles
  * in CSS keeps the palette and gets the roads and county lines back; the label layer is
  * lifted harder still, because type has to win. */
-/* RETUNED FOR ESRI. These were brightness(1.9) and brightness(1.5), set against CARTO's dark_all,
-   which is very nearly black and needed that much lifting to show a road at all. Esri's Dark Gray
-   Canvas is a properly exposed dark basemap, and 1.9 on it washes the whole thing to mid-grey and
-   takes the night palette with it. 1.25 and 1.35 put the roads and the town names where they were
-   without flattening the ground the amber pins have to sit on. */
-.brytr-map .brytr-tiles-base { filter: brightness(1.25) contrast(1.02); }
-.brytr-map .brytr-tiles-labels { filter: brightness(1.35) contrast(1.05); }
+/* NO FILTER. Both previous basemaps were dark and needed lifting - 1.9 for CARTO, 1.25 for Esri.
+   OSM standard is already a light, fully rendered map; anything applied here only degrades it. The
+   class stays on the layer as a hook in case a future basemap needs one again. */
 
 /* Every town is a light, not a data point — that is what the company sells. Metro towns
  * burn amber and carry a real glow; outstate towns are cooler and dimmer, which is also
  * the legend. */
 .brytr-map .brytr-pin {
   display: block;
-  inline-size: 10px;
-  block-size: 10px;
+  inline-size: 11px;
+  block-size: 11px;
   border-radius: 9999px;
-  background: #e6ecf2;
+  background: #111820;
   box-shadow:
-    0 0 0 2px rgb(230 236 242 / 0.16),
-    0 0 9px 2px rgb(230 236 242 / 0.4);
+    0 0 0 2.5px #ffffff,
+    0 1px 3px rgb(12 15 19 / 0.45);
 }
 /* THE GOLD CAME DOWN. "Make the map less bright gold."
    The metro pins carried three stacked amber shadows, the outermost a 34px bloom at 35%, so
@@ -734,35 +737,35 @@
    single gold smear - the towns stopped being separable, which is the one thing the map is for.
    One tight ring and one short glow each. They still read as lights; they no longer merge. */
 .brytr-map .brytr-pin.is-metro {
-  inline-size: 12px;
-  block-size: 12px;
-  background: #f6e5ae;
+  inline-size: 15px;
+  block-size: 15px;
+  background: #f5c518;
   box-shadow:
-    0 0 0 2px rgb(245 197 24 / 0.18),
-    0 0 7px 1px rgb(245 197 24 / 0.4);
+    0 0 0 2.5px #111820,
+    0 1px 4px rgb(12 15 19 / 0.5);
 }
 .brytr-map .brytr-pin { transition: box-shadow 160ms ease-out, transform 160ms ease-out; }
 .brytr-map .leaflet-marker-icon:hover .brytr-pin { transform: scale(1.35); }
 .brytr-map .leaflet-marker-icon:hover .brytr-pin.is-metro {
   box-shadow:
-    0 0 0 3px rgb(245 197 24 / 0.28),
-    0 0 12px 3px rgb(245 197 24 / 0.7);
+    0 0 0 3.5px #111820,
+    0 2px 8px rgb(12 15 19 / 0.55);
 }
 .brytr-map .leaflet-marker-icon:hover .brytr-pin:not(.is-metro) {
-  background: #fff;
+  background: #f5c518;
   box-shadow:
-    0 0 0 3px rgb(230 236 242 / 0.28),
-    0 0 14px 4px rgb(230 236 242 / 0.7);
+    0 0 0 3px #111820,
+    0 2px 8px rgb(12 15 19 / 0.5);
 }
 .brytr-map .brytr-shop {
   display: block;
-  inline-size: 13px;
-  block-size: 13px;
+  inline-size: 16px;
+  block-size: 16px;
   border-radius: 2px 2px 6px 6px;
   background: #f5c518;
   box-shadow:
-    0 0 0 3px rgb(245 197 24 / 0.2),
-    0 0 9px 2px rgb(245 197 24 / 0.4);
+    0 0 0 3px #111820,
+    0 2px 6px rgb(12 15 19 / 0.5);
 }
 
 /* Standalone text links (card CTAs, the announcement bar link) need a 44px touch
