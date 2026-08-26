@@ -707,8 +707,13 @@
  * night-sky section it goes black-on-black and you cannot find Lincoln. Lifting the tiles
  * in CSS keeps the palette and gets the roads and county lines back; the label layer is
  * lifted harder still, because type has to win. */
-.brytr-map .brytr-tiles-base { filter: brightness(1.9) contrast(0.95) saturate(1.3); }
-.brytr-map .brytr-tiles-labels { filter: brightness(1.5) contrast(1.1); }
+/* RETUNED FOR ESRI. These were brightness(1.9) and brightness(1.5), set against CARTO's dark_all,
+   which is very nearly black and needed that much lifting to show a road at all. Esri's Dark Gray
+   Canvas is a properly exposed dark basemap, and 1.9 on it washes the whole thing to mid-grey and
+   takes the night palette with it. 1.25 and 1.35 put the roads and the town names where they were
+   without flattening the ground the amber pins have to sit on. */
+.brytr-map .brytr-tiles-base { filter: brightness(1.25) contrast(1.02); }
+.brytr-map .brytr-tiles-labels { filter: brightness(1.35) contrast(1.05); }
 
 /* Every town is a light, not a data point — that is what the company sells. Metro towns
  * burn amber and carry a real glow; outstate towns are cooler and dimmer, which is also

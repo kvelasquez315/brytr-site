@@ -36,9 +36,26 @@ import { site } from "@/content/site";
 
 const SHOP: [number, number] = [41.2565, -96.1951]; // west Omaha, where the crews stage
 
-const CARTO = "https://{s}.basemaps.cartocdn.com";
-const ATTR =
-  '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>';
+/* THE BASEMAP MOVED OFF CARTO, AND THE WAY IT BROKE IS WORTH RECORDING.
+ *
+ * CARTO now require an API key for basemaps.cartocdn.com. They did not start returning 403 - they
+ * return HTTP 200 with a tile that has "API KEY REQUIRED / carto.com/basemaps/apikey" printed
+ * diagonally across it. So the map kept "working": every tile loaded, the tileerror handler never
+ * fired, the written fallback never showed, and the service-area map on nineteen pages quietly
+ * became a wall of watermarks.
+ *
+ * It also passed my own check. I verified this CDN with `curl -o /dev/null -w "%{http_code}"` and
+ * got 200, which told me nothing at all - the failure is in the pixels. Checking an image endpoint
+ * means looking at the image.
+ *
+ * Esri's Dark Gray Canvas needs no key, has the same two-layer split this component already relies
+ * on (a base with roads and county lines, a reference layer carrying place names), and is a genuine
+ * dark basemap rather than a light one dimmed in CSS. Attribution is required and is set below.
+ *
+ * NOTE THE AXIS ORDER: Esri serves {z}/{y}/{x}, not Leaflet's usual {z}/{x}/{y}. Getting that wrong
+ * does not error either - it renders a coherent map of somewhere else. */
+const ESRI = "https://server.arcgisonline.com/ArcGIS/rest/services";
+const ATTR = '&copy; <a href="https://www.esri.com/">Esri</a>';
 
 export function ServiceLeaflet({
   className = "",
@@ -108,9 +125,8 @@ export function ServiceLeaflet({
       });
 
       /* base: roads and county lines, no type */
-      const base = L.tileLayer(`${CARTO}/dark_nolabels/{z}/{x}/{y}{r}.png`, {
-        subdomains: "abcd",
-        maxZoom: 19,
+      const base = L.tileLayer(`${ESRI}/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}`, {
+        maxZoom: 16,
         className: "brytr-tiles-base",
         attribution: ATTR,
       });
@@ -141,9 +157,8 @@ export function ServiceLeaflet({
       const labelPane = map.getPane("labels")!;
       labelPane.style.zIndex = "650";
       labelPane.style.pointerEvents = "none";
-      L.tileLayer(`${CARTO}/dark_only_labels/{z}/{x}/{y}{r}.png`, {
-        subdomains: "abcd",
-        maxZoom: 19,
+      L.tileLayer(`${ESRI}/Canvas/World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}`, {
+        maxZoom: 16,
         pane: "labels",
         className: "brytr-tiles-labels",
       }).addTo(map);
