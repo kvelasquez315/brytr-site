@@ -2,6 +2,14 @@ export type City = {
   slug: string;
   name: string;
   state: "NE" | "IA";
+  /* "outstate" IS CURRENTLY UNUSED, and deliberately kept in the union.
+     The service area was Omaha metro plus six towns out to Grand Island, two and a quarter hours
+     from the shop. The client: "change the location so that it is only Omaha-type areas and
+     Council Bluffs." So Lincoln, Fremont, Ashland, Norfolk, Columbus and Grand Island came out -
+     which removes them from the map, the home list, /service-areas, their own six pages, the
+     sitemap, the footer and the city select on every form, because all of that reads this array.
+     Their entries in content/city-detail.ts are parked rather than deleted, so re-adding a town is
+     one row here. */
   tier: "metro" | "outstate" | "iowa";
   drive: string;            // drive time from the Brytr shop
   /* Real coordinates, so the service-area map is plotted rather than eyeballed. Simple
@@ -39,37 +47,19 @@ export const cities: City[] = [
     nearby: ["elkhorn", "millard", "springfield", "papillion", "la-vista", "omaha"] },
   { slug: "bennington", name: "Bennington", state: "NE", tier: "metro", drive: "22 min", lat: 41.364, lon: -96.157,
     neighborhoods: ["Newport Landing", "Bennington Lake", "Hawthorne", "Dominion"],
-    nearby: ["elkhorn", "omaha", "waterloo", "blair", "millard", "fremont"] },
+    nearby: ["elkhorn", "omaha", "waterloo", "blair", "millard"] },
   { slug: "waterloo", name: "Waterloo", state: "NE", tier: "metro", drive: "25 min", lat: 41.272, lon: -96.281,
     neighborhoods: ["Ridgeview", "Riverbend", "Woodcliff"],
-    nearby: ["elkhorn", "bennington", "gretna", "fremont", "omaha", "ashland"] },
+    nearby: ["elkhorn", "bennington", "gretna", "omaha"] },
   { slug: "springfield", name: "Springfield", state: "NE", tier: "metro", drive: "30 min", lat: 41.08, lon: -96.135,
     neighborhoods: ["Platteview", "Cedar Ridge", "Beaver Lake"],
-    nearby: ["gretna", "papillion", "bellevue", "la-vista", "ashland", "omaha"] },
+    nearby: ["gretna", "papillion", "bellevue", "la-vista", "omaha"] },
   { slug: "blair", name: "Blair", state: "NE", tier: "metro", drive: "35 min", lat: 41.544, lon: -96.125,
     neighborhoods: ["Deerfield", "Riverview", "Hillcrest"],
-    nearby: ["bennington", "omaha", "fremont", "elkhorn", "waterloo", "columbus"] },
+    nearby: ["bennington", "omaha", "elkhorn", "waterloo"] },
   { slug: "council-bluffs", name: "Council Bluffs", state: "IA", tier: "iowa", drive: "20 min", lat: 41.262, lon: -95.861,
     neighborhoods: ["Manawa", "Bloomer", "Twin City", "Harvest Hills"],
     nearby: ["omaha", "bellevue", "la-vista", "papillion", "millard", "elkhorn"] },
-  { slug: "lincoln", name: "Lincoln", state: "NE", tier: "outstate", drive: "55 min", lat: 40.813, lon: -96.702,
-    neighborhoods: ["Country Club", "Piedmont", "Near South", "Firethorn", "Wilderness Hills", "Highlands"],
-    nearby: ["ashland", "omaha", "springfield", "gretna", "waterloo", "columbus"] },
-  { slug: "fremont", name: "Fremont", state: "NE", tier: "outstate", drive: "45 min", lat: 41.433, lon: -96.498,
-    neighborhoods: ["Ridge Estates", "Somers Point", "Christensen Field"],
-    nearby: ["waterloo", "bennington", "blair", "elkhorn", "columbus", "omaha"] },
-  { slug: "ashland", name: "Ashland", state: "NE", tier: "outstate", drive: "35 min", lat: 41.039, lon: -96.369,
-    neighborhoods: ["Iron Horse", "Country View", "Silver Ridge"],
-    nearby: ["lincoln", "springfield", "gretna", "waterloo", "omaha", "la-vista"] },
-  { slug: "norfolk", name: "Norfolk", state: "NE", tier: "outstate", drive: "1 hr 50 min", lat: 42.029, lon: -97.417,
-    neighborhoods: ["Country Club", "Ta-Ha-Zouka", "Westview"],
-    nearby: ["columbus", "fremont", "blair", "grand-island", "omaha", "lincoln"] },
-  { slug: "columbus", name: "Columbus", state: "NE", tier: "outstate", drive: "1 hr 30 min", lat: 41.43, lon: -97.367,
-    neighborhoods: ["Lost Creek", "Quail Run", "Northgate"],
-    nearby: ["norfolk", "fremont", "grand-island", "lincoln", "blair", "omaha"] },
-  { slug: "grand-island", name: "Grand Island", state: "NE", tier: "outstate", drive: "2 hr 15 min", lat: 40.925, lon: -98.342,
-    neighborhoods: ["Indianhead", "Stolley Park", "Sunset"],
-    nearby: ["columbus", "norfolk", "lincoln", "fremont", "omaha", "ashland"] },
 ];
 
 export const cityBySlug = (slug: string) => cities.find((c) => c.slug === slug);

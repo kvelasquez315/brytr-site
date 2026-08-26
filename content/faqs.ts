@@ -41,7 +41,7 @@ export const serviceFaqsFor = (name: string): Faq[] => [
   { q: "Can I add to it later?",
     a: "Yes. Landscape fixtures, bistro runs on a pergola, and additional elevations can all be added to an existing controller and appear in the same app." },
   { q: "What areas do you cover?",
-    a: "The Omaha metro, Council Bluffs, Lincoln, and eastern Nebraska. Every city we serve is named on our service areas page." },
+    a: "The Omaha metro and Council Bluffs. Every city we serve is named on our service areas page." },
   { q: "Will it work with my existing smart home?",
     a: "The system runs on its own app and controller. Tell us what you are running and we will tell you honestly what does and does not integrate." },
   { q: "How do I get a number?",

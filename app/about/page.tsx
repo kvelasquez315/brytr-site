@@ -284,7 +284,7 @@ export default function About() {
                 ["1.2M", "lights installed locally", "Brytr's own count"],
                 [reviewProof.average, `from ${reviewProof.count} reviews`, `${reviewProof.platform}, ${reviewProof.checked}`],
                 ["2", "brands stocked", "Haven and Jellyfish"],
-                ["18", "towns we install in", "Omaha metro to Grand Island"],
+                ["12", "towns we install in", "The Omaha metro and Council Bluffs"],
               ].map(([f, l, src]) => (
                 <div key={l}>
                   <dt className="u text-[clamp(1.8rem,3vw,2.4rem)] font-medium leading-none text-on-dark">{f}</dt>
@@ -304,7 +304,7 @@ export default function About() {
               </p>
               <p className="mt-4 text-sm leading-relaxed text-on-dark-muted">
                 A yard and a warehouse rather than a showroom — the useful visit is us coming to you.
-                We drive the Omaha metro, Lincoln, eastern Nebraska and western Iowa.
+                We drive the Omaha metro and Council Bluffs.
               </p>
               <div className="mt-5 border-t border-on-dark/12 pt-4">
                 <TextLink onDark href="/service-areas">Every town we drive to</TextLink>

@@ -33,16 +33,26 @@
  * only inline style is the output ramp, which is a number.
  */
 
+/* THREE POINTS, AND ALL FIVE OF THE OLD ONES ARE GONE. "None of those steps are right. We need to
+ * come up with new ones" - then three, named: one app for the whole system, the best product made
+ * and the only ones here who can fit it, and the walkthrough after the lights are up.
+ *
+ * The old set (measured after dark, into fascia never shingles, one app every zone, we hold the
+ * warranty, checked twice before we leave) was a list of installation practices - things we do to
+ * the house. These are three things the customer ends up holding. */
 const STAGES: { title: string; body: string }[] = [
-  { title: "Measured on site, after dark", body: "Against your own materials, not a catalogue" },
-  { title: "Into fascia, never shingles", body: "Every penetration sealed as it is made" },
-  { title: "One app, every zone", body: "House, pergola, walls and beds, on saved scenes" },
-  { title: "We hold the warranty", body: "No portal between you and the crew" },
-  { title: "Checked twice before we leave", body: "Signed off lit after dark, then again in daylight" },
+  { title: "One app runs the whole system",
+    body: "Every zone on the house, the pergola, the walls and the beds, from one place" },
+  { title: "The best product made, and only from us",
+    body: "The highest quality permanent lighting available, and the only vendor here who can fit it" },
+  { title: "We walk you through it once it is lit",
+    body: "Nobody is left holding an app they were never shown how to use" },
 ];
 
-/* The output climbing down the run, so it reads as coming up rather than as five identical dots. */
-const GLOW = [0.3, 0.45, 0.62, 0.8, 1];
+/* The output climbing down the list, so the marks read as a run coming up rather than as three
+ * identical dots. Five values became three with the steps - leaving the old array would have run
+ * 0.3 / 0.45 / 0.62 and stopped at two thirds brightness, so the last light never reached full. */
+const GLOW = [0.42, 0.7, 1];
 
 export function InstallRun({ className }: { className?: string }) {
   return (

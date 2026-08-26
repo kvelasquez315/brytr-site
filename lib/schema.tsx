@@ -8,7 +8,7 @@ export const localBusiness = (city?: string) => ({
   "@id": `${site.url}/#business`,
   name: site.name,
   description:
-    "Permanent outdoor lighting installation for homes in the Omaha metro, Lincoln and eastern Nebraska.",
+    "Permanent outdoor lighting installation for homes in the Omaha metro and Council Bluffs.",
   url: site.url,
   telephone: `+1${site.phone.replace(/-/g, "")}`,
   /* Street address, postal code and the profile link all come off Brytr's own Google

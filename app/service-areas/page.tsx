@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { cities, metroCities, outstateCities, iowaCities } from "@/content/cities";
+import { cities, metroCities, iowaCities } from "@/content/cities";
 import { Shell } from "@/app/layout-shell";
 import { ServiceLeaflet } from "@/components/sections/service-leaflet";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
@@ -29,9 +29,9 @@ import { Jsonld, breadcrumb, localBusiness } from "@/lib/schema";
  */
 
 export const metadata: Metadata = {
-  title: "Service Areas: Omaha, Lincoln and Beyond",
+  title: "Service Areas: The Omaha Metro and Council Bluffs",
   description:
-    "Where Brytr installs permanent outdoor lighting: the Omaha metro, Council Bluffs, Lincoln, Norfolk, Columbus and Grand Island, with the real drive to each.",
+    "Where Brytr installs permanent outdoor lighting: every town in the Omaha metro plus Council Bluffs, with the real drive to each from our shop.",
   alternates: { canonical: "/service-areas" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Service areas", href: "/service-areas" }];
@@ -46,6 +46,9 @@ const minutes = (drive: string) => {
 };
 const ladder = [...cities].sort((a, b) => minutes(a.drive) - minutes(b.drive));
 
+/* TWO TIERS, NOT THREE. The outstate towns are gone from content/cities.ts - see the note on the
+   City type there - so the "Scheduled route" band has nothing in it. The ternary keeps a fallback
+   rather than assuming, because the tier union still allows "outstate" if a town comes back. */
 const bandFor = (tier: string) =>
   tier === "metro" ? "Same week" : tier === "iowa" ? "Same week, over the river" : "Scheduled route";
 
@@ -71,14 +74,13 @@ const bands: { h: string; count: number; promise: string; p: string; href: strin
     p: "Council Bluffs is twenty minutes from us, which is closer than half the Nebraska metro. Iowa-side installs get the same crews, the same materials and the same workmanship terms, and there is no border premium on the quote.",
     href: `/service-areas/${iowaCities[0].slug}`,
   },
-  {
-    h: "Outstate Nebraska",
-    count: outstateCities.length,
-    promise: "Batched into route days",
-    p: "Lincoln out to Grand Island. We batch installs into route days rather than driving out for one house, which is exactly why the pricing is the same as the metro instead of carrying a travel charge. A service call here is scheduled rather than same-week, and we say so before you sign.",
-    href: `/service-areas/${outstateCities[0].slug}`,
-  },
 ];
+
+/* THE OUTSTATE BAND IS GONE, AND IT WAS A BUILD FAILURE BEFORE IT WAS AN EDIT. It read
+ * `outstateCities[0].slug`, and with the service area cut back to the metro and Council Bluffs
+ * that array is empty - so the page threw "Cannot read properties of undefined (reading 'slug')"
+ * at collect-page-data and took the whole build down. Worth noting because nothing about removing
+ * six rows from a content file suggests it can break a route: the crash was two files away. */
 
 export default function AreasHub() {
   return (
@@ -91,7 +93,7 @@ export default function AreasHub() {
         photoAlt="A long Omaha ranch elevation lit blue and white with landscape uplighting"
         objectPosition="50% 45%"
         h1="Every town we drive to, and how long it takes."
-        lede="A service area is only worth publishing if it says what changes as you go out. Inside the metro a warranty call is the same week. Out past Lincoln it is a scheduled route, and the pricing is the same either way."
+        lede="A service area is only worth publishing if it says what it actually commits us to. Every town here is inside about thirty-five minutes of the shop, which is what lets a warranty call in February be the same week rather than a project."
         trail={trail}
       />
 
@@ -255,10 +257,11 @@ export default function AreasHub() {
                 a warranty call, in February, for one dark section.
               </p>
               <p className="text-base leading-relaxed text-on-dark-muted">
-                Inside the metro that is the same week. Out through Lincoln and eastern Nebraska we run
-                scheduled routes, which is why there is no travel premium on the quote. Past Grand Island
-                we would be selling a system we could not service properly, so we do not — and if you
-                ring from out there we will say so on the call rather than drive out and load the number.
+                That is why the area stops where it does. Everything we serve is inside about
+                thirty-five minutes of the shop, Council Bluffs included, and a dark section on any of
+                it is a visit rather than a route day. Further out we would be selling a system we
+                could not service properly, so we do not — and if you ring from out there we will say
+                so on the call rather than drive out and load the number.
               </p>
             </div>
             <div className="mt-8">
@@ -295,7 +298,7 @@ export default function AreasHub() {
                   "Whether your install shares a day with a neighbor's",
                   "How long we will hold a route date before it moves",
                   "Whether we can drop by to look at something small",
-                  "Past Grand Island: we will turn the work down",
+                  "Outside the metro: we will turn the work down",
                 ].map((x) => (
                   <li key={x} className="py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">{x}</li>
                 ))}

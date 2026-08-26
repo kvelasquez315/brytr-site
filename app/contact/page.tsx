@@ -32,7 +32,7 @@ export const metadata: Metadata = {
    * own SEO copy, so it keeps its exact wording rather than being reworded to fit. */
   title: { absolute: "Contact Brytr Co | Omaha, NE" },
   description:
-    "Call Brytr Co on 402-810-3973, send a message, or book the on-site design. Permanent outdoor lighting across the Omaha metro, Lincoln and western Iowa.",
+    "Call Brytr Co on 402-810-3973, send a message, or book the on-site design. Permanent outdoor lighting across the Omaha metro and Council Bluffs.",
   alternates: { canonical: "/contact" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Contact", href: "/contact" }];

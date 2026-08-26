@@ -40,7 +40,7 @@ export const site = {
     ],
     closed: ["Sunday"],
   },
-  region: "Omaha metro, Lincoln, western Iowa and eastern Nebraska",
+  region: "The Omaha metro and Council Bluffs",
   url: "https://brytrco.com",
   founders: [
     {

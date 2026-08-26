@@ -223,6 +223,21 @@ const SERVICE_CARDS: { slug: string; label: string }[] = [
   { slug: "holiday-seasonal-scenes", label: "Every other holiday" },
 ];
 
+/* THE LIGHT CARDS HAVE A HAIRLINE NOW, on all four kinds - services, the local promise, the town
+ * tiles and the reviews. Offered as a judgement call and taken: "if you think it is a good idea to
+ * add outlines to the different boxes that have text in black, then let's try that. If you don't,
+ * then let's not."
+ *
+ * It is worth doing here because of what these cards sit on. A white or limestone card on a white
+ * or limestone section is separated by a soft shadow and nothing else, and a soft edge between two
+ * near-identical values reads as blur rather than as an object - which is a large part of why the
+ * page kept coming back as not looking like a big site. `ring-1 ring-border` is ink at 12%: enough
+ * to give every card a definite edge, not enough to turn the page into a grid of boxes.
+ *
+ * It does NOT go on the dark cards. On the night ground the value difference is already large and
+ * an outline there reads as a border, not an edge.
+ *
+ * To revert: drop `ring-1 ring-border` from the four class lists it was added to. */
 export function Services() {
   const cards = SERVICE_CARDS.map((c) => {
     const s = services.find((x) => x.slug === c.slug);
@@ -245,7 +260,7 @@ export function Services() {
                 key={c!.slug}
                 href={`/services/${c!.slug}`}
                 data-spot
-                className="group flex flex-col overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]"
+                className="group flex flex-col overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border"
               >
                 <div className="relative aspect-16/10 w-full overflow-hidden">
                   {c!.img?.src && (
@@ -409,16 +424,30 @@ export function WhoWeAre() {
           * install is the thing you look at and the promise is what you read beside it. */}
         <div className="grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,34rem)] lg:gap-14">
           <div className="flex flex-col justify-center">
-            <div className="rounded-lg bg-background p-8 shadow-[var(--shadow-lg)] sm:p-10">
-              <h2 className="display-section text-foreground">A local company, on your roof</h2>
+            <div className="rounded-lg bg-background p-8 shadow-[var(--shadow-lg)] ring-1 ring-border sm:p-10">
+{/* THE CARD ARGUES AGAINST THE ABSENT COMPETITOR NOW, which is a different argument from the
+                * one it was making. It used to describe us - the shop on C Street, the same crew back
+                * years later - and leave the reader to work out why that was worth saying.
+                *
+                * The client named the thing it was dancing around: plenty of companies sell this
+                * product here and promise the warranty and the service behind it, and they cannot
+                * deliver either, because there is nobody in Omaha to deliver it. That is the whole
+                * point of being local, and it only lands if the alternative is on the page.
+                *
+                * "We're local" as the heading, in the client's words. Three words where there were
+                * six, and it is the claim rather than a description of the claim. */}
+              <h2 className="display-section text-foreground">We&rsquo;re local</h2>
               <p className="mt-5 text-[1.05rem] leading-relaxed text-muted-foreground">
-                The shop is on C Street in west Omaha and every crew drives out of it. The people
-                who measure your roofline after dark are the people who fit it, and the people who
-                come back to it years later.
+                Plenty of companies will sell you permanent lighting in Omaha, and every one of them
+                will promise a warranty and someone to call. Most of them cannot keep either promise,
+                because there is nobody here to keep it &mdash; the number rings somewhere else, and
+                the crew that fitted your house was passing through.
               </p>
               <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">
-                We fit both Haven and Jellyfish, so what goes on your house is the system that suits
-                it rather than the only one we sell.
+                We are here. The shop is in west Omaha, the people who measure your roofline are the
+                people who fit it, and they are the people who come back to it. Permanent lighting is
+                the only thing we do, so how you feel about yours is not one line of our business
+                &mdash; it is the business.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
@@ -487,7 +516,7 @@ export function WhoWeAre() {
               <li key={c.slug}>
                 <Link
                   href={`/service-areas/${c.slug}`}
-                  className="block rounded-lg bg-background px-4 py-3 text-[0.95rem] font-semibold text-foreground shadow-[var(--shadow-lg)] transition-colors duration-[--dur-fast] hover:bg-muted"
+                  className="block rounded-lg bg-background px-4 py-3 text-[0.95rem] font-semibold text-foreground shadow-[var(--shadow-lg)] ring-1 ring-border transition-colors duration-[--dur-fast] hover:bg-muted"
                 >
                   {c.name}
                   {c.state === "IA" ? ", IA" : ""}
@@ -525,16 +554,11 @@ export function WhoWeAre() {
  * THE RATING CARD CAME OFF THE PHOTOGRAPH. It was the fourth of six places the page said 5.0 / 196.
  * The photograph is better without a card over it, and Reviews is directly below.
  * ========================================================================= */
-const HOW_ITEMS: { title: string; body: string }[] = [
-  { title: "Measured on site, after dark", body: "Against your own materials, not a catalogue" },
-  { title: "Into fascia, never shingles", body: "Every penetration sealed as it is made" },
-  { title: "One app, every zone", body: "House, pergola, walls and beds, on saved scenes" },
-  { title: "We hold the warranty", body: "No portal between you and the crew" },
-  /* Moved here from the deleted WhoWeAre feature list, where it was one of four unrelated claims.
-   * It is the last step of an install, so it belongs at the end of the steps. It also gives this
-   * column a fifth row, which is what stops it finishing short of the photograph beside it. */
-  { title: "Checked twice before we leave", body: "Signed off lit after dark, then again in daylight" },
-];
+/* HOW_ITEMS IS GONE, AND IT HAD BEEN DEAD FOR SEVERAL ROUNDS. It was declared here and rendered
+ * nowhere - the live copy is STAGES in components/sections/install-run.tsx, and has been since the
+ * rows became a drawing. Nothing errored because nothing checks for an unused const, so editing
+ * this array changed the page not at all. Found while replacing the steps: the first edit landed
+ * here and had no effect on the render. */
 
 export function HowWeWork() {
   const shot = images.crewRoofFascia;
@@ -551,10 +575,10 @@ export function HowWeWork() {
         <div className="flex flex-col">
           <SectionHead
             onDark
+            /* NO LEDE. Removed on instruction - "remove where it says this gets drilled in your
+              * fascia and left there, that whole little section." It was also arguing for careful
+              * installation, and the three points under it are no longer about installation. */
             title="Installed once, and installed properly"
-            /* Was thirty-five words over three lines. The reference holds a section lede to twelve
-              * to twenty-four; this is twenty-one and makes the same point. */
-            lede="This gets drilled into your fascia and left there. How it is fixed and sealed is the difference at year five."
           />
 
           {/* THE FIVE STAGES ARE ONE DRAWING NOW - components/sections/install-run.tsx.
@@ -649,17 +673,36 @@ export function Reviews() {
   return (
     <section className="section bg-muted">
       <div className="shell">
-        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-          <SectionHead
-            /* THE ONE LOUD HEADING ON THIS PAGE, and it now has to say so. It used to rely on
-              * SectionHead defaulting to "hero"; that default flipped to "section" when the
-              * redesign rolled out to the other twenty templates, which silently took this
-              * heading down to 34px with them. Relying on a default to be the exception was the
-              * bug - the exception is the thing that should be written down. */
-            title="What our clients say"
-            lede={`Rated ${reviewProof.average} across ${reviewProof.count} ${reviewProof.platform} reviews.`}
-          />
-          <DarkPill href="/reviews">Read all {reviewProof.count}</DarkPill>
+{/* ONE SENTENCE AND THE MARK, replacing a heading, a lede and a pill.
+          *
+          * "Instead of having that header and the sub-header, just say - our clients have
+          * consistently rated us 5 stars across 196 reviews - and then put the Google logo." And
+          * "take out the button that says read all 196."
+          *
+          * The heading and the lede were saying the same thing twice: "What our clients say" is a
+          * label for the six cards directly beneath it, which need no label, and the lede carried
+          * the only actual information. Now the information IS the heading, and the mark says who
+          * counted instead of the sentence having to.
+          *
+          * /reviews is still reached from the nav and the footer, so the pill removed a duplicate
+          * route rather than a route. */}
+        {/* items-end, not items-center. Against a two-line heading a centred mark floats in the
+          * gutter beside the line break; on the baseline of the last line it reads as part of the
+          * sentence, which is what it is standing in for. */}
+        <div className="flex flex-wrap items-end gap-x-5 gap-y-3">
+          <h2 className="display-section max-w-[34ch] text-foreground">
+            Our clients have consistently rated us 5 stars across {reviewProof.count} reviews
+          </h2>
+          {googleLogo && (
+            <Image
+              src={googleLogo}
+              alt={reviewProof.platform}
+              width={34}
+              height={34}
+              unoptimized
+              className="size-[2.1rem] shrink-0"
+            />
+          )}
         </div>
 
         {/* THE STAGGER IS GONE. The middle card dropped 40px and the third 20px, inherited from
@@ -681,7 +724,7 @@ export function Reviews() {
           {shown.map((r) => (
             <article
               key={r.name}
-              className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)]"
+              className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ring-1 ring-border"
             >
               {/* THE GOOGLE MARK REPLACES THE DECORATIVE QUOTE GLYPH that used to sit in this
                 * corner - a 48px amber ellipsis at 25% opacity, which was there to fill the corner
@@ -899,8 +942,16 @@ export function Closer() {
       <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-20">
         <div className="flex flex-col">
           <SectionHead
-            title="See it on your house before you buy"
-            lede="We come out after dark, walk the property, and show you the design on your own elevation. No charge and no obligation."
+            /* THE LEDE WENT BECAUSE IT WAS NOT TRUE. "Get rid of where it says we come out after
+              * dark, walk the property and show you the design. That is not necessarily true. We
+              * do lots of sales appointments during the day." A claim about how the appointment
+              * runs is worth nothing if the appointment often runs another way.
+              *
+              * THE TITLE IS THE CLIENT'S WITH ONE WORD CHANGED, AND IT IS FLAGGED. He asked for
+              * "your neighbors love it. you will regret it." As written that tells a reader they
+              * will regret buying, on the section whose only job is the booking - so this reads
+              * "won't", on the assumption that "will" was a slip. One word, easy to put back. */
+            title="Your neighbors love it. You won&rsquo;t regret it."
           />
 
           <p className="mt-10 text-base text-muted-foreground">Or call us directly</p>

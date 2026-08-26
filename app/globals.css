@@ -474,64 +474,35 @@
     .shell { padding-inline: 2rem; }
   }
 
-  /* ---- THE INSTALL RUN: five stages on one length of channel ------- */
-  /* Drawn here rather than in SVG because the LABELS have to be real type. See the note at the
-     top of components/sections/install-run.tsx: the whole thing was one SVG, and inside a column
-     that goes from 656px to 343px the fixed-unit text rendered at nine pixels on a phone.
+  /* ---- THE INSTALL RUN: three points, drawn as lights ------------- */
+  /* Drawn here rather than in SVG because the LABELS have to be real type. The whole thing was one
+     SVG, and inside a column that goes from 656px to 343px the fixed-unit text rendered at nine
+     pixels on a phone. See the note at the top of components/sections/install-run.tsx.
 
-     The rail is a background on the list itself, so it spans whatever height the rows come to and
-     nothing has to be measured or kept in sync. Two layers: the channel body, and the diode pitch
-     as a repeating gradient down its centre - the same continuous run the SVG had, so the stage
-     nodes read as five bright points ON a lit channel rather than five lamps on a stick. */
-  /* THE GAP IS THE WHOLE RHYTHM, and 1.6rem was too little - the first pass overshot the client's
-     "too long" and closed the stages up until the body line of one sat against the title of the
-     next and all five read as a single ten-line block. A stage is two lines at snug leading, so
-     the space BETWEEN stages has to be clearly bigger than the space inside one or the grouping
-     collapses. 2.35rem against the 0.25rem inside it. */
+     THE CHANNEL IS GONE AND THE LIGHTS STAYED. "For the little graphic on the left, take out the
+     track-looking thing and just make the bullets look like lights."
+
+     That is the right read. A 14px bar down the side of a list is a scrollbar before it is a length
+     of aluminium, and nothing fixed that - not the extrusion, not the lit edge, not the diode pitch
+     running down it. The shape is the problem at that size. What the graphic was ever for is the
+     marks ramping from dim to full, and those do not need something to sit on. The leader rule went
+     with it: it ran from the channel to the copy, so without the channel it was a 1px stub starting
+     in mid-air.
+
+     The removed rules are NOT kept commented out here, and that is the lesson rather than the
+     style. The first attempt kept them, the old .run::before carried a comment of its own inside
+     it, and CSS comments do not nest - so the inner close ended the outer one and left a stray
+     brace. Turbopack failed the whole stylesheet and every page 500d. Deleted code belongs in git,
+     not in a comment block. */
   .run {
     position: relative;
     display: grid;
+    /* The space BETWEEN points has to be clearly bigger than the space inside one, or two-line
+       entries read as one continuous block. 2.35rem against the 0.25rem inside. */
     gap: 2rem;
-    padding-left: 3.5rem;
-  }
-  /* the channel body */
-  .run::before {
-    content: "";
-    position: absolute;
-    left: 0.6rem;
-    top: 0;
-    bottom: 0;
-    inline-size: 14px;
-    border-radius: 7px;
-    /* AN EXTRUSION, NOT A TRACK. Flat fill plus a 1px outline read as a scrollbar - which is what
-       it looked like at 14px against a dark section. The gradient and the highlight down the left
-       are the same two marks the drawn channel uses in components/sections/elevation.tsx: a body
-       that catches light on one edge, so it reads as a length of aluminium seen face-on. */
-    background: linear-gradient(
-      to right,
-      var(--draw-runline-night) 0 2px,
-      var(--draw-run-night) 2px 100%
-    );
-    box-shadow:
-      inset 0 0 0 1px var(--draw-line-night),
-      0 1px 3px color-mix(in oklab, var(--brand-ink) 40%, transparent);
-  }
-  /* the diodes along it, on the channel's own pitch */
-  .run::after {
-    content: "";
-    position: absolute;
-    left: calc(0.6rem + 5.5px);
-    top: 0.5rem;
-    bottom: 0.5rem;
-    inline-size: 3px;
-    border-radius: 2px;
-    background:
-      repeating-linear-gradient(
-        to bottom,
-        color-mix(in oklab, var(--brand-accent) 46%, transparent) 0 3px,
-        transparent 3px 12px
-      ),
-      var(--draw-faint-night);
+    /* Just enough to clear the light and its bloom. Any more and the marks float away from the
+       words they belong to. */
+    padding-left: 2.5rem;
   }
   .run-stage {
     position: relative;
@@ -539,33 +510,19 @@
     align-items: flex-start;
     gap: 0.75rem;
   }
-  /* THE LEADER, out of the channel to the copy. It was a drawn line in the SVG; here it is a
-     border on the row, which cannot drift out of alignment with the text it points at. */
-  .run-stage::before {
-    content: "";
-    position: absolute;
-    left: -1.85rem;
-    top: 0.72em;
-    inline-size: 1.35rem;
-    block-size: 1px;
-    background: var(--draw-line-night);
-  }
-  /* The stage diode. --out is the output ramp, set per stage in the component - 0.3 at the
-     walk-around through to 1 on the night it is handed over. Three stacked shadows rather than
-     three elements: the bloom, the halo and the diode itself. */
+  /* THE LIGHT. --out is the output ramp, set per point in the component, so the three read as a run
+     coming up rather than as three identical dots. Three stacked shadows rather than three
+     elements: the core, the halo and the bloom. The core mixes toward paper as output climbs,
+     because a diode at full photographs white-hot in the middle and amber around it. */
   .run-node {
     position: absolute;
-    left: calc(-3.5rem + 0.6rem + 7px);
+    left: -1.55rem;
     top: 0.72em;
     inline-size: 11px;
     block-size: 11px;
     margin-left: -5.5px;
     margin-top: -5.5px;
     border-radius: 9999px;
-    /* THE BLOOM HAD TO GROW. At 10px with a 5px halo the stage diodes were amber specks sitting on
-       a dark rail - technically present, not reading as lit, which is the one thing this graphic
-       exists to show. The core is mixed toward paper rather than to pure accent as the run comes
-       up, because a diode at full output photographs white-hot in the middle and amber around it. */
     background: color-mix(in oklab, var(--on-dark) calc(var(--out) * 45%), var(--brand-accent));
     box-shadow:
       0 0 0 3px color-mix(in oklab, var(--brand-accent) calc(var(--out) * 55%), transparent),

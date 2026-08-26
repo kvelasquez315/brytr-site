@@ -52,7 +52,10 @@ export function QuoteForm({
     "rounded-lg p-6 sm:p-7",
     onDark
       ? "form-on-dark bg-raise shadow-[var(--shadow-dark)] ring-1 ring-accent/15"
-      : "bg-card shadow-[var(--shadow-lg)]",
+      /* The hairline matches the four light card types on the home page - see the note above
+         Services in components/sections/home.tsx. A white form card on warm limestone was
+         separated by a soft shadow alone, which reads as blur rather than as an object. */
+      : "bg-card shadow-[var(--shadow-lg)] ring-1 ring-border",
     className
   );
 

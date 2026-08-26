@@ -104,8 +104,12 @@ export function SceneWipe() {
           * one, then the spec panel, then this. That is not indecision, it is the same judgement
           * applied repeatedly - every one of them was TEXT ABOUT a photograph that changes under
           * your hand, sitting next to the photograph that changes under your hand. */}
+        {/* NO WIDTH CAP. "Just make it so that is only one row." At 62px, "Beautiful permanent
+          * lighting" needs about 870px and the cap was 46rem (736), so it broke after the second
+          * word for no reason other than a measure limit inherited from when this head had a lede
+          * under it. The lede is gone; three words do not need a measure. It still wraps on a
+          * phone, where the clamp takes it to 40px and no cap is involved. */}
         <SectionHead
-          className="max-w-[46rem]"
           /* Renamed on instruction, from "Warm white every night. Any colour when you want it."
             * Three words instead of ten, and at the hero scale they are the biggest thing on the
             * page after the h1 - which is right for the section carrying the only interactive

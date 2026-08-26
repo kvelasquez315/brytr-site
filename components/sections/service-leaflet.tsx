@@ -143,21 +143,19 @@ export function ServiceLeaflet({
       });
       base.addTo(map);
 
-      /* the metro radius, dashed — the same device the reference uses */
-      /* The ring is a boundary, not a highlight. It was a full-strength amber dash around an
-       * amber fill, which together with eleven glowing pins inside it made the metro read as one
-       * gold blob. Thinner, dimmer, and no fill - the pins are what should be bright here. */
-      /* The ring got dimmer when the map was dark, because eleven glowing pins inside a bright
-       * amber circle turned the metro into one gold blob. On a light OSM basemap the opposite is
-       * true: 35% amber on beige is invisible. Back to a full-strength dash, still with no fill. */
-      const ring = L.circle(SHOP, {
-        radius: 48000, // ~30 miles, which is the same-week metro
-        color: accent,
-        weight: 2,
-        opacity: 0.9,
-        dashArray: "6 7",
-        fill: false,
-      }).addTo(map);
+      /* THE 30-MILE RING IS GONE, AND THE SERVICE AREA CHANGE IS WHY.
+       *
+       * It was drawn to say "everything inside here is the same-week metro" while six towns sat
+       * outside it, out to Grand Island. With the area now Omaha metro plus Council Bluffs, the
+       * ring encloses every pin on the map and says nothing the pins do not already say.
+       *
+       * It was also setting the zoom, and badly. fitBounds was fed the pins AND the ring, and the
+       * ring reaches 30 miles past the outermost pin in every direction - so a 60-mile circle was
+       * being fitted into a container running about 2.9:1, which fits the circle vertically and
+       * then shows 170 miles of Nebraska either side of it. The towns came out as a small gold
+       * cluster in a lot of empty farmland.
+       *
+       * Fitting the pins alone roughly doubles the zoom and the metro fills the frame. */
 
       /* NO SECOND LAYER. The dark canvas needed one - the basemap carried roads and the labels
        * came separately, so type could ride above the metro ring instead of under it. OSM standard
@@ -235,7 +233,7 @@ export function ServiceLeaflet({
        * the easternmost pin. zoomSnap is off above, so this lands on a fractional zoom and
        * Grand Island sits just inside the left edge instead of a whole level short. */
       map.fitBounds(
-        L.latLngBounds(cities.map((c) => [c.lat, c.lon] as [number, number])).extend(ring.getBounds()),
+        L.latLngBounds(cities.map((c) => [c.lat, c.lon] as [number, number])).extend([SHOP]),
         /* PADDING WENT UP WITH THE PIN HEIGHT. It was 20px a side, set when a pin was a 10px dot
          * centred on its point and 20px cleared it easily. A teardrop is 19px wide and hangs its
          * whole body ABOVE the coordinate, and the tile draws the town name beside the point too -

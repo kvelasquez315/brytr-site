@@ -303,7 +303,7 @@ export default function RecentProjects() {
               ["Warm white, on the front of a house", "closed", "Every warm-white frame used to be one back garden on one evening. The ranch above is a front elevation on plain warm white, at three brightnesses, and there are a dozen more fronts through the service pages."],
               ["The crew, working", "closed", "Somebody sitting on the shingles fixing a run to the fascia, in daylight. It is on the warranty page, where every claim about who is on your roof is made."],
               ["A commercial install", "open", "We do storefronts, canopies and multifamily. The closest real frame is a lit storefront band behind one of our own crew, and the commercial page uses it and says exactly that."],
-              ["A property out of the metro", "open", "The archive is still all Omaha metro. The Lincoln and Grand Island pages say so in their own footnotes, and the photographs on every city page are captioned by what is in the frame rather than by a town."],
+              ["A property out of the metro", "open", "The archive is all Omaha metro, which is now the whole service area. The photographs on every city page are captioned by what is in the frame rather than by a town."],
               ["The app, on a phone", "open", "We describe the scene library on half a dozen pages without ever showing it."],
               ["Zac and Sam", "open", "The about page names the two of them in every other sentence and has no photograph of either. There is one frame of somebody in a Brytr shirt in the archive and we cannot tell from it which of them it is, so it is captioned as a member of the crew rather than given a name it might not have."],
             ].map(([h, state, p2]) => (
