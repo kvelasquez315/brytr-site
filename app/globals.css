@@ -849,6 +849,20 @@
    OpenStreetMap standard is a fully rendered light map with its own labels, roads and land cover.
    Lifting it in CSS would only wash it out, and an amber glow on beige is invisible - so the pins
    became solid marks with a dark ring instead of lamps. */
+/* THE MAP HAS TO STAY UNDER THE HEADER, and nothing here was making it.
+   Leaflet gives its own layers hard z-index values: 400 on the tile and marker panes, 1000 on the
+   zoom control and the attribution. The container was `position: relative` with `z-index: auto`,
+   which does NOT open a stacking context, so those numbers were competing at the root against the
+   sticky header's z-50 and winning by a factor of twenty. Scrolling a page with a map on it pulled
+   the tiles and the plus/minus buttons straight over the nav.
+   `isolation: isolate` opens the context and traps every Leaflet number inside it, after which the
+   whole map participates in the page as one element at z-index 0. `z-index: 0` alone would also do
+   it on a positioned element; both are here because isolate is the one that says why. */
+.brytr-map {
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
+}
 .brytr-map.leaflet-container { background: var(--brand-neutral-deep); font-family: var(--font-body); }
 .brytr-map .leaflet-tooltip {
   background: var(--brand-primary);
