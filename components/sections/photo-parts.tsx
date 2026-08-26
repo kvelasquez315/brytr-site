@@ -206,7 +206,8 @@ export function PhotoPair({
 export function PhotoStrip({
   shots, title, lede, ground = "raise", cols, frame = "4/3",
 }: {
-  shots: { photo: string; caption: string }[];
+  /* `scene` turns a strip into a SEQUENCE. See the note above the render. */
+  shots: { photo: string; caption: string; scene?: string }[];
   title: string;
   lede?: string;
   ground?: "raise" | "muted" | "background";
@@ -230,6 +231,8 @@ export function PhotoStrip({
 }) {
   const live = shots.map((s) => ({ ...s, s: slot(s.photo) })).filter((x) => x.s);
   if (live.length < 2) return null;
+  /* A sequence is a set whose shots name their own variable. Nothing else changes behaviour. */
+  const seq = live.some((x) => x.scene);
   const dark = ground === "raise";
   const bg = { raise: "bg-raise", muted: "bg-muted", background: "bg-background" }[ground];
   const n = cols ?? Math.min(4, live.length);
@@ -259,8 +262,31 @@ export function PhotoStrip({
             {lede}
           </p>
         ) : null}
+        {/* WHEN THE FRAME NEVER MOVES, SAY SO. The client on the three-up of one west Omaha
+          * house at three settings: "I don't think this section with the images is very clear.
+          * When I look at it I think I'm just seeing a bunch of duplicated images."
+          *
+          * That is the section failing at exactly the thing it was built to prove. Three frames
+          * from a stationary drone, ninety seconds apart, differing only in what the controller
+          * was told to do - the sameness is the entire argument, and with nothing saying so it
+          * reads as the same photograph pasted three times. The differences live in a thin band
+          * along the roofline, which at a third of the shell width is a few pixels tall.
+          *
+          * Two fixes, and neither is a new photograph. The set is numbered, so the eye is told it
+          * is looking at a sequence before it looks for a difference. And each frame is titled
+          * with the ONE VARIABLE, at bold display size above its caption, so the difference is
+          * read rather than hunted for. The constant goes in a line under the lede.
+          *
+          * Only strips whose shots carry `scene` get this. On the city and most service pages the
+          * frames are different houses and numbering them would invent a sequence. */}
+        {seq && (
+          <p className={`mt-4 flex items-center gap-2.5 text-[0.95rem] font-semibold ${dark ? "text-on-dark" : "text-foreground"}`}>
+            <span className="run-node-inline" aria-hidden />
+            The same house, the same frame, the same evening. Only the setting changes.
+          </p>
+        )}
         <div className={`mt-9 grid gap-5 ${grid}`}>
-          {live.map(({ caption, s }) => {
+          {live.map(({ caption, scene, s }, i) => {
             const sl = s as NonNullable<ReturnType<typeof slot>>;
             return (
               <figure
@@ -283,11 +309,23 @@ export function PhotoStrip({
                   />
                 </div>
                 <figcaption
-                  className={`flex-1 border-t px-5 py-4 text-sm leading-relaxed ${
-                    dark ? "border-on-dark/12 text-on-dark-muted" : "border-border text-muted-foreground"
+                  className={`flex-1 border-t px-5 py-4 ${
+                    dark ? "border-on-dark/12" : "border-border"
                   }`}
                 >
-                  {caption}
+                  {scene && (
+                    <span className="mb-1.5 flex items-baseline gap-2.5">
+                      <span className={`font-mono text-xs font-bold tabular-nums ${dark ? "text-accent" : "text-accent-ink"}`}>
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span className={`font-display text-[1.02rem] font-bold leading-snug ${dark ? "text-on-dark" : "text-foreground"}`}>
+                        {scene}
+                      </span>
+                    </span>
+                  )}
+                  <span className={`block text-sm leading-relaxed ${dark ? "text-on-dark-muted" : "text-muted-foreground"}`}>
+                    {caption}
+                  </span>
                 </figcaption>
               </figure>
             );

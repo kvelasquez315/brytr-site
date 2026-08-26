@@ -171,20 +171,47 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             title="Everything in the written quote."
             lede="Nothing appears on install day that was not on the quote you signed."
           />
-          <ul className="mt-10 grid items-start gap-x-10 gap-y-6 lg:grid-cols-2">
+          {/* THIS WAS A TWO-COLUMN LIST OF BOLD LABEL PLUS ONE LINE, separated by hairlines, and
+            * the client on it: "sections should always have more design than this." He is right,
+            * and the giveaway is that the section carried no device at all - a heading, a lede,
+            * then five paragraphs in a grid. Nothing said what kind of thing the five items were.
+            *
+            * They are the install, in order: the walk-around, then the channel, then the
+            * controller, then the zoning, then both states checked. That is a sequence, and this
+            * site already has a device for a sequence, on the home page: `.run`, the lights whose
+            * output climbs from the first to the last. Using it here is not decoration bolted on,
+            * it is the section finally saying what it is.
+            *
+            * `on-light` because this ground is limestone. See the note in globals.css: the amber
+            * bloom that reads as a diode on the night sections is invisible on warm neutral, so
+            * the light variant swaps it for a solid core and a dark ring. */}
+          <ol className="run on-light mt-10 lg:grid-cols-2 lg:gap-x-14">
+            {/* EVERY LIGHT AT FULL OUTPUT, and that is a correction. The first pass ramped them
+              * from dim to bright, which is what the device does on the home page, where the five
+              * points ARE the install in order. These are not: on this service they read channel
+              * into fascia, mitered transitions, concealed conductor, colour matched. That is a
+              * set, not a sequence, and a ramp across it tells the reader there is an order to
+              * find. The device still marks the section as ours; it just stops implying time. */}
             {(d?.included ?? []).map(([h, p]) => (
-              <li key={h} className="border-t border-border pt-5">
-                <h3 className="font-display text-lg font-bold text-foreground">{h}</h3>
-                <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{p}</p>
+              <li key={h} className="run-stage">
+                <span className="run-node" style={{ "--out": 1 } as React.CSSProperties} aria-hidden />
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-display text-lg font-bold leading-snug text-foreground">{h}</h3>
+                  <p className="mt-1.5 text-[0.95rem] leading-relaxed text-muted-foreground">{p}</p>
+                </div>
               </li>
             ))}
-          </ul>
+          </ol>
 
           {sys && (
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-lg bg-primary px-6 py-5 shadow-[var(--shadow-dark)]">
+              {/* NO EYEBROW. "The hardware under it" was a small amber label announcing the
+                * subject of the line beneath it, which is the device removed from every section on
+                * the home page. Folded into the line it was introducing. */}
               <div className="min-w-0 flex-1">
-                <p className="label text-accent">The hardware under it</p>
-                <p className="mt-1 font-display text-lg font-bold text-on-dark">{sys.name}</p>
+                <p className="font-display text-lg font-bold text-on-dark">
+                  The hardware under it: {sys.name}
+                </p>
                 <p className="mt-1 text-sm text-on-dark-muted">{sys.short}</p>
               </div>
               <TextLink onDark href={`/lighting-systems/${sys.slug}`}>See the spec</TextLink>

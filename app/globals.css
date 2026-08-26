@@ -533,6 +533,46 @@
     .run { gap: 2.35rem; }
   }
 
+  /* THE LIGHTS ON A LIGHT GROUND. `.run` was built for the night sections, where an amber core
+     inside an amber bloom reads as a lit diode. On warm limestone the bloom has nothing to glow
+     against and the mark disappears, which is the same problem the service-area pins had when the
+     basemap went from dark to light. Same answer: a solid core with a dark ring, and the bloom
+     dropped rather than faded. Output still ramps, carried by the core colour instead of the glow. */
+  .run.on-light .run-node {
+    /* NO DARK RING. The first pass gave the light-ground mark a 2.5px ink ring, borrowed from the
+       service-area pins, and beside a list item a bordered circle is a radio button. It read as an
+       unselected option rather than as a light. Solid amber core, a soft amber halo, and one hairline
+       shadow for definition against the limestone. */
+    background: color-mix(in oklab, var(--brand-accent) calc(38% + var(--out) * 62%), var(--brand-neutral-deep));
+    box-shadow:
+      0 0 0 4px color-mix(in oklab, var(--brand-accent) calc(var(--out) * 22%), transparent),
+      0 1px 2px color-mix(in oklab, var(--brand-ink) 28%, transparent);
+  }
+
+  /* The small one, for marking a value rather than a heading. */
+  .run-node-inline.is-sm {
+    inline-size: 7px;
+    block-size: 7px;
+    box-shadow:
+      0 0 0 2px color-mix(in oklab, var(--brand-accent) 40%, transparent),
+      0 0 9px 2px color-mix(in oklab, var(--brand-accent) 34%, transparent);
+  }
+
+  /* THE SAME LIGHT, INLINE. `.run-node` is absolutely positioned against a `.run-stage`, which is
+     right for a list and useless anywhere else. This is the identical mark as a flow element, so a
+     column head or a label can carry it without inventing a second amber dot. */
+  .run-node-inline {
+    display: inline-block;
+    inline-size: 10px;
+    block-size: 10px;
+    flex: none;
+    border-radius: 9999px;
+    background: color-mix(in oklab, var(--on-dark) 40%, var(--brand-accent));
+    box-shadow:
+      0 0 0 3px color-mix(in oklab, var(--brand-accent) 45%, transparent),
+      0 0 14px 4px color-mix(in oklab, var(--brand-accent) 40%, transparent);
+  }
+
   /* ---- THE SIGNATURE: the channel / dusk line --------------------- */
   /* horizontal: the lens edge of a channel in cross-section.
      Capped at two per page by convention, enforced in review. */

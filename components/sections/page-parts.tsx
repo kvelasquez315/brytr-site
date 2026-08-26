@@ -138,96 +138,150 @@ export function PageHero({
   );
 }
 
-/** A dense spec table. Used on system, compare and service pages.
- *  `source` prints where the numbers came from, which is the difference between a spec
- *  table and a marketing table. */
+/* THE SPEC SHEET. It was a table and it is not one any more.
+ *
+ * "We should never ever have sections designed like this looking like an excel sheet."
+ *
+ * He is right, and it is worth naming exactly which parts were doing that, because the content is
+ * genuinely tabular and the answer is not to hide the information:
+ *
+ *   ZEBRA STRIPING     alternating row tints. The single biggest tell. It exists in spreadsheets
+ *                      to help an eye track across forty columns; here there are three, and the
+ *                      stripes were the loudest thing in the section.
+ *   A DARK HEADER BAR  a filled navy strip with column names in it. That is a spreadsheet header
+ *                      row, and it framed everything under it as data rather than as an argument.
+ *   THE RULED BOX      a ring around the whole thing with cells butted against each other, so the
+ *                      grid lines carried the structure instead of the type doing it.
+ *   FLAT WEIGHT        every cell at the same size and colour, so nothing led.
+ *
+ * What replaces them is hierarchy: the spec name small and quiet, the value in the display face,
+ * the reason as body copy at a readable measure, and a lot more air per row. Hairlines separate
+ * rows and nothing else is drawn.
+ *
+ * TWO MODES, because the five call sites are two different things and the old component treated
+ * them identically:
+ *   spec     a sheet. Spec, value, and optionally why it matters. Reads as a definition list.
+ *   versus   two things compared. Both columns get equal weight unless `highlightA`, which is set
+ *            only where one side is ours - and where it is set, the emphasis is a continuous
+ *            amber edge and a soft wash down that whole column, which reads as a lit channel
+ *            rather than as a highlighted range of cells.
+ *
+ * THE TABLE ELEMENT IS GONE, and that removed a problem rather than creating one. The old build
+ * carried two complete markups: a 40rem-min table that scrolled inside its own box, and a
+ * stacked <dl> for phones, because at 390px the table clipped one brand mid-word and pushed the
+ * other off-screen entirely. One responsive grid does both, so there is one markup, one
+ * accessibility tree, and nothing scrolls sideways.
+ *
+ * `min-w-0` stays and is still load-bearing: this sits inside a grid item, grid items default to
+ * min-width auto, and without it the content sets the column width and takes the document with it.
+ */
 export function SpecTable({
-  rows, headA, headB, highlightA, onDark = true, caption, source,
+  rows, headA, headB, highlightA, onDark = true, caption, source, mode,
 }: {
   rows: { spec: string; a: string; b?: string }[];
   headA: string; headB?: string; highlightA?: boolean; onDark?: boolean; caption: string;
   source?: string;
+  /** Defaults to a comparison when there are two columns. Pass "spec" where the second column
+   *  is a reason rather than a rival, or it gets read as one. */
+  mode?: "spec" | "versus";
 }) {
-  const hi = highlightA ? "border-x-2 border-accent" : "";
-  /* A two-column sheet (Spec / Value) fits a 390px phone at this type size, so it gets no
-   * min-width and never scrolls sideways. A three-column sheet is two brands compared, which
-   * genuinely needs the width, so that one keeps the 40rem floor and scrolls inside its own box.
-   *
-   * `min-w-0` is load-bearing, not tidying. This table sits inside a grid item on the system,
-   * compare and service pages, and a grid item defaults to `min-width: auto` — meaning it
-   * refuses to shrink below its content's min-content width. The 40rem table therefore pushed
-   * its own grid column to 640px and took the whole document with it: every system page was
-   * 656px wide inside a 390px viewport, so the entire page scrolled sideways rather than the
-   * table. `overflow-x-auto` cannot contain anything until the box is allowed to be narrower
-   * than what is inside it. */
-  const floor = headB ? "min-w-[40rem]" : "";
+  const kind = mode ?? (headB ? "versus" : "spec");
+  const two = !!headB;
 
-  /* AND A THREE-COLUMN SHEET RESTACKS ON A PHONE RATHER THAN SCROLLING.
+  const rule = onDark ? "border-on-dark/12" : "border-border";
+  const specTone = onDark ? "text-on-dark-muted" : "text-muted-foreground";
+  const valueTone = onDark ? "text-on-dark" : "text-foreground";
+  const bodyTone = onDark ? "text-on-dark-muted" : "text-muted-foreground";
+
+  /* The emphasis on our own column: a 2px amber edge and a wash, applied per row. The rows are
+   * contiguous, so both read as one continuous band down the column rather than as cell fills. */
+  /* HOW OUR COLUMN IS MARKED, AFTER TWO WRONG ANSWERS.
    *
-   * Containing the overflow was not the same as fixing it. At 390px the head-to-head table
-   * showed the Spec column, the left brand clipped mid-word ("Dedicated warm whit"), and the
-   * right brand — half of the comparison — entirely off-screen with no scrollbar, no fade and
-   * no hint that it existed. Then a footnote underneath explained a column the reader never
-   * saw. A comparison that hides one of the two things being compared is not a comparison.
+   * A pale amber wash behind every cell read as highlighter pen dragged across the text, which is
+   * a spreadsheet gesture wearing brand colours. A 2px amber rule down the column read better and
+   * was caught by scripts/slopcheck.sh, which bans coloured left and top border strips on cards
+   * outright: "as reliable a tell as em-dashes in text." The gate is right and it is this
+   * project's own rule, so it stands.
    *
-   * So below `sm` the same rows render as blocks: the spec, then both brands labelled and
-   * stacked. Nothing scrolls sideways and both columns are always present. Only one of the two
-   * markups is ever displayed, so only one is ever in the accessibility tree. */
-  const stack = headB ? (
-    <dl className={`grid gap-px overflow-hidden rounded-lg ring-1 sm:hidden ${onDark ? "bg-on-dark/12 ring-on-dark/12" : "bg-border ring-border"}`}>
-      {rows.map((r) => (
-        <div key={r.spec} className={onDark ? "bg-primary px-5 py-4" : "bg-card px-5 py-4"}>
-          <dt className={`text-sm font-semibold ${onDark ? "text-on-dark" : "text-foreground"}`}>{r.spec}</dt>
-          <dd className="mt-2.5 grid gap-2">
-            <div>
-              <p className={`label ${highlightA ? "text-accent" : onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>{headA}</p>
-              <p className={`mt-0.5 text-[0.95rem] leading-relaxed ${onDark ? "on-dark-cell" : "text-foreground"}`}>{r.a}</p>
-            </div>
-            <div className={`border-t pt-2 ${onDark ? "border-on-dark/10" : "border-border"}`}>
-              <p className={`label ${onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>{headB}</p>
-              <p className={`mt-0.5 text-[0.95rem] leading-relaxed ${
-                onDark ? (highlightA ? "on-dark-cell-muted" : "on-dark-cell") : (highlightA ? "text-muted-foreground" : "text-foreground")
-              }`}>{r.b}</p>
-            </div>
-          </dd>
-        </div>
-      ))}
-    </dl>
-  ) : null;
+   * What is left is the device the rest of the site already uses. A small light against each of
+   * our values, matching the larger one on the column head, so the column is marked by the same
+   * mark as everything else rather than by a piece of chrome invented for this table. */
+  const lit = "";
+
+  const cols = two
+    ? "md:grid-cols-[minmax(0,12rem)_minmax(0,1fr)_minmax(0,1fr)]"
+    : "md:grid-cols-[minmax(0,16rem)_minmax(0,1fr)]";
+
+  /* In spec mode the second column is an explanation, so it gets body treatment and the value
+   * leads. In versus mode both are values and they are set the same, minus the emphasis. */
+  const aClass =
+    kind === "versus"
+      ? `font-display text-[1.1rem] font-bold leading-snug ${valueTone}`
+      : `font-display text-[1.05rem] font-bold leading-snug ${valueTone}`;
+  const bClass =
+    kind === "versus"
+      ? `text-[1.02rem] leading-snug ${highlightA ? bodyTone : valueTone}`
+      : `text-[0.95rem] leading-relaxed ${bodyTone}`;
 
   return (
     <div className="min-w-0">
-      {stack}
-      <div className={`min-w-0 overflow-x-auto rounded-lg ring-1 ${headB ? "hidden sm:block" : ""} ${onDark ? "ring-on-dark/12" : "ring-border"}`}>
-        <table className={`w-full ${floor} border-collapse text-left`}>
-          <caption className="sr-only">{caption}</caption>
-          <thead>
-            <tr className={onDark ? "bg-raise" : "bg-primary"}>
-              <th scope="col" className="px-5 py-4 text-sm font-semibold text-on-dark-muted">Spec</th>
-              <th scope="col" className={`px-5 py-4 text-sm font-semibold text-on-dark ${hi}`}>{headA}</th>
-              {headB && (
-                <th scope="col" className={`px-5 py-4 text-sm font-semibold ${highlightA ? "text-on-dark-muted" : "text-on-dark"}`}>{headB}</th>
-              )}
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((r, i) => (
-              <tr key={r.spec} className={onDark ? (i % 2 ? "bg-primary" : "bg-on-dark/[0.03]") : (i % 2 ? "bg-card" : "bg-muted")}>
-                <th scope="row" className={`px-5 py-4 text-[0.95rem] font-medium ${onDark ? "on-dark-cell" : "text-foreground"}`}>{r.spec}</th>
-                <td className={`px-5 py-4 text-[0.95rem] ${onDark ? "on-dark-cell" : "text-foreground"} ${hi}`}>{r.a}</td>
-                {headB && (
-                  <td className={`px-5 py-4 text-[0.95rem] ${
-                    onDark ? (highlightA ? "on-dark-cell-muted" : "on-dark-cell") : (highlightA ? "text-muted-foreground" : "text-foreground")
-                  }`}>{r.b}</td>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <p className="sr-only">{caption}</p>
+
+      {/* THE COLUMN HEADS ARE TYPE, NOT A FILLED BAR. Only from md, because below that each row
+        * carries its own inline labels and a heading row would be pointing at nothing. */}
+      {/* THE HEADS CARRY REAL WEIGHT NOW. They were 11px labels, the same size as the spec names
+        * under them, so the section opened on four identical grey words and nothing announced what
+        * was being compared with what. At display size they are the argument, and the amber light
+        * on ours is the same mark the process lists use. */}
+      <div className={`hidden items-end pb-4 md:grid ${cols} gap-x-8 border-b ${rule}`}>
+        <span className={`label ${specTone}`}>Spec</span>
+        <span className="flex items-center gap-2.5">
+          {highlightA && <span className="run-node-inline" aria-hidden />}
+          <span className={`font-display text-lg font-bold leading-none ${valueTone}`}>{headA}</span>
+        </span>
+        {two && (
+          <span className={`font-display text-lg font-bold leading-none ${specTone}`}>{headB}</span>
+        )}
       </div>
-      {source && (
-        <p className={`mt-3 text-xs ${onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>{source}</p>
-      )}
+
+      <dl className={`border-t ${rule} md:border-t-0`}>
+        {rows.map((r) => (
+          /* THE PADDING IS ON THE CELLS, NOT THE ROW, and that is the difference between a
+            * continuous rule and a row of ticks. With `py-6` on the row, the amber border on our
+            * column only spanned the height of its own text, so eight rows produced eight short
+            * dashes floating in the gutter. Moving the padding into the cells makes each cell the
+            * full height of its row, so the border runs the length of the column unbroken. */
+          <div key={r.spec} className={`grid gap-x-8 gap-y-2 border-b ${rule} py-5 md:py-0 ${cols}`}>
+            <dt className={`label md:py-6 ${specTone}`}>{r.spec}</dt>
+
+            <dd className={`min-w-0 md:py-6 ${lit}`}>
+              {/* The inline column label below md, where the heading row is not shown. */}
+              {two && (
+                <span className={`label mb-1 block md:hidden ${highlightA ? "text-accent" : specTone}`}>
+                  {headA}
+                </span>
+              )}
+              {highlightA ? (
+                <span className="flex items-baseline gap-2.5">
+                  <span className="run-node-inline is-sm translate-y-[-1px]" aria-hidden />
+                  <span className={`block ${aClass}`}>{r.a}</span>
+                </span>
+              ) : (
+                <span className={`block ${aClass}`}>{r.a}</span>
+              )}
+            </dd>
+
+            {two && (
+              <dd className="min-w-0 md:py-6">
+                <span className={`label mb-1 block md:hidden ${specTone}`}>{headB}</span>
+                <span className={`block ${bClass}`}>{r.b}</span>
+              </dd>
+            )}
+          </div>
+        ))}
+      </dl>
+
+      {source && <p className={`mt-4 text-xs leading-relaxed ${bodyTone}`}>{source}</p>}
     </div>
   );
 }

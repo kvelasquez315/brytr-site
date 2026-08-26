@@ -24,7 +24,15 @@
  * cannot end up described as a different picture no matter which page it lands on.
  */
 
-export type Shot = { photo: string; caption: string };
+export type Shot = {
+  photo: string;
+  caption: string;
+  /* NAMES THE ONE VARIABLE, and only where a set is genuinely one frame at several settings.
+     Its presence is what turns a PhotoStrip into a numbered sequence, so leaving it off is the
+     right default: on a set of different houses, numbering invents an order that is not there.
+     See the note above the render in components/sections/photo-parts.tsx. */
+  scene?: string;
+};
 
 /* The general pool. Ordered so that adjacent entries differ — a warm white next to a colour
  * scene next to a detail — because `pick` takes a contiguous window and a run of five warm

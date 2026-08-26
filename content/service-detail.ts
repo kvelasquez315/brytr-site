@@ -74,10 +74,17 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       title: "One house, one evening, two settings.",
       lede: "Ninety seconds apart, from a drone that never moved. Same roof, same sky; the only thing that changed is what the controller was told to do.",
     },
+    /* NAMED SCENES, because these three frames are one house from one drone position and the
+     * captions all began "The same...". Without the variable titled, the set reads as a
+     * duplicated photograph. `scene` is what turns a strip into a numbered sequence: see the note
+     * in components/sections/photo-parts.tsx. */
     shots: [
-      { photo: "seqSecurity", caption: "The same run dimmed to a low warm white. Most people leave it here on a Tuesday." },
-      { photo: "seqWarmChristmas", caption: "The same warm white at full output, and for a lot of houses this is the entire Christmas scene." },
-      { photo: "seqRedGreen", caption: "And red and green, from the same five frames, on the same night." },
+      { photo: "seqSecurity", scene: "Dimmed warm white",
+        caption: "Low output, the setting most people leave it on for a Tuesday in March." },
+      { photo: "seqWarmChristmas", scene: "Warm white, full output",
+        caption: "The same run turned up. For a lot of houses this is the entire Christmas scene." },
+      { photo: "seqRedGreen", scene: "Red and green",
+        caption: "Colour on the same channel, on the same night, ninety seconds later." },
     ],
     secondPara:
       "It is installed once, by our own crew, and it stays on the building. Nothing goes up in November and nothing comes down in January.",

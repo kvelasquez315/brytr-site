@@ -362,6 +362,10 @@ export default function Pricing() {
               rows={bids}
               headA="Priced by"
               headB="Why"
+              /* A reason, not a rival. Without this the two columns get set as two competing
+                * values and the sheet reads as a comparison of things that are not being
+                * compared. */
+              mode="spec"
               source="Every one of these appears as its own line on the quote, so a job with three of them reads as three lines rather than one lump."
             />
           </div>
