@@ -4,6 +4,7 @@ import Image from "next/image";
 import { site } from "@/content/site";
 import { cities, metroCities } from "@/content/cities";
 import { services } from "@/content/services";
+import { images } from "@/content/images";
 import { reviewProof } from "@/content/reviews";
 import { Button } from "@/components/ui/button";
 import { SectionHead, Check, TextLink, QuoteForm } from "@/components/ui/bits";
@@ -291,21 +292,50 @@ export function SpecTable({
 export function ServiceRows({
   onDark, only, columns = 3,
 }: { onDark?: boolean; only?: string[]; columns?: 2 | 3 }) {
+  /* EACH ROW IS A CARD WITH THE PHOTOGRAPH OF THAT SERVICE. "These service links should be cards
+   * side by side with images of that other service."
+   *
+   * They were full-width text rows stacked in a framed rack: a bold name, a grey line under it,
+   * a hairline, repeat. Four of them read as a table of contents, which is a poor way to sell the
+   * next thing somebody might buy, and it was the only link block on the site with nothing to
+   * look at. Every service carries a `photo` key into content/images.ts already.
+   *
+   * A service with no photograph still renders, without the media block, rather than showing a
+   * grey placeholder. There is one, and it is better for it to be a text card in the row than for
+   * the row to have a hole in it. */
   const list = only ? services.filter((s) => only.includes(s.slug)) : services;
   return (
-    <ul className={`grid gap-3 sm:grid-cols-2 ${columns === 3 ? "xl:grid-cols-3" : ""}`}>
+    <ul className={`grid gap-5 sm:grid-cols-2 ${columns === 3 ? "xl:grid-cols-3" : ""}`}>
       {list.map((s) => {
+        const shot = s.photo ? images[s.photo] : undefined;
         return (
           <li key={s.slug}>
             <Link
               href={`/services/${s.slug}`}
-              className={`block h-full rounded-lg p-4 transition-all duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5 ${
-                onDark ? "bg-raise ring-1 ring-on-dark/10 hover:ring-accent/40" : "bg-card shadow-[var(--shadow-lg)]"
+              className={`group flex h-full flex-col overflow-hidden rounded-lg transition-all duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5 ${
+                onDark
+                  ? "bg-raise ring-1 ring-on-dark/10 hover:ring-accent/40"
+                  : "bg-card shadow-[var(--shadow-lg)] ring-1 ring-border"
               }`}
             >
-              <span className="min-w-0">
-                <span className={`block font-display text-base font-bold ${onDark ? "text-on-dark" : "text-foreground"}`}>{s.name}</span>
-                <span className={`mt-1 block text-sm ${onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>{s.short}</span>
+              {shot?.src && (
+                <span className="relative block aspect-16/9 overflow-hidden bg-primary">
+                  <Image
+                    src={shot.src}
+                    alt={shot.alt}
+                    fill
+                    sizes="(min-width: 1280px) 22vw, (min-width: 640px) 44vw, 100vw"
+                    className="object-cover transition-transform duration-[--dur-base] ease-[--ease-out-expo] group-hover:scale-[1.03]"
+                  />
+                </span>
+              )}
+              <span className="flex min-w-0 flex-1 flex-col p-5">
+                <span className={`block font-display text-[1.05rem] font-bold leading-snug ${onDark ? "text-on-dark group-hover:text-accent" : "text-foreground group-hover:text-accent-ink"}`}>
+                  {s.name}
+                </span>
+                <span className={`mt-1.5 block text-sm leading-relaxed ${onDark ? "text-on-dark-muted" : "text-muted-foreground"}`}>
+                  {s.short}
+                </span>
               </span>
             </Link>
           </li>
@@ -460,30 +490,26 @@ export function PageCta({
             <div className="mt-9 border-t border-border pt-7">{readNext}</div>
           </div>
 
-          <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
-            <p className="label text-accent">Call the shop</p>
-            <a
-              href={site.phoneHref}
-              className="u mt-2.5 block text-[clamp(1.6rem,3vw,2.1rem)] font-medium leading-none text-on-dark hover:text-accent"
-            >
-              {site.phone}
-            </a>
-            <p className="mt-3 text-sm text-on-dark-muted">Same-day reply, most days.</p>
-            {stats && (
-              <dl className="mt-7 grid grid-cols-2 gap-x-5 gap-y-5 border-t border-on-dark/12 pt-6">
-                {statList.map(([f, l]) => (
-                  <div key={l}>
-                    <dt className="u text-lg font-medium leading-none text-on-dark">{f}</dt>
-                    <dd className="mt-1.5 text-xs leading-snug text-on-dark-muted">{l}</dd>
-                  </div>
-                ))}
-              </dl>
-            )}
-            <div className="mt-6 border-t border-on-dark/12 pt-5">
-              <TextLink onDark href={panelLink?.href ?? "/free-design-consultation"}>
-                {panelLink?.label ?? "Book the on-site measure"}
-              </TextLink>
-            </div>
+          {/* A FORM, NOT A PANEL OF FACTS. "Instead of all this random text this should be a form."
+            *
+            * It was a phone number, a same-day-reply line, four stat pairs (1 day, 5.0, Ours,
+            * Free) and a text link. Every one of those appears somewhere else on the page it sits
+            * at the bottom of, and none of them is an action: the panel closed twelve templates by
+            * restating the page and then asking the reader to go and find something to click.
+            *
+            * The compact variant is name, phone, email, city and what they are lighting, which is
+            * everything the crew needs to call back. The number stays underneath as the
+            * alternative, because a closer that removes the phone from a trade site is worse than
+            * one made of facts. */}
+          <div>
+            <QuoteForm variant="compact" dark heading="Book the on-site design" submitLabel="Book my free design" />
+            <p className="mt-4 text-center text-sm text-muted-foreground">
+              Or call{" "}
+              <a href={site.phoneHref} className="u font-semibold text-foreground underline decoration-accent decoration-2 underline-offset-4">
+                {site.phone}
+              </a>
+              . Same-day reply, most days.
+            </p>
           </div>
         </div>
       </section>

@@ -74,6 +74,19 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       title: "One house, one evening, two settings.",
       lede: "Ninety seconds apart, from a drone that never moved. Same roof, same sky; the only thing that changed is what the controller was told to do.",
     },
+    /* NOTHING RENDERS `shots` ANY MORE, on any service. The "What it looks like once the crew has
+     * gone" strip was removed from app/services/[slug]/page.tsx on instruction, and it was the only
+     * consumer. Every `shots` array in this file, and the `scene` labels on the set below, are
+     * parked rather than deleted.
+     *
+     * Parked on purpose. These are captions written against one specific frame, which is the
+     * expensive part and the part that cannot be regenerated from the image manifest: "close
+     * enough to count the points and the gaps between them" is about that gable, not about gables.
+     * Deleting them to tidy an unused key would throw away the writing and keep the photographs.
+     * If the section is not coming back, this is a clean block to remove in one commit.
+     *
+     * `photo-sets.ts` is a different thing and is still live: it is the shared pool the fourteen
+     * remaining PhotoStrips draw from. */
     /* NAMED SCENES, because these three frames are one house from one drone position and the
      * captions all began "The same...". Without the variable titled, the set reads as a
      * duplicated photograph. `scene` is what turns a strip into a numbered sequence: see the note

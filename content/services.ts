@@ -199,6 +199,10 @@ export const services: Service[] = [
   },
   {
     slug: "commercial-outdoor-lighting",
+    /* The only service that had no card photograph, which showed the moment the service links
+       became image cards. crewPortrait is a lit commercial roofline with one of our own crew in
+       front of it, which is the subject. */
+    photo: "crewPortrait",
     name: "Commercial Outdoor Lighting",
     short: "Storefronts, parapets and multifamily.",
     title: "Commercial Permanent Lighting | Omaha",

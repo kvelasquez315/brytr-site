@@ -48,8 +48,13 @@ export function QuoteForm({
   const onDark = variant === "financing" || !!dark;
   const mini = variant === "mini";
 
+  /* THE FORM BREAKS ON ITS OWN WIDTH, NOT THE VIEWPORT. `sm:grid-cols-2` is a viewport query, so
+   * in the 24rem panel that closes twelve page templates the form still went two columns at
+   * desktop: "Email" rendered as "you@example.or" and the city select as "Select your ci". A
+   * container query asks the box instead, so the same component is two columns on the
+   * consultation page and one column in a narrow rail, with nothing passed in to say so. */
   const shell = cn(
-    "rounded-lg p-6 sm:p-7",
+    "@container rounded-lg p-6 sm:p-7",
     onDark
       ? "form-on-dark bg-raise shadow-[var(--shadow-dark)] ring-1 ring-accent/15"
       /* The hairline matches the four light card types on the home page - see the note above
@@ -114,8 +119,25 @@ export function QuoteForm({
         * form's shape (edentreepros.com: name + phone paired, then a full-width field, then the
         * select). Three fields in an L rather than three stacked full-width rows takes about 90px
         * off the card's height, and on a hero card height is the whole argument. */}
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className={mini ? "" : "sm:col-span-2"}>
+      {/* MINI KEEPS ITS PAIR; EVERYTHING ELSE STACKS.
+        *
+        * Measured, because the first attempt at this was wrong in both directions. Every form on
+        * the site sits in a 384px to 448px box - the hero card, the closer panel, even the
+        * consultation page - so `sm:grid-cols-2`, a VIEWPORT query, put two ~180px fields side by
+        * side everywhere at desktop. That is where "you@example.or" and "Select your ci" came
+        * from, and it was sitewide rather than new.
+        *
+        * A container query fixed the asking but not the threshold: at `@md` the hero lost its
+        * name-and-phone row, which is a deliberate piece of that card - three fields in an L
+        * rather than three stacked rows takes about 90px off its height, and on a hero card
+        * height is the argument.
+        *
+        * So the two cases are separated. `mini` is two short fields, "Jordan Miller" and
+        * "402-555-0134", which fit 180px and always pair. Everything else carries an email and a
+        * city select, which do not, so they stack until a container is genuinely wide. Nothing on
+        * the site is that wide today, which is the correct outcome rather than a missing feature. */}
+      <div className={`grid gap-4 ${mini ? "grid-cols-2" : "@lg:grid-cols-2"}`}>
+        <div className={mini ? "" : "@lg:col-span-2"}>
           <Label htmlFor={variant + "-name"}>Full name</Label>
           <Input id={variant + "-name"} name="name" required autoComplete="name" placeholder="Jordan Miller" />
         </div>
@@ -130,12 +152,12 @@ export function QuoteForm({
           </div>
         )}
         {variant === "full" && (
-          <div className="sm:col-span-2">
+          <div className="@lg:col-span-2">
             <Label htmlFor={variant + "-street"}>Street address</Label>
             <Input id={variant + "-street"} name="street" autoComplete="street-address" placeholder="1400 N 90th St" />
           </div>
         )}
-        <div className={mini ? "sm:col-span-2" : ""}>
+        <div className={mini ? "col-span-2" : ""}>
           <Label htmlFor={variant + "-city"}>City</Label>
           <Select id={variant + "-city"} name="city" defaultValue={city ?? ""} required>
             <option value="">Select your city</option>
@@ -177,7 +199,7 @@ export function QuoteForm({
           </div>
         )}
         {variant === "full" && (
-          <div className="sm:col-span-2">
+          <div className="@lg:col-span-2">
             <Label htmlFor={variant + "-notes"}>Notes</Label>
             <Textarea id={variant + "-notes"} name="notes" rows={3} placeholder="Two story, dormers on the front elevation." />
           </div>

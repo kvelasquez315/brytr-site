@@ -56,6 +56,19 @@
   --on-dark:       #f7f6f3;
   --on-dark-muted: #ccd3da;
 
+  /* THE SCENE COLOURS. Six, and they are the product rather than a decorative palette: what a
+     Brytr run is actually set to on a given night. Warm white most of the year, amber, then the
+     four people ask for by name. They exist so a card can carry a lit run in a real scene colour
+     instead of a flat brand tint, which is the only honest way this site gets colourful. Values
+     picked to hold up on the night ground, where every one of them is used. */
+  --scene-warm:   #ffe6b4;   /* lifted from #f6d9a0: at 2px diodes on the night card it was the
+                                one band in the set of six that did not read as lit */
+  --scene-amber:  #f5c518;
+  --scene-red:    #e0483c;
+  --scene-green:  #46b05e;
+  --scene-blue:   #4a8ff0;
+  --scene-violet: #9b6ce0;
+
   /* THE DRAWING PALETTE.
    *
    * The measured elevations in components/sections/elevation.tsx are a technical drawing, not a UI
@@ -556,6 +569,26 @@
     box-shadow:
       0 0 0 2px color-mix(in oklab, var(--brand-accent) 40%, transparent),
       0 0 9px 2px color-mix(in oklab, var(--brand-accent) 34%, transparent);
+  }
+
+  /* A LIT RUN ACROSS THE TOP OF A CARD. Same diode pitch as the rest of the site, turned
+     horizontal and set to whichever scene colour the card is given through `--scene`. It is the
+     product drawn at card scale, which is why this is allowed to be the colourful element: the
+     colour is what the thing does, not a palette applied to a box. */
+  .scene-band {
+    display: block;
+    block-size: 10px;
+    background-image: radial-gradient(
+      circle,
+      var(--scene) 0 2px,
+      color-mix(in oklab, var(--scene) 55%, transparent) 2px 2.8px,
+      transparent 3.1px
+    );
+    background-size: 16px 10px;
+    background-position: 4px center;
+    background-repeat: repeat-x;
+    border-block-end: 1px solid color-mix(in oklab, var(--scene) 40%, transparent);
+    box-shadow: 0 7px 20px -7px color-mix(in oklab, var(--scene) 65%, transparent);
   }
 
   /* THE SAME LIGHT, INLINE. `.run-node` is absolutely positioned against a `.run-stage`, which is

@@ -59,15 +59,34 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 /* The one comparison that recurs — but only on the pages where somebody genuinely has the
  * choice between installing this once and doing it again every year. */
-const compareRows = [
-  { spec: "First year cost", a: "Higher, once", b: "Lower, every year" },
-  { spec: "Ten year cost", a: "One install", b: "Ten rentals or ten purchases" },
-  { spec: "Ladder time", a: "None, ever", b: "Twice a year, in ice" },
-  { spec: "January takedown", a: "Nothing to take down", b: "A weekend you will not enjoy" },
-  { spec: "Color options", a: "Every color, per night", b: "Whatever you bought" },
-  { spec: "Storage", a: "None", b: "Boxes in the garage" },
-  { spec: "Damage risk", a: "Sealed into fascia once", b: "New staples and clips annually" },
-  { spec: "Resale appeal", a: "Reads as a building feature", b: "Neutral at best" },
+/* WHAT YOU GET, NOT WHAT THE OTHER THING COSTS. This was an eight-row sheet setting "Permanent"
+ * against "Hung each season", spec by spec. The client: "instead of comparing I would rather this
+ * be a section of cards that are designed and colorful showing value it brings."
+ *
+ * That is a better section for the same facts. A comparison spends half its space describing
+ * something the reader is trying to stop doing, and every row made them read the bad option again
+ * to understand the good one. These are the same eight rows read forwards: the ladder row becomes
+ * nobody goes up a ladder, the storage row becomes nothing in the garage, and the two cost rows
+ * collapse into one, because "higher, once" and "one install" were the same point twice.
+ *
+ * COLOURFUL WITHOUT INVENTING A PALETTE. Each card carries a lit run across its top in a real
+ * scene colour, from the six defined in globals.css. They are what a Brytr roofline is actually
+ * set to on a given night, so the colour on the card is the product rather than decoration
+ * applied to a box, and the section gets its colour from the one place this site is allowed to
+ * take it from. */
+const valueCards: { scene: string; h: string; p: string }[] = [
+  { scene: "warm", h: "One cost, not ten",
+    p: "You pay for an install once. The ten year version of hanging lights is ten rentals or ten purchases, and nobody prices it that way at the door." },
+  { scene: "amber", h: "Nobody goes up a ladder",
+    p: "Not in November to put them up, not in January to take them down, and not in between when a section goes dark." },
+  { scene: "red", h: "January is a month, not a job",
+    p: "There is nothing to take down, so the weekend you normally lose to it stays yours." },
+  { scene: "green", h: "Any colour, any night",
+    p: "Warm white on a Tuesday in March, red and green in December, team colours on a Saturday. Same run, from your phone." },
+  { scene: "blue", h: "Nothing in the garage",
+    p: "No boxes, no tangles, no rental return, and no shelf given up to something used six weeks a year." },
+  { scene: "violet", h: "It reads as part of the house",
+    p: "Colour matched to your fascia and sealed in once, so from the curb in daylight it is trim rather than a seasonal add-on." },
 ];
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -220,54 +239,50 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      {/* ── PHOTOGRAPHS OF THIS SERVICE ──
-        * Assigned per slug in content/service-detail.ts rather than rotated from a pool. On a
-        * city page a lit roofline is equally true anywhere in the metro; on a service page the
-        * frame has to be of the service, so a shared pool would eventually put a Christmas
-        * gable on the hardscape page. Three or four here, and the caption is written against
-        * what is in that particular frame. */}
-      {d?.shots?.length ? (
-        <PhotoStrip
-          title="What it looks like once the crew has gone."
-          /* THE LEDE IS PER-SERVICE, and it had to become per-service for two reasons.
-           *
-           * It used to read "Photographed on nights these were already running, rather than lit
-           * for a camera" — a template constant, on every service page. Several services carry
-           * daylight frames whose own captions say so, so the section was calling its own images
-           * liars. A provenance claim cannot be hard-coded above a set of photographs that
-           * varies.
-           *
-           * And it was one more string-for-string identical line in a template that already had
-           * six of them. `proofCaption` is written per service and was sitting in a section further
-           * down this page that has since been deleted, so it does the job here. */
-          lede={
-            d.proofCaption ??
-            "Our own installs, photographed as they were rather than staged for a camera."
-          }
-          shots={d.shots}
-          ground="raise"
-        />
-      ) : null}
+      {/* THE "ONCE THE CREW HAS GONE" PHOTO STRIP IS GONE, on instruction, from here and from the
+        * city template that carried the same section under almost the same heading.
+        *
+        * What it was: three or four frames of this service, assigned per slug rather than pulled
+        * from a shared pool, each captioned against what was in that particular frame. It had just
+        * been rebuilt as a numbered sequence, because on the whole-home page the three shots were
+        * one house from one drone position and read as a duplicated photograph.
+        *
+        * Deleted rather than hidden. The `shots` arrays stay in content/service-detail.ts and the
+        * city photo pool stays in content/photo-sets.ts, because both are still read by other
+        * sections; nothing about removing this section orphans the photographs themselves.
+        *
+        * PhotoStrip itself is still live on fourteen other pages with fourteen different headings,
+        * which is why the component is untouched. */}
 
       {/* ── THE COMPARISON, WHERE IT IS HONEST ── */}
       {d?.compare && (
         <section className="section bg-card">
           <div className="shell">
             <SectionHead
-              title="Installed once, against doing it again every year."
-              lede="This is the calculation almost nobody runs before they call, and it is usually the one that decides it."
+              title="What you get for installing it once."
+              lede="Six things that change the day the crew leaves, and keep being true for as long as the house has a roofline."
             />
-            <div className="mt-10">
-              <SpecTable
-                onDark={false}
-                caption="Permanent lighting compared with hanging lights every season"
-                rows={compareRows}
-                headA="Permanent"
-                headB="Hung each season"
-                highlightA
-                source="Ladder time, storage and takedown are the parts customers tell us they underestimated."
-              />
-            </div>
+            <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {valueCards.map((v) => (
+                <li
+                  key={v.h}
+                  className="flex flex-col overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10"
+                >
+                  <span
+                    className="scene-band"
+                    style={{ "--scene": `var(--scene-${v.scene})` } as React.CSSProperties}
+                    aria-hidden
+                  />
+                  <div className="flex flex-1 flex-col p-6 sm:p-7">
+                    <h3 className="font-display text-[1.2rem] font-bold leading-snug text-on-dark">{v.h}</h3>
+                    <p className="mt-2.5 text-[0.95rem] leading-relaxed text-on-dark-muted">{v.p}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-6 text-xs leading-relaxed text-muted-foreground">
+              Ladder time, storage and takedown are the parts customers tell us they underestimated.
+            </p>
           </div>
         </section>
       )}
@@ -300,28 +315,53 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       {/* ── WHAT PEOPLE LOOK AT NEXT ── */}
       <section className="section bg-card">
         <div className="shell">
-          <SectionHead title="What people look at next." />
-          <div className="mt-9 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
-            <ul className="divide-y divide-border">
-              {alsoSee.map((r) => {
-                return (
-                  <li key={r.slug}>
-                    <Link
-                      href={`/services/${r.slug}`}
-                      className="group flex items-center gap-4 px-6 py-4 transition-colors duration-[--dur-fast] hover:bg-muted"
-                    >
-                      <span className="min-w-0 flex-1">
-                        <span className="block font-display text-[1.05rem] font-bold text-foreground group-hover:underline">
-                          {r.name}
-                        </span>
-                        <span className="mt-0.5 block text-sm text-muted-foreground">{r.short}</span>
+          <SectionHead
+            title="What people look at next."
+            lede="Every one of these runs on the same channel and the same controller, so adding one later is a wiring afternoon rather than a second system."
+          />
+          {/* CARDS WITH THE PHOTOGRAPH OF THAT SERVICE. "These service links should be cards side
+            * by side with images of that other service."
+            *
+            * They were stacked full-width text rows inside one framed rack: bold name, grey line,
+            * hairline, repeat. That is a table of contents, and it was the only link block on the
+            * site with nothing to look at, on the section whose whole job is to make somebody want
+            * the next thing. Every service already carries a `photo` key into content/images.ts.
+            *
+            * This is the same card as `ServiceRows` in page-parts.tsx, which got the same
+            * treatment in the same pass, and the two are kept in step deliberately: a reader
+            * meeting this block on a service page and on a city page should not see two different
+            * ideas of what a service link is. */}
+          <ul className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {alsoSee.map((r) => {
+              const shot = r.photo ? images[r.photo] : undefined;
+              return (
+                <li key={r.slug}>
+                  <Link
+                    href={`/services/${r.slug}`}
+                    className="group flex h-full flex-col overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border transition-all duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5"
+                  >
+                    {shot?.src && (
+                      <span className="relative block aspect-16/9 overflow-hidden bg-primary">
+                        <Image
+                          src={shot.src}
+                          alt={shot.alt}
+                          fill
+                          sizes="(min-width: 1024px) 22vw, (min-width: 640px) 44vw, 100vw"
+                          className="object-cover transition-transform duration-[--dur-base] ease-[--ease-out-expo] group-hover:scale-[1.03]"
+                        />
                       </span>
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+                    )}
+                    <span className="flex min-w-0 flex-1 flex-col p-5">
+                      <span className="block font-display text-[1.05rem] font-bold leading-snug text-foreground group-hover:text-accent-ink">
+                        {r.name}
+                      </span>
+                      <span className="mt-1.5 block text-sm leading-relaxed text-muted-foreground">{r.short}</span>
+                    </span>
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 

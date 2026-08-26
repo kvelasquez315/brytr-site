@@ -378,25 +378,20 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         </div>
       </section>
 
-      {/* ── PHOTOGRAPHS, THREE PER CITY, NEVER THE SAME THREE ──
-        * This template makes eighteen pages and every one of them carried a single photograph:
-        * the hero. Past the fold each city page became four thousand words of drive times and
-        * covenant procedure. The client, on a page in exactly this state: "this here is not how
-        * pages should be with no images and just a bunch of text."
+      {/* THE "ONCE THE CREW HAS GONE" PHOTO STRIP IS GONE, on instruction, from here and from the
+        * city template that carried the same section under almost the same heading.
         *
-        * `pick` is seeded on the slug, so Elkhorn and Gretna get different photographs and keep
-        * getting the same ones on every build. What it does NOT do is claim a location: these
-        * are metro installs and we do not know which town most of them are in, so the captions
-        * describe the light and the page's own copy carries the city. Captioning a photograph
-        * "Gretna" because it is on the Gretna page would be the easiest lie on this site to
-        * tell and the easiest one to catch. */}
-      <PhotoStrip
-        title="What the system looks like once the crew has gone."
-        lede="Installs from around the metro rather than staged shots, photographed as they were, on properties that were already finished."
-        shots={pick(c.slug, 3)}
-        cols={3}
-        ground="raise"
-      />
+        * What it was: three or four frames of this service, assigned per slug rather than pulled
+        * from a shared pool, each captioned against what was in that particular frame. It had just
+        * been rebuilt as a numbered sequence, because on the whole-home page the three shots were
+        * one house from one drone position and read as a duplicated photograph.
+        *
+        * Deleted rather than hidden. The `shots` arrays stay in content/service-detail.ts and the
+        * city photo pool stays in content/photo-sets.ts, because both are still read by other
+        * sections; nothing about removing this section orphans the photographs themselves.
+        *
+        * PhotoStrip itself is still live on fourteen other pages with fourteen different headings,
+        * which is why the component is untouched. */}
 
       {/* ── COVENANTS ──
         * Three genuinely different situations, so three different paragraphs. */}
