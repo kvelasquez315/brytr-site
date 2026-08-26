@@ -540,7 +540,14 @@ export function HowWeWork() {
   const shot = images.crewRoofFascia;
   return (
     <section className="section bg-raise">
-      <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:gap-16">
+      {/* TWO EQUAL COLUMNS, from 1fr against a 28rem cap.
+        *
+        * At a 90rem container that split gave the drawing an 864px column and the photograph 448,
+        * so a 560-unit viewBox was being scaled up 1.54 times - which is why the labels rendered at
+        * 26px and the whole thing stood 833px tall. Halving the container is the other half of the
+        * fix to the pitch: the drawing lands near its natural size instead of being enlarged, and
+        * the photograph gets 656px of width in exchange for the height it loses. */}
+      <div className="shell grid items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col">
           <SectionHead
             onDark
@@ -580,7 +587,11 @@ export function HowWeWork() {
             * So each step gets its own object instead - a rule, a screw, a phone, a shield, two
             * ticks. See components/ui/marks.tsx for why marks are back at all after the previous
             * set was deleted, and what makes these different. */}
-          <InstallRun className="mt-9 block w-full" />
+          {/* No `block` here. It was for the SVG, and on the grid this became it silently beat
+            * `display: grid` from the utility layer - so every row gap collapsed to nothing and the
+            * five stages ran together as one ten-line block. Nothing errored; the list just looked
+            * badly set. */}
+          <InstallRun className="mt-9" />
 
           <div className="mt-auto pt-9">
             <div className="flex flex-wrap items-center gap-4">
@@ -601,7 +612,7 @@ export function HowWeWork() {
           * explain exactly what it draws. */}
         {shot?.src && (
           <div className="relative min-h-[26rem] overflow-hidden rounded-lg bg-primary">
-            <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 28rem, 100vw" className="object-cover" />
+            <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 45vw, 100vw" className="object-cover" />
           </div>
         )}
       </div>
