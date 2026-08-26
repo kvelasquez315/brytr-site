@@ -38,7 +38,9 @@ export function Faq({
           key={f.q}
           value={`i${i}`}
           className={`overflow-hidden rounded-lg shadow-[var(--shadow-lg)] data-[state=open]:border-b-2 data-[state=open]:border-accent ${
-            onDark ? "bg-raise" : cardBg
+            /* The hairline goes on the LIGHT branch only. On the night ground the value
+              * difference already separates the card, and an outline there reads as a border. */
+            onDark ? "bg-raise" : `${cardBg} ring-1 ring-border`
           }`}
         >
           <Acc.Header>

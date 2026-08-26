@@ -202,7 +202,7 @@ export default function SystemsHub() {
               const sy = bySlug(c.slug);
               const d = systemDetail[c.slug];
               return (
-                <article key={c.slug} className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+                <article key={c.slug} className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
                   <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                     <p className="label flex items-center gap-3 text-foreground">
                       <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -245,7 +245,7 @@ export default function SystemsHub() {
             lede="Every company publishes a spec table. Almost none say what a spec does to a building, which is the only part that helps you judge one. The third column is that."
           />
 
-          <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+          <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
             <div className="hidden bg-primary px-6 py-4 lg:grid lg:grid-cols-[22fr_26fr_52fr] lg:gap-8">
               <p className="label text-on-dark-muted">Spec</p>
               <p className="label flex items-center gap-3 text-on-dark">
@@ -275,9 +275,12 @@ export default function SystemsHub() {
           {/* what the sheet cannot tell you. The rows above are only honest with this
             * under them. */}
           <div className="mt-8 rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
-            <p className="label text-accent">And none of this is on a datasheet</p>
-            <h3 className="mt-3 max-w-[46ch] font-display text-xl font-bold text-on-dark">
-              The hardware is the half of this you can shop.
+            {/* NO EYEBROW. The small amber label that sat here was the device the client had
+              * removed from every section on the home page: "remove all of these little headings
+              * before sections." These three survived because they are inside dark panels rather
+              * than above section heads, which is a distinction the reader does not make. */}
+            <h3 className="max-w-[46ch] font-display text-xl font-bold text-on-dark">
+              The hardware is the half of this you can shop, and none of it is on a datasheet.
             </h3>
             <ul className="mt-6 grid gap-x-10 gap-y-0 lg:grid-cols-2">
               {identical.map((x) => (
@@ -329,7 +332,7 @@ export default function SystemsHub() {
 
           <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
             {roles.map((g) => (
-              <div key={g.heading} className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+              <div key={g.heading} className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
                 <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                   <p className="label flex items-center gap-3 text-foreground">
                     <span className="block h-4 w-1 bg-accent" aria-hidden />

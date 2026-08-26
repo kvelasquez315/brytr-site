@@ -230,7 +230,7 @@ export default function Gallery() {
                   return (
                     <figure
                       key={src}
-                      className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
+                      className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border"
                     >
                       <div className={`relative ${CARD_RATIO}`}>
                         <Image
@@ -333,7 +333,7 @@ export default function Gallery() {
         * stated difference between them. */}
       <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="rounded-lg bg-background p-7 shadow-[var(--shadow-lg)]">
+          <div className="rounded-lg bg-background p-7 shadow-[var(--shadow-lg)] ring-1 ring-border">
             <p className="label flex items-center gap-3 text-accent-ink">
               <span className="block h-4 w-1 bg-accent" aria-hidden />
               You are on this one

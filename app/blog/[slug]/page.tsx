@@ -173,7 +173,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
           </article>
 
           <aside className="h-fit space-y-5">
-            <div className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+            <div className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
               <div className="border-b border-border px-6 py-4">
                 <p className="label flex items-center gap-3 text-foreground">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -260,7 +260,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
               <Link
                 key={o.slug}
                 href={`/blog/${o.slug}`}
-                className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5"
+                className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] ring-1 ring-border transition-transform duration-[--dur-base] hover:-translate-y-0.5"
               >
                 <p className="label text-accent-ink">{o.category}</p>
                 <h3 className="mt-2 font-display text-[1.05rem] font-bold leading-snug text-foreground">

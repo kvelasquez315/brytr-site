@@ -130,42 +130,61 @@ export default function ServicesHub() {
                 >
                   <p className="font-display text-lg font-bold leading-snug text-on-dark">{b.said}</p>
 
-                  {/* the run: a lit node for what we would install first, banked nodes for
-                    * what gets added later, on one continuous channel */}
-                  <div className="mt-7 flex gap-5">
-                    <span className="run-spine" aria-hidden />
-                    <div className="min-w-0 flex-1">
-                      <div>
+                  {/* THE 3PX SPINE IS GONE, AND IT IS THE SAME REJECTION AS THE HOME PAGE.
+                    *
+                    * `.run-spine` was a vertical length of channel beside this branch: 3px wide,
+                    * running the full height of the card, with a diode pitch painted on it as a
+                    * repeating radial gradient. The identical device sat beside the five install
+                    * steps on the home page and the client read it as a border that had failed to
+                    * load. He was right there and he is right here, and the second instance is
+                    * worse, because at 3px inside a dark card the dots do not resolve at all.
+                    *
+                    * So this uses what replaced it: `.run`, the lights with no track. Two marks
+                    * here rather than five, at two outputs, which does the job the spine was
+                    * described as doing in the comment it carried - full output on what we would
+                    * install first, banked on what gets added later.
+                    *
+                    * `<ol>` because the whole point of this card is that one of these comes
+                    * before the other. */}
+                  <ol className="run mt-7">
+                    <li className="run-stage">
+                      <span className="run-node" style={{ "--out": 1 } as React.CSSProperties} aria-hidden />
+                      <div className="min-w-0 flex-1">
                         <p className="label text-accent">Start with</p>
                         <h3 className="mt-1.5 font-display text-xl font-bold leading-tight text-on-dark">
                           <Link href={`/services/${first.slug}`} className="hover:text-accent">{first.name}</Link>
                         </h3>
                         <p className="mt-2 text-[0.95rem] leading-relaxed text-on-dark-muted">{b.why}</p>
                       </div>
+                    </li>
 
-                      <p className="label mt-7 text-on-dark-muted">What people add next</p>
-                      <ul className="mt-3 space-y-2.5">
-                        {b.then.map((sl) => {
-                          const s = bySlug(sl);
-                          return (
-                            <li key={sl}>
-                              {/* name over note, not name beside note: "Soffit Lighting" wrapped
-                                * to two lines next to its own caption and the baselines fought */}
-                              <Link
-                                href={`/services/${sl}`}
-                                className="group block border-b border-on-dark/10 pb-2.5 hover:text-accent"
-                              >
-                                <span className="block font-display text-[0.95rem] font-bold text-on-dark/90 group-hover:text-accent">
-                                  {s.name}
-                                </span>
-                                <span className="mt-0.5 block text-xs text-on-dark-muted">{s.short}</span>
-                              </Link>
-                            </li>
-                          );
-                        })}
-                      </ul>
-                    </div>
-                  </div>
+                    <li className="run-stage">
+                      <span className="run-node" style={{ "--out": 0.42 } as React.CSSProperties} aria-hidden />
+                      <div className="min-w-0 flex-1">
+                        <p className="label text-on-dark-muted">What people add next</p>
+                        <ul className="mt-3 space-y-2.5">
+                          {b.then.map((sl) => {
+                            const s = bySlug(sl);
+                            return (
+                              <li key={sl}>
+                                {/* name over note, not name beside note: "Soffit Lighting" wrapped
+                                  * to two lines next to its own caption and the baselines fought */}
+                                <Link
+                                  href={`/services/${sl}`}
+                                  className="group block border-b border-on-dark/10 pb-2.5 hover:text-accent"
+                                >
+                                  <span className="block font-display text-[0.95rem] font-bold text-on-dark/90 group-hover:text-accent">
+                                    {s.name}
+                                  </span>
+                                  <span className="mt-0.5 block text-xs text-on-dark-muted">{s.short}</span>
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    </li>
+                  </ol>
 
                   <p className="mt-auto pt-7">
                     <span className="block text-sm leading-relaxed text-on-dark-muted">{b.wiring}</span>
@@ -198,7 +217,7 @@ export default function ServicesHub() {
             * difference costs nothing. `break-inside-avoid` keeps a card whole. */}
           <div className="mt-10 gap-5 lg:columns-2 lg:gap-5 [&>*]:mb-5 lg:[&>*]:break-inside-avoid">
             {groups.map((g) => (
-              <div key={g.heading} className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+              <div key={g.heading} className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
                 <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                   <p className="label flex items-center gap-3 text-foreground">
                     <span className="block h-4 w-1 bg-accent" aria-hidden />

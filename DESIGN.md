@@ -425,8 +425,29 @@ separator.
 Shadows are layered, ambient + direct, and differ on light vs dark surfaces because a dark-surface
 card cannot be separated by a dark shadow:
 - On light: `0 1px 2px ink/6%, 0 12px 28px -12px ink/16%`
-- On dark: `0 18px 40px -18px black/70%` plus a `1px` amber-at-14% hairline, which is the only place
-  a hairline does the work.
+- On dark: `0 18px 40px -18px black/70%` plus a `1px` amber-at-14% hairline.
+
+**Every light card also carries a hairline**, and this reverses what this section used to
+say, which was that the dark card was the only place a hairline did any work. It is not.
+A white or limestone card on a white or limestone section is separated from its ground by
+a soft shadow and nothing else, and a soft edge between two near-identical values reads as
+blur rather than as an object. That is a large part of what the client kept reporting as
+the site not looking like a big professional site.
+
+So: `rounded-* bg-card|bg-background` with `shadow-[var(--shadow-lg)]` must also carry
+`ring-1 ring-border`, which is ink at 12 percent. Enough for a definite edge, not enough
+to turn a page into a grid of boxes. Gated by `npm run cardedge`, inside `npm run check`,
+because it went onto the four home page card types first and stayed there: when the
+rollout came, 39 cards across 19 other templates had drifted without it. Nothing caught
+that, because every card was individually fine. It is the same failure mode as the
+section rhythm gate, a defect that exists only in the comparison between files.
+
+Dark cards stay exempt. On `bg-primary` or `bg-raise` the value difference against the
+ground is already large, and an outline there reads as a border rather than an edge.
+
+This does not contradict "never a 1px gray border as the primary separator" above. The
+separator is still whitespace, then the ground shift, then elevation. The hairline is the
+last 5 percent of the elevation step, not a replacement for the first two.
 
 Section backgrounds alternate per the table above across four tokens: `neutral`, `neutral-deep`,
 `primary`, `surface-raise`.
@@ -454,25 +475,38 @@ mobile call bar are the only fixed elements.
 
 ## Icons
 
-Container shape: the channel cross-section tile described under Signature.
-Style: solid/duotone, `currentColor` primary form + exactly one amber accent detail, 32-unit grid,
-drawn in a single pass so the set is cohesive.
+**There are none, and that is the rule.** The client, on the set this section used to
+specify: "I don't think we should be using icons at all. They look very AI and not
+great. I can't even tell what's going on with them." Then, on a later attempt to put
+them back: "If you are using icons you need to make them fully custom." Then, on what
+came back after that: "When I said make a graphic that didn't mean just add icons. This
+means make a design."
 
-Set (30). Subjects are the objects a Brytr tech actually touches, per the preset rule that specific
-beats abstract:
+That is three rejections of the same idea, and the third one names the distinction that
+matters. A glyph beside a line of text is a list with decoration on it. What earns its
+place is a drawing that IS the content:
 
-*Services (11)* — whole-home channel run, roofline eave section, christmas roofline, soffit
-cross-section, path light, retaining-wall course, pergola beam with bistro bulb, football with light
-rays, scene calendar, storefront parapet, wrench over channel segment.
+- `components/sections/channel-detail.tsx` is a measured section through the eave, with
+  five callouts, on `/how-it-works`. It is the fixing detail, drawn.
+- `components/sections/elevation.tsx` draws the house itself, lit and unlit, and is what
+  the drag demo falls back to when a photograph is missing.
+- `.run` in `app/globals.css` is the points of a process as lights whose output climbs
+  from the first to the last. Reading it top to bottom is watching the run come up.
 
-*App and control (4)* — scene swatch stack, clock with sunset line, house plan zones, dimmer slider.
+**The lights have no track.** `.run` began as a length of channel with the lights sitting
+on it. The client: "Take out the track-looking thing and just make the bullets look like
+lights." He is right, and it took two goes to accept it: a 14px bar down the side of a
+list is a scrollbar before it is a length of aluminium, and neither an extrusion, a lit
+edge nor a diode pitch painted down it changes that. The same device existed as
+`.run-spine` on `/services`, at 3px, where it read as a border that had failed to load.
+Both are gone. The lights are the whole graphic.
 
-*Trust and objection (9)* — install count, five stars, hard hat, other-brand channel with wrench,
-two channel profiles stacked, verified eye with sun and moon, tape measure on eave, receipt with
-repeating arrow, ladder on eave.
-
-*Financing and process (6)* — card with bulb, lightning speech bubble, clipboard with approval
-stamp, shield with filament, IP-rating droplet, day/night verification pair.
+**Labels above a heading are not eyebrows.** The small amber label rule was "remove all
+of these little headings before sections", and `.eyebrow` is deleted. `.label` survives,
+but only where it carries information the reader needs: the ordinals on the warranty
+claim sequence, which surface each product serves on `/about`, which of the two galleries
+you are currently on. A label that only announces the subject of the heading under it
+gets folded into that heading.
 
 ## Do's and Don'ts
 

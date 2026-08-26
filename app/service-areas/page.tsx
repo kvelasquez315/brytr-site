@@ -110,7 +110,7 @@ export default function AreasHub() {
         * with a hundred pixels of nothing in the middle of it. */}
       <section className="section bg-muted">
         <div className="shell grid items-start gap-9 lg:grid-cols-[58fr_42fr] lg:gap-12">
-          <div className="overflow-hidden rounded-lg bg-card p-2 shadow-[var(--shadow-lg)]">
+          <div className="overflow-hidden rounded-lg bg-card p-2 shadow-[var(--shadow-lg)] ring-1 ring-border">
             <ServiceLeaflet className="aspect-4/3 w-full" />
           </div>
           <div>
@@ -145,7 +145,7 @@ export default function AreasHub() {
             lede="Every town we drive to, sorted by the real drive from the shop. The promise is not the same at twenty minutes and at two hours."
           />
 
-          <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+          <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
             <div className="hidden bg-primary px-6 py-4 lg:grid lg:grid-cols-[30fr_14fr_24fr_32fr] lg:gap-8">
               <p className="label text-on-dark-muted">Town</p>
               <p className="label text-on-dark-muted">Drive</p>
@@ -206,7 +206,7 @@ export default function AreasHub() {
             {bands.map((b) => (
               <article
                 key={b.h}
-                className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
+                className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border"
               >
                 <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                   <p className="label flex items-center gap-3 text-foreground">

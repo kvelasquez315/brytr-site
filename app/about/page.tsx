@@ -126,7 +126,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+          <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
             <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
               <p className="label flex items-center gap-3 text-foreground">
                 <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -224,7 +224,7 @@ export default function About() {
             {site.founders.map((f) => (
               <article
                 key={f.name}
-                className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
+                className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border"
               >
                 <div className="grid grid-cols-[7.5rem_1fr] items-stretch">
                   {/* the monogram, on the channel tile's own treatment */}

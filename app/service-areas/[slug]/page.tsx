@@ -173,7 +173,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+            <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
               <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                 <p className="label flex items-center gap-3 text-foreground">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -217,7 +217,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             />
 
             <div className="mt-10 grid items-start gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
-              <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+              <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
                 <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border bg-primary px-6 py-4">
                   <p className="label flex items-center gap-3 text-on-dark">
                     <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -321,7 +321,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </ul>
 
               <div className="space-y-5">
-                <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+                <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
                   <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                     <p className="label flex items-center gap-3 text-foreground">
                       <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -515,7 +515,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               <li key={n.slug}>
                 <Link
                   href={`/service-areas/${n.slug}`}
-                  className="flex items-baseline justify-between gap-4 rounded-lg bg-background px-5 py-4 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] hover:-translate-y-0.5"
+                  className="flex items-baseline justify-between gap-4 rounded-lg bg-background px-5 py-4 shadow-[var(--shadow-lg)] ring-1 ring-border transition-transform duration-[--dur-base] hover:-translate-y-0.5"
                 >
                   <span className="font-display text-[0.95rem] font-bold text-foreground">
                     {n.name}

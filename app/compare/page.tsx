@@ -224,7 +224,7 @@ export default function CompareHub() {
             lede="What each one is, and what we do about it. This is the page we wanted to find when we started, and the last column is the part nobody else can print."
           />
 
-          <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+          <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
             <div className="hidden bg-primary px-6 py-4 lg:grid lg:grid-cols-[22fr_38fr_24fr] lg:gap-8">
               <p className="label text-on-dark-muted">Brand</p>
               <p className="label text-on-dark-muted">What you are getting</p>
@@ -295,7 +295,7 @@ export default function CompareHub() {
                       <li key={sl}>
                         <Link
                           href={`/compare/${sl}`}
-                          className="flex h-full flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] transition-transform duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5"
+                          className="flex h-full flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] ring-1 ring-border transition-transform duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5"
                         >
                           <span className="font-display text-[1.05rem] font-bold leading-snug text-foreground">
                             {c.a} against {c.b}

@@ -127,7 +127,7 @@ export default function Pricing() {
                 foot: "None of this is generosity. It is just how the quote is built.",
               },
             ].map((c) => (
-              <div key={c.h} className="flex flex-col rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
+              <div key={c.h} className="flex flex-col rounded-lg bg-background p-6 shadow-[var(--shadow-lg)] ring-1 ring-border">
                 <p className="label flex items-center gap-3 text-foreground">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
                   {c.h}
@@ -325,7 +325,7 @@ export default function Pricing() {
                     </span>
                   </div>
                 )}
-                <div className="flex-1 rounded-lg bg-card p-5 shadow-[var(--shadow-lg)]">
+                <div className="flex-1 rounded-lg bg-card p-5 shadow-[var(--shadow-lg)] ring-1 ring-border">
                   <h3 className="font-display text-lg font-bold leading-tight text-foreground">{t.h}</h3>
                   <p className="mt-2.5 text-sm leading-relaxed text-muted-foreground">{t.p}</p>
                 </div>
@@ -442,7 +442,7 @@ export default function Pricing() {
                   Your own measure decides your own number. This is the shape of a quote, not a price.
                 </p>
               </div>
-              <div className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+              <div className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] ring-1 ring-border">
                 <p className="label text-accent-ink">Also worth reading</p>
                 <ul className="mt-4 space-y-3 border-t border-border pt-4">
                   {[["Compare the brands we are asked about", "/compare"], ["What the warranty covers", "/warranty"],

@@ -168,7 +168,7 @@ export default function Reviews() {
               {tags.map(([t, n]) => (
                 <li
                   key={t}
-                  className="flex items-baseline justify-between gap-4 rounded-lg bg-background px-5 py-3.5 shadow-[var(--shadow-lg)]"
+                  className="flex items-baseline justify-between gap-4 rounded-lg bg-background px-5 py-3.5 shadow-[var(--shadow-lg)] ring-1 ring-border"
                 >
                   <span className="font-display text-[0.95rem] font-bold text-foreground">{t}</span>
                   <span className="u shrink-0 text-sm font-medium text-accent-ink">{n}</span>
@@ -225,7 +225,7 @@ export default function Reviews() {
             {rest.map((r, i) => (
               <figure
                 key={r.name}
-                className={`flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ${
+                className={`flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ring-1 ring-border ${
                   rest.length % 2 === 1 && i === rest.length - 1 ? "lg:col-span-2" : ""
                 }`}
               >

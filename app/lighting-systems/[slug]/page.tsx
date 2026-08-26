@@ -127,9 +127,14 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
           </div>
 
           <div className="rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
-            <p className="label text-accent">How this one is priced</p>
-            <h3 className="mt-3 font-display text-xl font-bold text-on-dark">
-              Not priced on its own.
+            {/* NO EYEBROW. The small amber label that sat here was the device the client had
+              * removed from every section on the home page: "remove all of these little headings
+              * before sections." These three survived because they are inside dark panels rather
+              * than above section heads, which is a distinction the reader does not make. */}
+            {/* The eyebrow was carrying the subject and the heading was carrying only the answer,
+              * so "Not priced on its own." read as a fragment with the label gone. Folded. */}
+            <h3 className="font-display text-xl font-bold text-on-dark">
+              This one is not priced on its own.
             </h3>
             <p className="mt-3 text-[0.95rem] leading-relaxed text-on-dark-muted">
               {s.tier === "Control"
@@ -188,7 +193,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
             * so the slack sits inside a card as padding rather than outside one as a hole. The left
             * card had no closing line at all, which is also why it was the short one. */}
           <div className="mt-10 grid items-stretch gap-5 lg:grid-cols-2">
-            <div className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+            <div className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
               <div className="border-b border-border bg-primary px-6 py-4">
                 <p className="label flex items-center gap-3 text-on-dark">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />

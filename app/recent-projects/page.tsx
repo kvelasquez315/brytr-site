@@ -206,7 +206,7 @@ export default function RecentProjects() {
                 * arrived and the condition silently stopped alternating: 0 split, 1 full-bleed,
                 * 2 split, 3 split — two identical layouts back to back, which is the exact rule
                 * this treatment exists to satisfy. `i % 2` alternates for any number of them. */}
-              <div className={`flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] ${i % 2 === 1 ? "lg:p-7" : ""}`}>
+              <div className={`flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)] ring-1 ring-border ${i % 2 === 1 ? "lg:p-7" : ""}`}>
                 <dl className={i % 2 === 1 ? "grid gap-x-8 divide-border border-y border-border sm:grid-cols-4 sm:divide-x" : "divide-y divide-border border-y border-border"}>
                   {p.facts.map(([k, v]) => (
                     <div key={k} className={i % 2 === 1 ? "px-1 py-4 sm:px-5" : "flex items-baseline justify-between gap-4 py-3"}>
@@ -229,7 +229,7 @@ export default function RecentProjects() {
 
             <div className={`mt-5 grid gap-4 sm:grid-cols-2 ${i % 2 === 1 ? "lg:grid-cols-2" : "lg:grid-cols-4"}`}>
               {p.shots.map((s) => (
-                <figure key={s.src} className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+                <figure key={s.src} className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
                   <div className="relative aspect-video">
                     <Image src={s.src} alt={s.alt} fill sizes={i % 2 === 1 ? "(min-width:1024px) 46vw, 100vw" : "(min-width:1024px) 23vw, 50vw"} className="object-cover" />
                   </div>
@@ -330,7 +330,7 @@ export default function RecentProjects() {
       {/* ── THE SPLIT WITH /gallery ── */}
       <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="rounded-lg bg-background p-7 shadow-[var(--shadow-lg)]">
+          <div className="rounded-lg bg-background p-7 shadow-[var(--shadow-lg)] ring-1 ring-border">
             <p className="label flex items-center gap-3 text-accent-ink">
               <span className="block h-4 w-1 bg-accent" aria-hidden />
               You are on this one

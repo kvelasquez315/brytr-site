@@ -262,7 +262,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               { h: c.aWinsHead, list: c.aWins, cost: c.costA, name: c.a },
               { h: c.bWinsHead, list: c.bWins, cost: c.costB, name: c.b },
             ].map((col) => (
-              <article key={col.h} className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)]">
+              <article key={col.h} className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ring-1 ring-border">
                 <h3 className="font-display text-2xl font-bold leading-snug text-foreground">{col.h}</h3>
                 <p className="u mt-2 text-xs uppercase tracking-[0.08em] text-muted-foreground">
                   {col.name} · {col.cost}
@@ -304,7 +304,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+            <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
               <div className="border-b border-border bg-primary px-6 py-4">
                 <p className="label flex items-center gap-3 text-on-dark">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -351,7 +351,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                 ["Ask who administers the warranty", "The installer, the manufacturer, or a franchise head office. All three are answers; not knowing is not."],
                 ["Ask what happens at handover", "Whether somebody walks the scenes with you, or hands you an app and drives off."],
               ].map(([h, p]) => (
-                <li key={h} className="rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
+                <li key={h} className="rounded-lg bg-background p-6 shadow-[var(--shadow-lg)] ring-1 ring-border">
                   <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{h}</h3>
                   <p className="mt-2.5 text-[0.95rem] leading-relaxed text-muted-foreground">{p}</p>
                 </li>

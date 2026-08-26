@@ -128,7 +128,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </ul>
           </div>
 
-          <dl className="h-fit rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
+          <dl className="h-fit rounded-lg bg-background p-6 shadow-[var(--shadow-lg)] ring-1 ring-border">
             <p className="label text-muted-foreground">{s.name}, in short</p>
             {(d?.facts ?? []).map(([k, v]) => (
               <div key={k} className="flex items-baseline justify-between gap-4 border-b border-border py-3.5 last:border-0">
@@ -274,7 +274,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="section bg-card">
         <div className="shell">
           <SectionHead title="What people look at next." />
-          <div className="mt-9 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+          <div className="mt-9 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
             <ul className="divide-y divide-border">
               {alsoSee.map((r) => {
                 return (

@@ -198,7 +198,7 @@ export default function HowItWorks() {
             lede="Every installer says they do good work, which is why the claim is worthless alone. So here is each one with the alternative beside it."
           />
 
-          <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+          <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
             <div className="hidden border-b border-border bg-primary px-6 py-4 lg:grid lg:grid-cols-[30fr_35fr_35fr] lg:gap-8">
               <p className="label text-on-dark-muted">The step</p>
               <p className="label flex items-center gap-3 text-on-dark">

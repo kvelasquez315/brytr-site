@@ -138,7 +138,7 @@ export default function Consult() {
             </ol>
 
             {/* THE SHEET — a facsimile of the leave-behind, blanks and all */}
-            <figure className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+            <figure className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
               <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                 <p className="label flex items-center gap-3 text-foreground">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -191,7 +191,7 @@ export default function Consult() {
           />
 
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
-            <div className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)]">
+            <div className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ring-1 ring-border">
               <h3 className="font-display text-2xl font-bold text-foreground">In the van</h3>
               <p className="mt-3 text-[1.05rem] leading-relaxed text-muted-foreground">
                 Enough to show you the real thing rather than a photograph of it.

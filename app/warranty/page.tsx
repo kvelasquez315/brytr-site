@@ -157,7 +157,7 @@ export default function Warranty() {
 
           <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
             {/* COVERED */}
-            <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
+            <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
               <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border bg-primary px-6 py-4">
                 <p className="label flex items-center gap-3 text-on-dark">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -216,8 +216,11 @@ export default function Warranty() {
 
           {/* THE HONEST GAP. Do not fill this in with invented numbers. */}
           <div className="mt-8 rounded-lg bg-primary p-7 shadow-[var(--shadow-dark)]">
-            <p className="label text-accent">On the terms themselves</p>
-            <h3 className="mt-3 font-display text-xl font-bold text-on-dark">
+            {/* NO EYEBROW. The small amber label that sat here was the device the client had
+              * removed from every section on the home page: "remove all of these little headings
+              * before sections." These three survived because they are inside dark panels rather
+              * than above section heads, which is a distinction the reader does not make. */}
+            <h3 className="font-display text-xl font-bold text-on-dark">
               We do not publish the year counts on this page.
             </h3>
             <p className="mt-3 max-w-[80ch] text-[0.95rem] leading-relaxed text-on-dark-muted">

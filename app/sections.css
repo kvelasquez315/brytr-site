@@ -7,26 +7,11 @@
  */
 
 @layer components {
-  /* THE SPINE — a vertical length of channel beside a branch of the decision tree on
-   * /services. Same diode pitch as .run-seg, turned 90°, so the device reads as the same
-   * product in both places rather than as two different decorations. */
-  .run-spine {
-    position: relative;
-    flex: none;
-    inline-size: 3px;
-    align-self: stretch;
-    border-radius: 3px;
-    background-image: radial-gradient(
-      circle,
-      var(--brand-accent) 0 1.6px,
-      color-mix(in oklab, var(--brand-accent) 55%, transparent) 1.6px 2.2px,
-      transparent 2.5px
-    );
-    background-size: 3px 14px;
-    background-position: center 2px;
-    background-repeat: repeat-y;
-    opacity: 0.75;
-  }
+  /* .run-spine WAS HERE AND IS NOT COMING BACK. A 3px vertical channel with a diode pitch
+     painted on it, beside each branch of the decision tree on /services. The identical device sat
+     beside the install steps on the home page and the client read it as a border that had failed
+     to load. Both are now `.run` in app/globals.css: the lights, with nothing for them to sit on.
+     Deleted rather than left commented, because a stylesheet is not a museum. */
 
   /* SCENE BARS — the twelve-month strip on /services/permanent-christmas-lights.
    * These are PRODUCT colors, not brand colors: what the diodes are actually set to on

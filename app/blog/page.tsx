@@ -67,7 +67,7 @@ export default function BlogHub() {
         <div className="shell">
           <Link
             href={`/blog/${feat.slug}`}
-            className="group grid overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] md:grid-cols-[42fr_58fr]"
+            className="group grid overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border md:grid-cols-[42fr_58fr]"
           >
             {featPic ? (
               <div className="relative min-h-[15rem] md:min-h-[20rem]">
