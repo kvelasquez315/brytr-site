@@ -72,44 +72,50 @@ import { ServiceLeaflet } from "@/components/sections/service-leaflet";
  * - not the JSX, which is a much larger and irrelevant number:
  *
  *     1,740  before, all of it prose a reader scrolls past
- *       687  after, prose a reader scrolls past
- *       306  the FAQ, mostly folded into collapsed cards but in the HTML (see section 8)
- *       993  total indexable, against the 800 floor the client set for SEO
+ *       978  now, prose a reader scrolls past
+ *       311  the FAQ, mostly folded into collapsed cards but in the HTML (see section 8)
+ *     1,289  total indexable, against the 800 floor the client set for SEO
  *
- * So the page a reader meets is 60% shorter while the page a crawler reads is 43% shorter. That gap
- * is the whole trick, and it is bought by `forceMount` on the accordion rather than by padding.
+ * The visible figure went 1,740 -> 687 -> 978, and both moves were right for what was being asked.
+ * Down, when the note was "way too much text". Back up, when it was "make it more full, like a real
+ * professional company" - because the second pass adds CARDS AND PHOTOGRAPHS, and their labels are
+ * words. A grid of eight services carries more text than a grid of five and reads as less, which is
+ * the distinction the raw number cannot make and the reason it is only ever a floor here.
  *
- * THE MARGIN IS 193 WORDS AND IT USED TO BE 405. Cutting the FAQ from eleven questions to six was
- * the client's call and the right one visually, but it spent half the headroom - so the next round
- * of trimming visible prose has to check this number rather than assume it.
+ * FULLNESS IS CONTENT THE PAGE ALREADY OWNED. Brytr installs ten things and the page showed five.
+ * There are six real Google reviews and it showed three. The work grid was six tiles against a
+ * library of ninety-five photographs. Nothing here was invented to fill a row:
  *
- * THE GROUND, AND A DELIBERATE DEPARTURE FROM THE RULE AT THE TOP OF globals.css:
+ *     services     5 -> 8 cards, plus the promo card = a full 3x3
+ *     reviews      3 -> 6 = two complete rows instead of one that stops
+ *     recent work  6 -> 9 = a 3x3 portfolio rather than a sample
+ *
+ * THE GROUND, AND TWO DELIBERATE DEPARTURES FROM globals.css:
  *
  *     1 Hero        primary + photograph   dark
- *     2 Services    background             light
+ *     2 Services    card (white)           light
  *     3 SceneWipe   muted                  light
- *     4 WhoWeAre    background             light
+ *     4 WhoWeAre    card (white)           light
  *     5 HowWeWork   raise                  dark
  *     6 Reviews     muted                  light
  *     7 RecentWork  primary                dark
- *     8 Faqs        background             light
+ *     8 Faqs        card (white)           light
  *     9 Closer      muted                  light   -> into the primary footer
  *
- * Services is second and the drag demo third, which is the client's call and the right one: an
- * interactive control immediately after the hero asks a visitor to play with something before
- * anyone has told them what is being sold. Claim, then proof.
+ * WHITE IS A SECTION GROUND NOW, against HANDOFF.md's "No pure white section backgrounds. White is
+ * for cards." The client: "it's very beige. It's just very beige backgrounds." Measured, he is
+ * right and the rule is why: `background` is L* 93.8 and `muted` is L* 89.7, which is dE 4.7 apart
+ * - at the edge of perceptible. Six sections alternated between them and section-rhythm.mjs passed
+ * every time, because it checks that neighbours are different TOKENS, not different COLOURS. White
+ * against muted is dE 12.5. The alternation is now something a reader can see.
  *
- * scripts/section-rhythm.mjs enforces that no two adjacent sections share a ground, and this passes
- * - no two neighbours are the same surface anywhere down the page.
+ * AND THE THREE-LIGHT RULE at the top of globals.css still bends at 2-3-4, on his earlier
+ * instruction that the site read too dark. Those three are white, muted, white - which, at dE 12.5
+ * a step, is now a real alternation rather than a nominal one.
  *
- * WHAT IT DOES BREAK is the unenforced note at the top of globals.css, "support surfaces so the page
- * never runs 3 light or 3 dark in a row", at sections 2, 3 and 4. That is on instruction: "the site
- * in general just looks dark, which is very weird for a lighting company." The drag demo used to sit
- * on `raise` directly under a night-photograph hero, so the first two screens were both dark and the
- * impression was set before a reader reached anything light. The three-light run is three DIFFERENT
- * surfaces (background, muted, background) and they alternate visibly. Six light sections to three
- * dark, where the page this replaced ran five lights in a row and still read as dark - because the
- * two darkest were its first two.
+ * Services is second and the drag demo third, also his call and the right one: an interactive
+ * control immediately after the hero asks a visitor to play with something before anyone has told
+ * them what is being sold. Claim, then proof.
  */
 
 /* ---------- shared parts ---------------------------------------------------- */
@@ -185,12 +191,26 @@ function Stars({ size = "1rem" }: { size?: string }) {
  * LINK, so the button was never anything but a second copy of the card's own href taking up 48px.
  * The detail lives on the service page, which is where somebody who has chosen goes.
  * ========================================================================= */
+/* EIGHT, NOT FIVE, WHICH MAKES THE GRID 3x3 WITH THE PROMO CARD.
+ *
+ * The client: "make it more full and more professional, like it's a big site, a real professional
+ * company" - while keeping the shapes. Brytr installs ten things and the home page was showing
+ * five of them, which is a small company's page whether or not the company is small. The three
+ * added here are the seasonal ones, which are also the three most searched: Christmas, game day and
+ * the other saved scenes.
+ *
+ * Five cards plus the promo made six cells - two tidy rows that stopped early. Eight plus the promo
+ * makes nine, which fills three rows exactly at lg and two at md. No new pattern, more of the one
+ * that was already there. */
 const SERVICE_CARDS: { slug: string; label: string }[] = [
   { slug: "permanent-roofline-lighting", label: "Roofline and eaves" },
   { slug: "landscape-lighting", label: "Landscape and beds" },
   { slug: "patio-pergola-bistro-lighting", label: "Patio and pergola" },
   { slug: "hardscape-lighting", label: "Walls, steps and coping" },
   { slug: "soffit-lighting", label: "Soffit and architectural" },
+  { slug: "permanent-christmas-lights", label: "Christmas, installed once" },
+  { slug: "gameday-lighting", label: "Game day colours" },
+  { slug: "holiday-seasonal-scenes", label: "Every other holiday" },
 ];
 
 export function Services() {
@@ -559,9 +579,18 @@ export function HowWeWork() {
  * 6 - WHAT OUR CLIENTS SAY. The page's one loud heading, and the only section that keeps
  * `scale="hero"`.
  *
- * SIX CARDS BECAME THREE. Six verbatim Google reviews is about 270 words of other people's prose in
- * one section, and by the fourth card a reader has stopped reading them and started counting them.
- * Three is a row, reads as a sample, and /reviews has the rest.
+ * SIX CARDS, HAVING BEEN THREE, HAVING BEEN SIX. Worth recording rather than quietly reverting.
+ *
+ * They were cut to three in the round about the page being too long, on the argument that six
+ * verbatim reviews is 270 words of other people's prose and that by the fourth card a reader has
+ * stopped reading them and started counting them. That argument was about LENGTH, and it was
+ * answering the right complaint at the time.
+ *
+ * The complaint now is the opposite one - "make it more full and more professional, like it's a big
+ * site, a real professional company" - and three reviews in a three-column grid is one row that
+ * stops. Social proof is the one thing on a contractor's page where volume IS the argument: six
+ * cards in two full rows say more by existing than any of them say in words. All six are real and
+ * already written; the page was choosing not to show half of them.
  *
  * The ground moved from `raise` to `muted`. The section was the page's dark moment, but what made
  * it loud was the 64px heading, not the ground - and with the drag demo and HowWeWork now both on
@@ -571,7 +600,7 @@ export function HowWeWork() {
  * Every word in these cards is verbatim from Google. Dates appear only where Google gave one.
  * ========================================================================= */
 export function Reviews() {
-  const three = reviews.slice(0, 3);
+  const shown = reviews.slice(0, 6);
   return (
     <section className="section bg-muted">
       <div className="shell">
@@ -606,7 +635,7 @@ export function Reviews() {
           * quotes do in between. That is the alignment he asked for, and it is the reason the
           * quote length no longer shows. */}
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {three.map((r) => (
+          {shown.map((r) => (
             <article
               key={r.name}
               className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)]"
@@ -661,6 +690,10 @@ export function Reviews() {
  * a rendering and none of it is stock." That is true and it is worth saying, so it moved into the
  * heading's own eyebrow row rather than being a third line of prose above a photo grid.
  * ========================================================================= */
+/* NINE, NOT SIX. Six tiles is two rows that stop; nine is a full 3x3 and reads as a portfolio
+ * rather than a sample. The three added are chosen for range rather than to pad a row - snow on the
+ * ground, two colours held apart by zone, and the turret detail - because a work grid that is nine
+ * front elevations at night is nine of the same photograph. */
 const WORK: { key: string; scene: string }[] = [
   { key: "homePrairieTwilight", scene: "Civil twilight, warm white" },
   /* Was seqRedGreen, which is the ninety-second-sequence house from the SAME hover point as the
@@ -671,6 +704,9 @@ const WORK: { key: string; scene: string }[] = [
   { key: "homeBrickGablesGold", scene: "Gables, warm white" },
   { key: "homeShakeBrick", scene: "Eave downlights" },
   { key: "gamedayRedFull", scene: "Game day, one tap" },
+  { key: "winterSnowDusk", scene: "February, nobody on a ladder" },
+  { key: "sceneWarmBlueBand", scene: "Two zones, two colours" },
+  { key: "archAtNight", scene: "The turret, every facet" },
 ];
 
 export function RecentWork() {

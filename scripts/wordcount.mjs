@@ -73,7 +73,12 @@ const h1 = [...main.matchAll(/<h1\b/g)].length;
 const h2 = [...main.matchAll(/<h2\b/g)].length;
 const h3 = [...main.matchAll(/<h3\b/g)].length;
 const forms = [...main.matchAll(/<form\b/g)].length;
-const fields = [...main.matchAll(/<(?:input|select|textarea)\b/g)].length;
+/* React ships its own hidden inputs for a Server Action - $ACTION_REF, $ACTION_KEY and the
+ * argument slots - so a naive count of <input> reported 22 fields on a page with 8. Those are
+ * plumbing, not questions being asked of a customer, and the number is only interesting as "how
+ * much is this form asking for". */
+const fields = [...main.matchAll(/<(?:input|select|textarea)\b[^>]*>/g)]
+  .filter((m) => !/\bname="\$ACTION/.test(m[0])).length;
 const buttons = [...main.matchAll(/rounded-full/g)].length;
 
 console.log(`\n  ${path}`);
