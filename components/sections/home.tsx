@@ -10,7 +10,7 @@ import { homeFaqs, pricingFaqs } from "@/content/faqs";
 import { SectionHead, QuoteForm } from "@/components/ui/bits";
 import { Faq } from "@/components/sections/faq";
 import { ServiceLeaflet } from "@/components/sections/service-leaflet";
-import { ChannelDetail } from "@/components/sections/channel-detail";
+import { InstallRun } from "@/components/sections/install-run";
 
 /* THE HOME PAGE SECTIONS.
  *
@@ -537,6 +537,7 @@ const HOW_ITEMS: { title: string; body: string }[] = [
 ];
 
 export function HowWeWork() {
+  const shot = images.crewRoofFascia;
   return (
     <section className="section bg-raise">
       <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:gap-16">
@@ -549,6 +550,22 @@ export function HowWeWork() {
             lede="This gets drilled into your fascia and left there. How it is fixed and sealed is the difference at year five."
           />
 
+          {/* THE FIVE STAGES ARE ONE DRAWING NOW - components/sections/install-run.tsx.
+            *
+            * "For that list of words right there, we should have some sort of designed graphic to
+            * go there for all of those different things that we are talking about."
+            *
+            * Third attempt at this column and the first two are worth naming, because they were
+            * different mistakes. The .run-spine was a 3px dotted rule beside the rows, which read
+            * as a border that had failed to load. The marks were a stock glyph per row, which is a
+            * list with decoration on it. Neither was a graphic OF the five things.
+            *
+            * This is: one length of channel seen face-on with a diode at each stage and the output
+            * ramping from the first to the last, so reading it top to bottom is watching the run
+            * come up. The labels live inside the drawing, annotating their own nodes the way the
+            * callouts annotate the eave section.
+            *
+            * OLD COMMENT KEPT BELOW for the history of what was here before. */}
           {/* A MARK PER STEP, REPLACING THE CHANNEL SPINE.
             *
             * `.run-spine` used to run down the left of this list - a 3px column of amber diodes,
@@ -563,14 +580,7 @@ export function HowWeWork() {
             * So each step gets its own object instead - a rule, a screw, a phone, a shield, two
             * ticks. See components/ui/marks.tsx for why marks are back at all after the previous
             * set was deleted, and what makes these different. */}
-          <ul className="mt-9 grid gap-6">
-            {HOW_ITEMS.map((h) => (
-              <li key={h.title} className="border-t border-on-dark/15 pt-4">
-                <h3 className="font-display text-[1.08rem] font-bold leading-snug text-on-dark">{h.title}</h3>
-                <p className="mt-1.5 text-[0.92rem] leading-snug text-on-dark-muted">{h.body}</p>
-              </li>
-            ))}
-          </ul>
+          <InstallRun className="mt-9 block w-full" />
 
           <div className="mt-auto pt-9">
             <div className="flex flex-wrap items-center gap-4">
@@ -580,21 +590,20 @@ export function HowWeWork() {
           </div>
         </div>
 
-        {/* THE DRAWING, WHERE A PHOTOGRAPH USED TO BE. "When I said make a graphic that didn't mean
-          * just add icons. This means make a design."
+        {/* A PHOTOGRAPH AGAIN, AND THE EAVE DRAWING MOVED TO /how-it-works.
           *
-          * A crew photograph shows people working; it does not show WHAT THEY DID, which is the
-          * only thing this section is arguing about. components/sections/channel-detail.tsx is a
-          * measured section through the eave - the shingle course nothing fastens through, the
-          * fascia board every fixing lands in, the channel on its face, the sealed screws, the
-          * diode and its lens - drawn in the same linework and the same --draw-* palette as the
-          * elevations this site has used since it was built.
+          * The drawing was here for one round and the aspect was wrong for the slot: it is a
+          * 700x450 sheet in a column that runs the height of five stages, so it sat letterboxed in
+          * the middle with a dead band above and below. "We should have an image on the right
+          * side" - and a column this tall wants a photograph, which crops to fill.
           *
-          * It is the one image on the site a competitor could not also have, because it is a
-          * drawing of Brytr's own method rather than a picture of a lit house. */}
-        <div className="overflow-hidden rounded-lg ring-1 ring-on-dark/10">
-          <ChannelDetail className="block h-full w-full" />
-        </div>
+          * The drawing is not discarded. It is on /how-it-works, which is the page that exists to
+          * explain exactly what it draws. */}
+        {shot?.src && (
+          <div className="relative min-h-[26rem] overflow-hidden rounded-lg bg-primary">
+            <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 28rem, 100vw" className="object-cover" />
+          </div>
+        )}
       </div>
     </section>
   );

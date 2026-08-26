@@ -4,6 +4,7 @@ import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
 import { InstallDaySequence } from "@/components/sections/install-day";
 import { PhotoStrip } from "@/components/sections/photo-parts";
+import { ChannelDetail } from "@/components/sections/channel-detail";
 
 import { Jsonld, breadcrumb } from "@/lib/schema";
 
@@ -240,6 +241,14 @@ export default function HowItWorks() {
             title="What happens before the van, and after it."
             lede="Install day is one day. The two things on either side of it are where most of the reassurance actually lives."
           />
+
+          {/* THE EAVE SECTION, moved here from the home page. It was in a tall column there and sat
+            * letterboxed; this page is the one that exists to explain what it draws, and here it
+            * gets the full shell width. Inside the existing section rather than as a new one, so
+            * scripts/section-rhythm.mjs sees no new ground. */}
+          <div className="mt-10 overflow-hidden rounded-lg ring-1 ring-on-dark/10">
+            <ChannelDetail className="block w-full" />
+          </div>
 
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             <article className="flex flex-col rounded-lg bg-raise p-7 ring-1 ring-on-dark/10">
