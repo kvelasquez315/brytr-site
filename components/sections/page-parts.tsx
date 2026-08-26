@@ -484,7 +484,11 @@ export function PageCta({
      * panel because it is the one thing on this band we want somebody to act on. */
     return (
       <section className={`section ${CTA_GROUND[ground ?? "muted"]}`}>
-        <div className="shell grid items-start gap-10 lg:grid-cols-[1fr_24rem] lg:gap-14">
+        {/* items-CENTER, and the column is wider. The copy in this closer is a heading, a short
+          * lede and three ticks, and the form beside it will always be taller. With items-start
+          * the difference all collected at the bottom left as one hole; centred, the copy sits
+          * against the middle of the form and the leftover splits evenly above and below. */}
+        <div className="shell grid items-center gap-10 lg:grid-cols-[1fr_26rem] lg:gap-14">
           <div>
             {head}
             <div className="mt-9 border-t border-border pt-7">{readNext}</div>

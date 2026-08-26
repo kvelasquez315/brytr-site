@@ -132,12 +132,17 @@ export function QuoteForm({
         * rather than three stacked rows takes about 90px off its height, and on a hero card
         * height is the argument.
         *
-        * So the two cases are separated. `mini` is two short fields, "Jordan Miller" and
-        * "402-555-0134", which fit 180px and always pair. Everything else carries an email and a
-        * city select, which do not, so they stack until a container is genuinely wide. Nothing on
-        * the site is that wide today, which is the correct outcome rather than a missing feature. */}
-      <div className={`grid gap-4 ${mini ? "grid-cols-2" : "@lg:grid-cols-2"}`}>
-        <div className={mini ? "" : "@lg:col-span-2"}>
+        * THE ANSWER IS PER FIELD, NOT PER FORM, and stacking everything was an overcorrection.
+        * Making the whole form one column stopped the clipping and made it five rows tall, which
+        * in the closer left the copy column finishing 260px above the form and a hole in the
+        * bottom left of the section on twelve templates.
+        *
+        * Only two fields actually need the width. "you@example.org" and the city select both
+        * clip at 156px; "Jordan Miller" and "402-555-0134" do not. So the grid is two columns
+        * from a 20rem container, the name and the phone share the first row, and everything with
+        * a long value spans both. One row shorter than the stack, and nothing is cut off. */}
+      <div className={`grid gap-4 ${mini ? "grid-cols-2" : "@xs:grid-cols-2"}`}>
+        <div>
           <Label htmlFor={variant + "-name"}>Full name</Label>
           <Input id={variant + "-name"} name="name" required autoComplete="name" placeholder="Jordan Miller" />
         </div>
@@ -146,18 +151,18 @@ export function QuoteForm({
           <Input id={variant + "-phone"} name="phone" type="tel" required autoComplete="tel" className="u" placeholder="402-555-0134" />
         </div>
         {!mini && (
-          <div>
+          <div className="@xs:col-span-2">
             <Label htmlFor={variant + "-email"}>Email</Label>
             <Input id={variant + "-email"} name="email" type="email" required autoComplete="email" placeholder="you@example.org" />
           </div>
         )}
         {variant === "full" && (
-          <div className="@lg:col-span-2">
+          <div className="@xs:col-span-2">
             <Label htmlFor={variant + "-street"}>Street address</Label>
             <Input id={variant + "-street"} name="street" autoComplete="street-address" placeholder="1400 N 90th St" />
           </div>
         )}
-        <div className={mini ? "col-span-2" : ""}>
+        <div className="col-span-2">
           <Label htmlFor={variant + "-city"}>City</Label>
           <Select id={variant + "-city"} name="city" defaultValue={city ?? ""} required>
             <option value="">Select your city</option>
@@ -167,7 +172,7 @@ export function QuoteForm({
           </Select>
         </div>
         {!mini && (
-          <div>
+          <div className="@xs:col-span-2">
             <Label htmlFor={variant + "-scope"}>
               {variant === "financing" ? "Estimated roofline" : "What are you lighting"}
             </Label>
@@ -199,7 +204,7 @@ export function QuoteForm({
           </div>
         )}
         {variant === "full" && (
-          <div className="@lg:col-span-2">
+          <div className="@xs:col-span-2">
             <Label htmlFor={variant + "-notes"}>Notes</Label>
             <Textarea id={variant + "-notes"} name="notes" rows={3} placeholder="Two story, dormers on the front elevation." />
           </div>
