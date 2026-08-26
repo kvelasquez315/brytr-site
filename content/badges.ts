@@ -53,6 +53,19 @@ export const brandLogo: { src: string; width: number; height: number; alt: strin
   alt: "Brytr Co",
 };
 
+/* THE MASTER, FOR LIGHT SURFACES. The note above says the black original is "kept for print and for
+ * any light surface later" - the header is that surface now. It went white, so the white wordmark
+ * that used to sit on it would have been invisible on it.
+ *
+ * This is the file the client sent, untouched: black wordmark, amber spark, over transparency. The
+ * light lockup is the derived one. */
+export const brandLogoDark: { src: string; width: number; height: number; alt: string } | null = {
+  src: "/img/brytr-logo.png",
+  width: 2048,
+  height: 906,
+  alt: "Brytr Co",
+};
+
 /* MANUFACTURER MARKS. Haven and Jellyfish are somebody else's trademarks, and the rule is the
  * same one that governs the Google mark above: used in their own colours from their own asset
  * pack, or not used. Not traced from memory, not lifted off a dealer page, not set in Archivo.

@@ -43,8 +43,12 @@ export function Footer() {
           * of forty-five identical links on a phone, which is a scroll tax and not a navigation. */}
         <div className="grid gap-10 lg:grid-cols-6">
           <div className="lg:col-span-1">
-            {/* Same slot as the header — one source for the mark, so the two cannot drift into
-              * showing different lockups. See the note on `brandLogo` in content/badges.ts. */}
+            {/* THE LIGHT LOCKUP, and the header now uses the dark one. That is a change from
+              * "one source so the two cannot drift", which was right while both sat on navy: the
+              * header went white, and a white wordmark on a white bar is nothing at all. Two
+              * lockups of the same mark, each on the ground it was made for - see `brandLogo` and
+              * `brandLogoDark` in content/badges.ts, which is still the single place either is
+              * declared. */}
             {brandLogo ? (
               <Image
                 src={brandLogo.src}

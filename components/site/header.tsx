@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { site } from "@/content/site";
-import { brandLogo } from "@/content/badges";
+import { brandLogoDark } from "@/content/badges";
 import type { NavItem } from "@/content/nav";
 import { Button } from "@/components/ui/button";
 
@@ -33,14 +33,14 @@ function Wordmark({ className }: { className?: string }) {
    * Height-constrained with width:auto rather than sized to a box, so a lockup of any
    * proportion drops in without being letterboxed or stretched. `priority` because this is
    * above the fold on all eighty-one pages. */
-  if (brandLogo) {
+  if (brandLogoDark) {
     return (
       <span className={className}>
         <Image
-          src={brandLogo.src}
-          alt={brandLogo.alt}
-          width={brandLogo.width}
-          height={brandLogo.height}
+          src={brandLogoDark.src}
+          alt={brandLogoDark.alt}
+          width={brandLogoDark.width}
+          height={brandLogoDark.height}
           priority
           className="h-8 w-auto lg:h-9"
         />
@@ -49,7 +49,7 @@ function Wordmark({ className }: { className?: string }) {
   }
   return (
     <span className={className}>
-      <span className="font-display text-2xl font-black tracking-[-0.04em] text-on-dark">brytr</span>
+      <span className="font-display text-2xl font-black tracking-[-0.04em] text-foreground">brytr</span>
       <span className="ml-0.5 inline-block size-2 translate-y-[-0.35rem] rounded-full bg-accent" />
     </span>
   );
@@ -93,11 +93,22 @@ export function Header({ nav }: { nav: NavItem[] }) {
   return (
     <>
       {/* urgency strip — Freedom slot 0 / Phoenix device */}
-      <div className="bg-accent text-accent-foreground">
-        <div className="shell flex min-h-10 items-center justify-center gap-2 py-2 text-center text-xs font-semibold sm:text-sm">
+      {/* THE UTILITY STRIP WENT DARK AND THE HEADER WENT WHITE.
+        *
+        * Both sites the client named as references do this exact thing: edentreepros.com opens on a
+        * dark green strip over a white bar, and freedomexteriorsusa.com is white-headed too. Brytr
+        * had the arrangement inverted - a full-width AMBER strip over a navy bar - which puts the
+        * loudest colour on the site in the first 40 pixels of all 74 pages, above a dark bar, above
+        * a dark photograph. Three heavy bands before any content.
+        *
+        * Amber is the CTA colour on this site. Spending it on a permanent strip is spending it on
+        * something nobody is being asked to click, and it is most of why the top of the page read
+        * as a local-business template rather than a company site. It survives here as the link. */}
+      <div className="bg-primary text-on-dark-muted">
+        <div className="shell flex min-h-10 items-center justify-center gap-2 py-2 text-center text-xs sm:text-sm">
           <span>
             2026 holiday slots are filling.{" "}
-            <Link href="/free-design-consultation" className="tap-44 underline decoration-2 underline-offset-2">
+            <Link href="/free-design-consultation" className="tap-44 font-semibold text-accent underline decoration-2 underline-offset-2">
               Book by November 15
             </Link>
             .
@@ -106,7 +117,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
       </div>
 
       <header
-        className="sticky top-0 z-50 border-b border-on-dark/10 bg-primary"
+        className="sticky top-0 z-50 border-b border-border bg-card"
         onMouseLeave={() => hold(null)}
       >
         <div className="shell flex h-19 items-center gap-6 lg:grid lg:grid-cols-[1fr_auto_1fr]">
@@ -125,7 +136,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
                   onFocus={() => hold(n.groups ? n.label : null)}
                   onClick={() => setMenu(null)}
                   className={`flex items-center gap-1.5 whitespace-nowrap py-2 text-[0.95rem] font-medium transition-colors duration-[--dur-fast] ${
-                    menu === n.label ? "text-accent" : "text-on-dark/85 hover:text-accent"
+                    menu === n.label ? "text-accent-ink" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {n.label}
@@ -144,7 +155,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
           </nav>
 
           <div className="hidden items-center gap-4 lg:flex lg:justify-self-end">
-            <a href={site.phoneHref} className="u text-[0.95rem] font-medium text-on-dark hover:text-accent">
+            <a href={site.phoneHref} className="u text-[0.95rem] font-medium text-foreground hover:text-accent-ink">
               {site.phone}
             </a>
             <Button asChild size="sm">
@@ -153,19 +164,19 @@ export function Header({ nav }: { nav: NavItem[] }) {
           </div>
 
           <div className="ml-auto flex items-center gap-2 lg:hidden">
-            <a href={site.phoneHref} className="u px-2 py-3 text-sm font-medium text-on-dark">
+            <a href={site.phoneHref} className="u px-2 py-3 text-sm font-medium text-foreground">
               {site.phone}
             </a>
             <button
               onClick={() => setOpen((v) => !v)}
               aria-expanded={open}
               aria-label="Menu"
-              className="grid size-11 place-items-center rounded-md border border-on-dark/25"
+              className="grid size-11 place-items-center rounded-md border border-input"
             >
               <span className="relative block h-3 w-5">
-                <span className="absolute inset-x-0 top-0 h-0.5 bg-on-dark" />
-                <span className="absolute inset-x-0 top-1.5 h-0.5 bg-on-dark" />
-                <span className="absolute inset-x-0 top-3 h-0.5 bg-on-dark" />
+                <span className="absolute inset-x-0 top-0 h-0.5 bg-foreground" />
+                <span className="absolute inset-x-0 top-1.5 h-0.5 bg-foreground" />
+                <span className="absolute inset-x-0 top-3 h-0.5 bg-foreground" />
               </span>
             </button>
           </div>
@@ -174,7 +185,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
         {/* ── desktop panel ── */}
         {active && (
           <div
-            className="absolute inset-x-0 top-full hidden border-b border-t border-on-dark/10 bg-primary shadow-[var(--shadow-dark)] lg:block"
+            className="absolute inset-x-0 top-full hidden border-b border-t border-border bg-card shadow-[var(--shadow-md)] lg:block"
             onMouseEnter={() => hold(active.label)}
           >
             <div className="shell grid gap-x-10 gap-y-8 py-9 lg:grid-cols-[1fr_18rem] lg:gap-x-14">
@@ -188,17 +199,17 @@ export function Header({ nav }: { nav: NavItem[] }) {
                     className={single ? "contents" : ""}
                     style={!single && g.span ? { gridColumn: `span ${g.span}` } : undefined}
                   >
-                    {!single && g.heading && <p className="label mb-3 text-accent">{g.heading}</p>}
+                    {!single && g.heading && <p className="label mb-3 text-accent-ink">{g.heading}</p>}
                     <ul className={single ? "contents" : g.span ? "columns-2 gap-x-10" : ""}>
                       {g.links.map((l) => (
                         <li key={l.href}>
                           <Link
                             href={l.href}
                             onClick={() => setMenu(null)}
-                            className="flex items-baseline justify-between gap-3 rounded-sm px-2.5 py-2 text-[0.95rem] text-on-dark/85 transition-colors duration-[--dur-fast] hover:bg-raise hover:text-accent"
+                            className="flex items-baseline justify-between gap-3 rounded-sm px-2.5 py-2 text-[0.95rem] text-muted-foreground transition-colors duration-[--dur-fast] hover:bg-muted hover:text-foreground"
                           >
                             <span>{l.label}</span>
-                            {l.note && <span className="u shrink-0 text-xs text-on-dark-muted">{l.note}</span>}
+                            {l.note && <span className="u shrink-0 text-xs text-muted-foreground">{l.note}</span>}
                           </Link>
                         </li>
                       ))}
@@ -208,7 +219,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
               </div>
 
               {active.feature && (
-                <div className="flex flex-col rounded-md bg-raise p-6 ring-1 ring-accent/25">
+                <div className="flex flex-col rounded-md bg-primary p-6">
                   <p className="label text-accent">{active.feature.label}</p>
                   <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-on-dark-muted">
                     {active.feature.body}
@@ -228,15 +239,15 @@ export function Header({ nav }: { nav: NavItem[] }) {
 
         {/* ── mobile sheet, with the same children as accordions ── */}
         {open && (
-          <div className="max-h-[calc(100dvh-8rem)] overflow-y-auto border-t border-on-dark/10 bg-primary lg:hidden">
+          <div className="max-h-[calc(100dvh-8rem)] overflow-y-auto border-t border-border bg-card lg:hidden">
             <div className="shell flex flex-col py-4">
               {nav.map((n) => (
-                <div key={n.href} className="border-b border-on-dark/10">
+                <div key={n.href} className="border-b border-border">
                   <div className="flex items-center justify-between">
                     <Link
                       href={n.href}
                       onClick={() => setOpen(false)}
-                      className="flex-1 py-3.5 text-lg font-medium text-on-dark"
+                      className="flex-1 py-3.5 text-lg font-medium text-foreground"
                     >
                       {n.label}
                     </Link>
@@ -245,7 +256,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
                         onClick={() => setSub((v) => (v === n.label ? null : n.label))}
                         aria-expanded={sub === n.label}
                         aria-label={`${n.label} pages`}
-                        className="grid size-11 place-items-center text-on-dark-muted"
+                        className="grid size-11 place-items-center text-muted-foreground"
                       >
                         <Chevron className={`size-4 ${sub === n.label ? "rotate-180" : ""}`} />
                       </button>
@@ -255,17 +266,17 @@ export function Header({ nav }: { nav: NavItem[] }) {
                     <div className="pb-3">
                       {n.groups.map((g) => (
                         <div key={g.heading ?? "g"} className="mb-2">
-                          {g.heading && <p className="label px-1 pb-1 pt-2 text-accent">{g.heading}</p>}
+                          {g.heading && <p className="label px-1 pb-1 pt-2 text-accent-ink">{g.heading}</p>}
                           <ul>
                             {g.links.map((l) => (
                               <li key={l.href}>
                                 <Link
                                   href={l.href}
                                   onClick={() => { setOpen(false); setSub(null); }}
-                                  className="flex items-baseline justify-between gap-3 py-2.5 pl-1 pr-2 text-[0.95rem] text-on-dark/85"
+                                  className="flex items-baseline justify-between gap-3 py-2.5 pl-1 pr-2 text-[0.95rem] text-muted-foreground"
                                 >
                                   <span>{l.label}</span>
-                                  {l.note && <span className="u text-xs text-on-dark-muted">{l.note}</span>}
+                                  {l.note && <span className="u text-xs text-muted-foreground">{l.note}</span>}
                                 </Link>
                               </li>
                             ))}
