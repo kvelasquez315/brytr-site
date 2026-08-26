@@ -65,10 +65,14 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
     last_name: rest.join(" "),
     phone,
     email: get("email"),
-    address1: get("street"),
+    /* `address` replaced both the old city select and the `full` variant's separate street input.
+     * It still goes out as address1, which is the key LeadConnector already maps. `city` is only
+     * present now when the page itself knew the town, so it is sent when it exists and omitted
+     * when it does not, rather than posting an empty string over a good value. */
+    address1: get("address"),
     city: get("city"),
     lighting_scope: get("scope"),
-    notes: get("notes"),
+    notes: get("note"),
     source: "brytrco.com",
     page: get("page"),
     form_variant: get("form"),

@@ -305,7 +305,7 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      <PageCta variant="phone" omit={["/how-it-works"]} />
+      <PageCta variant="phone" photos={valueProps["/how-it-works"].photos} omit={["/how-it-works"]} />
     </Shell>
   );
 }

@@ -320,7 +320,7 @@ export default function About() {
         </div>
       </section>
 
-      <PageCta variant="phone" omit={["/about"]} />
+      <PageCta variant="phone" photos={valueProps["/about"].photos} omit={["/about"]} />
     </Shell>
   );
 }

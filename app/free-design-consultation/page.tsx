@@ -321,6 +321,7 @@ export default function Consult() {
         * the page for. So it makes the other argument: pick up the phone instead. */}
       <PageCta
         variant="phone"
+        photos={valueProps["/free-design-consultation"].photos}
         title="Or skip the form and just call."
         body="Tell us the cross streets and roughly how much roofline you are looking at, and we will give you the per-foot basis and a range before anybody schedules anything."
         omit={["/pricing"]}

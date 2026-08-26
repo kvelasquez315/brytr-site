@@ -3,7 +3,6 @@
 import { useActionState } from "react";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { cities } from "@/content/cities";
 import { site } from "@/content/site";
 import { Button } from "@/components/ui/button";
 import { Input, Label, Select, Textarea } from "@/components/ui/field";
@@ -106,6 +105,9 @@ export function QuoteForm({
       {/* Context for whoever picks the lead up in the CRM: which page it came from and which form. */}
       <input type="hidden" name="page" value={pathname} />
       <input type="hidden" name="form" value={variant} />
+      {/* The city pages still know their own town. Nobody picks it any more, so it travels as a
+        * hidden value and the CRM keeps the key it has always mapped. */}
+      {city && <input type="hidden" name="city" value={city} />}
 
       {/* The honeypot. Not `display:none` - some bots skip hidden fields and some screen readers
         * announce them - so it is pulled off-screen, taken out of the tab order, and labelled as
@@ -156,20 +158,27 @@ export function QuoteForm({
             <Input id={variant + "-email"} name="email" type="email" required autoComplete="email" placeholder="you@example.org" />
           </div>
         )}
-        {variant === "full" && (
-          <div className="@xs:col-span-2">
-            <Label htmlFor={variant + "-street"}>Street address</Label>
-            <Input id={variant + "-street"} name="street" autoComplete="street-address" placeholder="1400 N 90th St" />
-          </div>
-        )}
+        {/* The `full` variant had its own "Street address" input as well. With City replaced by
+          * Address that was the same question twice on one form, so it is gone rather than
+          * renamed. */}
+        {/* ADDRESS, NOT A CITY SELECT. Asked for on every variant.
+          *
+          * The select was a closed list of the twelve towns we serve, which reads as a filter the
+          * homeowner has to pass rather than a question about their house, and it told us the one
+          * thing we could already guess from the page they were on. The street address is what the
+          * crew actually needs to turn up, and it contains the town anyway.
+          *
+          * Where the page knows the city, it still rides along as a hidden field, so the CRM keeps
+          * the same key it has always had even though nobody is picking it from a list any more. */}
         <div className="col-span-2">
-          <Label htmlFor={variant + "-city"}>City</Label>
-          <Select id={variant + "-city"} name="city" defaultValue={city ?? ""} required>
-            <option value="">Select your city</option>
-            {cities.map((c) => (
-              <option key={c.slug} value={c.name}>{c.name}{c.state === "IA" ? ", IA" : ""}</option>
-            ))}
-          </Select>
+          <Label htmlFor={variant + "-address"}>Address</Label>
+          <Input
+            id={variant + "-address"}
+            name="address"
+            required
+            autoComplete="street-address"
+            placeholder="1400 N 90th St, Omaha"
+          />
         </div>
         {!mini && (
           <div className="@xs:col-span-2">
@@ -203,12 +212,19 @@ export function QuoteForm({
             </Select>
           </div>
         )}
-        {variant === "full" && (
-          <div className="@xs:col-span-2">
-            <Label htmlFor={variant + "-notes"}>Notes</Label>
-            <Textarea id={variant + "-notes"} name="notes" rows={3} placeholder="Two story, dormers on the front elevation." />
-          </div>
-        )}
+        {/* ONE FREE-TEXT FIELD, ON EVERY VARIANT INCLUDING THE HERO. It was a `full`-only "Notes"
+          * box. It is the field that catches the thing no dropdown covers, and the placeholder is
+          * a real example rather than the word "notes", because an empty box labelled Notes gets
+          * left empty. Optional: it must not stand between somebody and the callback. */}
+        <div className="col-span-2">
+          <Label htmlFor={variant + "-note"}>Anything we should know</Label>
+          <Textarea
+            id={variant + "-note"}
+            name="note"
+            rows={mini ? 2 : 3}
+            placeholder="Two storey, dormers on the front elevation."
+          />
+        </div>
       </div>
 
       <Button size="block" className="mt-5" type="submit" disabled={pending}>

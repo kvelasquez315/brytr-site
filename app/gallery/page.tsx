@@ -370,7 +370,7 @@ export default function Gallery() {
         </div>
       </section>
 
-      <PageCta variant="phone" panelLink={{ href: "/recent-projects", label: "The installs, told as case studies" }} />
+      <PageCta variant="phone" photos={valueProps["/gallery"].photos} panelLink={{ href: "/recent-projects", label: "The installs, told as case studies" }} />
     </Shell>
   );
 }

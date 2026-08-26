@@ -461,6 +461,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       {frame === "referee" ? (
         <PageCta
           variant="phone"
+        photos={compareValueProp(c.a, c.b, slug).photos}
           title="We will tell you which of the two to buy."
           body="Free, on the phone, with no version of the answer that benefits us. We do not lead with either of these, so there is no version of this answer that puts money in our pocket."
           omit={["/compare"]}

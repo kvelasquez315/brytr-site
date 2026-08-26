@@ -316,7 +316,7 @@ export default function Reviews() {
         </div>
       </section>
 
-      <PageCta variant="phone" panelLink={{ href: reviewProof.url, label: `Read all ${reviewProof.count} reviews` }} />
+      <PageCta variant="phone" photos={valueProps["/reviews"].photos} panelLink={{ href: reviewProof.url, label: `Read all ${reviewProof.count} reviews` }} />
     </Shell>
   );
 }

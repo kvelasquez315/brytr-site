@@ -359,7 +359,7 @@ export default function Warranty() {
         </div>
       </section>
 
-      <PageCta variant="phone" omit={["/warranty"]} />
+      <PageCta variant="phone" photos={valueProps["/warranty"].photos} omit={["/warranty"]} />
     </Shell>
   );
 }

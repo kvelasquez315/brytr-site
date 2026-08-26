@@ -416,7 +416,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         </div>
       </section>
 
-      <PageCta variant="phone" 
+      <PageCta variant="phone" photos={serviceValueProp(s).photos} 
         /* The questions section above is bg-muted, so the closer would have landed on the same ground and the page would
           * have ended in one undifferentiated block. */
         ground="background"

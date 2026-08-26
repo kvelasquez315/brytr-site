@@ -468,7 +468,7 @@ export default function Pricing() {
         </div>
       </section>
 
-      <PageCta variant="phone" omit={["/pricing"]} 
+      <PageCta variant="phone" photos={valueProps["/pricing"].photos} omit={["/pricing"]} 
         /* The questions section above is bg-muted, so the closer would have landed on the same ground and the page would
           * have ended in one undifferentiated block. */
         ground="background"

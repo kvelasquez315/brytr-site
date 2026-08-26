@@ -367,7 +367,7 @@ export default function RecentProjects() {
         </div>
       </section>
 
-      <PageCta variant="phone" panelLink={{ href: "/gallery", label: "The scene library" }} />
+      <PageCta variant="phone" photos={valueProps["/recent-projects"].photos} panelLink={{ href: "/gallery", label: "The scene library" }} />
     </Shell>
   );
 }

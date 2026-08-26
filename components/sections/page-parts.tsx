@@ -405,8 +405,12 @@ const CTA_GROUND: Record<"muted" | "background" | "primary" | "raise", string> =
 };
 
 export function PageCta({
-  city, variant = "form", stats = true, title, body, omit = [], panelLink, ground,
+  city, variant = "form", stats = true, title, body, omit = [], panelLink, ground, photos,
 }: {
+  /** Candidate keys into content/images.ts for the closer photograph. Passed per template, so
+   *  two pages do not end on the same picture. The first frame that is not a 3/4 portrait wins:
+   *  this slot is 16/9, and cropping a portrait into it throws away most of the picture. */
+  photos?: string[];
   city?: string;
   variant?: "form" | "phone";
   /* THE CLOSER HAS TO ALTERNATE WITH WHATEVER IS ABOVE IT, and it could not.
@@ -479,6 +483,9 @@ export function PageCta({
     ["Free", "design consultation"],
   ];
 
+  const closerPool = (photos ?? []).map((k) => images[k]).filter((x) => x?.src);
+  const closer = closerPool.find((x) => x!.ratio !== "3/4") ?? closerPool[0];
+
   if (variant === "phone") {
     /* Two columns, so the page does not end on an empty half. The number gets the dark
      * panel because it is the one thing on this band we want somebody to act on. */
@@ -492,6 +499,20 @@ export function PageCta({
           <div>
             {head}
             <div className="mt-9 border-t border-border pt-7">{readNext}</div>
+
+            {/* A PHOTOGRAPH, FOR THE SAME REASON THE HOME CLOSER HAS ONE.
+              *
+              * This column is a heading, a short lede, three ticks and a line of links. The form
+              * beside it is six fields. Centring the two stopped the gap collecting at the bottom
+              * left, but left roughly 190px of empty limestone above and below instead, and the
+              * fix for empty space on this site has never been more words.
+              *
+              * Hidden below lg, where the two columns stack and there is no space to fill. */}
+            {closer?.src && (
+              <div className="relative mt-9 hidden aspect-16/9 overflow-hidden rounded-lg bg-primary ring-1 ring-border lg:block">
+                <Image src={closer.src} alt={closer.alt} fill sizes="46vw" className="object-cover" />
+              </div>
+            )}
           </div>
 
           {/* A FORM, NOT A PANEL OF FACTS. "Instead of all this random text this should be a form."

@@ -310,7 +310,7 @@ export default function Contact() {
         ground="raise"
       />
 
-      <PageCta variant="phone" omit={["/pricing"]} panelLink={{ href: "/free-design-consultation", label: "Book the on-site measure" }} 
+      <PageCta variant="phone" photos={valueProps["/contact"].photos} omit={["/pricing"]} panelLink={{ href: "/free-design-consultation", label: "Book the on-site measure" }} 
         /* The NAP block above is bg-muted, so the closer would have landed on the same ground and the page would
           * have ended in one undifferentiated block. */
         ground="background"
