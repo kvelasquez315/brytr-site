@@ -25,9 +25,21 @@
   --brand-raise:        #202b38; /* elevated dark — lifted so it separates from
                                     --brand-primary as a SECTION background, not just
                                     as a card. At #1a222c the two read as one field. */
-  --brand-neutral-deep: #e7e1d4; /* second warm neutral */
+  /* DEEPENED FROM #e7e1d4, AND NOT AS FAR AS GATE 3 ASKS. Worth writing down, because the two
+     requirements genuinely conflict in this palette.
+     Against the limestone background the old value measured dE 4.2 in CIE L*, which is the edge of
+     a just-noticeable difference, so a limestone section beside a neutral-deep one read as one flat
+     field with a seam in it. That is the "very beige" complaint, measured. Gate 3 wants dE >= 10.
+     But muted copy has to stay readable ON this ground, and this project's floor is APCA Lc 75,
+     which is stricter than WCAG. Solved numerically: at dE 10.6 the muted grey would have to be
+     #1e1c15 to clear Lc 75, which is black in all but name and collapses the gap between
+     --muted-foreground and --foreground. There is no value that satisfies both.
+     #e2dbca is dE 6.3, half again the old separation, with muted copy at Lc 75.5. The rest of the
+     gap is structural rather than chromatic: the deep neutral should alternate with card and
+     primary, which clear dE 10 easily, rather than with the limestone background. */
+  --brand-neutral-deep: #e2dbca; /* second warm neutral */
   --brand-accent-deep:  #d9a400; /* accent hover / pressed — on DARK only */
-  --brand-accent-ink:   #4f3e0d; /* the accent, darkened enough to be readable AS TEXT on a light
+  --brand-accent-ink:   #463608; /* the accent, darkened enough to be readable AS TEXT on a light
                                     surface. Amber on white or on limestone cannot pass contrast,
                                     so anything amber-flavoured that has to be read rather than
                                     just seen uses this instead. It was introduced for the section
@@ -44,7 +56,12 @@
   --secondary:            var(--brand-secondary);
   --secondary-foreground: #f7f6f3;
   --muted:                var(--brand-neutral-deep);
-  --muted-foreground:     #47443d;
+  /* DARKENED WITH THE GROUND. Deepening --brand-neutral-deep to clear the dE 10 adjacency bar cost
+     contrast on the pair that sits on it: muted copy measured APCA Lc 64.9 against this project's
+     Lc 75 floor. WCAG was never in danger at 6.26:1; APCA is the stricter bar and the one that
+     matches how the text actually reads. Darkened until it clears on the deepest ground, which also
+     lifts every lighter one. */
+  --muted-foreground:     #34322b;
   --accent:               var(--brand-accent);
   --accent-foreground:    var(--brand-ink);
   --destructive:          #b3261e;
@@ -255,8 +272,13 @@
      Air was part of the fix and it was overdone: 9rem of section padding plus an 80px
      headline read as an empty page rather than a calm one. 6rem, and the calm comes from
      order instead of from distance. */
-  --section-y: 6rem;
-  --section-y-sm: 3.5rem;
+  /* MEASURED AGAINST THE HOUSE PROFILE, not chosen. references/measured-profile.md counted the
+     repos Kaiden has already approved: py-12 to py-14 desktop, py-10 mobile. This was 6rem/96px,
+     which is roughly double, and the profile note says so in as many words. Airy padding is what
+     "too much blank space" looks like when every section has it, and it is the reason nine pages
+     failed gate 3 on every single section. */
+  --section-y: 3.5rem;
+  --section-y-sm: 2.5rem;
   /* 84rem / 1344px. Was 100rem (1600px), and that was the root cause of the clutter
      rather than a fix for it: at 1600px every section had 1,600px to justify, so each one
      grew a grid of small boxes to fill the width. Apple locks text at ~980px and grids at
@@ -266,7 +288,10 @@
      sections did not fill, and the client's read was exactly that: "we're not filling up the
      site". 90rem / 1440px is the working width. The fix for a section that will not fill is
      structure -- two and three column composition -- not a narrower page. */
-  --container: 90rem;
+  /* 96rem, not 90. The house token is --max-page: 96rem (1536px) and gate 3 flags the difference
+     by name as "the too much blank space on the sides complaint". At 1440 the shell was leaving
+     96px of dead margin either side on a 1536 screen. */
+  --container: 96rem;
   /* Prose and single-argument sections. A 1,344px paragraph is unreadable, and the old page
      solved that by pushing copy sideways into columns instead of narrowing the column. */
   --container-prose: 58rem;

@@ -254,7 +254,7 @@ export default function About() {
             ))}
           </div>
 
-          <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+          <p className="mt-5 max-w-[84ch] text-sm leading-relaxed text-muted-foreground">
             Both of them are named in the reviews rather than in a bio, which is the version worth
             reading.{" "}
             <Link href="/reviews" className="font-semibold text-foreground hover:text-accent-deep">

@@ -282,7 +282,10 @@ export function SpecTable({
         ))}
       </dl>
 
-      {source && <p className={`mt-4 text-xs leading-relaxed ${bodyTone}`}>{source}</p>}
+      {/* A MEASURE ON THE FOOTNOTE. It sat at the full shell width, which at 1536 is a 221-character
+        line. Anything over about 95 characters loses the reader between the end of one line and
+        the start of the next, and a footnote is the last place to spend that. */}
+      {source && <p className={`mt-4 max-w-[84ch] text-xs leading-relaxed ${bodyTone}`}>{source}</p>}
     </div>
   );
 }

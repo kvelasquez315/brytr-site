@@ -347,7 +347,7 @@ export default function Pricing() {
             <p className="u font-display text-2xl font-medium leading-none text-accent" aria-hidden>=</p>
             <div className="min-w-0 flex-1">
               <p className="font-display text-xl font-bold text-on-dark">One number for the whole scope, in writing.</p>
-              <p className="mt-1.5 text-sm text-on-dark-muted">
+              <p className="mt-1.5 max-w-[84ch] text-sm text-on-dark-muted">
                 Itemized by elevation, hardware and zone, signed before we schedule, and unchanged on
                 install day.
               </p>
