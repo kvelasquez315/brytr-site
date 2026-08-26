@@ -162,7 +162,7 @@ export default function Reviews() {
           <div>
             <SectionHead
               title="What do they actually talk about?"
-              lede="Not “great service”. When somebody writes about this work unprompted, they write about one of these — which is a more useful thing to know than an average."
+              lede="Not “great service”. When somebody writes about this work unprompted, they write about one of these, which is a more useful thing to know than an average."
             />
             <ul className="mt-8 grid gap-2.5 sm:grid-cols-2">
               {tags.map(([t, n]) => (

@@ -119,7 +119,7 @@ export default function AreasHub() {
               How to read it
             </p>
             <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">
-              Pins are real coordinates rather than a shaded blob drawn around a city — and the same
+              Pins are real coordinates rather than a shaded blob drawn around a city, and the same
               information is written out as text directly below, ordered by drive time, so the map is
               never the only route to it.
             </p>
@@ -253,14 +253,14 @@ export default function AreasHub() {
             <div className="prose-body mt-6 space-y-4">
               <p className="text-lg leading-relaxed text-on-dark">
                 Permanent lighting is a fifteen year relationship with a building. So the honest limit on
-                a service area is not how far a van will go for an install — it is how far it will go for
+                a service area is not how far a van will go for an install. It is how far it will go for
                 a warranty call, in February, for one dark section.
               </p>
               <p className="text-base leading-relaxed text-on-dark-muted">
                 That is why the area stops where it does. Everything we serve is inside about
                 thirty-five minutes of the shop, Council Bluffs included, and a dark section on any of
                 it is a visit rather than a route day. Further out we would be selling a system we
-                could not service properly, so we do not — and if you ring from out there we will say
+                could not service properly, so we do not, and if you ring from out there we will say
                 so on the call rather than drive out and load the number.
               </p>
             </div>

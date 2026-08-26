@@ -35,7 +35,7 @@ const WEBHOOK =
 export type LeadState = { ok: boolean; message: string } | null;
 
 const OK =
-  "Thanks — we have got it. We reply the same day, and the design walk-around is booked from there.";
+  "Thanks, we have got it. We reply the same day, and the design walk-around is booked from there.";
 const FAIL =
   "Something went wrong sending that. Please call us on 402-810-3973 and we will pick it up straight away.";
 

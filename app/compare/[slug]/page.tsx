@@ -107,7 +107,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
           frame === "referee"
             ? "Neither of these is our premium system, so there is no version of this page that helps us. It exists because people ask, and because an answer from somebody with nothing to gain is worth more than an answer from either manufacturer."
             : frame === "labor"
-            ? "One of these is a company and the other is a Saturday. Comparing them on spec misses the point entirely, so this page compares the work — who does it, how long it takes, and who you ring when a section dies."
+            ? "One of these is a company and the other is a Saturday. Comparing them on spec misses the point entirely, so this page compares the work: who does it, how long it takes, and who you ring when a section dies."
             : "We install two of the brands on this market, which is more than the company quoting against us, and it is the reason the other column here is allowed to win. Where we have not verified something, the page says which thing."
         }
         trail={trail}

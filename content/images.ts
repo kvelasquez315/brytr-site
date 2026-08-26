@@ -63,7 +63,7 @@ export const images: Record<string, Slot> = {
    * now describes what is in the frame: a soft pink, not warm white. */
   heroWarm: { src: "/img/scene-warm-white.jpg",
     alt: "An Omaha home, pergola and pool deck on everyday warm white at dusk",
-    subject: "The everyday setting. Pairs with heroScene — same house, same frame.", ratio: "16/9", priority: true },
+    subject: "The everyday setting. Pairs with heroScene, same house and same frame.", ratio: "16/9", priority: true },
   heroScene: { src: "/img/g-pool-red.jpg",
     alt: "The same Omaha home, pergola and pool deck with every run switched to red",
     subject: "Same frame as heroWarm, one colour scene on.", ratio: "16/9", priority: true },
@@ -117,7 +117,7 @@ export const images: Record<string, Slot> = {
    * christmasRedGreenGables, a different house on the same scene. */
   heroBg: { src: "/img/seq-everyday.jpg",
     alt: "A brick and cedar ranch west of Omaha at dusk, its roofline, eaves and garage band picked out in everyday warm white",
-    subject: "Wide front elevation, dusk, everyday warm white. Home hero only — must not be a property used elsewhere on that page.", ratio: "16/9", priority: true },
+    subject: "Wide front elevation, dusk, everyday warm white. Home hero only, and must not be a property used elsewhere on that page.", ratio: "16/9", priority: true },
 
   channelCloseUp: { src: "/img/channel-detail.jpg",
     alt: "Close view of a Brytr channel tucked into the fascia of an Omaha home, individual warm white LEDs visible along every gable and eave",
@@ -135,7 +135,7 @@ export const images: Record<string, Slot> = {
     subject: "The install itself, in daylight, with a person in it.", ratio: "3/4" },
   crewPortrait: { src: "/img/crew-portrait.jpg",
     alt: "A Brytr installer in a Brytr shirt and cap outside a lit commercial building, its roofline run set to red",
-    subject: "One of the crew, named nowhere — we do not know from the frame who this is.", ratio: "3/4" },
+    subject: "One of the crew, named nowhere, because we do not know from the frame who this is.", ratio: "3/4" },
   appScreen: { src: null, alt: "The Brytr lighting app showing saved scenes",
     subject: "Phone screenshot of the app scene list.", ratio: "4/5" },
 
@@ -144,7 +144,7 @@ export const images: Record<string, Slot> = {
 
   serviceWholeHome: { src: "/img/landscape-tree-beds.jpg",
     alt: "A wide Omaha ranch at blue hour, warm white along the roofline and uplights through a bare tree and the planting beds",
-    subject: "Roofline and landscape in one frame — the whole-property argument, photographed.", ratio: "4/3" },
+    subject: "Roofline and landscape in one frame: the whole-property argument, photographed.", ratio: "4/3" },
   serviceChristmas: { src: "/img/christmas-brick-two-storey.jpg",
     alt: "A large brick Omaha two-storey in alternating red and green with uplights on the planting beds",
     subject: "December on a big brick elevation, with the landscape lighting joining in.", ratio: "4/3" },
@@ -169,7 +169,7 @@ export const images: Record<string, Slot> = {
    * "seasonal". Halloween violet reads as a season immediately. */
   serviceHoliday: { src: "/img/halloween-orange-purple.jpg",
     alt: "An Omaha two-storey in orange and violet with a stone column washed amber for Halloween",
-    subject: "October rather than December — a saved scene that is not Christmas.", ratio: "3/4" },
+    subject: "October rather than December: a saved scene that is not Christmas.", ratio: "3/4" },
   serviceLandscape: { src: "/img/landscape-brick-uplight.jpg",
     alt: "A tall brick Omaha home with white roofline runs, magenta accents on the gables and uplights washing the brick and shrubs",
     subject: "Roofline, gable accent and uplight, each separately addressed.", ratio: "4/3" },
@@ -193,7 +193,7 @@ export const images: Record<string, Slot> = {
     subject: "Same frame, the December scene.", ratio: "16/9" },
   seqGameday: { src: "/img/seq-gameday.jpg",
     alt: "The same house washed red across the whole elevation with white left at the roof peaks",
-    subject: "Same frame, a colour scene. Note the white peaks — two zones, not one.", ratio: "16/9" },
+    subject: "Same frame, a colour scene. Note the white peaks: two zones, not one.", ratio: "16/9" },
 
   /* ── BY DAY ──
    * The site claims the hardware disappears in daylight. These are the only images on the
@@ -262,7 +262,7 @@ export const images: Record<string, Slot> = {
     subject: "Warm white on a traditional elevation.", ratio: "3/4" },
   homeShakeBrickDusk: { src: "/img/home-shake-brick-dusk.jpg",
     alt: "The same shake and brick Omaha home at blue hour with the downlights just come up",
-    subject: "Pairs with homeShakeBrick — same house, earlier in the evening.", ratio: "3/4" },
+    subject: "Pairs with homeShakeBrick, same house, earlier in the evening.", ratio: "3/4" },
   homeCraftsmanPorch: { src: "/img/home-craftsman-porch.jpg",
     alt: "A craftsman Omaha home at blue hour, warm white along the porch roof and the upper gables",
     subject: "Porch and gable on one run.", ratio: "3/4" },
@@ -477,7 +477,7 @@ export const galleryShots: GalleryShot[] = [
     caption: "Set from the app the morning of. Back to warm white the next night." },
   { src: "/img/g-blue-white.jpg", ratio: "16/9", scene: "Two zones, two colors",
     alt: "An Omaha home in blue and white with landscape uplighting",
-    caption: "Gables in color, eaves left white — the two-zone look most people land on." },
+    caption: "Gables in color, eaves left white: the two-zone look most people land on." },
   { src: "/img/scene-husker-red.jpg", ratio: "16/9", scene: "Scarlet",
     alt: "An Omaha ranch home in scarlet",
     caption: "Scheduled to kickoff, then back to warm white on its own." },
@@ -507,7 +507,7 @@ export const galleryShots: GalleryShot[] = [
     caption: "Red and blue on the gables, white left on the eaves." },
   { src: "/img/g-ranch-blue-white.jpg", ratio: "16/9", scene: "The long ranch line",
     alt: "A long Omaha ranch elevation lit blue and white with landscape uplighting",
-    caption: "A low ranch roofline is the hardest to light well — the run has to hold a straight line for its whole length." },
+    caption: "A low ranch roofline is the hardest to light well, because the run has to hold a straight line for its whole length." },
   { src: "/img/g-pool-blue.jpg", ratio: "16/9", scene: "Whole property, one tap",
     alt: "An Omaha home, pergola and pool deck lit blue at dusk",
     caption: "House, pergola and hardscape all switched together." },

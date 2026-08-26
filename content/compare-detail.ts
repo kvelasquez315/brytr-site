@@ -36,7 +36,7 @@ export const compareDetail: Record<string, CompareDetail> = {
     objectPosition: "50% 52%",
     unknowns: [
       "Nothing much. This is the one comparison on the site where both columns are systems we buy, install and warranty ourselves.",
-      "Exact LED pitch on the current Jellyfish generation — we quote it as “wider” rather than a figure, because the figure has changed between production runs.",
+      "Exact LED pitch on the current Jellyfish generation. We quote it as “wider” rather than a figure, because the figure has changed between production runs.",
     ],
     alsoSee: ["haven-vs-gemstone-lights", "jellyfish-vs-gemstone-lights"],
   },

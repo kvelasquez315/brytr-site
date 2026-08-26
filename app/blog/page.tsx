@@ -125,7 +125,7 @@ export default function BlogHub() {
             ))}
           </ul>
           <p className="mt-4 text-xs text-on-dark-muted">
-            Anchors, not filters. This rack scrolls away with the page — nothing on this site is pinned
+            Anchors, not filters. This rack scrolls away with the page, and nothing on this site is pinned
             except the header.
           </p>
         </div>

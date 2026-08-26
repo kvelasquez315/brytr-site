@@ -49,7 +49,7 @@ const beats: { at: string; h: string; p: string; who: string }[] = [
   {
     at: "0:05",
     h: "We walk the whole property.",
-    p: "Front, both sides, the back, the beds, the walk, the patio. We are looking for what the light can do that you have not pictured yet — a wall in section, a tree worth uplighting, a soffit deep enough to hide the channel completely.",
+    p: "Front, both sides, the back, the beds, the walk, the patio. We are looking for what the light can do that you have not pictured yet: a wall in section, a tree worth uplighting, a soffit deep enough to hide the channel completely.",
     who: "You, us, and a flashlight",
   },
   {
@@ -104,7 +104,7 @@ export default function Consult() {
           * furniture by the time you get here, and it left this page with no line of its own.
           * The hour, and what you keep at the end of it, is what this page is actually about. */
         h1="One hour after dark, and you keep the drawing."
-        lede="We come out, walk the property after dark, design it with you, measure the roofline, and leave you holding a written quote. If you decide against it you have lost an hour and gained a plan — the drawing and the number are yours either way."
+        lede="We come out, walk the property after dark, design it with you, measure the roofline, and leave you holding a written quote. If you decide against it you have lost an hour and gained a plan. The drawing and the number are yours either way."
         trail={trail}
       />
 

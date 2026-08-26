@@ -61,7 +61,7 @@ const routes: { label: string; h: string; href: string; external?: boolean; best
     h: "Facebook or Instagram",
     href: site.social.instagram,
     external: true,
-    best: "Sending us a picture of something — your own house, a house you drove past, a fault you can see from the ground. A photograph saves ten minutes of describing.",
+    best: "Sending us a picture of something: your own house, a house you drove past, a fault you can see from the ground. A photograph saves ten minutes of describing.",
     bad: "Anything you need on the record. Messages get missed on social far more often than the phone does.",
     who: "Also us, and slower than either of the two above.",
   },
@@ -70,7 +70,7 @@ const routes: { label: string; h: string; href: string; external?: boolean; best
     h: "The shop, 13436 C St",
     href: "/about",
     best: "Builders, roofers, landscapers and property managers who want to talk about a portfolio of addresses or coordinating around other trades.",
-    bad: "Homeowners hoping to look at product. It is a yard and a warehouse rather than a showroom — the useful visit is us coming to you with the samples.",
+    bad: "Homeowners hoping to look at product. It is a yard and a warehouse rather than a showroom. The useful visit is us coming to you with the samples.",
     who: "Ring first. There is often nobody there, because the work is at your house.",
   },
 ];
@@ -101,7 +101,7 @@ export default function Contact() {
         <div className="shell">
           <SectionHead
             title="Every way in, and none of them interchangeable."
-            lede="The number is in the header of every page, so the useful thing to publish is which route suits what you are actually asking — including what each one is bad at."
+            lede="The number is in the header of every page, so the useful thing to publish is which route suits what you are actually asking, including what each one is bad at."
           />
 
           <ul className="mt-10 grid gap-5 lg:grid-cols-2">
@@ -158,7 +158,7 @@ export default function Contact() {
             <div className="prose-body mt-6 space-y-4">
               <p className="text-lg leading-relaxed text-on-dark">
                 Nobody hesitates over a phone number. What people hesitate over is being entered into
-                something — a sequence, a list, a CRM that emails them every Tuesday for a year.
+                something: a sequence, a list, a CRM that emails them every Tuesday for a year.
               </p>
               <p className="text-base leading-relaxed text-on-dark-muted">
                 So here is the whole of it. Your details reach two people, they are used to answer the

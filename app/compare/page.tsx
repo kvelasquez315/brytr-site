@@ -391,7 +391,7 @@ export default function CompareHub() {
                   "A generation change in the hardware, which happens often",
                   "A pattern of failures on something we install, which changes our own recommendation first",
                   "A local dealer changing hands, on the franchise comparisons",
-                  "Anybody showing us we have a fact wrong — tell us and we will fix it",
+                  "Anybody showing us we have a fact wrong: tell us and we will fix it",
                 ].map((x) => (
                   <li key={x} className="py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">{x}</li>
                 ))}

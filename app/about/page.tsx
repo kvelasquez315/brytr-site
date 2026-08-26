@@ -61,7 +61,7 @@ const costs: { chip: string; h: string; p: string; cost: string }[] = [
   {
     chip: "Costs us margin",
     h: "The same crew, measure to handover.",
-    p: "Permanent lighting is fastened into your fascia board and sealed, and the failures in this trade are workmanship far more often than product. The people who measure your house are the people who fit it, and the people who come back to it — which is the only thing that makes any of the rest of this checkable.",
+    p: "Permanent lighting is fastened into your fascia board and sealed, and the failures in this trade are workmanship far more often than product. The people who measure your house are the people who fit it, and the people who come back to it, which is the only thing that makes any of the rest of this checkable.",
     cost: "Training and a slower schedule instead of whoever is free that week.",
   },
   {
@@ -116,7 +116,7 @@ export default function About() {
               </p>
               <p className="text-base text-muted-foreground">
                 That one decision is why the rest of the company looks the way it does. If your
-                recommendation is not pre-decided, you have to be able to defend it — which means
+                recommendation is not pre-decided, you have to be able to defend it, which means
                 measuring properly, installing it yourself, and being reachable in year three.
               </p>
             </div>
@@ -303,7 +303,7 @@ export default function About() {
                 {site.address.city}, {site.address.state} {site.address.zip}
               </p>
               <p className="mt-4 text-sm leading-relaxed text-on-dark-muted">
-                A yard and a warehouse rather than a showroom — the useful visit is us coming to you.
+                A yard and a warehouse rather than a showroom. The useful visit is us coming to you.
                 We drive the Omaha metro and Council Bluffs.
               </p>
               <div className="mt-5 border-t border-on-dark/12 pt-4">

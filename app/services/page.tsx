@@ -107,7 +107,7 @@ export default function ServicesHub() {
         photoAlt="A two-story Omaha home with its roofline, gables and front trees lit at night"
         objectPosition="50% 62%"
         h1="Everything worth lighting on an Omaha property."
-        lede="Roofline, soffit, beds, trees, walls, pergolas and storefronts — all of it on one channel, one controller and one app, so what you install first does not limit what you add later."
+        lede="Roofline, soffit, beds, trees, walls, pergolas and storefronts: all of it on one channel, one controller and one app, so what you install first does not limit what you add later."
         trail={trail}
       />
 
@@ -117,7 +117,7 @@ export default function ServicesHub() {
         <div className="shell">
           <SectionHead
             title="What people say first, and what it changes."
-            lede="Whichever one it is, the first run is different — and so is what you end up adding a year or two later. This is the order we would do it in, and why."
+            lede="Whichever one it is, the first run is different, and so is what you end up adding a year or two later. This is the order we would do it in, and why."
           />
 
           <ol className="mt-10 grid gap-5 lg:grid-cols-3">

@@ -142,7 +142,7 @@ system-ui, Space Grotesk, Geist, Instrument Serif.
 
 ## Copy rules
 
-Two rules, both from client review, both absolute.
+Three rules, all from client review, all absolute.
 
 **No numbers in a heading.** A heading paints a picture; it does not count the items
 underneath it. `Eleven ways to light an Omaha property` became `Every surface worth
@@ -161,6 +161,32 @@ below it, so the heading is spending its only line on information the reader can
 that reads as a magazine deck, breaks the vertical rhythm of the page, and was a lazy
 substitute for having enough content. Width gets filled with content. A form or a
 photograph may sit beside a heading; a paragraph may not.
+
+**No em dashes anywhere a visitor can read.** Not the character, not `&mdash;`, not a
+unicode escape. Client instruction, and it is a house style rather than a preference
+about one sentence, so it is a gate: `npm run emdash`, wired into `npm run check`.
+
+The gate is `scripts/em-dash.mjs`, and the thing worth knowing about it is that a flat
+grep is useless here. This codebase carries more prose in its comments than on its
+pages, and those comments are full of em dashes: a plain search reports 336 hits, 77 of
+which are copy. So the script walks each file as a character stream, tracks whether it
+is inside a line comment, a block comment, a quoted string or a template literal, and
+reports only what a browser would render. Comments are exempt. Documentation is exempt.
+
+Replacing them is not a substitution. A dash does different grammatical work in
+different sentences, and swapping all of them for one character leaves comma splices
+across the site. Three cases, and it is worth knowing which one you have:
+
+- It introduces an apposition or a list, so a colon: `all of it on one channel`.
+- It hangs a dependent clause off the end, so a comma: `, which is the only thing that
+  makes any of the rest of this checkable`.
+- It joins two independent clauses, so they become two sentences: `Nothing else goes
+  into it. There is no design fee`.
+
+One case was not punctuation at all. A cell in the pricing table used a bare em dash as
+a glyph meaning nothing happens in this year. An en dash there would be the same mark
+under a different name, so it is a drawn 14px rule instead, which sits better than a
+character hanging on a text baseline.
 
 ## Layout
 

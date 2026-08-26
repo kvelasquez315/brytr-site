@@ -69,14 +69,14 @@ export const serviceDetail: Record<string, ServiceDetail> = {
   "permanent-outdoor-lighting": {
     pair: {
       a: "seqEveryday", b: "seqGameday",
-      aLabel: "The everyday setting — warm white, roofline, eaves and the band over the garage.",
+      aLabel: "The everyday setting: warm white, roofline, eaves and the band over the garage.",
       bLabel: "Ninety seconds later. Same fixtures, same evening, one saved scene switched on.",
       title: "One house, one evening, two settings.",
       lede: "Ninety seconds apart, from a drone that never moved. Same roof, same sky; the only thing that changed is what the controller was told to do.",
     },
     shots: [
       { photo: "seqSecurity", caption: "The same run dimmed to a low warm white. Most people leave it here on a Tuesday." },
-      { photo: "seqWarmChristmas", caption: "The same warm white at full output — for a lot of houses this is the entire Christmas scene." },
+      { photo: "seqWarmChristmas", caption: "The same warm white at full output, and for a lot of houses this is the entire Christmas scene." },
       { photo: "seqRedGreen", caption: "And red and green, from the same five frames, on the same night." },
     ],
     secondPara:
@@ -101,7 +101,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     /* Was hero-warm-white.jpg captioned "warm white, dimmed" — see the note on heroWarm in
      * content/images.ts. scene-warm-white.jpg is the one frame that actually shows it. */
     proofShot: "/img/scene-warm-white.jpg",
-    proofCaption: "The everyday setting on a west Omaha install — house, pergola and hardscape all on it, scheduled to dusk.",
+    proofCaption: "The everyday setting on a west Omaha install: house, pergola and hardscape all on it, scheduled to dusk.",
   },
 
   "permanent-christmas-lights": {
@@ -109,7 +109,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       { photo: "christmasRedGreenGables", caption: "Red and green alternating along every gable and eave. Nothing was hung to make this." },
       { photo: "christmasWreathsNets", caption: "The permanent run alongside the wreaths and nets people still want out. It is not either-or." },
       { photo: "christmasEntryShrubs", caption: "Snow on the beds, and no ladder went up in December to get here." },
-      { photo: "christmasBrickGable", caption: "Close on a brick gable — you can count the points and the gaps between them." },
+      { photo: "christmasBrickGable", caption: "Close on a brick gable, close enough to count the points and the gaps between them." },
     ],
     secondPara:
       "The hardware that runs red and green in December is the same hardware that runs warm white in March. You are not buying a Christmas product; you are buying a roofline that can be set to Christmas from your phone and then set back.",
@@ -123,7 +123,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       ["Rest of the year", "Warm white, or any scene"],
     ],
     included: [
-      ["Alternating pixel scenes", "Every other diode red, the rest green — a pattern a strand of bulbs cannot do."],
+      ["Alternating pixel scenes", "Every other diode red, the rest green: a pattern a strand of bulbs cannot do."],
       ["Date-range scheduling", "On at dusk from the day you choose, off on the day you choose, without you touching it."],
       ["Warm white underneath", "The same run is your everyday lighting for the other eleven months."],
       ["No storage", "No boxes, no clips, no ladder in December, no gutter damage in January."],
@@ -143,7 +143,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     },
     shots: [
       { photo: "detailGableMiter", caption: "The turn at a peak. One continuous line, mitered, with no gap and no doubled-up section." },
-      { photo: "homeWideRanch", caption: "A long low ranch, which is the hardest elevation there is — nothing breaks the run, so every sag shows." },
+      { photo: "homeWideRanch", caption: "A long low ranch, which is the hardest elevation there is, because nothing breaks the run, so every sag shows." },
       { photo: "homeBrickGablesGold", caption: "A complicated roof. More gables means more corners, and corners are where installs fail." },
     ],
     secondPara:
@@ -193,13 +193,13 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     ],
     alsoSee: ["permanent-roofline-lighting", "permanent-outdoor-lighting", "hardscape-lighting", "landscape-lighting"],
     proofShot: "/img/soffit-eaves.jpg",
-    proofCaption: "Soffit and eave runs on one Omaha elevation — gables in color, eaves left white.",
+    proofCaption: "Soffit and eave runs on one Omaha elevation: gables in color, eaves left white.",
   },
 
   "hardscape-lighting": {
     shots: [
       { photo: "hardscapeSeatwall", caption: "Lit caps along a stone seat wall, with the porch behind it on the same scene." },
-      { photo: "patioTimberStone", caption: "Step lights down the stairs and a run along the beam — one system, two jobs." },
+      { photo: "patioTimberStone", caption: "Step lights down the stairs and a run along the beam: one system, two jobs." },
       { photo: "poolRearWarm", caption: "The back of a house at dusk, the points repeated in the water." },
     ],
     secondPara:
@@ -231,7 +231,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       { photo: "landscapeBrickUplight", caption: "Roofline, gable accent and uplight, each addressed separately and each doing a different job." },
     ],
     secondPara:
-      "Beds, trees and paths need genuinely different fixtures from a roofline — in-ground uplights, path fixtures, and beam angles chosen per tree rather than a single spacing. They land in the same app as the house, on their own zone, so the yard can be on when the roofline is off.",
+      "Beds, trees and paths need genuinely different fixtures from a roofline: in-ground uplights, path fixtures, and beam angles chosen per tree rather than a single spacing. They land in the same app as the house, on their own zone, so the yard can be on when the roofline is off.",
     figure: "fixtures",
     compare: false,
     facts: [
@@ -257,7 +257,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       { photo: "patioTimberStone", caption: "A timber and stone cover: the run along the beam is the same channel as the roofline." },
       { photo: "patioCovered", caption: "From underneath, with the furniture in it, which is the only angle that answers the real question." },
       { photo: "poolPergolaDusk", caption: "Pool and pergola at sunset. This is the reason people add the overhead run." },
-      { photo: "installDayPavilion", caption: "Mid-install on a poolside pavilion — anything with a structure to fasten to at both ends will take a run." },
+      { photo: "installDayPavilion", caption: "Mid-install on a poolside pavilion. Anything with a structure to fasten to at both ends will take a run." },
     ],
     secondPara:
       "A pergola is the one place on a property where the fixture is meant to be seen, so the run is set out to the structure's own bays rather than to a spacing table. It switches and dims with the rest of the property instead of from a plug by the back door.",
@@ -284,7 +284,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
   "holiday-seasonal-scenes": {
     shots: [
       { photo: "halloweenOrangePurple", caption: "October: orange and violet, scheduled for the month and switching itself back." },
-      { photo: "fourthBrickRanch", caption: "July: red, white and blue — the one scene nobody hangs bulbs for, because nobody wants to." },
+      { photo: "fourthBrickRanch", caption: "July: red, white and blue: the one scene nobody hangs bulbs for, because nobody wants to." },
       { photo: "christmasGreenRed", caption: "December, and green as the field colour rather than the usual alternation." },
       { photo: "winterGradientSnow", caption: "February, in snow, running a gradient across a single roofline." },
     ],
@@ -314,10 +314,10 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       aLabel: "Friday. Warm white, and nobody would guess the house does anything else.",
       bLabel: "Saturday. Scarlet across the elevation with white held at the peaks.",
       title: "Saturday, and then Sunday again.",
-      lede: "The same house, the same evening, ninety seconds apart. Not a house that is red — a house that is warm white and can be red for four hours.",
+      lede: "The same house, the same evening, ninety seconds apart. Not a house that is red, but a house that is warm white and can be red for four hours.",
     },
     shots: [
-      { photo: "gamedayRedBlueGables", caption: "Two team colours held apart by zone — one gable red, the next blue, eaves left white." },
+      { photo: "gamedayRedBlueGables", caption: "Two team colours held apart by zone: one gable red, the next blue, eaves left white." },
       { photo: "gamedayRedGable", caption: "How far a saturated colour spills onto a driveway. Shown rather than described." },
       { photo: "gamedayRanchWide", caption: "Colour across a long low roofline and a curved drive." },
     ],
@@ -347,9 +347,9 @@ export const serviceDetail: Record<string, ServiceDetail> = {
      * this page gets that frame and says what it is, rather than putting three houses under a
      * commercial heading and hoping nobody notices the difference. */
     shots: [
-      { photo: "crewPortrait", caption: "A storefront band set to red behind one of our own crew. Commercial work is the same channel and the same controller as a house — the difference is the fixing detail and the hours we can be on site." },
+      { photo: "crewPortrait", caption: "A storefront band set to red behind one of our own crew. Commercial work is the same channel and the same controller as a house. The difference is the fixing detail and the hours we can be on site." },
       { photo: "sceneWhiteRedEntry", caption: "Cool white across a long elevation with one zone changed, which is how most branding scenes are actually built." },
-      { photo: "homeModernStone", caption: "A flat roof edge with no gable to hang a line on — the detailing problem most commercial buildings present." },
+      { photo: "homeModernStone", caption: "A flat roof edge with no gable to hang a line on, which is the detailing problem most commercial buildings present." },
     ],
     secondPara:
       "A parapet, a storefront band and a wrapped elevation are a different survey from a house: the runs are longer, the fixings change with the substrate, and the work happens outside your trading hours. The controller and the app are the same ones we put on a residential job.",

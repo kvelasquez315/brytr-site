@@ -82,7 +82,7 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
      * warm white front elevations. This is the most important group on the page and it is now the
      * second largest, which is the shape the argument always wanted. */
     lede:
-      "This is the one that sells it, and it is the one nobody pictures before the consultation: on a schedule, from dusk until you go to bed, most nights of the year. Everybody asks us to photograph the colors, so most of what gets taken is colour — these are the frames of the setting you would actually live with. The daylight question, whether you can see the hardware at noon, is answered further down this page in photographs rather than in a promise.",
+      "This is the one that sells it, and it is the one nobody pictures before the consultation: on a schedule, from dusk until you go to bed, most nights of the year. Everybody asks us to photograph the colors, so most of what gets taken is colour. These are the frames of the setting you would actually live with. The daylight question, whether you can see the hardware at noon, is answered further down this page in photographs rather than in a promise.",
     srcs: [
       "/img/seq-everyday.jpg",
       "/img/scene-warm-white.jpg",
@@ -157,7 +157,7 @@ export default function Gallery() {
         photoAlt="An Omaha ranch home with its roofline in red over white for game day"
         objectPosition="50% 48%"
         h1="The same fixture, every way we have shot it."
-        lede="Every photograph on this page is a Brytr system on a real Omaha home — no renders, no stock houses, no borrowed shots. Grouped by what the system is set to rather than by house, because the point is that none of these needed different hardware."
+        lede="Every photograph on this page is a Brytr system on a real Omaha home: no renders, no stock houses, no borrowed shots. Grouped by what the system is set to rather than by house, because the point is that none of these needed different hardware."
         trail={trail}
       />
 
@@ -175,7 +175,7 @@ export default function Gallery() {
         * suspicion that the colour shots are a different install. This set closes it. */}
       <PhotoStrip
         title="The same roofline, photographed as the settings changed."
-        lede="A drone held its position over one property west of Omaha for a minute and a half while the scenes were switched through from a phone. Same roof, same sky, same camera — read them left to right."
+        lede="A drone held its position over one property west of Omaha for a minute and a half while the scenes were switched through from a phone. Same roof, same sky, same camera. Read them left to right."
         shots={sequence}
         cols={5}
         frame="16/9"
@@ -272,7 +272,7 @@ export default function Gallery() {
         lede="A night shot flatters any install. Daylight does not: at noon a badly fixed channel has nowhere to hide. Two houses, uncropped and ungraded."
         a="dayBrickGable"
         b="dayShakeGable"
-        aLabel="Brick and white fascia. The channel runs under the roof edge, colour matched to the trim — you have to know it is there to find it."
+        aLabel="Brick and white fascia. The channel runs under the roof edge, colour matched to the trim, and you have to know it is there to find it."
         bLabel="A shake gable on a second house, so this is not one lucky angle. The run reads as a narrow strip below the gutter line."
         ground="muted"
       />
@@ -309,12 +309,12 @@ export default function Gallery() {
               ],
               [
                 "Where the color stops",
-                "Color lands on the elevation the homeowner chose and stops there — gables scarlet, eaves left white, landscape left warm. Every run is a zone that can be set on its own.",
+                "Color lands on the elevation the homeowner chose and stops there: gables scarlet, eaves left white, landscape left warm. Every run is a zone that can be set on its own.",
                 "The everyday setting is white, not color.",
               ],
               [
                 "What nobody photographs",
-                "Mitered corners, sealed terminations, capped ends, and channel color matched to the fascia so it disappears at noon. Ask any installer for a daylight photo from the curb before you sign — and if they cannot produce one, that is the answer.",
+                "Mitered corners, sealed terminations, capped ends, and channel color matched to the fascia so it disappears at noon. Ask any installer for a daylight photo from the curb before you sign, and if they cannot produce one, that is the answer.",
                 "We will show you ours in person.",
               ],
             ].map(([h, p, note]) => (

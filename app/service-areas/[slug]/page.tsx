@@ -200,7 +200,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 ))}
               </ul>
               <p className="bg-muted px-6 py-4 text-sm leading-relaxed text-muted-foreground">
-                Not listed? We still cover it — this is a list of where we have worked, not a boundary.
+                Not listed? We still cover it. This is a list of where we have worked, not a boundary.
                 Ring and ask.
               </p>
             </div>
@@ -246,7 +246,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 </ul>
                 <p className="border-t border-border bg-muted px-6 py-4 text-sm leading-relaxed text-muted-foreground">
                   Drive times from 13436 C St in normal traffic. We are not claiming Iowa is closer than
-                  Omaha — we are pointing out that it is closer than half of the metro.
+                  Omaha. We are pointing out that it is closer than half of the metro.
                 </p>
               </div>
 
@@ -392,7 +392,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         * tell and the easiest one to catch. */}
       <PhotoStrip
         title="What the system looks like once the crew has gone."
-        lede="Installs from around the metro rather than staged shots — photographed as they were, on properties that were already finished."
+        lede="Installs from around the metro rather than staged shots, photographed as they were, on properties that were already finished."
         shots={pick(c.slug, 3)}
         cols={3}
         ground="raise"
@@ -482,7 +482,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           {c.tier === "metro"
             ? `${c.drive === "In town" ? "We are in town" : `${c.drive} from the shop`}, so the measure and the install usually land in the same week, and there is a good chance a crew is already working within a couple of streets of you.`
             : c.tier === "iowa"
-            ? `${c.drive} from the shop, over the river — which in practice is closer than half the Nebraska metro. Same crews, same materials, same workmanship terms, and no border premium on the quote.`
+            ? `${c.drive} from the shop, over the river, which in practice is closer than half the Nebraska metro. Same crews, same materials, same workmanship terms, and no border premium on the quote.`
             : `${c.drive} from the shop, so ${c.name} runs as a route day rather than a single call. That is worth knowing before the measure: it is the reason we will want to walk the whole property while we are on it rather than quote the roofline and come back in a season.`}
         </p>
         <p>

@@ -286,7 +286,7 @@ export function ServiceLeaflet({
           one, and each is a page of its own.
         </p>
         <p className="mt-5 text-sm text-on-dark-muted">
-          If you want the drive time to an address rather than a town, call and ask —{" "}
+          If you want the drive time to an address rather than a town, call and ask.{" "}
           <a href={site.phoneHref} className="u text-on-dark underline decoration-accent decoration-2 underline-offset-4">{site.phone}</a>.
         </p>
       </div>

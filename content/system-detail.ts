@@ -50,7 +50,7 @@ export const systemDetail: Record<string, SystemDetail> = {
     position: "An add-on rather than an alternative. It goes on with the roofline run and shares the app.",
     notFor: {
       h: "Where it will not work",
-      p: "A shallow overhang. The fixture needs enough soffit depth to sit back far enough that you see the wash rather than the source, and we measure the overhang before quoting it. It is also not a substitute for roofline trim lighting — it does a different job on a different plane.",
+      p: "A shallow overhang. The fixture needs enough soffit depth to sit back far enough that you see the wash rather than the source, and we measure the overhang before quoting it. It is also not a substitute for roofline trim lighting, because it does a different job on a different plane.",
     },
     alsoSee: ["haven-evolution", "haven-x-bistro-lights", "app-and-controls"],
   },
@@ -76,7 +76,7 @@ export const systemDetail: Record<string, SystemDetail> = {
     position: "The overhead add-on. Permanent bistro runs for pergolas, patio covers and gazebos.",
     notFor: {
       h: "Where there is nothing to span",
-      p: "An open patio with no structure over it. Bistro runs need something to fasten to at both ends and something rated to take the tension — posts, a pergola beam, a patio cover fascia. Stringing between a house and a tree is what people do themselves, and it is not what we install.",
+      p: "An open patio with no structure over it. Bistro runs need something to fasten to at both ends and something rated to take the tension: posts, a pergola beam, a patio cover fascia. Stringing between a house and a tree is what people do themselves, and it is not what we install.",
     },
     alsoSee: ["haven-9-series-landscape-lights", "haven-q-series", "haven-evolution"],
   },
@@ -99,7 +99,7 @@ export const systemDetail: Record<string, SystemDetail> = {
     photoAlt: "An Omaha home in red, white and blue for the Fourth of July",
     objectPosition: "50% 50%",
     position:
-      "The layer customers actually touch. Not a system you buy separately — it is how every system above is operated.",
+      "The layer customers actually touch. Not a system you buy separately, but how every system above is operated.",
     notFor: {
       h: "What it needs from you",
       p: "Wi-fi that reaches the controller, and twenty minutes at handover. A system nobody set up properly is a system that stays on whatever the crew left it on, which is the quiet way an expensive install turns into a porch light.",

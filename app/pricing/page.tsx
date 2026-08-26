@@ -59,7 +59,7 @@ const terms: { op?: string; h: string; p: string }[] = [
   { h: "Linear feet", p: "Measured on site, elevation by elevation. The single biggest term, and the reason a firm number needs a visit." },
   { op: "×", h: "Story rate", p: "A two-story costs more per foot than a ranch. That is access and time on a ladder, not more material." },
   { op: "+", h: "Corners", p: "Every dormer, valley, turret and bay is another mitered transition, cut and sealed by hand." },
-  { op: "+", h: "Zones", p: "How many elevations you want to control on their own — front only, front and sides, or the whole envelope." },
+  { op: "+", h: "Zones", p: "How many elevations you want to control on their own: front only, front and sides, or the whole envelope." },
   { op: "+", h: "Hardware", p: "Which manufacturer's line goes on the house, plus any landscape, hardscape or bistro run added on the same visit." },
 ];
 
@@ -95,7 +95,7 @@ export default function Pricing() {
               </p>
               <p className="text-base text-muted-foreground">
                 What does help is knowing exactly how the number is built, what moves it, and roughly
-                where a house your shape lands — and you can have all three on the phone, before anybody
+                where a house your shape lands, and you can have all three on the phone, before anybody
                 drives out. That is the trade this page is making.
               </p>
             </div>
@@ -197,7 +197,12 @@ export default function Pricing() {
                   {years.slice(1).map((y) => (
                     <td key={y} className="px-5 py-5 align-top">
                       <div className="border-t border-on-dark/12 pt-4">
-                        <span className="u block text-lg font-medium text-on-dark/40" aria-hidden>—</span>
+                        {/* A DRAWN BAR, NOT AN EM DASH. This cell means "nothing happens in this year" and it
+                          * said so with a single em dash character, which the no-em-dash rule now
+                          * forbids sitewide. An en dash would be the same mark under a different
+                          * name, so it is a drawn rule instead, which also sits better than a glyph
+                          * hanging on a text baseline. */}
+                        <span className="u block h-px w-3.5 bg-on-dark/40" aria-hidden />
                         <span className="mt-1 block text-xs leading-relaxed text-on-dark-muted">
                           Nothing goes up. Nothing comes down.
                         </span>
@@ -265,7 +270,7 @@ export default function Pricing() {
           <dl className="mt-8 grid gap-5 sm:grid-cols-3">
             {([
               ["1", "install, in the first week you own it", true],
-              ["10", "trips up a ladder on the other row — twice a year, five years", false],
+              ["10", "trips up a ladder on the other row, twice a year for five years", false],
               ["0", "Januaries spent taking anything down", true],
             ] as [string, string, boolean][]).map(([f, l, ours]) => (
               <div key={l} className="rounded-lg bg-raise px-5 py-5 ring-1 ring-on-dark/10">
@@ -307,7 +312,7 @@ export default function Pricing() {
         <div className="shell">
           <SectionHead
             title="Feet times a rate, then what the house adds."
-            lede="In order of how much each one moves the total. Nothing else goes into it — there is no design fee, no travel charge inside the metro and no line for the consultation."
+            lede="In order of how much each one moves the total. Nothing else goes into it. There is no design fee, no travel charge inside the metro and no line for the consultation."
           />
 
           <div className="mt-10 flex flex-col gap-3 lg:flex-row lg:items-stretch">
@@ -348,7 +353,7 @@ export default function Pricing() {
         <div className="shell">
           <SectionHead
             title="Not everything is priced by the foot."
-            lede="Roofline is. A pergola is priced by span, landscape by fixture, and a wall by the foot of cap it runs under — because that is how the work actually divides up."
+            lede="Roofline is. A pergola is priced by span, landscape by fixture, and a wall by the foot of cap it runs under, because that is how the work actually divides up."
           />
           <div className="mt-10">
             <SpecTable

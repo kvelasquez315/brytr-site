@@ -440,14 +440,14 @@ export function WhoWeAre() {
               <p className="mt-5 text-[1.05rem] leading-relaxed text-muted-foreground">
                 Plenty of companies will sell you permanent lighting in Omaha, and every one of them
                 will promise a warranty and someone to call. Most of them cannot keep either promise,
-                because there is nobody here to keep it &mdash; the number rings somewhere else, and
+                because there is nobody here to keep it: the number rings somewhere else, and
                 the crew that fitted your house was passing through.
               </p>
               <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">
                 We are here. The shop is in west Omaha, the people who measure your roofline are the
                 people who fit it, and they are the people who come back to it. Permanent lighting is
-                the only thing we do, so how you feel about yours is not one line of our business
-                &mdash; it is the business.
+                the only thing we do, so how you feel about yours is not one line of our business.
+                It is the business.
               </p>
               <div className="mt-8 flex flex-wrap items-center gap-4">
                 <AccentPill href="/free-design-consultation">Book a free design</AccentPill>

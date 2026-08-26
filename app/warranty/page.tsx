@@ -114,12 +114,12 @@ const notCovered: { h: string; p: string }[] = [
 /* THE FIVE QUESTIONS. Written to be asked of everybody quoting the job, including us. */
 const questions: { q: string; a: string }[] = [
   {
-    q: "Who holds the workmanship coverage — you, or the manufacturer?",
+    q: "Who holds the workmanship coverage: you, or the manufacturer?",
     a: "We do, and it is separate from the hardware terms. A single blanket warranty that does not distinguish the two is a warranty that gets argued about, because product failures and install failures are settled by different parties.",
   },
   {
     q: "Who physically turns up when something goes dark?",
-    a: "The crew who fitted it. Not a franchise dispatcher and not the manufacturer — they have no way of getting to your fascia board.",
+    a: "The crew who fitted it. Not a franchise dispatcher and not the manufacturer, who has no way of getting to your fascia board.",
   },
   {
     q: "Is the workmanship coverage in the paperwork I sign, or in a brochure?",
@@ -141,7 +141,7 @@ export default function Warranty() {
         photoAlt="An Omaha brick two-story with three gables, the walk and beds all lit, blue on the walls with the gables in warm white"
         objectPosition="50% 50%"
         h1="What is covered, and who comes out."
-        lede="A warranty is worth exactly as much as the person administering it. There are two layers on every Brytr install — the manufacturer's on the hardware and ours on the work — and we are the ones who show up for either."
+        lede="A warranty is worth exactly as much as the person administering it. There are two layers on every Brytr install: the manufacturer's on the hardware and ours on the work, and we are the ones who show up for either."
         trail={trail}
       />
 
@@ -250,7 +250,7 @@ export default function Warranty() {
       >
         <p>
           Every term on this page is underwritten by the people who did the work. That is not a
-          slogan — it is the mechanism. A crew who will never see your house again has no reason to
+          slogan. It is the mechanism. A crew who will never see your house again has no reason to
           care whether a fixing holds for eight years.
         </p>
         <p>
