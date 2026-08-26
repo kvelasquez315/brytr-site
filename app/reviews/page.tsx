@@ -131,7 +131,7 @@ export default function Reviews() {
       {/* ── THE RATING, AND WHAT THE REVIEWS MENTION ──
         * The organizing device for the page. Counts are of the six quoted below
         * and say so on the label, because that is the number we have read. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[34fr_66fr] lg:gap-14">
           <div>
             <p className="eyebrow">On {reviewProof.platform}</p>
@@ -170,7 +170,7 @@ export default function Reviews() {
               {tags.map(([t, n]) => (
                 <li
                   key={t}
-                  className="flex items-baseline justify-between gap-4 rounded-lg bg-card px-5 py-3.5 shadow-[var(--shadow-lg)]"
+                  className="flex items-baseline justify-between gap-4 rounded-lg bg-background px-5 py-3.5 shadow-[var(--shadow-lg)]"
                 >
                   <span className="font-display text-[0.95rem] font-bold text-foreground">{t}</span>
                   <span className="u shrink-0 text-sm font-medium text-accent-ink">{n}</span>

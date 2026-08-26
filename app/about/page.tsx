@@ -94,7 +94,7 @@ export default function About() {
 
       {/* ── THE THESIS ──
         * The argument on the left, the thing it produces on the right. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[54fr_46fr] lg:gap-14">
           <div>
             <p className="eyebrow">Why the company exists</p>
@@ -127,7 +127,7 @@ export default function About() {
             </div>
           </div>
 
-          <div className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+          <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
             <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
               <p className="label flex items-center gap-3 text-foreground">
                 <span className="block h-4 w-1 bg-accent" aria-hidden />

@@ -148,7 +148,7 @@ export default function Warranty() {
       {/* ── COVERED, FACING NOT COVERED ──
         * The centerpiece. Everybody in this trade publishes the left column.
         * The right column is the one that tells you whether to trust the left. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="Both columns"
@@ -158,7 +158,7 @@ export default function Warranty() {
 
           <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
             {/* COVERED */}
-            <div className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+            <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
               <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border bg-primary px-6 py-4">
                 <p className="label flex items-center gap-3 text-on-dark">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -208,7 +208,7 @@ export default function Warranty() {
                   </li>
                 ))}
               </ul>
-              <p className="border-t border-border bg-card px-6 py-5 text-sm leading-relaxed text-muted-foreground">
+              <p className="border-t border-border bg-background px-6 py-5 text-sm leading-relaxed text-muted-foreground">
                 None of these mean we will not help. They mean the work is quoted rather than free, and
                 you will be told which it is before anybody starts.
               </p>

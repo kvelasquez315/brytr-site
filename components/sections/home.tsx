@@ -200,7 +200,7 @@ export function Services() {
   }).filter(Boolean);
 
   return (
-    <section className="section bg-background">
+    <section className="section bg-card">
       <div className="shell">
         {/* No lede. The heading is a question a homeowner can answer in one word, and the five
           * answers are directly underneath it. A paragraph here would be explaining the grid. */}
@@ -216,7 +216,7 @@ export function Services() {
                 key={c!.slug}
                 href={`/services/${c!.slug}`}
                 data-spot
-                className="group flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
+                className="group flex flex-col overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]"
               >
                 <div className="relative aspect-16/10 w-full overflow-hidden">
                   {c!.img?.src && (
@@ -364,7 +364,7 @@ const ABOUT_CARDS: { title: string; body: string }[] = [
 export function WhoWeAre() {
   const shot = images.installDayGarage;
   return (
-    <section className="section bg-background">
+    <section className="section bg-card">
       <div className="shell">
         {/* ── who we are ── */}
         <div className="grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
@@ -378,7 +378,7 @@ export function WhoWeAre() {
             {/* THREE CARDS, WHICH IS WHAT WAS MISSING. */}
             <ul className="mt-8 grid gap-4">
               {ABOUT_CARDS.map((c) => (
-                <li key={c.title} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+                <li key={c.title} className="rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
                   <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{c.title}</h3>
                   <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{c.body}</p>
                 </li>
@@ -775,7 +775,7 @@ export const faqItems = [
 
 export function Faqs() {
   return (
-    <section className="section bg-background">
+    <section className="section bg-card">
       <div className="shell grid items-start gap-10 lg:grid-cols-[22rem_minmax(0,1fr)] lg:gap-16">
         <div className="rounded-lg bg-primary p-8">
           <SectionHead
@@ -794,7 +794,7 @@ export function Faqs() {
             <LightPill href="/faq">Read every question</LightPill>
           </div>
         </div>
-        <Faq items={faqItems} />
+        <Faq items={faqItems} ground="background" />
       </div>
     </section>
   );

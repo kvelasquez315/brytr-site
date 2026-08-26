@@ -81,7 +81,7 @@ export default function Pricing() {
       {/* ── THE HONEST NOTE ──
         * First thing after the hero, because "why isn't there a price on
         * this page" is the reason people leave it. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell grid gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
           <div>
             <p className="eyebrow">Straight answer</p>
@@ -128,7 +128,7 @@ export default function Pricing() {
                 foot: "None of this is generosity. It is just how the quote is built.",
               },
             ].map((c) => (
-              <div key={c.h} className="flex flex-col rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+              <div key={c.h} className="flex flex-col rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
                 <p className="label flex items-center gap-3 text-foreground">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
                   {c.h}
@@ -348,7 +348,7 @@ export default function Pricing() {
       </section>
 
       {/* ── HOW EACH KIND OF WORK IS PRICED ── */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="Bid types"

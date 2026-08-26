@@ -24,7 +24,7 @@ export default function Page() {
         lede="The terms that apply to this website. The terms that apply to an actual install are in your written quote, which is the document that governs the work."
         trail={trail}
       />
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <div className="max-w-[76ch]">
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">About this site</h2>

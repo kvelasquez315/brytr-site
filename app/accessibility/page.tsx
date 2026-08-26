@@ -24,7 +24,7 @@ export default function Page() {
         lede="What we have done, what we know is imperfect, and how to tell us if something on this site does not work for you."
         trail={trail}
       />
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <div className="max-w-[76ch]">
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">What we aim for</h2>

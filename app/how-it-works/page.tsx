@@ -140,7 +140,7 @@ export default function HowItWorks() {
       </section>
 
       {/* ── THE HALF OF THE DAY THAT IS NOT IN THE DRAWING ── */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[40fr_60fr] lg:gap-14">
           <div>
             <p className="eyebrow">The other half</p>

@@ -24,7 +24,7 @@ export default function Page() {
         lede="What we collect when you send us a form, what we do with it, and what we will not do with it."
         trail={trail}
       />
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <div className="max-w-[76ch]">
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">What we collect</h2>

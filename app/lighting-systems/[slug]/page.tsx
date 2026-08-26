@@ -106,7 +106,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
       />
 
       {/* ── THE SPEC SHEET, IN FULL ── */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[62fr_38fr] lg:gap-14">
           <div>
             <SectionHead
@@ -346,7 +346,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
       )}
 
       {/* ── QUESTIONS ── */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead eyebrow="Questions" title={`${s.name}: what people ask.`} />
           {/* Two columns. This was one 82ch column in a 100rem shell, so the right ~570px of

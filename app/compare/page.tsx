@@ -217,7 +217,7 @@ export default function CompareHub() {
 
       {/* ── THE MARKET, WITH A STANCE COLUMN ──
         * The centerpiece. The fourth column is the page. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="The whole market"
@@ -225,7 +225,7 @@ export default function CompareHub() {
             lede="What each one is, and what we do about it. This is the page we wanted to find when we started, and the last column is the part nobody else can print."
           />
 
-          <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+          <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
             <div className="hidden bg-primary px-6 py-4 lg:grid lg:grid-cols-[22fr_38fr_24fr] lg:gap-8">
               <p className="label text-on-dark-muted">Brand</p>
               <p className="label text-on-dark-muted">What you are getting</p>

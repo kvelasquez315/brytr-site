@@ -113,7 +113,7 @@ export default function ServicesHub() {
 
       {/* ── THE DECISION TREE ──
         * The centerpiece, and the thing this page has that no other page does. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="Start here"
@@ -300,7 +300,7 @@ export default function ServicesHub() {
       </section>
 
       {/* ── WHERE ── */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="Available in"

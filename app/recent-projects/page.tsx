@@ -329,9 +329,9 @@ export default function RecentProjects() {
       </section>
 
       {/* ── THE SPLIT WITH /gallery ── */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="rounded-lg bg-card p-7 shadow-[var(--shadow-lg)]">
+          <div className="rounded-lg bg-background p-7 shadow-[var(--shadow-lg)]">
             <p className="label flex items-center gap-3 text-accent-ink">
               <span className="block h-4 w-1 bg-accent" aria-hidden />
               You are on this one

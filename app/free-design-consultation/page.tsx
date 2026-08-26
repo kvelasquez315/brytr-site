@@ -110,7 +110,7 @@ export default function Consult() {
 
       {/* ── THE HOUR ──
         * The centerpiece: the clock down the left, the deliverable on the right. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="What you are agreeing to"
@@ -139,7 +139,7 @@ export default function Consult() {
             </ol>
 
             {/* THE SHEET — a facsimile of the leave-behind, blanks and all */}
-            <figure className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+            <figure className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
               <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
                 <p className="label flex items-center gap-3 text-foreground">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />

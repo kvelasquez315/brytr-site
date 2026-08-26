@@ -17,7 +17,20 @@ import type { Faq as FaqItem } from "@/content/faqs";
  * in for structure that is not there. Here it is STATE - it marks which question is open, it appears
  * and disappears with the interaction, and the reference uses it for the same reason.
  */
-export function Faq({ items, onDark }: { items: FaqItem[]; onDark?: boolean }) {
+export function Faq({
+  items, onDark, ground = "card",
+}: {
+  items: FaqItem[];
+  onDark?: boolean;
+  /* WHICH LIGHT GROUND THE CARDS SIT ON.
+   *
+   * They were always `bg-card` - white - which was right while every section under them was
+   * limestone. The home page's FAQ section is white now, and a white card on a white section is
+   * not a card. Measured: white against `background` is dE 7.8, which with the shadow is a
+   * visible edge; white against white is nothing at all. */
+  ground?: "card" | "background";
+}) {
+  const cardBg = ground === "background" ? "bg-background" : "bg-card";
   return (
     <Acc.Root type="single" collapsible defaultValue="i0" className="w-full space-y-4">
       {items.map((f, i) => (
@@ -25,7 +38,7 @@ export function Faq({ items, onDark }: { items: FaqItem[]; onDark?: boolean }) {
           key={f.q}
           value={`i${i}`}
           className={`overflow-hidden rounded-lg shadow-[var(--shadow-lg)] data-[state=open]:border-b-2 data-[state=open]:border-accent ${
-            onDark ? "bg-raise" : "bg-card"
+            onDark ? "bg-raise" : cardBg
           }`}
         >
           <Acc.Header>

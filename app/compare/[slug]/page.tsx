@@ -168,7 +168,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       {/* ── THE SPECS ──
         * One table, once. The old page printed the first five rows as two cards
         * and then all fourteen again underneath. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="Line by line"
@@ -285,7 +285,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         * referee → the deciding factor is the installer, and here is how to judge one.
         * labor  → what a DIY install actually costs you that is not money. */}
       {frame === "compete" && (
-        <section className="section bg-background">
+        <section className="section bg-card">
           <div className="shell grid items-start gap-10 lg:grid-cols-[48fr_52fr] lg:gap-14">
             <div>
               <p className="eyebrow">Why we can say this</p>
@@ -309,7 +309,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               </div>
             </div>
 
-            <div className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+            <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
               <div className="border-b border-border bg-primary px-6 py-4">
                 <p className="label flex items-center gap-3 text-on-dark">
                   <span className="block h-4 w-1 bg-accent" aria-hidden />
@@ -341,7 +341,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       )}
 
       {frame === "referee" && (
-        <section className="section bg-background">
+        <section className="section bg-card">
           <div className="shell">
             <SectionHead
               eyebrow="The actual deciding factor"
@@ -357,7 +357,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                 ["Ask who administers the warranty", "The installer, the manufacturer, or a franchise head office. All three are answers; not knowing is not."],
                 ["Ask what happens at handover", "Whether somebody walks the scenes with you, or hands you an app and drives off."],
               ].map(([h, p]) => (
-                <li key={h} className="rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+                <li key={h} className="rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
                   <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{h}</h3>
                   <p className="mt-2.5 text-[0.95rem] leading-relaxed text-muted-foreground">{p}</p>
                 </li>
@@ -371,7 +371,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       )}
 
       {frame === "labor" && (
-        <section className="section bg-background">
+        <section className="section bg-card">
           <div className="shell grid items-start gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
             <div>
               <p className="eyebrow">The part that is not money</p>

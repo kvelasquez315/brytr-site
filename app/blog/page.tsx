@@ -63,11 +63,11 @@ export default function BlogHub() {
         * reads better here anyway: at full width the featured piece gets its own photograph
         * beside it, and a reader who has just been told what this page is gets one obvious
         * way in before the twelve-item list. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <Link
             href={`/blog/${feat.slug}`}
-            className="group grid overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] md:grid-cols-[42fr_58fr]"
+            className="group grid overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] md:grid-cols-[42fr_58fr]"
           >
             {featPic ? (
               <div className="relative min-h-[15rem] md:min-h-[20rem]">
@@ -145,7 +145,7 @@ export default function BlogHub() {
       />
 
       {/* ── EVERYTHING, GROUPED ── */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="All of it"

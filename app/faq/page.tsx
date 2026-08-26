@@ -179,7 +179,7 @@ export default function FaqPage() {
       {/* ── THE SHORT ANSWERS ──
         * The centerpiece. Answers in the open, because the whole failure of an
         * FAQ page is that the useful part is behind a click. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="No clicking required"

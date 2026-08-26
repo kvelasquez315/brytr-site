@@ -97,7 +97,7 @@ export default function Contact() {
       {/* ── THE FOUR ROUTES IN ──
         * The centerpiece. Every route says what it is bad for, which is the
         * half of a contact page that is normally missing. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="Which one to use"
@@ -109,7 +109,7 @@ export default function Contact() {
             {routes.map((r) => (
               <li
                 key={r.h}
-                className="flex flex-col overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]"
+                className="flex flex-col overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]"
               >
                 <div className="border-b border-border px-6 py-4">
                   <p className="label flex items-center gap-3 text-accent-ink">

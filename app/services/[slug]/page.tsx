@@ -114,7 +114,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       />
 
       {/* ── WHAT IT IS, AND THE FACTS THAT ONLY APPLY TO IT ── */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell grid gap-10 lg:grid-cols-[58fr_42fr] lg:gap-14">
           <div>
             <SectionHead title={`What ${s.name.toLowerCase()} actually is.`} />
@@ -128,7 +128,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </ul>
           </div>
 
-          <dl className="h-fit rounded-lg bg-card p-6 shadow-[var(--shadow-lg)]">
+          <dl className="h-fit rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
             <p className="label text-muted-foreground">{s.name}, in short</p>
             {(d?.facts ?? []).map(([k, v]) => (
               <div key={k} className="flex items-baseline justify-between gap-4 border-b border-border py-3.5 last:border-0">
@@ -226,7 +226,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
 
       {/* ── THE COMPARISON, WHERE IT IS HONEST ── */}
       {d?.compare && (
-        <section className="section bg-background">
+        <section className="section bg-card">
           <div className="shell">
             <SectionHead
               eyebrow="The comparison"
@@ -275,10 +275,10 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         * where it always belonged, and the gallery is reachable from the nav and the closer. */}
 
       {/* ── WHAT PEOPLE LOOK AT NEXT ── */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead title="What people look at next." />
-          <div className="mt-9 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+          <div className="mt-9 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
             <ul className="divide-y divide-border">
               {alsoSee.map((r) => {
                 return (

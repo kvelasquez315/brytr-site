@@ -136,7 +136,7 @@ export default function AreasHub() {
       {/* ── THE DRIVE-TIME LADDER ──
         * The centerpiece. Eighteen towns in one table, ordered by minutes,
         * with the band each falls into. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="Ordered by minutes, not alphabetically"
@@ -144,7 +144,7 @@ export default function AreasHub() {
             lede="Every town we drive to, sorted by the real drive from the shop. The promise is not the same at twenty minutes and at two hours."
           />
 
-          <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+          <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
             <div className="hidden bg-primary px-6 py-4 lg:grid lg:grid-cols-[30fr_14fr_24fr_32fr] lg:gap-8">
               <p className="label text-on-dark-muted">Town</p>
               <p className="label text-on-dark-muted">Drive</p>

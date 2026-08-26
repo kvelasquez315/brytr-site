@@ -239,7 +239,7 @@ export default function SystemsHub() {
 
       {/* ── THE SHEET ──
         * The roofline hardware, with a consequence written against every row. */}
-      <section className="section bg-background">
+      <section className="section bg-card">
         <div className="shell">
           <SectionHead
             eyebrow="The roofline hardware"
@@ -247,7 +247,7 @@ export default function SystemsHub() {
             lede="Every company publishes a spec table. Almost none say what a spec does to a building, which is the only part that helps you judge one. The third column is that."
           />
 
-          <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)]">
+          <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)]">
             <div className="hidden bg-primary px-6 py-4 lg:grid lg:grid-cols-[22fr_26fr_52fr] lg:gap-8">
               <p className="label text-on-dark-muted">Spec</p>
               <p className="label flex items-center gap-3 text-on-dark">

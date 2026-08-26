@@ -97,7 +97,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
       {/* ── THE ARTICLE ──
         * TOC on the left with real anchors, the piece in the middle, and one
         * panel on the right that differs by category. No second form. */}
-      <div className="section bg-background">
+      <div className="section bg-card">
         {/* TWO COLUMNS, NOT THREE, and the reason is that no post has enough headings for a
           * sidebar. A previous pass gave this template a 13rem left column for a table of
           * contents. Every one of the twelve articles has two or three headings, so that column
