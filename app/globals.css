@@ -512,6 +512,15 @@
     .shell { padding-inline: 2rem; }
   }
 
+  /* NO CARD LEFT ALONE IN A ROW. rules.md: card grids fill their rows evenly, no orphan. An odd
+     number of cards in a two-column grid leaves the last one sitting in a half-empty row, which is
+     the single most common way a good grid ends badly. This makes that last card span the row
+     instead, so the block finishes on a straight edge. It only fires when the count is actually
+     odd, so an even grid is untouched. */
+  .fill-row > *:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
   /* ---- THE INSTALL RUN: three points, drawn as lights ------------- */
   /* Drawn here rather than in SVG because the LABELS have to be real type. The whole thing was one
      SVG, and inside a column that goes from 656px to 343px the fixed-unit text rendered at nine

@@ -133,17 +133,10 @@ export default function AreasHub() {
           <div className="overflow-hidden rounded-lg bg-card p-2 shadow-[var(--shadow-lg)] ring-1 ring-border">
             <ServiceLeaflet className="aspect-21/9 w-full" />
           </div>
-          <dl className="mt-5 grid gap-5 sm:grid-cols-2">
-            {bands.map((b) => (
-              <div key={b.h} className="rounded-lg bg-card px-6 py-5 shadow-[var(--shadow-lg)] ring-1 ring-border">
-                <dt className="flex items-center gap-3 font-display text-[1.05rem] font-bold text-foreground">
-                  <span className="run-node-inline is-sm" aria-hidden />
-                  {b.h}
-                </dt>
-                <dd className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{b.promise}</dd>
-              </div>
-            ))}
-          </dl>
+          {/* THE BAND CARDS CAME BACK OUT. I put them here an hour ago to fill the column the map
+            * had lost, and then found the same two bands rendered again as a full section further
+            * down the page with more copy on them. Saying it twice on one page is worse than the
+            * gap I was filling. The section below is the one that keeps them. */}
         </div>
       </section>
 
@@ -182,7 +175,7 @@ export default function AreasHub() {
                       <span className="u text-sm font-medium text-accent-ink">{c.drive}</span>
                       <span>
                         <span
-                          className={`u inline-flex rounded-sm border px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] ${bandStyle[band]}`}
+                          className={`u text-[0.7rem] uppercase tracking-[0.08em] ${bandStyle[band]}`}
                         >
                           {band}
                         </span>
@@ -212,7 +205,9 @@ export default function AreasHub() {
           <SectionHead
             title="The promise is not the same everywhere."
           />
-          <div className="mt-10 grid gap-5 lg:grid-cols-3">
+          {/* TWO COLUMNS FOR TWO BANDS. It was three, so a third of the row was empty from the
+            * moment the service area came back to the metro and Council Bluffs. */}
+          <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {bands.map((b) => (
               <article
                 key={b.h}

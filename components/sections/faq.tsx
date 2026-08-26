@@ -38,7 +38,7 @@ export function Faq({
           key={f.q}
           value={`i${i}`}
           className={`overflow-hidden rounded-lg shadow-[var(--shadow-lg)] data-[state=open]:border-b-2 data-[state=open]:border-accent ${
-            /* The hairline goes on the LIGHT branch only. On the night ground the value
+ /* The hairline goes on the LIGHT branch only. On the night ground the value
               * difference already separates the card, and an outline there reads as a border. */
             onDark ? "bg-raise" : `${cardBg} ring-1 ring-border`
           }`}
@@ -58,7 +58,7 @@ export function Faq({
                   * is what tells you the row is one you can open. Full amber is still reserved for
                   * the row that IS open. */
                 className={`grid size-9 shrink-0 place-items-center rounded-full transition-colors duration-[--dur-fast] group-data-[state=open]:bg-accent group-data-[state=open]:text-accent-foreground ${
-                  onDark ? "bg-on-dark/10 text-on-dark-muted" : "bg-accent/15 text-accent-ink"
+ onDark ? "bg-on-dark/10 text-on-dark-muted" : "bg-accent/15 text-accent-ink"
                 }`}
                 aria-hidden
               >

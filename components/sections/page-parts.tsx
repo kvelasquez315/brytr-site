@@ -316,7 +316,7 @@ export function ServiceRows({
             <Link
               href={`/services/${s.slug}`}
               className={`group flex h-full flex-col overflow-hidden rounded-lg transition-all duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5 ${
-                onDark
+ onDark
                   ? "bg-raise ring-1 ring-on-dark/10 hover:ring-accent/40"
                   : "bg-card shadow-[var(--shadow-lg)] ring-1 ring-border"
               }`}
@@ -367,7 +367,7 @@ export function CityTiles({
             <Link
               href={`/service-areas/${c.slug}`}
               className={`flex items-baseline justify-between gap-4 px-4 py-3 transition-colors duration-[--dur-fast] ${
-                onDark ? "hover:bg-raise" : "hover:bg-muted"
+ onDark ? "hover:bg-raise" : "hover:bg-muted"
               }`}
             >
               <span className={`font-display text-[0.95rem] font-bold ${onDark ? "text-on-dark" : "text-foreground"}`}>

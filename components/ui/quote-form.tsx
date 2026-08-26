@@ -68,7 +68,7 @@ export function QuoteForm({
   if (state?.ok) {
     return (
       <div className={shell}>
-        <div className="flex items-start gap-3">
+ <div className="flex items-start gap-3">
           <span className="mt-0.5 grid size-6 shrink-0 place-items-center rounded-full bg-accent" aria-hidden>
             <svg viewBox="0 0 16 16" className="size-4 text-accent-foreground" fill="none">
               <path d="m3.2 8.4 3 3 6.6-6.8" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -84,7 +84,7 @@ export function QuoteForm({
             <a
               href={site.phoneHref}
               className={cn(
-                "u mt-4 inline-block font-display font-bold underline decoration-accent decoration-2 underline-offset-4",
+ "u mt-4 inline-block font-display font-bold underline decoration-accent decoration-2 underline-offset-4",
                 onDark ? "text-on-dark" : "text-foreground"
               )}
             >
@@ -98,7 +98,7 @@ export function QuoteForm({
 
   return (
     <form action={formAction} className={shell}>
-      {heading && (
+ {heading && (
         <h3 className={cn("mb-5 text-xl", onDark ? "text-on-dark" : "text-foreground")}>{heading}</h3>
       )}
 

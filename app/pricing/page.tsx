@@ -240,7 +240,7 @@ export default function Pricing() {
                           {["Up", "Down"].map((e) => (
                             <span
                               key={e}
-                              className="u rounded-sm border border-on-dark/25 px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] text-on-dark/75"
+                              className="u text-[0.7rem] uppercase tracking-[0.08em] text-on-dark/75"
                             >
                               {e}
                             </span>

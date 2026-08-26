@@ -123,6 +123,12 @@ JS_MEASURE = r"""
       lab: lab(effBg(n)),
       words, imgs, svgs, bgImage, cards, table,
       radius: cs.borderRadius,
+      grid: cs.gridTemplateColumns || (n.querySelector('[class*="grid-cols"]') ?
+        getComputedStyle(n.querySelector('[class*="grid-cols"]')).gridTemplateColumns : 'none'),
+      fullBleed: r.width >= window.innerWidth - 2,
+      accordion: n.querySelectorAll('[data-state],details,[aria-expanded]').length,
+      gallery: n.querySelectorAll('img').length >= 4,
+      map: n.querySelectorAll('.leaflet-container,[class*="map"],iframe').length,
     });
   }
 
@@ -217,6 +223,65 @@ def analyse(path, m, out):
             blk("F3 undesigned", f'section {i} ({s["words"]}w, {s["imgs"]} img, {s["cards"]} cards): '
                                  f'media={has_media} groundShift={ground_shift} contentForm={has_form} '
                                  f'— needs at least 2 of 3')
+
+    # ---- F6: colour distribution. "boring and white" is measured here. ----
+    total_h = sum(s["height"] for s in secs) or 1
+    light_h = sum(s["height"] for s in secs if s["lab"][0] > 90)
+    light_share = light_h / total_h
+    chroma = lambda s: math.hypot(s["lab"][1], s["lab"][2])
+    brandish = [s for s in secs if s["lab"][0] < 40 or chroma(s) > 12]
+    bleed_photo = [s for s in secs if s["fullBleed"] and (s["bgImage"] or s["imgs"])]
+    grounds = {tuple(round(v) for v in s["lab"]) for s in secs}
+
+    if light_share > 0.55:
+        blk("F6 too-white", f"{light_share:.0%} of page height is a light ground (cap 55%) — "
+                            f"this is the 'boring and white' failure")
+    if len(brandish) < 2:
+        blk("F6 no-colour", f"{len(brandish)} sections on a brand-colour or dark ground (need 2+)")
+    if not bleed_photo:
+        blk("F6 no-photo-band", "no full-bleed photograph band on the page (need 1+)")
+    if len(grounds) < 3:
+        warn("F6 grounds", f"only {len(grounds)} distinct grounds in rotation (want 3+)")
+
+    # ---- F7: section form variety. "they all look the same" is measured here. ----
+    def form(s):
+        if s["map"]:
+            return "map"
+        if s["accordion"] >= 3:
+            return "accordion"
+        if s["fullBleed"] and (s["bgImage"] or s["imgs"]):
+            return "full-bleed-photo"
+        g = str(s["grid"] or "none")
+        cols = len([c for c in g.split() if c not in ("none", "")]) if g != "none" else 0
+        if cols >= 4:
+            return "grid-4"
+        if cols == 3:
+            return "grid-3"
+        if cols == 2:
+            parts = g.split()
+            try:
+                a, b = float(parts[0].rstrip("px")), float(parts[1].rstrip("px"))
+                return "split-left" if a > b else "split-right"
+            except Exception:
+                return "split-left"
+        if s["gallery"]:
+            return "gallery"
+        if chroma(s) > 12 or s["lab"][0] < 40:
+            return "colour-band"
+        return "plain-band"
+
+    forms = [form(s) for s in secs]
+    distinct = len(set(forms))
+    if len(secs) >= 6 and distinct < 4:
+        blk("F7 form-variety", f"{len(secs)} sections but only {distinct} distinct forms "
+                               f"({', '.join(sorted(set(forms)))}) — need 4+")
+    for i in range(1, len(forms)):
+        if forms[i] == forms[i - 1] and forms[i] != "plain-band":
+            warn("F7 repeat-form", f"sections {i-1}/{i} both '{forms[i]}' — never the same form twice in a row")
+    plain = forms.count("plain-band")
+    if plain > max(1, len(forms) // 4):
+        blk("F7 plain-bands", f"{plain} of {len(forms)} sections are plain bands "
+                              f"(no photo, no colour, no grid) — that is the boring page")
 
     # ---- F4: adjacent grounds ----
     for i in range(1, len(secs)):

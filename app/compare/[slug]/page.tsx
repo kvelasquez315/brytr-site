@@ -433,7 +433,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                     * not got one. */}
                   <span
                     className={`label mt-4 border-t border-on-dark/12 pt-3 ${
-                      o.neutral ? "text-on-dark-muted" : "text-accent"
+ o.neutral ? "text-on-dark-muted" : "text-accent"
                     }`}
                   >
                     {o.neutral ? "We have no stake in this one" : o.labor ? "Labor, not brand" : "Read it"}

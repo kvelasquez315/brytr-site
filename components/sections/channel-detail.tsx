@@ -44,7 +44,7 @@ export function ChannelDetail({ className }: { className?: string }) {
     <svg
       viewBox="0 0 700 450"
       className={className}
-      role="img"
+ role="img"
       aria-label="A measured cross-section through a roof edge: the shingle course with nothing fastened through it, the fascia board every fixing lands in, the aluminium channel screwed to its face, the sealed fixings, and the addressable LED behind its lens."
     >
       <rect width="700" height="450" fill={paper} />

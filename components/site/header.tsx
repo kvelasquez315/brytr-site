@@ -36,7 +36,7 @@ function Wordmark({ className }: { className?: string }) {
   if (brandLogoDark) {
     return (
       <span className={className}>
-        <Image
+ <Image
           src={brandLogoDark.src}
           alt={brandLogoDark.alt}
           width={brandLogoDark.width}
@@ -51,7 +51,7 @@ function Wordmark({ className }: { className?: string }) {
   }
   return (
     <span className={className}>
-      <span className="font-display text-2xl font-black tracking-[-0.04em] text-foreground">brytr</span>
+ <span className="font-display text-2xl font-black tracking-[-0.04em] text-foreground">brytr</span>
       <span className="ml-0.5 inline-block size-2 translate-y-[-0.35rem] rounded-full bg-accent" />
     </span>
   );
@@ -138,7 +138,7 @@ export function Header({ nav }: { nav: NavItem[] }) {
                   onFocus={() => hold(n.groups ? n.label : null)}
                   onClick={() => setMenu(null)}
                   className={`flex items-center gap-1.5 whitespace-nowrap py-2 text-[0.95rem] font-medium transition-colors duration-[--dur-fast] ${
-                    menu === n.label ? "text-accent-ink" : "text-muted-foreground hover:text-foreground"
+ menu === n.label ? "text-accent-ink" : "text-muted-foreground hover:text-foreground"
                   }`}
                 >
                   {n.label}

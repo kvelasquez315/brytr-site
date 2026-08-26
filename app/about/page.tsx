@@ -193,16 +193,23 @@ export default function About() {
             title="Decisions that make us less money."
           />
 
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {costs.map((c) => (
+          {/* SIX COLUMNS FOR FIVE CARDS, so both rows finish on a straight edge. At three columns
+            * the second row held two cards and a third of it was empty, which rules.md calls an
+            * orphan and which is what the eye actually catches. Three cards spanning two columns,
+            * then two spanning three: same cards, no gap, and the second row reads as the heavier
+            * pair rather than as a row that ran out. */}
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-6">
+            {costs.map((c, i) => (
               <article
                 key={c.h}
-                className="flex flex-col rounded-lg bg-raise p-6 ring-1 ring-on-dark/10"
+                className={`flex flex-col rounded-lg bg-raise p-6 ring-1 ring-on-dark/10 ${
+ i < 3 ? "xl:col-span-2" : "xl:col-span-3"
+                }`}
               >
-                <p className="u inline-flex w-fit rounded-sm border border-accent/45 px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] text-accent">
-                  {c.chip}
-                </p>
-                <h3 className="mt-4 font-display text-xl font-bold leading-snug text-on-dark">{c.h}</h3>
+                {/* NO CHIP. "COSTS US MARGIN" in a bordered uppercase box is a badge, and rules.md
+                  * D5 bans pills and badges anywhere. The card already ends with what it costs, in
+                  * a labelled row, which is the same information said once instead of twice. */}
+                <h3 className="font-display text-xl font-bold leading-snug text-on-dark">{c.h}</h3>
                 <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-on-dark-muted">{c.p}</p>
                 <div className="mt-5 border-t border-on-dark/12 pt-4">
                   <p className="label text-on-dark-muted">What it costs</p>

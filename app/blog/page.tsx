@@ -125,7 +125,7 @@ export default function BlogHub() {
               <li key={g.category}>
                 <a
                   href={`#${slugify(g.category)}`}
-                  className="inline-flex items-baseline gap-2.5 rounded-sm border border-on-dark/22 px-4 py-2.5 text-sm text-on-dark-muted transition-colors duration-[--dur-fast] hover:border-accent hover:text-on-dark"
+                  className="inline-flex items-baseline gap-2.5 rounded-full border border-on-dark/22 px-5 py-2.5 text-sm text-on-dark-muted transition-colors duration-[--dur-fast] hover:border-accent hover:text-on-dark"
                 >
                   {g.category}
                 </a>

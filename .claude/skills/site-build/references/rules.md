@@ -32,12 +32,46 @@ Highs. Do not chase Nits into over-engineering — subtraction beats addition.
 - **Inline hex** outside `globals.css`. `[brand-lock]`
 - **More than one hero component** in the tree. `[B1]`
 
+## PASSING THE CHECKS IS THE FLOOR, NOT THE GOAL
+
+Read this before anything else. The scripts can only prove a page is not *wrong*. They cannot make it
+*good*. A page that clears every gate and is still boring has failed — and "boring and white" is the
+failure mode this rule set produces when followed literally, because most of it is prohibitions.
+
+So on every screenshot pass, ask two questions the scripts cannot:
+
+1. **Is anything here interesting to look at?** If every section is a white band with a heading and
+   some cards, no gate will catch it and the site is dead.
+2. **Could this be any other company?** If yes, the skin is doing no work.
+
+When a ban and "this section is lifeless" collide, **fix the lifelessness** — with photography, a
+brand-colour ground, a distinctive container form, scale contrast, or the signature device. Never by
+reaching for a banned pattern, and never by leaving it plain because plain is safe.
+
+## Service cards — required content, not an icon slot
+
+Cards are the most common place this goes wrong. A card that is a title and a sentence is a failure.
+Every card carries **at least four** of:
+
+1. A **real photograph** of that service — the default visual layer, and what replaced the banned
+   generic icon
+2. Title
+3. One tight paragraph, 2–3 lines
+4. A 3–4 item list of what's actually included
+5. A price-from, timeframe, or warranty line, set in the utility face
+6. A text-link CTA ("See gutter repair →")
+7. Optionally: a hand-authored brand mark at **jhlincoln.com** quality — permitted and encouraged
+   here, but never a stock glyph and never the only visual layer
+
+**Cards in a grid must not all be the same size.** One feature cell larger than the rest is what
+separates a designed grid from a template. Rows still fill evenly — no orphan card.
+
 ## Icons
 
-Default is **no icons at all.** Carry meaning with real photography, type hierarchy, and designed
-container forms. If an icon is genuinely required by the design, it must be hand-authored SVG at the
-quality bar of **jhlincoln.com**. "Make a graphic" means design an illustration — it does not mean
-add icons. `[E1, E3]`
+Default is **no icons.** Carry meaning with real photography, type hierarchy, and designed container
+forms. Where an icon genuinely helps, it must be hand-authored SVG at the quality bar of
+**jhlincoln.com** — that standard is the permission, not a prohibition. "Make a graphic" means design
+an illustration; it does not mean add icons. `[E1, E3]`
 
 ## Hero — closed set
 
@@ -76,6 +110,48 @@ form closer.
 - Interior pages inherit the home page's **design language** — component forms, radius, type
   treatment, image density, colour rhythm — without duplicating its layout. `[A5]`
 - Interior pages compose only from components already in the shared library.
+
+## Colour distribution — the fix for "boring and white"
+
+Requiring adjacent sections to differ is not enough: white → off-white → white passes and the page
+still reads as one pale field. So the page as a whole is measured. Per page: `[F6]`
+
+| Requirement | Value |
+|---|---|
+| Light grounds (L\* > 90) as a share of page height | **≤ 55%** |
+| Sections on a brand-colour or brand-dark ground | **≥ 2** |
+| Full-bleed photograph bands | **≥ 1** |
+| Distinct grounds in rotation | **≥ 3** (not just white/off-white) |
+
+Precedent: fixing "it's very beige" on brytr-site meant sweeping 35 sections — beige 53% → 40%,
+white 0% → 21%, with cards recoloured to stay contrast-safe. A distribution, deliberately set.
+
+## Section form variety — the fix for "they all look the same"
+
+A page must not be one layout repeated. Every section has a **form**, and the page needs range: `[F7]`
+
+`full-bleed-photo` · `split-left` · `split-right` · `grid-3` · `grid-4` · `feature-bento`
+(one large cell) · `colour-band` · `overlap-card` (straddling two sections) · `map` · `accordion` ·
+`gallery`
+
+- A page with 6+ sections uses **at least 4 distinct forms**
+- **Never the same form twice in a row**
+- Splits alternate direction down the page and use the 0.9/1.1 ratio
+
+## Cross-site variation — the fix for "every site is identical"
+
+Structure is fixed; the **skin** is what makes each site its own. Log every build's skin decisions in
+`skin-log.json` at repo root:
+
+```json
+{ "client": "dgr-painting", "radiusBase": "0.625rem", "displayFont": "Fraunces",
+  "bodyFont": "Karla", "accent": "#c8102e", "groundRotation": ["white","navy","offwhite"],
+  "sectionForms": ["full-bleed-photo","split-left","feature-bento","colour-band"],
+  "signatureDevice": "roller-edge motif as section divider" }
+```
+
+A new build must differ from the **last three** logged skins on at least **three** axes. If it
+doesn't, the brand work hasn't been done — go back to `DESIGN.md`. `[M4]`
 
 ## Designed vs undesigned
 

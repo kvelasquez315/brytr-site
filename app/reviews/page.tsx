@@ -212,7 +212,7 @@ export default function Reviews() {
                 {(mentions[featured.name] ?? []).map((t) => (
                   <li
                     key={t}
-                    className="u rounded-sm border border-accent/45 px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] text-accent"
+                    className="u text-[0.7rem] uppercase tracking-[0.08em] text-accent"
                   >
                     {t}
                   </li>
@@ -232,7 +232,7 @@ export default function Reviews() {
               <figure
                 key={r.name}
                 className={`flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ring-1 ring-border ${
-                  rest.length % 2 === 1 && i === rest.length - 1 ? "lg:col-span-2" : ""
+ rest.length % 2 === 1 && i === rest.length - 1 ? "lg:col-span-2" : ""
                 }`}
               >
                 {googleLogo && (

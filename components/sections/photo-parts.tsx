@@ -118,14 +118,14 @@ export function PhotoSplit({
         <div>
           <h2
             className={`display-section ${
-              dark ? "text-on-dark" : "text-foreground"
+ dark ? "text-on-dark" : "text-foreground"
             }`}
           >
             {title}
           </h2>
           <div
             className={`mt-5 space-y-4 text-[1.05rem] leading-relaxed ${
-              dark ? "text-on-dark/85" : "text-muted-foreground"
+ dark ? "text-on-dark/85" : "text-muted-foreground"
             }`}
           >
             {children}
@@ -135,7 +135,7 @@ export function PhotoSplit({
               <Link
                 href={link.href}
                 className={`u text-sm underline decoration-accent decoration-2 underline-offset-4 ${
-                  dark ? "text-on-dark" : "text-foreground"
+ dark ? "text-on-dark" : "text-foreground"
                 }`}
               >
                 {link.label}
@@ -170,7 +170,7 @@ export function PhotoPair({
       <div className="shell">
         <h2
           className={`display-section max-w-[34ch] ${
-            dark ? "text-on-dark" : "text-foreground"
+ dark ? "text-on-dark" : "text-foreground"
           }`}
         >
           {title}
@@ -255,7 +255,7 @@ export function PhotoStrip({
       <div className="shell">
         <h2
           className={`display-section max-w-[36ch] ${
-            dark ? "text-on-dark" : "text-foreground"
+ dark ? "text-on-dark" : "text-foreground"
           }`}
         >
           {title}
@@ -295,12 +295,12 @@ export function PhotoStrip({
               <figure
                 key={sl.src}
                 className={`flex flex-col overflow-hidden rounded-lg shadow-[var(--shadow-dark)] ${
-                  dark ? "bg-primary ring-1 ring-on-dark/10" : "bg-card"
+ dark ? "bg-primary ring-1 ring-on-dark/10" : "bg-card"
                 }`}
               >
                 <div
                   className={`relative ${
-                    frame === "3/4" ? "aspect-3/4" : frame === "16/9" ? "aspect-video" : "aspect-4/3"
+ frame === "3/4" ? "aspect-3/4" : frame === "16/9" ? "aspect-video" : "aspect-4/3"
                   }`}
                 >
                   <Image
@@ -318,7 +318,7 @@ export function PhotoStrip({
                 </div>
                 <figcaption
                   className={`flex-1 border-t px-5 py-4 ${
-                    dark ? "border-on-dark/12" : "border-border"
+ dark ? "border-on-dark/12" : "border-border"
                   }`}
                 >
                   {scene && (

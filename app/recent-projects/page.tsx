@@ -319,7 +319,7 @@ export default function RecentProjects() {
                 <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                   <h3 className="font-display text-[1.05rem] font-bold text-on-dark">{h}</h3>
                   <span
-                    className={`u shrink-0 rounded-sm border px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] ${
+                    className={`u text-[0.7rem] uppercase tracking-[0.08em] ${
                       state === "closed"
                         ? "border-on-dark/30 text-on-dark-muted"
                         : "border-accent/50 text-accent"

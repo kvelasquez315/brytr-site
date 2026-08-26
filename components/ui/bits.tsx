@@ -66,7 +66,7 @@ export function SectionHead({
     <div className={cn(align === "center" && "mx-auto max-w-[54rem] text-center", className)}>
       <h2
         className={cn(
-          scale === "hero" ? "display-hero" : "display-section",
+ scale === "hero" ? "display-hero" : "display-section",
           onDark ? "text-on-dark" : "text-foreground"
         )}
       >
@@ -75,7 +75,7 @@ export function SectionHead({
       {lede && (
         <p
           className={cn(
-            "mt-4 max-w-[62ch] text-lg",
+ "mt-4 max-w-[62ch] text-lg",
             align === "center" && "mx-auto",
             onDark ? "text-on-dark-muted" : "text-muted-foreground"
           )}
@@ -114,7 +114,7 @@ export function TextLink({ href, children, onDark }: { href: string; children: R
     <Link
       href={href}
       className={cn(
-        "tap-44 inline-block font-semibold decoration-accent decoration-2 underline-offset-4 transition-all duration-[--dur-fast] hover:decoration-[3px]",
+ "tap-44 inline-block font-semibold decoration-accent decoration-2 underline-offset-4 transition-all duration-[--dur-fast] hover:decoration-[3px]",
         onDark ? "text-on-dark underline" : "text-foreground underline"
       )}
     >

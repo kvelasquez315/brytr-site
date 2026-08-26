@@ -178,7 +178,7 @@ export default function Warranty() {
                     <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                       <h3 className="font-display text-[1rem] font-bold text-foreground">{c.h}</h3>
                       <span
-                        className={`u shrink-0 rounded-sm border px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] ${
+                        className={`u text-[0.7rem] uppercase tracking-[0.08em] ${
                           c.by === "Brytr"
                             ? "border-accent-ink/40 text-accent-ink"
                             : "border-border text-muted-foreground"

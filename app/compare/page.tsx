@@ -254,7 +254,7 @@ export default function CompareHub() {
                   <p className="text-[0.95rem] leading-relaxed text-muted-foreground">{m.what}</p>
                   <div>
                     <span
-                      className={`u inline-flex rounded-sm border px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] ${stanceStyle[m.stance]}`}
+                      className={`u text-[0.7rem] uppercase tracking-[0.08em] ${stanceStyle[m.stance]}`}
                     >
                       {m.stance}
                     </span>
@@ -284,7 +284,7 @@ export default function CompareHub() {
             {argumentGroups.map((g) => (
               <div key={g.heading}>
                 <div className={`flex flex-wrap items-baseline justify-between gap-3 border-b-2 pb-3 ${
-                  g.neutral ? "border-border" : "border-accent"
+ g.neutral ? "border-border" : "border-accent"
                 }`}>
                   <h3 className="font-display text-[clamp(1.2rem,2.2vw,1.6rem)] font-bold text-foreground">
                     {g.heading}

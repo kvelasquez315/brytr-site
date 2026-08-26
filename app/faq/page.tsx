@@ -231,7 +231,7 @@ export default function FaqPage() {
                 <li key={g.h}>
                   <a
                     href={`#${slug(g.h)}`}
-                    className="inline-flex items-baseline gap-2.5 rounded-sm border border-on-dark/22 px-4 py-2.5 text-sm text-on-dark-muted transition-colors duration-[--dur-fast] hover:border-accent hover:text-on-dark"
+                    className="inline-flex items-baseline gap-2.5 rounded-full border border-on-dark/22 px-5 py-2.5 text-sm text-on-dark-muted transition-colors duration-[--dur-fast] hover:border-accent hover:text-on-dark"
                   >
                     {g.h}
                   </a>
