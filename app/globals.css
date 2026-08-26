@@ -721,15 +721,21 @@
 /* Every town is a light, not a data point — that is what the company sells. Metro towns
  * burn amber and carry a real glow; outstate towns are cooler and dimmer, which is also
  * the legend. */
+/* TEARDROPS, TIP DOWN. A square with three rounded corners, rotated -45deg, so the one square
+   corner becomes the point. Sized by Leaflet's iconSize, so these only carry shape and colour.
+   The white ring is doing real work here - OSM tiles run from near-white farmland to mid-green
+   parkland to pink motorway, and a bare navy or amber shape loses its edge over at least one of
+   them. */
 .brytr-map .brytr-pin {
   display: block;
-  inline-size: 11px;
-  block-size: 11px;
-  border-radius: 9999px;
-  background: #111820;
+  inline-size: 100%;
+  aspect-ratio: 1;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  background: #1d2a36;
   box-shadow:
-    0 0 0 2.5px #ffffff,
-    0 1px 3px rgb(12 15 19 / 0.45);
+    0 0 0 2px #ffffff,
+    1px -1px 3px rgb(12 15 19 / 0.4);
 }
 /* THE GOLD CAME DOWN. "Make the map less bright gold."
    The metro pins carried three stacked amber shadows, the outermost a 34px bloom at 35%, so
@@ -737,35 +743,34 @@
    single gold smear - the towns stopped being separable, which is the one thing the map is for.
    One tight ring and one short glow each. They still read as lights; they no longer merge. */
 .brytr-map .brytr-pin.is-metro {
-  inline-size: 15px;
-  block-size: 15px;
   background: #f5c518;
   box-shadow:
-    0 0 0 2.5px #111820,
-    0 1px 4px rgb(12 15 19 / 0.5);
+    0 0 0 2px #111820,
+    1px -1px 4px rgb(12 15 19 / 0.45);
 }
 .brytr-map .brytr-pin { transition: box-shadow 160ms ease-out, transform 160ms ease-out; }
 .brytr-map .leaflet-marker-icon:hover .brytr-pin { transform: scale(1.35); }
 .brytr-map .leaflet-marker-icon:hover .brytr-pin.is-metro {
   box-shadow:
-    0 0 0 3.5px #111820,
-    0 2px 8px rgb(12 15 19 / 0.55);
+    0 0 0 3px #111820,
+    2px -2px 9px rgb(12 15 19 / 0.5);
 }
 .brytr-map .leaflet-marker-icon:hover .brytr-pin:not(.is-metro) {
   background: #f5c518;
   box-shadow:
-    0 0 0 3px #111820,
-    0 2px 8px rgb(12 15 19 / 0.5);
+    0 0 0 2.5px #111820,
+    2px -2px 9px rgb(12 15 19 / 0.5);
 }
 .brytr-map .brytr-shop {
   display: block;
-  inline-size: 16px;
-  block-size: 16px;
-  border-radius: 2px 2px 6px 6px;
+  inline-size: 100%;
+  aspect-ratio: 1;
+  border-radius: 3px 50% 50% 0;
+  transform: rotate(-45deg);
   background: #f5c518;
   box-shadow:
-    0 0 0 3px #111820,
-    0 2px 6px rgb(12 15 19 / 0.5);
+    0 0 0 2.5px #111820,
+    1px -1px 5px rgb(12 15 19 / 0.5);
 }
 
 /* Standalone text links (card CTAs, the announcement bar link) need a 44px touch

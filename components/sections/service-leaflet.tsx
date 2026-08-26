@@ -164,15 +164,50 @@ export function ServiceLeaflet({
        * is a single rendered tile with its labels already in it, so the extra pane would be an
        * empty layer and a z-index to maintain. */
 
+/* THE PINS POINT AT THE TOWN INSTEAD OF SITTING ON IT, and the reason is the basemap change.
+       *
+       * On the dark canvas the town names arrived in their own reference layer, in a pane ABOVE the
+       * markers, so a dot centred on the coordinate was drawn UNDER the label and nothing was lost.
+       * OSM standard renders its labels into the tile itself, so that stacking inverts: every pin
+       * became a blob sitting in the middle of the word it was marking. The first screenshot after
+       * the swap read "N(dot)lk", "Co(dot)bus", "F(dot)nt" and "(dot)rand Island".
+       *
+       * So the marker is a teardrop now - the tip on the coordinate, the body above it, which is
+       * the ordinary map convention and clears the label by its whole height. It also unstacks the
+       * metro: eleven dots inside thirty miles were one gold mass, and eleven teardrops of two
+       * sizes leaning out of the same cluster can at least be counted.
+       *
+       * THE TIP IS NOT THE BOX CORNER. The shape is a square with three round corners rotated -45
+       * degrees, so the sharp corner lands 0.207 x size BELOW the box - the anchor has to account
+       * for it or every pin points slightly above where it means. */
+      const tip = (size: number) => Math.round(size * 1.207);
+
+      /* PIN SIZE FOLLOWS THE CONTAINER, and this is not polish - at a phone width it is the
+       * difference between a map and a gold smear.
+       *
+       * The box is 754px on desktop and 327px on a 375px phone, but Leaflet sizes an icon in
+       * absolute pixels, so the same 19px teardrop is 2.5 percent of the desktop map and 6 percent
+       * of the mobile one. Twelve of them inside a thirty-mile ring that is itself only about
+       * ninety pixels across came out as one mass with the word "Omaha" somewhere underneath it.
+       *
+       * Shrinking them does not make the metro individually clickable at that size and it is not
+       * meant to - the towns are all listed as their own cards beside the map, which is where
+       * anyone on a phone will actually tap. What the map has to do there is show WHERE the work
+       * is, and it can only do that if the ring, the labels and the count of pins survive.
+       *
+       * Read once, at init. Markers are built once and the anchor is baked into each icon, so a
+       * CSS-only shrink would leave every tip pointing above its town. */
+      const compact = host.current!.clientWidth < 480;
+
       for (const c of cities) {
         const metro = c.tier === "metro" || c.tier === "iowa";
-        const size = metro ? 13 : 10;
+        const size = metro ? (compact ? 12 : 19) : (compact ? 10 : 15);
         L.marker([c.lat, c.lon], {
           icon: L.divIcon({
             className: "",
             html: `<span class="brytr-pin${metro ? " is-metro" : ""}"></span>`,
-            iconSize: [size, size],
-            iconAnchor: [size / 2, size / 2],
+            iconSize: [size, tip(size)],
+            iconAnchor: [size / 2, tip(size)],
           }),
           keyboard: false,
         })
@@ -188,8 +223,8 @@ export function ServiceLeaflet({
         icon: L.divIcon({
           className: "",
           html: '<span class="brytr-shop"></span>',
-          iconSize: [15, 15],
-          iconAnchor: [7.5, 7.5],
+          iconSize: [compact ? 11 : 16, compact ? 13 : 20],
+          iconAnchor: [compact ? 5.5 : 8, compact ? 13 : 20],
         }),
       })
         .addTo(map)
@@ -201,7 +236,14 @@ export function ServiceLeaflet({
        * Grand Island sits just inside the left edge instead of a whole level short. */
       map.fitBounds(
         L.latLngBounds(cities.map((c) => [c.lat, c.lon] as [number, number])).extend(ring.getBounds()),
-        { paddingTopLeft: [20, 16], paddingBottomRight: [20, 26] } // room for scale + attribution
+        /* PADDING WENT UP WITH THE PIN HEIGHT. It was 20px a side, set when a pin was a 10px dot
+         * centred on its point and 20px cleared it easily. A teardrop is 19px wide and hangs its
+         * whole body ABOVE the coordinate, and the tile draws the town name beside the point too -
+         * so at 20px, Grand Island (the westernmost town, hard against the left edge by design)
+         * lost the left half of its pin and the "G" of its label to the container edge. */
+        compact
+          ? { paddingTopLeft: [26, 22] as [number, number], paddingBottomRight: [22, 26] as [number, number] }
+          : { paddingTopLeft: [46, 40] as [number, number], paddingBottomRight: [40, 34] as [number, number] }
       );
 
       /* the box is sized by the column beside it, so it can change after Leaflet has
