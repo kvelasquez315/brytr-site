@@ -113,7 +113,6 @@ export default function Consult() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="What you are agreeing to"
             title="Roughly an hour, and this is where it goes."
             lede="The objection is never the price, because there is not one. It is the hour. So here is the hour, minute by minute, and the thing you are holding at the end of it."
           />
@@ -187,7 +186,6 @@ export default function Consult() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="Before we get there"
             title="What we bring, and what helps if you have it."
             lede="You do not have to prepare anything, and nothing on this list stops the visit happening. All of it makes the hour shorter and the quote tighter."
           />
@@ -244,7 +242,6 @@ export default function Consult() {
         * This page describes an appointment. Two photographs of one actually happening are
         * worth more than the third paragraph explaining it. */}
       <PhotoPair
-        eyebrow="The hour itself"
         title="What we are doing while we are standing in your garden."
         lede="Made on the property, after dark, against your own materials. Warm white on red brick is a different colour from warm white on white siding."
         a="installDayPavilion"
@@ -260,7 +257,6 @@ export default function Consult() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="The part you are actually worried about"
             title="What will not happen in your driveway."
             lede="Home improvement has earned the suspicion. So it is worth being specific about what we do not do, rather than promising to be nice."
           />

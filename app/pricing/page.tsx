@@ -84,7 +84,6 @@ export default function Pricing() {
       <section className="section bg-card">
         <div className="shell grid gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
           <div>
-            <p className="eyebrow">Straight answer</p>
             <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
               We are not publishing a headline price.
             </h2>
@@ -156,7 +155,6 @@ export default function Pricing() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="The real comparison"
             /* Was "Five years, side by side." The table below has five year rows, so the
               * heading was counting the list under it — the rule the client has corrected me on
               * more than once. The span is still stated in the lede and in the table caption,
@@ -295,7 +293,6 @@ export default function Pricing() {
         * A reader deciding whether four figures is worth it should be able to see the thing
         * they would be buying somewhere in the middle of the argument, not only above it. */}
       <PhotoStrip
-        eyebrow="What the number buys"
         title="The same figure, on three different houses."
         lede="Price follows roof geometry rather than square footage, which is why these three cost different amounts and why none of them can be quoted from a satellite photograph."
         shots={pick("pricing", 3)}
@@ -309,7 +306,6 @@ export default function Pricing() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="How the number is built"
             title="Feet times a rate, then what the house adds."
             lede="In order of how much each one moves the total. Nothing else goes into it — there is no design fee, no travel charge inside the metro and no line for the consultation."
           />
@@ -351,7 +347,6 @@ export default function Pricing() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="Bid types"
             title="Not everything is priced by the foot."
             lede="Roofline is. A pergola is priced by span, landscape by fixture, and a wall by the foot of cap it runs under — because that is how the work actually divides up."
           />
@@ -372,7 +367,7 @@ export default function Pricing() {
       <section className="section bg-primary">
         <div className="shell grid gap-10 lg:grid-cols-[48fr_52fr] lg:gap-14">
           <div>
-            <SectionHead onDark eyebrow="Financing" title="Spread it out, or pay it once." />
+            <SectionHead onDark  title="Spread it out, or pay it once." />
             <p className="mt-5 text-lg leading-relaxed text-on-dark/85">
               Financing is arranged through a third-party lender rather than by us, so the terms are
               theirs and the paperwork is theirs. What we can do is put the real numbers in front of
@@ -419,7 +414,7 @@ export default function Pricing() {
       {/* ── QUESTIONS ── */}
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="Pricing questions" title="The ones we get most." />
+          <SectionHead  title="The ones we get most." />
           <div className="mt-9 grid gap-10 lg:grid-cols-[1fr_21rem] lg:gap-14">
             <Faq items={pricingFaqs} />
             <div className="space-y-5">

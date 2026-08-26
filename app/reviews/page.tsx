@@ -134,7 +134,6 @@ export default function Reviews() {
       <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[34fr_66fr] lg:gap-14">
           <div>
-            <p className="eyebrow">On {reviewProof.platform}</p>
             <p className="u mt-4 text-[clamp(4rem,9vw,7rem)] font-medium leading-[0.85] text-foreground">
               {reviewProof.average}
             </p>
@@ -162,7 +161,6 @@ export default function Reviews() {
 
           <div>
             <SectionHead
-              eyebrow="The organizing question"
               title="What do they actually talk about?"
               lede="Not “great service”. When somebody writes about this work unprompted, they write about one of these — which is a more useful thing to know than an average."
             />
@@ -191,7 +189,6 @@ export default function Reviews() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="In their own words"
             title="In full, and unedited."
             lede="Copied exactly as written, spelling and exclamation marks included. Most are the testimonials Brytr already publishes on brytrco.com; the rest are quoted from the Google profile itself. Nothing is paraphrased, tidied or lengthened."
           />
@@ -282,7 +279,6 @@ export default function Reviews() {
         * A page of testimony with no photograph of the thing being testified about. Three
         * installs, so the quotes above have something to point at. */}
       <PhotoStrip
-        eyebrow="What they are reviewing"
         title="The work behind the rating."
         lede="Every review on this page was written by somebody in this metro about a house in this metro. These are installs of the kind they are describing."
         shots={pick("reviews", 3)}
@@ -297,7 +293,6 @@ export default function Reviews() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="Behind the average"
             title="Practices, not adjectives."
             lede="A rating is an outcome. These are the inputs, and each one is written up somewhere on this site where you can hold us to it."
           />

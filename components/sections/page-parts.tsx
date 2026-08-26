@@ -359,7 +359,6 @@ export function PageCta({
   const head = (
     <>
       <SectionHead
-        eyebrow="Next step"
         title={title ?? "See it on your house before you buy."}
       />
       <p className="mt-4 max-w-[60ch] text-lg text-muted-foreground">

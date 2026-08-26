@@ -2,9 +2,9 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export function SectionHead({
-  eyebrow, title, lede, onDark, className, align = "left", scale = "section",
+  title, lede, onDark, className, align = "left", scale = "section",
 }: {
-  eyebrow?: string; title: string; lede?: string; onDark?: boolean; className?: string;
+  title: string; lede?: string; onDark?: boolean; className?: string;
   align?: "left" | "center";
   /* TWO HEADING SIZES, AND THE HOME PAGE IS WHY.
    *
@@ -64,16 +64,8 @@ export function SectionHead({
    * items underneath them. */
   return (
     <div className={cn(align === "center" && "mx-auto max-w-[54rem] text-center", className)}>
-      {eyebrow && (
-        <p className={cn("eyebrow", onDark && "eyebrow--on-dark", align === "center" && "justify-center")}>
-          <span className="channel-mark" aria-hidden />
-          {eyebrow}
-          {align === "center" && <span className="channel-mark" aria-hidden />}
-        </p>
-      )}
       <h2
         className={cn(
-          eyebrow && "mt-3",
           scale === "hero" ? "display-hero" : "display-section",
           onDark ? "text-on-dark" : "text-foreground"
         )}

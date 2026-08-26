@@ -139,7 +139,6 @@ export default function AreasHub() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="Ordered by minutes, not alphabetically"
             title="How far, and what that changes."
             lede="Every town we drive to, sorted by the real drive from the shop. The promise is not the same at twenty minutes and at two hours."
           />
@@ -198,7 +197,6 @@ export default function AreasHub() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="What each band commits us to"
             title="The promise is not the same everywhere."
             lede="The pricing does not change as you go out. What changes is how fast we can get back to you, and that is worth knowing before rather than after."
           />
@@ -238,7 +236,6 @@ export default function AreasHub() {
         * which town most of them are in and inventing one on a page about drive times would be
         * a strange place to start lying. */}
       <PhotoStrip
-        eyebrow="From around the area"
         title="The same crew, whichever line on the table you are on."
         lede="Drive time changes what we can promise about a warranty call. It does not change who turns up, what goes on the house, or what it costs."
         shots={pick("areas-index", 3)}
@@ -250,7 +247,7 @@ export default function AreasHub() {
       <section className="section bg-primary">
         <div className="shell grid items-start gap-10 lg:grid-cols-[50fr_50fr] lg:gap-14">
           <div>
-            <SectionHead onDark eyebrow="The edge of it" title="Why the radius stops where it does." />
+            <SectionHead onDark  title="Why the radius stops where it does." />
             <div className="prose-body mt-6 space-y-4">
               <p className="text-lg leading-relaxed text-on-dark">
                 Permanent lighting is a fifteen year relationship with a building. So the honest limit on

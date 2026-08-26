@@ -100,7 +100,6 @@ export function SceneWipe() {
         <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
           <SectionHead
             className="max-w-[46rem]"
-            eyebrow="How the colour works"
             title="Warm white every night. Any colour when you want it."
           />
           <Link

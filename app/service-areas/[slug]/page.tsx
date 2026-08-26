@@ -151,7 +151,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         <section className="section bg-card">
           <div className="shell grid items-start gap-10 lg:grid-cols-[42fr_58fr] lg:gap-14">
             <div>
-              <p className="eyebrow">Working across {c.name}</p>
               <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
                 The subdivisions here, and the towns next door.
               </h2>
@@ -213,7 +212,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         <section className="section bg-card">
           <div className="shell">
             <SectionHead
-              eyebrow="The river is not a service boundary"
               title={`${c.name} is ${c.drive} from our shop.`}
               lede="Which is closer than most of the Nebraska metro. The bridge adds nothing to a drive time and nothing to a quote, and the arithmetic below is the whole argument."
             />
@@ -302,7 +300,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         <section className="section bg-card">
           <div className="shell">
             <SectionHead
-              eyebrow={`${c.drive} each way`}
               title={`${c.name} is a route day, and that is why the price is the same.`}
               lede="We batch installs out here into route days. That is what keeps the per-foot number the same as the metro, and it changes the scheduling rather than the work."
             />
@@ -363,7 +360,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="Most asked for here"
             title={`What ${c.name} books.`}
             /* One sentence on eighteen pages. The three bands genuinely do book different
               * work — the metro adds landscape and hardscape on the same visit, the Iowa side
@@ -395,7 +391,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         * "Gretna" because it is on the Gretna page would be the easiest lie on this site to
         * tell and the easiest one to catch. */}
       <PhotoStrip
-        eyebrow="Finished work"
         title="What the system looks like once the crew has gone."
         lede="Installs from around the metro rather than staged shots — photographed as they were, on properties that were already finished."
         shots={pick(c.slug, 3)}
@@ -410,7 +405,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           <div>
             <SectionHead
               onDark
-              eyebrow={c.note ? "HOA and covenants" : "Getting approved"}
               title="We handle the paperwork, not you."
             />
             <p className="mt-5 text-lg leading-relaxed text-on-dark/85">
@@ -471,7 +465,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         photo={pick(`${c.slug}-split`, 1)[0]?.photo ?? "homeShakeBrick"}
         side={c.tier === "iowa" ? "right" : "left"}
         ground="muted"
-        eyebrow="After dark, on site"
         title={`How we design it in ${c.name}.`}
         link={{ href: "/free-design-consultation", label: "What the hour actually involves" }}
       >
@@ -505,7 +498,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
       <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[38fr_62fr] lg:gap-14">
           <div>
-            <p className="eyebrow">Next door</p>
             <h2 className="mt-4 text-[clamp(1.6rem,2.8vw,2.2rem)] leading-[1.08] text-foreground">
               Where else we are, near {c.name}.
             </h2>
@@ -540,7 +532,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
       {/* ── QUESTIONS ── */}
       <section className="section bg-muted">
         <div className="shell">
-          <SectionHead eyebrow="Questions" title={`Permanent lighting in ${c.name}.`} />
+          <SectionHead  title={`Permanent lighting in ${c.name}.`} />
           <div className="mt-9 grid gap-10 lg:grid-cols-[1fr_21rem] lg:gap-14">
             {/* The glance card is h-fit, so it ran out a third of the way down and the
               * accordion carried on beside a quarter-page of nothing — identically on all

@@ -182,7 +182,6 @@ export default function FaqPage() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="No clicking required"
             title="The ones we get most, answered here."
             lede="Each of these has a longer answer further down. These are the short versions, and they do not say anything the long versions contradict."
           />
@@ -215,7 +214,6 @@ export default function FaqPage() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="All of them"
             title="Grouped by where in the decision it comes up."
             lede="Roughly the order people ask them in: what it is, what it is made of, what happens on the day, what it costs, and what happens after we leave."
           />
@@ -278,7 +276,6 @@ export default function FaqPage() {
         * above and the raise band below. */}
       <PhotoStrip
         shots={photoPick("faq-strip", 3)}
-        eyebrow="The answers, installed"
         title="What the questions are actually about."
         ground="background"
       />
@@ -297,7 +294,6 @@ export default function FaqPage() {
           <div>
             <SectionHead
               onDark
-              eyebrow="The honest limit"
               title="Questions no FAQ page can answer."
             />
             {/* THIS SECTION USED TO BE A SECOND CLOSER.

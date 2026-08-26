@@ -192,7 +192,6 @@ export default function SystemsHub() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="Where every job starts"
             /* Not "the two things": the panels are directly underneath and counting them in
               * the heading is the habit I keep having to be told about. */
             title="The roofline run, and the app that operates it."
@@ -242,7 +241,6 @@ export default function SystemsHub() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="The roofline hardware"
             title="Every row, and what it actually does to the house."
             lede="Every company publishes a spec table. Almost none say what a spec does to a building, which is the only part that helps you judge one. The third column is that."
           />
@@ -310,7 +308,6 @@ export default function SystemsHub() {
         * specifications on this page a homeowner can actually verify with their own eyes, so
         * those are the two that get photographs. */}
       <PhotoPair
-        eyebrow="The rows, on a building"
         title="Two specifications you can check yourself."
         lede="Most of the sheet above has to be taken on trust. These two do not: whether the channel disappears by day, and how far apart the points sit."
         a="dayBrickGable"
@@ -326,7 +323,6 @@ export default function SystemsHub() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="The full lineup"
             title="Most of these are additions, not alternatives."
             lede="The roofline run, the three Haven lines that go with it, the app, and the other manufacturer we fit. Grouped by what each is for."
           />
@@ -380,7 +376,6 @@ export default function SystemsHub() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="What we would put on it"
             title="What we would quote you, by the shape of the property."
             lede="The three shapes almost every enquiry falls into. The verdicts are ours, and one of the three is us talking you out of buying more."
           />

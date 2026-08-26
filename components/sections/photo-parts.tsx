@@ -85,10 +85,9 @@ export function PhotoBand({
 
 /* ── PHOTOGRAPH BESIDE PROSE ── */
 export function PhotoSplit({
-  photo, eyebrow, title, children, side = "left", link, ground = "background", tall = false,
+  photo, title, children, side = "left", link, ground = "background", tall = false,
 }: {
   photo: string;
-  eyebrow: string;
   title: string;
   children: React.ReactNode;
   /** which side the photograph sits on — alternate it down a page */
@@ -114,9 +113,8 @@ export function PhotoSplit({
       <div className="shell grid items-center gap-9 lg:grid-cols-2 lg:gap-14">
         {pic}
         <div>
-          <p className={`eyebrow ${dark ? "eyebrow--on-dark" : ""}`}>{eyebrow}</p>
           <h2
-            className={`mt-4 text-[clamp(1.6rem,3vw,2.3rem)] leading-[1.06] ${
+            className={`display-section ${
               dark ? "text-on-dark" : "text-foreground"
             }`}
           >
@@ -149,13 +147,12 @@ export function PhotoSplit({
 
 /* ── TWO PHOTOGRAPHS THAT ONLY MEAN SOMETHING TOGETHER ── */
 export function PhotoPair({
-  a, b, aLabel, bLabel, eyebrow, title, lede, ground = "muted",
+  a, b, aLabel, bLabel, title, lede, ground = "muted",
 }: {
   a: string;
   b: string;
   aLabel: string;
   bLabel: string;
-  eyebrow: string;
   title: string;
   lede: string;
   ground?: "muted" | "background" | "raise";
@@ -168,9 +165,8 @@ export function PhotoPair({
   return (
     <section className={`section ${bg}`}>
       <div className="shell">
-        <p className={`eyebrow ${dark ? "eyebrow--on-dark" : ""}`}>{eyebrow}</p>
         <h2
-          className={`mt-4 max-w-[34ch] text-[clamp(1.6rem,3vw,2.3rem)] leading-[1.06] ${
+          className={`display-section max-w-[34ch] ${
             dark ? "text-on-dark" : "text-foreground"
           }`}
         >
@@ -208,10 +204,9 @@ export function PhotoPair({
 
 /* ── A ROW OF PHOTOGRAPHS ── */
 export function PhotoStrip({
-  shots, eyebrow, title, lede, ground = "raise", cols, frame = "4/3",
+  shots, title, lede, ground = "raise", cols, frame = "4/3",
 }: {
   shots: { photo: string; caption: string }[];
-  eyebrow: string;
   title: string;
   lede?: string;
   ground?: "raise" | "muted" | "background";
@@ -252,9 +247,8 @@ export function PhotoStrip({
   return (
     <section className={`section ${bg}`}>
       <div className="shell">
-        <p className={`eyebrow ${dark ? "eyebrow--on-dark" : ""}`}>{eyebrow}</p>
         <h2
-          className={`mt-4 max-w-[36ch] text-[clamp(1.6rem,3vw,2.3rem)] leading-[1.06] ${
+          className={`display-section max-w-[36ch] ${
             dark ? "text-on-dark" : "text-foreground"
           }`}
         >

@@ -236,7 +236,6 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         * grounds alternating: background, muted, raise, muted. */}
       <PhotoStrip
         shots={postShots.slice(1)}
-        eyebrow="What it looks like"
         title="Finished installs around Omaha."
         ground="muted"
         frame="4/3"
@@ -253,7 +252,6 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="Read next"
             title={`More on ${p.category.toLowerCase()}.`}
             lede="Same category first, then whatever else is closest, rather than whatever happens to sit at the top of the list."
           />

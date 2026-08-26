@@ -100,7 +100,6 @@ export default function Contact() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="Which one to use"
             title="Every way in, and none of them interchangeable."
             lede="The number is in the header of every page, so the useful thing to publish is which route suits what you are actually asking — including what each one is bad at."
           />
@@ -154,7 +153,6 @@ export default function Contact() {
           <div>
             <SectionHead
               onDark
-              eyebrow="After you send it"
               title="Where your details go, and where they do not."
             />
             <div className="prose-body mt-6 space-y-4">
@@ -220,7 +218,6 @@ export default function Contact() {
         tall
         side="left"
         ground="raise"
-        eyebrow="Where the call ends up"
         title="An hour on your own lawn, after dark."
         link={{ href: "/free-design-consultation", label: "What the hour actually involves" }}
       >
@@ -302,7 +299,6 @@ export default function Contact() {
         * is background, so raise is the only surface that alternates against both. */}
       <PhotoStrip
         shots={pick("contact-strip", 3)}
-        eyebrow="Before you call"
         title="What we would be quoting."
         ground="raise"
       />

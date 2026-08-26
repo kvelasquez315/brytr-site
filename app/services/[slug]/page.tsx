@@ -168,7 +168,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="What is included"
             title="Everything in the written quote."
             lede="Nothing appears on install day that was not on the quote you signed."
           />
@@ -202,7 +201,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         * what is in that particular frame. */}
       {d?.shots?.length ? (
         <PhotoStrip
-          eyebrow={`${s.name}, installed`}
           title="What it looks like once the crew has gone."
           /* THE LEDE IS PER-SERVICE, and it had to become per-service for two reasons.
            *
@@ -229,7 +227,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <section className="section bg-card">
           <div className="shell">
             <SectionHead
-              eyebrow="The comparison"
               title="Installed once, against doing it again every year."
               lede="This is the calculation almost nobody runs before they call, and it is usually the one that decides it."
             />
@@ -255,7 +252,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         * subject, and where a service has none, this renders nothing. */}
       {d?.pair ? (
         <PhotoPair
-          eyebrow="The same house, twice"
           title={d.pair.title}
           lede={d.pair.lede}
           a={d.pair.a}
@@ -306,7 +302,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <section className="section bg-muted">
         <div className="shell grid gap-10 lg:grid-cols-[1fr_20rem] lg:gap-14">
           <div>
-            <SectionHead eyebrow="Questions" title={`${s.name}: what people ask before they book.`} />
+            <SectionHead  title={`${s.name}: what people ask before they book.`} />
             {/* The "Nearest crews" aside is h-fit, so it ended a third of the way down while
               * the accordion carried on alone — roughly 350px of bare column beside the rest
               * of the questions, on all eleven service pages. Two-up from xl, where the

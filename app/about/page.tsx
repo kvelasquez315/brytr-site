@@ -97,7 +97,6 @@ export default function About() {
       <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[54fr_46fr] lg:gap-14">
           <div>
-            <p className="eyebrow">Why the company exists</p>
             <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
               More than one brand, on purpose.
             </h2>
@@ -183,7 +182,6 @@ export default function About() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="Checkable, not heartfelt"
             title="Decisions that make us less money."
             lede="Every company on your shortlist will tell you it puts customers first. That sentence is free. These are not: each one has a price attached, and the price is written next to it."
           />
@@ -218,7 +216,6 @@ export default function About() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="Who you will actually deal with"
             title="Zac and Sam."
             lede="Two people, and between them the whole company. The person who quotes your house is one of them, and so is the person who signs it off at dusk."
           />
@@ -266,7 +263,6 @@ export default function About() {
         * do more for that than another paragraph would, and the middle one has a person in it,
         * which every one of the previous four sections was talking about in the abstract. */}
       <PhotoStrip
-        eyebrow="The work"
         title="What the two of us are actually selling."
         lede="Not a product line. A crew that turns up, a channel fixed into fascia rather than stapled to a shingle, and a run that still holds a straight line in year eight."
         shots={[

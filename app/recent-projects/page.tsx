@@ -185,7 +185,7 @@ export default function RecentProjects() {
       {projects.map((p, i) => (
         <section key={p.slug} className={`section ${i % 2 === 0 ? "bg-background" : "bg-muted"}`}>
           <div className="shell">
-            <SectionHead eyebrow={`${p.where} · ${p.shot}`} title={p.title} lede={p.lede} />
+            <SectionHead  title={p.title} lede={p.lede} />
 
             <div className={`mt-10 grid gap-5 ${i % 2 === 1 ? "" : "lg:grid-cols-[62fr_38fr]"}`}>
               <figure className="overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-lg)]">
@@ -258,7 +258,6 @@ export default function RecentProjects() {
           <div className="flex flex-col">
             <SectionHead
               onDark
-              eyebrow="What arrived, and what is still missing"
               title="The gaps this page used to list, and the ones it still does."
             />
             {/* THE POINT OF PUBLISHING GAPS IS THAT YOU HAVE TO GO BACK AND CLOSE THEM.

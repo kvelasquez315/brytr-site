@@ -121,7 +121,6 @@ export default function HowItWorks() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="The whole job, in section"
             title="The same board, through the day."
             lede="Your fascia from the first hour to the last. Nothing in the first three frames is lit, because most of install day happens with the system dark."
           />
@@ -143,7 +142,6 @@ export default function HowItWorks() {
       <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[40fr_60fr] lg:gap-14">
           <div>
-            <p className="eyebrow">The other half</p>
             <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
               What is not in the drawing.
             </h2>
@@ -178,7 +176,6 @@ export default function HowItWorks() {
         * be like" — so the drawings stay and these three sit under them. Nothing is staged: two
         * of them are mid-install and the third is the walkthrough at the end of it. */}
       <PhotoStrip
-        eyebrow="The day itself"
         title="Drawings explain the detail. This is the day."
         lede="One crew, one day on most houses, and a walkthrough after dark before anybody leaves."
         shots={[
@@ -196,7 +193,6 @@ export default function HowItWorks() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="Where we differ"
             title="What is not standard in this trade."
             lede="Every installer says they do good work, which is why the claim is worthless alone. So here is each one with the alternative beside it."
           />
@@ -241,7 +237,6 @@ export default function HowItWorks() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="Either side of the day"
             title="What happens before the van, and after it."
             lede="Install day is one day. The two things on either side of it are where most of the reassurance actually lives."
           />

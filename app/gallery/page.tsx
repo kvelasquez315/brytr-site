@@ -174,7 +174,6 @@ export default function Gallery() {
         * swapped out to get from one to the other. Every competitor's gallery is open to the
         * suspicion that the colour shots are a different install. This set closes it. */}
       <PhotoStrip
-        eyebrow="One house, one evening"
         title="The same roofline, photographed as the settings changed."
         lede="A drone held its position over one property west of Omaha for a minute and a half while the scenes were switched through from a phone. Same roof, same sky, same camera — read them left to right."
         shots={sequence}
@@ -269,7 +268,6 @@ export default function Gallery() {
         * flattering, and because a badly detailed channel is invisible at night and obvious at
         * noon. Publishing the noon photograph is the argument. */}
       <PhotoPair
-        eyebrow="The other half"
         title="The same hardware at noon, which is the photograph nobody in this trade publishes."
         lede="A night shot flatters any install. Daylight does not: at noon a badly fixed channel has nowhere to hide. Two houses, uncropped and ungraded."
         a="dayBrickGable"
@@ -280,7 +278,6 @@ export default function Gallery() {
       />
 
       <PhotoPair
-        eyebrow="One entry, twice"
         title="And the same arch, before dark and after."
         lede="A straight rake is easy. This octagonal turret is about as awkward as a front elevation gets, and the run keeps going through it."
         a="archByDay"
@@ -295,7 +292,6 @@ export default function Gallery() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="How to read any of these"
             /* Was "A gallery can only settle half of it", with a lede saying no photograph here
               * answered the daylight question. That was true when it was written and it is not
               * true now: the daylight frames were in Brytr's own library the whole time and are

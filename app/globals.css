@@ -27,10 +27,12 @@
                                     as a card. At #1a222c the two read as one field. */
   --brand-neutral-deep: #e7e1d4; /* second warm neutral */
   --brand-accent-deep:  #d9a400; /* accent hover / pressed — on DARK only */
-  --brand-accent-ink:   #4f3e0d; /* the accent, darkened for eyebrow text on light
-                                    surfaces. Amber on cream cannot pass contrast, so
-                                    light-section eyebrows use this and the amber
-                                    channel-mark beside them carries the brand color. */
+  --brand-accent-ink:   #4f3e0d; /* the accent, darkened enough to be readable AS TEXT on a light
+                                    surface. Amber on white or on limestone cannot pass contrast,
+                                    so anything amber-flavoured that has to be read rather than
+                                    just seen uses this instead. It was introduced for the section
+                                    eyebrows, which are gone; it is still what the FAQ chevrons,
+                                    the small labels and the accent links are set in. */
 
   /* ---- semantic layer --------------------------------------------- */
   --background:           var(--brand-neutral);
@@ -381,10 +383,28 @@
      The jumps are deliberately large. The old scale ran 46px headline to 15px body with a
      population of 13px labels in between, so nothing read as big and everything read as
      detail. Display to lead to body is now roughly 3.4x, 1.4x. */
+  /* ALL THREE DISPLAY SIZES WENT UP, because the eyebrow above every heading came off.
+   *
+   * "Remove all of this little headings before sections and make the heading text on all sections
+   * and the hero bigger so they stand out more."
+   *
+   * The two halves of that are one change. Every section used to open with a small amber-ruled
+   * label - OUR SERVICES, WHO WE ARE - and the heading under it only had to be the second thing you
+   * noticed, because the label had already told you where you were. With the label gone the heading
+   * is the ONLY thing naming the section, and a 34px heading is not enough to carry that on a page
+   * this wide.
+   *
+   *   display-section   34 -> 46px   ordinary section headings, which is most of the site
+   *   display-hero      54 -> 62px   the one loud section per page
+   *   display-hero-lg   64 -> 76px   the page title in the hero
+   *
+   * The gaps between the three are what stop this becoming the old failure in a new size: at the
+   * previous scale the h1 and the section headings were both 54px and nothing was subordinate to
+   * anything. 76 / 62 / 46 keeps three clearly separate steps. */
   .display-hero {
-    font-size: clamp(2.15rem, 3.4vw, 3.375rem);
-    line-height: 1.04;
-    letter-spacing: -0.028em;
+    font-size: clamp(2.5rem, 4.1vw, 3.875rem);
+    line-height: 1.03;
+    letter-spacing: -0.03em;
   }
   /* THE HOME HERO H1, AND NOTHING ELSE ON THE SITE.
    *
@@ -401,14 +421,14 @@
    * Tighter tracking and leading than `display-hero` because both improve as type gets larger:
    * at 64px the default -0.028em reads loose and 1.04 leading reads airy. */
   .display-hero-lg {
-    font-size: clamp(2.5rem, 4.6vw, 4rem);
-    line-height: 0.99;
-    letter-spacing: -0.034em;
+    font-size: clamp(2.9rem, 5.5vw, 4.75rem);
+    line-height: 0.97;
+    letter-spacing: -0.036em;
   }
   .display-section {
-    font-size: clamp(1.6rem, 2.2vw, 2.125rem);
-    line-height: 1.1;
-    letter-spacing: -0.022em;
+    font-size: clamp(2rem, 3.1vw, 2.875rem);
+    line-height: 1.06;
+    letter-spacing: -0.028em;
   }
   /* One line under a headline. 58ch, not 46: at 46 a lead wrapped after five words and
      left the right half of the section empty, which is how "simple" turned into "unfinished". */
@@ -470,30 +490,15 @@
     height: 1px;
     background: var(--brand-primary);
   }
-  /* the short mark that sits above a section eyebrow */
-  .channel-mark {
-    width: 48px;
-    height: 4px;
-    background: var(--brand-accent);
-    position: relative;
-    flex: none;
-  }
-  .channel-mark::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    top: 50%;
-    height: 1px;
-    background: var(--brand-primary);
-  }
   /* .channel-tile LIVED HERE and is gone with the icon set.
      It was the icon container: a 3rem box, squared top and rounded bottom, with an amber lens line
      along its top edge — the channel in cross-section, holding a glyph. Nothing renders a glyph any
      more (see content/icon-map.ts), so it held nothing.
 
-     The channel device itself survives as .channel-mark and .channel-edge, and those are the right
-     survivors: they are RULES rather than containers, so they mean something on their own instead
-     of needing a picture inside them. */
+     The channel device now survives as .channel-edge alone. .channel-mark went with the section
+     eyebrows in a later round — it was the 48x4px amber rule beside a label that no longer exists.
+     What is left is the right survivor: the edge closes the hero and opens the footer, twice per
+     page, which is the cap DESIGN.md sets for it. */
   /* Micro-labels — eyebrows, spec keys, figcaption tags.
    *
    * These used the mono utility face, which put IBM Plex Mono on ~50 decorative
@@ -517,18 +522,14 @@
     text-transform: none;
   }
 
-  .eyebrow {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 0.9rem;
-    letter-spacing: 0;
-    text-transform: none;
-    color: var(--brand-accent-ink);
-  }
-  .eyebrow--on-dark { color: var(--brand-accent); }
+  /* .eyebrow and .eyebrow--on-dark lived here, and .channel-mark below them.
+     Removed with the section eyebrows themselves: "remove all of this little headings before
+     sections". The heading is the only label a section has now, which is why all three display
+     sizes went up in the same change.
+
+     The channel device is NOT gone with them - .channel-edge still closes the hero and opens the
+     footer, which is the two-per-page cap DESIGN.md sets for it. What went is the 48x4px rule that
+     sat beside a label that no longer exists. */
 
   /* MOVED OUT OF @media (pointer: coarse). These were anchored next to .tap-44, which
    * lives inside that query, so the timeline gradient and the card hover rule only ever

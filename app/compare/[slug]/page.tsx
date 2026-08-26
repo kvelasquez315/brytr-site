@@ -171,7 +171,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="Line by line"
             title={frame === "labor" ? "The job, not the datasheet." : `${c.a} against ${c.b}, spec by spec.`}
             lede={
               frame === "labor"
@@ -207,7 +206,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             <div>
               <SectionHead
                 onDark
-                eyebrow="The gaps"
                 title="What we do not know about this one."
               />
               <p className="mt-5 text-lg leading-relaxed text-on-dark/85">
@@ -236,7 +234,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         * evidence on the page, and it sits before the "where each wins" section deliberately:
         * a reader should know what we can do before they read us being fair about a rival. */}
       <PhotoPair
-        eyebrow="Ours, for reference"
         title="What we hand over, on two houses."
         lede="Neither of these is a comparison. Everything else here is a claim about hardware, and a claim is worth less than a finished roofline."
         a={pick(`${c.slug}-a`, 1)[0]?.photo ?? "homeShakeBrick"}
@@ -251,7 +248,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="Both sides"
             title="Where each of these actually wins."
             lede={
               frame === "compete"
@@ -288,7 +284,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         <section className="section bg-card">
           <div className="shell grid items-start gap-10 lg:grid-cols-[48fr_52fr] lg:gap-14">
             <div>
-              <p className="eyebrow">Why we can say this</p>
               <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
                 We install a cheaper one too.
               </h2>
@@ -344,7 +339,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         <section className="section bg-card">
           <div className="shell">
             <SectionHead
-              eyebrow="The actual deciding factor"
               title="On this comparison, the installer matters more than the box."
               lede="Both are competent products in the same part of the market. Which is better on your house is decided by whoever fastens it there."
             />
@@ -374,7 +368,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         <section className="section bg-card">
           <div className="shell grid items-start gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
             <div>
-              <p className="eyebrow">The part that is not money</p>
               <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
                 What a DIY install actually costs.
               </h2>
@@ -417,7 +410,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       <section className="section bg-raise">
         <div className="shell grid items-start gap-10 lg:grid-cols-[38fr_62fr] lg:gap-14">
           <div>
-            <SectionHead onDark eyebrow="Read next" title="What most people read after this one." />
+            <SectionHead onDark  title="What most people read after this one." />
             <p className="mt-5 text-[1.05rem] leading-relaxed text-on-dark-muted">
               Chosen, in order, rather than the other eight comparisons printed at the bottom of all nine
               pages.

@@ -110,7 +110,6 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
         <div className="shell grid items-start gap-10 lg:grid-cols-[62fr_38fr] lg:gap-14">
           <div>
             <SectionHead
-              eyebrow="The sheet"
               title={`${s.name}, spec by spec.`}
               lede="Manufacturer figures where they are the manufacturer's, ours where they are ours, and nothing rounded up in either direction."
             />
@@ -176,7 +175,6 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="After installing it"
             title={`${s.name}: the honest read.`}
             lede="We install this hardware, so we have no reason to oversell it and none to trash it. Both columns are what we would tell you standing in your driveway."
           />
@@ -249,7 +247,6 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
         * frames of it on actual buildings is the only way to check that promise, and the seed is
         * the slug so the nine hardware pages do not carry the same three. */}
       <PhotoStrip
-        eyebrow="On finished installs"
         /* Not "on three houses" — the heading counted the row of photographs directly beneath it,
           * which is the rule I keep breaking, this time on the template that makes nine pages. */
         title="The same hardware, on houses that are nothing like each other."
@@ -267,7 +264,6 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
           <div>
             <SectionHead
               onDark
-              eyebrow="Where it sits"
               title={
                 s.tier === "Control"
                   ? "The layer over everything else."
@@ -328,7 +324,6 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
           <div className="shell">
             <SectionHead
               onDark
-              eyebrow="Head to head"
               title={`${rel.a} against ${rel.b}.`}
               lede={rel.verdict}
             />
@@ -348,7 +343,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
       {/* ── QUESTIONS ── */}
       <section className="section bg-card">
         <div className="shell">
-          <SectionHead eyebrow="Questions" title={`${s.name}: what people ask.`} />
+          <SectionHead  title={`${s.name}: what people ask.`} />
           {/* Two columns. This was one 82ch column in a 100rem shell, so the right ~570px of
             * the section was bare on all nine system pages, identically. */}
           <div className="mt-8 grid gap-x-14 lg:grid-cols-2">

@@ -220,7 +220,6 @@ export default function CompareHub() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="The whole market"
             title="Everything sold as permanent lighting in this metro."
             lede="What each one is, and what we do about it. This is the page we wanted to find when we started, and the last column is the part nobody else can print."
           />
@@ -271,7 +270,6 @@ export default function CompareHub() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="Head to head"
             title="Not all of these are the same kind of argument."
             lede="A page where we are competing and a page where we are refereeing should not read the same way, so they do not. Which kind each one is, is written on it."
           />
@@ -327,7 +325,6 @@ export default function CompareHub() {
         * total. `background` keeps the run alternating: muted above, raise on the band below. */}
       <PhotoStrip
         shots={pick("compare-strip", 3)}
-        eyebrow="The same install standard"
         title="Whichever brand ends up on the house."
         ground="background"
       />
@@ -345,7 +342,7 @@ export default function CompareHub() {
       <section className="section bg-primary">
         <div className="shell grid items-start gap-10 lg:grid-cols-[44fr_56fr] lg:gap-14">
           <div>
-            <SectionHead onDark eyebrow="Methodology" title="How these were judged." />
+            <SectionHead onDark  title="How these were judged." />
             <div className="prose-body mt-6 space-y-4">
               <p className="text-lg leading-relaxed text-on-dark">
                 Most of what is on these pages comes from fitting two of these systems ourselves,

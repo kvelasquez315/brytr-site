@@ -136,7 +136,6 @@ export default function BlogHub() {
         * pictures is a sitemap, and a reader who is not sure they want to read anything here
         * needs a reason to stay that is not another headline. */}
       <PhotoStrip
-        eyebrow="Why any of this matters"
         title="Everything below is written from doing this."
         lede="Not sponsored, not manufacturer copy, and not written by somebody who has never been on a roof in February. These are installs by the people who wrote the guides."
         shots={pick("blog-index", 3)}
@@ -148,7 +147,6 @@ export default function BlogHub() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="All of it"
             title="Grouped by what you are trying to decide."
             lede="Roughly the order the questions arrive in: whether to buy at all, what happens to the building, what the hardware and the terms actually are, and the parts that are only true here."
           />

@@ -151,7 +151,6 @@ export default function Warranty() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="Both columns"
             title="What is covered, and what is not."
             lede="Most warranty arguments here are really about whether a failure was the product or the install. Splitting it before anything goes wrong removes the argument."
           />
@@ -246,7 +245,6 @@ export default function Warranty() {
         tall
         side="right"
         ground="raise"
-        eyebrow="Who the promise is from"
         title="A warranty is only worth the crew standing behind it."
         link={{ href: "/about", label: "Who Brytr actually is" }}
       >
@@ -266,7 +264,6 @@ export default function Warranty() {
       <section className="section bg-muted">
         <div className="shell grid items-start gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
           <div>
-            <p className="eyebrow">The part that matters</p>
             <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
               A claim should be a phone call.
             </h2>
@@ -318,7 +315,6 @@ export default function Warranty() {
         * primary one below. */}
       <PhotoStrip
         shots={pick("warranty-strip", 3)}
-        eyebrow="What we are standing behind"
         title="Installs we still service."
         ground="background"
       />
@@ -327,7 +323,6 @@ export default function Warranty() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="Ask all three quotes"
             title="Questions worth asking any installer."
             lede="Including us. Every one of these has an answer that is easy to give and hard to fake, and the pattern of who dodges which one tells you most of what you need."
           />

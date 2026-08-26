@@ -116,7 +116,6 @@ export default function ServicesHub() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="Start here"
             title="What people say first, and what it changes."
             lede="Whichever one it is, the first run is different — and so is what you end up adding a year or two later. This is the order we would do it in, and why."
           />
@@ -183,7 +182,6 @@ export default function ServicesHub() {
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
-            eyebrow="The full list"
             title="Grouped by what it attaches to."
             lede="Every one of these has its own page, with its own photographs and its own spec."
           />
@@ -239,7 +237,6 @@ export default function ServicesHub() {
         * navigation with no pictures is a sitemap. Four frames spanning roofline, landscape,
         * overhead and a colour scene, so a reader can see the categories rather than read them. */}
       <PhotoStrip
-        eyebrow="All of it, one controller"
         /* Not "Four of the ten" — that counted the rack above AND the row below, in one
           * line. The reader can see how many pictures there are. */
         title="Different houses, different jobs, one controller."
@@ -261,7 +258,6 @@ export default function ServicesHub() {
         <div className="shell">
           <SectionHead
             onDark
-            eyebrow="Who it is for"
             title="The same channel goes on a storefront. The job around it is different."
             lede="We install for homeowners and for businesses, and the hardware does not change. The scheduling, the access and the paperwork do."
           />
@@ -303,7 +299,6 @@ export default function ServicesHub() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            eyebrow="Available in"
             title="Every one of these, everywhere we drive."
             lede="Each town has its own page, with the drive from our shop and the installs we have photographed nearby."
           />
