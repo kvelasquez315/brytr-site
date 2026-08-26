@@ -96,11 +96,9 @@ export default function Pricing() {
               We are not publishing a headline price.
             </h2>
             <div className="prose-body mt-6 space-y-4">
-              <p className="text-lg text-foreground">
-                Any per-foot figure on a website is one of two things: the cheapest possible job on the
-                simplest possible house, or a number that changes on install day. Neither one helps you
-                decide anything.
-              </p>
+            {/* ONE PARAGRAPH. rules.md bans a second body paragraph stacked under a heading, and the
+              * measured count was twelve of these on one service page and fifteen on a city page.
+              * Kept whichever of the two carried the claim rather than the run-up to it. */}
               <p className="text-base text-muted-foreground">
                 What does help is knowing exactly how the number is built, what moves it, and roughly
                 where a house your shape lands, and you can have all three on the phone, before anybody

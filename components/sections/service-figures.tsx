@@ -347,7 +347,7 @@ function ScenesFigure() {
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {shots.map(([name, slot]) => (
           <li key={name} className="overflow-hidden rounded-md bg-raise ring-1 ring-on-dark/10">
-            <span className="relative block aspect-video">
+            <span className="relative block photo-frame aspect-video">
               <Image src={slot.src!} alt={slot.alt} fill sizes="(min-width:1024px) 22vw, 45vw" className="object-cover" />
             </span>
             <span className="block px-3 py-2.5 font-display text-xs font-bold text-on-dark">{name}</span>
@@ -372,7 +372,7 @@ function GamedayFigure() {
       <div className="grid gap-4 sm:grid-cols-2">
         {pair.map(([day, src, alt, note]) => (
           <figure key={day} className="overflow-hidden rounded-md bg-raise ring-1 ring-on-dark/10">
-            <span className="relative block aspect-video">
+            <span className="relative block photo-frame aspect-video">
               <Image src={src} alt={alt} fill sizes="(min-width:640px) 45vw, 100vw" className="object-cover" />
             </span>
             <figcaption className="px-4 py-3">

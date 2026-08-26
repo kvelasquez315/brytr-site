@@ -58,13 +58,45 @@ restarting.
    Browse the existing site for real copy, services, service areas, and brand equity.
    For anything Kaiden can only judge by eye, **render options and let him pick a letter**: hero
    crops, font specimens, palette, radius. Never describe an image in words and ask him to approve it.
-2. **Brand lock.** Write `DESIGN.md` + `globals.css` tokens from `references/measured-profile.md`.
-   Includes the `--max-page` token, radius scale, type scale, and the signature device.
+2. **Draw the skin — before writing DESIGN.md.**
+   ```bash
+   node scripts/variation.mjs <client-slug>          # see the draw
+   node scripts/variation.mjs <client-slug> --log     # record it once locked
+   ```
+   This hands you **bounds, not a design**: radius base, type pairing, ground rotation, accent
+   strategy, container and padding values, a 6-form palette, forms excluded this build, and the
+   source the signature device must derive from. Chosen to differ from the last three logged builds.
+
+   Work inside the draw. Do not substitute your own preferences for it — the whole point is that
+   your preferences are the same every time, which is why sites converged. If a drawn value is
+   genuinely wrong for the brand, say so and why, then re-draw; do not silently ignore it.
+
+3. **Brand lock.** Write `DESIGN.md` + `globals.css` tokens from the draw, with
+   `references/measured-profile.md` as the range reference. Includes the page-width token, the radius
+   scale derived from the drawn base, the type scale, and the named signature device.
    No component code until this is committed.
-3. **Home page first.** It defines the component library. Every interior page composes from it.
-4. **Interior pages.** Only components that already exist in the shared library. A new section form
+4. **Home page first.** It defines the component library. Every interior page composes from it.
+5. **Interior pages.** Only components that already exist in the shared library. A new section form
    gets added to the library and built from tokens — never inlined on one page.
-5. Run all three gates. Ship.
+6. Run all three gates. Ship.
+
+---
+
+## Direction, not dictation
+
+The two failure modes are opposite and both real: a fixed spec makes every site identical, a vague
+brief makes every site boring. This skill avoids both by being specific about **budgets and bounds**
+and silent about **composition**.
+
+- **Budgets** say what the page must add up to — light-ground share, form variety, photo bands,
+  copy distribution. Many different good pages satisfy the same budget; no boring one does.
+- **The draw** (`variation.mjs`) fixes the palette you build from and rules out what you used last
+  time. Divergence is enforced instead of hoped for.
+- **Nothing dictates placement.** No rule says which form goes in which slot, what the photograph
+  shows, what the device is, or how a section is composed. That is the design work, and it is yours.
+
+If you find yourself reproducing the last site's page with new colours, you have followed the letter
+and missed the point. The gates will not catch that. You have to.
 
 ---
 

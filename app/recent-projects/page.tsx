@@ -197,7 +197,7 @@ export default function RecentProjects() {
 
             <div className={`mt-10 grid gap-5 ${i % 2 === 1 ? "" : "lg:grid-cols-[62fr_38fr]"}`}>
               <figure className="overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-lg)]">
-                <div className="relative aspect-16/10">
+                <div className="relative photo-frame aspect-16/10">
                   <Image
                     src={p.lead.src}
                     alt={p.lead.alt}
@@ -238,7 +238,7 @@ export default function RecentProjects() {
             <div className={`mt-5 grid gap-4 sm:grid-cols-2 ${i % 2 === 1 ? "lg:grid-cols-2" : "lg:grid-cols-4"}`}>
               {p.shots.map((s) => (
                 <figure key={s.src} className="overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
-                  <div className="relative aspect-video">
+                  <div className="relative photo-frame aspect-video">
                     <Image src={s.src} alt={s.alt} fill sizes={i % 2 === 1 ? "(min-width:1024px) 46vw, 100vw" : "(min-width:1024px) 23vw, 50vw"} className="object-cover" />
                   </div>
                   <figcaption className="label px-4 py-3 text-muted-foreground">

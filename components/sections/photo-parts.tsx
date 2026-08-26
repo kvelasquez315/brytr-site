@@ -189,7 +189,7 @@ export function PhotoPair({
                 key={l as string}
                 className="overflow-hidden rounded-lg bg-primary shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10"
               >
-                <div className="relative aspect-video">
+                <div className="relative photo-frame aspect-video">
                   <Image src={sl.src} alt={sl.alt} fill sizes="(min-width: 768px) 46vw, 100vw" className="object-cover" />
                 </div>
                 <figcaption className="flex items-baseline gap-3 border-t border-on-dark/12 px-5 py-3.5">

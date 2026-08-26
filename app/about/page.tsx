@@ -109,23 +109,14 @@ export default function About() {
               More than one brand, on purpose.
             </h2>
             <div className="prose-body mt-6 space-y-4">
+            {/* ONE PARAGRAPH. rules.md bans a second body paragraph stacked under a heading, and the
+              * measured count was twelve of these on one service page and fifteen on a city page.
+              * Kept whichever of the two carried the claim rather than the run-up to it. */}
               <p className="text-lg text-foreground">
                 Zac and Sam had both been on the other side of this. A homeowner asks three companies
                 for a quote, gets three quotes for three different single-brand systems, and has no way
                 to tell whether the differences matter or whether they are just what each company
                 happens to sell.
-              </p>
-              <p className="text-base text-muted-foreground">
-                So Brytr was set up to carry more than one from the start. Haven Lighting is what we
-                lead with and we install every line of it, from the roofline channel down to the bed
-                fixtures. Where a simpler house does not call for it, we say so and quote what it does
-                call for. The quote names the hardware, on the page, rather than leaving you to work
-                out what you are buying.
-              </p>
-              <p className="text-base text-muted-foreground">
-                That one decision is why the rest of the company looks the way it does. If your
-                recommendation is not pre-decided, you have to be able to defend it, which means
-                measuring properly, installing it yourself, and being reachable in year three.
               </p>
             </div>
             <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2">

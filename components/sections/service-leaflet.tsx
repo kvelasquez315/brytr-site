@@ -61,8 +61,20 @@ const ATTR =
 export function ServiceLeaflet({
   className = "",
   legend = false,
+  focus,
 }: {
   className?: string;
+  /* THE SLUG OF ONE TOWN TO CENTRE ON, and the reason the city pages needed it.
+   *
+   * Twelve service-area pages were rendering the same list of nearby towns as text, so the only
+   * thing separating /service-areas/elkhorn from /service-areas/gretna was the proper noun. Every
+   * one of those towns already carries real coordinates in content/cities.ts, so the honest
+   * differentiator was there the whole time: a map actually centred on the town being written
+   * about, with its own pin enlarged and its neighbours around it.
+   *
+   * With `focus` the map centres on that town at a fixed zoom instead of fitting the whole metro,
+   * and that town's pin is drawn larger. Without it, nothing changes. */
+  focus?: string;
   /* THE LEGEND BELONGS TO THE MAP, so it renders in here rather than as a sibling.
    *
    * It used to sit in the calling page as its own panel: an amber glowing dot for "Metro, same
@@ -199,7 +211,9 @@ export function ServiceLeaflet({
 
       for (const c of cities) {
         const metro = c.tier === "metro" || c.tier === "iowa";
-        const size = metro ? (compact ? 12 : 19) : (compact ? 10 : 15);
+        const isFocus = focus === c.slug;
+        const base = metro ? (compact ? 12 : 19) : (compact ? 10 : 15);
+        const size = isFocus ? Math.round(base * 1.45) : base;
         L.marker([c.lat, c.lon], {
           icon: L.divIcon({
             className: "",
@@ -232,6 +246,13 @@ export function ServiceLeaflet({
        * right edge and sliced the ring in half, because the ring reaches ~30 miles past
        * the easternmost pin. zoomSnap is off above, so this lands on a fractional zoom and
        * Grand Island sits just inside the left edge instead of a whole level short. */
+      /* CENTRE ON THE TOWN, or fit the whole area when no town is named. The zoom is fixed at 11
+       * rather than fitted, because a fitted bound around one pin is meaningless and the useful
+       * frame here is "this town and the ones next to it". */
+      const focused = focus ? cities.find((c) => c.slug === focus) : undefined;
+      if (focused) {
+        map.setView([focused.lat, focused.lon], 10.6);
+      } else
       map.fitBounds(
         L.latLngBounds(cities.map((c) => [c.lat, c.lon] as [number, number])).extend([SHOP]),
         /* PADDING WENT UP WITH THE PIN HEIGHT. It was 20px a side, set when a pin was a 10px dot

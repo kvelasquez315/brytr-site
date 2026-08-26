@@ -154,14 +154,12 @@ export default function HowItWorks() {
               What is not in the drawing.
             </h2>
             <div className="prose-body mt-6 space-y-4">
+            {/* ONE PARAGRAPH. rules.md bans a second body paragraph stacked under a heading, and the
+              * measured count was twelve of these on one service page and fifteen on a city page.
+              * Kept whichever of the two carried the claim rather than the run-up to it. */}
               <p className="text-lg text-foreground">
                 The channel is the easy part. Six other decisions get made on your property that day,
                 and every one of them is a thing you would only notice if somebody got it wrong.
-              </p>
-              <p className="text-base text-muted-foreground">
-                They are also the six that separate a crew who does this every week from a crew who
-                took the job because it was quiet. All six get made on your property, on the day, by
-                the people who measured it.
               </p>
             </div>
             <div className="mt-7"><TextLink href="/about">Who is actually on your roof</TextLink></div>

@@ -163,10 +163,9 @@ export default function Contact() {
               title="Where your details go, and where they do not."
             />
             <div className="prose-body mt-6 space-y-4">
-              <p className="text-lg leading-relaxed text-on-dark">
-                Nobody hesitates over a phone number. What people hesitate over is being entered into
-                something: a sequence, a list, a CRM that emails them every Tuesday for a year.
-              </p>
+            {/* ONE PARAGRAPH. rules.md bans a second body paragraph stacked under a heading, and the
+              * measured count was twelve of these on one service page and fifteen on a city page.
+              * Kept whichever of the two carried the claim rather than the run-up to it. */}
               <p className="text-base leading-relaxed text-on-dark-muted">
                 So here is the whole of it. Your details reach two people, they are used to answer the
                 thing you asked, and if you go quiet we go quiet. We do not buy leads and we do not sell

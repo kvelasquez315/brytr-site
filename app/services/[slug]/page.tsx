@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services, serviceBySlug } from "@/content/services";
+import { ChannelFigure } from "@/components/sections/channel-figure";
 import { images } from "@/content/images";
 import { detailFor } from "@/content/service-detail";
 import { systemBySlug } from "@/content/systems";
@@ -145,14 +146,27 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <div className="shell grid gap-10 lg:grid-cols-[58fr_42fr] lg:gap-14">
           <div>
             <SectionHead title={`What ${s.name.toLowerCase()} actually is.`} />
-            <div className="prose-body mt-6 space-y-4">
+            {/* ONE PARAGRAPH. `secondPara` was a second body paragraph stacked straight under the
+              * heading, which rules.md bans and which the p+p count on this page was measuring. The
+              * lede carries the definition; the checklist under it carries the specifics. The data
+              * stays in content/service-detail.ts rather than being deleted, because it is written
+              * per service and is the expensive part. */}
+            <div className="prose-body mt-6">
               <p className="text-lg text-foreground">{s.lede}</p>
-              {/* Per-service now. See the comment on ServiceDetail.secondPara. */}
-              <p className="text-base text-muted-foreground">{d?.secondPara}</p>
             </div>
             <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
               {s.includes.map((i) => <Check key={i}>{i}</Check>)}
             </ul>
+
+            {/* THE DIODE PITCH, DRAWN. This section was 133 words with no photograph, no graphic
+              * and no background image, which rules.md calls undesigned outright. It is also the
+              * section that says what the product is, and the thing a homeowner actually wants to
+              * know at that moment is whether they will see a line or a row of dots. That is a
+              * dimension, which a photograph cannot show and a drawing can. Same linework as the
+              * eave section on /how-it-works. */}
+            <div className="mt-8 overflow-hidden rounded-lg bg-primary p-5 shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10">
+              <ChannelFigure variant="pitch" className="block w-full" />
+            </div>
           </div>
 
           <dl className="h-fit rounded-lg bg-background p-6 shadow-[var(--shadow-lg)] ring-1 ring-border">
@@ -229,8 +243,17 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             ))}
           </ol>
 
+          {/* THE GABLE RUN, DRAWN, and it is here to break a specific defect. Sections 4 and 5 ran
+            * consecutively with no photograph, no graphic and no background image between them:
+            * 1,104px of unbroken text in the middle of the page. This section lists what is in the
+            * quote, and the mitre at the peak is the line item a reader can actually check from
+            * the curb, so it is the one worth drawing. Same linework as the eave section. */}
+          <div className="mt-10 overflow-hidden rounded-lg bg-primary p-5 shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10">
+            <ChannelFigure variant="run" className="block w-full" />
+          </div>
+
           {sys && (
-            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-lg bg-primary px-6 py-5 shadow-[var(--shadow-dark)]">
+            <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-lg bg-primary px-6 py-5 shadow-[var(--shadow-dark)]">
               {/* NO EYEBROW. "The hardware under it" was a small amber label announcing the
                 * subject of the line beneath it, which is the device removed from every section on
                 * the home page. Folded into the line it was introducing. */}
@@ -346,7 +369,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                     className="group flex h-full flex-col overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border transition-all duration-[--dur-base] ease-[--ease-out-expo] hover:-translate-y-0.5"
                   >
                     {shot?.src && (
-                      <span className="relative block aspect-16/9 overflow-hidden bg-primary">
+                      <span className="relative block aspect-16/9 overflow-hidden photo-frame">
                         <Image
                           src={shot.src}
                           alt={shot.alt}

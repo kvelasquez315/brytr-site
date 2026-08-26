@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { cities, cityBySlug, metroCities } from "@/content/cities";
@@ -8,6 +9,9 @@ import { reviewProof } from "@/content/reviews";
 import { Shell } from "@/app/layout-shell";
 import { Faq } from "@/components/sections/faq";
 import { PageHero, PageCta, ServiceRows, SectionHead, Check, TextLink } from "@/components/sections/page-parts";
+import { images } from "@/content/images";
+import { ChannelFigure } from "@/components/sections/channel-figure";
+import { ServiceLeaflet } from "@/components/sections/service-leaflet";
 import { PhotoStrip, PhotoSplit } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, localBusiness, faqSchema } from "@/lib/schema";
@@ -86,6 +90,11 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
   const nearby = (c.nearby.map(cityBySlug).filter(Boolean) as typeof cities)
     .slice()
     .sort((a, b) => minutes(a.drive) - minutes(b.drive));
+  /* One metro frame per town, seeded on the slug so it is stable per page and different between
+   * pages. The caption comes from the same pool and describes what is in the frame, never a town. */
+  const areaPick = pick(`area-${c.slug}`, 1)[0];
+  const areaShot = areaPick ? images[areaPick.photo] : undefined;
+  const areaShotCaption = areaPick?.caption ?? "";
   const trail = [
     { name: "Home", href: "/" },
     { name: "Service areas", href: "/service-areas" },
@@ -137,19 +146,36 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
 
       {/* ── THE BAND STRIP ──
         * Four facts, three of which are this city's own. */}
+      {/* ONE FIGURE LEADS, THE REST SUPPORT. It was four numbers at identical size divided by four
+        * rules, which ranks nothing and makes the reader do the work of deciding what matters. The
+        * drive time is the fact this whole page turns on, so it is set at display size and the
+        * other three run quietly beside it, with a line underneath saying what they add up to.
+        * Same defect and same fix as the trust banner. */}
       <section className="bg-raise">
-        <div className="shell grid grid-cols-2 divide-x divide-on-dark/12 py-8 lg:grid-cols-4">
-          {[
-            ["Drive from the shop", c.drive],
-            ["Subdivisions listed here", `${c.neighborhoods.length}`],
-            ["Service call", c.tier === "outstate" ? "Scheduled route" : "Same week"],
-            ["Travel charge", "None, at any distance"],
-          ].map(([k, v]) => (
-            <div key={k} className="px-5 py-3">
-              <p className="u text-lg font-medium text-on-dark">{v}</p>
-              <p className="mt-1 text-xs text-on-dark-muted">{k}</p>
-            </div>
-          ))}
+        <div className="shell flex flex-wrap items-center gap-x-12 gap-y-6 py-8">
+          <p className="flex items-baseline gap-3">
+            <span className="u font-display text-[clamp(2rem,4vw,2.75rem)] font-bold leading-none text-on-dark">
+              {c.drive}
+            </span>
+            <span className="text-sm text-on-dark-muted">from the shop</span>
+          </p>
+          <ul className="flex flex-wrap items-center gap-x-8 gap-y-2 text-sm text-on-dark-muted">
+            <li>
+              <span className="font-semibold text-on-dark">{c.neighborhoods.length}</span> subdivisions listed
+            </li>
+            <li>
+              <span className="font-semibold text-on-dark">
+                {c.tier === "outstate" ? "Scheduled route" : "Same week"}
+              </span>{" "}
+              service call
+            </li>
+            <li>
+              <span className="font-semibold text-on-dark">No</span> travel charge
+            </li>
+          </ul>
+          <p className="w-full text-sm leading-relaxed text-on-dark-muted lg:w-auto lg:flex-1">
+            Close enough that a dark section is a visit rather than a route day.
+          </p>
         </div>
       </section>
 
@@ -175,6 +201,32 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   written quote. No charge and nothing to sign.
                 </p>
               </div>
+              {/* A PHOTOGRAPH, NOT A DRAWING, and the distinction is the check rather than taste.
+                * This section sits in the first four slots, where the page order rule wants
+                * image-led, and an SVG does not satisfy that: a reader arriving here should meet a
+                * real roofline before they meet a diagram. The drawing moved down to the covenant
+                * section, which needed media of its own.
+                *
+                * The caption describes what is in the frame and never the town. We do not know
+                * which of these metro installs is in which suburb, and captioning one as being in
+                * this one would be the easiest lie on the site to tell and the easiest to catch. */}
+              {areaShot?.src && (
+                <figure className="mt-8 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
+                  <div className="photo-frame relative aspect-16/9">
+                    <Image
+                      src={areaShot.src}
+                      alt={areaShot.alt}
+                      fill
+                      sizes="(min-width: 1024px) 42vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                  <figcaption className="border-t border-border px-5 py-4 text-sm leading-relaxed text-muted-foreground">
+                    {areaShotCaption}
+                  </figcaption>
+                </figure>
+              )}
+
               <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2">
                 <TextLink href="/free-design-consultation">Book the on-site measure</TextLink>
                 <TextLink href="/pricing">How the number is built</TextLink>
@@ -401,7 +453,15 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               onDark
               title="We handle the paperwork, not you."
             />
-            <p className="mt-5 text-lg leading-relaxed text-on-dark/85">
+            {/* THE SCENE RANGE, DRAWN. This section carried 175 words, one card and no visual of
+              * any kind, which the house rules call undesigned outright. It is also the section
+              * about what an association will and will not allow, so the useful thing to show
+              * beside it is the range the run can actually be set to. Same linework as the eave
+              * section on /how-it-works. */}
+            <div className="mt-7 overflow-hidden rounded-lg bg-raise p-5 ring-1 ring-on-dark/10">
+              <ChannelFigure variant="spectrum" className="block w-full" />
+            </div>
+            <p className="mt-6 text-lg leading-relaxed text-on-dark/85">
               {c.tier === "metro"
                 ? `Several ${c.name} developments have specific covenant language about permanent exterior lighting, and a fair amount of it was written before this product existed. We pull yours, read the actual clause, and file the submission ourselves.`
                 : c.tier === "iowa"
@@ -491,15 +551,25 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         * This city's own neighbors, ordered by drive, not the eighteen-box rack. */}
       <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[38fr_62fr] lg:gap-14">
+          {/* A MAP CENTRED ON THIS TOWN, replacing a paragraph about ordering.
+            *
+            * This section used to be a heading, a sentence explaining that the list was sorted by
+            * drive time, and the list. Nothing in it was true of one town rather than another
+            * except the name in the heading, which is precisely how twelve pages came to be one
+            * page with the noun swapped.
+            *
+            * The map is centred on this town's own coordinates with its pin enlarged, so the page
+            * shows where the reader actually is and which of our other towns sit around them. The
+            * list stays beside it, because a map answers "where roughly" and a list answers "how
+            * long is the drive", and those are different questions. */}
           <div>
             <h2 className="mt-4 text-[clamp(1.6rem,2.8vw,2.2rem)] leading-[1.08] text-foreground">
               Where else we are, near {c.name}.
             </h2>
-            <p className="mt-5 text-[1.05rem] leading-relaxed text-muted-foreground">
-              Ordered by the drive from our shop rather than alphabetically, because that is the number
-              that decides how quickly anybody gets back to you.
-            </p>
-            <div className="mt-7">
+            <div className="mt-6 overflow-hidden rounded-lg bg-card p-2 shadow-[var(--shadow-lg)] ring-1 ring-border">
+              <ServiceLeaflet focus={c.slug} className="aspect-4/3 w-full" />
+            </div>
+            <div className="mt-6">
               <TextLink href="/service-areas">Every town we drive to, with drive times</TextLink>
             </div>
           </div>

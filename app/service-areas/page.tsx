@@ -256,11 +256,9 @@ export default function AreasHub() {
           <div>
             <SectionHead onDark  title="Why the radius stops where it does." />
             <div className="prose-body mt-6 space-y-4">
-              <p className="text-lg leading-relaxed text-on-dark">
-                Permanent lighting is a fifteen year relationship with a building. So the honest limit on
-                a service area is not how far a van will go for an install. It is how far it will go for
-                a warranty call, in February, for one dark section.
-              </p>
+            {/* ONE PARAGRAPH. rules.md bans a second body paragraph stacked under a heading, and the
+              * measured count was twelve of these on one service page and fifteen on a city page.
+              * Kept whichever of the two carried the claim rather than the run-up to it. */}
               <p className="text-base leading-relaxed text-on-dark-muted">
                 That is why the area stops where it does. Everything we serve is inside about
                 thirty-five minutes of the shop, Council Bluffs included, and a dark section on any of

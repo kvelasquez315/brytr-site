@@ -278,11 +278,9 @@ export default function Warranty() {
               A claim should be a phone call.
             </h2>
             <div className="prose-body mt-6 space-y-4">
-              <p className="text-lg text-foreground">
-                The single most useful thing about a locally owned installer is that something going
-                wrong is a conversation rather than a process. You ring the number on your quote and one
-                of the two people who own the company picks it up.
-              </p>
+            {/* ONE PARAGRAPH. rules.md bans a second body paragraph stacked under a heading, and the
+              * measured count was twelve of these on one service page and fifteen on a city page.
+              * Kept whichever of the two carried the claim rather than the run-up to it. */}
               <p className="text-base text-muted-foreground">
                 We hold the workmanship coverage ourselves and we administer the manufacturer side on
                 your behalf. You never file anything, never chase a distributor, and never find out that

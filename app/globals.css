@@ -521,6 +521,19 @@
     grid-column: 1 / -1;
   }
 
+  /* WHAT AN IMAGE LOOKS LIKE BEFORE IT ARRIVES.
+     Every photograph frame on this site was `bg-primary`, the near-black night surface. That is the
+     right colour behind a loaded night photograph and the worst possible colour behind an unloaded
+     one: on /services/permanent-roofline-lighting, eight of fourteen images were lazy with
+     naturalWidth 0, and two of them sat in the viewport as solid black rounded rectangles 726px
+     wide. A hole, not a placeholder.
+     `--brand-secondary` is the anodised aluminium mid-grey, which reads as a quiet panel on the
+     limestone sections and on the night sections both, and never as a void. It is also the colour
+     of the actual channel, so an empty frame is at least the right material. */
+  .photo-frame {
+    background-color: var(--brand-secondary);
+  }
+
   /* ---- THE INSTALL RUN: three points, drawn as lights ------------- */
   /* Drawn here rather than in SVG because the LABELS have to be real type. The whole thing was one
      SVG, and inside a column that goes from 656px to 343px the fixed-unit text rendered at nine

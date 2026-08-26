@@ -94,17 +94,20 @@ export function ValueBand({
           * one carries the whole property while the two under it carry detail. */}
         {lead?.src && (
           <div className="grid grid-cols-2 gap-4">
-            <div className="relative col-span-2 aspect-16/9 overflow-hidden rounded-lg bg-primary ring-1 ring-border">
+            <div className="relative col-span-2 aspect-16/9 overflow-hidden rounded-lg photo-frame ring-1 ring-border">
+              {/* EAGER. This is the first section under the hero on every interior page, so its
+                * lead frame is in the first viewport at 1440 and must never be lazy. */}
               <Image
                 src={lead.src}
                 alt={lead.alt}
                 fill
+                priority
                 sizes="(min-width: 1024px) 56vw, 100vw"
                 className="object-cover"
               />
             </div>
             {rest.slice(0, 2).map((s) => (
-              <div key={s.src} className="relative aspect-4/3 overflow-hidden rounded-lg bg-primary ring-1 ring-border">
+              <div key={s.src} className="relative aspect-4/3 overflow-hidden rounded-lg photo-frame ring-1 ring-border">
                 <Image
                   src={s.src!}
                   alt={s.alt}

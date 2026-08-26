@@ -322,7 +322,7 @@ export function ServiceRows({
               }`}
             >
               {shot?.src && (
-                <span className="relative block aspect-16/9 overflow-hidden bg-primary">
+                <span className="relative block aspect-16/9 overflow-hidden photo-frame">
                   <Image
                     src={shot.src}
                     alt={shot.alt}
@@ -517,7 +517,7 @@ export function PageCta({
               *
               * Hidden below lg, where the two columns stack and there is no space to fill. */}
             {closer?.src && (
-              <div className="relative mt-9 hidden aspect-16/9 overflow-hidden rounded-lg bg-primary ring-1 ring-border lg:block">
+              <div className="relative mt-9 hidden aspect-16/9 overflow-hidden rounded-lg photo-frame ring-1 ring-border lg:block">
                 {/* 63vw, not 46. The copy column is 1fr of [1fr_26rem] in a 1376 shell, which is a 904px
                   * slot at 1440, and 46vw was asking Next for 662. */}
                 <Image src={closer.src} alt={closer.alt} fill sizes="(min-width: 1024px) 63vw, 100vw" className="object-cover" />

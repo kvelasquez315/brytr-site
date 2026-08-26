@@ -350,11 +350,9 @@ export default function CompareHub() {
           <div>
             <SectionHead onDark  title="How these were judged." />
             <div className="prose-body mt-6 space-y-4">
-              <p className="text-lg leading-relaxed text-on-dark">
-                Most of what is on these pages comes from fitting two of these systems ourselves,
-                on real rooflines, rather than from reading spec sheets. That is a real
-                qualification and it is also a narrow one.
-              </p>
+            {/* ONE PARAGRAPH. rules.md bans a second body paragraph stacked under a heading, and the
+              * measured count was twelve of these on one service page and fifteen on a city page.
+              * Kept whichever of the two carried the claim rather than the run-up to it. */}
               <p className="text-base leading-relaxed text-on-dark-muted">
                 So where we have no direct experience, the page says so by name rather than filling the
                 gap with a plausible sentence. And where our own premium system loses to something
