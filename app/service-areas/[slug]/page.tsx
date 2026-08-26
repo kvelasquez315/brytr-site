@@ -458,7 +458,9 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               * about what an association will and will not allow, so the useful thing to show
               * beside it is the range the run can actually be set to. Same linework as the eave
               * section on /how-it-works. */}
-            <div className="mt-7 overflow-hidden rounded-lg bg-raise p-5 ring-1 ring-on-dark/10">
+            {/* CAPPED. At full column width the drawing rendered over 600px tall and dominated a
+              * section it was only meant to support. */}
+            <div className="mt-7 max-w-[30rem] overflow-hidden rounded-lg bg-raise p-4 ring-1 ring-on-dark/10">
               <ChannelFigure variant="spectrum" className="block w-full" />
             </div>
             <p className="mt-6 text-lg leading-relaxed text-on-dark/85">

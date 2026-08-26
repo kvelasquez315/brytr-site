@@ -190,7 +190,7 @@ export default function CompareHub() {
         photo="/img/g-pool-blue.jpg"
         photoAlt="An Omaha home, pergola and pool deck lit blue at dusk"
         objectPosition="50% 48%"
-        h1="We install two of these and would not put three of them on your house."
+        h1="We install both of these and would not put either on every house."
         lede="Every comparison page in this category is written by somebody who sells exactly one of the products on it. We install two of them, and we will tell you which of the rest we would not fit, which is the only reason this page can also tell you where our own premium system loses."
         trail={trail}
       />

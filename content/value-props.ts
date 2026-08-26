@@ -46,7 +46,7 @@ const CORE = [
 
 export const valueProps: Record<string, ValueProp> = {
   "/about": {
-    title: "A local crew and one system.",
+    title: "A local crew, and the system they fit.",
     lede: "We install permanent outdoor lighting in the Omaha metro and nothing else, which is why the warranty call gets answered by the people who did the work.",
     points: [
       { h: "It is the only thing we do", p: "Not a roofing company with a lighting arm, and not a seasonal side line." },
@@ -85,7 +85,7 @@ export const valueProps: Record<string, ValueProp> = {
   },
 
   "/contact": {
-    title: "One call, then a date after dark.",
+    title: "A call, then a date after dark.",
     lede: "The useful next step is somebody standing on your driveway at dusk with a tape measure, not another brochure.",
     points: [
       { h: "Same-day reply, most days", p: "A person from the shop, not a call centre taking a message for somebody else." },
@@ -133,7 +133,7 @@ export const valueProps: Record<string, ValueProp> = {
   },
 
   "/how-it-works": {
-    title: "One day, and it is on the building.",
+    title: "Installed in a day, and left on the building.",
     lede: "Measured after dark, routed into the fascia, sealed as it goes, commissioned on your phone and signed off lit and in daylight.",
     points: [
       { h: "Into fascia, never through shingles", p: "Every penetration sealed at the moment it is made, which is where installs fail at year five." },
@@ -185,7 +185,7 @@ export const valueProps: Record<string, ValueProp> = {
   },
 
   "/reviews": {
-    title: "Rated five stars by neighbours.",
+    title: "What the neighbours said about the work.",
     lede: "Every review here is verbatim from Google, from homeowners in the Omaha metro who have had a system on the building through a full year.",
     points: [
       { h: "They write about the same things", p: "Communication, the crew, and how it looked the first night. That is more useful than an average." },
@@ -211,7 +211,7 @@ export const valueProps: Record<string, ValueProp> = {
   },
 
   "/services": {
-    title: "One channel, every surface.",
+    title: "Every surface runs on the same channel.",
     lede: "Roofline, soffit, beds, trees, walls and pergolas all run on the same channel and the same controller, so what you fit first does not limit what you add.",
     points: CORE,
     photos: ["serviceWholeHome", "servicePatio", "serviceLandscape"],
@@ -220,7 +220,7 @@ export const valueProps: Record<string, ValueProp> = {
   },
 
   "/warranty": {
-    title: "Two layers, and we answer both.",
+    title: "Who answers when something goes wrong.",
     lede: "The manufacturer covers the hardware and we cover the work. Whichever one a fault falls under, the call comes to us and we come out.",
     points: [
       { h: "Workmanship is ours", p: "The crew who fastened it holds the terms. Not a dispatcher, and not somebody who has never seen your fascia." },
@@ -243,7 +243,7 @@ const shots = (seed: string, n: number) => pick(seed, n).map((s) => s.photo);
 
 export function serviceValueProp(s: Service): ValueProp {
   return {
-    title: "One system, and this is part of it.",
+    title: "Part of the same system.",
     lede: `${s.name} runs on the same channel and the same controller as everything else we fit, so adding to it later is a wiring afternoon rather than a second system.`,
     points: [
       { h: "Fitted once, then left alone", p: "Routed in and sealed on install day. Nothing to put up in November and nothing to take down." },
@@ -309,7 +309,7 @@ export function compareValueProp(a: string, b: string, slug: string): ValueProp 
 
 export function postValueProp(slug: string): ValueProp {
   return {
-    title: "What this is, in one line.",
+    title: "What this is, briefly.",
     lede: "Permanent outdoor lighting is one aluminium channel routed into your eave, one run of addressable LEDs and one app, fitted once and left on the building.",
     points: CORE,
     photos: shots(`vb-post-${slug}`, 3),

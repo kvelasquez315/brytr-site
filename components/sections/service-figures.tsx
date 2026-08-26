@@ -61,7 +61,7 @@ const zoneRows: [string, string, string][] = [
 function ZonesFigure() {
   return (
     <Frame
-      label="One property, four switches"
+      label="The property, switch by switch"
       caption="Zones are decided on the walk-around and wired that way, which is why the back of the house can stay dark while the front is lit."
       tall
     >

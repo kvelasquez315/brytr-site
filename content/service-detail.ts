@@ -71,7 +71,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       a: "seqEveryday", b: "seqGameday",
       aLabel: "The everyday setting: warm white, roofline, eaves and the band over the garage.",
       bLabel: "Ninety seconds later. Same fixtures, same evening, one saved scene switched on.",
-      title: "One house, one evening, two settings.",
+      title: "The same house, with the setting changed.",
       lede: "Ninety seconds apart, from a drone that never moved. Same roof, same sky; the only thing that changed is what the controller was told to do.",
     },
     /* NOTHING RENDERS `shots` ANY MORE, on any service. The "What it looks like once the crew has

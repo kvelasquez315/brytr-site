@@ -303,7 +303,7 @@ export default function Pricing() {
         * A reader deciding whether four figures is worth it should be able to see the thing
         * they would be buying somewhere in the middle of the argument, not only above it. */}
       <PhotoStrip
-        title="The same figure, on three different houses."
+        title="The same figure on different houses."
         lede="Price follows roof geometry, not square footage, which is why these three differ."
         shots={pick("pricing", 3)}
         cols={3}

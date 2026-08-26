@@ -38,7 +38,7 @@ const trail = [{ name: "Home", href: "/" }, { name: "Recent projects", href: "/r
 const projects = [
   {
     slug: "two-story-brick",
-    title: "Brick two-story, three gables",
+    title: "Brick two-story with gables",
     where: "West Omaha",
     shot: "Photographed October 2, 2025",
     lede:
@@ -62,7 +62,7 @@ const projects = [
       { src: "/img/hero-warm-white.jpg", label:"One soft pink, every run", alt: "The same Omaha two-story with every roofline run set to the same soft pink" },
       { src: "/img/hero-game-day.jpg", label:"Game day", alt: "The same Omaha two-story lit red and blue for game day" },
       { src: "/img/christmas-detail.jpg", label:"Christmas", alt: "Individual red and green LEDs alternating along the gables of the same Omaha home" },
-      { src: "/img/g-blue-white.jpg", label:"Two zones, two colors", alt: "The same Omaha home with gables in blue and eaves left white" },
+      { src: "/img/g-blue-white.jpg", label:"Colour held apart by zone", alt: "The same Omaha home with gables in blue and eaves left white" },
     ],
   },
   {
@@ -137,7 +137,7 @@ const projects = [
    * site that can carry the claim, which is why it is here and why the numbers are stated. */
   {
     slug: "ranch-five-scenes",
-    title: "Brick and cedar ranch, one hover point",
+    title: "Brick and cedar ranch",
     where: "West of Omaha",
     shot: "Photographed September 30, 2025",
     lede:

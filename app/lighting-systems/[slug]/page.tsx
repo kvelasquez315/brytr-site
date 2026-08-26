@@ -278,7 +278,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
               title={
                 s.tier === "Control"
                   ? "The layer over everything else."
-                  : "One line of the lineup, not a system on its own."
+                  : "A line of the lineup, not a system on its own."
               }
             />
             <p className="mt-5 text-lg leading-relaxed text-on-dark/85">{d?.position ?? s.short}</p>

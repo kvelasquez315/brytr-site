@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import { services, serviceBySlug } from "@/content/services";
 import { ChannelFigure } from "@/components/sections/channel-figure";
 import { images } from "@/content/images";
+import { pick } from "@/content/photo-sets";
 import { detailFor } from "@/content/service-detail";
 import { systemBySlug } from "@/content/systems";
 import { serviceFaqsFor } from "@/content/faqs";
@@ -97,6 +98,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const s = serviceBySlug(slug);
   if (!s) notFound();
   const d = detailFor(s.slug);
+  /* A frame for the section that says what this service is. Seeded on the slug so it is stable
+   * per page and different between pages, and it must not repeat the page's own hero. */
+  const sectionPick = pick(`svc-${s.slug}`, 1)[0];
+  const sectionShot = sectionPick ? images[sectionPick.photo] : undefined;
+  const quotePick = pick(`svc-quote-${s.slug}`, 1)[0];
+  const quoteShot = quotePick ? images[quotePick.photo] : undefined;
   const sys = s.system ? systemBySlug(s.system) : undefined;
   const faqs = serviceFaqsFor(s.name);
   const alsoSee = (d?.alsoSee ?? [])
@@ -154,19 +161,27 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             <div className="prose-body mt-6">
               <p className="text-lg text-foreground">{s.lede}</p>
             </div>
-            <ul className="mt-7 grid gap-2.5 sm:grid-cols-2">
-              {s.includes.map((i) => <Check key={i}>{i}</Check>)}
-            </ul>
-
-            {/* THE DIODE PITCH, DRAWN. This section was 133 words with no photograph, no graphic
-              * and no background image, which rules.md calls undesigned outright. It is also the
-              * section that says what the product is, and the thing a homeowner actually wants to
-              * know at that moment is whether they will see a line or a row of dots. That is a
-              * dimension, which a photograph cannot show and a drawing can. Same linework as the
-              * eave section on /how-it-works. */}
-            <div className="mt-8 overflow-hidden rounded-lg bg-primary p-5 shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10">
-              <ChannelFigure variant="pitch" className="block w-full" />
-            </div>
+            {/* NO TICK LIST. It restated the paragraph above it as four fragments, and the client
+              * on exactly this: "remove this and let the graphic do the talking." The facts panel
+              * beside this column already carries the specifics in a form worth reading.
+              *
+              * AND A PHOTOGRAPH, NOT A THIRD DRAWING. This section, the zone drawing below it and
+              * the section after that were all graphics, three in a row with no photograph
+              * between them: "this is honestly just random since we then have 3 graphics in a row
+              * with no images." Correct. The rule this page was failing wanted it to stop being a
+              * wall of text, not to become a wall of diagrams. The drawing that was here has moved
+              * to /how-it-works, where it is the only one on the page. */}
+            {sectionShot?.src && (
+              <div className="photo-frame relative mt-8 aspect-16/9 overflow-hidden rounded-lg ring-1 ring-border">
+                <Image
+                  src={sectionShot.src}
+                  alt={sectionShot.alt}
+                  fill
+                  sizes="(min-width: 1024px) 54vw, 100vw"
+                  className="object-cover"
+                />
+              </div>
+            )}
           </div>
 
           <dl className="h-fit rounded-lg bg-background p-6 shadow-[var(--shadow-lg)] ring-1 ring-border">
@@ -243,14 +258,18 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             ))}
           </ol>
 
-          {/* THE GABLE RUN, DRAWN, and it is here to break a specific defect. Sections 4 and 5 ran
-            * consecutively with no photograph, no graphic and no background image between them:
-            * 1,104px of unbroken text in the middle of the page. This section lists what is in the
-            * quote, and the mitre at the peak is the line item a reader can actually check from
-            * the curb, so it is the one worth drawing. Same linework as the eave section. */}
-          <div className="mt-10 overflow-hidden rounded-lg bg-primary p-5 shadow-[var(--shadow-dark)] ring-1 ring-on-dark/10">
-            <ChannelFigure variant="run" className="block w-full" />
-          </div>
+          {/* A PHOTOGRAPH, AND THE REASON IT IS NOT A DRAWING. A gable drawing sat here briefly and
+            * was the third graphic in three consecutive sections, which the client called random.
+            * Taking it out re-opened the other defect: sections three, four and five then ran with
+            * no visual at all between them. A real install frame closes both, because the fault was
+            * never "not enough visuals", it was three diagrams where a photograph belonged. */}
+          {quoteShot?.src && (
+            <figure className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
+              <div className="photo-frame relative aspect-21/9">
+                <Image src={quoteShot.src} alt={quoteShot.alt} fill sizes="96vw" className="object-cover" />
+              </div>
+            </figure>
+          )}
 
           {sys && (
             <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-4 rounded-lg bg-primary px-6 py-5 shadow-[var(--shadow-dark)]">

@@ -458,11 +458,9 @@ export function PageCta({
         {body ??
           "We measure on site, design it with you after dark, and hand you a written quote. If you decide against it, you’ve lost an hour and gained a plan."}
       </p>
-      <ul className="mt-7 space-y-3">
-        <Check>Free on-site assessment</Check>
-        <Check>Written quote, no pressure</Check>
-        <Check>Financing available</Check>
-      </ul>
+        {/* NO TICK LIST. Three fragments restating the paragraph directly above them, under
+          * the one heading on the page whose job is to get a form filled in. Removed on
+          * instruction. */}
     </>
   );
 

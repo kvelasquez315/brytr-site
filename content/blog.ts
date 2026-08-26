@@ -14,7 +14,7 @@ export const posts: Post[] = [
     links: { label: "Permanent Christmas lights", href: "/services/permanent-christmas-lights" },
     body: [
       { p: "If you are moving within two years, probably not. If you are staying five or more, the arithmetic stops being close. Most of the value in a permanent system is not the Christmas lights at all, it is the 335 other nights, which is the part nobody mentions in the quote." },
-      { h: "The three questions that decide it" },
+      { h: "The questions that decide it" },
       { list: ["How long are you staying? Under two years and a rented seasonal install is cheaper.", "Who goes up the ladder? If the answer is you, in ice, price that honestly.", "Will you use it in June? Households that do get several times the value out of it."] },
       { h: "What the numbers actually look like" },
       { p: "A professional seasonal install in Omaha is an annual cost, every year, forever, and it goes up. A permanent system is a one-time cost with effectively no recurring spend. Somewhere between year four and year seven the lines cross, and after that the permanent system is simply cheaper while also being better." },

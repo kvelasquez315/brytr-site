@@ -68,7 +68,7 @@ export function ChannelFigure({
           4 in.
         </text>
         <text x={x0 - 26} y={y - 40} fill={inkMuted} fontSize="15" fontFamily="var(--font-body)">
-          Every four inches, the whole length of the run
+          The same spacing, the whole length of the run
         </text>
         <text x={x0 - 26} y={y + 108} fill={inkMuted} fontSize="15" fontFamily="var(--font-body)">
           Close enough that the diffuser reads it as a line rather than a row of points
@@ -118,7 +118,7 @@ export function ChannelFigure({
         })}
         <path d={`M${x0 + w} ${y + 30}V${y + 42}`} stroke={faint} strokeWidth="1" />
         <text x={x0 - 14} y={y - 42} fill={inkMuted} fontSize="15" fontFamily="var(--font-body)">
-          One run, six saved scenes. Nothing is swapped to change it.
+          The same run, every saved scene. Nothing is swapped to change it.
         </text>
         {/* anchored to the start, not centred: centred on the first run of five it overhung the
           * left edge of the viewBox and the W was cut off. */}
@@ -165,7 +165,7 @@ export function ChannelFigure({
       </text>
 
       <text x={left[0] - 10} y="290" fill={inkMuted} fontSize="15" fontFamily="var(--font-body)">
-        Both rakes and the eave on one continuous run
+        Both rakes and the eave, unbroken
       </text>
     </svg>
   );

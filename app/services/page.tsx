@@ -264,7 +264,7 @@ export default function ServicesHub() {
       <PhotoStrip
         /* Not "Four of the ten" — that counted the rack above AND the row below, in one
           * line. The reader can see how many pictures there are. */
-        title="Different houses, different jobs, one controller."
+        title="What changes between houses, and what does not."
         lede="Everything above attaches to the same channel and the same app, which is why most people end up adding a second and a third thing a season later rather than buying it all at once."
         shots={[
           { photo: "homeBrickGablesGold", caption: "Roofline. The gables, the eaves and the soffit, on the everyday warm white." },
@@ -323,7 +323,7 @@ export default function ServicesHub() {
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            title="Every one of these, everywhere we drive."
+            title="All of these, everywhere we drive."
           />
           <div className="mt-9"><CityTiles /></div>
         </div>

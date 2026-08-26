@@ -105,7 +105,7 @@ export default function Consult() {
           * also be this page's proposition — a headline that ends every other page reads as
           * furniture by the time you get here, and it left this page with no line of its own.
           * The hour, and what you keep at the end of it, is what this page is actually about. */
-        h1="One hour after dark, and you keep the drawing."
+        h1="An hour after dark, and you keep the drawing."
         lede="We come out, walk the property after dark, design it with you, measure the roofline, and leave you holding a written quote. If you decide against it you have lost an hour and gained a plan. The drawing and the number are yours either way."
         trail={trail}
       />

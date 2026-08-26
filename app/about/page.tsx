@@ -89,7 +89,7 @@ export default function About() {
         photo="/img/g-ranch-blue-white.jpg"
         photoAlt="A single-story Omaha home in October with the roofline, front beds, rock steps and walk all lit, the entry gable set to blue"
         objectPosition="50% 42%"
-        h1="Built by the two people who show up on the roof."
+        h1="Built by the people who show up on the roof."
         lede="Brytr exists because every permanent lighting quote in this metro came from somebody selling exactly one brand and calling it the only good option. We carry two and we run our own crews, from the measure to the handover."
         trail={trail}
       />
@@ -106,7 +106,7 @@ export default function About() {
         <div className="shell grid items-start gap-10 lg:grid-cols-[54fr_46fr] lg:gap-14">
           <div>
             <h2 className="mt-4 text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.06] text-foreground">
-              More than one brand, on purpose.
+              Why we carry more than we have to.
             </h2>
             <div className="prose-body mt-6 space-y-4">
             {/* ONE PARAGRAPH. rules.md bans a second body paragraph stacked under a heading, and the
@@ -267,7 +267,7 @@ export default function About() {
         * do more for that than another paragraph would, and the middle one has a person in it,
         * which every one of the previous four sections was talking about in the abstract. */}
       <PhotoStrip
-        title="What the two of us are actually selling."
+        title="What we are actually selling."
         lede="Not a product line. A crew that turns up, a channel fixed into fascia rather than stapled to a shingle, and a run that still holds a straight line in year eight."
         shots={[
           { photo: "crewRoofFascia", caption: "On the roof. The same crew from the measure to the handover, and the same crew if anything ever needs looking at." },

@@ -115,7 +115,7 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
     ],
   },
   {
-    h: "One color, every zone",
+    h: "The whole elevation in the same colour",
     note: "The whole property, one tap",
     lede:
       "The largest group here, which is the answer to anybody who thinks this is a Christmas product.",
@@ -132,7 +132,7 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
     ],
   },
   {
-    h: "Two zones, two colors",
+    h: "Colour held apart by zone",
     note: "The look most people land on",
     lede:
       "Gables in color, eaves left white, landscape left warm. Where most people land after a month of playing with it.",
@@ -289,7 +289,7 @@ export default function Gallery() {
       />
 
       <PhotoPair
-        title="And the same arch, before dark and after."
+        title="The same arch, before dark and after."
         lede="A straight rake is easy. This octagonal turret is about as awkward as a front elevation gets, and the run keeps going through it."
         a="archByDay"
         b="archAtNight"

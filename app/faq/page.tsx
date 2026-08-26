@@ -336,7 +336,7 @@ export default function FaqPage() {
       <PageCta
         variant="phone"
         photos={valueProps["/faq"].photos}
-        title="Ask us the one that is not on this page."
+        title="Ask us what is not on this page."
         body="Most questions we have never been asked before turn out to be about somebody's specific roofline, which is a five minute phone call rather than a paragraph."
         panelLink={{ href: "/free-design-consultation", label: "Book the on-site measure" }}
       />
