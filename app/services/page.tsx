@@ -5,6 +5,8 @@ import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, CityTiles, SectionHead, TextLink } from "@/components/sections/page-parts";
 import { PhotoStrip } from "@/components/sections/photo-parts";
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /services — WAVE 1, PAGE 1 of the page-by-page pass.
  *
@@ -110,6 +112,12 @@ export default function ServicesHub() {
         lede="Roofline, soffit, beds, trees, walls, pergolas and storefronts: all of it on one channel, one controller and one app, so what you install first does not limit what you add later."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/services"]} ground="muted" />
+
 
       {/* ── THE DECISION TREE ──
         * The centerpiece, and the thing this page has that no other page does. */}

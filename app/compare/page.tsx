@@ -6,6 +6,8 @@ import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/
 import { PhotoBand, PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /compare — WAVE 4, PAGE 1 of the page-by-page pass.
  *
@@ -192,6 +194,12 @@ export default function CompareHub() {
         lede="Every comparison page in this category is written by somebody who sells exactly one of the products on it. We install two of them, and we will tell you which of the rest we would not fit, which is the only reason this page can also tell you where our own premium system loses."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/compare"]} ground="muted" />
+
 
       {/* ── WHERE WE STAND, AND ON WHAT ──
         * Three cards in a 28rem column meant three stacked rows of small print. Across the

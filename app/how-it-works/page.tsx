@@ -7,6 +7,8 @@ import { PhotoStrip } from "@/components/sections/photo-parts";
 import { ChannelDetail } from "@/components/sections/channel-detail";
 
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /how-it-works — WAVE 2, PAGE 1 of the page-by-page pass.
  *
@@ -115,6 +117,12 @@ export default function HowItWorks() {
         lede="Permanent lighting is a carpentry job with an electrical job inside it. Everything that decides whether you like it in five years happens in the eight inches between your shingles and your gutter, on the day the van turns up."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/how-it-works"]} ground="card" />
+
 
       {/* ── THE FASCIA, FOUR TIMES ──
         * The centerpiece. Same board, four states, amber in the last one only. */}

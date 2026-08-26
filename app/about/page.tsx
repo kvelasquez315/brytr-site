@@ -7,6 +7,8 @@ import { PhotoStrip } from "@/components/sections/photo-parts";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 import { site } from "@/content/site";
 import { reviewProof } from "@/content/reviews";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /about — WAVE 2, PAGE 2 of the page-by-page pass.
  *
@@ -91,6 +93,12 @@ export default function About() {
         lede="Brytr exists because every permanent lighting quote in this metro came from somebody selling exactly one brand and calling it the only good option. We carry two and we run our own crews, from the measure to the handover."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/about"]} ground="muted" />
+
 
       {/* ── THE THESIS ──
         * The argument on the left, the thing it produces on the right. */}

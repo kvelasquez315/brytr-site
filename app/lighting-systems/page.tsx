@@ -6,6 +6,8 @@ import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
 import { PhotoPair } from "@/components/sections/photo-parts";
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /lighting-systems — WAVE 3, PAGE 1 of the page-by-page pass.
  *
@@ -182,6 +184,12 @@ export default function SystemsHub() {
         lede="Haven Lighting makes the roofline channel, the soffit and architectural fixtures, the ground-level lights and the overhead bistro runs. We install all of it, which is why everything on a property answers to one app instead of three."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/lighting-systems"]} ground="card" />
+
 
       {/* ── THE ROOFLINE, AND THE LAYER THAT RUNS IT ──
         * This slot used to hold two invented tiers side by side, as though the page were

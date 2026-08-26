@@ -9,6 +9,8 @@ import { pick as photoPick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, faqSchema } from "@/lib/schema";
 import { homeFaqs, pricingFaqs, serviceFaqsFor } from "@/content/faqs";
 import { Faq } from "@/components/sections/faq";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /faq — WAVE 2, PAGE 6 of the page-by-page pass.
  *
@@ -175,6 +177,12 @@ export default function FaqPage() {
         lede="In the words customers actually use, grouped by where in the decision they come up. The ones we get most are answered in the open, in one line each, so you do not have to click anything to find out what we will and will not tell you."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/faq"]} ground="muted" />
+
 
       {/* ── THE SHORT ANSWERS ──
         * The centerpiece. Answers in the open, because the whole failure of an

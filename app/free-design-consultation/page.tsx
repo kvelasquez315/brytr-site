@@ -6,6 +6,8 @@ import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, Check, TextLink } from "@/components/sections/page-parts";
 import { PhotoPair } from "@/components/sections/photo-parts";
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /free-design-consultation — WAVE 1, PAGE 3 of the page-by-page pass.
  *
@@ -107,6 +109,12 @@ export default function Consult() {
         lede="We come out, walk the property after dark, design it with you, measure the roofline, and leave you holding a written quote. If you decide against it you have lost an hour and gained a plan. The drawing and the number are yours either way."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/free-design-consultation"]} ground="muted" />
+
 
       {/* ── THE HOUR ──
         * The centerpiece: the clock down the left, the deliverable on the right. */}

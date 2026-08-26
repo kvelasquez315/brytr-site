@@ -7,6 +7,8 @@ import { PhotoStrip, PhotoPair } from "@/components/sections/photo-parts";
 import { sequence } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 import { galleryShots } from "@/content/images";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /gallery — WAVE 6 of the page-by-page pass.
  *
@@ -160,6 +162,12 @@ export default function Gallery() {
         lede="Every photograph on this page is a Brytr system on a real Omaha home: no renders, no stock houses, no borrowed shots. Grouped by what the system is set to rather than by house, because the point is that none of these needed different hardware."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/gallery"]} ground="muted" />
+
 
       {/* ── THE NINETY-SECOND SEQUENCE ──
         * The strongest set in Brytr's library and it was sitting unused in a shared Drive

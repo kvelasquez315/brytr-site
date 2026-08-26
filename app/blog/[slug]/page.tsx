@@ -9,6 +9,8 @@ import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/
 import { PhotoBand, PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { postValueProp } from "@/content/value-props";
 
 /* ONE TEMPLATE, TWELVE POSTS — WAVE 6 of the page-by-page pass.
  *
@@ -93,6 +95,12 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         lede={p.dek}
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...postValueProp(slug)} ground="muted" />
+
 
       {/* ── THE ARTICLE ──
         * TOC on the left with real anchors, the piece in the middle, and one

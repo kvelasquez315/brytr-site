@@ -8,6 +8,8 @@ import { PageHero, PageCta, SpecTable, SectionHead, Check, TextLink } from "@/co
 import { PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, faqSchema } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /pricing — WAVE 1, PAGE 2 of the page-by-page pass.
  *
@@ -77,6 +79,12 @@ export default function Pricing() {
         lede="It is priced by linear foot of roofline plus complexity, which is why a real number needs somebody on a ladder with a wheel. We would rather publish how the pricing is built than make you call to find out."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/pricing"]} ground="muted" />
+
 
       {/* ── THE HONEST NOTE ──
         * First thing after the hero, because "why isn't there a price on

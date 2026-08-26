@@ -8,6 +8,8 @@ import { PageHero, PageCta, SpecTable, SectionHead, Check, TextLink } from "@/co
 import { PhotoPair } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { compareValueProp } from "@/content/value-props";
 
 /* ONE TEMPLATE, NINE COMPARISON PAGES — WAVE 4 of the page-by-page pass.
  *
@@ -112,6 +114,12 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         }
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...compareValueProp(c.a, c.b, slug)} ground="muted" />
+
 
       {/* ── THE VERDICT ──
         * It was a card in the hero's right column. A verdict is the single thing a reader came

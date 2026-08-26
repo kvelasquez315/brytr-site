@@ -7,6 +7,8 @@ import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, localBusiness } from "@/lib/schema";
 import { site } from "@/content/site";
 import { reviewProof } from "@/content/reviews";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /contact — WAVE 2, PAGE 5 of the page-by-page pass.
  *
@@ -93,6 +95,12 @@ export default function Contact() {
         lede="Calls go to the two people who own the company, not to a call center and not to a lead service that resells your details. If we are on a roof, we ring you back."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/contact"]} ground="muted" />
+
 
       {/* ── THE FOUR ROUTES IN ──
         * The centerpiece. Every route says what it is bad for, which is the

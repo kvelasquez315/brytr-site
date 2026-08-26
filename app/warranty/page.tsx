@@ -6,6 +6,8 @@ import { pick } from "@/content/photo-sets";
 
 import { Jsonld, breadcrumb } from "@/lib/schema";
 import { site } from "@/content/site";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /warranty — WAVE 2, PAGE 4 of the page-by-page pass.
  *
@@ -144,6 +146,12 @@ export default function Warranty() {
         lede="A warranty is worth exactly as much as the person administering it. There are two layers on every Brytr install: the manufacturer's on the hardware and ours on the work, and we are the ones who show up for either."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/warranty"]} ground="muted" />
+
 
       {/* ── COVERED, FACING NOT COVERED ──
         * The centerpiece. Everybody in this trade publishes the left column.

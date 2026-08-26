@@ -33,8 +33,13 @@ const walk = (dir, out = []) => {
 };
 
 const SECTION = /className="(?:section )?bg-(background|muted|raise|primary|card)"/g;
-const COMPONENT = /<(PhotoStrip|PhotoSplit|PhotoBand|PhotoPair|PageCta)\b/g;
-const GROUND = /ground="(background|muted|raise|primary)"/;
+const COMPONENT = /<(PhotoStrip|PhotoSplit|PhotoBand|PhotoPair|PageCta|ValueBand)\b/g;
+/* `card` was missing from this list, and it mattered the moment a component that accepts it was
+   added. ValueBand takes ground="card" on the two templates whose first section is muted; the
+   regex did not match, the gate fell back to the component default, and it reported those two
+   pages as two muted sections in a row. A ground the codebase uses has to be a ground this can
+   read, or the fallback quietly becomes the answer. */
+const GROUND = /ground="(background|muted|raise|primary|card)"/;
 /* Defaults must match the components. If you change a default there, change it here. */
 const DEFAULTS = {
   PhotoStrip: "raise",
@@ -42,6 +47,11 @@ const DEFAULTS = {
   PhotoBand: "raise",
   PhotoPair: "muted",
   PageCta: "muted",
+  /* ValueBand renders its own <section> with a template-literal className, which the SECTION regex
+     above cannot see, and it takes its ground as a prop the way the photograph components do.
+     Without this entry the band was invisible to the gate on all twenty templates it had just been
+     added to, and the gate reported PASS while never having looked at it. */
+  ValueBand: "muted",
 };
 
 /* `{cond && (` … `)}` beside another, or `) : (` — only one branch renders. */

@@ -11,6 +11,8 @@ import { PageHero, PageCta, SpecTable, SectionHead, Check, TextLink } from "@/co
 import { PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, faqSchema } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { systemValueProp } from "@/content/value-props";
 
 /* ONE TEMPLATE, EIGHT HARDWARE PAGES — WAVE 3 of the page-by-page pass.
  *
@@ -104,6 +106,12 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
         lede={s.lede}
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...systemValueProp(s.name, s.slug)} ground="muted" />
+
 
       {/* ── THE SPEC SHEET, IN FULL ── */}
       <section className="section bg-card">

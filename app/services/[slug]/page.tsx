@@ -16,6 +16,8 @@ import {
   PageHero, PageCta, SpecTable, SectionHead, Check, TextLink,
 } from "@/components/sections/page-parts";
 import { Jsonld, breadcrumb, serviceSchema, faqSchema } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { serviceValueProp } from "@/content/value-props";
 
 /* ONE TEMPLATE, ELEVEN PAGES — and it used to show that.
  *
@@ -131,6 +133,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         lede={s.lede}
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...serviceValueProp(s)} ground="muted" />
+
 
       {/* ── WHAT IT IS, AND THE FACTS THAT ONLY APPLY TO IT ── */}
       <section className="section bg-card">

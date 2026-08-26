@@ -8,6 +8,8 @@ import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 import { reviews, reviewProof } from "@/content/reviews";
 import { googleLogo } from "@/content/badges";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /reviews — WAVE 2, PAGE 3 of the page-by-page pass.
  *
@@ -127,6 +129,12 @@ export default function Reviews() {
         lede="We would rather send you to the profile than retype our own reviews, so this page does both: the ones we quote in full, and what all of them keep coming back to."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/reviews"]} ground="muted" />
+
 
       {/* ── THE RATING, AND WHAT THE REVIEWS MENTION ──
         * The organizing device for the page. Counts are of the six quoted below

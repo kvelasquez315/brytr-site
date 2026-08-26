@@ -8,6 +8,8 @@ import { PageHero, PageCta, SectionHead } from "@/components/sections/page-parts
 import { PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /blog — WAVE 6 of the page-by-page pass.
  *
@@ -57,6 +59,12 @@ export default function BlogHub() {
         lede="Written from installing this product rather than from a manufacturer's brochure. Nothing here is sponsored, nothing is a press release, and where our own premium system loses, it says so."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/blog"]} ground="muted" />
+
 
       {/* ── START HERE ──
         * This was a card in the hero's right column, which is now the form on every page. It

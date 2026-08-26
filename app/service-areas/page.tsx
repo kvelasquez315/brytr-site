@@ -7,6 +7,8 @@ import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/
 import { PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, localBusiness } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /service-areas — WAVE 5, PAGE 1 of the page-by-page pass.
  *
@@ -96,6 +98,12 @@ export default function AreasHub() {
         lede="A service area is only worth publishing if it says what it actually commits us to. Every town here is inside about thirty-five minutes of the shop, which is what lets a warranty call in February be the same week rather than a project."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/service-areas"]} ground="card" />
+
 
       {/* ── THE MAP ──
         * It was in the hero's right column, which is now the form on every page. Moving it into

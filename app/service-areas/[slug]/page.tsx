@@ -11,6 +11,8 @@ import { PageHero, PageCta, ServiceRows, SectionHead, Check, TextLink } from "@/
 import { PhotoStrip, PhotoSplit } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, localBusiness, faqSchema } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { cityValueProp } from "@/content/value-props";
 
 /* ONE TEMPLATE, EIGHTEEN CITY PAGES — WAVE 5, and the biggest sameness risk on the site.
  *
@@ -126,6 +128,12 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           * ruled-off block and says the word out loud. A surface shift rather than a coloured
           * left strip, which slopcheck rejects on principle and is right to. */
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...cityValueProp(c)} ground="muted" />
+
 
       {/* ── THE BAND STRIP ──
         * Four facts, three of which are this city's own. */}

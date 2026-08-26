@@ -4,6 +4,8 @@ import { Shell } from "@/app/layout-shell";
 import Link from "next/link";
 import { PageHero, PageCta, SectionHead, Check, TextLink } from "@/components/sections/page-parts";
 import { Jsonld, breadcrumb } from "@/lib/schema";
+import { ValueBand } from "@/components/sections/value-band";
+import { valueProps } from "@/content/value-props";
 
 /* /recent-projects — WAVE 6 of the page-by-page pass.
  *
@@ -181,6 +183,12 @@ export default function RecentProjects() {
         lede="Not renders and not stock houses. Brytr installs around the Omaha metro, photographed on the properties with the systems running, and described by elevation and by what is lit. Homeowner addresses stay private, so none of them are named."
         trail={trail}
       />
+
+      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
+        * offer once before this page gets specific about its own subject. Shape is shared, content
+        * is written against this page in content/value-props.ts. See the note on the component. */}
+      <ValueBand {...valueProps["/recent-projects"]} ground="card" />
+
 
       {projects.map((p, i) => (
         <section key={p.slug} className={`section ${i % 2 === 0 ? "bg-background" : "bg-muted"}`}>
