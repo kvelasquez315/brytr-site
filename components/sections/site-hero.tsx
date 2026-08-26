@@ -89,12 +89,20 @@ export function SiteHero({
             {/* One button, and it is the phone. The form is two columns to the right and its submit
               * is amber, so a second amber "book a consultation" here would be a third route to one
               * action competing with itself. */}
+            {/* THE BUTTON HAD NO EDGE. A white pill on a photograph has nothing holding it apart
+              * from a bright patch behind it, so it read as undefined - a ring and a real shadow
+              * give it a boundary that does not depend on what the image is doing underneath.
+              *
+              * The glyph is redrawn too. It was a filled handset on a 20 grid whose path ran to the
+              * very edge of the viewBox, so the earpiece clipped at small sizes - "the icon isn't
+              * fully there". This one is stroked on a 24 grid with room around it. */}
             <a
               href={site.phoneHref}
-              className="tap-44 mt-9 inline-flex h-14 items-center gap-3 rounded-full bg-card px-8 text-[1.05rem] font-semibold text-foreground transition-colors duration-[--dur-fast] hover:bg-muted"
+              className="tap-44 mt-9 inline-flex h-14 items-center gap-3 rounded-full bg-card px-8 text-[1.1rem] font-semibold text-foreground shadow-[var(--shadow-dark)] ring-1 ring-foreground/15 transition-colors duration-[--dur-fast] hover:bg-muted"
             >
-              <svg viewBox="0 0 20 20" className="size-[1.15rem] text-accent-ink" fill="currentColor" aria-hidden>
-                <path d="M4.2 2.5A1.7 1.7 0 0 1 6.5 3l1 1.7a1.7 1.7 0 0 1-.3 2.1l-.7.7a9 9 0 0 0 3.9 3.9l.7-.7a1.7 1.7 0 0 1 2.1-.3l1.7 1a1.7 1.7 0 0 1 .5 2.3l-.7 1a2.4 2.4 0 0 1-2.8.9C8 14.3 5.2 11.5 3.5 7.9a2.4 2.4 0 0 1 .3-2.7z" />
+              <svg viewBox="0 0 24 24" className="size-5 shrink-0 text-accent-ink" fill="none"
+                   stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                <path d="M7.5 3.5h-2A2.5 2.5 0 0 0 3 6.2C3 14 10 21 17.8 21a2.5 2.5 0 0 0 2.7-2.5v-2a1.4 1.4 0 0 0-1.1-1.4l-3-.6a1.4 1.4 0 0 0-1.4.6l-.8 1.2a12.6 12.6 0 0 1-5.5-5.5l1.2-.8a1.4 1.4 0 0 0 .6-1.4l-.6-3A1.4 1.4 0 0 0 7.5 3.5Z" />
               </svg>
               Call {site.phone}
             </a>
@@ -105,7 +113,10 @@ export function SiteHero({
               variant="mini"
               heading="Free design consultation"
               submitLabel="Request my free design"
-              className="bg-background shadow-[var(--shadow-dark)]"
+              /* An outline as well as the shadow. The card is warm limestone on a night
+                * photograph, and the shadow alone let its edge disappear wherever the image behind
+                * it happened to be dark. */
+              className="bg-background shadow-[var(--shadow-dark)] ring-1 ring-foreground/15"
             />
           </div>
         </div>
@@ -138,19 +149,22 @@ export function TrustPlinth() {
       href={reviewProof.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="shell flex flex-wrap items-center justify-center gap-x-5 gap-y-2 py-6 text-center"
+      /* EVERYTHING UP A STEP, AND THE BAND THE SAME HEIGHT. The client wanted the words bigger
+        * "without changing the width or height of that little section", so the padding comes down
+        * as the type goes up: 36px numeral at py-6 was an 84px band, 42px numeral at py-5 is 82px. */
+      className="shell flex flex-wrap items-center justify-center gap-x-5 gap-y-2 py-5 text-center"
     >
-      <span className="u font-display text-[2.25rem] font-bold leading-none text-on-dark">
+      <span className="u font-display text-[2.6rem] font-bold leading-none text-on-dark">
         {reviewProof.average}
       </span>
       <span className="flex items-center gap-1" aria-hidden>
         {[0, 1, 2, 3, 4].map((i) => (
-          <svg key={i} viewBox="0 0 20 20" className="size-[1.4rem] text-accent" fill="currentColor">
+          <svg key={i} viewBox="0 0 20 20" className="size-[1.6rem] text-accent" fill="currentColor">
             <path d="M10 1.6l2.47 5.2 5.53.72-4.06 3.9 1.03 5.6L10 14.3l-4.97 2.72 1.03-5.6L2 7.52l5.53-.72z" />
           </svg>
         ))}
       </span>
-      <span className="text-[1.05rem] text-on-dark-muted">
+      <span className="text-[1.25rem] text-on-dark-muted">
         across <span className="u font-semibold text-on-dark">{reviewProof.count}</span> reviews on{" "}
         {googleLogo ? (
           /* `unoptimized` because Next refuses SVG through the image optimizer unless
@@ -162,7 +176,7 @@ export function TrustPlinth() {
             width={22}
             height={22}
             unoptimized
-            className="inline-block size-[1.375rem] translate-y-[-0.15rem]"
+            className="inline-block size-[1.55rem] translate-y-[-0.15rem]"
           />
         ) : (
           <span className="font-display font-bold text-on-dark">Google</span>

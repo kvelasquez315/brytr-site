@@ -106,7 +106,12 @@ export function SceneWipe() {
           * your hand, sitting next to the photograph that changes under your hand. */}
         <SectionHead
           className="max-w-[46rem]"
-          title="Warm white every night. Any colour when you want it."
+          /* Renamed on instruction, from "Warm white every night. Any colour when you want it."
+            * Three words instead of ten, and at the hero scale they are the biggest thing on the
+            * page after the h1 - which is right for the section carrying the only interactive
+            * proof on the site. */
+          scale="hero"
+          title="Beautiful permanent lighting"
         />
 
         {/* THE DEMO RUNS FULL WIDTH NOW. The 19rem spec panel that used to sit beside it is gone —

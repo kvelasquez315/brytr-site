@@ -143,13 +143,16 @@ export function ServiceLeaflet({
       base.addTo(map);
 
       /* the metro radius, dashed — the same device the reference uses */
+      /* The ring is a boundary, not a highlight. It was a full-strength amber dash around an
+       * amber fill, which together with eleven glowing pins inside it made the metro read as one
+       * gold blob. Thinner, dimmer, and no fill - the pins are what should be bright here. */
       const ring = L.circle(SHOP, {
         radius: 48000, // ~30 miles, which is the same-week metro
         color: accent,
-        weight: 1.5,
-        dashArray: "6 7",
-        fillColor: accent,
-        fillOpacity: 0.05,
+        weight: 1,
+        opacity: 0.35,
+        dashArray: "5 8",
+        fill: false,
       }).addTo(map);
 
       /* type on its own pane, above the circle and the pins' glow */

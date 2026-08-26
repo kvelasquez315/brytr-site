@@ -395,32 +395,35 @@ export function WhoWeAre() {
   return (
     <section className="section bg-card">
       <div className="shell">
-        {/* ── who we are ── */}
-        <div className="grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,24rem)] lg:gap-16">
-          <div className="flex flex-col">
-            <SectionHead
-              title="The difference a local crew makes"
-              lede="Brytr is an Omaha company. The shop, the van and the crew are all here, and so is everyone who will be on your roof."
-            />
-
-            {/* THREE CARDS, EACH WITH ITS OWN MARK - see components/ui/marks.tsx for why icons are
-              * back after the whole previous set was deleted, and what is different about these. */}
-            <ul className="mt-8 grid gap-4">
-              {ABOUT_CARDS.map((c) => (
-                <li key={c.title} className="rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
-                  <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{c.title}</h3>
-                  <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{c.body}</p>
-                </li>
-              ))}
-            </ul>
-
-            {/* `mt-9`, NOT `mt-auto`. mt-auto pinned these buttons to the bottom of a column whose
-              * height was set by the photograph beside it, so with only a paragraph above them the
-              * 150px in between was dead. That gap is the thing in his screenshot. Content sets the
-              * height now, and the row sits under the last card. */}
-            <div className="mt-9 flex flex-wrap items-center gap-4">
-              <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
-              <DarkPill href="/about">More about us</DarkPill>
+        {/* ── ONE CARD AND A BIGGER PHOTOGRAPH ──
+          *
+          * "Remove that entire section... on the left, just have it be one card that shows the
+          * brand promise of what a local company can do for them. Make the photo on the right
+          * bigger."
+          *
+          * What went: the heading, the lede and the three cards - local not a franchise, two brands
+          * on the truck, the same crew start to finish. Three cards making one argument in three
+          * instalments. The promise below is that argument said once.
+          *
+          * The photograph goes from 24rem to 34rem and the copy column gives up the width, so the
+          * install is the thing you look at and the promise is what you read beside it. */}
+        <div className="grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,34rem)] lg:gap-14">
+          <div className="flex flex-col justify-center">
+            <div className="rounded-lg bg-background p-8 shadow-[var(--shadow-lg)] sm:p-10">
+              <h2 className="display-section text-foreground">A local company, on your roof</h2>
+              <p className="mt-5 text-[1.05rem] leading-relaxed text-muted-foreground">
+                The shop is on C Street in west Omaha and every crew drives out of it. The people
+                who measure your roofline after dark are the people who fit it, and the people who
+                come back to it years later.
+              </p>
+              <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">
+                We fit both Haven and Jellyfish, so what goes on your house is the system that suits
+                it rather than the only one we sell.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
+                <DarkPill href="/about">More about us</DarkPill>
+              </div>
             </div>
           </div>
 
@@ -460,32 +463,41 @@ export function WhoWeAre() {
           * No legend. It exists on the component and is genuinely useful on /service-areas, but
           * here it is a third thing to read in a section that has already had two rebuilds for
           * being cluttered. Hovering a pin gives the town and the drive from the shop. */}
-        <div className="mt-14 grid items-stretch gap-8 border-t border-border pt-12 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-12">
-          <ServiceLeaflet className="min-h-[22rem] w-full lg:min-h-[26rem]" />
+        {/* ── WHERE WE WORK: a heading, the map, then the towns as cards ──
+          *
+          * Restructured on instruction. It was a small amber label and a 1.35rem sub-heading -
+          * "Eighteen towns, and the drive from our shop" - sitting in a narrow column beside the
+          * map, with the town names as a plain two-column list of links.
+          *
+          * Now it opens like every other block on the page: one heading, full width, at the same
+          * scale as the rest. The map runs wide underneath it, and the towns are eighteen small
+          * cards on the brand's own limestone rather than a list of underlines.
+          *
+          * The count came out of the heading as well. "Eighteen towns" is a number that is wrong
+          * the moment content/cities.ts gains a row, and the cards below it are already countable. */}
+        <div className="mt-14 border-t border-border pt-12">
+          <h2 className="display-section text-foreground">Where we work</h2>
 
-          <div className="flex flex-col">
-            <p className="label text-accent-ink">Where we work</p>
-            <h3 className="mt-3 font-display text-[1.35rem] font-bold leading-tight text-foreground">
-              Eighteen towns, and the drive from our shop
-            </h3>
-            {/* "Do you come to my town" is a lookup, and a lookup wants a list rather than pills
-              * or cards. Each name is its own page. */}
-            <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-2">
-              {cities.map((c) => (
-                <li key={c.slug}>
-                  <Link
-                    href={`/service-areas/${c.slug}`}
-                    className="text-[0.95rem] text-muted-foreground transition-colors duration-[--dur-fast] hover:text-accent-ink hover:underline"
-                  >
-                    {c.name}
-                    {c.state === "IA" ? ", IA" : ""}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-auto pt-7">
-              <DarkPill href="/service-areas">See every service area</DarkPill>
-            </div>
+          <ServiceLeaflet className="mt-8 min-h-[24rem] w-full lg:min-h-[30rem]" />
+
+          {/* Each town is its own page, so each card is a link. Limestone on the white section, the
+            * same pairing the service cards use above. */}
+          <ul className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+            {cities.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  href={`/service-areas/${c.slug}`}
+                  className="block rounded-lg bg-background px-4 py-3 text-[0.95rem] font-semibold text-foreground shadow-[var(--shadow-lg)] transition-colors duration-[--dur-fast] hover:bg-muted"
+                >
+                  {c.name}
+                  {c.state === "IA" ? ", IA" : ""}
+                </Link>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-8">
+            <DarkPill href="/service-areas">See every service area</DarkPill>
           </div>
         </div>
       </div>
@@ -624,7 +636,6 @@ export function Reviews() {
               * redesign rolled out to the other twenty templates, which silently took this
               * heading down to 34px with them. Relying on a default to be the exception was the
               * bug - the exception is the thing that should be written down. */
-            scale="hero"
             title="What our clients say"
             lede={`Rated ${reviewProof.average} across ${reviewProof.count} ${reviewProof.platform} reviews.`}
           />

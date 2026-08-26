@@ -42,7 +42,9 @@ function Wordmark({ className }: { className?: string }) {
           width={brandLogoDark.width}
           height={brandLogoDark.height}
           priority
-          className="h-8 w-auto lg:h-9"
+          /* Was h-8 / lg:h-9. The bar is h-19 (76px), so 48px of mark still leaves 14px of air above
+              * and below it - the logo is the only thing in the left rail and was sitting small in it. */
+            className="h-10 w-auto lg:h-12"
         />
       </span>
     );

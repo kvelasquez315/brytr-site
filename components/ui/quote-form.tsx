@@ -192,9 +192,6 @@ export function QuoteForm({
         </p>
       )}
 
-      <p className={cn("form-note mt-3 text-xs", onDark ? "text-on-dark-muted" : "text-muted-foreground")}>
-        We reply the same day. No obligation.
-      </p>
     </form>
   );
 }

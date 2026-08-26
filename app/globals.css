@@ -728,22 +728,25 @@
     0 0 0 2px rgb(230 236 242 / 0.16),
     0 0 9px 2px rgb(230 236 242 / 0.4);
 }
+/* THE GOLD CAME DOWN. "Make the map less bright gold."
+   The metro pins carried three stacked amber shadows, the outermost a 34px bloom at 35%, so
+   eleven of them inside one dashed amber ring turned the whole Omaha side of the map into a
+   single gold smear - the towns stopped being separable, which is the one thing the map is for.
+   One tight ring and one short glow each. They still read as lights; they no longer merge. */
 .brytr-map .brytr-pin.is-metro {
-  inline-size: 13px;
-  block-size: 13px;
-  background: #fff2c4;
+  inline-size: 12px;
+  block-size: 12px;
+  background: #f6e5ae;
   box-shadow:
-    0 0 0 3px rgb(245 197 24 / 0.22),
-    0 0 12px 3px rgb(245 197 24 / 0.75),
-    0 0 34px 10px rgb(245 197 24 / 0.35);
+    0 0 0 2px rgb(245 197 24 / 0.18),
+    0 0 7px 1px rgb(245 197 24 / 0.4);
 }
 .brytr-map .brytr-pin { transition: box-shadow 160ms ease-out, transform 160ms ease-out; }
 .brytr-map .leaflet-marker-icon:hover .brytr-pin { transform: scale(1.35); }
 .brytr-map .leaflet-marker-icon:hover .brytr-pin.is-metro {
   box-shadow:
-    0 0 0 3px rgb(245 197 24 / 0.3),
-    0 0 16px 5px rgb(245 197 24 / 0.95),
-    0 0 44px 14px rgb(245 197 24 / 0.5);
+    0 0 0 3px rgb(245 197 24 / 0.28),
+    0 0 12px 3px rgb(245 197 24 / 0.7);
 }
 .brytr-map .leaflet-marker-icon:hover .brytr-pin:not(.is-metro) {
   background: #fff;
@@ -753,13 +756,13 @@
 }
 .brytr-map .brytr-shop {
   display: block;
-  inline-size: 15px;
-  block-size: 15px;
+  inline-size: 13px;
+  block-size: 13px;
   border-radius: 2px 2px 6px 6px;
   background: #f5c518;
   box-shadow:
-    0 0 0 4px rgb(245 197 24 / 0.24),
-    0 0 20px 6px rgb(245 197 24 / 0.55);
+    0 0 0 3px rgb(245 197 24 / 0.2),
+    0 0 9px 2px rgb(245 197 24 / 0.4);
 }
 
 /* Standalone text links (card CTAs, the announcement bar link) need a 44px touch
