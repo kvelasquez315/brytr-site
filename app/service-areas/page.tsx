@@ -117,29 +117,33 @@ export default function AreasHub() {
         * bg-background, and two consecutive sections on the same ground read as one section
         * with a hundred pixels of nothing in the middle of it. */}
       <section className="section bg-muted">
-        <div className="shell grid items-start gap-9 lg:grid-cols-[58fr_42fr] lg:gap-12">
+        {/* THE LEGEND COLUMN IS GONE, AND IT WAS A REGRESSION OF MINE. The map sat at 58fr with a
+          * 42fr column beside it holding a "How to read it" label, a paragraph, and the service
+          * bands. That column was sized for three bands. Cutting the service area back to the metro
+          * and Council Bluffs left two, so it finished 260px short of the map and the section read
+          * as a map with a stunted card floating next to it.
+          *
+          * The paragraph went with it, and it should have gone earlier regardless: "pins are real
+          * coordinates rather than a shaded blob" is the section explaining its own map, which is
+          * exactly the self-describing subtext being cut everywhere else.
+          *
+          * The map is full width now and the two bands sit under it as a pair. Nothing is short,
+          * nothing is explaining itself, and the map gets the width it always wanted. */}
+        <div className="shell">
           <div className="overflow-hidden rounded-lg bg-card p-2 shadow-[var(--shadow-lg)] ring-1 ring-border">
-            <ServiceLeaflet className="aspect-4/3 w-full" />
+            <ServiceLeaflet className="aspect-21/9 w-full" />
           </div>
-          <div>
-            <p className="label flex items-center gap-3 text-foreground">
-              <span className="block h-4 w-1 bg-accent" aria-hidden />
-              How to read it
-            </p>
-            <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">
-              Pins are real coordinates rather than a shaded blob drawn around a city, and the same
-              information is written out as text directly below, ordered by drive time, so the map is
-              never the only route to it.
-            </p>
-            <dl className="mt-7 divide-y divide-border overflow-hidden rounded-lg bg-card ring-1 ring-border">
-              {bands.map((b) => (
-                <div key={b.h} className="px-5 py-4">
-                  <dt className="font-display text-[1rem] font-bold text-foreground">{b.h}</dt>
-                  <dd className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{b.promise}</dd>
-                </div>
-              ))}
-            </dl>
-          </div>
+          <dl className="mt-5 grid gap-5 sm:grid-cols-2">
+            {bands.map((b) => (
+              <div key={b.h} className="rounded-lg bg-card px-6 py-5 shadow-[var(--shadow-lg)] ring-1 ring-border">
+                <dt className="flex items-center gap-3 font-display text-[1.05rem] font-bold text-foreground">
+                  <span className="run-node-inline is-sm" aria-hidden />
+                  {b.h}
+                </dt>
+                <dd className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{b.promise}</dd>
+              </div>
+            ))}
+          </dl>
         </div>
       </section>
 

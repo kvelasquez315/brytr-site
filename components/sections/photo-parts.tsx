@@ -304,7 +304,12 @@ export function PhotoStrip({
                     src={sl.src}
                     alt={sl.alt}
                     fill
-                    sizes="(min-width: 1024px) 24vw, (min-width: 640px) 46vw, 100vw"
+                    /* SIZES FOLLOWS THE COLUMN COUNT. It was a fixed 24vw, which is right for the
+                      * four-across strip and wrong for every other width this component takes: a
+                      * three-across row is a 445px slot at 1440 and 24vw asks for 345, so Next served
+                      * a file narrower than the box and the browser scaled it up. Measured, not
+                      * guessed: 8 pages were serving soft images. */
+                    sizes={`(min-width: 1024px) ${n === 5 ? 19 : n === 4 ? 24 : n === 3 ? 32 : 47}vw, (min-width: 640px) 46vw, 100vw`}
                     className="object-cover"
                   />
                 </div>

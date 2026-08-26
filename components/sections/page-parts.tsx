@@ -324,7 +324,9 @@ export function ServiceRows({
                     src={shot.src}
                     alt={shot.alt}
                     fill
-                    sizes="(min-width: 1280px) 22vw, (min-width: 640px) 44vw, 100vw"
+                    /* 22vw assumed the three-across layout. ServiceRows also renders two across,
+                      * where the slot is 678px at 1440 and 22vw asked for 316. */
+                    sizes={`(min-width: 1280px) ${columns === 3 ? 24 : 47}vw, (min-width: 640px) 46vw, 100vw`}
                     className="object-cover transition-transform duration-[--dur-base] ease-[--ease-out-expo] group-hover:scale-[1.03]"
                   />
                 </span>
@@ -510,7 +512,9 @@ export function PageCta({
               * Hidden below lg, where the two columns stack and there is no space to fill. */}
             {closer?.src && (
               <div className="relative mt-9 hidden aspect-16/9 overflow-hidden rounded-lg bg-primary ring-1 ring-border lg:block">
-                <Image src={closer.src} alt={closer.alt} fill sizes="46vw" className="object-cover" />
+                {/* 63vw, not 46. The copy column is 1fr of [1fr_26rem] in a 1376 shell, which is a 904px
+                  * slot at 1440, and 46vw was asking Next for 662. */}
+                <Image src={closer.src} alt={closer.alt} fill sizes="(min-width: 1024px) 63vw, 100vw" className="object-cover" />
               </div>
             )}
           </div>

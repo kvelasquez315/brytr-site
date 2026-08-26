@@ -203,7 +203,7 @@ export default function RecentProjects() {
                     alt={p.lead.alt}
                     fill
                     priority={i === 0}
-                    sizes="(min-width:1024px) 60vw, 100vw"
+                    sizes="(min-width:1024px) 96vw, 100vw"
                     className="object-cover"
                   />
                 </div>
