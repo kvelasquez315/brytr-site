@@ -283,7 +283,7 @@ export default function FaqPage() {
       <PhotoStrip
         shots={photoPick("faq-strip", 3)}
         title="What the questions are actually about."
-        ground="background"
+        ground="card"
       />
 
       <PhotoBand

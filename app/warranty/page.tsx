@@ -160,7 +160,6 @@ export default function Warranty() {
         <div className="shell">
           <SectionHead
             title="What is covered, and what is not."
-            lede="Most warranty arguments here are really about whether a failure was the product or the install. Splitting it before anything goes wrong removes the argument."
           />
 
           <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
@@ -327,7 +326,7 @@ export default function Warranty() {
       <PhotoStrip
         shots={pick("warranty-strip", 3)}
         title="Installs we still service."
-        ground="background"
+        ground="card"
       />
 
       <section className="section bg-primary">

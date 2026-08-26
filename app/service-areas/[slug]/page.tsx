@@ -221,7 +221,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           <div className="shell">
             <SectionHead
               title={`${c.name} is ${c.drive} from our shop.`}
-              lede="Which is closer than most of the Nebraska metro. The bridge adds nothing to a drive time and nothing to a quote, and the arithmetic below is the whole argument."
             />
 
             <div className="mt-10 grid items-start gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
@@ -309,7 +308,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           <div className="shell">
             <SectionHead
               title={`${c.name} is a route day, and that is why the price is the same.`}
-              lede="We batch installs out here into route days. That is what keeps the per-foot number the same as the metro, and it changes the scheduling rather than the work."
             />
 
             <div className="mt-10 grid items-start gap-10 lg:grid-cols-[54fr_46fr] lg:gap-14">
@@ -373,13 +371,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               * work — the metro adds landscape and hardscape on the same visit, the Iowa side
               * skews to roofline first, and out here it is whole-property in one trip because
               * a second trip is a route day — so each band says its own thing. */
-            lede={
-              c.tier === "metro"
-                ? "Everything we offer is available here, and in the metro it is normal for two or three to go on the same visit."
-                : c.tier === "iowa"
-                ? "Everything we offer is available here. Over the river it starts with the roofline more often, and the rest tends to follow a season later."
-                : "Everything we offer is available here, and out here it is worth scoping the whole property at once: a second visit is a route day."
-            }
           />
           <div className="mt-9"><ServiceRows only={servicesFor(c.tier)} columns={2} /></div>
           <div className="mt-8"><TextLink href="/services">Everything we offer, grouped by what it attaches to</TextLink></div>
@@ -585,7 +576,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         omit={["/how-it-works"]}
         /* The questions section above is bg-muted and so is the closer's default, so the two ran
           * together at the foot of all eighteen city pages. */
-        ground="background"
+        ground="card"
       />
     </Shell>
   );

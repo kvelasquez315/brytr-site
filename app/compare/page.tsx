@@ -332,7 +332,7 @@ export default function CompareHub() {
       <PhotoStrip
         shots={pick("compare-strip", 3)}
         title="Whichever brand ends up on the house."
-        ground="background"
+        ground="card"
       />
 
       <PhotoBand

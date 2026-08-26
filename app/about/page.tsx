@@ -277,7 +277,7 @@ export default function About() {
           { photo: "walkthroughDusk", caption: "The handover. We do not leave until you have stood on your own lawn and looked at it lit." },
         ]}
         cols={3}
-        ground="background"
+        ground="card"
       />
 
       {/* ── THE NUMBERS, WITH THEIR SOURCES ──

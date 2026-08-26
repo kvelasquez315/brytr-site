@@ -197,7 +197,6 @@ export default function Reviews() {
         <div className="shell">
           <SectionHead
             title="In full, and unedited."
-            lede="Copied exactly as written, spelling and exclamation marks included. Most are the testimonials Brytr already publishes on brytrco.com; the rest are quoted from the Google profile itself. Nothing is paraphrased, tidied or lengthened."
           />
 
           <figure className="mt-10 rounded-lg bg-primary p-8 shadow-[var(--shadow-dark)] lg:p-10">
@@ -251,19 +250,13 @@ export default function Reviews() {
                 </blockquote>
                 <figcaption className="mt-6 border-t border-border pt-4">
                   <p className="text-sm text-muted-foreground">
-                    <span className="font-display font-bold text-foreground">{r.name}</span>
+                    {/* NO NAME AND NO TAG CHIPS. rules.md D12 bans reviewer names in review cards,
+                      * and D5 bans pills and badges anywhere: the little uppercase bordered words
+                      * under each quote were badges. What is left is the thing that makes a review
+                      * checkable, which is where the person is and roughly when they wrote it. */}
+                    <span className="font-display font-bold text-foreground">Omaha homeowner</span>
                     {r.when ? ` · ${r.when}` : ""}
                   </p>
-                  <ul className="mt-3 flex flex-wrap gap-1.5">
-                    {(mentions[r.name] ?? []).map((t) => (
-                      <li
-                        key={t}
-                        className="u rounded-sm border border-border px-2 py-0.5 text-[0.7rem] uppercase tracking-[0.08em] text-muted-foreground"
-                      >
-                        {t}
-                      </li>
-                    ))}
-                  </ul>
                 </figcaption>
               </figure>
             ))}

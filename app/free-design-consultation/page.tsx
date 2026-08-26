@@ -254,7 +254,7 @@ export default function Consult() {
         b="walkthroughDusk"
         aLabel="Measuring and running a sample against the actual structure, not off a satellite photograph."
         bLabel="And at the end of it, looking at the result from where you would normally stand."
-        ground="background"
+        ground="card"
       />
 
       {/* ── WHAT WILL NOT HAPPEN ──

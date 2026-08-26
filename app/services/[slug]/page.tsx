@@ -196,7 +196,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <div className="shell">
           <SectionHead
             title="Everything in the written quote."
-            lede="Nothing appears on install day that was not on the quote you signed."
           />
           {/* THIS WAS A TWO-COLUMN LIST OF BOLD LABEL PLUS ONE LINE, separated by hairlines, and
             * the client on it: "sections should always have more design than this." He is right,
@@ -324,7 +323,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
         <div className="shell">
           <SectionHead
             title="What people look at next."
-            lede="Every one of these runs on the same channel and the same controller, so adding one later is a wiring afternoon rather than a second system."
           />
           {/* CARDS WITH THE PHOTOGRAPH OF THAT SERVICE. "These service links should be cards side
             * by side with images of that other service."
@@ -419,7 +417,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <PageCta variant="phone" photos={serviceValueProp(s).photos} 
         /* The questions section above is bg-muted, so the closer would have landed on the same ground and the page would
           * have ended in one undifferentiated block. */
-        ground="background"
+        ground="card"
       />
     </Shell>
   );

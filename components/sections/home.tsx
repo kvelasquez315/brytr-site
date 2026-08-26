@@ -571,7 +571,7 @@ export function HowWeWork() {
         * 26px and the whole thing stood 833px tall. Halving the container is the other half of the
         * fix to the pitch: the drawing lands near its natural size instead of being enlarged, and
         * the photograph gets 656px of width in exchange for the height it loses. */}
-      <div className="shell grid items-stretch gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="shell grid items-stretch gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
         <div className="flex flex-col">
           <SectionHead
             onDark
@@ -751,7 +751,8 @@ export function Reviews() {
                 {r.text}
               </blockquote>
               <footer className="mt-6 border-t border-border pt-4">
-                <p className="label text-foreground">{r.name}</p>
+                {/* NO REVIEWER NAME. rules.md D12 bans names in review cards. The town and the date are
+                    * what make a review checkable; the first name is not, and Google shows it anyway. */}
                 <p className="mt-0.5 text-[0.85rem] text-muted-foreground">
                   Omaha homeowner{r.when ? ` · ${r.when}` : ""}
                 </p>
@@ -914,7 +915,7 @@ export function Faqs() {
             <LightPill href="/faq">Read every question</LightPill>
           </div>
         </div>
-        <Faq items={faqItems} ground="background" />
+        <Faq items={faqItems} ground="card" />
       </div>
     </section>
   );

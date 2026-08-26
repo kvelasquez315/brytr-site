@@ -131,7 +131,6 @@ export default function HowItWorks() {
           <SectionHead
             onDark
             title="The same board, through the day."
-            lede="Your fascia from the first hour to the last. Nothing in the first three frames is lit, because most of install day happens with the system dark."
           />
           <div className="mt-10"><InstallDaySequence /></div>
           <p className="mt-7 max-w-[76ch] text-sm leading-relaxed text-on-dark-muted">

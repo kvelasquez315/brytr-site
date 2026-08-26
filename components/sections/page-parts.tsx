@@ -402,9 +402,12 @@ export function CityTiles({
 /* A LOOKUP, NOT AN INTERPOLATION. `bg-${ground}` compiles and then silently renders with no
  * background at all: Tailwind scans source text for class names, so a class assembled at runtime
  * is never generated. Every ground the closer can take has to appear here as a literal. */
-const CTA_GROUND: Record<"muted" | "background" | "primary" | "raise", string> = {
+const CTA_GROUND: Record<"muted" | "card" | "primary" | "raise", string> = {
   muted: "bg-muted",
-  background: "bg-background",
+  /* `card` replaced `background` here. Limestone is within dE 6.3 of both white and the deep
+     neutral, so as a section ground it can never legally touch either one. See the note in
+     scripts/section-rhythm.mjs. */
+  card: "bg-card",
   primary: "bg-primary",
   raise: "bg-raise",
 };
@@ -427,7 +430,7 @@ export function PageCta({
    *
    * The ground is a decision about the page, not about the component, so the page makes it. The
    * defaults are the old behaviour, so nothing changes unless a caller says so. */
-  ground?: "muted" | "background" | "primary" | "raise";
+  ground?: "muted" | "card" | "primary" | "raise";
   stats?: boolean;
   title?: string;
   body?: string;

@@ -180,11 +180,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         <div className="shell">
           <SectionHead
             title={frame === "labor" ? "The job, not the datasheet." : `${c.a} against ${c.b}, spec by spec.`}
-            lede={
-              frame === "labor"
-                ? "Every row here is something that happens or does not happen on your property. None of it is about which diode is brighter."
-                : "Neither column is highlighted and neither gets a badge. Read it and decide."
-            }
           />
           <div className="mt-10">
             <SpecTable
@@ -248,7 +243,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         b={pick(`${c.slug}-b`, 1)[0]?.photo ?? "homeWideRanch"}
         aLabel={pick(`${c.slug}-a`, 1)[0]?.caption ?? ""}
         bLabel={pick(`${c.slug}-b`, 1)[0]?.caption ?? ""}
-        ground="background"
+        ground="card"
       />
 
       {/* ── WHERE EACH ACTUALLY WINS ──
@@ -257,13 +252,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
         <div className="shell">
           <SectionHead
             title="Where each of these actually wins."
-            lede={
-              frame === "compete"
-                ? "The right-hand column is real. We install more than one of these, which is what lets us give the other option honest reasons rather than token ones."
-                : frame === "labor"
-                ? "There are people who should absolutely do this themselves, and the right-hand column is written for them rather than at them."
-                : "Two products, no stake, and the deciding factor at the bottom is not either datasheet."
-            }
           />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {[

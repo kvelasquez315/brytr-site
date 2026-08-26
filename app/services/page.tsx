@@ -125,7 +125,6 @@ export default function ServicesHub() {
         <div className="shell">
           <SectionHead
             title="What people say first, and what it changes."
-            lede="Whichever one it is, the first run is different, and so is what you end up adding a year or two later. This is the order we would do it in, and why."
           />
 
           <ol className="mt-10 grid gap-5 lg:grid-cols-3">
@@ -285,7 +284,6 @@ export default function ServicesHub() {
           <SectionHead
             onDark
             title="The same channel goes on a storefront. The job around it is different."
-            lede="We install for homeowners and for businesses, and the hardware does not change. The scheduling, the access and the paperwork do."
           />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {[

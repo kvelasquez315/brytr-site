@@ -30,10 +30,9 @@ import { images } from "@/content/images";
 export type ValuePoint = { h: string; p: string };
 
 export function ValueBand({
-  title, lede, points, photos, cta, alt, ground = "muted",
+  title, points, photos, cta, alt, ground = "muted",
 }: {
   title: string;
-  lede: string;
   /** Three. Fewer reads as a stub, more turns the band into the page. */
   points: ValuePoint[];
   /** Three keys into content/images.ts: one wide, then two. A missing key renders nothing at all
@@ -41,9 +40,9 @@ export function ValueBand({
   photos: string[];
   cta: { href: string; label: string };
   alt?: { href: string; label: string };
-  ground?: "muted" | "card" | "background";
+  ground?: "muted" | "card";
 }) {
-  const bg = { muted: "bg-muted", card: "bg-card", background: "bg-background" }[ground];
+  const bg = { muted: "bg-muted", card: "bg-card" }[ground];
   const live = photos.map((k) => images[k]).filter((s) => s?.src);
   const [lead, ...rest] = live;
 
@@ -51,8 +50,10 @@ export function ValueBand({
     <section className={`section ${bg}`}>
       <div className="shell grid items-center gap-12 lg:grid-cols-[minmax(0,42fr)_minmax(0,58fr)] lg:gap-16">
         <div>
+          {/* NO LEDE. rules.md D3 bans sub-heading and sub-body text under a section heading
+            * outright: the heading goes straight into content. The three points below already carry
+            * the argument, and the lede was a fourth statement of it. */}
           <h2 className="display-section max-w-[20ch] text-foreground">{title}</h2>
-          <p className="mt-5 max-w-[54ch] text-[1.05rem] leading-relaxed text-muted-foreground">{lede}</p>
 
           {/* The house lights, on the light variant. Every point is at full output: these are a
             * set of reasons, not a sequence, and a ramp across them would tell the reader to look

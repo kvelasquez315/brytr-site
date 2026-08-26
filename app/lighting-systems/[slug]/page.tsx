@@ -119,7 +119,6 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
           <div>
             <SectionHead
               title={`${s.name}, spec by spec.`}
-              lede="Manufacturer figures where they are the manufacturer's, ours where they are ours, and nothing rounded up in either direction."
             />
             <div className="mt-9">
               <SpecTable
@@ -189,7 +188,6 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
         <div className="shell">
           <SectionHead
             title={`${s.name}: the honest read.`}
-            lede="We install this hardware, so we have no reason to oversell it and none to trash it. Both columns are what we would tell you standing in your driveway."
           />
 
           {/* NOT items-start. The two columns hold different numbers of rows — six wins against a
@@ -266,7 +264,7 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
         lede="Specifications describe a part. These show what the part does to an elevation, which is the only question a homeowner is actually asking."
         shots={pick(`sys-${s.slug}`, 3)}
         cols={3}
-        ground="background"
+        ground="card"
       />
 
       {/* ── WHERE IT SITS ──
@@ -338,7 +336,6 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
             <SectionHead
               onDark
               title={`${rel.a} against ${rel.b}.`}
-              lede={rel.verdict}
             />
             <div className="mt-9">
               <SpecTable

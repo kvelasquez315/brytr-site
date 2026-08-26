@@ -85,7 +85,7 @@ export function PhotoBand({
 
 /* ── PHOTOGRAPH BESIDE PROSE ── */
 export function PhotoSplit({
-  photo, title, children, side = "left", link, ground = "background", tall = false,
+  photo, title, children, side = "left", link, ground = "card", tall = false,
 }: {
   photo: string;
   title: string;
@@ -93,14 +93,14 @@ export function PhotoSplit({
   /** which side the photograph sits on — alternate it down a page */
   side?: "left" | "right";
   link?: { href: string; label: string };
-  ground?: "background" | "muted" | "raise" | "primary";
+  ground?: "card" | "muted" | "raise" | "primary";
   /** portrait photographs get a taller frame rather than a bad crop */
   tall?: boolean;
 }) {
   const s = slot(photo);
   if (!s) return null;
   const dark = ground === "raise" || ground === "primary";
-  const bg = { background: "bg-background", muted: "bg-muted", raise: "bg-raise", primary: "bg-primary" }[ground];
+  const bg = { card: "bg-card", muted: "bg-muted", raise: "bg-raise", primary: "bg-primary" }[ground];
   const pic = (
     <figure className={`overflow-hidden rounded-lg shadow-[var(--shadow-dark)] ${side === "right" ? "lg:order-2" : ""}`}>
       <div className={`relative ${tall ? "aspect-3/4" : "aspect-4/3"}`}>
@@ -110,7 +110,10 @@ export function PhotoSplit({
   );
   return (
     <section className={`section ${bg}`}>
-      <div className="shell grid items-center gap-9 lg:grid-cols-2 lg:gap-14">
+      {/* ASYMMETRIC, NOT HALVES. measured-profile.md: splits run 0.9fr/1.1fr or 1.05fr/0.95fr and
+        alternate direction. A plain 50/50 is the shape every generated page uses, and two equal
+        columns give the eye nothing to enter the section by. */}
+      <div className={`shell grid items-center gap-9 lg:gap-14 ${side === "right" ? "lg:grid-cols-[1.1fr_0.9fr]" : "lg:grid-cols-[0.9fr_1.1fr]"}`}>
         {pic}
         <div>
           <h2
@@ -155,13 +158,13 @@ export function PhotoPair({
   bLabel: string;
   title: string;
   lede: string;
-  ground?: "muted" | "background" | "raise";
+  ground?: "muted" | "card" | "raise";
 }) {
   const A = slot(a);
   const B = slot(b);
   if (!A || !B) return null;
   const dark = ground === "raise";
-  const bg = { muted: "bg-muted", background: "bg-background", raise: "bg-raise" }[ground];
+  const bg = { muted: "bg-muted", card: "bg-card", raise: "bg-raise" }[ground];
   return (
     <section className={`section ${bg}`}>
       <div className="shell">
@@ -210,7 +213,7 @@ export function PhotoStrip({
   shots: { photo: string; caption: string; scene?: string }[];
   title: string;
   lede?: string;
-  ground?: "raise" | "muted" | "background";
+  ground?: "raise" | "muted" | "card";
   /** defaults to however many shots survive the manifest */
   cols?: 2 | 3 | 4 | 5;
   /* ONE ASPECT FOR THE WHOLE ROW, and this is not a preference.
@@ -234,7 +237,7 @@ export function PhotoStrip({
   /* A sequence is a set whose shots name their own variable. Nothing else changes behaviour. */
   const seq = live.some((x) => x.scene);
   const dark = ground === "raise";
-  const bg = { raise: "bg-raise", muted: "bg-muted", background: "bg-background" }[ground];
+  const bg = { raise: "bg-raise", muted: "bg-muted", card: "bg-card" }[ground];
   const n = cols ?? Math.min(4, live.length);
   /* Five across is the filmstrip, and it exists for exactly one set: the five frames shot from
    * a stationary drone inside ninety seconds. A row of five reads as consecutive in a way that
@@ -320,9 +323,10 @@ export function PhotoStrip({
                 >
                   {scene && (
                     <span className="mb-1.5 flex items-baseline gap-2.5">
-                      <span className={`font-mono text-xs font-bold tabular-nums ${dark ? "text-accent" : "text-accent-ink"}`}>
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
+                      {/* THE 01 / 02 / 03 MARKERS ARE GONE, and I added them two commits ago.
+                        * rules.md D4 bans numbers describing a section, leading-zero steps by name.
+                        * The scene titles and the line above the strip already say it is one frame
+                        * at three settings, so the numbers were carrying nothing the words did not. */}
                       <span className={`font-display text-[1.02rem] font-bold leading-snug ${dark ? "text-on-dark" : "text-foreground"}`}>
                         {scene}
                       </span>

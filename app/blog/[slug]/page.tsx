@@ -291,7 +291,7 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         /* background, not the default muted: the read-next section above is bg-muted, and the two
           * ran together as one block with a 1440 x 199px dead strip between them, on all twelve
           * article pages. */
-        ground="background"
+        ground="card"
         panelLink={{ href: "/blog", label: "The rest of the guides" }}
       />
     </Shell>

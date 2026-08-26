@@ -211,7 +211,6 @@ export default function AreasHub() {
         <div className="shell">
           <SectionHead
             title="The promise is not the same everywhere."
-            lede="The pricing does not change as you go out. What changes is how fast we can get back to you, and that is worth knowing before rather than after."
           />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
             {bands.map((b) => (

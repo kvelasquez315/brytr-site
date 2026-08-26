@@ -168,7 +168,6 @@ export default function Pricing() {
               * more than once. The span is still stated in the lede and in the table caption,
               * where a number is information rather than a headline. */
             title="Year by year, side by side."
-            lede="The question is almost never “what does this cost”. It is “what does this cost instead of what I am doing now”. So here are five years of both, counted in what actually happens."
           />
 
           <div className="mt-10 overflow-x-auto rounded-lg ring-1 ring-on-dark/12">
@@ -310,7 +309,7 @@ export default function Pricing() {
         lede="Price follows roof geometry, not square footage, which is why these three differ."
         shots={pick("pricing", 3)}
         cols={3}
-        ground="background"
+        ground="card"
       />
 
       {/* ── THE ARITHMETIC ──
@@ -320,7 +319,6 @@ export default function Pricing() {
         <div className="shell">
           <SectionHead
             title="Feet times a rate, then what the house adds."
-            lede="In order of how much each one moves the total. Nothing else goes into it. There is no design fee, no travel charge inside the metro and no line for the consultation."
           />
 
           <div className="mt-10 flex flex-col gap-3 lg:flex-row lg:items-stretch">
@@ -361,7 +359,6 @@ export default function Pricing() {
         <div className="shell">
           <SectionHead
             title="Not everything is priced by the foot."
-            lede="Roofline is. A pergola is priced by span, landscape by fixture, and a wall by the foot of cap it runs under, because that is how the work actually divides up."
           />
           <div className="mt-10">
             <SpecTable
@@ -471,7 +468,7 @@ export default function Pricing() {
       <PageCta variant="phone" photos={valueProps["/pricing"].photos} omit={["/pricing"]} 
         /* The questions section above is bg-muted, so the closer would have landed on the same ground and the page would
           * have ended in one undifferentiated block. */
-        ground="background"
+        ground="card"
       />
     </Shell>
   );

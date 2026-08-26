@@ -197,7 +197,10 @@ export default function Gallery() {
         const [leadSrc, ...restSrcs] = g.srcs;
         const lead = shotFor(leadSrc);
         return (
-          <section key={g.h} className={`section ${gi % 2 === 0 ? "bg-background" : "bg-muted"}`}>
+          /* card, not background. Limestone is dE 6.3 from the deep neutral, so alternating the two
+            * produced five consecutive "reads as one flat field" failures down this page. White
+            * against the deep neutral is dE 12.5, the only light pair that clears the bar. */
+          <section key={g.h} className={`section ${gi % 2 === 0 ? "bg-card" : "bg-muted"}`}>
             <div className="shell">
               {/* Note under the rule, not beside the heading. */}
               <div className="border-b-2 border-accent pb-3">
@@ -292,7 +295,7 @@ export default function Gallery() {
         b="archAtNight"
         aLabel="Daylight. Nothing visible under the roof edge, on a curve where nothing can be hidden behind a fascia board."
         bLabel="After dark: one continuous run following every facet of the octagon, with no break at the corners."
-        ground="background"
+        ground="card"
       />
 
       {/* ── WHAT TO LOOK FOR ── */}
@@ -306,7 +309,6 @@ export default function Gallery() {
               * directly above this section. Leaving the old sentence in place would have been the
               * site telling a reader to disbelieve a photograph it had just shown them. */
             title="How to judge any of these, including ours."
-            lede="Permanent lighting is judged twice: how it looks after dark, and whether you can see the hardware at noon. Both are answered on this page."
           />
           <div className="mt-10 grid gap-5 lg:grid-cols-3">
             {[
@@ -340,7 +342,7 @@ export default function Gallery() {
         * These two pages used to show some of the same photographs with no
         * stated difference between them. */}
       <section className="section bg-card">
-        <div className="shell grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
+        <div className="shell grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
           <div className="rounded-lg bg-background p-7 shadow-[var(--shadow-lg)] ring-1 ring-border">
             <p className="label flex items-center gap-3 text-accent-ink">
               <span className="block h-4 w-1 bg-accent" aria-hidden />
