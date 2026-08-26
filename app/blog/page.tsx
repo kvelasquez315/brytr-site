@@ -156,7 +156,6 @@ export default function BlogHub() {
         <div className="shell">
           <SectionHead
             title="Grouped by what you are trying to decide."
-            lede="Roughly the order the questions arrive in: whether to buy at all, what happens to the building, what the hardware and the terms actually are, and the parts that are only true here."
           />
 
           <div className="mt-10 space-y-12">

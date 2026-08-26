@@ -89,27 +89,27 @@ const covered: { h: string; by: "Manufacturer" | "Brytr"; p: string }[] = [
 const notCovered: { h: string; p: string }[] = [
   {
     h: "Roof, gutter or solar work by somebody else",
-    p: "A roofer working over our channel, or a gutter crew leaning a ladder on it, is not a warranty claim. Tell whoever is quoting the work that the lighting is there and we will happily talk to them first.",
+    p: "Not a warranty claim. Tell whoever is quoting the work that the lighting is there and we will talk to them first.",
   },
   {
     h: "Storm, hail and impact damage",
-    p: "That is a homeowner's insurance question rather than a warranty one. We will quote the repair and we will write whatever your adjuster needs, but we are not the ones covering it.",
+    p: "An insurance question, not a warranty one. We quote the repair and write what your adjuster needs.",
   },
   {
     h: "Anything another installer has modified",
-    p: "If a run has been cut into, extended or re-terminated by somebody else, we cannot stand behind the part of the system we no longer recognize. We can still quote putting it right.",
+    p: "Cut into, extended or re-terminated by somebody else. We cannot stand behind what we did not fit.",
   },
   {
     h: "A new elevation or an extension",
-    p: "Adding the back of the house, a new pergola or a garage built after the fact is new work priced as new work. It ties into the controller you already have.",
+    p: "New work, priced as new work. It joins the same controller.",
   },
   {
     h: "Changing your mind about the design",
-    p: "Wanting a different color, a different schedule or a different zone is a settings conversation and usually a five minute phone call. Wanting the channel moved is a quote.",
+    p: "A settings conversation, and usually a free one. Rewiring a zone is not.",
   },
   {
     h: "Cosmetic marks from something hitting it",
-    p: "A ladder, a branch or a stray ball on the diffuser. We will replace the section; it is not a defect.",
+    p: "A ladder, a branch or a stray ball. We replace the section; it is not a defect.",
   },
 ];
 
@@ -303,10 +303,10 @@ export default function Warranty() {
 
           <ol className="divide-y divide-border border-y border-border">
             {[
-              ["You call", "Tell us which elevation, and whether it is the whole run or a section. That one detail usually tells us what the part is before we leave the shop."],
-              ["We diagnose on site", "Controller, power supply, a termination or the diodes. We can narrow it quickly because we installed it and we have the elevation drawings."],
-              ["We fix it under whichever layer applies", "Manufacturer or our own workmanship. Deciding which of the two it is takes place between us and them, not between you and either of us."],
-              ["You get told what it was", "In plain language, including when the honest answer is that it was our fault. A pattern of failures is worth more to us than a repaired run."],
+              ["You call", "Which elevation, and whether it is the whole run or a section. That usually names the fault."],
+              ["We diagnose on site", "Controller, power supply, termination or diodes. Quick, because we know how it is wired."],
+              ["We fix it under whichever layer applies", "Manufacturer or workmanship. That is settled between us and them, not by you."],
+              ["You get told what it was", "In plain language, including when the answer is that it was our fault."],
             ].map(([h, p], i) => (
               <li key={h} className="py-5">
                 <p className="label text-accent-ink">{["First", "Then", "Then", "Afterwards"][i]}</p>
@@ -335,7 +335,6 @@ export default function Warranty() {
           <SectionHead
             onDark
             title="Questions worth asking any installer."
-            lede="Including us. Every one of these has an answer that is easy to give and hard to fake, and the pattern of who dodges which one tells you most of what you need."
           />
 
           <ol className="mt-10 divide-y divide-on-dark/12 border-y border-on-dark/12">

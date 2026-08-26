@@ -268,7 +268,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           <div className="shell">
             <SectionHead
               title="What you get for installing it once."
-              lede="Six things that change the day the crew leaves, and keep being true for as long as the house has a roofline."
             />
             <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {valueCards.map((v) => (

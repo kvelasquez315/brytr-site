@@ -191,7 +191,6 @@ export default function FaqPage() {
         <div className="shell">
           <SectionHead
             title="The ones we get most, answered here."
-            lede="Each of these has a longer answer further down. These are the short versions, and they do not say anything the long versions contradict."
           />
 
           <dl className="mt-10 grid gap-x-10 gap-y-0 lg:grid-cols-2">
@@ -223,7 +222,6 @@ export default function FaqPage() {
         <div className="shell">
           <SectionHead
             title="Grouped by where in the decision it comes up."
-            lede="Roughly the order people ask them in: what it is, what it is made of, what happens on the day, what it costs, and what happens after we leave."
           />
 
           <nav aria-label="Question groups" className="mt-9 rounded-lg bg-primary px-6 py-5 shadow-[var(--shadow-dark)]">

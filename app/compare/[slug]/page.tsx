@@ -348,7 +348,6 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
           <div className="shell">
             <SectionHead
               title="On this comparison, the installer matters more than the box."
-              lede="Both are competent products in the same part of the market. Which is better on your house is decided by whoever fastens it there."
             />
             <ul className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {[

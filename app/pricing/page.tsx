@@ -307,7 +307,7 @@ export default function Pricing() {
         * they would be buying somewhere in the middle of the argument, not only above it. */}
       <PhotoStrip
         title="The same figure, on three different houses."
-        lede="Price follows roof geometry rather than square footage, which is why these three cost different amounts and why none of them can be quoted from a satellite photograph."
+        lede="Price follows roof geometry, not square footage, which is why these three differ."
         shots={pick("pricing", 3)}
         cols={3}
         ground="background"

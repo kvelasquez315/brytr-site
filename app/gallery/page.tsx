@@ -84,7 +84,7 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
      * warm white front elevations. This is the most important group on the page and it is now the
      * second largest, which is the shape the argument always wanted. */
     lede:
-      "This is the one that sells it, and it is the one nobody pictures before the consultation: on a schedule, from dusk until you go to bed, most nights of the year. Everybody asks us to photograph the colors, so most of what gets taken is colour. These are the frames of the setting you would actually live with. The daylight question, whether you can see the hardware at noon, is answered further down this page in photographs rather than in a promise.",
+      "The setting nobody pictures before the consultation, and the one that sells it: warm white on a schedule, most nights of the year.",
     srcs: [
       "/img/seq-everyday.jpg",
       "/img/scene-warm-white.jpg",
@@ -101,7 +101,7 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
     h: "Occasions, saved as scenes",
     note: "Set once, scheduled, forgotten",
     lede:
-      "Each of these is a saved scene rather than a change of hardware. They run on a date range and put themselves back to warm white afterwards, which is why nobody in these houses owns a ladder in January.",
+      "Saved scenes, not different hardware. They run on a date range and put themselves back afterwards.",
     srcs: [
       "/img/christmas-detail.jpg",
       "/img/scene-halloween.jpg",
@@ -118,7 +118,7 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
     h: "One color, every zone",
     note: "The whole property, one tap",
     lede:
-      "The largest group on the page, which is the honest answer to anybody who thinks this is a Christmas product. House, pergola, walls and deck all pushed to the same color, at whatever brightness keeps the color clean.",
+      "The largest group here, which is the answer to anybody who thinks this is a Christmas product.",
     srcs: [
       "/img/g-blue-elevation.jpg",
       "/img/g-pool-red.jpg",
@@ -135,14 +135,14 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
     h: "Two zones, two colors",
     note: "The look most people land on",
     lede:
-      "Gables in color, eaves left white, landscape left warm. It is the setting customers arrive at after a month of playing with the app, and it is the reason zoning gets settled before install day rather than after.",
+      "Gables in color, eaves left white, landscape left warm. Where most people land after a month of playing with it.",
     srcs: ["/img/g-blue-white.jpg", "/img/g-ranch-blue-white.jpg", "/img/g-moonrise.jpg"],
   },
   {
     h: "Close up, and off the house",
     note: "The channel, and the structures",
     lede:
-      "Nobody in this trade photographs the hardware, which is exactly why it is worth photographing. The same channel profile runs along a pergola fascia as along an eave.",
+      "Nobody in this trade photographs the hardware, which is why it is worth photographing.",
     srcs: ["/img/g-gable-detail.jpg", "/img/patio-pergola.jpg", "/img/detail-gable-miter.jpg"],
   },
 ];
@@ -312,17 +312,17 @@ export default function Gallery() {
             {[
               [
                 "The line, not the dots",
-                "Look at any roofline above: it reads as one continuous line rather than a string of bulbs. That is the diffuser doing its job, and it is the difference between a light fixture and a decoration.",
+                "One continuous line rather than a string of bulbs. That is the diffuser doing its job.",
                 "Zoom in on any gable.",
               ],
               [
                 "Where the color stops",
-                "Color lands on the elevation the homeowner chose and stops there: gables scarlet, eaves left white, landscape left warm. Every run is a zone that can be set on its own.",
+                "Color lands where the homeowner chose and stops there. Every run is its own zone.",
                 "The everyday setting is white, not color.",
               ],
               [
                 "What nobody photographs",
-                "Mitered corners, sealed terminations, capped ends, and channel color matched to the fascia so it disappears at noon. Ask any installer for a daylight photo from the curb before you sign, and if they cannot produce one, that is the answer.",
+                "Mitered corners, sealed terminations, capped ends, and channel matched to the fascia.",
                 "We will show you ours in person.",
               ],
             ].map(([h, p, note]) => (

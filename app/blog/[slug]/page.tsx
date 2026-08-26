@@ -261,7 +261,6 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         <div className="shell">
           <SectionHead
             title={`More on ${p.category.toLowerCase()}.`}
-            lede="Same category first, then whatever else is closest, rather than whatever happens to sit at the top of the list."
           />
           <div className="mt-9 grid gap-5 sm:grid-cols-3">
             {next.map((o) => (

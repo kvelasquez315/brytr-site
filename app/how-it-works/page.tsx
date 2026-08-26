@@ -45,27 +45,27 @@ const trail = [{ name: "Home", href: "/" }, { name: "How it works", href: "/how-
 const invisible: [string, string][] = [
   [
     "Where the driver lives",
-    "Every run needs a power supply, and it has to be somewhere serviceable, dry and not in the middle of your garage wall. We pick that with you rather than putting it wherever the wire happens to end.",
+    "Somewhere serviceable and dry, and not the middle of your garage wall. Picked with you.",
   ],
   [
     "How the wire gets there",
-    "Inside the channel wherever it can be, then the shortest concealed route to the driver. Nothing crosses a soffit face and nothing is stapled down a downspout.",
+    "Inside the channel where it can be, then the shortest concealed route. Nothing crosses a soffit in the open.",
   ],
   [
     "Miters at every transition",
-    "A gable, a dormer, a bay and a valley are all corners, and each one is cut on the angle rather than bent. Bent channel at a valley is the single loudest tell from the street.",
+    "Gables, dormers, bays and valleys are all cut on the angle. Bent channel is the tell of a fast install.",
   ],
   [
     "Zones wired the way you asked",
-    "The zoning agreed at the consultation gets wired on install day. Adding a zone afterwards is a wiring job, not a setting, which is why we settle it before anybody drills.",
+    "Wired on install day. Adding one afterwards is a wiring job, not an app setting.",
   ],
   [
     "The ladder, and your landscaping",
-    "Standoffs and pads, beds walked around rather than through, and gutters not leaned on. This is the part of the day your plants notice.",
+    "Standoffs and pads, beds walked around, gutters not leaned on.",
   ],
   [
     "The clean-up nobody credits",
-    "Offcuts, screws, packaging, sealant tubes and the aluminum filings from every cut, off site with us. Metal shavings left on a driveway end up in somebody's tire.",
+    "Offcuts, screws, packaging and the aluminum filings from every cut, off site with us.",
   ],
 ];
 
@@ -203,7 +203,6 @@ export default function HowItWorks() {
         <div className="shell">
           <SectionHead
             title="What is not standard in this trade."
-            lede="Every installer says they do good work, which is why the claim is worthless alone. So here is each one with the alternative beside it."
           />
 
           <div className="mt-10 overflow-hidden rounded-lg bg-card shadow-[var(--shadow-lg)] ring-1 ring-border">
@@ -247,7 +246,6 @@ export default function HowItWorks() {
           <SectionHead
             onDark
             title="What happens before the van, and after it."
-            lede="Install day is one day. The two things on either side of it are where most of the reassurance actually lives."
           />
 
           {/* THE EAVE SECTION, moved here from the home page. It was in a tall column there and sat

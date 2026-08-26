@@ -122,7 +122,6 @@ export default function Consult() {
         <div className="shell">
           <SectionHead
             title="Roughly an hour, and this is where it goes."
-            lede="The objection is never the price, because there is not one. It is the hour. So here is the hour, minute by minute, and the thing you are holding at the end of it."
           />
 
           <div className="mt-10 grid items-start gap-10 lg:grid-cols-[58fr_42fr] lg:gap-14">
@@ -195,7 +194,6 @@ export default function Consult() {
         <div className="shell">
           <SectionHead
             title="What we bring, and what helps if you have it."
-            lede="You do not have to prepare anything, and nothing on this list stops the visit happening. All of it makes the hour shorter and the quote tighter."
           />
 
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
@@ -266,7 +264,6 @@ export default function Consult() {
           <SectionHead
             onDark
             title="What will not happen in your driveway."
-            lede="Home improvement has earned the suspicion. So it is worth being specific about what we do not do, rather than promising to be nice."
           />
 
           <div className="mt-10 grid gap-10 lg:grid-cols-[56fr_44fr] lg:gap-14">

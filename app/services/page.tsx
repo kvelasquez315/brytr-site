@@ -210,7 +210,6 @@ export default function ServicesHub() {
         <div className="shell">
           <SectionHead
             title="Grouped by what it attaches to."
-            lede="Every one of these has its own page, with its own photographs and its own spec."
           />
 
           {/* MULTI-COLUMN, NOT A GRID, and the reason is the group sizes.
@@ -327,7 +326,6 @@ export default function ServicesHub() {
         <div className="shell">
           <SectionHead
             title="Every one of these, everywhere we drive."
-            lede="Each town has its own page, with the drive from our shop and the installs we have photographed nearby."
           />
           <div className="mt-9"><CityTiles /></div>
         </div>

@@ -109,7 +109,6 @@ export default function Contact() {
         <div className="shell">
           <SectionHead
             title="Every way in, and none of them interchangeable."
-            lede="The number is in the header of every page, so the useful thing to publish is which route suits what you are actually asking, including what each one is bad at."
           />
 
           <ul className="mt-10 grid gap-5 lg:grid-cols-2">

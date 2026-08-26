@@ -49,8 +49,8 @@ export const valueProps: Record<string, ValueProp> = {
     title: "A local crew and one system.",
     lede: "We install permanent outdoor lighting in the Omaha metro and nothing else, which is why the warranty call gets answered by the people who did the work.",
     points: [
-      { h: "It is the only thing we do", p: "Not a roofing company with a lighting arm, and not a seasonal side line that disappears in February." },
-      { h: "The same faces, start to finish", p: "The crew that measures your house after dark is the crew that fits it and the crew that comes back." },
+      { h: "It is the only thing we do", p: "Not a roofing company with a lighting arm, and not a seasonal side line." },
+      { h: "The same faces, start to finish", p: "The crew that measures your house is the crew that fits it and comes back to it." },
       { h: "We hold the workmanship terms", p: "No franchise dispatcher between you and a fixing that needs looking at." },
     ],
     photos: ["homeWideRanch", "crewPortrait", "installDayGarage"],

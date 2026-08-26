@@ -147,22 +147,22 @@ export default function About() {
                 {
                   t: "Haven Evolution",
                   s: "Roofline",
-                  when: "The channel routed into the eave and the diodes that sit in it. A dedicated warm white channel rather than a mixed one, which is the difference you look at every night of the year.",
+                  when: "The channel routed into the eave. A dedicated warm white diode, so warm white is real rather than mixed.",
                 },
                 {
                   t: "Haven Q Series",
                   s: "Soffit",
-                  when: "Fixtures inside the overhang, for where the light needs to come down the face of the house rather than along the trim line.",
+                  when: "Fixtures inside the overhang, washing down the face of the house rather than along the roofline.",
                 },
                 {
                   t: "Haven 9 Series",
                   s: "Landscape",
-                  when: "Path lights, uplights and bed washers, on the same controller and the same app as the roofline above them.",
+                  when: "Path lights, uplights and bed washers, on the same controller as the roofline.",
                 },
                 {
                   t: "Haven X Bistro",
                   s: "Overhead",
-                  when: "Permanent bistro runs for pergolas, patio covers and gazebos. Rated cable and real terminations rather than a seasonal string.",
+                  when: "Permanent bistro runs for pergolas and patio covers. Rated cable, not a seasonal string.",
                 },
               ].map((x) => (
                 <li key={x.t} className="px-6 py-5">
@@ -191,7 +191,6 @@ export default function About() {
           <SectionHead
             onDark
             title="Decisions that make us less money."
-            lede="Every company on your shortlist will tell you it puts customers first. That sentence is free. These are not: each one has a price attached, and the price is written next to it."
           />
 
           <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -225,7 +224,6 @@ export default function About() {
         <div className="shell">
           <SectionHead
             title="Zac and Sam."
-            lede="Two people, and between them the whole company. The person who quotes your house is one of them, and so is the person who signs it off at dusk."
           />
 
           <div className="mt-10 grid gap-5 lg:grid-cols-2">

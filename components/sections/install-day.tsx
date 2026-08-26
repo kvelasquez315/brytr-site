@@ -48,7 +48,7 @@ const stages: Stage[] = [
   {
     when: "First hour",
     h: "Bare fascia, measured again.",
-    p: "The quote was measured at the consultation. It gets measured again off the ladder before a single hole is drilled, because a wheel on the ground and a tape on the board are not the same number.",
+    p: "Measured again off the ladder before a single hole is drilled.",
     alt: "Cross-section of a roof edge: shingles, decking and a bare fascia board with a dimension line under it",
     art: (
       <>
@@ -71,7 +71,7 @@ const stages: Stage[] = [
   {
     when: "Through the morning",
     h: "Channel up, one elevation at a time.",
-    p: "Extruded aluminum, color matched to your trim, fastened into the fascia board on a fixed screw pitch. Nothing is fastened through a shingle, ever, on any elevation.",
+    p: "Extruded aluminum, color matched to your trim, on a fixed screw pitch. Nothing through a shingle.",
     alt: "The same roof edge with the aluminum channel fastened under the fascia board on two screws",
     art: (
       <>
@@ -90,7 +90,7 @@ const stages: Stage[] = [
   {
     when: "As we go, not after",
     h: "Every penetration sealed at the moment it is made.",
-    p: "Sealant goes on the screw as it is driven, while the hole is still clean and the board is still dry. Sealing a wall of holes at the end of the day is how water gets into a fascia board two winters later.",
+    p: "Sealant on the screw as it is driven, while the hole is clean and the board is dry.",
     alt: "The same roof edge with sealant at each screw and the conductor run inside the channel",
     art: (
       <>
@@ -118,7 +118,7 @@ const stages: Stage[] = [
   {
     when: "At dusk, with you",
     h: "Diffuser on, and every scene walked.",
-    p: "Frosted diffuser clipped in so you see a line of light rather than a row of dots. Then the curb check in what is left of the daylight, then every saved scene after dark, with the app on your phone before we pull off the drive.",
+    p: "Diffuser clipped in, then the curb check in daylight and every scene walked after dark.",
     alt: "The finished roof edge with the diffuser fitted, the diodes lit and light falling away below",
     art: (
       <>

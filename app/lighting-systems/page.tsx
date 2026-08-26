@@ -203,7 +203,6 @@ export default function SystemsHub() {
             /* Not "the two things": the panels are directly underneath and counting them in
               * the heading is the habit I keep having to be told about. */
             title="The roofline run, and the app that operates it."
-            lede="Everything else on this page is added to these, so this is the part of the quote that is on every job we do."
           />
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
             {core.map((c) => {
@@ -250,7 +249,6 @@ export default function SystemsHub() {
         <div className="shell">
           <SectionHead
             title="Every row, and what it actually does to the house."
-            lede="Every company publishes a spec table. Almost none say what a spec does to a building, which is the only part that helps you judge one. The third column is that."
           />
 
           <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
@@ -335,7 +333,6 @@ export default function SystemsHub() {
         <div className="shell">
           <SectionHead
             title="Most of these are additions, not alternatives."
-            lede="The roofline run, the three Haven lines that go with it, the app, and the other manufacturer we fit. Grouped by what each is for."
           />
 
           <div className="mt-10 grid items-start gap-5 lg:grid-cols-2">
@@ -388,7 +385,6 @@ export default function SystemsHub() {
           <SectionHead
             onDark
             title="What we would quote you, by the shape of the property."
-            lede="The three shapes almost every enquiry falls into. The verdicts are ours, and one of the three is us talking you out of buying more."
           />
 
           <div className="mt-10 grid gap-5 lg:grid-cols-3">

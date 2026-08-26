@@ -150,7 +150,6 @@ export default function AreasHub() {
         <div className="shell">
           <SectionHead
             title="How far, and what that changes."
-            lede="Every town we drive to, sorted by the real drive from the shop. The promise is not the same at twenty minutes and at two hours."
           />
 
           <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">

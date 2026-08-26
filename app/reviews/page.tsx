@@ -170,7 +170,6 @@ export default function Reviews() {
           <div>
             <SectionHead
               title="What do they actually talk about?"
-              lede="Not “great service”. When somebody writes about this work unprompted, they write about one of these, which is a more useful thing to know than an average."
             />
             <ul className="mt-8 grid gap-2.5 sm:grid-cols-2">
               {tags.map(([t, n]) => (
@@ -302,7 +301,6 @@ export default function Reviews() {
           <SectionHead
             onDark
             title="Practices, not adjectives."
-            lede="A rating is an outcome. These are the inputs, and each one is written up somewhere on this site where you can hold us to it."
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {practice.map((f) => (

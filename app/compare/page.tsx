@@ -229,7 +229,6 @@ export default function CompareHub() {
         <div className="shell">
           <SectionHead
             title="Everything sold as permanent lighting in this metro."
-            lede="What each one is, and what we do about it. This is the page we wanted to find when we started, and the last column is the part nobody else can print."
           />
 
           <div className="mt-10 overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
@@ -279,7 +278,6 @@ export default function CompareHub() {
         <div className="shell">
           <SectionHead
             title="Not all of these are the same kind of argument."
-            lede="A page where we are competing and a page where we are refereeing should not read the same way, so they do not. Which kind each one is, is written on it."
           />
 
           <div className="mt-10 space-y-10">
