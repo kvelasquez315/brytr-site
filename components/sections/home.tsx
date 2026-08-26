@@ -10,10 +10,7 @@ import { homeFaqs, pricingFaqs } from "@/content/faqs";
 import { SectionHead, QuoteForm } from "@/components/ui/bits";
 import { Faq } from "@/components/sections/faq";
 import { ServiceLeaflet } from "@/components/sections/service-leaflet";
-import {
-  MarkPin, MarkVan, MarkPerson,
-  MarkRule, MarkScrew, MarkPhone, MarkShield, MarkCheckTwice,
-} from "@/components/ui/marks";
+import { ChannelDetail } from "@/components/sections/channel-detail";
 
 /* THE HOME PAGE SECTIONS.
  *
@@ -378,19 +375,16 @@ export function Services() {
  * was the cause of an earlier version of the same complaint: a 555px portrait beside a 400px
  * column centres both and leaves 77px of nothing above and below the copy.
  * ========================================================================= */
-const ABOUT_CARDS: { mark: (p: { className?: string }) => React.ReactElement; title: string; body: string }[] = [
+const ABOUT_CARDS: { title: string; body: string }[] = [
   {
-    mark: MarkPin,
     title: "Local, not a franchise",
     body: "The shop is on C Street in west Omaha and every crew drives out of it. No territory partner, no dispatcher in another state.",
   },
   {
-    mark: MarkVan,
     title: "Two brands on the truck",
     body: "We fit both Haven and Jellyfish, so the system we put on your house is the one that suits it rather than the only one we sell.",
   },
   {
-    mark: MarkPerson,
     title: "The same crew, start to finish",
     body: "The people who measure your roofline after dark are the people who fit it, and the people who come back to it.",
   },
@@ -413,12 +407,9 @@ export function WhoWeAre() {
               * back after the whole previous set was deleted, and what is different about these. */}
             <ul className="mt-8 grid gap-4">
               {ABOUT_CARDS.map((c) => (
-                <li key={c.title} className="flex gap-4 rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
-                  <c.mark className="mt-0.5 size-6 shrink-0 text-accent-ink" />
-                  <div>
-                    <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{c.title}</h3>
-                    <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{c.body}</p>
-                  </div>
+                <li key={c.title} className="rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
+                  <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{c.title}</h3>
+                  <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{c.body}</p>
                 </li>
               ))}
             </ul>
@@ -522,19 +513,18 @@ export function WhoWeAre() {
  * THE RATING CARD CAME OFF THE PHOTOGRAPH. It was the fourth of six places the page said 5.0 / 196.
  * The photograph is better without a card over it, and Reviews is directly below.
  * ========================================================================= */
-const HOW_ITEMS: { mark: (p: { className?: string }) => React.ReactElement; title: string; body: string }[] = [
-  { mark: MarkRule, title: "Measured on site, after dark", body: "Against your own materials, not a catalogue" },
-  { mark: MarkScrew, title: "Into fascia, never shingles", body: "Every penetration sealed as it is made" },
-  { mark: MarkPhone, title: "One app, every zone", body: "House, pergola, walls and beds, on saved scenes" },
-  { mark: MarkShield, title: "We hold the warranty", body: "No portal between you and the crew" },
+const HOW_ITEMS: { title: string; body: string }[] = [
+  { title: "Measured on site, after dark", body: "Against your own materials, not a catalogue" },
+  { title: "Into fascia, never shingles", body: "Every penetration sealed as it is made" },
+  { title: "One app, every zone", body: "House, pergola, walls and beds, on saved scenes" },
+  { title: "We hold the warranty", body: "No portal between you and the crew" },
   /* Moved here from the deleted WhoWeAre feature list, where it was one of four unrelated claims.
    * It is the last step of an install, so it belongs at the end of the steps. It also gives this
    * column a fifth row, which is what stops it finishing short of the photograph beside it. */
-  { mark: MarkCheckTwice, title: "Checked twice before we leave", body: "Signed off lit after dark, then again in daylight" },
+  { title: "Checked twice before we leave", body: "Signed off lit after dark, then again in daylight" },
 ];
 
 export function HowWeWork() {
-  const shot = images.crewRoofFascia;
   return (
     <section className="section bg-raise">
       <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,28rem)] lg:gap-16">
@@ -563,12 +553,9 @@ export function HowWeWork() {
             * set was deleted, and what makes these different. */}
           <ul className="mt-9 grid gap-6">
             {HOW_ITEMS.map((h) => (
-              <li key={h.title} className="flex gap-4">
-                <h.mark className="mt-0.5 size-6 shrink-0 text-accent" />
-                <div>
-                  <h3 className="font-display text-[1.08rem] font-bold leading-snug text-on-dark">{h.title}</h3>
-                  <p className="mt-1.5 text-[0.92rem] leading-snug text-on-dark-muted">{h.body}</p>
-                </div>
+              <li key={h.title} className="border-t border-on-dark/15 pt-4">
+                <h3 className="font-display text-[1.08rem] font-bold leading-snug text-on-dark">{h.title}</h3>
+                <p className="mt-1.5 text-[0.92rem] leading-snug text-on-dark-muted">{h.body}</p>
               </li>
             ))}
           </ul>
@@ -581,11 +568,21 @@ export function HowWeWork() {
           </div>
         </div>
 
-        {shot?.src && (
-          <div className="relative min-h-[22rem] overflow-hidden rounded-lg bg-primary">
-            <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 28rem, 100vw" className="object-cover" />
-          </div>
-        )}
+        {/* THE DRAWING, WHERE A PHOTOGRAPH USED TO BE. "When I said make a graphic that didn't mean
+          * just add icons. This means make a design."
+          *
+          * A crew photograph shows people working; it does not show WHAT THEY DID, which is the
+          * only thing this section is arguing about. components/sections/channel-detail.tsx is a
+          * measured section through the eave - the shingle course nothing fastens through, the
+          * fascia board every fixing lands in, the channel on its face, the sealed screws, the
+          * diode and its lens - drawn in the same linework and the same --draw-* palette as the
+          * elevations this site has used since it was built.
+          *
+          * It is the one image on the site a competitor could not also have, because it is a
+          * drawing of Brytr's own method rather than a picture of a lit house. */}
+        <div className="overflow-hidden rounded-lg ring-1 ring-on-dark/10">
+          <ChannelDetail className="block h-full w-full" />
+        </div>
       </div>
     </section>
   );
@@ -865,7 +862,7 @@ export function Faqs() {
  * 196 on one page, and Reviews is three sections above with three actual reviews in it.
  * ========================================================================= */
 export function Closer() {
-  const closer = images.detailGableMiter;
+  const closer = images.homeRanchBluehour;
   return (
     <section className="section bg-muted">
       <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-20">
@@ -892,10 +889,21 @@ export function Closer() {
             * up with two hundred pixels of nothing above it. A photograph genuinely fills that
             * height, which is the difference between filling a gap and hiding one.
             *
-            * The mitre at a gable peak is the right frame for this spot: it is the detail that
-            * separates a good install from a cheap one, and it is the last thing a reader sees
-            * before the form. `flex-1` rather than a fixed aspect, so it takes exactly the height
-            * the column has spare at any width.
+            * SECOND CHOICE OF FRAME, and the first one was measurably wrong. It was
+            * detailGableMiter - the mitre at a gable peak - picked because it is the detail that
+            * separates a good install from a cheap one. The client: "this image right now is not
+            * very visible. I'm not sure what I'm looking at."
+            *
+            * Measured, he is being generous. That frame is relative luminance 0.015, the DARKEST
+            * file in the library, and it is a 3/4 portrait being cropped into a wide band - so what
+            * survived the crop was an unlit sliver with no house in it. A tight detail needs the
+            * viewer to already know what they are looking at, which is exactly what a reader
+            * arriving at the foot of the page does not.
+            *
+            * homeRanchBluehour is 0.151 - ten times brighter - and it is a whole ranch at blue
+            * hour with the roofline lit end to end. A reader can tell what it is at a glance, which
+            * is the only thing this slot has to do. `flex-1` rather than a fixed aspect, so it
+            * takes exactly the height the column has spare at any width.
             *
             * The hours and the service area are not lost - both are in the footer on all 74 pages,
             * and the region is in the LocalBusiness schema. */}
