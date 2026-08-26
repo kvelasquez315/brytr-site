@@ -31,10 +31,10 @@ import { Elevation } from "./elevation";
  * captions itself. The heading names the section, the labels say what to do, and the thing itself
  * is the argument.
  *
- * THE SPEC PANEL LOST ITS PARAGRAPH. Below the four spec rows there was a further sentence per
- * state ("Any two colours can be saved as their own scene and scheduled to a date range, so the
- * house changes without anyone touching it.") and then a caption. The four rows already say it in
- * the form a reader can scan, which is the point of a spec panel.
+ * THE SPEC PANEL IS GONE ENTIRELY. It lost its trailing paragraph first, then the whole panel -
+ * see the note at the demo itself. What is left in this section is a heading, a link, three labels
+ * and the photograph, which is the shortest this argument has ever been made and the first version
+ * where nothing beside the image is competing with it.
  *
  * The left half is genuinely the everyday setting. It briefly was not: the pair used to be
  * hero-warm-white.jpg against hero-game-day.jpg, and the first of those is a soft pink rather than
@@ -42,18 +42,6 @@ import { Elevation } from "./elevation";
  * on the hero pair in content/images.ts.
  */
 
-const warmSpecs = [
-  ["Everyday scene", "Warm white, roofline and grounds"],
-  ["Channel finish", "Matched to fascia"],
-  ["Schedule", "Dusk to 11:00 pm"],
-  ["Runs from", "The app, or the wall switch"],
-];
-const sceneSpecs = [
-  ["Saved scene", "One colour, every run"],
-  ["Zones on it", "House, pergola, walls and deck"],
-  ["Switch time", "One tap, no ladder"],
-  ["Scheduled by", "Date range, set once"],
-];
 
 export function SceneWipe() {
   const [pct, setPct] = useState(46);
@@ -103,8 +91,8 @@ export function SceneWipe() {
      * bright, which is the right way round for a company whose product is light. On raise the
      * photographs and their surroundings were the same value and the demo had no frame.
      *
-     * The spec panel stays dark. It is a card, not a section, and a dark card on a light ground
-     * is how the rest of the page already handles a panel that needs to hold its own weight. */
+     * There is no dark card in here any more - the spec panel that was the reason for that note
+     * has been removed. */
     <section className="section bg-muted">
       <div className="shell">
         {/* The onward link sits on the RIGHT OF THE HEAD, the same as RecentWork, Reviews and the
@@ -124,7 +112,21 @@ export function SceneWipe() {
           </Link>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-[1fr_19rem]">
+        {/* THE DEMO RUNS FULL WIDTH NOW. The 19rem spec panel that used to sit beside it is gone —
+          * the client sent a screenshot of it and said "remove", and the screenshot shows why: four
+          * spec rows, then roughly two hundred pixels of nothing, then a caption pinned to the
+          * bottom by `mt-auto`. Same defect as the buttons in Who We Are, from the same cause — a
+          * column whose height came from the thing beside it rather than from its own content.
+          *
+          * It should not have been rescued by removing the `mt-auto` either. The panel was
+          * captioning a control that captions itself: the three labels directly above the track
+          * already read "Warm white / Drag the line / One colour", and the whole argument of this
+          * section is the photograph changing under the reader's own hand. A table of four
+          * specifications is the least persuasive thing that could sit next to that.
+          *
+          * The image gets the full shell width in exchange, which is the right trade for the one
+          * interactive thing on the site. */}
+        <div className="mt-10">
           <div>
             <div className="flex items-center justify-between px-1 pb-3">
               <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-muted-foreground" : "text-accent-ink"}`}>
@@ -187,26 +189,6 @@ export function SceneWipe() {
             </div>
           </div>
 
-          {/* The spec panel swaps with the state, so the right side is full either way. */}
-          <div className="flex flex-col rounded-lg bg-primary p-6">
-            <p className="label text-accent">
-              {mostlyScene ? "Saved scene" : "Everyday setting"}
-            </p>
-            <h3 className="mt-3 text-xl text-on-dark">
-              {mostlyScene ? "One colour, the whole property" : "Warm white, every night"}
-            </h3>
-            <dl className="mt-6 divide-y divide-on-dark/10 border-y border-on-dark/10">
-              {(mostlyScene ? sceneSpecs : warmSpecs).map(([k, v]) => (
-                <div key={k} className="flex items-baseline justify-between gap-4 py-3.5">
-                  <dt className="text-sm text-on-dark-muted">{k}</dt>
-                  <dd className="u text-right text-sm font-medium text-on-dark">{v}</dd>
-                </div>
-              ))}
-            </dl>
-            <p className="label mt-auto pt-6 text-on-dark-muted">
-              Photographed on a completed Omaha install
-            </p>
-          </div>
         </div>
       </div>
     </section>
