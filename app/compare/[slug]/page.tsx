@@ -238,7 +238,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       <PhotoPair
         eyebrow="Ours, for reference"
         title="What we hand over, on two houses."
-        lede="Neither of these is a comparison. They are here because everything else on this page is a claim about hardware, and a claim about hardware is worth less than a photograph of a finished roofline."
+        lede="Neither of these is a comparison. Everything else here is a claim about hardware, and a claim is worth less than a finished roofline."
         a={pick(`${c.slug}-a`, 1)[0]?.photo ?? "homeShakeBrick"}
         b={pick(`${c.slug}-b`, 1)[0]?.photo ?? "homeWideRanch"}
         aLabel={pick(`${c.slug}-a`, 1)[0]?.caption ?? ""}

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { compares } from "@/content/compares";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
-import { PhotoBand } from "@/components/sections/photo-parts";
+import { PhotoBand, PhotoStrip } from "@/components/sections/photo-parts";
+import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 
 /* /compare — WAVE 4, PAGE 1 of the page-by-page pass.
@@ -322,6 +323,15 @@ export default function CompareHub() {
         * Nine comparison pages, a market table and a methodology note: this whole page is about
         * other companies. One band of our own work before the methodology section, because the
         * methodology is a claim about our judgement and this is the evidence for it. */}
+      {/* Three frames, because scripts/images.mjs had this page rendering two photographs in
+        * total. `background` keeps the run alternating: muted above, raise on the band below. */}
+      <PhotoStrip
+        shots={pick("compare-strip", 3)}
+        eyebrow="The same install standard"
+        title="Whichever brand ends up on the house."
+        ground="background"
+      />
+
       <PhotoBand
         photo="aerialRedRoofline"
         label="Ours, from above"

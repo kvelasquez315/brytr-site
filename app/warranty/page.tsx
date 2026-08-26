@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
-import { PhotoSplit } from "@/components/sections/photo-parts";
+import { PhotoSplit, PhotoStrip } from "@/components/sections/photo-parts";
+import { pick } from "@/content/photo-sets";
 
 import { Jsonld, breadcrumb } from "@/lib/schema";
 import { site } from "@/content/site";
@@ -312,6 +313,16 @@ export default function Warranty() {
       {/* ── THE FIVE QUESTIONS ──
         * Written to be asked of every quote on the reader's kitchen table,
         * which is the only version of this section worth publishing. */}
+      {/* Two photographs on a two-thousand-word warranty page was the thinnest set on the site
+        * after the blog template. `background` sits between the muted section above and the
+        * primary one below. */}
+      <PhotoStrip
+        shots={pick("warranty-strip", 3)}
+        eyebrow="What we are standing behind"
+        title="Installs we still service."
+        ground="background"
+      />
+
       <section className="section bg-primary">
         <div className="shell">
           <SectionHead

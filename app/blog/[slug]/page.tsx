@@ -6,7 +6,7 @@ import { photoForPost, relatedByCategory } from "@/content/blog-detail";
 import { services } from "@/content/services";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
-import { PhotoBand } from "@/components/sections/photo-parts";
+import { PhotoBand, PhotoStrip } from "@/components/sections/photo-parts";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb } from "@/lib/schema";
 
@@ -67,6 +67,9 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
     { name: p.title, href: `/blog/${p.slug}` },
   ];
   const toc = p.body.filter((b) => b.h).map((b) => b.h!) as string[];
+
+  /* ONE pick for the whole page, so the band and the strip cannot land on the same frame. */
+  const postShots = pick(`post-${p.slug}`, 4);
 
   return (
     <Shell>
@@ -218,16 +221,31 @@ export default async function Post({ params }: { params: Promise<{ slug: string 
         </div>
       </div>
 
-      {/* ── A PHOTOGRAPH AT THE END OF THE READ ──
-        * Twelve articles through this template, and the only image on any of them was the hero.
-        * A reader who has just finished seven minutes of prose about install method or covenant
-        * procedure has earned a picture of the outcome. Seeded on the slug, so the twelve do not
-        * all close on the same house. */}
+      {/* ── PHOTOGRAPHS AT THE END OF THE READ ──
+        * Twelve articles through this template, and until recently the only image on any of them
+        * was the hero. A reader who has just finished seven minutes of prose about install method
+        * or covenant procedure has earned a picture of the outcome.
+        *
+        * FOUR NOW, NOT ONE. scripts/images.mjs reported every blog post rendering exactly two
+        * distinct photographs - the hero and this band - across two thousand words. On a site whose
+        * argument is "here are the houses we have done", and with ninety-five usable frames in the
+        * library, that is a thin page rather than a restrained one.
+        *
+        * All four come from ONE `pick` call so they cannot repeat each other, and the seed is the
+        * slug so the twelve posts do not close on the same houses. `muted` on the strip keeps the
+        * grounds alternating: background, muted, raise, muted. */}
+      <PhotoStrip
+        shots={postShots.slice(1)}
+        eyebrow="What it looks like"
+        title="Finished installs around Omaha."
+        ground="muted"
+        frame="4/3"
+      />
       <PhotoBand
-        photo={pick(`post-${p.slug}`, 1)[0]?.photo ?? "homeShakeBrick"}
+        photo={postShots[0]?.photo ?? "homeShakeBrick"}
         label="One of ours"
         note={`Filed under ${p.category.toLowerCase()}`}
-        caption={pick(`post-${p.slug}`, 1)[0]?.caption ?? ""}
+        caption={postShots[0]?.caption ?? ""}
         ground="raise"
       />
 

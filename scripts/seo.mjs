@@ -99,6 +99,21 @@ for (const [key, label] of [["title", "titles"], ["desc", "descriptions"]]) {
   }
 }
 
+/* EXIT CODE, so this can gate a deploy rather than only inform one. Every check above is a hard
+ * requirement - a missing canonical or a duplicate title is never acceptable - so any entry in any
+ * bucket fails the run. */
+const failed =
+  Object.values(problems).reduce((n, l) => n + l.length, 0) +
+  dupes("title").length +
+  dupes("desc").length;
+
 const schemaTypes = [...new Set(rows.flatMap((r) => r.ld))].sort();
 console.log(`\n  structured data types in use: ${schemaTypes.join(", ") || "none"}`);
+console.log("");
+if (failed) {
+  console.error(`FAILED  ${failed} SEO problem(s) across ${rows.length} routes.`);
+  process.exit(1);
+}
+console.log("  PASS  every route has a unique title and description, a canonical, an og:image,");
+console.log("        one h1, and breadcrumb markup.");
 console.log("");

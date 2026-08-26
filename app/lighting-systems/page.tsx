@@ -312,7 +312,7 @@ export default function SystemsHub() {
       <PhotoPair
         eyebrow="The rows, on a building"
         title="Two specifications you can check yourself."
-        lede="Most of the sheet above has to be taken on trust. These two do not: whether the channel disappears in daylight, and how far apart the points sit. Both are visible from your own driveway on any install in this metro."
+        lede="Most of the sheet above has to be taken on trust. These two do not: whether the channel disappears by day, and how far apart the points sit."
         a="dayBrickGable"
         b="homeEaveDownlights"
         aLabel="Colour matched to the fascia. This is the row about finish, photographed at noon rather than asserted."

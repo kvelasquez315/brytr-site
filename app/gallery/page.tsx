@@ -271,7 +271,7 @@ export default function Gallery() {
       <PhotoPair
         eyebrow="The other half"
         title="The same hardware at noon, which is the photograph nobody in this trade publishes."
-        lede="A night shot flatters any install. Daylight does not: at noon a channel that was stapled to a shingle edge, mismatched to the trim or left sagging between fixings has nowhere to hide. So here it is on two houses, uncropped and ungraded."
+        lede="A night shot flatters any install. Daylight does not: at noon a badly fixed channel has nowhere to hide. Two houses, uncropped and ungraded."
         a="dayBrickGable"
         b="dayShakeGable"
         aLabel="Brick and white fascia. The channel runs under the roof edge, colour matched to the trim — you have to know it is there to find it."
@@ -282,7 +282,7 @@ export default function Gallery() {
       <PhotoPair
         eyebrow="One entry, twice"
         title="And the same arch, before dark and after."
-        lede="A straight rake is easy. What separates a good roofline job from a cheap one is whether the run keeps going through the awkward part — and this octagonal turret is about as awkward as a front elevation gets."
+        lede="A straight rake is easy. This octagonal turret is about as awkward as a front elevation gets, and the run keeps going through it."
         a="archByDay"
         b="archAtNight"
         aLabel="Daylight. Nothing visible under the roof edge, on a curve where nothing can be hidden behind a fascia board."

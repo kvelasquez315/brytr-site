@@ -246,7 +246,7 @@ export default function Consult() {
       <PhotoPair
         eyebrow="The hour itself"
         title="What we are doing while we are standing in your garden."
-        lede="The design is made on the property, after dark, against your own materials — because warm white on red brick is a different colour from warm white on white siding and no catalogue will tell you that."
+        lede="Made on the property, after dark, against your own materials. Warm white on red brick is a different colour from warm white on white siding."
         a="installDayPavilion"
         b="walkthroughDusk"
         aLabel="Measuring and running a sample against the actual structure, not off a satellite photograph."

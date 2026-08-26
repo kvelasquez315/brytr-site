@@ -72,7 +72,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       aLabel: "The everyday setting — warm white, roofline, eaves and the band over the garage.",
       bLabel: "Ninety seconds later. Same fixtures, same evening, one saved scene switched on.",
       title: "One house, one evening, two settings.",
-      lede: "These two frames are ninety seconds apart from a drone that never moved — the logged position shifts less than two feet between them. So nothing here is two houses cut together: it is the same roof, the same sky, and the only thing that changed is what the controller was told to do.",
+      lede: "Ninety seconds apart, from a drone that never moved. Same roof, same sky; the only thing that changed is what the controller was told to do.",
     },
     shots: [
       { photo: "seqSecurity", caption: "The same run dimmed to a low warm white. Most people leave it here on a Tuesday." },
@@ -139,7 +139,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       aLabel: "The same arched entry in daylight. Nothing to see under the roof edge.",
       bLabel: "After dark, one continuous run following every facet of the octagon.",
       title: "The run follows the roof, including where the roof stops being straight.",
-      lede: "A roofline is easy where it is a straight rake and hard everywhere else — valleys, dormers, returns, and curves like this one. Any installer can light a gable. What separates a good roofline job from a cheap one is whether the line keeps going through the awkward part or quietly stops before it.",
+      lede: "Any installer can light a gable. What separates a good roofline job from a cheap one is whether the line keeps going through the awkward part.",
     },
     shots: [
       { photo: "detailGableMiter", caption: "The turn at a peak. One continuous line, mitered, with no gap and no doubled-up section." },
@@ -314,7 +314,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       aLabel: "Friday. Warm white, and nobody would guess the house does anything else.",
       bLabel: "Saturday. Scarlet across the elevation with white held at the peaks.",
       title: "Saturday, and then Sunday again.",
-      lede: "Both frames are the same house on the same evening, ninety seconds apart. That is the actual product: not a house that is red, but a house that is warm white and can be red for four hours without anybody touching it.",
+      lede: "The same house, the same evening, ninety seconds apart. Not a house that is red — a house that is warm white and can be red for four hours.",
     },
     shots: [
       { photo: "gamedayRedBlueGables", caption: "Two team colours held apart by zone — one gable red, the next blue, eaves left white." },

@@ -77,4 +77,18 @@ console.log(`  pages with something over    ${pagesOver} of ${routes.length}`);
 console.log(`  ledes over 24 words          ${longLedes}`);
 console.log(`  headlines over 9 words       ${longHeads}`);
 console.log(`  pages with >1 loud heading   ${loudPages}`);
+/* EXIT CODE. A lede over 34 words and a second loud heading are the two that actually make a page
+ * feel heavy, so those fail. A headline over nine words stays a WARNING: a few on this site are
+ * product claims that need the length, and failing them would mean either weakening the copy or
+ * ignoring the tool. */
+const longestLede = Math.max(0, ...rows.flatMap((r) => (r.badLedes ?? []).map((l) => words(l))));
+if (longestLede > 34 || loudPages) {
+  console.error(
+    `FAILED  longest lede ${longestLede} words (max 34), ` +
+    `${loudPages} page(s) with more than one loud heading.`
+  );
+  process.exit(1);
+}
+console.log("  PASS  no lede over 34 words, one loud heading per page at most.");
+console.log(`        ${longHeads} headline(s) over 9 words — a warning, not a failure.`);
 console.log("");

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
-import { PhotoSplit } from "@/components/sections/photo-parts";
+import { PhotoSplit, PhotoStrip } from "@/components/sections/photo-parts";
+import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, localBusiness } from "@/lib/schema";
 import { site } from "@/content/site";
 import { reviewProof } from "@/content/reviews";
@@ -296,6 +297,15 @@ export default function Contact() {
           </div>
         </div>
       </section>
+
+      {/* `raise` here rather than background: the section above is muted and the PageCta below
+        * is background, so raise is the only surface that alternates against both. */}
+      <PhotoStrip
+        shots={pick("contact-strip", 3)}
+        eyebrow="Before you call"
+        title="What we would be quoting."
+        ground="raise"
+      />
 
       <PageCta variant="phone" omit={["/pricing"]} panelLink={{ href: "/free-design-consultation", label: "Book the on-site measure" }} 
         /* The NAP block above is bg-muted, so the closer would have landed on the same ground and the page would

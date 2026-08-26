@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead } from "@/components/sections/page-parts";
-import { PhotoBand } from "@/components/sections/photo-parts";
+import { PhotoBand, PhotoStrip } from "@/components/sections/photo-parts";
+/* Aliased: this file already has its own local `pick`, which selects FAQ entries by question
+  * text. Two different pickers, one name, and the import silently shadowed nothing - TypeScript
+  * caught it as a redeclaration rather than letting it through. */
+import { pick as photoPick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, faqSchema } from "@/lib/schema";
 import { homeFaqs, pricingFaqs, serviceFaqsFor } from "@/content/faqs";
 import { Faq } from "@/components/sections/faq";
@@ -270,6 +274,15 @@ export default function FaqPage() {
         * accordions and nothing else between the hero and the closer. The section below says
         * what this page cannot answer, and the honest answer to most of the questions above is
         * "come and look at it after dark" — so this is the one thing a reader can look at. */}
+      {/* A page of questions with two pictures on it. `background` between the muted section
+        * above and the raise band below. */}
+      <PhotoStrip
+        shots={photoPick("faq-strip", 3)}
+        eyebrow="The answers, installed"
+        title="What the questions are actually about."
+        ground="background"
+      />
+
       <PhotoBand
         photo="poolPergolaDusk"
         label="The answer to most of the above"
