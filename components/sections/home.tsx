@@ -10,6 +10,10 @@ import { homeFaqs, pricingFaqs } from "@/content/faqs";
 import { SectionHead, QuoteForm } from "@/components/ui/bits";
 import { Faq } from "@/components/sections/faq";
 import { ServiceLeaflet } from "@/components/sections/service-leaflet";
+import {
+  MarkPin, MarkVan, MarkPerson,
+  MarkRule, MarkScrew, MarkPhone, MarkShield, MarkCheckTwice,
+} from "@/components/ui/marks";
 
 /* THE HOME PAGE SECTIONS.
  *
@@ -58,12 +62,21 @@ import { ServiceLeaflet } from "@/components/sections/service-leaflet";
  * their three ticks and their button - the whole card is the link, which is what a card being a
  * link should mean.
  *
- * NO ICONS ANYWHERE. There were ten on this page - seven section-head glyphs and three sets of
- * tiles. The client: "I can't even tell what's going on with them... I would rather we bring our own
- * visual sense to it with our images." Section heads fall back to the channel-mark, which is the
- * brand's amber rule rather than a picture of anything; the feature lists are hairline, bold title,
- * phrase; the service cards lost the badge that sat on top of a photograph of the same thing. The
- * whole set is deleted - see content/icon-map.ts.
+ * ICONS: ALL TWENTY-EIGHT DELETED, THEN EIGHT DRAWN. Both on instruction, and it is not a reversal.
+ *
+ * The original set went because of what he said about it: "I can't even tell what's going on with
+ * them." That set drew IDEAS - wholeHome, twoTiers, dayNight, weatherSealed, hoaPaperwork - and
+ * nobody decodes "two tiers" from a shape at 24px, so the glyph was decoration in the most
+ * prominent position of every row. components/icons/index.tsx went with it.
+ *
+ * Then: "these cards should have our own custom icons." So there are eight now, in
+ * components/ui/marks.tsx, and every one of them draws an OBJECT rather than a concept - a pin, a
+ * van, a person, a rule, a screw, a phone, a shield, two ticks. Each was rendered to PNG at 24 and
+ * 48px and looked at before shipping; the screw was redrawn once because the first version read as
+ * a down arrow. That check is the whole difference between this set and the last one.
+ *
+ * The rule going forward: if the honest drawing of a card's idea would be abstract, that card gets
+ * no mark rather than a bad one.
  *
  * AND THE FOUNDERS ARE NOT MENTIONED. "I don't want to mention them. We shouldn't be mentioning
  * them." Their section went, then the one sentence that survived into WhoWeAre went too.
@@ -365,16 +378,19 @@ export function Services() {
  * was the cause of an earlier version of the same complaint: a 555px portrait beside a 400px
  * column centres both and leaves 77px of nothing above and below the copy.
  * ========================================================================= */
-const ABOUT_CARDS: { title: string; body: string }[] = [
+const ABOUT_CARDS: { mark: (p: { className?: string }) => React.ReactElement; title: string; body: string }[] = [
   {
+    mark: MarkPin,
     title: "Local, not a franchise",
     body: "The shop is on C Street in west Omaha and every crew drives out of it. No territory partner, no dispatcher in another state.",
   },
   {
+    mark: MarkVan,
     title: "Two brands on the truck",
     body: "We fit both Haven and Jellyfish, so the system we put on your house is the one that suits it rather than the only one we sell.",
   },
   {
+    mark: MarkPerson,
     title: "The same crew, start to finish",
     body: "The people who measure your roofline after dark are the people who fit it, and the people who come back to it.",
   },
@@ -393,12 +409,16 @@ export function WhoWeAre() {
               lede="Brytr is an Omaha company. The shop, the van and the crew are all here, and so is everyone who will be on your roof."
             />
 
-            {/* THREE CARDS, WHICH IS WHAT WAS MISSING. */}
+            {/* THREE CARDS, EACH WITH ITS OWN MARK - see components/ui/marks.tsx for why icons are
+              * back after the whole previous set was deleted, and what is different about these. */}
             <ul className="mt-8 grid gap-4">
               {ABOUT_CARDS.map((c) => (
-                <li key={c.title} className="rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
-                  <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{c.title}</h3>
-                  <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{c.body}</p>
+                <li key={c.title} className="flex gap-4 rounded-lg bg-background p-6 shadow-[var(--shadow-lg)]">
+                  <c.mark className="mt-0.5 size-6 shrink-0 text-accent-ink" />
+                  <div>
+                    <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{c.title}</h3>
+                    <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{c.body}</p>
+                  </div>
                 </li>
               ))}
             </ul>
@@ -413,20 +433,19 @@ export function WhoWeAre() {
             </div>
           </div>
 
-          {/* The photograph runs the full height of the row, with the one confirmed figure as an
-            * opaque card on its bottom edge - no scrim needed, and no gap above or below it. */}
+          {/* THE 1.2M CARD IS GONE. "I don't like the 1.2m number stat. Lets not do that at all."
+            *
+            * It was the one hard figure the client had confirmed on camera, which is why it survived
+            * three rebuilds of this section - but a big round number on a card is a stat tile, and a
+            * stat tile is the thing every contractor site has. The photograph underneath it is a
+            * real install with two people working on it, and it says more uncropped than it did
+            * with a number sitting over one corner. */}
           <div className="relative min-h-[24rem]">
             {shot?.src && (
               <div className="relative h-full w-full overflow-hidden rounded-lg bg-primary">
                 <Image src={shot.src} alt={shot.alt} fill sizes="(min-width:1024px) 24rem, 100vw" className="object-cover" />
               </div>
             )}
-            <div className="absolute inset-x-5 bottom-5 rounded-lg bg-card p-5 shadow-[var(--shadow-dark)]">
-              <p className="u font-display text-[2.5rem] font-bold leading-none text-accent-ink">1.2M</p>
-              <h3 className="mt-1.5 font-display text-[1rem] font-bold leading-snug text-foreground">
-                Lights installed around Omaha
-              </h3>
-            </div>
           </div>
         </div>
 
@@ -503,15 +522,15 @@ export function WhoWeAre() {
  * THE RATING CARD CAME OFF THE PHOTOGRAPH. It was the fourth of six places the page said 5.0 / 196.
  * The photograph is better without a card over it, and Reviews is directly below.
  * ========================================================================= */
-const HOW_ITEMS: { title: string; body: string }[] = [
-  { title: "Measured on site, after dark", body: "Against your own materials, not a catalogue" },
-  { title: "Into fascia, never shingles", body: "Every penetration sealed as it is made" },
-  { title: "One app, every zone", body: "House, pergola, walls and beds, on saved scenes" },
-  { title: "We hold the warranty", body: "No portal between you and the crew" },
+const HOW_ITEMS: { mark: (p: { className?: string }) => React.ReactElement; title: string; body: string }[] = [
+  { mark: MarkRule, title: "Measured on site, after dark", body: "Against your own materials, not a catalogue" },
+  { mark: MarkScrew, title: "Into fascia, never shingles", body: "Every penetration sealed as it is made" },
+  { mark: MarkPhone, title: "One app, every zone", body: "House, pergola, walls and beds, on saved scenes" },
+  { mark: MarkShield, title: "We hold the warranty", body: "No portal between you and the crew" },
   /* Moved here from the deleted WhoWeAre feature list, where it was one of four unrelated claims.
    * It is the last step of an install, so it belongs at the end of the steps. It also gives this
    * column a fifth row, which is what stops it finishing short of the photograph beside it. */
-  { title: "Checked twice before we leave", body: "Signed off lit after dark, then again in daylight" },
+  { mark: MarkCheckTwice, title: "Checked twice before we leave", body: "Signed off lit after dark, then again in daylight" },
 ];
 
 export function HowWeWork() {
@@ -528,37 +547,37 @@ export function HowWeWork() {
             lede="This gets drilled into your fascia and left there. How it is fixed and sealed is the difference at year five."
           />
 
-          {/* THE RUN. One continuous length of channel down the left of the four steps, with the
-            * steps clipped onto it - `.run-spine` from app/sections.css, the same device and the
-            * same diode pitch as the decision tree on /services.
+          {/* A MARK PER STEP, REPLACING THE CHANNEL SPINE.
             *
-            * This is what replaced the icon tiles, and it is the answer to "I would rather we bring
-            * our own visual sense to it". A pictogram of a hard hat is a picture of a different
-            * thing; a length of lit channel beside four steps about how the channel gets installed
-            * is the product itself doing the work. It is also the only amber in the section, and
-            * amber reading vertically down a dark ground is most of the colour this page has. */}
-          <div className="mt-9 flex gap-6">
-            <span className="run-spine" aria-hidden />
-            <ul className="grid flex-1 gap-6">
-              {HOW_ITEMS.map((h) => (
-                <li key={h.title}>
+            * `.run-spine` used to run down the left of this list - a 3px column of amber diodes,
+            * the same device as the decision tree on /services. The client, on a screenshot: "this
+            * here should be a graphic."
+            *
+            * He is right, and the screenshot is the argument: at the height this column gives it,
+            * a 3px dotted rule reads as a border that failed to load rather than as a length of lit
+            * channel. The device needs to run tall to be legible as a channel, which it does on
+            * /services and does not here.
+            *
+            * So each step gets its own object instead - a rule, a screw, a phone, a shield, two
+            * ticks. See components/ui/marks.tsx for why marks are back at all after the previous
+            * set was deleted, and what makes these different. */}
+          <ul className="mt-9 grid gap-6">
+            {HOW_ITEMS.map((h) => (
+              <li key={h.title} className="flex gap-4">
+                <h.mark className="mt-0.5 size-6 shrink-0 text-accent" />
+                <div>
                   <h3 className="font-display text-[1.08rem] font-bold leading-snug text-on-dark">{h.title}</h3>
                   <p className="mt-1.5 text-[0.92rem] leading-snug text-on-dark-muted">{h.body}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
+                </div>
+              </li>
+            ))}
+          </ul>
 
           <div className="mt-auto pt-9">
             <div className="flex flex-wrap items-center gap-4">
               <AccentPill href="/free-design-consultation">Book a free design</AccentPill>
               <LightPill href="/how-it-works">How an install runs</LightPill>
             </div>
-            {/* The one line worth keeping out of the deleted WhyTrust section: it is that
-              * section's whole argument, and the reason there are no invented seals on this page. */}
-            <p className="mt-5 max-w-[42ch] text-[0.92rem] leading-snug text-on-dark-muted">
-              Every claim on this page goes in writing before you sign.
-            </p>
           </div>
         </div>
 
@@ -846,6 +865,7 @@ export function Faqs() {
  * 196 on one page, and Reviews is three sections above with three actual reviews in it.
  * ========================================================================= */
 export function Closer() {
+  const closer = images.detailGableMiter;
   return (
     <section className="section bg-muted">
       <div className="shell grid items-stretch gap-12 lg:grid-cols-[minmax(0,1fr)_28rem] lg:gap-20">
@@ -863,9 +883,33 @@ export function Closer() {
             {site.phone}
           </a>
 
-          <p className="mt-auto pt-8 text-[0.95rem] text-muted-foreground">
-            {site.hours.openLabel}. Installing across {site.region}.
-          </p>
+          {/* A PHOTOGRAPH WHERE THE HOURS LINE WAS. The client, on a screenshot of that line
+            * floating alone in a band of empty limestone: "instead we should have a pic of a good
+            * install."
+            *
+            * Fourth time `mt-auto` has produced exactly this. It pins the last child to the bottom
+            * of a column whose height comes from the form beside it, so a single 14-word line ended
+            * up with two hundred pixels of nothing above it. A photograph genuinely fills that
+            * height, which is the difference between filling a gap and hiding one.
+            *
+            * The mitre at a gable peak is the right frame for this spot: it is the detail that
+            * separates a good install from a cheap one, and it is the last thing a reader sees
+            * before the form. `flex-1` rather than a fixed aspect, so it takes exactly the height
+            * the column has spare at any width.
+            *
+            * The hours and the service area are not lost - both are in the footer on all 74 pages,
+            * and the region is in the LocalBusiness schema. */}
+          <div className="relative mt-auto min-h-[14rem] flex-1 overflow-hidden rounded-lg bg-primary">
+            {closer?.src && (
+              <Image
+                src={closer.src}
+                alt={closer.alt}
+                fill
+                sizes="(min-width:1024px) 44vw, 100vw"
+                className="object-cover"
+              />
+            )}
+          </div>
         </div>
         <QuoteForm variant="compact" heading="Get a free design consultation" />
       </div>

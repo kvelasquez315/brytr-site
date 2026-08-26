@@ -62,12 +62,7 @@ export function Footer() {
                 brytr<span className="ml-0.5 inline-block size-2 translate-y-[-0.35rem] rounded-full bg-accent" />
               </p>
             )}
-            {/* The tagline's second appearance, which is the pattern the client pointed at on
-              * freedomexteriorsusa.com: one line, in the hero and again at the close. */}
-            <p className="mt-4 font-display text-[1.1rem] font-bold tracking-[-0.02em] text-accent">
-              {site.tagline}
-            </p>
-            <p className="mt-3 text-sm text-on-dark-muted">
+            <p className="mt-4 text-sm text-on-dark-muted">
               Permanent outdoor lighting for Omaha homes. Installed once, controlled from your phone,
               and serviced by the people who put it up.
             </p>

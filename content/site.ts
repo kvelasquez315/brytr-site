@@ -6,6 +6,20 @@
 export const site = {
   name: "Brytr Co",
   legalName: "Brytr Co",
+  /* NOT RENDERED ANYWHERE, DELIBERATELY, AND IT SHOULD STAY THAT WAY.
+   *
+   * It ran for a while as an amber line under the hero h1 and again in the footer, on the reasoning
+   * that freedomexteriorsusa.com repeats one line twice and that this was the company's own words
+   * going unused. The client, on a screenshot of it: "avoid ever using lines like this that are
+   * gimmicky."
+   *
+   * That is a standing rule rather than one deletion. This site does not do slogans - not here, not
+   * as a section heading, not as a caption. What it does instead is state what the thing is and
+   * show a photograph of it. Every heading on the page now names something checkable: what we do,
+   * where we work, how we install it, what it costs.
+   *
+   * Kept in the file because it is Brytr's real tagline and they use it elsewhere - print, the van,
+   * social. It is theirs. It is just not the website's voice. */
   tagline: "Disappears by day, wows by night.",
   phone: "402-810-3973",
   phoneHref: "tel:+14028103973",

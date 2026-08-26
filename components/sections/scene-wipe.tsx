@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { images } from "@/content/images";
 import { SectionHead } from "@/components/ui/bits";
@@ -95,21 +94,20 @@ export function SceneWipe() {
      * has been removed. */
     <section className="section bg-muted">
       <div className="shell">
-        {/* The onward link sits on the RIGHT OF THE HEAD, the same as RecentWork, Reviews and the
-          * FAQ. Left-aligned on its own it left roughly 600 x 150px of empty band beside the lede. */}
-        <div className="flex flex-wrap items-end justify-between gap-x-12 gap-y-6">
-          <SectionHead
-            className="max-w-[46rem]"
-            title="Warm white every night. Any colour when you want it."
-          />
-          <Link
-            href="/gallery"
-            className="tap-44 inline-flex h-12 shrink-0 items-center gap-2.5 rounded-full bg-primary px-7 font-semibold text-on-dark transition-colors duration-[--dur-fast] hover:bg-raise"
-          >
-            See every scene
-            <span aria-hidden>&rarr;</span>
-          </Link>
-        </div>
+        {/* A HEADING AND THE THING ITSELF, AND NOTHING ELSE.
+          *
+          * The "See every scene" pill that used to sit on the right of this head is gone on the
+          * client's instruction, and the /gallery route it pointed at is still reached from the nav,
+          * from Recent Work's own button and from the footer - so nothing became unreachable.
+          *
+          * It is also the fourth thing removed from this section in a row: four lines of lede, then
+          * one, then the spec panel, then this. That is not indecision, it is the same judgement
+          * applied repeatedly - every one of them was TEXT ABOUT a photograph that changes under
+          * your hand, sitting next to the photograph that changes under your hand. */}
+        <SectionHead
+          className="max-w-[46rem]"
+          title="Warm white every night. Any colour when you want it."
+        />
 
         {/* THE DEMO RUNS FULL WIDTH NOW. The 19rem spec panel that used to sit beside it is gone —
           * the client sent a screenshot of it and said "remove", and the screenshot shows why: four
@@ -125,17 +123,19 @@ export function SceneWipe() {
           *
           * The image gets the full shell width in exchange, which is the right trade for the one
           * interactive thing on the site. */}
+        {/* THE THREE LABELS ARE GONE TOO - "Warm white / Drag the line / One colour" across the top
+          * of the track. Removed on instruction, and the reasoning holds: they were captioning the
+          * two halves of a photograph that already look like warm white and a colour, and
+          * instructing a reader to drag a handle that has drag arrows drawn on it.
+          *
+          * THE AFFORDANCE DOES NOT DEPEND ON THEM. The handle is an amber block with a
+          * left-right chevron pair in it, sitting on an amber line down the middle of the image,
+          * and it carries `cursor-ew-resize`. What the labels were carrying that the visuals do not
+          * is the SCREEN READER story, and that never lived in them anyway - it is on the slider's
+          * aria-label and its aria-valuetext, both of which still describe which state you are
+          * looking at as the handle moves. */}
         <div className="mt-10">
           <div>
-            <div className="flex items-center justify-between px-1 pb-3">
-              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-muted-foreground" : "text-accent-ink"}`}>
-                Warm white
-              </span>
-              <span className="label text-muted-foreground">Drag the line</span>
-              <span className={`label transition-colors duration-[--dur-fast] ${mostlyScene ? "text-accent-ink" : "text-muted-foreground"}`}>
-                One colour
-              </span>
-            </div>
 
             {/* The aspect ratio lives on the TRACK and both photographs are absolutely positioned
               * inside it, so the two layers are the same box by construction. They used to derive

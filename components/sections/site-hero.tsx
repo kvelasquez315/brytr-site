@@ -84,13 +84,7 @@ export function SiteHero({
             {breadcrumb}
             <h1 className="display-hero-lg text-on-dark">{h1}</h1>
 
-            {/* The tagline, in the client's own words, in amber. Identical on every page - it is
-              * the brand line, not page copy, so it does not take a prop. */}
-            <p className="mt-5 font-display text-[1.3rem] font-bold tracking-[-0.02em] text-accent">
-              {site.tagline}
-            </p>
-
-            <p className="mt-3 max-w-[44ch] text-[1.15rem] leading-relaxed text-on-dark/90">{lede}</p>
+            <p className="mt-6 max-w-[44ch] text-[1.15rem] leading-relaxed text-on-dark/90">{lede}</p>
 
             {/* One button, and it is the phone. The form is two columns to the right and its submit
               * is amber, so a second amber "book a consultation" here would be a third route to one

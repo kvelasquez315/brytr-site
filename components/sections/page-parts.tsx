@@ -118,10 +118,7 @@ export function PageHero({
           <div className="max-w-[76ch]">
             <Breadcrumb trail={trail} />
             <h1 className="display-hero-lg text-on-dark">{h1}</h1>
-            <p className="mt-5 font-display text-[1.3rem] font-bold tracking-[-0.02em] text-accent">
-              {site.tagline}
-            </p>
-            <p className="mt-3 max-w-[62ch] text-[1.15rem] leading-relaxed text-on-dark/90">{lede}</p>
+            <p className="mt-6 max-w-[62ch] text-[1.15rem] leading-relaxed text-on-dark/90">{lede}</p>
           </div>
         </div>
         <TrustPlinth />
