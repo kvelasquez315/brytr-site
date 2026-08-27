@@ -44,7 +44,19 @@ export const metadata: Metadata = {
    * possible first impression, and it is one object in one file.
    *
    * The frame is the home hero - scripts/hero-pick.mjs measured it as the brightest wide everyday-
-   * warm-white photograph in the library. 1200x630 is the size every platform crops to.
+   * warm-white photograph in the library.
+   *
+   * THE DECLARED DIMENSIONS WERE WRONG, and they were wrong in the way that is hardest to notice.
+   * This said 1200x630 because that is the size every guide to share cards quotes. The file is
+   * 2400x1350. Those are not the same shape - 1.905 against 1.778 - so every scraper that trusts
+   * the declared numbers to reserve space, and several do rather than fetching the image first,
+   * was told to expect a wider, shorter picture than the one it was about to get. Nothing renders
+   * broken; the card is just laid out against the wrong box.
+   *
+   * A declared width and height that does not match the file is worse than declaring neither,
+   * because the tag exists to save the scraper a fetch and this one made the fetch mandatory to
+   * get right. Measured off the file with Pillow rather than copied from a guide. If this image
+   * is ever swapped, measure the new one.
    *
    * Declared here rather than per page so it applies everywhere by default. A page with a better
    * image of its own can still override `openGraph.images`; none does yet, and a good default beats
@@ -55,8 +67,8 @@ export const metadata: Metadata = {
     siteName: "Brytr Co",
     images: [{
       url: "/img/seq-everyday.jpg",
-      width: 1200,
-      height: 630,
+      width: 2400,
+      height: 1350,
       alt: "A brick and cedar ranch west of Omaha at dusk, its roofline picked out in warm white",
     }],
   },
