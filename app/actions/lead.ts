@@ -30,7 +30,9 @@
 
 const WEBHOOK =
   process.env.LEAD_WEBHOOK_URL ??
-  "https://services.leadconnectorhq.com/hooks/3uFcpA4cPE48TA2iiaA6/webhook-trigger/b9e6ee0f-3a3f-423e-83d7-117bbc752aa3";
+  /* Rotated 2026-08-27. The previous endpoint was 3uFcpA4cPE48TA2iiaA6/b9e6ee0f, and any test
+   * leads sitting in that account came from this form. */
+  "https://services.leadconnectorhq.com/hooks/rkBM51eyu0Wdw5HGwEHs/webhook-trigger/aa8db861-941b-4e3d-8ef2-892290a9356b";
 
 export type LeadState = { ok: boolean; message: string } | null;
 
