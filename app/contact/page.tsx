@@ -31,8 +31,18 @@ import { valueProps } from "@/content/value-props";
 export const metadata: Metadata = {
   /* `absolute` bypasses the root layout's "%s | Brytr Co" template. Without it the brand
    * lands twice — "Contact Brytr Co | Omaha, NE | Brytr Co" — and this title is the client's
-   * own SEO copy, so it keeps its exact wording rather than being reworded to fit. */
-  title: { absolute: "Contact Brytr Co | Omaha, NE" },
+   * own SEO copy, so it keeps its exact wording rather than being reworded to fit.
+   *
+   * EXTENDED, NOT REWRITTEN. At "Contact Brytr Co | Omaha, NE" this was 28 characters, which is
+   * under the 30 every audit tool treats as too short, and it is the ONLY indexable page on the
+   * site with that problem - measured across all 68 routes. A 28-character title wastes about
+   * half the width Google will actually render and says nothing about what the company does.
+   *
+   * The client's string is preserved character for character as the prefix, and the product is
+   * appended as a third segment rather than woven into it. Three separators is one more than
+   * ideal; changing copy the client wrote is worse. 57 characters, inside the 60 Google renders
+   * before truncating. */
+  title: { absolute: "Contact Brytr Co | Omaha, NE | Permanent Outdoor Lighting" },
   description:
     "Call Brytr Co on 402-810-3973, send a message, or book the on-site design. Permanent outdoor lighting across the Omaha metro and Council Bluffs.",
   alternates: { canonical: "/contact" },
