@@ -91,7 +91,19 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
     submitted_at: new Date().toISOString(),
   };
 
+  /* SAY WHERE THE LEAD WENT, in the runtime log.
+   *
+   * A misrouted webhook is invisible from the outside: if the URL is wrong but still valid, the
+   * homeowner sees "Request received", the action sees a 2xx, and the lead lands in somebody else's
+   * account with nothing anywhere to show it. That is exactly the failure that just happened and it
+   * cost a round trip to diagnose, because the only place the truth existed was the CRM inbox.
+   *
+   * One line per submission, in the Vercel runtime log. The hook id only, never the trigger secret
+   * and never the homeowner's details. */
+  const hookId = WEBHOOK.split("/hooks/")[1]?.split("/")[0] ?? "unknown";
+
   try {
+    console.info(`[lead] posting ${get("form") || "form"} from ${get("page") || "?"} to hook ${hookId}`);
     const res = await fetch(WEBHOOK, {
       method: "POST",
       headers: { "content-type": "application/json" },
