@@ -64,9 +64,73 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
+/* THE REAL WORK LABS LOADER. Site key FJ-P6qy5SYgFADlj.
+ *
+ * Real Work Labs supplied this as "paste into the sitewide <head>", which on a plain HTML site
+ * means one <script> in one template. Here it means this, and the two are not quite the same
+ * thing, so the differences are written down.
+ *
+ * WHY A RAW <script> IN A RENDERED <head>, AND NOT next/script. This was built the documented way
+ * first and the documented way is wrong for an inline script.
+ *
+ * next/script's own reference says beforeInteractive scripts "will always be injected inside the
+ * head of the HTML document regardless of where it's placed in the component". That holds for a
+ * script with a `src`. For an INLINE one it does not: Next serialises it into
+ * `(self.__next_s=self.__next_s||[]).push([0,{"children":"..."}])` and emits that as the first
+ * element of <body>, to be evaluated by its own bootstrap. Measured in the built HTML - </head> at
+ * byte 5321, <body> at 5328, the snippet at 5627. Every route, so the behaviour was consistent
+ * rather than a fluke of one page.
+ *
+ * That version would have worked. It runs on every route and it runs before hydration, which is
+ * what beforeInteractive promises. Two reasons it is not what shipped: the instruction was
+ * specifically the sitewide <head>, and routing a third-party loader through Next's bootstrap
+ * array makes the widget depend on Next's own runtime parsing first. A tag in <head> does not.
+ *
+ * So the root layout renders <head> and puts the tag in it. Verified in the built HTML on /,
+ * /recent-projects, /pricing and /service-areas/[slug]: the snippet and the site key are inside
+ * <head> on all of them, and the generated metadata is untouched - title, description, og:image
+ * and all eight font preloads still render, which is the thing a hand-written <head> in the App
+ * Router is supposed to break and does not.
+ *
+ * WHY THE SNIPPET IS COPIED BYTE FOR BYTE AND NOT TIDIED. It registers its rwlPluginReady listener
+ * BEFORE inserting loader.js into the document, which is the whole reason the init call ever fires.
+ * Reordering it, promoting the listener, or replacing the insertBefore with an append is a race
+ * condition waiting for a slow network. Third-party snippets get pasted, not refactored.
+ *
+ * THE ONE THING REMOVED. Real Work Labs' snippet ships with `<div id="rwl-neighborhood"></div>`
+ * above the script. A <div> cannot live in <head> and would not render there in any case, so it is
+ * not here. That is their second widget - a location strip meant for a page body - and it is
+ * deliberately not installed yet. When it is wanted, the div goes in the template that should
+ * carry it (the nineteen /service-areas/[slug] pages are the obvious home) and nothing about this
+ * loader changes: one loader serves both widgets.
+ *
+ * KNOWN LIMIT, AND IT IS THE FIRST THING TO CHECK IF THE PROJECTS DO NOT DRAW. The plugin's init
+ * runs once per full page load. A visitor who lands on the home page and then reaches
+ * /recent-projects by clicking the nav is doing a client-side navigation, so no script re-runs and
+ * the plugin is not asked to render again. Whether it copes with that depends on the plugin, not on
+ * us, and app.realworklabs.com is not reachable from the environment this was built in, so it could
+ * not be tested. If the widget is blank on a soft navigation but fine on a hard reload, that is
+ * this, and the fix is a small client component on the page that calls window.rwlPlugin.init again
+ * on mount. Do not guess at that API before seeing the loader.
+ */
+const RWL_LOADER = `(function(){
+             var d = document, t = 'script',
+                 o = d.createElement(t),
+                 s = d.getElementsByTagName(t)[0];
+                 o.src = 'https://app.realworklabs.com/static/plugin/loader.js?v=' + new Date().getTime();
+                 window.addEventListener('rwlPluginReady', function () {
+                     window.rwlPlugin.init('https://app.realworklabs.com', 'FJ-P6qy5SYgFADlj');
+                }, false);
+                s.parentNode.insertBefore(o, s);
+
+            }());`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${archivo.variable} ${plexSans.variable}`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: RWL_LOADER }} />
+      </head>
       <body>{children}</body>
     </html>
   );
