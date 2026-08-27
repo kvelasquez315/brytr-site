@@ -98,8 +98,20 @@ export function Footer() {
             </ul>
           </nav>
 
+          {/* THE HEADING IS A LINK NOW, and it is not decoration.
+            *
+            * Recent Projects took Service Areas' place in the header menu, and that menu item was
+            * the ONLY internal link to /service-areas anywhere on the site. The nineteen town
+            * pages below were never affected - this list has always carried them - but the index
+            * itself would have been left reachable from the sitemap and from nothing else, which
+            * is how a real landing page quietly stops ranking.
+            *
+            * So the column heading points at it. One link, in the place a reader would expect the
+            * heading of a list of towns to go, and the index is back in the internal link graph. */}
           <nav aria-label="Service areas" className="lg:col-span-2">
-            <h2 className="label text-accent">Service areas</h2>
+            <h2 className="label">
+              <Link href="/service-areas" className="text-accent hover:text-on-dark">Service areas</Link>
+            </h2>
             <ul className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2.5">
               {cities.map((c) => (
                 <li key={c.slug}>
