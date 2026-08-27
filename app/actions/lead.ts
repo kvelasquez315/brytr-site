@@ -54,11 +54,32 @@ const FAIL =
 export async function submitLead(_prev: LeadState, formData: FormData): Promise<LeadState> {
   const get = (k: string) => (formData.get(k) ?? "").toString().trim();
 
-  /* THE HONEYPOT. A field no human sees and every naive bot fills in. It returns the SUCCESS state
-   * rather than an error, and posts nothing: telling a bot it failed is telling it to try again
-   * with different input. This matters more than it did an hour ago, because the endpoint behind
-   * this is now real and points at the client's CRM. */
-  if (get("company")) return { ok: true, message: OK };
+  /* THE HONEYPOT, AND THE BUG IT CAUSED. Read this before touching the field name.
+   *
+   * A field no human sees and every naive bot fills in. It returns the SUCCESS state rather than an
+   * error, and posts nothing: telling a bot it failed is telling it to try again with different
+   * input.
+   *
+   * IT WAS CALLED `company`, AND THAT ATE REAL LEADS. Chrome autofill and every password manager
+   * match on the field name, id and label - "company", "organization", "org" - and they fill it
+   * whether or not it is off-screen, whether or not `autocomplete="off"` is set, and whether or not
+   * it is out of the tab order. Anyone whose browser has an employer saved, which is most people
+   * who have ever completed a business form, silently tripped the trap. They saw "Thanks, we have
+   * got it." Nothing was posted. Nothing was logged, because the log line used to sit inside the
+   * try below, after this return - so the runtime log for a swallowed lead was byte-identical to
+   * the log for no submission at all. That is the whole reason it survived: every observable
+   * signal, on both sides of the wire, said success.
+   *
+   * Diagnosed 27 Aug 2026 from the runtime log: `POST /index 200 [serverless]` with no `[lead]`
+   * line under it, which is only reachable through this early return.
+   *
+   * THE NAME IS NOW MEANINGLESS ON PURPOSE. `ref_ck` matches no autofill heuristic in any browser,
+   * so nothing offers to fill it. Do not rename it back to anything a human field could be called.
+   * A bot that fills every input still fills it, which is the only thing it was ever for. */
+  if (get("ref_ck")) {
+    console.warn(`[lead] honeypot rejected ${get("form") || "form"} from ${get("page") || "?"} - nothing posted`);
+    return { ok: true, message: OK };
+  }
 
   const name = get("name");
   const phone = get("phone");
@@ -101,9 +122,13 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
    * One line per submission, in the Vercel runtime log. The hook id only, never the trigger secret
    * and never the homeowner's details. */
   const hookId = WEBHOOK.split("/hooks/")[1]?.split("/")[0] ?? "unknown";
+  /* OUTSIDE THE TRY, AND ABOVE EVERY EARLY RETURN THAT MATTERS. It used to be the first statement
+   * inside the try, which meant the two paths that drop a lead - the honeypot and the missing-field
+   * check - left no trace at all. A log line that only prints on the happy path cannot tell you
+   * that the happy path was not taken. */
+  console.info(`[lead] posting ${get("form") || "form"} from ${get("page") || "?"} to hook ${hookId}`);
 
   try {
-    console.info(`[lead] posting ${get("form") || "form"} from ${get("page") || "?"} to hook ${hookId}`);
     const res = await fetch(WEBHOOK, {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -116,6 +141,13 @@ export async function submitLead(_prev: LeadState, formData: FormData): Promise<
       console.error(`[lead] webhook responded ${res.status} ${res.statusText}`);
       return { ok: false, message: FAIL };
     }
+    /* WHAT LEADCONNECTOR SAYS BACK, IN THE LOG. A 2xx is not proof the workflow ran. While an
+     * inbound trigger is still capturing sample data it answers "Success: test request received"
+     * with no id and executes nothing; a live trigger answers "Success: request sent to trigger
+     * execution server" WITH an id. Both are 200, and the difference is the difference between a
+     * lead in the CRM and a lead nowhere. Truncated, because the body is not ours to store. */
+    const echo = (await res.text().catch(() => "")).slice(0, 200);
+    console.info(`[lead] hook ${hookId} replied ${res.status}: ${echo}`);
     return { ok: true, message: OK };
   } catch (err) {
     console.error("[lead] webhook post failed", err);

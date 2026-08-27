@@ -109,12 +109,29 @@ export function QuoteForm({
         * hidden value and the CRM keeps the key it has always mapped. */}
       {city && <input type="hidden" name="city" value={city} />}
 
-      {/* The honeypot. Not `display:none` - some bots skip hidden fields and some screen readers
+      {/* THE HONEYPOT. Not `display:none` - some bots skip hidden fields and some screen readers
         * announce them - so it is pulled off-screen, taken out of the tab order, and labelled as
-        * not-for-you for anything that does read it. See app/actions/lead.ts. */}
+        * not-for-you for anything that does read it.
+        *
+        * IT WAS NAMED `company` AND LABELLED "Company", AND IT SWALLOWED REAL LEADS. Autofill and
+        * password managers match on the name, the id and the label text, and they fill a field
+        * called "company" no matter where it sits on the page or what autoComplete says. Anyone
+        * with an employer saved in their browser tripped it, saw the thank-you, and was never
+        * heard from. The name, the id and the label are all meaningless now for exactly that
+        * reason - nothing in any browser's heuristics matches `ref_ck`. DO NOT give this field a
+        * human-sounding name again. The full account is in app/actions/lead.ts. */}
       <div className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden" aria-hidden>
-        <label htmlFor={variant + "-company"}>Company (leave this empty)</label>
-        <input id={variant + "-company"} name="company" type="text" tabIndex={-1} autoComplete="off" />
+        <label htmlFor={variant + "-ref-ck"}>Leave this field empty</label>
+        <input
+          id={variant + "-ref-ck"}
+          name="ref_ck"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          data-1p-ignore
+          data-lpignore="true"
+          data-form-type="other"
+        />
       </div>
 
       {/* MINI PUTS NAME AND PHONE ON ONE ROW AND THE CITY UNDER THEM, which is the reference
