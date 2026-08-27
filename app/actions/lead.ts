@@ -23,15 +23,25 @@
  * host. If anyone ever switches it to a static export, every form on the site goes dead silently.
  * That is the one thing to know before changing the deploy target.
  *
- * THE URL IS A DEFAULT, NOT A SECRET. `.env*` is gitignored here, so an env-only value would leave
- * the deploy broken until somebody remembered to set it. It reads LEAD_WEBHOOK_URL first so it can
- * be moved or rotated without a code change, and falls back to the endpoint the client supplied.
+ * ONE ENDPOINT, PINNED IN CODE, AND NO ENVIRONMENT OVERRIDE. That last part is deliberate and it
+ * is a reversal.
+ *
+ * This used to read `process.env.LEAD_WEBHOOK_URL ?? <constant>`, which I added so the endpoint
+ * could be rotated without a deploy. The problem is what it does to a promise: the instruction is
+ * that every form on the site posts to one specific webhook, and with an env override in front of
+ * the constant that is not something the codebase can guarantee. A stale LEAD_WEBHOOK_URL left set
+ * in the hosting project would silently win over the URL written here, on production only, with
+ * nothing in the repo to show it. Grepping the code would say one thing and the leads would go
+ * somewhere else.
+ *
+ * So the constant is the single source of truth. Rotating means editing this line, which is a
+ * one-line change and a deploy, and is exactly what happened both times it has been rotated.
+ *
+ * Rotated 2026-08-27. The previous endpoint was 3uFcpA4cPE48TA2iiaA6/b9e6ee0f; the test leads
+ * sitting in that account came from this form.
  */
 
 const WEBHOOK =
-  process.env.LEAD_WEBHOOK_URL ??
-  /* Rotated 2026-08-27. The previous endpoint was 3uFcpA4cPE48TA2iiaA6/b9e6ee0f, and any test
-   * leads sitting in that account came from this form. */
   "https://services.leadconnectorhq.com/hooks/rkBM51eyu0Wdw5HGwEHs/webhook-trigger/aa8db861-941b-4e3d-8ef2-892290a9356b";
 
 export type LeadState = { ok: boolean; message: string } | null;
