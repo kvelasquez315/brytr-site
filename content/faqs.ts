@@ -11,15 +11,15 @@ export const homeFaqs: Faq[] = [
   { q: "Does it damage my soffit or fascia?",
     a: "It fastens into the fascia board, not through the shingles, and every penetration is sealed. Done correctly it is no more invasive than hanging a gutter. Done badly it is a leak, so every penetration on your house is sealed as it is made and checked before we leave." },
   { q: "What happens when a section stops working?",
-    a: "You call us and we come out. We are the ones who installed it and we hold the warranty alongside the manufacturer, so there is no portal and no dispatcher between you and the crew." },
+    a: "You call us and we come out. We are the ones who installed it, so there is no portal and no dispatcher between you and the crew." },
   { q: "Can it be installed in winter?",
     a: "Yes, and we do it all winter in Nebraska. Extreme cold affects adhesive and sealant cure times, so we adjust method rather than turning the work down. If conditions genuinely will not allow a good install that day, we reschedule rather than push through." },
   { q: "Do I need to be home for the install?",
-    a: "Not for the whole day, but we do want you there at the end. Handover includes walking the app with you and verifying the run in daylight and again after dark, which is the step most installers skip." },
+    a: "Not for the whole day, but we do want you there at the end. Handover includes walking the app with you and switching through every scene before we leave, which is the step most installers skip." },
   { q: "Will my HOA allow it?",
-    a: "Most do, and several of the newer west Omaha developments have specific language about permanent exterior lighting. We pull your covenant, submit the spec sheet and a rendering to your board, and install once it is approved. We handle that paperwork rather than handing it to you." },
+    a: "Most do, and several of the newer west Omaha developments have specific language about permanent exterior lighting. Read the lighting clause in your covenant before you plan anything and bring it to the visit, and we will go through it with you." },
   { q: "How long does an install take?",
-    a: "Most homes are one day. Larger properties, or a job that includes landscape and hardscape fixtures on the same visit, run two. We give you the actual number in the written quote, not a range." },
+    a: "It depends on the size of the elevation and whether landscape or hardscape fixtures go on the same visit. We give you the actual number in the written quote after the on-site measure, rather than a figure on a web page." },
 ];
 
 /* THE PRICING FAQ SET IS GONE. Nine questions, and every one of them answered with a specific
@@ -39,11 +39,9 @@ export const pricingFaqs: Faq[] = [
 
 export const serviceFaqsFor = (name: string): Faq[] => [
   { q: `How long does ${name} take to install?`,
-    a: "Most residential jobs are a single day. We confirm the exact number in your written quote after the on-site measure." },
+    a: "We confirm it in your written quote after the on-site measure, because it depends on the elevation." },
   { q: "Is this permanent or seasonal?",
     a: "Permanent. The channel and the LEDs stay on the house year round and there is nothing to take down in January." },
-  { q: "What warranty comes with it?",
-    a: "Manufacturer coverage on the hardware plus our own workmanship coverage on the install. We will put the exact terms in writing before you sign." },
   { q: "Can I add to it later?",
     a: "Yes. Landscape fixtures, bistro runs on a pergola, and additional elevations can all be added to an existing controller and appear in the same app." },
   { q: "What areas do you cover?",
