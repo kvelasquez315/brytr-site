@@ -105,7 +105,7 @@ const market: { brand: string; maker: string; what: string; stance: Stance; note
     maker: "Ghouly and similar",
     what: "The same overseas production lines behind several retail brands, sold direct.",
     stance: "Would not",
-    note: "No warranty administrator worth the name.",
+    note: "No dealer network behind it here.",
   },
   {
     brand: "Adhesive-mount strip",
@@ -210,7 +210,7 @@ export default function CompareHub() {
           <p className="label text-accent">Where we stand · on every brand below</p>
           <dl className="mt-7 grid gap-px overflow-hidden rounded-lg bg-on-dark/12 ring-1 ring-on-dark/12 md:grid-cols-3">
             {[
-              ["We install it", "Stocked, quoted, installed by our own crews and covered by our own workmanship terms."],
+              ["We install it", "Stocked, quoted and installed by us rather than ordered in for the job."],
               ["Not ours", "We do not carry it and we will still tell you where it is good. Nothing here is scored to make ours win."],
               ["We would not", "We have removed these rather than installed them, and we will say why."],
             ].map(([k, v]) => (
@@ -362,7 +362,6 @@ export default function CompareHub() {
             </div>
             <div className="mt-8 flex flex-wrap gap-x-7 gap-y-2">
               <TextLink onDark href="/lighting-systems">The two we actually sell</TextLink>
-              <TextLink onDark href="/warranty">What our own terms cover</TextLink>
             </div>
           </div>
 
@@ -374,11 +373,14 @@ export default function CompareHub() {
               </p>
               <ul className="mt-5 divide-y divide-on-dark/10 border-t border-on-dark/10">
                 {[
-                  "White quality: side by side after dark, never off a datasheet",
+                  "White quality: side by side on a real elevation, never off a datasheet",
                   "Channel: from the curb at noon, which is where it matters",
                   "App: on whether a customer still opens it in year two",
                   "Failure modes: on what actually fails in this category, not on a rated diode life",
-                  "Price: as a band, because per-foot varies house to house",
+                  /* "Price: as a band, because per-foot varies house to house" removed
+                     27 Aug 2026. It asserted a pricing basis on a page that compares hardware,
+                     and this list is about how the comparison is judged - price was never one of
+                     the things actually judged here. */
                 ].map((x) => (
                   <li key={x} className="py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">{x}</li>
                 ))}
