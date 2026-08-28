@@ -47,11 +47,11 @@ const CORE = [
 export const valueProps: Record<string, ValueProp> = {
   "/about": {
     title: "A local crew, and the system they fit.",
-    lede: "We install permanent outdoor lighting in the Omaha metro and nothing else, which is why the warranty call gets answered by the people who did the work.",
+    lede: "We install permanent outdoor lighting in the Omaha metro and nothing else, which is why the phone gets answered by the people who did the work.",
     points: [
       { h: "It is the only thing we do", p: "Not a roofing company with a lighting arm, and not a seasonal side line." },
       { h: "The same faces, start to finish", p: "The crew that measures your house is the crew that fits it and comes back to it." },
-      { h: "We hold the workmanship terms", p: "No franchise dispatcher between you and a fixing that needs looking at." },
+      { h: "No dispatcher in the middle", p: "The people who fitted it are the people you reach when something needs looking at." },
     ],
     photos: ["homeWideRanch", "crewPortrait", "installDayGarage"],
     cta: BOOK,
@@ -85,7 +85,7 @@ export const valueProps: Record<string, ValueProp> = {
   },
 
   "/contact": {
-    title: "A call, then a date after dark.",
+    title: "A call, then a date on your own lawn.",
     lede: "The useful next step is somebody standing on your driveway at dusk with a tape measure, not another brochure.",
     points: [
       { h: "Same-day reply, most days", p: "A person from the shop, not a call centre taking a message for somebody else." },
@@ -94,7 +94,7 @@ export const valueProps: Record<string, ValueProp> = {
     ],
     photos: ["homePrairieTwilight", "walkthroughDusk", "crewPortrait"],
     cta: BOOK,
-    alt: { href: "/pricing", label: "How pricing works" },
+    alt: { href: "/compare", label: "Compare the brands" },
   },
 
   "/faq": {
@@ -110,7 +110,11 @@ export const valueProps: Record<string, ValueProp> = {
     title: "See it on your own house first.",
     lede: "We come out, measure the roofline, and design it with you on your own elevation. You end up holding a written number either way.",
     points: [
-      { h: "Free, and genuinely no obligation", p: "No design fee, no deposit to get a drawing, and nobody follows up for a year." },
+      /* WAS: "No design fee, no deposit to get a drawing, and nobody follows up for a year."
+       * Three claims, and the deposit and design-fee halves are pricing terms nobody at Brytr
+       * gave us. The visit being free is the offer Brytr leads with everywhere, so that part
+       * stays and the invented terms around it do not. */
+      { h: "Free, and genuinely no obligation", p: "The visit, the design and the written quote cost nothing, and nobody follows up for a year." },
       { h: "Your materials, not a catalogue", p: "Channel colour held against your actual fascia, because that is what decides how it looks at noon." },
       { h: "Scenes built while we are there", p: "You leave the appointment knowing what the app does, not reading about it later." },
     ],
@@ -133,16 +137,22 @@ export const valueProps: Record<string, ValueProp> = {
   },
 
   "/how-it-works": {
-    title: "Installed in a day, and left on the building.",
-    lede: "Measured after dark, routed into the fascia, sealed as it goes, commissioned on your phone and signed off lit and in daylight.",
+    /* WAS: "Installed in a day, and left on the building." The duration survived here in the
+     * TITLE after the same claim was taken out of the points below it, three lines further down,
+     * in the same commit. A heading is the one line on a band a reader cannot miss. */
+    title: "Fitted into the fascia, and left on the building.",
+    lede: "Measured on site, routed into the fascia, sealed as it goes, commissioned on your phone and signed off with you.",
     points: [
       { h: "Into fascia, never through shingles", p: "Every penetration sealed at the moment it is made, which is where installs fail at year five." },
-      { h: "Most homes are a single day", p: "One crew, one visit, and the drive cleared before we leave." },
-      { h: "Checked twice before we go", p: "The daylight sightline from the curb, then every scene walked with you after dark." },
+      /* WAS: "Most homes are a single day / One crew, one visit, and the drive cleared before we
+       * leave." The duration claim is out on the client's instruction. What is left is the part
+       * that was never in doubt and is the actual reassurance: the site gets cleared. */
+      { h: "The drive is cleared before we leave", p: "One visit, and nothing left on your property when it is done." },
+      { h: "Checked twice before we go", p: "The sightline from the curb, then every scene walked through with you." },
     ],
     photos: ["installDayPavilion", "detailGableMiter", "crewRoofFascia"],
     cta: BOOK,
-    alt: { href: "/pricing", label: "How pricing works" },
+    alt: { href: "/compare", label: "Compare the brands" },
   },
 
   "/lighting-systems": {
@@ -150,7 +160,7 @@ export const valueProps: Record<string, ValueProp> = {
     lede: "We fit more than one manufacturer, so what goes on your house is the system that suits it rather than the only one we sell.",
     points: [
       { h: "Named on the quote", p: "Manufacturer, series and channel finish in writing, so you know exactly what is being fastened to your building." },
-      { h: "Two warranty layers", p: "The manufacturer covers the hardware. We cover the work, and we are the ones who turn up." },
+      { h: "One number to call", p: "The people who fitted it are the people who turn up." },
       { h: "Add to it later", p: "Landscape, patio and hardscape join the same controller without replacing what is already up." },
     ],
     photos: ["archAtNight", "serviceRoofline", "serviceSoffit"],
@@ -158,19 +168,10 @@ export const valueProps: Record<string, ValueProp> = {
     alt: { href: "/compare", label: "Compare the brands" },
   },
 
-  "/pricing": {
-    title: "Priced by the foot, in writing.",
-    lede: "The number depends on your roofline, how many zones you want and what else you light. All three are settled on site before anybody signs.",
-    points: [
-      { h: "No design fee, no travel charge", p: "Inside the metro the consultation and the drawing cost nothing, and neither appears on the quote." },
-      { h: "Every element its own line", p: "Roofline, landscape and patio priced separately, so you can see what each one is doing to the total." },
-      { h: "One cost, not ten", p: "The ten year version of hanging lights is ten rentals or ten purchases, and nobody prices it that way at the door." },
-    ],
-    photos: ["homeRanchBluehour", "patioCovered", "landscapeTreeBeds"],
-    cta: BOOK,
-    alt: { href: "/financing", label: "Financing options" },
-  },
-
+  /* THE "/pricing" BAND IS GONE with the page it belonged to. It carried three claims and all
+   * three were unsourced: "No design fee, no travel charge", the per-element pricing breakdown,
+   * and a "Financing options" link to /financing - a route that never existed, so that button was
+   * a live 404 on the client's domain. */
   "/recent-projects": {
     title: "Finished work, photographed as it was.",
     lede: "Real Omaha properties, shot on nights the systems were already running rather than staged for a camera.",
@@ -199,11 +200,20 @@ export const valueProps: Record<string, ValueProp> = {
 
   "/service-areas": {
     title: "The metro, and Council Bluffs.",
-    lede: "Every town we serve is inside about thirty-five minutes of the shop, which is what lets a warranty call in February be the same week.",
+    lede: "Every town we serve is inside about thirty-five minutes of the shop, which is what lets a call in February be answered the same week.",
     points: [
       { h: "A service call is a visit", p: "Not a route day booked for next month. That is the whole reason the area stops where it does." },
-      { h: "Same price in every town", p: "No travel charge inside the metro, and no border premium on the Iowa side." },
-      { h: "Your own crew, not a franchise", p: "The same people in Elkhorn, Bellevue and Council Bluffs, out of one shop in west Omaha." },
+      /* WAS: "Same price in every town / No travel charge inside the metro, and no border premium
+       * on the Iowa side." A uniform-pricing guarantee across nineteen towns and two states.
+       * Nobody at Brytr has told us how travel is or is not priced. Replaced with the thing this
+       * band was really for, which is why the service area stops where it does - and that is a
+       * drive time, not a price. */
+      { h: "One shop, one set of people", p: "Every town is served out of west Omaha rather than by a local franchise." },
+      /* WAS: "Your own crew, not a franchise". The client's correction in August was that the
+       * crews are subcontractors, not employees, so "your own crew" is false. What is true and is
+       * the actual point of this band is that everything is dispatched from one shop rather than
+       * from a franchise head office. */
+      { h: "One shop, not a franchise", p: "Elkhorn, Bellevue and Council Bluffs are all served out of west Omaha." },
     ],
     photos: ["winterGradientSnow", "homeShakeBrick", "deckRanchWarm"],
     cta: BOOK,
@@ -216,21 +226,14 @@ export const valueProps: Record<string, ValueProp> = {
     points: CORE,
     photos: ["serviceWholeHome", "servicePatio", "serviceLandscape"],
     cta: BOOK,
-    alt: { href: "/pricing", label: "How pricing works" },
+    alt: { href: "/compare", label: "Compare the brands" },
   },
 
-  "/warranty": {
-    title: "Who answers when something goes wrong.",
-    lede: "The manufacturer covers the hardware and we cover the work. Whichever one a fault falls under, the call comes to us and we come out.",
-    points: [
-      { h: "Workmanship is ours", p: "The crew who fastened it holds the terms. Not a dispatcher, and not somebody who has never seen your fascia." },
-      { h: "Sealed as it is fitted", p: "Every penetration closed at the moment it is made, which is what most warranty claims in this trade are actually about." },
-      { h: "Still servicing our first installs", p: "A warranty is worth what the company administering it is still around to honour." },
-    ],
-    photos: ["dayShakeGable", "homeEaveDownlights", "dayStoneGable"],
-    cta: BOOK,
-    alt: { href: "/how-it-works", label: "How an install runs" },
-  },
+  /* THE "/warranty" ENTRY IS GONE, 28 Aug 2026, with the page. Deleting the route and leaving its
+   * copy in this map would have shipped three paragraphs of warranty terms in the bundle for a URL
+   * that now 308s to the home page - which is the same mistake as the dead pricing-FAQ array that
+   * nearly went out on 27 Aug: unrendered is not the same as removed, and a claim in a shipped
+   * chunk is a claim. Nothing in this file should describe coverage until Brytr gives us terms. */
 };
 
 /* ── THE DYNAMIC TEMPLATES ──
@@ -248,11 +251,11 @@ export function serviceValueProp(s: Service): ValueProp {
     points: [
       { h: "Fitted once, then left alone", p: "Routed in and sealed on install day. Nothing to put up in November and nothing to take down." },
       { h: "Its own zone in the app", p: "It comes on and goes off independently, so the back of the property can stay dark while the front is lit." },
-      { h: "Ours to service", p: "The crew that fitted it holds the workmanship terms and is twenty minutes away." },
+      { h: "Ours to service", p: "The crew that fitted it is twenty minutes away." },
     ],
     photos: [s.photo ?? "homeWideRanch", ...shots(`vb-${s.slug}`, 2)],
     cta: BOOK,
-    alt: { href: "/pricing", label: "How pricing works" },
+    alt: { href: "/compare", label: "Compare the brands" },
   };
 }
 
@@ -264,12 +267,15 @@ export function cityValueProp(c: City): ValueProp {
      * reads correctly, so the exception is handled rather than the sentence rewritten for all. */
     lede:
       c.drive === "In town"
-        ? "The shop is in west Omaha, so an install here is booked inside the week and a warranty call is a visit rather than a route day."
-        : `${c.drive} from the shop in west Omaha, which is what lets an install here be booked inside the week and a warranty call be a visit.`,
+        ? "The shop is in west Omaha, so an install here is booked inside the week and a service call is a visit rather than a route day."
+        : `${c.drive} from the shop in west Omaha, which is what lets an install here be booked inside the week and a service call be a visit.`,
     points: [
       { h: "The same crew as every town", p: "One shop, one set of people, and no local franchise holding the terms." },
-      { h: "No travel charge", p: "Priced by the foot exactly as it is in Omaha, with nothing added for the drive." },
-      { h: "Designed on your own elevation", p: "After dark, against your fascia colour, before anything is ordered." },
+      /* WAS: "No travel charge / Priced by the foot exactly as it is in Omaha, with nothing added
+       * for the drive." This rendered on all twelve city pages: a pricing basis plus a
+       * no-surcharge guarantee, neither of them from Brytr. */
+      { h: "Booked out of west Omaha", p: "The same people who measure the house are the ones the shop sends back to it." },
+      { h: "Designed on your own elevation", p: "Against your own fascia colour, before anything is ordered." },
     ],
     photos: shots(`vb-city-${c.slug}`, 3),
     cta: BOOK,
@@ -283,7 +289,7 @@ export function systemValueProp(name: string, slug: string): ValueProp {
     lede: `${name} is what gets fastened to the building. Who fastens it, and who answers when a section goes dark, is the other half of what you are buying.`,
     points: [
       { h: "Named on your quote", p: "Series, channel finish and diode spacing in writing before anybody drills." },
-      { h: "Two warranty layers", p: "The manufacturer covers the hardware. We cover the work, and the call comes to us either way." },
+      { h: "One number to call", p: "The call comes to the people who fitted it, either way." },
       { h: "Not the only one we fit", p: "If another system suits your building better we will say so, because we install both." },
     ],
     photos: shots(`vb-sys-${slug}`, 3),
