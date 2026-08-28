@@ -48,7 +48,7 @@ export const metroShots: Shot[] = [
   { photo: "dayBrickGable", caption: "The same hardware in daylight. Colour matched to the fascia, diffuser facing down, and you have to know it is there to find it." },
   { photo: "landscapeTreeBeds", caption: "Roofline and landscape on one controller, so the beds and the tree come up with the house rather than on their own timer." },
   { photo: "halloweenOrangePurple", caption: "Orange and violet through October, set from the app and scheduled to switch itself back." },
-  { photo: "homePrairieTwilight", caption: "Civil twilight, which is the twenty minutes this product looks best and the reason we design after dark." },
+  { photo: "homePrairieTwilight", caption: "Civil twilight, which is the twenty minutes this product looks best." },
   { photo: "patioTimberStone", caption: "A timber and stone patio cover: the run along the beam and the step lights on the stairs are the same system as the roofline." },
   { photo: "winterSnowDusk", caption: "February, snow on the drive, lights on. Nobody went up a ladder to make this happen." },
   { photo: "homeCraftsmanPorch", caption: "Porch roof and upper gables carried on one run at blue hour." },
