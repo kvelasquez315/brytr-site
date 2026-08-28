@@ -35,10 +35,9 @@ export const posts: Post[] = [
         "How many brands do you carry, and why that one?",
         "Does it fasten into the fascia or through the shingles?",
         "Show me a daytime photo of a finished install from the street.",
-        "What exactly does the warranty cover, and who administers it?",
-        "Will you service this if I sell the house?",
+            "Will you service this if I sell the house?",
         "What happens if one section fails in year four?",
-        "Do you handle the HOA submission?",
+        "What does a board actually want to see?",
         "Can I see the written quote before install day, with no line items added later?",
       ] },
       { callout: "Question four is the one that separates good installers from the rest. Anyone can make a roofline look good at night. Making the hardware disappear in daylight is the actual craft." },
@@ -83,19 +82,20 @@ export const posts: Post[] = [
       { p: "Fastening through the roof covering, over-driving fasteners into soft or rotten fascia, and skipping sealant on a cold day because it is slow. All three are shortcuts, and all three are why the crew who measures a house is the crew who fits it." },
       { callout: "If your fascia is already soft or rotten, that gets repaired before anything is mounted to it. Mounting a permanent fixture to failing timber is not an install, it is a deferred problem." },
     ] }),
-  B({ slug: "permanent-lighting-warranty-comparison", title: "Permanent Lighting Warranties Compared",
-    h1: "Permanent lighting warranties, compared brand by brand.", keyword: "jellyfish lighting warranty",
-    category: "Product", read: "6 min",
-    dek: "A warranty is only worth the administrator behind it. Here is what to read in the document, and the question that matters more than the length.",
-    links: { label: "Our warranty", href: "/warranty" },
-    body: [
-      { p: "Everyone in this category advertises a long warranty. Almost nobody explains who administers it, what counts as a covered failure, or whether labor is included. Those three things decide whether the number means anything." },
-      { h: "The four things to read" },
-      { list: ["Length on the LED versus length on the controller and power supply, which are usually different and usually shorter", "Whether labor to diagnose and replace is included or billed", "Who administers it: the manufacturer, the installer, or a franchise administrator", "What voids it, especially around roof work and third-party service"] },
-      { callout: "The question that matters more than the length: who comes out? A twenty-five year warranty administered by a company that no longer works in your city is a piece of paper." },
-      { h: "How we handle it" },
-      { p: "Manufacturer coverage on the hardware plus our own workmanship coverage on the install, both in writing before you sign. We come out. That is the arrangement, and it is the reason we stay inside one market." },
-    ] }),
+  /* THE WARRANTY ARTICLE WAS HERE and is gone, 28 Aug 2026. "Permanent lighting warranties,
+   * compared brand by brand" - a 6-minute read that told homeowners what to look for in a warranty
+   * document, ranked competitors on who administers theirs, and closed with "Manufacturer coverage
+   * on the hardware plus our own workmanship coverage on the install, both in writing before you
+   * sign. We come out."
+   *
+   * Brytr has given us no warranty terms, so the article was advising people on a document we have
+   * never seen and promising coverage nobody authorised. The client's instruction on warranty is to
+   * remove it entirely, and an article ABOUT warranties cannot survive that instruction by being
+   * reworded. It is in git: `git show f7956e9:content/blog.ts`.
+   *
+   * The route dies with the entry - /blog/[slug] is generated from this array - so
+   * /blog/permanent-lighting-warranty-comparison now 404s. It was in the sitemap only via
+   * posts.map(), so that clears itself too. */
   B({ slug: "permanent-lights-on-stucco-brick-cedar", title: "Permanent Lights on Stucco, Brick and Cedar Homes",
     h1: "Permanent lights on stucco, brick and cedar homes.", keyword: "permanent lights on stucco",
     category: "Install", read: "6 min",
@@ -117,8 +117,17 @@ export const posts: Post[] = [
       { p: "Covenant language on permanent exterior lighting is newer than the product, which means a lot of associations are working out their position as applications arrive. That is good news: a well-presented submission usually gets approved." },
       { h: "What boards actually object to" },
       { list: ["Visible hardware in daylight, which is a design question and answerable with a daytime photo", "Color changing displays running year round, which a scheduling commitment resolves", "Brightness spilling onto neighboring lots, which zoning and aiming resolves", "Non-matching channel finishes, which color matching resolves"] },
-      { h: "How the submission goes" },
-      { p: "We pull your covenant and read the lighting clause, put together a spec sheet and a rendering of your elevation in the format your board wants, and submit it. Nothing is mounted before the approval comes back. Typically two weeks." },
+      { h: "What a submission usually needs" },
+      /* WAS: "We pull your covenant and read the lighting clause, put together a spec sheet and a
+       * rendering of your elevation in the format your board wants, and submit it. Nothing is
+       * mounted before the approval comes back. Typically two weeks."
+       *
+       * Four claims: that Brytr pulls the covenant, prepares the submission, files it, and that
+       * approvals take two weeks. Removed 28 Aug 2026 - the client has not told us they administer
+       * HOA submissions, and the two-week figure came from nowhere. The article keeps its value
+       * because the useful half was always the list of what boards object to, which is above and
+       * is unchanged. */
+      { p: "Most boards want the same three things: the lighting clause in your own covenant, a spec sheet for the hardware, and a drawing or photograph showing what it looks like on your elevation. Read the clause before you plan anything." },
       { callout: "Worth knowing: an approval is much easier to get with a daylight photograph of a finished install than with a night photograph. Boards are worried about how it looks at noon, not at midnight." },
     ] }),
   B({ slug: "husker-gameday-lighting-ideas", title: "Husker Gameday Lighting Ideas",
@@ -169,7 +178,7 @@ export const posts: Post[] = [
       { list: ["Two story with a front gable: light the main eave and the gable, leave the sides dark", "Ranch: light the full front run, then spend the rest of the budget on landscape uplighting instead", "Multiple dormers: light the main eave only, or the dormers only, never both at once", "Turret or bay: treat it as its own zone, because it is the feature"] },
       { h: "Where the money is best spent" },
       { p: "In a lot of cases the second-best pound is not more roofline, it is two landscape uplights on a mature tree. Roofline lighting draws the outline of the house. Uplighting gives it depth. Together they read as designed rather than decorated." },
-      { callout: "Ask for the design to be done after dark, on your property. A daytime design conversation about a night-time product is guesswork." },
+      { callout: "Ask for the design to be done on your own property rather than off a satellite photograph. A design drawn from an aerial view of a roof is guesswork." },
     ] }),
 ];
 
