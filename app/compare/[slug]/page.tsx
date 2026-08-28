@@ -190,7 +190,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               headB={c.b}
               source={
                 frame === "labor"
-                  ? "Everything in the left column is what our own crews do. The right column is what a competent DIY install involves, not a worst case."
+                  ? "Everything in the left column is what a professional install involves. The right column is what a competent DIY install involves, not a worst case."
                   : frame === "referee"
                   ? "Both columns are our own read as installers in this market. Neither manufacturer has given us a datasheet, and we have not asked either of them to review this page."
                   : `The ${c.a} column is the manufacturer's published spec. The ${c.b} column is our own read as installers in this market, which is worth something and is not the same as a datasheet.`
@@ -296,8 +296,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               </div>
               <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2">
                 <TextLink href="/lighting-systems">Everything we install</TextLink>
-                <TextLink href="/warranty">What our own terms cover</TextLink>
-              </div>
+                  </div>
             </div>
 
             <div className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
@@ -343,8 +342,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                 ["Ask who is on the ladder", "Whether the people who quote it are the people who fit it. Almost every failure in this trade is workmanship, so this question is the one that predicts year four."],
                 ["Ask when the sealant goes on", "At the moment the screw is driven, or in one pass at the end of the day. Only one of those keeps water out of a fascia board."],
                 ["Ask how corners are handled", "Cut and mitered, or flexed around. A kink at a valley is visible from the street and cracks first in February."],
-                ["Ask who administers the warranty", "The installer, the manufacturer, or a franchise head office. All three are answers; not knowing is not."],
-                ["Ask what happens at handover", "Whether somebody walks the scenes with you, or hands you an app and drives off."],
+                            ["Ask what happens at handover", "Whether somebody walks the scenes with you, or hands you an app and drives off."],
               ].map(([h, p]) => (
                 <li key={h} className="rounded-lg bg-background p-6 shadow-[var(--shadow-lg)] ring-1 ring-border">
                   <h3 className="font-display text-[1.05rem] font-bold leading-snug text-foreground">{h}</h3>
@@ -353,7 +351,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               ))}
             </ul>
             <p className="mt-6 max-w-[80ch] text-sm leading-relaxed text-muted-foreground">
-              Ask us the same six. We would rather be judged on them than on which brand is in our van.
+              Ask us the same five. We would rather be judged on them than on which brand is in our van.
             </p>
           </div>
         </section>
@@ -384,7 +382,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
 
             <ul className="divide-y divide-border border-y border-border">
               {[
-                ["A weekend at roof height", "Two days on a ladder for most homes, and the second day is the one where people get careless."],
+                ["A weekend at roof height", "The second day is the one where people get careless, and it is the day the corners get done."],
                 ["Holes you drilled yourself", "Every fixing is a penetration in your own fascia. Sealing them properly is the difference between a project and a leak."],
                 ["It shows in daylight", "Consumer channel is not color matched to your trim, and adhesive mounts sit proud of the board. This is the part people regret."],
                 ["Corners", "There is no miter saw in the box. Every gable and valley is a bend, and bends are where a run cracks."],
