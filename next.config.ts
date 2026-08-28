@@ -55,10 +55,26 @@ import type { NextConfig } from "next";
  * writing, and the last version of the file is in git if the structure is ever wanted:
  * `git show c53361a:app/pricing/page.tsx`. The structure was not the problem.
  */
+/* /warranty IS GONE TOO, 28 Aug 2026, same instruction and same reason: "remove it entirely".
+ *
+ * Brytr has never given us warranty terms. The page stated two layers of coverage - manufacturer on
+ * the hardware, Brytr's own on the workmanship - said we hold them alongside the manufacturer, and
+ * was linked from 21 places including the footer and the closer on every page. A homeowner could
+ * have relied on it.
+ *
+ * The blog article that compared warranties brand by brand goes with it, for the same reason: it
+ * advised people on what to read in a document we have never seen, and closed by promising Brytr's
+ * coverage. /blog/permanent-lighting-warranty-comparison redirects to the blog index rather than
+ * 404ing, because it was a real indexed URL with a real keyword behind it.
+ *
+ * Both redirect rather than 404 for the reason /pricing does: they were linked from all over the
+ * site and are probably in Google's index, and a 404 punishes a reader for our mistake. */
 const nextConfig: NextConfig = {
   async redirects() {
     return [
       { source: "/pricing", destination: "/", permanent: true },
+      { source: "/warranty", destination: "/", permanent: true },
+      { source: "/blog/permanent-lighting-warranty-comparison", destination: "/blog", permanent: true },
       { source: "/financing", destination: "/", permanent: true },
       { source: "/sitemap_index.xml", destination: "/sitemap.xml", permanent: true },
       { source: "/page-sitemap.xml", destination: "/sitemap.xml", permanent: true },
