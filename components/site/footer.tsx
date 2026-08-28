@@ -9,7 +9,10 @@ import { cities } from "@/content/cities";
 import { systems } from "@/content/systems";
 
 const company = [
-  ["About", "/about"], ["How it works", "/how-it-works"], ["Pricing and financing", "/pricing"],
+  /* "Pricing and financing" was here and is gone with the page, 27 Aug 2026. Both halves of that
+   * label were a problem: the prices were invented and the finance partner was never named by
+   * Brytr. /pricing redirects to the home page. */
+  ["About", "/about"], ["How it works", "/how-it-works"],
   ["Warranty", "/warranty"], ["Reviews", "/reviews"], ["Gallery", "/gallery"],
   ["Recent projects", "/recent-projects"], ["FAQ", "/faq"], ["Compare brands", "/compare"],
 ];

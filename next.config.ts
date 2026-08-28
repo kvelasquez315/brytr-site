@@ -38,10 +38,15 @@ import type { NextConfig } from "next";
  * we file HOA submissions ourselves, and promised "no design fee, no travel charge". None of it
  * came from Brytr. It was live on the client's own domain.
  *
- * A 308 to /contact rather than a 404 or a 410: the URL was in the header nav of all 78 pages and
- * in the footer, so it is in browser histories and possibly in Google's index. A visitor who wanted
- * a price should land somewhere that can give them one, which is a phone number. A 404 punishes
- * them for our mistake.
+ * A 308 TO THE HOME PAGE rather than a 404 or a 410. The URL was in the header nav of all 78 pages
+ * and in the footer, so it is in browser histories and possibly in Google's index, and a 404 would
+ * punish a visitor for our mistake.
+ *
+ * It pointed at /contact for one commit and the client changed it to the home page, which is the
+ * better call: /contact is four ways to reach us, and somebody who clicked "Pricing" has not yet
+ * decided to make contact. The home page carries the phone number in the header, the offer, and
+ * the reviews, so it can answer "what is this and should I call" - which is the question underneath
+ * the click. Do not quietly move it back.
  *
  * /financing gets the same treatment and never existed as a route at all. It was the target of the
  * pricing page's own "Financing options" button, so that button was a live 404.
@@ -53,8 +58,8 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   async redirects() {
     return [
-      { source: "/pricing", destination: "/contact", permanent: true },
-      { source: "/financing", destination: "/contact", permanent: true },
+      { source: "/pricing", destination: "/", permanent: true },
+      { source: "/financing", destination: "/", permanent: true },
       { source: "/sitemap_index.xml", destination: "/sitemap.xml", permanent: true },
       { source: "/page-sitemap.xml", destination: "/sitemap.xml", permanent: true },
     ];

@@ -4,14 +4,20 @@ import { compares } from "./compares";
 /* content/cities.ts is no longer imported here. It fed the Service Areas panel, which this menu
  * no longer carries. The towns are listed in the footer, which imports cities.ts itself. */
 
-/* THE HEADER MENU. Five items: Services, Gallery, Pricing, Recent Projects, About.
+/* THE HEADER MENU. Four items: Services, Gallery, Recent Projects, About.
+ *
+ * PRICING IS GONE, 27 Aug 2026, on the client's instruction. The item used to carry the note
+ * "Pricing was three clicks deep and it is the first thing a homeowner looks for", which was true
+ * and is exactly why the page did so much damage: every figure on it was invented, and it was one
+ * click from all 78 pages. The URL now redirects to the home page. Nothing replaces the item here -
+ * a menu item pointing at a redirect is worse than no menu item - and nothing should until Brytr
+ * gives us real numbers in writing.
  *
  * RECENT PROJECTS TOOK SERVICE AREAS' SLOT, on instruction, when the Real Work Labs widget went
- * in. It is a swap rather than an addition for a reason worth keeping: the client's verdict on the
+ * in. It was a swap rather than an addition for a reason worth keeping: the client's verdict on the
  * live nav was that it was "very weird", and six centered items is the shape that made it weird.
- * Five stays five.
  *
- * WHAT THE SWAP COST, AND WHAT WAS DONE ABOUT IT. Service Areas was the only header link to
+ * WHAT THAT SWAP COST, AND WHAT WAS DONE ABOUT IT. Service Areas was the only header link to
  * /service-areas, and its panel was the only header route to the nineteen town pages. The towns
  * were never at risk - the footer lists all nineteen and always has - but the INDEX had no other
  * internal link anywhere on the site, which would have left a real landing page reachable only
@@ -19,17 +25,16 @@ import { compares } from "./compares";
  * removing anything else from this menu: a page with no internal links is a page Google stops
  * believing in, and the sitemap alone is not a substitute.
  *
- * WHY IT CHANGED AGAIN. It read Systems / Lighting / Areas / Gallery / Pricing / About, and the
- * client's verdict on the live site was that "the navigation of it is very weird". He is right, and
- * the reason is specific: SYSTEMS AND LIGHTING ARE THE SAME WORD TWICE to anybody who does not work
- * here. One meant the hardware brands, the other meant the jobs, and no homeowner can guess which
- * is which. Meanwhile the home page said "See all services" - a THIRD word for the same thing - so
- * the menu and the page did not even agree with each other.
+ * WHY IT CHANGED BEFORE THAT. It read Systems / Lighting / Areas / Gallery / Pricing / About, and
+ * the client's verdict on the live site was that "the navigation of it is very weird". He is right,
+ * and the reason is specific: SYSTEMS AND LIGHTING ARE THE SAME WORD TWICE to anybody who does not
+ * work here. One meant the hardware brands, the other meant the jobs, and no homeowner can guess
+ * which is which. Meanwhile the home page said "See all services" - a THIRD word for the same
+ * thing - so the menu and the page did not even agree with each other.
  *
  * One word for the thing Brytr sells: Services. The hardware lines and the brand comparisons are
  * columns inside it, because that is what they are - detail about how a service gets done, not a
- * separate thing to buy. "Areas" spelled out as "Service Areas", because "Areas" on its own could
- * mean areas of the house.
+ * separate thing to buy.
  *
  * Derived from the same arrays the pages are generated from, so a slug can never drift out of the
  * menu - add a service to content/services.ts and it appears here on the next build. Nothing is
@@ -83,8 +88,6 @@ export const navTree: NavItem[] = [
     },
   },
   { label: "Gallery", href: "/gallery" },
-  /* Pricing was three clicks deep and it is the first thing a homeowner looks for. */
-  { label: "Pricing", href: "/pricing" },
   /* WHERE SERVICE AREAS USED TO BE. Its panel carried the nineteen towns in three groups with a
    * "your town is not listed" feature card, and it is in git if it is ever wanted back:
    * `git show b6e9ce2:content/nav.ts`. The towns are still linked from the footer, and the index
