@@ -112,7 +112,7 @@ export default function Contact() {
         trail={trail}
       />
 
-      {/* ── THE MAIN FORM, AND THE CONTACT DETAILS BESIDE IT ────────────────────────────────
+      {/* ── THE MAIN FORM, AND THE CONTACT DETAILS BESIDE IT ──────────────────────────────────
         * Added 28 Aug 2026 on the client's instruction: "there should be a big main form on the
         * contact page after the hero with contact info next to it."
         *
@@ -307,7 +307,7 @@ export default function Contact() {
                 {[
                   "One of us reads it and replies",
                   "We ask for the town if you have not given it",
-                  "We offer times, mostly evenings",
+                  "We offer times that suit you",
                   "You get a written quote after the visit",
                   "The quote stays valid whether or not you reply",
                 ].map((x) => (
@@ -344,13 +344,13 @@ export default function Contact() {
         tall
         side="left"
         ground="raise"
-        title="An hour on your own lawn, after dark."
+        title="An hour on your own lawn."
         link={{ href: "/free-design-consultation", label: "What the hour actually involves" }}
       >
         <p>
           Every one of the routes above ends in the same place: somebody standing on your property
-          after dark with a sample run, showing you what warm white does against your fascia
-          rather than against a photograph of somebody else&rsquo;s.
+          with a sample run, showing you what warm white does against your own fascia rather than
+          against a photograph of somebody else&rsquo;s.
         </p>
         <p>
           It costs nothing, there is nothing to sign, and you keep the written quote either way.
@@ -380,7 +380,7 @@ export default function Contact() {
         ground="muted"
       />
 
-      <PageCta variant="phone" photos={valueProps["/contact"].photos} omit={["/pricing"]} panelLink={{ href: "/free-design-consultation", label: "Book the on-site measure" }} 
+      <PageCta variant="phone" photos={valueProps["/contact"].photos} panelLink={{ href: "/free-design-consultation", label: "Book the on-site measure" }} 
         /* The NAP block above is bg-muted, so the closer would have landed on the same ground and the page would
           * have ended in one undifferentiated block. */
         ground="card"
