@@ -4,6 +4,7 @@ import Image from "next/image";
 import { site } from "@/content/site";
 import { cities, metroCities } from "@/content/cities";
 import { services } from "@/content/services";
+import { systems } from "@/content/systems";
 import { images } from "@/content/images";
 import { reviewProof } from "@/content/reviews";
 import { Button } from "@/components/ui/button";
@@ -441,9 +442,9 @@ export function PageCta({
   panelLink?: { href: string; label: string };
 }) {
   const nextLinks = [
-    { href: "/pricing", label: "how the pricing works" },
+    /* "how the pricing works" led this list and is gone with /pricing. Callers still passing
+       omit={["/pricing"]} are harmless - the filter simply matches nothing now. */
     { href: "/compare", label: "compare the brands we are asked about" },
-    { href: "/warranty", label: "what the warranty covers" },
     { href: "/how-it-works", label: "what install day looks like" },
   ]
     .filter((l) => !omit.includes(l.href))
@@ -456,7 +457,7 @@ export function PageCta({
       />
       <p className="mt-4 max-w-[60ch] text-lg text-muted-foreground">
         {body ??
-          "We measure on site, design it with you after dark, and hand you a written quote. If you decide against it, you’ve lost an hour and gained a plan."}
+          "We measure on site, design it with you, and hand you a written quote. If you decide against it, you’ve lost an hour and gained a plan."}
       </p>
         {/* NO TICK LIST. Three fragments restating the paragraph directly above them, under
           * the one heading on the page whose job is to get a form filled in. Removed on
@@ -482,11 +483,24 @@ export function PageCta({
     </p>
   );
 
+  /* TWO OF THESE FOUR WERE FALSE and they rendered in the closer of nearly every page.
+   *
+   *   "1 day / typical install"        an install-duration claim. Removed 28 Aug 2026 on the
+   *                                    client's instruction: do not say one-day installs.
+   *   "Ours / the crew on your roof"   the staffing claim, in different words. The earlier sweep
+   *                                    caught "our own crews" and missed this because it does not
+   *                                    use the phrase - which is the argument for auditing rendered
+   *                                    text rather than grepping for a string. The crews are
+   *                                    subcontracted.
+   *
+   * Replaced with two figures anybody can check: the six systems in content/systems.ts and the
+   * twelve towns in content/cities.ts, both counted from the arrays rather than typed, so neither
+   * can drift from what the site actually publishes. */
   const statList: [string, string][] = [
-    ["1 day", "typical install"],
     [reviewProof.average, `from ${reviewProof.count} reviews`],
-    ["Ours", "the crew on your roof"],
     ["Free", "design consultation"],
+    [String(systems.length), "systems we install"],
+    [String(cities.length), "towns we cover"],
   ];
 
   const closerPool = (photos ?? []).map((k) => images[k]).filter((x) => x?.src);
