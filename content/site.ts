@@ -1,8 +1,12 @@
 /* Confirmed facts only. Anything not verified from the client is absent by design.
- * Verified: 196 five-star Google reviews · 5.0 average (Google Business Profile, 20 Aug 2026) · 1.2M lights installed locally
+ * Verified: 201 five-star Google reviews · 5.0 average (Google Business Profile, 28 Aug 2026)
  * One crew from measure to handover · founders Zac Van Buren & Sam Greguska
  * Phone 402-810-3973 · Omaha, NE · carries both Haven Evolution and Jellyfish
  */
+/* The review count and average live in content/reviews.ts and are read from there rather than
+ * repeated. See the note beside `stats` below. */
+import { reviewProof } from "./reviews";
+
 export const site = {
   name: "Brytr Co",
   legalName: "Brytr Co",
@@ -58,17 +62,29 @@ export const site = {
     facebook: "https://www.facebook.com/BrytrlightingNE",
     instagram: "https://www.instagram.com/brytrco",
   },
-  /* Every figure here is confirmed. Do not add one that is not. */
+  /* Every figure here is confirmed. Do not add one that is not.
+   *
+   * "1.2M lights installed in Omaha" was the first entry and is gone, 28 Aug 2026, on the client's
+   * instruction to remove it everywhere. It had already been taken off the home page once and it
+   * survived here and on /about, which is how a removed claim comes back.
+   *
+   * NOTE FOR WHOEVER READS THIS ARRAY NEXT: nothing consumes `site.stats` any more. Its last
+   * caller was a home-page variant deleted in August. It is kept because it is the closest thing
+   * this repo has to a list of what has actually been verified, and that list is worth having -
+   * but do not assume a figure added here will render anywhere, and do not assume one removed here
+   * has left the site. Grep for it. That is the lesson of this entire week. */
   stats: [
-    { figure: "1.2M", label: "Lights installed in Omaha", icon: "installCount" },
-    { figure: "5.0", label: "Average from 196 Google reviews", icon: "stars" },
+    /* The count is interpolated from content/reviews.ts rather than typed here. It was "196"
+       in this string while reviews.ts said the same, and the client has corrected this number
+       twice - each correction had to find three files or the site disagreed with itself. */
+    { figure: reviewProof.average, label: `Average from ${reviewProof.count} Google reviews`, icon: "stars" },
     { figure: "1 crew", label: "From the measure to the handover", icon: "hardHat" },
     /* This slot held "25 yr — LED rating on the Signature system", which was an invented number
      * on an invented tier. It was swapped for IP66, but that rating came out of the same batch
      * of specs I wrote without a source, so it is not safe either. Replaced with the one thing
      * in this row the client confirmed on camera: we do not leave until the customer has seen it
      * both ways. If Haven publishes an ingress rating, put it back with the datasheet to hand. */
-    { figure: "2 states", label: "Verified lit after dark and in daylight", icon: "dayNight" },
+    { figure: "Every scene", label: "Switched through with you before we leave", icon: "dayNight" },
   ],
 } as const;
 

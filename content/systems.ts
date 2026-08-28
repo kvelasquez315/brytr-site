@@ -39,8 +39,7 @@ export const systems: System[] = [
       { label: "Diffuser", value: "Frosted polycarbonate" },
       { label: "App", value: "Haven, iOS and Android" },
       { label: "Weather rating", value: "IP66" },
-      { label: "Warranty", value: "Manufacturer backed" },
-    ],
+        ],
     wins: [
       "A dedicated white channel is the single biggest quality difference in this category",
       "Tight LED spacing reads as a line of light, not a string of dots",
@@ -134,8 +133,7 @@ export const systems: System[] = [
       { label: "Diffuser", value: "Channel mounted" },
       { label: "App", value: "Jellyfish app" },
       { label: "Zones", value: "Supported" },
-      { label: "Warranty", value: "Manufacturer backed" },
-    ],
+        ],
     wins: [
       "Meaningfully cheaper than Haven Evolution on the same roofline",
       "A genuinely permanent install, not a seasonal product",
