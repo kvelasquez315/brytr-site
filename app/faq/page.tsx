@@ -35,7 +35,7 @@ import { valueProps } from "@/content/value-props";
 export const metadata: Metadata = {
   title: "Permanent Lighting FAQ",
   description:
-    "Every question we get about permanent outdoor lighting in Omaha: cost, install day, damage to the fascia, HOA approval, warranty and winter installs.",
+    "Every question we get about permanent outdoor lighting in Omaha: install day, damage to the fascia, HOA approval and winter installs.",
   alternates: { canonical: "/faq" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "FAQ", href: "/faq" }];
@@ -55,16 +55,18 @@ const service = serviceFaqsFor("permanent lighting");
 const pick = (src: typeof homeFaqs, ...qs: string[]) =>
   qs.map((q) => src.find((f) => f.q === q)).filter((f): f is (typeof src)[number] => !!f);
 
-/* `wide` spans the grid and splits its own items into two columns. Cost and financing is the
- * biggest group by some way — nine questions against three or four — so it earns the full width
- * and gives the layout a full last row instead of a lone card in a wide one. */
+/* `wide` spans the grid and splits its own items into two columns. It was carried by "Cost and
+ * financing", the biggest group by some way at nine questions, which is also the group that was
+ * removed on 27 Aug 2026 because every figure in it was invented. No group uses `wide` now. The
+ * prop stays because the next genuinely large group will want it; the layout does not need it to
+ * fill its last row, which was checked rather than assumed. */
 const groups: { h: string; note: string; items: typeof homeFaqs; wide?: boolean }[] = [
   {
     h: "Before you buy",
     note: "The ones that decide whether this is even the right product for the house.",
     items: pick(homeFaqs,
       "Can you actually see it during the day?",
-      "What does it cost?",
+      /* "What does it cost?" removed from content/faqs.ts - see the note there. */
       "Does it damage my soffit or fascia?",
       "Will my HOA allow it?"),
   },
@@ -78,7 +80,7 @@ const groups: { h: string; note: string; items: typeof homeFaqs; wide?: boolean 
   },
   {
     h: "Install",
-    note: "One day on your property, and what it asks of you while it happens.",
+    note: "What install day asks of you while it happens.",
     items: [
       ...pick(homeFaqs,
         "How long does an install take?",
@@ -87,22 +89,19 @@ const groups: { h: string; note: string; items: typeof homeFaqs; wide?: boolean 
     ],
   },
   {
-    h: "Service and warranty",
+    h: "Service and support",
     note: "The part that matters in year four, when nobody is selling you anything.",
     items: [
       ...pick(homeFaqs, "What happens when a section stops working?"),
       ...pick(service,
-        "What warranty comes with it?",
         "What areas do you cover?",
         "How do I get a number?"),
     ],
   },
-  {
-    h: "Cost and financing",
-    note: "Why the number is shaped the way it is, and what moves it.",
-    items: pricingFaqs,
-    wide: true,
-  },
+  /* THE "Cost and financing" GROUP IS GONE. Nine answers, every specific in them invented: a
+   * deposit policy, a lending partner, quote validity, what a second visit saves. Removed
+   * 27 Aug 2026 along with /pricing. The one survivor - the consultation is free - is answered
+   * in the group above rather than given a section of its own. */
 ];
 const all = groups.flatMap((g) => g.items);
 
@@ -115,11 +114,10 @@ const shortAnswers: { q: string; a: string; to: string }[] = [
     a: "Barely, and that is the point. Color-matched aluminum tucked into the eave line, which reads as trim from the street.",
     to: "Before you buy",
   },
-  {
-    q: "What does it cost?",
-    a: "Priced by linear foot of roofline plus complexity. There is no headline price, but you can have the per-foot basis on the phone.",
-    to: "Cost and financing",
-  },
+  /* The "What does it cost?" short answer is gone. It stated a pricing basis and pointed at the
+   * "Cost and financing" group, and both the basis and the group were removed on 27 Aug 2026 as
+   * unsourced. A short answer whose `to` names a group that no longer exists would also have been
+   * a link into nothing. */
   {
     q: "Will it damage my fascia?",
     a: "It fastens into the fascia board, never through the shingles, and every penetration is sealed as it is made.",
@@ -132,18 +130,18 @@ const shortAnswers: { q: string; a: string; to: string }[] = [
   },
   {
     q: "Will my HOA allow it?",
-    a: "Most do. We pull your covenant, submit the spec sheet ourselves, and install once it is approved.",
+    a: "Most do. Read your covenant's lighting clause before you plan anything, and bring it to the visit.",
     to: "Before you buy",
   },
   {
     q: "How long does it take?",
-    a: "One day for most homes. Two if landscape or hardscape fixtures go on the same visit.",
+    a: "We give you the actual number in the written quote after the on-site measure.",
     to: "Install",
   },
   {
     q: "What if a section goes dark?",
     a: "You call us and we come out. It is usually a driver or one bad connection rather than the whole run.",
-    to: "Service and warranty",
+    to: "Service and support",
   },
 ];
 
@@ -290,7 +288,7 @@ export default function FaqPage() {
         photo="poolPergolaDusk"
         label="The answer to most of the above"
         note="A finished install in the metro"
-        caption="Almost every question on this page ends in the same place: it depends on your roof, and the way to find out is to stand in front of it after dark. The consultation is an hour, it costs nothing, and you keep the written quote whether or not you ring us again."
+        caption="Almost every question on this page ends in the same place: it depends on your roof, and the way to find out is to stand in front of it. The consultation is an hour, it costs nothing, and you keep the written quote whether or not you ring us again."
         ground="raise"
       />
 
