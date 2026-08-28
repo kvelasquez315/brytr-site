@@ -15,7 +15,8 @@ import { valueProps } from "@/content/value-props";
  *
  * What it was, and this one was a real defect rather than a design one: the page hardcoded
  * "177" in five places — the <title>, the meta description, the hero stat row, a fact card,
- * and the AggregateRating JSON-LD. The Google Business Profile says 196. Publishing a
+ * and the AggregateRating JSON-LD. The Google Business Profile said 196 then and says 201 now,
+ * which is the point: it only ever goes up. Publishing a
  * review count in structured data that does not match the profile is the kind of mismatch
  * that gets a rich result dropped, and it was wrong on the page a reader is most likely to
  * check. Every figure on this page now comes from content/reviews.ts, which records where
@@ -27,8 +28,8 @@ import { valueProps } from "@/content/value-props";
  *
  * What it is now. The organizing device is WHAT THE REVIEWS ACTUALLY MENTION, as a rack of
  * phrases with counts, and every quote below carries the tags it earned. The counts are of
- * the six quoted here and say so — counting themes across all 196 would mean reading all
- * 196 and we have not, so the honest number is the one we can stand behind.
+ * the six quoted here and say so — counting themes across the whole profile would mean reading
+ * the whole profile, and we have not, so the honest number is the one we can stand behind.
  *
  * RULE, unchanged: never write a testimonial. Every word inside quote marks on this page is
  * somebody else's.
@@ -80,7 +81,7 @@ const practice: { h: string; p: string; href: string }[] = [
   },
   {
     h: "Signed off twice, by you",
-    p: "Once from the curb in daylight, once walking every scene after dark. A job is not finished until both of those have happened with you standing there.",
+    p: "Once from the curb, once walking every scene with you. A job is not finished until both of those have happened with you standing there.",
     href: "/how-it-works",
   },
   {
@@ -88,11 +89,11 @@ const practice: { h: string; p: string; href: string }[] = [
     p: "We install more than one brand and quote the one your roofline actually calls for, including when that is the cheaper one.",
     href: "/lighting-systems",
   },
-  {
-    h: "Both warranties, in writing first",
-    p: "Manufacturer coverage on the hardware and our own on the workmanship, printed on the quote you sign rather than produced afterwards.",
-    href: "/warranty",
-  },
+  /* TWO CARDS SAID THE SAME THING. "One number to call / the people who fitted it are the people
+     who answer the phone, and they are twenty minutes away" sat directly beside the card below it,
+     which makes the same claim without the invented drive time. Two cards, one point, and five
+     cards in a three-column row left the last row a third empty. Four now, and the row fills at
+     every width. */
   {
     h: "One number, answered locally",
     p: "A service call goes to the people who installed it. Not a portal, not a franchise dispatcher, not a manufacturer's queue.",
@@ -222,8 +223,8 @@ export default function Reviews() {
           </figure>
 
           {/* AN ODD COUNT IN A TWO-COLUMN GRID LEAVES A HOLE.
-            * There are eight verbatim reviews and one of them is pulled out above as the feature,
-            * so seven land here — four rows, the last of which had one card and one empty cell,
+            * The array holds an odd number of verbatim reviews and one is pulled out above as the
+            * feature, so an odd count lands here - the last row had one card and one empty cell,
             * roughly 680 x 340px of bare page. The answer is not to drop a real review to make the
             * arithmetic work: the last card spans both columns, which closes the row and reads as
             * a deliberate final quote rather than a remainder. */}
@@ -295,7 +296,7 @@ export default function Reviews() {
             onDark
             title="Practices, not adjectives."
           />
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
             {practice.map((f) => (
               <article key={f.h} className="flex flex-col rounded-lg bg-raise p-6 ring-1 ring-on-dark/10">
                 <h3 className="font-display text-lg font-bold leading-snug text-on-dark">{f.h}</h3>
