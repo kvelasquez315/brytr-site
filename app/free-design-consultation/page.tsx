@@ -34,7 +34,7 @@ import { valueProps } from "@/content/value-props";
 
 export const metadata: Metadata = {
   title: "Free Lighting Design Consultation | Omaha",
-  description: "Book a free on-site permanent lighting design consultation in the Omaha metro. We measure, design after dark, and hand you a written quote. No obligation.",
+  description: "Book a free on-site permanent lighting design consultation in the Omaha metro. We measure, design it with you, and hand you a written quote. No obligation.",
   alternates: { canonical: "/free-design-consultation" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Free design consultation", href: "/free-design-consultation" }];
@@ -56,7 +56,7 @@ const beats: { at: string; h: string; p: string; who: string }[] = [
   },
   {
     at: "0:20",
-    h: "We design it after dark.",
+    h: "We design it on your own elevation.",
     p: "This is why evenings are better. We put real output on the house from a sample run, change the color on a phone, and you say yes or no to each thing while you are looking at it rather than at a render.",
     who: "The part people say they did not expect",
   },
@@ -69,7 +69,7 @@ const beats: { at: string; h: string; p: string; who: string }[] = [
   {
     at: "0:55",
     h: "You are holding the quote.",
-    p: "One number for the whole scope, itemized, with both warranty terms on it. You keep it whether or not you ever call us again.",
+    p: "One number for the whole scope, itemized. You keep it whether or not you ever call us again.",
     who: "Nothing to sign that evening",
   },
 ];
@@ -87,7 +87,6 @@ const sheet: { k: string; v?: string; blank?: string }[] = [
   { k: "Hardware", v: "The line and the manufacturer, named not implied" },
   { k: "Add-ons", blank: "landscape, hardscape, bistro" },
   { k: "Total, for the whole scope", blank: "one number" },
-  { k: "Warranty", v: "Manufacturer and workmanship, both stated" },
 ];
 
 export default function Consult() {
@@ -105,8 +104,8 @@ export default function Consult() {
           * also be this page's proposition — a headline that ends every other page reads as
           * furniture by the time you get here, and it left this page with no line of its own.
           * The hour, and what you keep at the end of it, is what this page is actually about. */
-        h1="An hour after dark, and you keep the drawing."
-        lede="We come out, walk the property after dark, design it with you, measure the roofline, and leave you holding a written quote. If you decide against it you have lost an hour and gained a plan. The drawing and the number are yours either way."
+        h1="An hour on your property, and you keep the drawing."
+        lede="We come out, walk the property with you, design it together, measure the roofline, and leave you holding a written quote. If you decide against it you have lost an hour and gained a plan. The drawing and the number are yours either way."
         trail={trail}
       />
 
@@ -229,12 +228,19 @@ export default function Consult() {
                 <Check onDark>Your covenant or HOA rules, if your neighborhood has them</Check>
                 <Check onDark>A rough idea of which elevations matter to you and which do not</Check>
                 <Check onDark>Any photograph of a house you liked, even a screenshot</Check>
-                <Check onDark>Whether there is a rear elevation you actually use after dark</Check>
+                <Check onDark>Whether there is a rear elevation you actually use in the evening</Check>
                 <Check onDark>Any window you would rather we did not throw light into</Check>
               </ul>
+              {/* WAS: "If your neighborhood needs a submission, we pull the paperwork and file it.
+                * That is our job, not yours." The HOA administration service again, and this is the
+                * fifth place it has turned up - it was removed from the pricing FAQ, the covenant
+                * row on /how-it-works, the areas pages and content/faqs.ts before this one. Brytr
+                * has not told us they file covenant submissions, and on THIS page the claim does
+                * the most damage, because a homeowner reading it while booking could reasonably
+                * skip their own application. */}
               <p className="mt-7 border-t border-on-dark/12 pt-5 text-sm leading-relaxed text-on-dark-muted">
-                If your neighborhood needs a submission, we pull the paperwork and file it. That is our
-                job, not yours.{" "}
+                If your neighborhood has a lighting clause, bring it to the visit and we will read it
+                with you.{" "}
                 <Link href="/faq" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
                   More on covenants
                 </Link>.
@@ -249,7 +255,7 @@ export default function Consult() {
         * worth more than the third paragraph explaining it. */}
       <PhotoPair
         title="What we are doing while we are standing in your garden."
-        lede="Made on the property, after dark, against your own materials. Warm white on red brick is a different colour from warm white on white siding."
+        lede="Made on the property, against your own materials. Warm white on red brick is a different colour from warm white on white siding."
         a="installDayPavilion"
         b="walkthroughDusk"
         aLabel="Measuring and running a sample against the actual structure, not off a satellite photograph."
@@ -303,13 +309,14 @@ export default function Consult() {
                 <a href={site.phoneHref} className="u mt-2.5 block text-[clamp(1.6rem,3vw,2.1rem)] font-medium leading-none text-on-dark hover:text-accent">
                   {site.phone}
                 </a>
+                {/* WAS: "Same-day reply most days. We can give you the per-foot basis and a
+                  * range over the phone before anybody schedules anything." Two unsourced claims
+                  * in one sentence - a reply-time promise and a pricing basis we would quote over
+                  * the phone. Both removed 27 Aug 2026. What is left is what a phone number is
+                  * actually for. */}
                 <p className="mt-4 text-sm leading-relaxed text-on-dark-muted">
-                  Same-day reply most days. We can give you the per-foot basis and a range over the
-                  phone before anybody schedules anything.
+                  It reaches one of the two owners rather than a dispatcher.
                 </p>
-                <div className="mt-5 border-t border-on-dark/12 pt-4">
-                  <TextLink onDark href="/pricing">How the pricing is built</TextLink>
-                </div>
               </div>
             </div>
           </div>
@@ -323,8 +330,7 @@ export default function Consult() {
         variant="phone"
         photos={valueProps["/free-design-consultation"].photos}
         title="Or skip the form and just call."
-        body="Tell us the cross streets and roughly how much roofline you are looking at, and we will give you the per-foot basis and a range before anybody schedules anything."
-        omit={["/pricing"]}
+        body="Tell us the cross streets and roughly how much roofline you are looking at, and we will tell you what the visit involves before anybody schedules anything."
         panelLink={{ href: "/gallery", label: "See finished installs first" }}
       />
     </Shell>
