@@ -100,22 +100,22 @@ export const serviceDetail: Record<string, ServiceDetail> = {
         caption: "Colour on the same channel, on the same night, ninety seconds later." },
     ],
     secondPara:
-      "It is installed once, by our own crew, and it stays on the building. Nothing goes up in November and nothing comes down in January.",
+      "It is installed once and it stays on the building. Nothing goes up in November and nothing comes down in January.",
     figure: "zones",
     compare: true,
     facts: [
       ["Runs on", "One channel, one controller"],
       ["Zones", "Per elevation, unlimited"],
       ["Everyday setting", "Warm white, dimmable"],
-      ["Install time", "One day, most homes"],
+      ["Install time", "Confirmed in the written quote"],
       ["Added to later", "Without replacing anything"],
     ],
     included: [
-      ["The walk-around", "We design after dark, on your property, to what you actually want lit rather than to a package."],
+      ["The walk-around", "We design on your property, to what you actually want lit rather than to a package."],
       ["Channel and diffuser", "Extruded aluminum color matched to the fascia, frosted diffuser facing down."],
       ["Controller and app", "Sited, commissioned, and set up on your phone with your first scenes built while we are there."],
       ["Zoning", "Front, sides, back and landscape switched separately, so the back can stay dark."],
-      ["Both states checked", "Daylight sightline from the curb, then every scene walked with you after dark."],
+      ["Both states checked", "The sightline from the curb, then every scene walked through with you."],
     ],
     alsoSee: ["permanent-roofline-lighting", "landscape-lighting", "patio-pergola-bistro-lighting", "holiday-seasonal-scenes"],
     /* Was hero-warm-white.jpg captioned "warm white, dimmed" — see the note on heroWarm in
@@ -236,7 +236,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     included: [
       ["Under-cap washers", "Tucked beneath the wall cap so you see the light on the stone and never the fixture."],
       ["Step and riser lights", "Placed where a foot lands, which is a safety decision before it is a design one."],
-      ["Aimed away from seating", "Anything at seated eye height gets re-aimed on site, after dark, with somebody sitting in the chair."],
+      ["Aimed away from seating", "Anything at seated eye height gets re-aimed on site, with somebody sitting in the chair."],
       ["Sealed in the stone", "Cable routed behind the course and sealed, so nothing is exposed to a mower or a shovel."],
     ],
     alsoSee: ["landscape-lighting", "patio-pergola-bistro-lighting", "permanent-outdoor-lighting", "soffit-lighting"],
@@ -293,7 +293,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     included: [
       ["Beam runs", "Channel along the beam face, so the light falls on the table rather than in your eyes."],
       ["Bistro spans", "Catenary wire tensioned properly, sagged evenly, terminated at a post rather than a gutter."],
-      ["Dimmed for dinner", "Set with you at the table after dark. Dinner bright and Christmas bright are not the same setting."],
+      ["Dimmed for dinner", "Set with you at the table. Dinner bright and Christmas bright are not the same setting."],
       ["One app", "The patio and the roofline answer to the same tap, so the whole property switches together."],
     ],
     alsoSee: ["hardscape-lighting", "landscape-lighting", "permanent-outdoor-lighting", "holiday-seasonal-scenes"],
@@ -367,7 +367,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
      * this page gets that frame and says what it is, rather than putting three houses under a
      * commercial heading and hoping nobody notices the difference. */
     shots: [
-      { photo: "crewPortrait", caption: "A storefront band set to red behind one of our own crew. Commercial work is the same channel and the same controller as a house. The difference is the fixing detail and the hours we can be on site." },
+      { photo: "crewPortrait", caption: "A storefront band set to red behind a member of the crew. Commercial work is the same channel and the same controller as a house. The difference is the fixing detail and the hours we can be on site." },
       { photo: "sceneWhiteRedEntry", caption: "Cool white across a long elevation with one zone changed, which is how most branding scenes are actually built." },
       { photo: "homeModernStone", caption: "A flat roof edge with no gable to hang a line on, which is the detailing problem most commercial buildings present." },
     ],
