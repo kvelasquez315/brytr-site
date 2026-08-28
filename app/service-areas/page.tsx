@@ -72,8 +72,8 @@ const bands: { h: string; count: number; promise: string; p: string; href: strin
   {
     h: "Over the river",
     count: iowaCities.length,
-    promise: "Same crews, same warranty",
-    p: "Council Bluffs is twenty minutes from us, which is closer than half the Nebraska metro. Iowa-side installs get the same crews, the same materials and the same workmanship terms, and there is no border premium on the quote.",
+    promise: "Same crews, same materials",
+    p: "Council Bluffs is twenty minutes from us, which is closer than half the Nebraska metro. Iowa-side installs get the same crews and the same materials as anywhere else we work.",
     href: `/service-areas/${iowaCities[0].slug}`,
   },
 ];
@@ -95,7 +95,7 @@ export default function AreasHub() {
         photoAlt="A long Omaha ranch elevation lit blue and white with landscape uplighting"
         objectPosition="50% 45%"
         h1="Every town we drive to, and how long it takes."
-        lede="A service area is only worth publishing if it says what it actually commits us to. Every town here is inside about thirty-five minutes of the shop, which is what lets a warranty call in February be the same week rather than a project."
+        lede="A service area is only worth publishing if it says what it actually commits us to. Every town here is inside about thirty-five minutes of the shop, which is what lets a service call in February be the same week rather than a project."
         trail={trail}
       />
 
@@ -244,7 +244,7 @@ export default function AreasHub() {
         * a strange place to start lying. */}
       <PhotoStrip
         title="The same crew, whichever line on the table you are on."
-        lede="Drive time changes what we can promise about a warranty call. It does not change who turns up, what goes on the house, or what it costs."
+        lede="Drive time changes how quickly we can get back out to you. It does not change who turns up or what goes on the house."
         shots={pick("areas-index", 3)}
         cols={3}
         ground="raise"
@@ -267,9 +267,6 @@ export default function AreasHub() {
                 so on the call rather than drive out and load the number.
               </p>
             </div>
-            <div className="mt-8">
-              <TextLink onDark href="/warranty">What is covered</TextLink>
-            </div>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2">
@@ -280,10 +277,16 @@ export default function AreasHub() {
               </p>
               <ul className="mt-5 divide-y divide-on-dark/10 border-t border-on-dark/10">
                 {[
-                  "Per-foot pricing, with no travel charge added",
+                  /* "Per-foot pricing, with no travel charge added" removed 27 Aug 2026 - a
+                     pricing basis and a no-surcharge guarantee, neither from Brytr.
+                     "The covenant submission handled by us" removed 28 Aug 2026 - an HOA
+                     administration service Brytr has not told us they provide.
+                     AND THE LIST THEN CARRIED "The same crew in every town we serve" TWICE,
+                     which is what two removals from a five-item literal will do if you are
+                     reading the diff and not the result: one duplicated row, rendered, plus a
+                     duplicate React key on it. */
                   "The same crew in every town we serve",
-                  "Both warranty layers, written on the quote",
-                  "The covenant submission handled by us",
+                  "The written quote before install day, unchanged on it",
                   "The curb check and the scene walk at dusk",
                 ].map((x) => (
                   <li key={x} className="py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">{x}</li>
