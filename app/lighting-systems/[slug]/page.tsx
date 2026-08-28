@@ -145,28 +145,31 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
             </h3>
             <p className="mt-3 text-[0.95rem] leading-relaxed text-on-dark-muted">
               {s.tier === "Control"
-                ? "The app and the controller are part of every install rather than a line item. There is no subscription and nothing to renew."
+                /* "There is no subscription and nothing to renew" removed 27 Aug 2026. Whether
+                   the manufacturer charges for the app is the manufacturer's business and we have
+                   not checked it; asserting it on Brytr's site made it Brytr's promise. */
+                ? "The app and the controller are part of every install rather than a line item."
                 : "This is hardware inside a quote rather than a product you buy from us. What you are quoted is the job it belongs to, measured on your own roofline."}
             </p>
-            <div className="mt-6 border-t border-on-dark/12 pt-5">
-              <TextLink onDark href="/pricing">How the number is built</TextLink>
-            </div>
-            <div className="mt-7 border-t border-on-dark/12 pt-6">
-              <p className="label text-on-dark-muted">What you are not paying for</p>
-              <ul className="mt-4 divide-y divide-on-dark/10 border-y border-on-dark/10">
-                {[
-                  ["No design fee", "The consultation, the design and the written quote are free."],
-                  ["No travel charge", "Anywhere inside the metro. Outstate runs are batched into route days at the same price."],
-                  ["No subscription", "The app and the controller are part of the install. Nothing renews and nothing expires."],
-                  ["No line on install day", "If it was not on the quote you signed, it is not on the invoice."],
-                ].map(([h, p]) => (
-                  <li key={h} className="py-3">
-                    <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
-                    <p className="mt-0.5 text-sm leading-relaxed text-on-dark-muted">{p}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            {/* "WHAT YOU ARE NOT PAYING FOR" WAS HERE, on all six of these pages, and it is gone.
+              *
+              * Four billing policies, none of them from Brytr:
+              *   no travel charge          "Anywhere inside the metro. Outstate runs are batched
+              *                             into route days at the same price." An invented pricing
+              *                             rule for a service area, stated as policy.
+              *   no subscription           A recurring-cost claim about the manufacturer's app.
+              *   no line on install day    "If it was not on the quote you signed, it is not on the
+              *                             invoice." An invoicing commitment nobody has made.
+              *   no design fee             The only one that was true - the visit is free - and it
+              *                             is already said on /free-design-consultation, which is
+              *                             the page a reader deciding about a visit is on.
+              *
+              * A four-item list of things you will not be charged for reads as a price list with
+              * the numbers taken out. Removed 27 Aug 2026 with /pricing. Do not rebuild it from
+              * this comment: it needs Brytr's actual terms, in writing.
+              *
+              * The empty bordered div above it went too. It held a link to /pricing and was left
+              * behind as a 1px rule with nothing in it when that link was removed. */}
 
             {/* This line used to pitch a choice these pages do not offer: a reader on
               * /app-and-controls was being told which of two packages was wrong for their
@@ -285,11 +288,9 @@ export default async function SystemPage({ params }: { params: Promise<{ slug: s
             <ul className="mt-7 space-y-3">
               <Check onDark>Fitted and signed off by the crew who measured it</Check>
               <Check onDark>Named on the quote rather than implied</Check>
-              <Check onDark>Manufacturer terms plus our workmanship coverage</Check>
             </ul>
             <div className="mt-8 flex flex-wrap gap-x-7 gap-y-2">
               <TextLink onDark href="/lighting-systems">The whole lineup</TextLink>
-              <TextLink onDark href="/warranty">What is covered</TextLink>
             </div>
           </div>
 
