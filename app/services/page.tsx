@@ -289,8 +289,8 @@ export default function ServicesHub() {
             {[
               {
                 h: "On a house",
-                p: "One day for most homes. We work off ladders, miter at every transition, and walk every scene with you after dark before we leave.",
-                l: ["Covenant paperwork pulled and submitted", "Zoned per elevation so the back can stay off", "Scenes saved with you standing there"],
+                p: "We work off ladders, miter at every transition, and walk every scene with you before we leave.",
+                l: ["Zoned per elevation so the back can stay off", "Scenes saved with you standing there"],
                 href: "/services/permanent-outdoor-lighting",
                 cta: "See a whole-home install",
               },
