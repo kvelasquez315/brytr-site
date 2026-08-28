@@ -52,7 +52,7 @@ const costs: { chip: string; h: string; p: string; cost: string }[] = [
     chip: "Costs us margin",
     h: "More than one brand on the truck.",
     p: "Almost every permanent lighting company in this metro is a dealer for a single manufacturer, which is a normal way to run the business and means the recommendation is settled before anyone looks at your house. We lead with Haven, we install every line of it, and where a house does not call for it we say so and quote what it does.",
-    cost: "Two sets of stock, two sets of training, two warranty processes to keep straight.",
+    cost: "Two sets of stock and two sets of training to keep straight.",
   },
   {
     chip: "Costs us the sale",
@@ -69,7 +69,7 @@ const costs: { chip: string; h: string; p: string; cost: string }[] = [
   {
     chip: "Costs us a day",
     h: "The last hour is unbilled.",
-    p: "The daylight curb check and the scene walkthrough after dark are the two steps most installers skip, and they are the two that catch problems. They are also the reason a crew is on your property at dusk rather than on the next job.",
+    p: "The curb check and the scene walkthrough are the two steps most installers skip, and they are the two that catch problems. They are also the reason a crew is on your property at dusk rather than on the next job.",
     cost: "Roughly an hour of a two-person crew, on every install, billed to nobody.",
   },
   {
@@ -90,7 +90,7 @@ export default function About() {
         photoAlt="A single-story Omaha home in October with the roofline, front beds, rock steps and walk all lit, the entry gable set to blue"
         objectPosition="50% 42%"
         h1="Built by the people who show up on the roof."
-        lede="Brytr exists because every permanent lighting quote in this metro came from somebody selling exactly one brand and calling it the only good option. We carry two and we run our own crews, from the measure to the handover."
+        lede="Brytr exists because every permanent lighting quote in this metro came from somebody selling exactly one brand and calling it the only good option. We carry two, and the same people take a job from the measure to the handover."
         trail={trail}
       />
 
@@ -271,7 +271,7 @@ export default function About() {
         lede="Not a product line. A crew that turns up, a channel fixed into fascia rather than stapled to a shingle, and a run that still holds a straight line in year eight."
         shots={[
           { photo: "crewRoofFascia", caption: "On the roof. The same crew from the measure to the handover, and the same crew if anything ever needs looking at." },
-          { photo: "installDayGarage", caption: "A working day, in daylight. The design happens after dark; the install happens when we can see the fixings." },
+          { photo: "installDayGarage", caption: "A working day, in daylight, which is when the fixings are visible." },
           { photo: "walkthroughDusk", caption: "The handover. We do not leave until you have stood on your own lawn and looked at it lit." },
         ]}
         cols={3}
@@ -283,9 +283,28 @@ export default function About() {
       <section className="bg-raise">
         <div className="shell py-14">
           <div className="grid gap-10 lg:grid-cols-[1fr_28rem] lg:gap-14">
-            <dl className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-4">
+            {/* THREE COLUMNS, NOT FOUR. It was sm:grid-cols-4 for four figures. Removing the
+              * 1.2M left three in a four-wide grid, which is a quarter of the row empty at every
+              * width above sm - the blank-space failure arriving as a side effect of a copy
+              * deletion, which is the least obvious way for it to arrive. Measured rather than
+              * assumed: the three cells now fill the row. */}
+            <dl className="grid grid-cols-2 gap-x-8 gap-y-8 sm:grid-cols-3">
+              {/* "1.2M lights installed locally / Brytr's own count" WAS THE FIRST OF FOUR and it
+                * is gone, 28 Aug 2026, on the client's instruction: "remove that stat of 1.2 from
+                * everywhere."
+                *
+                * It had already been pulled off the home page once - "I don't like the 1.2m number
+                * stat. Lets not do that at all" - and survived here and in content/site.ts, which
+                * is the failure mode this whole pass keeps finding: a claim removed from the page
+                * somebody was looking at, left standing in the two places they were not.
+                *
+                * Its source line said "Brytr's own count", which is the most honest thing that
+                * could be written about it and still not a source. Nobody can check it, and a
+                * seven-figure round number is exactly the sort of claim a reader is entitled to
+                * check. Three figures left, and every one of them is verifiable: the Google rating
+                * from the profile, the two brands off the shelf, and the towns off our own
+                * service-area list. */}
               {[
-                ["1.2M", "lights installed locally", "Brytr's own count"],
                 [reviewProof.average, `from ${reviewProof.count} reviews`, `${reviewProof.platform}, ${reviewProof.checked}`],
                 ["2", "brands stocked", "Haven and Jellyfish"],
                 ["12", "towns we install in", "The Omaha metro and Council Bluffs"],
