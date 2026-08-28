@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Shell } from "@/app/layout-shell";
 import { PageHero, PageCta, SectionHead, TextLink } from "@/components/sections/page-parts";
 import { PhotoSplit, PhotoStrip } from "@/components/sections/photo-parts";
+import { QuoteForm } from "@/components/ui/bits";
 import { pick } from "@/content/photo-sets";
 import { Jsonld, breadcrumb, localBusiness } from "@/lib/schema";
 import { site } from "@/content/site";
@@ -24,8 +25,13 @@ import { valueProps } from "@/content/value-props";
  * is bad for, and who picks it up. Then what happens to a message after it is sent, because
  * the thing people are actually worried about is being entered into a sales sequence.
  *
- * Archetype: home hero → four routes with a recommendation on each → what-happens-next
- * split → the NAP block. Closer: one, the phone band.
+ * REVISED 28 Aug 2026: the main form. The client asked for "a big main form on the contact page
+ * after the hero with contact info next to it", which is the section directly below the hero now.
+ * The four routes still earn their place - they answer "which of these should I use" - but they are
+ * no longer the first thing on a page whose job is getting a form filled in.
+ *
+ * Archetype: home hero → main form with the details beside it → value band → four routes with a
+ * recommendation on each → what-happens-next split. Closer: one, the phone band.
  */
 
 export const metadata: Metadata = {
@@ -106,9 +112,113 @@ export default function Contact() {
         trail={trail}
       />
 
-      {/* THE VALUE BAND, directly under the trust plinth, same as every other page. It states the
-        * offer once before this page gets specific about its own subject. Shape is shared, content
-        * is written against this page in content/value-props.ts. See the note on the component. */}
+      {/* ── THE MAIN FORM, AND THE CONTACT DETAILS BESIDE IT ────────────────────────────────
+        * Added 28 Aug 2026 on the client's instruction: "there should be a big main form on the
+        * contact page after the hero with contact info next to it."
+        *
+        * WHY THE HERO'S FORM WAS NOT ENOUGH, even though it is a real form. The hero card is the
+        * `mini` variant - name, phone, address, note - sized to sit on a photograph without
+        * covering it. It is the same card on all 78 pages, so on the one page whose entire job is
+        * getting in touch it reads as site furniture rather than as the point of the page. This
+        * section is the `full` variant: it adds the email and what-are-you-lighting, it is not
+        * competing with a photograph for room, and it is the first thing below the fold.
+        *
+        * THE FORM IS ON THE LEFT. Reading order, not decoration: the left column is what a visitor
+        * scans first, and on this page the form is the primary action. It also means the form does
+        * not sit under the hero's own form card, which would have put two forms in one vertical
+        * column with a band between them.
+        *
+        * THE DETAILS COLUMN IS THE OLD NAP BLOCK, MOVED. It used to sit six sections lower, which
+        * meant the address and the phone number were below the four route cards, the privacy
+        * section and a photograph - past the point most people leave. Moving it here is why that
+        * block is gone rather than duplicated: saying the address twice on one page is how a
+        * Google Business Profile match gets muddied.
+        *
+        * `bg-card` rather than muted: the hero above is `bg-primary` and the value band below now
+        * takes muted, so this is the ground that alternates against both. */}
+      <section className="section bg-card">
+        <div className="shell grid items-start gap-10 lg:grid-cols-[56fr_44fr] lg:gap-14">
+          {/* `bg-background` ON THE FORM, AND IT IS NOT A PREFERENCE. The section ground is
+            * `bg-card`, which is #ffffff, and QuoteForm's light shell defaults to `bg-card` too - so
+            * on the first build the form was a white card on a white section, held apart by nothing
+            * but a hairline. That is the same defect that made the home page's figure cards vanish
+            * two rounds ago, arriving from the other direction: there the SECTION moved onto the
+            * card's ground, here the CARD landed on the section's.
+            *
+            * `bg-background` is the warm limestone neutral, so the form reads as an object sitting
+            * on the page. Same override the home hero uses, for the same reason. tailwind-merge
+            * means the class passed here beats the one in the component's base list rather than
+            * fighting it. */}
+          <QuoteForm
+            variant="full"
+            heading="Tell us about the house"
+            submitLabel="Send this to Zac and Sam"
+            className="bg-background"
+          />
+
+          <div className="flex flex-col gap-8">
+            <div>
+              <p className="label text-muted-foreground">By phone</p>
+              <a
+                href={site.phoneHref}
+                className="u mt-3 block text-3xl font-medium text-foreground hover:text-accent-deep"
+              >
+                {site.phone}
+              </a>
+              <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
+                Best for anything urgent, and for a service call on a system we installed. It
+                reaches the people who put it up rather than a dispatcher.
+              </p>
+            </div>
+
+            <div className="border-t border-border pt-7">
+              <p className="label text-muted-foreground">Where we are</p>
+              <address className="mt-3 not-italic">
+                <p className="font-display text-xl font-bold text-foreground">{site.name}</p>
+                <p className="mt-2 leading-relaxed text-muted-foreground">
+                  {site.address.street}
+                  <br />
+                  {site.address.city}, {site.address.state} {site.address.zip}
+                </p>
+              </address>
+              <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
+                {site.region}. If you are outside that, we will tell you rather than drive out and
+                load the quote.
+              </p>
+              <div className="mt-5">
+                <TextLink href="/service-areas">Every town, with drive times</TextLink>
+              </div>
+            </div>
+
+            <div className="border-t border-border pt-7">
+              <p className="label text-muted-foreground">Elsewhere</p>
+              <ul className="mt-4 divide-y divide-border border-y border-border">
+                {[
+                  ["Instagram", site.social.instagram, "Finished installs, most weeks"],
+                  ["Facebook", site.social.facebook, "The same work, and the reviews"],
+                  [`${reviewProof.platform} profile`, reviewProof.url, `${reviewProof.average} from ${reviewProof.count} reviews`],
+                ].map(([label, href, note]) => (
+                  <li key={label} className="py-3.5">
+                    <a
+                      href={href}
+                      className="font-display text-[0.95rem] font-bold text-foreground underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
+                    >
+                      {label}
+                    </a>
+                    <p className="mt-0.5 text-sm text-muted-foreground">{note}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* THE VALUE BAND. It states the offer once before this page gets specific about its own
+        * subject. It moved BELOW the form rather than above it: on a contact page the form is the
+        * subject, and a band restating the offer between the hero and the form would have pushed
+        * the one thing this page is for further down the screen. Ground changed muted from card,
+        * because this section now takes card. */}
       <ValueBand {...valueProps["/contact"]} ground="muted" />
 
 
@@ -247,76 +357,27 @@ export default function Contact() {
         </p>
       </PhotoSplit>
 
-      {/* ── THE NAP BLOCK ──
-        * One canonical copy of name, address and phone, matching the Google
-        * profile exactly, because that match is what ties the two together. */}
-      <section className="section bg-muted">
-        <div className="shell grid items-start gap-10 lg:grid-cols-[1fr_1fr_1fr] lg:gap-12">
-          <div>
-            <p className="label text-muted-foreground">By phone</p>
-            <a
-              href={site.phoneHref}
-              className="u mt-3 block text-3xl font-medium text-foreground hover:text-accent-deep"
-            >
-              {site.phone}
-            </a>
-            <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
-              Best for anything urgent, and for a service call on a system we installed. It reaches the
-              people who put it up rather than a dispatcher.
-            </p>
-            <div className="mt-5">
-              <TextLink href="/warranty">What is covered</TextLink>
-            </div>
-          </div>
+      {/* THE NAP BLOCK USED TO BE HERE and its content is now in the form section near the top of
+        * the page. It carried the phone number, the address and the social links in three columns,
+        * six sections below the fold - after the four route cards, the privacy section and a
+        * photograph. On a contact page that is the wrong end of the page for the address.
+        *
+        * Removed rather than duplicated. ONE canonical NAP block per page: that exact match with
+        * the Google Business Profile is what ties the site to the local pack listing, and printing
+        * the block twice on one page is how the match gets muddied. The street also appears as the
+        * heading of the trade route card above ("The shop, 13436 C St") and in the footer, which is
+        * unchanged and is a label rather than a second NAP block - measured at three occurrences of
+        * the street on this page, exactly as before this change. */}
 
-          <div>
-            <p className="label text-muted-foreground">Where we are</p>
-            <address className="mt-3 not-italic">
-              <p className="font-display text-xl font-bold text-foreground">{site.name}</p>
-              <p className="mt-2 leading-relaxed text-muted-foreground">
-                {site.address.street}
-                <br />
-                {site.address.city}, {site.address.state} {site.address.zip}
-              </p>
-            </address>
-            <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
-              {site.region}. If you are outside that, we will tell you rather than drive out and load the
-              quote.
-            </p>
-            <div className="mt-5">
-              <TextLink href="/service-areas">Every town, with drive times</TextLink>
-            </div>
-          </div>
-
-          <div>
-            <p className="label text-muted-foreground">Elsewhere</p>
-            <ul className="mt-4 divide-y divide-border border-y border-border">
-              {[
-                ["Instagram", site.social.instagram, "Finished installs, most weeks"],
-                ["Facebook", site.social.facebook, "The same work, and the reviews"],
-                [`${reviewProof.platform} profile`, reviewProof.url, `${reviewProof.average} from ${reviewProof.count} reviews`],
-              ].map(([label, href, note]) => (
-                <li key={label} className="py-3.5">
-                  <a
-                    href={href}
-                    className="font-display text-[0.95rem] font-bold text-foreground underline decoration-accent decoration-2 underline-offset-4 hover:text-accent-deep"
-                  >
-                    {label}
-                  </a>
-                  <p className="mt-0.5 text-sm text-muted-foreground">{note}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* `raise` here rather than background: the section above is muted and the PageCta below
-        * is background, so raise is the only surface that alternates against both. */}
+      {/* GROUND CHANGED raise -> muted, 28 Aug 2026, and it had to be. This used to sit under the
+        * muted NAP block, so raise was the surface that alternated. The NAP block is gone and the
+        * section above this is now the PhotoSplit, which is raise - two raise sections in a row
+        * with a dead strip between them, which is exactly what scripts/section-rhythm.mjs exists
+        * to catch. Muted alternates against raise above and against the card closer below. */}
       <PhotoStrip
         shots={pick("contact-strip", 3)}
         title="What we would be quoting."
-        ground="raise"
+        ground="muted"
       />
 
       <PageCta variant="phone" photos={valueProps["/contact"].photos} omit={["/pricing"]} panelLink={{ href: "/free-design-consultation", label: "Book the on-site measure" }} 
