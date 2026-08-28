@@ -79,7 +79,7 @@ const sheet: { spec: string; value: string; why: string }[] = [
   {
     spec: "Weather rating",
     value: "IP66",
-    why: "It survives a Nebraska winter. It does not survive a bad install, which is why the fastening and the sealing sit under our own warranty rather than the manufacturer's.",
+    why: "It survives a Nebraska winter. It does not survive a bad install, which is why the fastening and the sealing get the attention on this site.",
   },
   {
     spec: "App",
@@ -97,7 +97,7 @@ const identical: string[] = [
   "Every penetration sealed at the moment it is made",
   "Mitered corners at every gable, dormer, bay and valley",
   "The daylight curb check and the after-dark scene walk, both signed off by you",
-  "The same workmanship coverage from us, whichever hardware is on the house",
+  "The same fastening and sealing method, whichever hardware is on the house",
 ];
 
 /* THE TWO THINGS EVERY JOB HAS. The roofline run, and the layer that operates it. */
