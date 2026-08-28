@@ -108,10 +108,21 @@ export function Header({ nav }: { nav: NavItem[] }) {
         * as a local-business template rather than a company site. It survives here as the link. */}
       <div className="bg-primary text-on-dark-muted">
         <div className="shell flex min-h-10 items-center justify-center gap-2 py-2 text-center text-xs sm:text-sm">
+          {/* WAS: "2026 holiday slots are filling. Book by November 15."
+            *
+            * Removed 28 Aug 2026. Two invented facts in eleven words, on every page of the site:
+            * that slots are filling, and that there is a 15 November cut-off. Nobody at Brytr told
+            * us either. A manufactured deadline is the single most corrosive thing that was on this
+            * site, because it is designed to make somebody act faster than they otherwise would.
+            *
+            * The strip stays, carrying the offer that is real - the consultation is free and there
+            * is no obligation - because the bar has a job: it is the one place above the fold that
+            * is not navigation. If Brytr gives us a genuine seasonal cut-off, it goes here, with
+            * the date they give us. */}
           <span>
-            2026 holiday slots are filling.{" "}
+            Free on-site design consultation, no obligation.{" "}
             <Link href="/free-design-consultation" className="tap-44 font-semibold text-accent underline decoration-2 underline-offset-2">
-              Book by November 15
+              Book a visit
             </Link>
             .
           </span>

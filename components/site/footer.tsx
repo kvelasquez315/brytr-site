@@ -13,7 +13,7 @@ const company = [
    * label were a problem: the prices were invented and the finance partner was never named by
    * Brytr. /pricing redirects to the home page. */
   ["About", "/about"], ["How it works", "/how-it-works"],
-  ["Warranty", "/warranty"], ["Reviews", "/reviews"], ["Gallery", "/gallery"],
+  ["Reviews", "/reviews"], ["Gallery", "/gallery"],
   ["Recent projects", "/recent-projects"], ["FAQ", "/faq"], ["Compare brands", "/compare"],
 ];
 
