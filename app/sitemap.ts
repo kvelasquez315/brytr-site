@@ -80,7 +80,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     at("/blog", 0.6, "app/blog/page.tsx", "weekly"),
     at("/about", 0.6, "app/about/page.tsx"),
     at("/how-it-works", 0.6, "app/how-it-works/page.tsx"),
-    at("/warranty", 0.6, "app/warranty/page.tsx"),
     at("/reviews", 0.6, "app/reviews/page.tsx"),
     at("/gallery", 0.6, "app/gallery/page.tsx"),
     at("/recent-projects", 0.6, "app/recent-projects/page.tsx"),
