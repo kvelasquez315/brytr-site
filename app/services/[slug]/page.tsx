@@ -192,7 +192,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 <dd className="u text-right text-sm font-medium text-foreground">{v}</dd>
               </div>
             ))}
-            <div className="mt-5"><TextLink href="/pricing">See pricing and financing</TextLink></div>
           </dl>
         </div>
       </section>
@@ -445,9 +444,13 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                 </li>
               ))}
             </ul>
+            {/* "or the price per foot" was the third item here, on all ten service pages, and it
+              * asserted a pricing basis plus a guarantee that it does not vary by town. Removed
+              * 27 Aug 2026. The two claims left are about people and materials, which is what this
+              * paragraph is for. */}
             <p className="mt-5 text-sm leading-relaxed text-on-dark-muted">
               Drive time changes what we can promise about a service call. It does not change who
-              turns up, what goes on the house, or the price per foot.
+              turns up or what goes on the house.
             </p>
             <div className="mt-auto border-t border-on-dark/12 pt-4">
               <TextLink onDark href="/service-areas">Every town we drive to</TextLink>
