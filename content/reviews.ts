@@ -1,10 +1,15 @@
 /* REAL REVIEWS. Nothing here is written by us.
  *
- * Source of the rating and the count: Brytr's own Google Business Profile, read on
- * 20 Aug 2026 — "Brytr - Permanent Roofline & Smart Landscape Lighting", 13436 C St,
- * Omaha NE 68144. It showed 5.0 with 196 reviews. (The client's own site still says
- * "135+" and their Instagram says "170+"; the profile is the live number, so it is the
- * one we publish. It only ever goes up — check the profile before quoting it in an ad.)
+ * Source of the rating and the count: Brytr's own Google Business Profile — "Brytr - Permanent
+ * Roofline & Smart Landscape Lighting", 13436 C St, Omaha NE 68144.
+ *
+ * 201 as of 28 Aug 2026, on the client's correction. It read 196 when this file was written on
+ * 20 Aug and the client told us the real figure twice before it was changed, which is the reason
+ * `count` is now the ONLY place the number appears. It was hardcoded in three files - here,
+ * content/site.ts and content/badges.ts - so a correction fixed one and left two wrong, and the
+ * site contradicted itself on its own most-quoted fact. Both of the others read it from here now.
+ *
+ * It only ever goes up. Check the profile before quoting it anywhere, and change it HERE.
  *
  * Source of the quoted text: most of these are the testimonials Brytr already publishes on
  * brytrco.com, verbatim. The rest are from the Google profile itself, quoted verbatim from
@@ -66,9 +71,9 @@ export const reviews: Review[] = [
 
 export const reviewProof = {
   average: "5.0",
-  count: 196,
+  count: 201,
   platform: "Google",
   /* the profile itself, so "read them yourself" is a real link */
   url: "https://www.google.com/maps/place/Brytr+-+Permanent+Roofline+%26+Smart+Landscape+Lighting/@41.2226632,-96.1244091,17z",
-  checked: "20 Aug 2026",
+  checked: "28 Aug 2026",
 } as const;

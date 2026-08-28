@@ -1,4 +1,5 @@
 import type { IconKey } from "./icon-map";
+import { reviewProof } from "./reviews";
 
 /* THE GOOGLE MARK, and it is here now.
  *
@@ -78,8 +79,11 @@ export const brandLogoDark: { src: string; width: number; height: number; alt: s
 export const systemLogo: Record<string, string | null> = {};
 
 export const reviewProofBadge = {
-  score: "5.0",
-  count: "196",
+  /* READ FROM content/reviews.ts, not repeated. Both of these were hardcoded - "5.0" and "196" -
+   * and when the client corrected the count to 201 that correction would have fixed reviews.ts and
+   * left this badge saying 196 on whatever renders it. One number, one home. */
+  score: reviewProof.average,
+  count: String(reviewProof.count),
   source: "Google reviews",
   note: "Every one from an Omaha homeowner",
 };
@@ -90,7 +94,7 @@ export const reviewProofBadge = {
 export type Offering = { name: string; note: string; icon: IconKey; href: string };
 
 export const offerings: Offering[] = [
-  { name: "Roofline", note: "Eaves, gables and soffit", icon: "roofline", href: "/services/permanent-roofline-lighting" },
+  { name: "Roofline", note: "Eaves, gables and paths", icon: "roofline", href: "/services/permanent-roofline-lighting" },
   { name: "Landscape", note: "Beds, trees and paths", icon: "pathLight", href: "/services/landscape-lighting" },
   { name: "Patio and pergola", note: "Overhead and hardscape", icon: "pergola", href: "/services/patio-pergola-bistro-lighting" },
 ];
