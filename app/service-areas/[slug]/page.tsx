@@ -169,9 +169,11 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
               </span>{" "}
               service call
             </li>
-            <li>
-              <span className="font-semibold text-on-dark">No</span> travel charge
-            </li>
+            {/* "No travel charge" was the third stat here, on all twelve city pages. A
+              * no-surcharge guarantee is a pricing term and nobody at Brytr gave us one. Removed
+              * 28 Aug 2026 with the rest of the pricing copy. Two stats rather than three: the
+              * subdivision count and the service-call speed are both facts about this town, which
+              * is what this row is for. */}
           </ul>
           <p className="w-full text-sm leading-relaxed text-on-dark-muted lg:w-auto lg:flex-1">
             Close enough that a dark section is a visit rather than a route day.
@@ -196,7 +198,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   rather than a project.
                 </p>
                 <p className="text-base text-muted-foreground">
-                  Every install is designed on site after dark. We walk the property with you, talk
+                  Every install is designed on site. We walk the property with you, talk
                   through what you actually want lit, measure the roofline, and leave you holding a
                   written quote. No charge and nothing to sign.
                 </p>
@@ -229,7 +231,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
 
               <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2">
                 <TextLink href="/free-design-consultation">Book the on-site measure</TextLink>
-                <TextLink href="/pricing">How the number is built</TextLink>
               </div>
             </div>
 
@@ -314,9 +315,14 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   {[
                     ["The same crews", "The people who installed in Dundee last week are the people who install in Manawa this week. Iowa is not handed to anybody else."],
                     ["The same materials", "The same hardware, the same channel finishes, the same controllers. Nothing is substituted because of a state line."],
-                    ["The same warranty", "Manufacturer terms on the hardware and ours on the workmanship, written on the quote exactly as they are in Nebraska."],
-                    ["No border premium", "Per-foot pricing, and the bridge is not a line item. Anybody quoting a river surcharge is quoting you for their own inconvenience."],
-                    ["The covenant paperwork", "Iowa associations word things differently from west Omaha ones. We pull yours and read it either way."],
+                    /* "No border premium" removed 27 Aug 2026: it stated a pricing basis
+                       ("per-foot pricing"), guaranteed no surcharge, and made a claim about what
+                       competitors charge, in one sentence. None of the three came from Brytr.
+                       AND THE ROW AFTER IT WAS A SECOND "The same crews", left behind when that
+                       deletion was made against the diff rather than against the result: one row
+                       rendered twice on every Iowa page, with a duplicate React key on it. */
+                    ["The same service afterwards", "A dark section over the river is a visit, same as anywhere else in the radius."],
+                    ["The covenant wording", "Iowa associations word things differently from west Omaha ones. Worth reading the clause either way."],
                   ].map(([h, p]) => (
                     <li key={h} className="py-5">
                       <h3 className="font-display text-[1.05rem] font-bold text-foreground">{h}</h3>
@@ -326,8 +332,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 </ul>
                 <div className="mt-7 flex flex-wrap gap-x-7 gap-y-2">
                   <TextLink href="/free-design-consultation">Book the on-site measure</TextLink>
-                  <TextLink href="/warranty">The warranty terms</TextLink>
-                </div>
+                  </div>
               </div>
             </div>
 
@@ -449,9 +454,13 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
       <section className="section bg-primary">
         <div className="shell grid items-start gap-10 lg:grid-cols-[46fr_54fr] lg:gap-14">
           <div>
+            {/* TITLE WAS "We handle the paperwork, not you." Removed 28 Aug 2026 on the client's
+              * instruction: Brytr has not told us they administer HOA submissions, and this
+              * section promised it in a heading on twelve city pages. What survives is the part
+              * that is genuinely useful and promises nothing - what a board actually looks at. */}
             <SectionHead
               onDark
-              title="We handle the paperwork, not you."
+              title="What an association will want to see."
             />
             {/* THE SCENE RANGE, DRAWN. This section carried 175 words, one card and no visual of
               * any kind, which the house rules call undesigned outright. It is also the section
@@ -465,29 +474,32 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             </div>
             <p className="mt-6 text-lg leading-relaxed text-on-dark/85">
               {c.tier === "metro"
-                ? `Several ${c.name} developments have specific covenant language about permanent exterior lighting, and a fair amount of it was written before this product existed. We pull yours, read the actual clause, and file the submission ourselves.`
+                ? `Several ${c.name} developments have specific covenant language about permanent exterior lighting, and a fair amount of it was written before this product existed. Bring your covenant to the visit and we will read the clause with you.`
                 : c.tier === "iowa"
-                ? `Iowa associations word this differently from the west Omaha ones, and there are fewer of them. Where ${c.name} has one, we pull the rules and submit to the board before we schedule anything.`
-                : `Most ${c.name} properties have no restriction at all. Where there is an association we handle the submission, and out here it is more often a city permit question than a covenant one.`}
+                ? `Iowa associations word this differently from the west Omaha ones, and there are fewer of them. If ${c.name} has one, bring the rules to the visit.`
+                : `Most ${c.name} properties have no restriction at all, and out here it is more often a city permit question than a covenant one.`}
             </p>
-            {/* These four used to print on all eighteen pages under whichever intro the tier
-              * generated. On Norfolk that meant a paragraph saying "most properties have no
-              * restriction at all" followed by four bullets promising to pull your covenant
-              * and eat the cost if the board refuses — the page arguing with itself. */}
+            {/* THERE USED TO BE FOUR OF THESE and they printed on all eighteen pages under
+              * whichever intro the tier generated. On Norfolk that meant a paragraph saying "most
+              * properties have no restriction at all" followed by four bullets promising to pull
+              * your covenant and eat the cost if the board refused — the page arguing with itself,
+              * and promising a service nobody at Brytr has confirmed. Three now, per branch, and
+              * they describe what boards ask for rather than what we would do about it. */}
             <ul className="mt-7 space-y-3">
               {c.tier === "outstate" ? (
                 <>
-                  <Check onDark>We find out whether there is an association at all before quoting</Check>
-                  <Check onDark>Where there is one, the spec sheet and elevation go in its own format</Check>
-                  <Check onDark>City permit questions we handle the same way, and usually the same week</Check>
-                  <Check onDark>If an approval does not land, you owe us nothing</Check>
+                  <Check onDark>Whether there is an association at all is worth checking before you plan</Check>
+                  <Check onDark>Boards usually want a spec sheet and a drawing of the elevation</Check>
+                  <Check onDark>Out here it is more often a city permit question than a covenant one</Check>
                 </>
               ) : (
                 <>
-                  <Check onDark>We pull the covenant before quoting, not after</Check>
-                  <Check onDark>Spec sheet and elevation submitted in the board&rsquo;s own format</Check>
-                  <Check onDark>Nothing goes on the house before approval lands</Check>
-                  <Check onDark>If the board says no, you owe us nothing</Check>
+                  {/* The four that were here promised to pull the covenant, file the submission,
+                    * and refund you if the board refused. Three service commitments and a money
+                    * one, none of them from Brytr. What is left describes what boards ask for. */}
+                  <Check onDark>Boards want a spec sheet and a drawing of your elevation</Check>
+                  <Check onDark>Read the lighting clause before you plan anything</Check>
+                  <Check onDark>Nothing should go on the house before an approval lands</Check>
                 </>
               )}
             </ul>
@@ -538,11 +550,11 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           {c.tier === "metro"
             ? `${c.drive === "In town" ? "We are in town" : `${c.drive} from the shop`}, so the measure and the install usually land in the same week, and there is a good chance a crew is already working within a couple of streets of you.`
             : c.tier === "iowa"
-            ? `${c.drive} from the shop, over the river, which in practice is closer than half the Nebraska metro. Same crews, same materials, same workmanship terms, and no border premium on the quote.`
+            ? `${c.drive} from the shop, over the river, which in practice is closer than half the Nebraska metro. Same crews and the same materials as anywhere else we work.`
             : `${c.drive} from the shop, so ${c.name} runs as a route day rather than a single call. That is worth knowing before the measure: it is the reason we will want to walk the whole property while we are on it rather than quote the roofline and come back in a season.`}
         </p>
         <p>
-          Nothing is quoted off a satellite photograph. We come out after dark, walk the property with
+          Nothing is quoted off a satellite photograph. We come out, walk the property with
           you and switch a sample run on against your own fascia, because warm white against red brick
           is a different colour from warm white against white siding and no catalogue will tell you
           that. You keep the written quote either way.
@@ -619,10 +631,11 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   /* These two rows used to read "Subdivisions listed 6" and "Neighboring towns 4",
                     * which is this page counting two of its own lists back at the reader. What a
                     * reader actually wants from a glance card is what the visit costs and how soon. */
-                  ["The measure", "Free, on site, after dark"],
+                  ["The measure", "Free, and on site"],
                   ["Written quote", "Yours to keep"],
                   ["Systems carried", "Haven and Jellyfish"],
-                  ["Travel charge", "None"],
+                  /* ["Travel charge", "None"] removed 28 Aug 2026 - a no-surcharge guarantee is
+                     a pricing term and Brytr has given us none. */
                 ].map(([k, v]) => (
                   <div key={k} className="flex items-baseline justify-between gap-4 py-3">
                     <dt className="text-sm text-on-dark-muted">{k}</dt>
@@ -635,9 +648,6 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                   ? "Out here the honest answer to “when” is “on the next route”, and we will give you the real week."
                   : "A service call in this band gets scheduled inside the week."}
               </p>
-              <div className="mt-auto border-t border-on-dark/12 pt-4">
-                <TextLink onDark href="/warranty">What the warranty covers</TextLink>
-              </div>
             </div>
           </div>
         </div>
