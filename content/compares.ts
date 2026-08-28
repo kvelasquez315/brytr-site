@@ -30,8 +30,11 @@ const havenRows = (bName: string, b: Partial<Record<string, string>>): Row[] => 
   { spec: "Zoning", a: "Unlimited, per elevation", b: b.zones ?? "Supported, fewer" },
   { spec: "Dimming", a: "1 to 100 percent per zone", b: b.dim ?? "Supported" },
   { spec: "Weather rating", a: "IP66", b: b.ip ?? "Sealed channel" },
-  { spec: "Rated LED life", a: "25 years", b: b.life ?? "Shorter" },
-  { spec: "Professionally installed", a: "Yes, our own crews", b: b.install ?? "Varies by dealer" },
+  /* THE "Rated LED life | 25 years | Shorter" ROW IS GONE, 28 Aug 2026. The 25-year figure was
+     invented - see the note on `stats` in content/site.ts, where the same number was removed for
+     the same reason - and once our own column is a guess, the row cannot be repaired by softening
+     the competitor's. If Haven publishes a rated life, it goes back with the datasheet to hand. */
+  { spec: "Professionally installed", a: "Yes, by us", b: b.install ?? "Varies by dealer" },
   { spec: "Price tier", a: "Premium", b: b.price ?? "Lower" },
 ];
 
@@ -72,7 +75,7 @@ export const compares: Compare[] = [
       "Gemstone is a real competitor with a well-known name and a good track record. The decision usually comes down to white quality and who is on the ladder, not the brand on the box.",
     aWinsHead: "Choose Haven Evolution if",
     bWinsHead: "Choose Gemstone if",
-    aWins: ["Dedicated white channel matters to you", "You want our crews and our service", "You want the deeper app"],
+    aWins: ["Dedicated white channel matters to you", "You want a local company accountable for the install and the service", "You want the deeper app"],
     bWins: ["You already have a Gemstone dealer you trust", "Their channel profile suits your fascia better", "Their pricing lands better for your run length"],
     rows: havenRows("Gemstone Lights", { maker: "Gemstone Lights", app: "Good", price: "Comparable" }),
     costA: "Premium tier", costB: "Comparable",
@@ -89,7 +92,7 @@ export const compares: Compare[] = [
     aWinsHead: "Choose Haven Evolution if",
     bWinsHead: "Choose Trimlight if",
     aWins: ["You want a local owner accountable for the install", "Dedicated white channel", "One app across roofline and landscape"],
-    bWins: ["You want a national warranty administrator", "Your local franchisee has strong reviews", "You are moving and want a brand that exists elsewhere"],
+    bWins: ["Your local franchisee has strong reviews", "You are moving and want a brand that exists elsewhere"],
     rows: havenRows("Trimlight", { maker: "Trimlight", app: "Good", install: "Franchise dependent", price: "Comparable" }),
     costA: "Premium tier", costB: "Comparable",
   },
@@ -103,7 +106,7 @@ export const compares: Compare[] = [
       "Oelo sells locally and makes a solid product with a distinctive channel. If you have seen an Oelo install you liked, the honest comparison is white quality and app depth.",
     aWinsHead: "Choose Haven Evolution if",
     bWinsHead: "Choose Oelo if",
-    aWins: ["Dedicated white channel", "Deeper app and zoning", "Our crews install and service it"],
+    aWins: ["Dedicated white channel", "Deeper app and zoning", "We install it and we service it"],
     bWins: ["You prefer their channel profile", "You want a specific Oelo color option", "Their local pricing works better for you"],
     rows: havenRows("Oelo", { maker: "Oelo", price: "Comparable" }),
     costA: "Premium tier", costB: "Comparable",
@@ -133,14 +136,13 @@ export const compares: Compare[] = [
       "Budget is the only consideration",
     ],
     rows: [
-      { spec: "Who installs it", a: "Our own crew", b: "You" },
+      { spec: "Who installs it", a: "Brytr", b: "You" },
       { spec: "Ladder time", a: "None for you", b: "A full weekend, at height" },
       { spec: "Channel", a: "Extruded aluminum, mitered, color matched", b: "Adhesive or clip mount" },
       { spec: "Daylight appearance", a: "Hidden in the eave", b: "Usually visible" },
       { spec: "Wire management", a: "Concealed", b: "Your problem" },
       { spec: "Corners and transitions", a: "Cut and sealed on site", b: "Bend and hope" },
-      { spec: "Warranty", a: "Ours plus manufacturer", b: "Consumer electronics warranty" },
-      { spec: "If a section fails", a: "We come out", b: "Back on the ladder" },
+          { spec: "If a section fails", a: "We come out", b: "Back on the ladder" },
       { spec: "Weather rating", a: "IP66 channel system", b: "Varies by kit" },
       { spec: "App", a: "Haven, purpose built", b: "Govee, general purpose" },
       { spec: "Resale appeal", a: "Reads as a building feature", b: "Reads as a gadget" },
@@ -171,11 +173,11 @@ export const compares: Compare[] = [
     keyword: "who makes permanent lights",
     a: "Haven Evolution", b: "Ghouly and other OEM supply",
     verdict:
-      "Most permanent lighting sold in the US comes off the same handful of overseas production lines, Ghouly among them. What you are actually buying is the channel, the controller, the app, the warranty administrator and the crew. Not the LED.",
+      "Most permanent lighting sold in the US comes off the same handful of overseas production lines, Ghouly among them. What you are actually buying is the channel, the controller, the app and the crew. Not the LED.",
     aWinsHead: "What a branded system buys you",
     bWinsHead: "What white-label supply buys you",
     aWins: [
-      "A warranty with somebody to administer it",
+      "Somebody local to call when it needs looking at",
       "A controller and app under active development",
       "Consistent channel extrusion and finishes",
       "An installer network with training standards",
@@ -188,8 +190,7 @@ export const compares: Compare[] = [
     ],
     rows: [
       { spec: "Who makes the LED", a: "Contract manufactured to Haven spec", b: "Often the same lines" },
-      { spec: "Who backs the warranty", a: "Haven, plus Brytr", b: "The installer, if they are still trading" },
-      { spec: "Controller", a: "Haven, actively developed", b: "Generic, varies" },
+          { spec: "Controller", a: "Haven, actively developed", b: "Generic, varies" },
       { spec: "App", a: "Purpose built, updated", b: "Whatever ships with the controller" },
       { spec: "Channel extrusion", a: "Consistent profile and finishes", b: "Varies batch to batch" },
       { spec: "Color consistency across runs", a: "Binned and matched", b: "Not guaranteed" },
