@@ -48,12 +48,7 @@ export const postPhotos: Record<string, PostPhoto> = {
       "A brick gable and white fascia on an Omaha home in daylight, the channel running under the roof edge as a slim line the colour of the trim",
     objectPosition: "50% 52%",
   },
-  "permanent-lighting-warranty-comparison": {
-    photo: "/img/install-day-garage.jpg",
-    photoAlt:
-      "A daytime install at an Omaha home, the garage open and two people working at the front of the house",
-    objectPosition: "50% 50%",
-  },
+  /* "permanent-lighting-warranty-comparison" removed with the article itself. */
   "permanent-lights-on-stucco-brick-cedar": {
     photo: "/img/day-stone-gable.jpg",
     photoAlt:

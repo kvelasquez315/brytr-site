@@ -35,7 +35,7 @@ export const compareDetail: Record<string, CompareDetail> = {
     photoAlt: "Brytr channel lighting following the gable and eave lines of an Omaha home",
     objectPosition: "50% 52%",
     unknowns: [
-      "Nothing much. This is the one comparison on the site where both columns are systems we buy, install and warranty ourselves.",
+      "Nothing much. This is the one comparison on the site where both columns are systems we buy and install ourselves.",
       "Exact LED pitch on the current Jellyfish generation. We quote it as “wider” rather than a figure, because the figure has changed between production runs.",
     ],
     alsoSee: ["haven-vs-gemstone-lights", "jellyfish-vs-gemstone-lights"],
@@ -47,7 +47,7 @@ export const compareDetail: Record<string, CompareDetail> = {
     objectPosition: "50% 45%",
     unknowns: [
       "Gemstone's current published LED pitch and rated life. We have never been given their datasheet and we are not going to guess at it.",
-      "How their warranty administration actually performs, because every claim on a Gemstone system goes to the dealer who fitted it.",
+      "How the dealer network actually performs, because a Gemstone system is serviced by whoever fitted it.",
       "Their pricing. Dealer pricing in this market is not published by anybody, ours included.",
     ],
     alsoSee: ["jellyfish-vs-gemstone-lights", "haven-vs-trimlight"],
