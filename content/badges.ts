@@ -94,7 +94,7 @@ export const reviewProofBadge = {
 export type Offering = { name: string; note: string; icon: IconKey; href: string };
 
 export const offerings: Offering[] = [
-  { name: "Roofline", note: "Eaves, gables and paths", icon: "roofline", href: "/services/permanent-roofline-lighting" },
+  { name: "Roofline", note: "Eaves, gables and soffit", icon: "roofline", href: "/services/permanent-roofline-lighting" },
   { name: "Landscape", note: "Beds, trees and paths", icon: "pathLight", href: "/services/landscape-lighting" },
   { name: "Patio and pergola", note: "Overhead and hardscape", icon: "pergola", href: "/services/patio-pergola-bistro-lighting" },
 ];
