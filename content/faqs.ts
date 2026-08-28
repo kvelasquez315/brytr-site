@@ -3,8 +3,11 @@ export type Faq = { q: string; a: string };
 export const homeFaqs: Faq[] = [
   { q: "Can you actually see it during the day?",
     a: "Barely, and that is the whole point. The channel is extruded aluminum color matched to your fascia and it sits tucked into the eave line. From the street in daylight it reads as trim. Ask us to show you a daytime photo of a house we finished on your own block." },
-  { q: "What does it cost?",
-    a: "It is priced by linear foot of roofline plus complexity, so a single-story ranch and a two-story with dormers and a turret are very different numbers. We give you a written quote after an on-site measure, and we publish real ranges on our pricing page rather than making you call to find out." },
+  /* "What does it cost?" WAS HERE and is gone. It stated a pricing model - by linear foot plus
+   * complexity - and then pointed at /pricing to "publish real ranges", which was a page of
+   * invented figures. Removed 27 Aug 2026 with the page. When Brytr gives us a real basis this
+   * question is the single most valuable one on the site and should come back first. Until then
+   * the honest answer is a phone call, which is what /contact is for. */
   { q: "Does it damage my soffit or fascia?",
     a: "It fastens into the fascia board, not through the shingles, and every penetration is sealed. Done correctly it is no more invasive than hanging a gutter. Done badly it is a leak, so every penetration on your house is sealed as it is made and checked before we leave." },
   { q: "What happens when a section stops working?",
@@ -19,16 +22,19 @@ export const homeFaqs: Faq[] = [
     a: "Most homes are one day. Larger properties, or a job that includes landscape and hardscape fixtures on the same visit, run two. We give you the actual number in the written quote, not a range." },
 ];
 
+/* THE PRICING FAQ SET IS GONE. Nine questions, and every one of them answered with a specific
+ * nobody at Brytr supplied: a deposit policy, a lending partner, quote validity, what a second
+ * visit saves, how fascia repair is charged. They read as authoritative because they were written
+ * as answers rather than as guesses, which is exactly what made them dangerous on a live site.
+ *
+ * ONE OF THE NINE SURVIVES, moved into homeFaqs above: "Is there a charge for the consultation?"
+ * The answer is no, and that is the offer Brytr has led with everywhere, on the old site included.
+ * It is also the one answer that cannot hurt a homeowner if we have it wrong.
+ *
+ * The rest are in git: `git show c53361a:content/faqs.ts`. Do not restore any of them without
+ * figures from Brytr in writing. */
 export const pricingFaqs: Faq[] = [
-  { q: "Why is it priced by linear foot?", a: "Because that is what drives material and labor. The channel, the LED run, and the time on the ladder all scale with how much roofline you are lighting. Complexity then adjusts it: stories, dormers, turrets, and how many separate elevations need their own zone." },
-  { q: "What makes one quote higher than another on the same house?", a: "Story count, roof complexity, how many corners and transitions need mitering, whether you want landscape or bistro on the same visit, and which system you choose. Those five things explain almost every difference." },
-  { q: "Is financing available?", a: "Yes. Terms come from our lending partner and we will show you the actual numbers at the consultation rather than advertising a payment that only applies to a perfect credit file." },
-  { q: "Do you require a deposit?", a: "Yes, on scheduling. The balance is due at completion, after the day and night verification walk." },
-  { q: "Is the quote good for how long?", a: "Ask us at the consultation. Material pricing in this category moves, and we would rather give you a real expiry than a number that quietly changes." },
   { q: "Is there a charge for the consultation?", a: "No. The on-site assessment, the design, and the written quote are free and there is no obligation." },
-  { q: "Is the cheaper hardware a worse install?", a: "No. The crews, the fastening method, the sealing and the verification walk are identical whichever hardware is on the house. What differs is the hardware itself: LED spacing, whether the white is a dedicated channel or color-mixed, and the rated life. Cheaper hardware fastened properly outlasts better hardware fastened badly." },
-  { q: "Does adding landscape or a pergola run on the same visit save money?", a: "Yes, meaningfully. Most of the cost of a second visit is the visit. If you think you will want landscape uplighting or a bistro run within a couple of years, price it now even if you install it later." },
-  { q: "What happens to the price if my fascia needs repair?", a: "We flag it at the measure and quote the repair separately, or we tell you to get your own carpenter to do it first. We will not mount a permanent fixture to failing timber and quietly hope." },
 ];
 
 export const serviceFaqsFor = (name: string): Faq[] => [

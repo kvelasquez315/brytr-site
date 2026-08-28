@@ -20,9 +20,8 @@ import { site } from "@/content/site";
  * there is nothing to read off the posts themselves.
  *
  * So the date comes from git - the last commit that touched the file a route is actually generated
- * from. That is a real answer to "when did this page last change": /pricing moves when
- * app/pricing/page.tsx moves, every service page moves when content/services.ts moves, and a
- * deploy that only changed the footer moves none of them.
+ * from. That is a real answer to "when did this page last change": every service page moves when
+ * content/services.ts moves, and a deploy that only changed the footer moves none of them.
  *
  * IT FAILS SOFT. A shallow clone, a source tarball, or any build container without git in it throws,
  * and then the route ships with no lastmod at all. Omitting the field is correct in that case:
@@ -66,11 +65,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
    * file, not from its `[slug]/page.tsx` template - a change to the template is a change to all
    * eleven service pages, and a change to content/services.ts is too, so either is defensible;
    * the content file is the one that moves when the WORDS move, which is what a crawler cares
-   * about. */
+   * about.
+   *
+   * /pricing IS NOT LISTED, removed 27 Aug 2026 with the page. It redirects to /contact, and a
+   * sitemap that advertises a redirect is a sitemap telling Google to crawl something twice to
+   * learn nothing. */
   return [
     at("/", 1.0, "components/sections/home.tsx", "weekly"),
     at("/free-design-consultation", 0.9, "app/free-design-consultation/page.tsx"),
-    at("/pricing", 0.9, "app/pricing/page.tsx"),
     at("/services", 0.8, "app/services/page.tsx"),
     at("/lighting-systems", 0.8, "app/lighting-systems/page.tsx"),
     at("/compare", 0.8, "app/compare/page.tsx"),

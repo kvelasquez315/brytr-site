@@ -22,10 +22,39 @@ import type { NextConfig } from "next";
  * the moment the whole URL set changes. A 308 to the real sitemap costs nothing and keeps it alive.
  *
  * Permanent rather than temporary on purpose: these paths are never coming back.
+ *
+ * CORRECTION, 27 Aug 2026: the cutover has already happened. Ahrefs' freshest fetch of
+ * https://brytrco.com/pricing returns this site, and /pricing does not exist on WordPress at all.
+ * The 21 Aug crawl above was six days stale when I reasoned from it. The redirects are still right;
+ * the reason they are urgent rather than preparatory is that the domain is live on this build.
+ */
+
+/* /pricing IS GONE, AND THIS IS WHY IT REDIRECTS RATHER THAN 404s.
+ *
+ * The page was removed on 27 Aug 2026 because every specific on it was invented. Not exaggerated -
+ * invented. It stated a deposit policy ("Yes, on scheduling. The balance is due at completion"),
+ * printed an example quote down to the figures (244 linear ft, 3 zones, Haven Evolution, 4
+ * uplights), described financing "arranged through a third-party lender" nobody has named, claimed
+ * we file HOA submissions ourselves, and promised "no design fee, no travel charge". None of it
+ * came from Brytr. It was live on the client's own domain.
+ *
+ * A 308 to /contact rather than a 404 or a 410: the URL was in the header nav of all 78 pages and
+ * in the footer, so it is in browser histories and possibly in Google's index. A visitor who wanted
+ * a price should land somewhere that can give them one, which is a phone number. A 404 punishes
+ * them for our mistake.
+ *
+ * /financing gets the same treatment and never existed as a route at all. It was the target of the
+ * pricing page's own "Financing options" button, so that button was a live 404.
+ *
+ * DO NOT RE-ADD A PRICING PAGE FROM MEMORY. Whatever replaces this needs figures from Brytr in
+ * writing, and the last version of the file is in git if the structure is ever wanted:
+ * `git show c53361a:app/pricing/page.tsx`. The structure was not the problem.
  */
 const nextConfig: NextConfig = {
   async redirects() {
     return [
+      { source: "/pricing", destination: "/contact", permanent: true },
+      { source: "/financing", destination: "/contact", permanent: true },
       { source: "/sitemap_index.xml", destination: "/sitemap.xml", permanent: true },
       { source: "/page-sitemap.xml", destination: "/sitemap.xml", permanent: true },
     ];
