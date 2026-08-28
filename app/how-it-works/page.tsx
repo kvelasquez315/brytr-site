@@ -35,7 +35,7 @@ import { valueProps } from "@/content/value-props";
 export const metadata: Metadata = {
   title: "How It Works: Install Day, Start to Finish",
   description:
-    "What happens on a Brytr install day in Omaha: fascia measured off the ladder, channel sealed as we go, mitered corners, then the curb check after dark.",
+    "What happens on a Brytr install day in Omaha: fascia measured off the ladder, channel sealed as we go, mitered corners, then the curb check before we leave.",
   alternates: { canonical: "/how-it-works" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "How it works", href: "/how-it-works" }];
@@ -73,14 +73,19 @@ const invisible: [string, string][] = [
  * everybody says and the only way to make it mean anything is to name the alternative. */
 const differences: { h: string; us: string; trade: string }[] = [
   {
-    h: "The design happens after dark",
-    us: "We come back in the evening, put a powered sample on your actual elevation, and change color on it while you watch.",
+    /* WAS: "We come back in the evening, put a powered sample on your actual elevation, and change
+       color on it while you watch." An after-dark return visit with a powered demo rig, which is a
+       second appointment nobody at Brytr has committed to. The claim that survives is the one the
+       client leads with everywhere: the design is done on your own property, on your own elevation,
+       against your own fascia colour. */
+    h: "The design happens on your property",
+    us: "Measured and designed standing on your own driveway, against your own fascia colour and your own roof shape.",
     trade: "Quoted from the driveway at two in the afternoon, off a photograph and a rough count.",
   },
   {
     h: "The curb check happens in daylight",
     us: "We stand where your neighbors stand, at noon, and look at the eave line. If you can pick the channel out, we have not finished.",
-    trade: "Signed off at night, when anything looks good and nothing shows.",
+    trade: "Signed off from the street without the homeowner walking it.",
   },
   {
     h: "Sealant goes on as the screw goes in",
@@ -97,11 +102,18 @@ const differences: { h: string; us: string; trade: string }[] = [
     us: "Your everyday setting chosen first, then the scenes you actually asked for, saved with you holding the phone.",
     trade: "Handed over with the factory presets and an app nobody opens twice.",
   },
-  {
-    h: "Your covenant is read before the quote",
-    us: "We pull the rules for your neighborhood, read them, and file the submission ourselves.",
-    trade: "Discovered after the board says no, with a deposit already paid.",
-  },
+  /* THE COVENANT ROW IS GONE, both halves of it, 27 Aug 2026.
+   *
+   * "We pull the rules for your neighborhood, read them, and file the submission ourselves" is an
+   * HOA administration service nobody at Brytr has said they provide. Paired against it, "Discovered
+   * after the board says no, with a deposit already paid" asserted both how competitors bill and
+   * that they get it wrong.
+   *
+   * The row is removed rather than half-rewritten because this component pairs a claim about us
+   * against a claim about the trade, and a pair where one side is invented is not repaired by
+   * softening the other. The same HOA claim survives in content/faqs.ts and on the areas pages -
+   * it is on the list, it is not pricing, and it is not fixed here.
+   */
 ];
 
 export default function HowItWorks() {
@@ -183,19 +195,20 @@ export default function HowItWorks() {
         * of them are mid-install and the third is the walkthrough at the end of it. */}
       <PhotoStrip
         title="Drawings explain the detail. This is the day."
-        lede="One crew, one day on most houses, and a walkthrough after dark before anybody leaves."
+        lede="One crew and a walkthrough of every scene before anybody leaves."
         shots={[
           { photo: "installDayGarage", caption: "Morning. Van open, roofline measured, nothing on the house yet." },
           { photo: "installDayPavilion", caption: "A run going on to a poolside pavilion. Anything with a structure to fasten to at both ends will take one." },
-          { photo: "walkthroughDusk", caption: "After dark, on your lawn, with every scene switched through in front of you." },
+          { photo: "walkthroughDusk", caption: "On your lawn, with every scene switched through in front of you." },
         ]}
         cols={3}
         ground="raise"
       />
 
       {/* ── US AGAINST THE TRADE ──
-        * Six claims, each with the alternative named. "We care about quality"
-        * means nothing until you say what the other option looks like. */}
+        * Five claims, each with the alternative named. "We care about quality"
+        * means nothing until you say what the other option looks like. The sixth was the covenant
+        * row and it came out with the HOA submission service - see the note on `differences`. */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
@@ -261,9 +274,9 @@ export default function HowItWorks() {
               </p>
               <ul className="mt-6 flex-1 divide-y divide-on-dark/10 border-y border-on-dark/10">
                 {[
-                  ["The consultation", "About an hour, after dark, no charge and nothing to sign. It has its own page because it is the part people ask about most."],
+                  ["The consultation", "About an hour, no charge and nothing to sign. It has its own page because it is the part people ask about most."],
                   ["The written quote", "One number for the whole scope, itemized by elevation, hardware and zone, unchanged on install day."],
-                  ["The covenant submission", "Pulled, read and filed by us, before we schedule anything, if your neighborhood needs it."],
+                  ["The covenant", "Worth reading the lighting clause before anything is ordered, if your neighborhood has one."],
                 ].map(([h, p]) => (
                   <li key={h} className="py-4">
                     <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
@@ -273,7 +286,6 @@ export default function HowItWorks() {
               </ul>
               <div className="mt-6 flex flex-wrap gap-x-7 gap-y-2">
                 <TextLink onDark href="/free-design-consultation">What the hour looks like</TextLink>
-                <TextLink onDark href="/pricing">How the number is built</TextLink>
               </div>
             </article>
 
@@ -286,7 +298,7 @@ export default function HowItWorks() {
                 {[
                   ["A section goes dark", "Almost always a driver or one bad connection rather than the whole run. We come out and fix that section."],
                   ["You want another zone", "The back elevation, the pergola, the beds. It ties into the controller you already have."],
-                  ["Something we installed fails", "Manufacturer terms on the hardware, ours on the workmanship, both written on your quote."],
+                  ["Something we installed fails", "You call the number on this site and one of the two owners answers it."],
                 ].map(([h, p]) => (
                   <li key={h} className="py-4">
                     <p className="font-display text-[0.95rem] font-bold text-on-dark">{h}</p>
@@ -294,9 +306,6 @@ export default function HowItWorks() {
                   </li>
                 ))}
               </ul>
-              <div className="mt-6">
-                <TextLink onDark href="/warranty">The warranty terms</TextLink>
-              </div>
             </article>
           </div>
         </div>
