@@ -299,12 +299,12 @@ export function Services() {
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/45" aria-hidden />
             <div className="relative flex flex-1 flex-col">
-              <p className="label text-accent">Free &middot; On site &middot; After dark</p>
+              <p className="label text-accent">Free &middot; On site &middot; No obligation</p>
               <h3 className="mt-3 font-display text-[1.5rem] font-bold leading-tight text-on-dark">
                 Not sure what your house needs?
               </h3>
               <p className="mt-3 text-[0.95rem] leading-snug text-on-dark-muted">
-                We walk the property with you after dark and lay the design out on your own elevation.
+                We walk the property with you and lay the design out on your own elevation.
               </p>
               <div className="mt-auto pt-8">
                 <Link
@@ -401,7 +401,7 @@ const ABOUT_CARDS: { title: string; body: string }[] = [
   },
   {
     title: "The same crew, start to finish",
-    body: "The people who measure your roofline after dark are the people who fit it, and the people who come back to it.",
+    body: "The design is laid out on your own elevation rather than off a satellite photograph.",
   },
 ];
 
@@ -439,7 +439,7 @@ export function WhoWeAre() {
               <h2 className="display-section text-foreground">We&rsquo;re local</h2>
               <p className="mt-5 text-[1.05rem] leading-relaxed text-muted-foreground">
                 Plenty of companies will sell you permanent lighting in Omaha, and every one of them
-                will promise a warranty and someone to call. Most of them cannot keep either promise,
+                will promise someone to call. Most of them cannot keep that promise,
                 because there is nobody here to keep it: the number rings somewhere else, and
                 the crew that fitted your house was passing through.
               </p>
@@ -887,7 +887,8 @@ export const faqItems = [
   ...pick(
     homeFaqs,
     "Can you actually see it during the day?",
-    "What does it cost?",
+    /* "What does it cost?" removed with /pricing - it stated a pricing model and linked to a
+       page of invented figures. See the note in content/faqs.ts. */
     "How long does an install take?",
     "Does it damage my soffit or fascia?",
     "What happens when a section stops working?"
