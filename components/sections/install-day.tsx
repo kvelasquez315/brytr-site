@@ -118,7 +118,7 @@ const stages: Stage[] = [
   {
     when: "At dusk, with you",
     h: "Diffuser on, and every scene walked.",
-    p: "Diffuser clipped in, then the curb check in daylight and every scene walked after dark.",
+    p: "Diffuser clipped in, then the curb check and every scene walked with you.",
     alt: "The finished roof edge with the diffuser fitted, the diodes lit and light falling away below",
     art: (
       <>
