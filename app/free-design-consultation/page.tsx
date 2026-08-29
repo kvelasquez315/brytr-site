@@ -255,7 +255,7 @@ export default function Consult() {
         * worth more than the third paragraph explaining it. */}
       <PhotoPair
         title="What we are doing while we are standing in your garden."
-        lede="Made on the property, against your own materials. Warm white on red brick is a different colour from warm white on white siding."
+        lede="Made on the property, against your own materials. Warm white on red brick is a different color from warm white on white siding."
         a="installDayPavilion"
         b="walkthroughDusk"
         aLabel="Measuring and running a sample against the actual structure, not off a satellite photograph."
