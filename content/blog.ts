@@ -47,7 +47,7 @@ export const posts: Post[] = [
   B({ slug: "permanent-lights-vs-hanging-christmas-lights", title: "Permanent Lights vs Hanging Christmas Lights",
     h1: "Permanent lights versus hanging them every December.", keyword: "permanent lights vs christmas lights",
     category: "Before you buy", read: "5 min",
-    dek: "One is a fixture. The other is a chore with a recurring invoice. The real cost, the real labour and the real difference over ten years, laid out properly.",
+    dek: "One is a fixture. The other is a chore with a recurring invoice. The real cost, the real labor and the real difference over ten years, laid out properly.",
     links: { label: "Permanent Christmas lights", href: "/services/permanent-christmas-lights" },
     body: [
       { p: "The comparison people run is first-year cost, which permanent loses badly. The comparison that matters is ten-year cost plus ladder time plus what happens in January." },
@@ -89,7 +89,7 @@ export const posts: Post[] = [
    * sign. We come out."
    *
    * Brytr has given us no warranty terms, so the article was advising people on a document we have
-   * never seen and promising coverage nobody authorised. The client's instruction on warranty is to
+   * never seen and promising coverage nobody authorized. The client's instruction on warranty is to
    * remove it entirely, and an article ABOUT warranties cannot survive that instruction by being
    * reworded. It is in git: `git show f7956e9:content/blog.ts`.
    *
@@ -102,7 +102,7 @@ export const posts: Post[] = [
     dek: "Cladding rarely matters, because the channel almost never fastens to it. What matters is the fascia behind the gutter and the depth of the overhang.",
     links: { label: "Permanent roofline lighting", href: "/services/permanent-roofline-lighting" },
     body: [
-      { p: "The most common worry we hear is about the wall material. It is usually the wrong worry. The channel mounts to the fascia at the roof edge, so brick, stucco, cedar, vinyl and fibre cement all end up in roughly the same place." },
+      { p: "The most common worry we hear is about the wall material. It is usually the wrong worry. The channel mounts to the fascia at the roof edge, so brick, stucco, cedar, vinyl and fiber cement all end up in roughly the same place." },
       { h: "Where cladding does matter" },
       { list: ["Stucco: any wall-mounted fixture needs proper anchors and sealing, and we avoid wall mounting where we can", "Brick: drilling into mortar joints rather than brick faces, and only where a wall fixture is genuinely required", "Cedar: fastener choice matters to avoid staining, and pre-drilling avoids splitting", "Vinyl: expansion and contraction is real, so nothing is fastened rigidly through a panel"] },
       { h: "What actually decides the install" },
@@ -165,7 +165,7 @@ export const posts: Post[] = [
       { h: "What cold actually changes" },
       { list: ["Sealant cure times lengthen, so sequencing changes", "Some adhesives are out of spec below a threshold and get substituted", "Channel contracts, so expansion allowance at terminations matters more", "Access and footing decide whether a given day is safe at all"] },
       { h: "When we reschedule" },
-      { p: "Ice on the roof, or conditions that would mean rushing a seal to get off the ladder. We would rather move you a week than hand you a leak in March. That is a judgement the crew makes on the day, not a policy." },
+      { p: "Ice on the roof, or conditions that would mean rushing a seal to get off the ladder. We would rather move you a week than hand you a leak in March. That is a judgment the crew makes on the day, not a policy." },
     ] }),
   B({ slug: "roofline-lighting-design-ideas", title: "Roofline Lighting Design Ideas for Omaha Homes",
     h1: "Roofline lighting design ideas for Omaha homes.", keyword: "roofline lighting ideas",
