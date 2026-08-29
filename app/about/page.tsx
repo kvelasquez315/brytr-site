@@ -26,7 +26,7 @@ import { valueProps } from "@/content/value-props";
  * costs us, and why it stands anyway. Nothing on it is a feeling.
  *
  * The founder cards are landscape monogram panels rather than empty 4/5 portrait boxes,
- * because an about page with two grey rectangles where the faces go is worse than an about
+ * because an about page with two gray rectangles where the faces go is worse than an about
  * page with no faces. Portraits are on the shot list; when they land, these become photos
  * and the layout does not move.
  *
@@ -46,7 +46,17 @@ const trail = [{ name: "Home", href: "/" }, { name: "About", href: "/about" }];
 
 /* THE CENTERPIECE. Structural decisions, each one costing something specific. The
  * chip is the taxonomy — margin, time, or the sale itself — because "we put customers
- * first" is a sentence and "this one costs us the sale" is a fact you can check. */
+ * first" is a sentence and "this one costs us the sale" is a fact you can check.
+ *
+ * ONE CARD WAS REPLACED, 29 Aug 2026. It read "No expiring price, no follow-up sequence" and
+ * spent a paragraph explaining that Brytr uses none of the tools that increase close rate. The
+ * client's punch list says there are same-day savings and there is a follow-up sequence, so the
+ * card's entire subject was a practice the company does not follow.
+ *
+ * It is REPLACED rather than deleted because the grid spans below are index-based - three cards
+ * at two columns, then two at three - and four cards would leave exactly the orphan row that
+ * layout was built to avoid. The replacement is the same kind of claim and is checkable on this
+ * site: the daylight frames are on the gallery, and publishing them costs sales. */
 const costs: { chip: string; h: string; p: string; cost: string }[] = [
   {
     chip: "Costs us margin",
@@ -69,14 +79,16 @@ const costs: { chip: string; h: string; p: string; cost: string }[] = [
   {
     chip: "Costs us a day",
     h: "The last hour is unbilled.",
-    p: "The curb check and the scene walkthrough are the two steps most installers skip, and they are the two that catch problems. They are also the reason a crew is on your property at dusk rather than on the next job.",
+    /* WAS "The curb check and the scene walkthrough are the two steps most installers skip." The
+       daylight curb check is on the punch list as not true, so it is the walkthrough, singular. */
+    p: "The scene walkthrough is the step most installers skip, and it is the one that catches problems. It is also the reason a crew is still on your property when the lights come up rather than on the next job.",
     cost: "Roughly an hour of a two-person crew, on every install, billed to nobody.",
   },
   {
     chip: "Costs us the sale",
-    h: "No expiring price, no follow-up sequence.",
-    p: "The number on your quote is the number next month. There is no signing bonus, no discount for deciding tonight, and if you go quiet after the visit, so do we. Every one of those is a tool that measurably increases close rate and every one of them is a tool we do not use.",
-    cost: "Deals that would have closed under pressure, and do not.",
+    h: "We publish the daylight photographs.",
+    p: "Every gallery in this trade is a hundred night shots, because darkness flatters any install and a badly fixed channel is invisible at midnight. We put the noon frames up beside them. Some people look at those, decide the hardware is more visible than they had pictured, and do not call back.",
+    cost: "The buyers who would have booked off the night shots alone.",
   },
 ];
 
@@ -199,7 +211,7 @@ export default function About() {
               >
                 {/* NO CHIP. "COSTS US MARGIN" in a bordered uppercase box is a badge, and rules.md
                   * D5 bans pills and badges anywhere. The card already ends with what it costs, in
-                  * a labelled row, which is the same information said once instead of twice. */}
+                  * a labeled row, which is the same information said once instead of twice. */}
                 <h3 className="font-display text-xl font-bold leading-snug text-on-dark">{c.h}</h3>
                 <p className="mt-2.5 flex-1 text-[0.95rem] leading-relaxed text-on-dark-muted">{c.p}</p>
                 <div className="mt-5 border-t border-on-dark/12 pt-4">
