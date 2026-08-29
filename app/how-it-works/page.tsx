@@ -77,9 +77,9 @@ const differences: { h: string; us: string; trade: string }[] = [
        color on it while you watch." An after-dark return visit with a powered demo rig, which is a
        second appointment nobody at Brytr has committed to. The claim that survives is the one the
        client leads with everywhere: the design is done on your own property, on your own elevation,
-       against your own fascia colour. */
+       against your own fascia color. */
     h: "The design happens on your property",
-    us: "Measured and designed standing on your own driveway, against your own fascia colour and your own roof shape.",
+    us: "Measured and designed standing on your own driveway, against your own fascia color and your own roof shape.",
     trade: "Quoted from the driveway at two in the afternoon, off a photograph and a rough count.",
   },
   {
