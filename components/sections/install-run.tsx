@@ -39,12 +39,20 @@
  *
  * The old set (measured after dark, into fascia never shingles, one app every zone, we hold the
  * warranty, checked twice before we leave) was a list of installation practices - things we do to
- * the house. These are three things the customer ends up holding. */
+ * the house. These are three things the customer ends up holding.
+ *
+ * THE SECOND ONE WAS REPLACED, 29 Aug 2026. It read "The best product made, and only from us /
+ * The highest quality permanent lighting available, and the only vendor here who can fit it", and
+ * the client's punch list against it is "Not sure what this means." Two superlatives in one line,
+ * neither of them checkable. What is in its place is the fact the rest of the site already carries
+ * and can support: two systems on the truck, so the one that goes on a house is chosen for the
+ * house. If the original meant something specific - a sole-installer arrangement with a
+ * manufacturer, say - it can come back once we have it in writing. */
 const STAGES: { title: string; body: string }[] = [
   { title: "One app runs the whole system",
     body: "Every zone on the house, the pergola, the walls and the beds, from one place" },
-  { title: "The best product made, and only from us",
-    body: "The highest quality permanent lighting available, and the only vendor here who can fit it" },
+  { title: "Two systems, so you get the right one",
+    body: "We fit Haven and Jellyfish, so what goes on the roof suits the building rather than being the only line we carry" },
   { title: "We walk you through it once it is lit",
     body: "Nobody is left holding an app they were never shown how to use" },
 ];
