@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { site } from "@/content/site";
 import { reviews, reviewProof } from "@/content/reviews";
 import { Shell } from "@/app/layout-shell";
@@ -9,84 +8,64 @@ import { Jsonld, breadcrumb } from "@/lib/schema";
 import { ValueBand } from "@/components/sections/value-band";
 import { valueProps } from "@/content/value-props";
 
-/* /free-design-consultation — WAVE 1, PAGE 3 of the page-by-page pass.
+/* /free-design-consultation — REWRITTEN 29 Aug 2026 against the client's punch list, and this is
+ * the page that had drifted furthest from the truth on the whole site.
  *
- * What it was: a flat color band for a hero (no photograph at all), the form beside a
- * numbered 1-2-3-4 list in amber squares, four checkmarks, a phone panel, and a drawn
- * ranch elevation dropped in at the bottom with nothing to do with the page. Four
- * kilobytes. It was the thinnest page on the site and it is the page the whole site is
- * trying to get people to.
+ * WHAT CAME OUT, and why. Every one of these was written to sound like a company that does not
+ * sell you anything, and Brytr never asked for that page:
  *
- * What it is now. The hero is the home page's, on the front-elevation shot — because the
- * everyday setting is what somebody is actually buying, and the walk lit in that frame is
- * the argument. The centerpiece is THE HOUR: five beats with the clock running down the
- * left, and beside it a facsimile of the sheet you are handed at the end of it. The blanks
- * on that sheet are left blank on purpose. They are your numbers, off your house, and
- * filling them in here with plausible-looking figures would be the exact thing this site
- * has refused to do everywhere else.
+ *   THE HOUR, beat by beat        Five timed steps from 0:00 to 0:55. "No folder, no tablet
+ *                                 presentation" - there is a folder and there is a presentation.
+ *                                 "You, us, and a flashlight" - no. "This is why evenings are
+ *                                 better" - appointments are daytime. "Quiet. Bring a drink" -
+ *                                 the client's reaction to that one was "what??", which is fair.
+ *                                 "Nothing to sign that evening" - there is something to sign.
+ *   THE DESIGN SUMMARY SHEET      A facsimile of a one-page leave-behind with ruled blanks for
+ *                                 linear feet, mitered corners and zones. No such sheet exists.
+ *                                 It was the centerpiece of the page and it was a prop.
+ *   "you keep the drawing"        In the H1 and the lede. There is no drawing.
+ *   WHAT WILL NOT HAPPEN          Three promises, all false: no price that expires tonight (there
+ *                                 are same-day savings), no manager on the phone, no follow-up
+ *                                 sequence (there is one).
+ *   THE COVENANT BULLETS          HOA has never been a problem and the client does not want it
+ *                                 raised on site, so the whole HOA thread comes off this page.
+ *   "An evening slot"             No evening visits.
+ *   "A sample run, powered"       A demo rig nobody has confirmed.
  *
- * Then the two things nobody asks but everybody wonders: what we turn up with, and what
- * will NOT happen while we are standing in your driveway.
+ * WHAT THE PAGE IS NOW: the four things that genuinely happen - we walk it, we measure it, we
+ * show you the scenes on the app, you get a written quote - and nothing around them. It is a
+ * shorter page than it was and that is the correct outcome; the previous length was invention.
  *
- * Archetype: home hero → clock + document facsimile → two-up kit list → dark objection
- * strip with a real review. Closer: one, the phone band, because the hero has the form.
+ * The one thing this page must not do again is describe the appointment as softer than it is.
+ * It is a sales visit. What is defensible is that the number is measured rather than guessed.
  */
 
 export const metadata: Metadata = {
   title: "Free Lighting Design Consultation | Omaha",
-  description: "Book a free on-site permanent lighting design consultation in the Omaha metro. We measure, design it with you, and hand you a written quote. No obligation.",
+  description: "Book a free on-site permanent lighting design consultation in the Omaha metro. We walk the property, measure the roofline, and hand you a written quote.",
   alternates: { canonical: "/free-design-consultation" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Free design consultation", href: "/free-design-consultation" }];
 
-/* THE HOUR. Elapsed time down the left, because "about an hour" is the objection and the
- * only way to answer it is to show where the hour goes. Typical, not a schedule. */
-const beats: { at: string; h: string; p: string; who: string }[] = [
+/* WHAT ACTUALLY HAPPENS. Four things, no clock against them, and every one is something the
+ * client has confirmed. If a step cannot be stated without a qualifier it does not belong here. */
+const steps: { h: string; p: string }[] = [
   {
-    at: "0:00",
-    h: "We park and you point.",
-    p: "No folder, no tablet presentation. You tell us which elevations you look at and which ones you have never once thought about.",
-    who: "Two minutes of talking, standing in the driveway",
+    h: "We walk the whole property",
+    p: "Front, both sides, the back, the beds, the walk, the patio. We are looking for what the light can do that you have not pictured yet, and for the elevations you have never once thought about.",
   },
   {
-    at: "0:05",
-    h: "We walk the whole property.",
-    p: "Front, both sides, the back, the beds, the walk, the patio. We are looking for what the light can do that you have not pictured yet: a wall in section, a tree worth uplighting, a soffit deep enough to hide the channel completely.",
-    who: "You, us, and a flashlight",
-  },
-  {
-    at: "0:20",
-    h: "We design it on your own elevation.",
-    p: "This is why evenings are better. We put real output on the house from a sample run, change the color on a phone, and you say yes or no to each thing while you are looking at it rather than at a render.",
-    who: "The part people say they did not expect",
-  },
-  {
-    at: "0:40",
-    h: "We measure.",
+    h: "We measure the roofline",
     p: "A wheel along every elevation, corners counted, zones agreed, hardware chosen. This is the part that makes the number real instead of a range.",
-    who: "Quiet. Bring a drink",
   },
   {
-    at: "0:55",
-    h: "You are holding the quote.",
-    p: "One number for the whole scope, itemized. You keep it whether or not you ever call us again.",
-    who: "Nothing to sign that evening",
+    h: "We show you the scenes",
+    p: "The app, on a phone, with the scenes switched through in front of you. You have used it before you have bought it, which is the step most installers leave until handover.",
   },
-];
-
-/* THE LEAVE-BEHIND. The lines are the real lines. The values are blank because they are
- * measured off your house, and inventing a set of plausible ones is precisely the trick
- * this site does not do. */
-const sheet: { k: string; v?: string; blank?: string }[] = [
-  { k: "Property", blank: "town and elevation names" },
-  { k: "Front elevation", blank: "linear ft" },
-  { k: "Side elevations", blank: "linear ft each" },
-  { k: "Rear elevation", blank: "linear ft, or none" },
-  { k: "Mitered corners", blank: "count" },
-  { k: "Zones", blank: "count" },
-  { k: "Hardware", v: "The line and the manufacturer, named not implied" },
-  { k: "Add-ons", blank: "landscape, hardscape, bistro" },
-  { k: "Total, for the whole scope", blank: "one number" },
+  {
+    h: "You get a written quote",
+    p: "One number for the whole scope, itemized. It is based on the measure rather than on a satellite photograph, and it is yours to keep.",
+  },
 ];
 
 export default function Consult() {
@@ -100,12 +79,10 @@ export default function Consult() {
         photo="/img/hero-warm-white.jpg"
         photoAlt="An Omaha two-story with every roofline run on the same soft pink, and the front walk and beds lit as well as the roofline"
         objectPosition="22% 62%"
-        /* "See it on your house before you buy." is the closer on eleven pages. It cannot
-          * also be this page's proposition — a headline that ends every other page reads as
-          * furniture by the time you get here, and it left this page with no line of its own.
-          * The hour, and what you keep at the end of it, is what this page is actually about. */
-        h1="An hour on your property, and you keep the drawing."
-        lede="We come out, walk the property with you, design it together, measure the roofline, and leave you holding a written quote. If you decide against it you have lost an hour and gained a plan. The drawing and the number are yours either way."
+        /* WAS "An hour on your property, and you keep the drawing." There is no drawing. What you
+          * actually leave with is a written number, so that is what the headline says. */
+        h1="An hour on your property, and a written quote."
+        lede="We come out, walk the property with you, measure the roofline and put a written number in your hand. It is measured off your own elevation rather than off a satellite photograph, and it is yours to keep."
         trail={trail}
       />
 
@@ -115,80 +92,39 @@ export default function Consult() {
       <ValueBand {...valueProps["/free-design-consultation"]} ground="muted" />
 
 
-      {/* ── THE HOUR ──
-        * The centerpiece: the clock down the left, the deliverable on the right. */}
+      {/* ── WHAT THE VISIT INVOLVES ──
+        * Was a five-beat clock down the left with a facsimile leave-behind sheet beside it. Both
+        * are gone; the sheet does not exist and the clock was written rather than observed. Four
+        * cards across, so the section fills without a column of invented detail holding it up. */}
       <section className="section bg-card">
         <div className="shell">
           <SectionHead
-            title="Roughly an hour, and this is where it goes."
+            title="What the visit involves."
           />
 
-          <div className="mt-10 grid items-start gap-10 lg:grid-cols-[58fr_42fr] lg:gap-14">
-            <ol>
-              {beats.map((b) => (
-                <li key={b.at} className="grid grid-cols-[4.5rem_1fr] gap-x-5 border-t border-border py-6 first:border-t-0 first:pt-0">
-                  <p className="u pt-0.5 text-lg font-medium leading-none text-accent-ink">{b.at}</p>
-                  <div className="min-w-0">
-                    <h3 className="font-display text-lg font-bold leading-tight text-foreground">{b.h}</h3>
-                    <p className="mt-2 text-[0.95rem] leading-relaxed text-muted-foreground">{b.p}</p>
-                    <p className="label mt-3 text-muted-foreground">{b.who}</p>
-                  </div>
-                </li>
-              ))}
-              <li className="border-t border-border pt-6">
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  Times are typical rather than a schedule. A larger property, a covenant to read or a
-                  yard you want walked twice all add to it, and none of that changes what it costs.
-                </p>
+          <ol className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((s) => (
+              <li
+                key={s.h}
+                className="flex flex-col rounded-lg bg-background p-7 shadow-[var(--shadow-lg)] ring-1 ring-border"
+              >
+                <h3 className="font-display text-[1.15rem] font-bold leading-snug text-foreground">{s.h}</h3>
+                <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-muted-foreground">{s.p}</p>
               </li>
-            </ol>
+            ))}
+          </ol>
 
-            {/* THE SHEET — a facsimile of the leave-behind, blanks and all */}
-            <figure className="overflow-hidden rounded-lg bg-background shadow-[var(--shadow-lg)] ring-1 ring-border">
-              <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border px-6 py-4">
-                <p className="label flex items-center gap-3 text-foreground">
-                  <span className="block h-4 w-1 bg-accent" aria-hidden />
-                  Design summary
-                </p>
-                <p className="text-xs text-muted-foreground">One page. You keep it.</p>
-              </div>
-
-              <dl className="px-6">
-                {sheet.map((r) => (
-                  <div key={r.k} className="flex items-baseline justify-between gap-5 border-b border-border py-3.5 last:border-0">
-                    <dt className="text-sm text-muted-foreground">{r.k}</dt>
-                    <dd className="min-w-0 text-right">
-                      {r.v ? (
-                        <span className="text-sm font-medium text-foreground">{r.v}</span>
-                      ) : (
-                        <span className="inline-flex flex-col items-end">
-                          <span
-                            className="block w-[6.5rem] border-b border-dashed border-muted-foreground/50 pb-1"
-                            aria-hidden
-                          />
-                          <span className="u mt-1 block text-[0.7rem] uppercase tracking-[0.08em] text-muted-foreground">
-                            {r.blank}
-                          </span>
-                        </span>
-                      )}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-
-              <figcaption className="border-t border-border bg-muted px-6 py-5 text-sm leading-relaxed text-muted-foreground">
-                The blanks are blank because they are your numbers, taken off your house with a wheel.
-                We fill them in with you standing there, and the sheet is yours whether or not you book
-                anything.
-              </figcaption>
-            </figure>
-          </div>
+          <p className="mt-8 max-w-[80ch] text-sm leading-relaxed text-muted-foreground">
+            A larger property, or a yard you want walked twice, adds to it. None of that changes what
+            the visit costs.
+          </p>
         </div>
       </section>
 
-      {/* ── WHAT TURNS UP, AND WHAT HELPS ──
-        * Two lists, because both questions get asked on the phone and neither
-        * one is answered anywhere on the site. */}
+      {/* ── WHAT WE BRING, AND WHAT HELPS ──
+        * The kit list is three items now rather than four: "A sample run, powered" described a
+        * demo rig nobody has confirmed we carry. The right-hand list lost the covenant bullets and
+        * the evening slot - see the note at the top of this file. */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
@@ -199,13 +135,12 @@ export default function Consult() {
             <div className="flex flex-col rounded-lg bg-card p-7 shadow-[var(--shadow-lg)] ring-1 ring-border">
               <h3 className="font-display text-2xl font-bold text-foreground">In the van</h3>
               <p className="mt-3 text-[1.05rem] leading-relaxed text-muted-foreground">
-                Enough to show you the real thing rather than a photograph of it.
+                Enough to make the number real before we drive away.
               </p>
               <ul className="mt-6 flex-1 divide-y divide-border border-y border-border">
                 {[
-                  ["A sample run, powered", "The actual channel and diodes, lit, so you can see the beam and the gap between fixtures up close."],
                   ["A measuring wheel", "Every elevation walked and written down, not paced out."],
-                  ["The app, on a phone", "We change the color on the sample while you watch, so scenes are a thing you have used before you buy them."],
+                  ["The app, on a phone", "We switch the scenes in front of you, so they are a thing you have used before you buy them."],
                   ["The quote, before we leave", "Written on the property and handed to you, so you are holding a number rather than waiting on an email."],
                 ].map(([h, p]) => (
                   <li key={h} className="py-4">
@@ -223,68 +158,61 @@ export default function Consult() {
                 otherwise work out on the walk.
               </p>
               <ul className="mt-6 flex-1 space-y-3.5">
-                <Check onDark>An evening slot, so the design happens with the light actually on</Check>
                 <Check onDark>Whoever else gets a say, in the driveway rather than on speakerphone</Check>
-                <Check onDark>Your covenant or HOA rules, if your neighborhood has them</Check>
                 <Check onDark>A rough idea of which elevations matter to you and which do not</Check>
                 <Check onDark>Any photograph of a house you liked, even a screenshot</Check>
                 <Check onDark>Whether there is a rear elevation you actually use in the evening</Check>
                 <Check onDark>Any window you would rather we did not throw light into</Check>
               </ul>
-              {/* WAS: "If your neighborhood needs a submission, we pull the paperwork and file it.
-                * That is our job, not yours." The HOA administration service again, and this is the
-                * fifth place it has turned up - it was removed from the pricing FAQ, the covenant
-                * row on /how-it-works, the areas pages and content/faqs.ts before this one. Brytr
-                * has not told us they file covenant submissions, and on THIS page the claim does
-                * the most damage, because a homeowner reading it while booking could reasonably
-                * skip their own application. */}
-              <p className="mt-7 border-t border-on-dark/12 pt-5 text-sm leading-relaxed text-on-dark-muted">
-                If your neighborhood has a lighting clause, bring it to the visit and we will read it
-                with you.{" "}
-                <Link href="/faq" className="text-on-dark underline decoration-accent decoration-2 underline-offset-4">
-                  More on covenants
-                </Link>.
-              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* ── THE HOUR, PHOTOGRAPHED ──
-        * This page describes an appointment. Two photographs of one actually happening are
-        * worth more than the third paragraph explaining it. */}
+        * The lede here used to be "Warm white on red brick is a different colour from warm white on
+        * white siding", which the client read and wrote "What??" beside. It was also the colour-
+        * matching argument in disguise. What these two frames actually show is the measure and the
+        * handover, so that is what the copy says now. */}
       <PhotoPair
         title="What we are doing while we are standing in your garden."
-        lede="Made on the property, against your own materials. Warm white on red brick is a different color from warm white on white siding."
+        lede="The first is the measure, on the property, against the actual structure. The second is the end of it, looking at the result from where you would normally stand."
         a="installDayPavilion"
         b="walkthroughDusk"
-        aLabel="Measuring and running a sample against the actual structure, not off a satellite photograph."
+        aLabel="Measuring against the actual structure, not off a satellite photograph."
         bLabel="And at the end of it, looking at the result from where you would normally stand."
         ground="card"
       />
 
-      {/* ── WHAT WILL NOT HAPPEN ──
-        * The objection nobody says out loud. One real review carrying it. */}
+      {/* ── WHY PEOPLE BOOK IT ──
+        * WAS "What will not happen in your driveway": three promises, none of them true. It is
+        * deleted rather than softened, because the honest version of that section is short enough
+        * to be one paragraph, and because a page that oversells how gentle the appointment is has
+        * the same problem as a page that oversells the product. The review and the phone panel are
+        * kept - they were the only load-bearing things in that section. */}
       <section className="section bg-primary">
         <div className="shell">
           <SectionHead
             onDark
-            title="What will not happen in your driveway."
+            title="What you get out of an hour."
           />
 
           <div className="mt-10 grid gap-10 lg:grid-cols-[56fr_44fr] lg:gap-14">
-            <ul className="divide-y divide-on-dark/12 border-y border-on-dark/12">
-              {[
-                ["No price that expires tonight.", "The number on your sheet is the number next month. There is no signing bonus and no discount for deciding before we drive away, because a price that moves was never a price."],
-                ["No manager on the phone.", "Nobody is calling anybody to “see what I can do for you”. The person who measured your house is the person who quoted it."],
-                ["No follow-up sequence.", "One reply to your form, one visit, and then it is your move. If you go quiet, we go quiet."],
-              ].map(([h, p]) => (
-                <li key={h} className="py-6">
-                  <h3 className="font-display text-xl font-bold leading-snug text-on-dark">{h}</h3>
-                  <p className="mt-2.5 text-[0.95rem] leading-relaxed text-on-dark-muted">{p}</p>
-                </li>
-              ))}
-            </ul>
+            <div>
+              <p className="text-lg leading-relaxed text-on-dark/85">
+                It is a sales appointment and we are not going to pretend otherwise. What we will say
+                is that the number at the end of it is measured rather than guessed, that it covers
+                the whole scope rather than a starting point, and that it is written down before
+                anybody leaves your driveway.
+              </p>
+              <p className="mt-5 text-[1.02rem] leading-relaxed text-on-dark-muted">
+                If you decide against it, you have spent an hour and you know what your house would
+                cost. That is a better position than the one most people are in after a phone call.
+              </p>
+              <div className="mt-7">
+                <TextLink onDark href="/gallery">See finished installs first</TextLink>
+              </div>
+            </div>
 
             <div className="space-y-5">
               <figure className="rounded-lg bg-raise p-7 ring-1 ring-on-dark/10">
@@ -324,8 +252,8 @@ export default function Consult() {
       </section>
 
       {/* The closer cannot repeat this page's own H1 back at somebody who has just read
-        * 1,200 words under it, and it cannot offer to book the thing they are already on
-        * the page for. So it makes the other argument: pick up the phone instead. */}
+        * the page, and it cannot offer to book the thing they are already on the page for.
+        * So it makes the other argument: pick up the phone instead. */}
       <PageCta
         variant="phone"
         photos={valueProps["/free-design-consultation"].photos}
