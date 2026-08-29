@@ -70,14 +70,14 @@ const CARD_RATIO = "aspect-4/3";
  * Blank space is the failure this client cares about most and I generated it structurally.
  *
  * So: add photographs or move them, never ship a remainder. If a group cannot reach the next
- * multiple of three honestly, it should be merged into a neighbour instead. */
+ * multiple of three honestly, it should be merged into a neighbor instead. */
 const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
   {
     h: "The everyday setting",
     note: "Where the system sits most nights",
     /* This group used to hold three shots, two of which were pink rather than warm white, so
      * the group arguing "this is the setting you are actually buying" made that argument with
-     * photographs of something else. They moved to the single-colour group and this one was
+     * photographs of something else. They moved to the single-color group and this one was
      * left holding a single frame, with a lede that admitted it.
      *
      * That admission is now obsolete and so is the shortage: the second archive brought nineteen
@@ -115,7 +115,7 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
     ],
   },
   {
-    h: "The whole elevation in the same colour",
+    h: "The whole elevation in the same color",
     note: "The whole property, one tap",
     lede:
       "The largest group here, which is the answer to anybody who thinks this is a Christmas product.",
@@ -132,7 +132,7 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
     ],
   },
   {
-    h: "Colour held apart by zone",
+    h: "Color held apart by zone",
     note: "The look most people land on",
     lede:
       "Gables in color, eaves left white, landscape left warm. Where most people land after a month of playing with it.",
@@ -176,11 +176,11 @@ export default function Gallery() {
         * moves under two feet across all five frames.
         *
         * That is why this is a filmstrip and not a grid. A gallery full of different houses in
-        * different colours proves we can light houses. Five frames of ONE house proves the thing
+        * different colors proves we can light houses. Five frames of ONE house proves the thing
         * a gallery normally cannot: that the house in the warm white photograph and the house in
         * the scarlet photograph are the same house, on the same night, and that nothing was
         * swapped out to get from one to the other. Every competitor's gallery is open to the
-        * suspicion that the colour shots are a different install. This set closes it. */}
+        * suspicion that the color shots are a different install. This set closes it. */}
       <PhotoStrip
         title="The same roofline, photographed as the settings changed."
         lede="A drone held its position over one property west of Omaha for a minute and a half while the scenes were switched through from a phone. Same roof, same sky, same camera. Read them left to right."
@@ -283,7 +283,7 @@ export default function Gallery() {
         lede="A night shot flatters any install. Daylight does not: at noon a badly fixed channel has nowhere to hide. Two houses, uncropped and ungraded."
         a="dayBrickGable"
         b="dayShakeGable"
-        aLabel="Brick and white fascia. The channel runs under the roof edge, colour matched to the trim, and you have to know it is there to find it."
+        aLabel="Brick and white fascia. The channel runs under the roof edge, color matched to the trim, and you have to know it is there to find it."
         bLabel="A shake gable on a second house, so this is not one lucky angle. The run reads as a narrow strip below the gutter line."
         ground="muted"
       />
