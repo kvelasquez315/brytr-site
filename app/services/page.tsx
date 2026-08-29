@@ -39,8 +39,8 @@ const trail = [{ name: "Home", href: "/" }, { name: "Services", href: "/services
 /* THE DECISION TREE. Each branch starts with what somebody says when we walk up the
  * driveway, not with a product name. `start` is what we would install first and why;
  * `then` is what the same customers add later, in the order they usually add it. The
- * pairing order is our recommendation, which is a judgement we are allowed to make — it
- * is labelled as ours rather than dressed up as data. */
+ * pairing order is our recommendation, which is a judgment we are allowed to make — it
+ * is labeled as ours rather than dressed up as data. */
 const branches: {
   said: string;
   start: string;          // slug
@@ -215,7 +215,7 @@ export default function ServicesHub() {
             *
             * The four groups hold three, two, two and four rows. In a two-column grid with
             * `items-start` that pairs 3 against 2 and 2 against 4, so the shorter card in each row
-            * stopped 88px and 176px short of its neighbour — the second one leaving a 675 x 176px
+            * stopped 88px and 176px short of its neighbor — the second one leaving a 675 x 176px
             * hole under a card. Switching to `items-stretch` does not fix it, it just moves the
             * void inside the short card instead of beside it.
             *
@@ -260,7 +260,7 @@ export default function ServicesHub() {
       {/* ── THE RANGE, IN PHOTOGRAPHS ──
         * This page is a decision tree followed by a rack of rows: it is navigation, and
         * navigation with no pictures is a sitemap. Four frames spanning roofline, landscape,
-        * overhead and a colour scene, so a reader can see the categories rather than read them. */}
+        * overhead and a color scene, so a reader can see the categories rather than read them. */}
       <PhotoStrip
         /* Not "Four of the ten" — that counted the rack above AND the row below, in one
           * line. The reader can see how many pictures there are. */
@@ -288,8 +288,12 @@ export default function ServicesHub() {
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {[
               {
+                /* 29 Aug 2026, off the client punch list: this read "...and check the run
+                   from the curb before we leave." There is no daylight curb check - the
+                   client has said so plainly - so the sentence now ends on what the crew
+                   actually does while it is up there. */
                 h: "On a house",
-                p: "We work off ladders, miter at every transition, and walk every scene with you before we leave.",
+                p: "We work off ladders, seal every fixing as it is driven, and walk every scene with you before we leave.",
                 l: ["Zoned per elevation so the back can stay off", "Scenes saved with you standing there"],
                 href: "/services/permanent-outdoor-lighting",
                 cta: "See a whole-home install",
