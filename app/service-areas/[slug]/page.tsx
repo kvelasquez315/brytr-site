@@ -134,7 +134,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
           * "we have not shot a job here" — the most creditable sentence on the page — was
           * styled exactly like Omaha's ordinary "photographed on a Brytr install". A reader
           * skimming both got no signal that one of them was a disclosure. It now gets a
-          * ruled-off block and says the word out loud. A surface shift rather than a coloured
+          * ruled-off block and says the word out loud. A surface shift rather than a colored
           * left strip, which slopcheck rejects on principle and is right to. */
       />
 
@@ -556,7 +556,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         <p>
           Nothing is quoted off a satellite photograph. We come out, walk the property with
           you and switch a sample run on against your own fascia, because warm white against red brick
-          is a different colour from warm white against white siding and no catalogue will tell you
+          is a different color from warm white against white siding and no catalog will tell you
           that. You keep the written quote either way.
         </p>
       </PhotoSplit>
@@ -565,14 +565,14 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
         * This city's own neighbors, ordered by drive, not the eighteen-box rack. */}
       <section className="section bg-card">
         <div className="shell grid items-start gap-10 lg:grid-cols-[38fr_62fr] lg:gap-14">
-          {/* A MAP CENTRED ON THIS TOWN, replacing a paragraph about ordering.
+          {/* A MAP CENTERED ON THIS TOWN, replacing a paragraph about ordering.
             *
             * This section used to be a heading, a sentence explaining that the list was sorted by
             * drive time, and the list. Nothing in it was true of one town rather than another
             * except the name in the heading, which is precisely how twelve pages came to be one
             * page with the noun swapped.
             *
-            * The map is centred on this town's own coordinates with its pin enlarged, so the page
+            * The map is centered on this town's own coordinates with its pin enlarged, so the page
             * shows where the reader actually is and which of our other towns sit around them. The
             * list stays beside it, because a map answers "where roughly" and a list answers "how
             * long is the drive", and those are different questions. */}
