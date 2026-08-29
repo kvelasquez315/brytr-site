@@ -23,7 +23,7 @@ export function Hero() {
   return (
     <SiteHero
       h1="Permanent outdoor lighting in Omaha"
-      lede="Warm white every night, any colour when you want it, and nobody on a ladder in December."
+      lede="Warm white every night, any color when you want it, and nobody on a ladder in December."
       photo={bg.src as string}
       photoAlt={bg.alt}
       objectPosition="50% 50%"

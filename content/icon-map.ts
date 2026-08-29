@@ -13,7 +13,7 @@
  * So nothing renders one any more, on any page, and components/icons/index.tsx - 479 lines of
  * them - is deleted. What is left is the NAME, because `icon` is still a field on every service,
  * system and offering in content/, and those keys are meaningful data: they say what KIND of thing
- * a service is, and a future design might key a photograph or a colour off them rather than a
+ * a service is, and a future design might key a photograph or a color off them rather than a
  * drawing. Removing the field as well would be a content migration across four files to delete
  * information that costs nothing to keep.
  *

@@ -29,7 +29,7 @@
  * background on the list, so it spans whatever height the rows come to, and each diode sits inside
  * its own row. Nothing measures anything.
  *
- * Every colour is a token, in globals.css. No hex here, which scripts/hex-lock.mjs enforces; the
+ * Every color is a token, in globals.css. No hex here, which scripts/hex-lock.mjs enforces; the
  * only inline style is the output ramp, which is a number.
  */
 
