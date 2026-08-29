@@ -200,7 +200,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 <p className="text-base text-muted-foreground">
                   Every install is designed on site. We walk the property with you, talk
                   through what you actually want lit, measure the roofline, and leave you holding a
-                  written quote. No charge and nothing to sign.
+                  written quote, and no charge for the visit.
                 </p>
               </div>
               {/* A PHOTOGRAPH, NOT A DRAWING, and the distinction is the check rather than taste.
@@ -372,7 +372,7 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
                 {[
                   ["What a route day is", `A crew leaves the shop early, works ${c.name} and the towns around it for the day, and comes back. Two or three properties, sometimes four on smaller runs.`],
                   ["What it means for your date", "We hold a window rather than a day until there is enough work out here to fill it, then it firms up and we ring you. That wait is the honest cost of not being charged for the drive."],
-                  ["What it does not change", "The crew, the method, the sealing, the mitered corners, the curb check and the scene walk at dusk. Identical to a metro job, because it is the same two people."],
+                  ["What it does not change", "The crew, the method, the sealing and the scene walk before anybody leaves. Identical to a metro job, because it is the same two people."],
                   ["What it means for a service call", "Scheduled onto the next route rather than same-week. If something is genuinely urgent we will tell you honestly whether that is days or a fortnight."],
                   ["Why we still do it", `There is nobody out here carrying more than one brand, so the alternative for a ${c.name} homeowner is one brand and one price. That is worth a drive.`],
                 ].map(([h, p]) => (
@@ -472,11 +472,17 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <div className="mt-7 max-w-[30rem] overflow-hidden rounded-lg bg-raise p-4 ring-1 ring-on-dark/10">
               <ChannelFigure variant="spectrum" className="block w-full" />
             </div>
+            {/* THE METRO AND IOWA PARAGRAPHS BOTH ENDED BY TELLING THE READER TO BRING THE
+              * COVENANT TO THE VISIT SO WE COULD READ THE CLAUSE WITH THEM. Off the client punch
+              * list, 29 Aug 2026: HOA has never been a problem for Brytr and it is not something
+              * discussed on site, so the site cannot be offering a covenant review at the
+              * appointment. Both now stop at reading your own clause first, which is advice
+              * rather than a service. */}
             <p className="mt-6 text-lg leading-relaxed text-on-dark/85">
               {c.tier === "metro"
-                ? `Several ${c.name} developments have specific covenant language about permanent exterior lighting, and a fair amount of it was written before this product existed. Bring your covenant to the visit and we will read the clause with you.`
+                ? `Several ${c.name} developments have specific covenant language about permanent exterior lighting, and a fair amount of it was written before this product existed. Worth reading the lighting clause before you plan anything.`
                 : c.tier === "iowa"
-                ? `Iowa associations word this differently from the west Omaha ones, and there are fewer of them. If ${c.name} has one, bring the rules to the visit.`
+                ? `Iowa associations word this differently from the west Omaha ones, and there are fewer of them. If ${c.name} has one, read the lighting clause before you plan anything.`
                 : `Most ${c.name} properties have no restriction at all, and out here it is more often a city permit question than a covenant one.`}
             </p>
             {/* THERE USED TO BE FOUR OF THESE and they printed on all eighteen pages under
@@ -509,8 +515,11 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             <p className="label text-accent">What actually wins an approval</p>
             <ul className="mt-5 divide-y divide-on-dark/10 border-y border-on-dark/10">
               {[
-                ["A daylight photograph", "Boards worry about what it looks like at noon, not at night. A curb shot of a finished install answers the real objection."],
-                ["The words on the spec sheet", "“Architectural exterior lighting, color matched to trim” describes it accurately. “Permanent Christmas lights” describes it badly and gets refused."],
+                /* WAS "Boards worry about what it looks like at noon, not at night. A curb shot of
+                   a finished install answers the real objection." Same retraction as everywhere
+                   else: no curb, no noon. The advice is unchanged and still true. */
+                ["A daylight photograph", "Boards worry about how it looks in daylight, not at night. A daytime photograph of a finished install answers the real objection."],
+                ["The words on the spec sheet", "“Architectural exterior lighting, fixed to the fascia” describes it accurately. “Permanent Christmas lights” describes it badly and gets refused."],
                 ["Naming the zones", "A board that knows the back elevation can be left dark is a board with less to object to."],
                 ["Somebody else’s approval", "If a neighbor in your association already has one, that is usually the whole conversation."],
               ].map(([h, p]) => (
@@ -553,11 +562,16 @@ export default async function CityPage({ params }: { params: Promise<{ slug: str
             ? `${c.drive} from the shop, over the river, which in practice is closer than half the Nebraska metro. Same crews and the same materials as anywhere else we work.`
             : `${c.drive} from the shop, so ${c.name} runs as a route day rather than a single call. That is worth knowing before the measure: it is the reason we will want to walk the whole property while we are on it rather than quote the roofline and come back in a season.`}
         </p>
+        {/* THE SECOND SENTENCE READ "because warm white against red brick is a different color
+          * from warm white against white siding and no catalog will tell you that." The client's
+          * punch list against that line, where it also appeared on the consultation page, is
+          * "What??" - so it is gone from the eighteen city pages too. The point it was reaching
+          * for is simply that a sample run on your own house tells you more than a photograph of
+          * somebody else's does, which is what it says now. */}
         <p>
-          Nothing is quoted off a satellite photograph. We come out, walk the property with
-          you and switch a sample run on against your own fascia, because warm white against red brick
-          is a different color from warm white against white siding and no catalog will tell you
-          that. You keep the written quote either way.
+          Nothing is quoted off a satellite photograph. We come out, walk the property with you and
+          switch a sample run on against your own house, which tells you more in a minute than a
+          photograph of somebody else&rsquo;s elevation will. You keep the written quote either way.
         </p>
       </PhotoSplit>
 
