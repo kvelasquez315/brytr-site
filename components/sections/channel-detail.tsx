@@ -26,7 +26,7 @@
  * sits where it sits because of what is around it, and a shared component invited exactly the kind
  * of coordinate mix-up that put all five of them in one corner the first time this was rendered.
  *
- * Every colour is a token. No hex appears here, which is what scripts/hex-lock.mjs enforces.
+ * Every color is a token. No hex appears here, which is what scripts/hex-lock.mjs enforces.
  */
 
 export function ChannelDetail({ className }: { className?: string }) {
@@ -45,7 +45,7 @@ export function ChannelDetail({ className }: { className?: string }) {
       viewBox="0 0 700 450"
       className={className}
  role="img"
-      aria-label="A measured cross-section through a roof edge: the shingle course with nothing fastened through it, the fascia board every fixing lands in, the aluminium channel screwed to its face, the sealed fixings, and the addressable LED behind its lens."
+      aria-label="A measured cross-section through a roof edge: the shingle course with nothing fastened through it, the fascia board every fixing lands in, the aluminum channel screwed to its face, the sealed fixings, and the addressable LED behind its lens."
     >
       <rect width="700" height="450" fill={paper} />
 

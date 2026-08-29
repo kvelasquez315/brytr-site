@@ -14,10 +14,10 @@
  *   spectrum   the same length, its diodes stepping through the six scene colors from globals.css,
  *              with warm white marked as where it sits most of the year.
  *   run        a gable seen straight on with the channel following the eave and both rakes, and the
- *              mitre called out at the peak. Answers "what does it do at the corners".
+ *              miter called out at the peak. Answers "what does it do at the corners".
  *
  * WHY SVG AND NOT A PHOTOGRAPH. These are the parts a photograph cannot show: a dimension, a pitch,
- * a color range, the geometry of a mitre. Where a photograph can show it, the site uses one.
+ * a color range, the geometry of a miter. Where a photograph can show it, the site uses one.
  *
  * Every color is a token. No hex, which scripts/hex-lock.mjs enforces.
  */
@@ -135,7 +135,7 @@ export function ChannelFigure({
   const right: [number, number] = [610, 210];
   return (
     <svg viewBox="0 0 700 300" className={className} role="img"
-      aria-label="A gable seen straight on with the Brytr channel following both rakes and the eave, and the mitred joint called out at the peak.">
+      aria-label="A gable seen straight on with the Brytr channel following both rakes and the eave, and the mitered joint called out at the peak.">
       {/* the gable itself, construction weight */}
       <path d={`M${left[0]} ${left[1]}L${peak[0]} ${peak[1]}L${right[0]} ${right[1]}`} fill="none" stroke={faint} strokeWidth="1.4" />
       <path d={`M${left[0]} ${left[1]}H${right[0]}`} stroke={faint} strokeWidth="1.4" />
@@ -157,7 +157,7 @@ export function ChannelFigure({
       <circle cx={peak[0]} cy={peak[1] + 16} r="16" fill="none" stroke={line} strokeWidth="1" />
       <path d={`M${peak[0] + 16} ${peak[1] + 16}H${peak[0] + 74}`} stroke={line} strokeWidth="1" />
       <text x={peak[0] + 82} y={peak[1] + 12} fill={ink} fontSize="16" fontWeight="700" fontFamily="var(--font-display)">
-        Mitred, not bent
+        Mitered, not bent
       </text>
       <text x={peak[0] + 82} y={peak[1] + 33} fill={inkMuted} fontSize="14" fontFamily="var(--font-body)">
         {/* shortened: the longer sentence ran past x=700 and lost its last letter to the viewBox */}
