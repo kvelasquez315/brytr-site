@@ -45,7 +45,10 @@ export const metroShots: Shot[] = [
   { photo: "christmasRedGreenGables", caption: "Red and green alternating along every gable. Nothing was hung for this and nothing comes down in January." },
   { photo: "poolPergolaDusk", caption: "A pool and pergola at sunset, the beam run and the roofline behind it on the same schedule." },
   { photo: "homeFarmhouseDark", caption: "Dark siding, restrained output. Warm white on a modern elevation reads as architecture rather than decoration." },
-  { photo: "dayBrickGable", caption: "The same hardware in daylight. Color matched to the fascia, diffuser facing down, and you have to know it is there to find it." },
+  /* WAS "Color matched to the fascia, diffuser facing down". Brytr does not colour match the
+     channel - client's punch list, 29 Aug 2026. What the frame actually shows is a run tucked
+     under the roof edge, which is the checkable half of the claim. */
+  { photo: "dayBrickGable", caption: "The same hardware in daylight. Tucked under the roof edge, diffuser facing down, and you have to know it is there to find it." },
   { photo: "landscapeTreeBeds", caption: "Roofline and landscape on one controller, so the beds and the tree come up with the house rather than on their own timer." },
   { photo: "halloweenOrangePurple", caption: "Orange and violet through October, set from the app and scheduled to switch itself back." },
   { photo: "homePrairieTwilight", caption: "Civil twilight, which is the twenty minutes this product looks best." },
