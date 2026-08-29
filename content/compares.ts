@@ -24,7 +24,11 @@ const havenRows = (bName: string, b: Partial<Record<string, string>>): Row[] => 
   { spec: "LED spacing", a: "4 in.", b: b.spacing ?? "Wider" },
   { spec: "White channel", a: "Dedicated warm white", b: b.white ?? "Color-mixed" },
   { spec: "Color range", a: "RGB + dedicated white", b: b.color ?? "RGB" },
-  { spec: "Channel profile", a: "Extruded aluminum, color matched", b: b.channel ?? "Aluminum, stock finishes" },
+  /* WAS a: "Extruded aluminum, color matched". Brytr does not colour match the channel, and this
+     row was setting that against "Aluminum, stock finishes" on the competitor - so it claimed a
+     difference that does not exist. The real difference on our side is that it is a rigid
+     extrusion that gets screwed on. 29 Aug 2026. */
+  { spec: "Channel profile", a: "Extruded aluminum, screw-fixed", b: b.channel ?? "Aluminum, stock finishes" },
   { spec: "App quality", a: "Best of the systems we install", b: b.app ?? "Workable" },
   { spec: "Scene programming", a: "Unlimited saved scenes", b: b.scenes ?? "Supported" },
   { spec: "Zoning", a: "Unlimited, per elevation", b: b.zones ?? "Supported, fewer" },
@@ -125,7 +129,7 @@ export const compares: Compare[] = [
     bWinsHead: "Choose a DIY kit if",
     aWins: [
       "You are not comfortable at roof height",
-      "You want the channel hidden and mitered at every corner",
+      "You want the channel screwed into the fascia rather than stuck to it",
       "You want one number to call when a section dies",
       "You care what it looks like in daylight",
     ],
@@ -138,10 +142,13 @@ export const compares: Compare[] = [
     rows: [
       { spec: "Who installs it", a: "Brytr", b: "You" },
       { spec: "Ladder time", a: "None for you", b: "A full weekend, at height" },
-      { spec: "Channel", a: "Extruded aluminum, mitered, color matched", b: "Adhesive or clip mount" },
+      { spec: "Channel", a: "Extruded aluminum, screw-fixed", b: "Adhesive or clip mount" },
       { spec: "Daylight appearance", a: "Hidden in the eave", b: "Usually visible" },
       { spec: "Wire management", a: "Concealed", b: "Your problem" },
-      { spec: "Corners and transitions", a: "Cut and sealed on site", b: "Bend and hope" },
+      /* WAS "Corners and transitions | Cut and sealed on site | Bend and hope". Our half implied a
+         mitre and their half mocked bending the channel around a corner, which is what we do. Both
+         sides of a comparison row have to be true. 29 Aug 2026. */
+      { spec: "Terminations", a: "Capped and sealed on site", b: "Whatever is in the box" },
           { spec: "If a section fails", a: "We come out", b: "Back on the ladder" },
       { spec: "Weather rating", a: "IP66 channel system", b: "Varies by kit" },
       { spec: "App", a: "Haven, purpose built", b: "Govee, general purpose" },

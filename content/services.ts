@@ -31,7 +31,7 @@ export const services: Service[] = [
     lede:
       "One aluminum channel routed into the eave, one run of addressable LEDs, one app. The flagship system; every other service here is a narrower cut of it.",
     includes: [
-      "Channel color-matched to your fascia",
+      "Extruded aluminum channel, screw-fixed",
       "Addressable LEDs at 4 in. spacing",
       "App control with unlimited saved scenes",
       "Every scene switched through before we leave",
@@ -71,9 +71,11 @@ export const services: Service[] = [
     photo: "serviceRoofline",
     lede:
       "The installation-mechanics page. Where the track sits, how it fastens, what happens at a valley, and why it does not read from the street in daylight.",
+    /* WAS "Hidden fastening into fascia, not shingles" and "Mitered corners at every roof
+       transition". Sometimes the roof does require a penetration, and Brytr does not miter
+       corners - both on the client's punch list, 29 Aug 2026. */
     includes: [
-      "Hidden fastening into fascia, not shingles",
-      "Mitered corners at every roof transition",
+      "Hidden fastening into the fascia wherever the roof allows",
       "Sealed end caps and terminations",
       "No visible wire runs",
     ],
@@ -190,6 +192,8 @@ export const services: Service[] = [
     photo: "serviceGameday",
     lede:
       "Husker scarlet, Creighton blue, or your high school's colors, saved as a scene and scheduled to kickoff. The single most-used scene our Omaha customers set up.",
+    /* "Exact team color matching" STAYS. It is about the colour of the light, which the system
+       genuinely does, and not about matching the extrusion to a fascia, which it does not. */
     includes: [
       "Exact team color matching",
       "Scheduled to game time",
@@ -211,6 +215,8 @@ export const services: Service[] = [
     icon: "commercial",
     lede:
       "Parapet and storefront runs for restaurants, retail, offices and multifamily. Brand colors year round, holiday scenes without a seasonal contractor.",
+    /* "Brand color matching" STAYS, for the same reason as the gameday row: it is the scene, not
+       the channel finish. */
     includes: [
       "Parapet, canopy and soffit runs",
       "Brand color matching",
