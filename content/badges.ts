@@ -4,15 +4,15 @@ import { reviewProof } from "./reviews";
 /* THE GOOGLE MARK, and it is here now.
  *
  * This slot sat `null` for several rounds behind the note below, which is still the rule and is
- * worth keeping: third-party marks are used in their OWN colours or not at all — never recoloured
+ * worth keeping: third-party marks are used in their OWN colors or not at all — never recolored
  * to Brytr amber, never traced from memory, never set in Archivo. What that rule was written to
  * stop is an INVENTED mark or a restyled one. It was being read as "no Google mark until somebody
  * emails us a file", which is a different and much weaker rule, and it left the review plinth
  * setting the word Google in the display face next to a rating — the one place on the page where
  * the real mark does actual work, because it names the source a reader can go and check.
  *
- * /public/logo/google.svg is the four-colour G at the official proportions in the official four
- * colours (#4285F4 #34A853 #FBBC05 #EA4335). Attributing reviews to their source is the use this
+ * /public/logo/google.svg is the four-color G at the official proportions in the official four
+ * colors (#4285F4 #34A853 #FBBC05 #EA4335). Attributing reviews to their source is the use this
  * mark exists for and the use Google publishes it for.
  *
  * IT IS RENDERED `unoptimized`. Next refuses SVG through the image optimizer unless
@@ -30,13 +30,13 @@ export const googleLogo: string | null = "/logo/google.svg";
  * master is very nearly invisible. The master is kept for print and for any light surface later.
  *
  * THE LIGHT VERSION IS DERIVED, NOT REDRAWN, and that distinction is why it is allowed at all.
- * The file he sent is a two-colour composite over transparency: black (0,0,0) and amber
+ * The file he sent is a two-color composite over transparency: black (0,0,0) and amber
  * (255,186,66), with every antialiased edge carried in the alpha channel. Because black is the
  * zero vector every pixel is exactly `f * amber`, and `f` is recoverable from the red channel
  * alone. Recomposing at the same `f` against white instead of black turns the wordmark white,
  * leaves the spark on its exact original amber, and lands every edge pixel on the correct
  * intermediate, so nothing fringes. Verified after the fact: 96.5% pure white, 3.5% amber at
- * (255,186,66), no third colour anywhere. Brytr publishes this lockup themselves as
+ * (255,186,66), no third color anywhere. Brytr publishes this lockup themselves as
  * BRYTR-LOGO-WHITE-Y.png, so this is the same mark and not an invention.
  *
  * `width`/`height` are the file's real pixels. next/image needs the intrinsic ratio, and the one
@@ -68,7 +68,7 @@ export const brandLogoDark: { src: string; width: number; height: number; alt: s
 };
 
 /* MANUFACTURER MARKS. Haven and Jellyfish are somebody else's trademarks, and the rule is the
- * same one that governs the Google mark above: used in their own colours from their own asset
+ * same one that governs the Google mark above: used in their own colors from their own asset
  * pack, or not used. Not traced from memory, not lifted off a dealer page, not set in Archivo.
  *
  * Keyed by the slug in content/systems.ts, so `systemLogo["haven-evolution"]` is the Haven mark.

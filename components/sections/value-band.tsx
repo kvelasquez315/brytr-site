@@ -17,7 +17,7 @@ import { images } from "@/content/images";
  * IT IS NOT THREE CARDS. The site already leans on three-up grids and slopcheck warns about it,
  * so this is deliberately asymmetric: a copy column carrying the argument and the call to action,
  * against a photo mosaic of one wide frame over two squarer ones. Same shape on every page, and
- * the shape is the point: a reader moving from /pricing to /warranty should recognise the band
+ * the shape is the point: a reader moving from /pricing to /warranty should recognize the band
  * and know it is the same offer restated, not a new pitch.
  *
  * THE CONTENT IS ALWAYS DIFFERENT. Three points and three photographs per page, written and

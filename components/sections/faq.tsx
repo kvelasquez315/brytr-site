@@ -12,7 +12,7 @@ import type { Faq as FaqItem } from "@/content/faqs";
  * WHAT OURS WAS: a flat list with a hairline under each row and a bare chevron. Same information,
  * but on a page built out of cards it read as the one section nobody had designed.
  *
- * The bottom border is the one place on this site where a coloured strip on a card is right, and it
+ * The bottom border is the one place on this site where a colored strip on a card is right, and it
  * is worth saying why, because slopcheck bans exactly that pattern: a strip is wrong when it stands
  * in for structure that is not there. Here it is STATE - it marks which question is open, it appears
  * and disappears with the interaction, and the reference uses it for the same reason.
@@ -53,7 +53,7 @@ export function Faq({
               <span
                 /* The CLOSED chevron carries a soft amber wash rather than grey. On a page of six
                   * white cards the grey circles were the only mark on any of them, and six grey
-                  * dots is what "needs more colour" was pointing at. This stays inside the rule
+                  * dots is what "needs more color" was pointing at. This stays inside the rule
                   * that amber is CTA-and-active-state only: a chevron is the control, and the wash
                   * is what tells you the row is one you can open. Full amber is still reserved for
                   * the row that IS open. */

@@ -21,7 +21,7 @@ export const postPhotos: Record<string, PostPhoto> = {
   "are-permanent-christmas-lights-worth-it": {
     photo: "/img/christmas-wreaths-nets.jpg",
     photoAlt:
-      "An Omaha two-storey in red and green with lit wreaths in the windows and net lights over the shrubs",
+      "An Omaha two-story in red and green with lit wreaths in the windows and net lights over the shrubs",
     objectPosition: "50% 50%",
   },
   "how-to-choose-a-permanent-lighting-installer": {
@@ -45,7 +45,7 @@ export const postPhotos: Record<string, PostPhoto> = {
   "do-permanent-lights-damage-soffit-or-fascia": {
     photo: "/img/day-brick-gable.jpg",
     photoAlt:
-      "A brick gable and white fascia on an Omaha home in daylight, the channel running under the roof edge as a slim line the colour of the trim",
+      "A brick gable and white fascia on an Omaha home in daylight, the channel running under the roof edge as a slim line the color of the trim",
     objectPosition: "50% 52%",
   },
   /* "permanent-lighting-warranty-comparison" removed with the article itself. */
@@ -58,13 +58,13 @@ export const postPhotos: Record<string, PostPhoto> = {
   "omaha-hoa-rules-permanent-outdoor-lighting": {
     photo: "/img/home-porch-flag.jpg",
     photoAlt:
-      "A grey Omaha two-storey at blue hour with warm downlights over the porch and a flag by the door",
+      "A grey Omaha two-story at blue hour with warm downlights over the porch and a flag by the door",
     objectPosition: "50% 58%",
   },
   "husker-gameday-lighting-ideas": {
     photo: "/img/gameday-red-full.jpg",
     photoAlt:
-      "An Omaha two-storey washed scarlet across the whole elevation under a moon",
+      "An Omaha two-story washed scarlet across the whole elevation under a moon",
     objectPosition: "50% 50%",
   },
   "how-long-do-permanent-led-lights-last": {
