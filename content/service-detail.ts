@@ -21,7 +21,7 @@
  *   proofShot — the photograph that page closes on, so eleven pages do not all show the
  *               same house.
  *
- * Everything here is either a fact about the hardware we install or a judgement we are
+ * Everything here is either a fact about the hardware we install or a judgment we are
  * making as the installer. No invented prices, warranties or timescales.
  */
 
@@ -58,7 +58,7 @@ export type ServiceDetail = {
    *
    * `shots`  three or four for a strip.
    * `pair`   two frames of the SAME subject that mean something only together — the arch by
-   *          day and lit, the one house on warm white and on a colour scene. Only set this
+   *          day and lit, the one house on warm white and on a color scene. Only set this
    *          where the two frames are genuinely registered against each other; a pair of two
    *          different houses is a strip with a misleading label on it. */
   shots?: Shot[];
@@ -97,7 +97,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       { photo: "seqWarmChristmas", scene: "Warm white, full output",
         caption: "The same run turned up. For a lot of houses this is the entire Christmas scene." },
       { photo: "seqRedGreen", scene: "Red and green",
-        caption: "Colour on the same channel, on the same night, ninety seconds later." },
+        caption: "Color on the same channel, on the same night, ninety seconds later." },
     ],
     secondPara:
       "It is installed once and it stays on the building. Nothing goes up in November and nothing comes down in January.",
@@ -305,7 +305,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     shots: [
       { photo: "halloweenOrangePurple", caption: "October: orange and violet, scheduled for the month and switching itself back." },
       { photo: "fourthBrickRanch", caption: "July: red, white and blue: the one scene nobody hangs bulbs for, because nobody wants to." },
-      { photo: "christmasGreenRed", caption: "December, and green as the field colour rather than the usual alternation." },
+      { photo: "christmasGreenRed", caption: "December, and green as the field color rather than the usual alternation." },
       { photo: "winterGradientSnow", caption: "February, in snow, running a gradient across a single roofline." },
     ],
     secondPara:
@@ -323,7 +323,7 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       ["Scene library built with you", "We build the first eight or so while we are there, named the way you would say them out loud."],
       ["Scheduled by date", "Halloween on the first, Christmas on Thanksgiving, back to warm white in January, unattended."],
       ["Per-zone color", "The gables can run color while the eaves stay white, which is the look most people land on."],
-      ["Brightness per scene", "Color reads cleaner dialled back, so each scene stores its own output level."],
+      ["Brightness per scene", "Color reads cleaner dialed back, so each scene stores its own output level."],
     ],
     alsoSee: ["permanent-christmas-lights", "gameday-lighting", "permanent-outdoor-lighting", "patio-pergola-bistro-lighting"],
   },
@@ -337,9 +337,9 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       lede: "The same house, the same evening, ninety seconds apart. Not a house that is red, but a house that is warm white and can be red for four hours.",
     },
     shots: [
-      { photo: "gamedayRedBlueGables", caption: "Two team colours held apart by zone: one gable red, the next blue, eaves left white." },
-      { photo: "gamedayRedGable", caption: "How far a saturated colour spills onto a driveway. Shown rather than described." },
-      { photo: "gamedayRanchWide", caption: "Colour across a long low roofline and a curved drive." },
+      { photo: "gamedayRedBlueGables", caption: "Two team colors held apart by zone: one gable red, the next blue, eaves left white." },
+      { photo: "gamedayRedGable", caption: "How far a saturated color spills onto a driveway. Shown rather than described." },
+      { photo: "gamedayRanchWide", caption: "Color across a long low roofline and a curved drive." },
     ],
     secondPara:
       "Scarlet on a Saturday is the same run of channel doing something different for an afternoon. It is worth saying plainly because the alternative being sold is a second set of lights for the two months a year anyone would notice.",
