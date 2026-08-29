@@ -13,7 +13,7 @@ import { valueProps } from "@/content/value-props";
 
 /* /contact — WAVE 2, PAGE 5 of the page-by-page pass.
  *
- * What it was: 3.6 kB, a hero with no photograph, three unlabelled columns of contact
+ * What it was: 3.6 kB, a hero with no photograph, three unlabeled columns of contact
  * details, the eighteen-city rack that ten other templates also carried, and NO closer at
  * all — the only page on the site that just stopped. It also promised a "same day reply on
  * anything sent before 6pm", which is a specific operational commitment nobody at Brytr
@@ -70,7 +70,10 @@ const routes: { label: string; h: string; href: string; external?: boolean; best
     label: "Best if you want a quote",
     h: "The design consultation form",
     href: "/free-design-consultation",
-    best: "Booking the on-site measure. Give us the town and roughly what you are lighting and we will come back with times, most of them evenings.",
+    /* "most of them evenings" came off 29 Aug 2026. The client's punch list is explicit that
+       appointments are daytime, and this was the last place on the site still offering an
+       evening slot. */
+    best: "Booking the on-site measure. Give us the town and roughly what you are lighting and we will come back with times that work.",
     bad: "Anything urgent. A form is a queue, however short, and a dark run in December should be a phone call.",
     who: "Read by us, not by an agency or a lead service. It goes nowhere else.",
   },
@@ -112,7 +115,7 @@ export default function Contact() {
         trail={trail}
       />
 
-      {/* ── THE MAIN FORM, AND THE CONTACT DETAILS BESIDE IT ──────────────────────────────────
+      {/* ── THE MAIN FORM, AND THE CONTACT DETAILS BESIDE IT ────────────────────────────────
         * Added 28 Aug 2026 on the client's instruction: "there should be a big main form on the
         * contact page after the hero with contact info next to it."
         *
@@ -322,11 +325,13 @@ export default function Contact() {
               </p>
               <ul className="mt-5 divide-y divide-on-dark/10 border-t border-on-dark/10">
                 {[
-                  "No drip sequence and no newsletter",
+                  /* THREE OF THESE FIVE CAME OFF, 29 Aug 2026. "No drip sequence and no
+                     newsletter", "No follow-up if you stop replying" and "No price that expires to
+                     hurry you" were all promises about the sales process, and the client's punch
+                     list says there is a follow-up sequence and there are same-day savings. The two
+                     left are about what happens to your data, which is what this panel is for. */
                   "Your details are not sold or shared",
                   "No third-party lead broker involved",
-                  "No follow-up if you stop replying",
-                  "No price that expires to hurry you",
                 ].map((x) => (
                   <li key={x} className="py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">{x}</li>
                 ))}
@@ -353,7 +358,7 @@ export default function Contact() {
           against a photograph of somebody else&rsquo;s.
         </p>
         <p>
-          It costs nothing, there is nothing to sign, and you keep the written quote either way.
+          It costs nothing, and you keep the written quote either way.
         </p>
       </PhotoSplit>
 
