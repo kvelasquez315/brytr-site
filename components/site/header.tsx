@@ -100,10 +100,10 @@ export function Header({ nav }: { nav: NavItem[] }) {
         * Both sites the client named as references do this exact thing: edentreepros.com opens on a
         * dark green strip over a white bar, and freedomexteriorsusa.com is white-headed too. Brytr
         * had the arrangement inverted - a full-width AMBER strip over a navy bar - which puts the
-        * loudest colour on the site in the first 40 pixels of all 74 pages, above a dark bar, above
+        * loudest color on the site in the first 40 pixels of all 74 pages, above a dark bar, above
         * a dark photograph. Three heavy bands before any content.
         *
-        * Amber is the CTA colour on this site. Spending it on a permanent strip is spending it on
+        * Amber is the CTA color on this site. Spending it on a permanent strip is spending it on
         * something nobody is being asked to click, and it is most of why the top of the page read
         * as a local-business template rather than a company site. It survives here as the link. */}
       <div className="bg-primary text-on-dark-muted">
@@ -115,12 +115,16 @@ export function Header({ nav }: { nav: NavItem[] }) {
             * us either. A manufactured deadline is the single most corrosive thing that was on this
             * site, because it is designed to make somebody act faster than they otherwise would.
             *
-            * The strip stays, carrying the offer that is real - the consultation is free and there
-            * is no obligation - because the bar has a job: it is the one place above the fold that
-            * is not navigation. If Brytr gives us a genuine seasonal cut-off, it goes here, with
-            * the date they give us. */}
+            * The strip stays, carrying the offer that is real - the consultation is free - because
+            * the bar has a job: it is the one place above the fold that is not navigation. If Brytr
+            * gives us a genuine seasonal cut-off, it goes here, with the date they give us.
+            *
+            * "no obligation" CAME OFF THE END OF IT, 29 Aug 2026. The client's punch list says the
+            * page bullet "Free, and genuinely no obligation" is not true, and that there are both
+            * same-day savings and a follow-up sequence. Whatever else is true, this bar ran that
+            * phrase on all 74 pages, so it is the first place it should stop. */}
           <span>
-            Free on-site design consultation, no obligation.{" "}
+            Free on-site design consultation.{" "}
             <Link href="/free-design-consultation" className="tap-44 font-semibold text-accent underline decoration-2 underline-offset-2">
               Book a visit
             </Link>
