@@ -110,7 +110,7 @@ const all = groups.flatMap((g) => g.items);
  * group the long version lives in.
  *
  * TWO OF THEM CHANGED 29 Aug 2026 with the claims they compressed: the daytime answer no
- * longer says the aluminum is colour matched, and the fascia answer no longer says the fixing
+ * longer says the aluminum is color matched, and the fascia answer no longer says the fixing
  * never goes through a shingle. A short answer that outruns its long answer is worse than no
  * short answer, because this rack is the part of the page people actually read. */
 const shortAnswers: { q: string; a: string; to: string }[] = [
@@ -135,7 +135,7 @@ const shortAnswers: { q: string; a: string; to: string }[] = [
   },
   {
     q: "Will my HOA allow it?",
-    a: "Most do. Read your covenant's lighting clause before you plan anything, and bring it to the visit.",
+    a: "Most do. Read your covenant's lighting clause before you plan anything.",
     to: "Before you buy",
   },
   {
@@ -157,8 +157,12 @@ const cannot: { h: string; p: string }[] = [
     p: "Two houses with the same footage can be a long way apart on price, because the number is driven by story count, corners and how many zones you want. A figure typed here would be either the cheapest possible job or wrong.",
   },
   {
+    /* THE SECOND SENTENCE READ "We pull yours and read it rather than guessing from the
+       neighborhood name." That is the HOA administration claim already taken off the twelve
+       city pages and the consultation page, surviving here in a card nobody was rereading.
+       Brytr does not administer covenant submissions and does not discuss HOA on site. */
     h: "Whether your covenant allows it",
-    p: "Several of the newer west Omaha developments have specific language about permanent exterior lighting and no two sets of rules read the same. We pull yours and read it rather than guessing from the neighborhood name.",
+    p: "Several of the newer west Omaha developments have specific language about permanent exterior lighting and no two sets of rules read the same. Yours is the only document that settles it, so read the lighting clause before you plan anything.",
   },
   {
     h: "Whether your fascia is sound",
