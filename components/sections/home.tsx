@@ -116,7 +116,7 @@ import { InstallRun } from "@/components/sections/install-run";
  * for cards." The client: "it's very beige. It's just very beige backgrounds." Measured, he is
  * right and the rule is why: `background` is L* 93.8 and `muted` is L* 89.7, which is dE 4.7 apart
  * - at the edge of perceptible. Six sections alternated between them and section-rhythm.mjs passed
- * every time, because it checks that neighbours are different TOKENS, not different COLOURS. White
+ * every time, because it checks that neighbors are different TOKENS, not different COLORS. White
  * against muted is dE 12.5. The alternation is now something a reader can see.
  *
  * AND THE THREE-LIGHT RULE at the top of globals.css still bends at 2-3-4, on his earlier
@@ -219,12 +219,12 @@ const SERVICE_CARDS: { slug: string; label: string }[] = [
   { slug: "hardscape-lighting", label: "Walls, steps and coping" },
   { slug: "soffit-lighting", label: "Soffit and architectural" },
   { slug: "permanent-christmas-lights", label: "Christmas, installed once" },
-  { slug: "gameday-lighting", label: "Game day colours" },
+  { slug: "gameday-lighting", label: "Game day colors" },
   { slug: "holiday-seasonal-scenes", label: "Every other holiday" },
 ];
 
 /* THE LIGHT CARDS HAVE A HAIRLINE NOW, on all four kinds - services, the local promise, the town
- * tiles and the reviews. Offered as a judgement call and taken: "if you think it is a good idea to
+ * tiles and the reviews. Offered as a judgment call and taken: "if you think it is a good idea to
  * add outlines to the different boxes that have text in black, then let's try that. If you don't,
  * then let's not."
  *
@@ -339,7 +339,7 @@ export function Services() {
  * section up, exists to prove). Checked twice (which is a step in How We Work, one section down).
  * And "W2 employees, never subcontracted".
  *
- * So it restated three neighbouring sections and no reader could say what it was for. That is
+ * So it restated three neighboring sections and no reader could say what it was for. That is
  * exactly the note from two rounds ago - "a section should not have so much going on to where we
  * are talking about who we are and how we design it, or how the lighting works" - and I fixed the
  * styling of it twice without fixing the thing it was pointing at. Four claims that each belong
@@ -388,7 +388,7 @@ export function Services() {
  *
  * THE PHOTOGRAPH RUNS THE FULL HEIGHT of the row - `items-stretch` and `h-full`. `items-center`
  * was the cause of an earlier version of the same complaint: a 555px portrait beside a 400px
- * column centres both and leaves 77px of nothing above and below the copy.
+ * column centers both and leaves 77px of nothing above and below the copy.
  * ========================================================================= */
 const ABOUT_CARDS: { title: string; body: string }[] = [
   {
@@ -418,7 +418,7 @@ export function WhoWeAre() {
           *
           * What went: the heading, the lede and the three cards - local not a franchise, two brands
           * on the truck, the same crew start to finish. Three cards making one argument in three
-          * instalments. The promise below is that argument said once.
+          * installments. The promise below is that argument said once.
           *
           * The photograph goes from 24rem to 34rem and the copy column gives up the width, so the
           * install is the thing you look at and the promise is what you read beside it. */}
@@ -480,7 +480,7 @@ export function WhoWeAre() {
           * built for /service-areas, in exactly this pairing. Every city in content/cities.ts
           * already carries real coordinates, so nothing is plotted by hand.
           *
-          * IT IS THE ONE PIECE OF DECORATION-FREE COLOUR ON A LIGHT PAGE, and it earns it: each
+          * IT IS THE ONE PIECE OF DECORATION-FREE COLOR ON A LIGHT PAGE, and it earns it: each
           * town is an amber pin with a real glow, so the map reads as a map OF LIGHTS rather than
           * a scatter plot. That is the product, drawn as geography.
           *
@@ -686,7 +686,7 @@ export function Reviews() {
           *
           * /reviews is still reached from the nav and the footer, so the pill removed a duplicate
           * route rather than a route. */}
-        {/* items-end, not items-center. Against a two-line heading a centred mark floats in the
+        {/* items-end, not items-center. Against a two-line heading a centered mark floats in the
           * gutter beside the line break; on the baseline of the last line it reads as part of the
           * sentence, which is what it is standing in for. */}
         <div className="flex flex-wrap items-end gap-x-5 gap-y-3">
@@ -771,7 +771,7 @@ export function Reviews() {
  * The grid moved from `muted` to `primary`, and that is the one place on this page where a dark
  * section is an argument rather than a rhythm choice: every photograph in it is a night shot of a
  * lit house, so on a near-black ground the section's only light comes out of the product. On warm
- * neutral the same six frames read as six grey rectangles with captions.
+ * neutral the same six frames read as six gray rectangles with captions.
  *
  * The lede came off - "Photographed on the property at night with the system running. None of it is
  * a rendering and none of it is stock." That is true and it is worth saying, so it moved into the
@@ -779,7 +779,7 @@ export function Reviews() {
  * ========================================================================= */
 /* NINE, NOT SIX. Six tiles is two rows that stop; nine is a full 3x3 and reads as a portfolio
  * rather than a sample. The three added are chosen for range rather than to pad a row - snow on the
- * ground, two colours held apart by zone, and the turret detail - because a work grid that is nine
+ * ground, two colors held apart by zone, and the turret detail - because a work grid that is nine
  * front elevations at night is nine of the same photograph. */
 const WORK: { key: string; scene: string }[] = [
   { key: "homePrairieTwilight", scene: "Civil twilight, warm white" },
@@ -792,7 +792,7 @@ const WORK: { key: string; scene: string }[] = [
   { key: "homeShakeBrick", scene: "Eave downlights" },
   { key: "gamedayRedFull", scene: "Game day, one tap" },
   { key: "winterSnowDusk", scene: "February, nobody on a ladder" },
-  { key: "sceneWarmBlueBand", scene: "Two zones, two colours" },
+  { key: "sceneWarmBlueBand", scene: "Two zones, two colors" },
   { key: "archAtNight", scene: "The turret, every facet" },
 ];
 
@@ -859,7 +859,7 @@ export function RecentWork() {
  *   when it breaks, and is the consultation free. The other nineteen are on /faq, one click away
  *   and linked from the panel.
  *
- *   THE COLOUR IS A NAVY PANEL BESIDE THEM, not a tint on the cards. Amber stays what it is on
+ *   THE COLOR IS A NAVY PANEL BESIDE THEM, not a tint on the cards. Amber stays what it is on
  *   this site - the CTA - so it arrives as the button inside that panel rather than as decoration
  *   on six accordion rows. The panel also fills the left column, so a section that was one tall
  *   pale list is now a composition.
@@ -974,7 +974,7 @@ export function Closer() {
             * height, which is the difference between filling a gap and hiding one.
             *
             * SECOND CHOICE OF FRAME, and the first one was measurably wrong. It was
-            * detailGableMiter - the mitre at a gable peak - picked because it is the detail that
+            * detailGableMiter - the miter at a gable peak - picked because it is the detail that
             * separates a good install from a cheap one. The client: "this image right now is not
             * very visible. I'm not sure what I'm looking at."
             *
