@@ -21,6 +21,10 @@ import type { City } from "./cities";
  *   no em dashes, which scripts/em-dash.mjs enforces
  *   no founders, no W-2s, no subcontracting
  *   the photographs are chosen against the page, and the lead one wants a wide frame
+ *
+ * AND, SINCE 29 AUG 2026: nothing in here says the channel is colour matched to anything, and
+ * nothing says the fixing never goes through a shingle. This file reaches about fifty routes, so
+ * it is the worst place on the site to carry a claim we cannot make.
  */
 export type ValueProp = {
   title: string;
@@ -64,7 +68,10 @@ export const valueProps: Record<string, ValueProp> = {
     points: [
       { h: "No ladder, ever again", p: "The run is fixed into the fascia once and stays there through every season." },
       { h: "Warm white is the everyday setting", p: "Color is there when you want it. Most nights of the year this looks like good trim lighting." },
-      { h: "It disappears in daylight", p: "Channel color matched to your fascia, so from the curb at noon it reads as part of the house." },
+      /* WAS "It disappears in daylight / Channel color matched to your fascia, so from the curb at
+         noon it reads as part of the house." Brytr does not colour match the channel. The daylight
+         argument now rests on the noon photographs, which are real and on the gallery. */
+      { h: "It reads as trim in daylight", p: "A slim track tucked up into the eave line. We publish the noon photographs so you can judge that yourself." },
     ],
     photos: ["seqEveryday", "dayShakeGable", "winterSnowDusk"],
     cta: BOOK,
@@ -89,8 +96,13 @@ export const valueProps: Record<string, ValueProp> = {
     lede: "The useful next step is somebody standing on your driveway at dusk with a tape measure, not another brochure.",
     points: [
       { h: "Same-day reply, most days", p: "A person from the shop, not a call center taking a message for somebody else." },
-      { h: "The design happens on site", p: "On your elevation, against your own fascia color, with the scenes built while we are there." },
-      { h: "You keep the quote either way", p: "Written, itemised, and yours whether you book the work or not." },
+      /* WAS "On your elevation, against your own fascia color, with the scenes built while we are
+         there." The middle clause was the colour-matching claim, on the page people reach when
+         they are ready to call. 29 Aug 2026. */
+      { h: "The design happens on site", p: "On your own elevation, with the scenes built and switched through while we are there." },
+      /* "itemised" -> "itemized" in the same pass. A British spelling the colour sweep missed
+         outright, because the rule only covered the -ise verbs I had thought to list. */
+      { h: "You keep the quote either way", p: "Written, itemized, and yours whether you book the work or not." },
     ],
     photos: ["homePrairieTwilight", "walkthroughDusk", "crewPortrait"],
     cta: BOOK,
@@ -113,9 +125,14 @@ export const valueProps: Record<string, ValueProp> = {
       /* WAS: "No design fee, no deposit to get a drawing, and nobody follows up for a year."
        * Three claims, and the deposit and design-fee halves are pricing terms nobody at Brytr
        * gave us. The visit being free is the offer Brytr leads with everywhere, so that part
-       * stays and the invented terms around it do not. */
-      { h: "Free, and genuinely no obligation", p: "The visit, the design and the written quote cost nothing, and nobody follows up for a year." },
-      { h: "Your materials, not a catalog", p: "Channel color held against your actual fascia, because that is what decides how it looks at noon." },
+       * stays and the invented terms around it do not.
+       *
+       * THEN THE REST OF IT WENT TOO, 29 Aug 2026, on the client's punch list. "nobody follows
+       * up for a year" is not true - there is a follow-up sequence. And "Your materials, not a
+       * catalogue" was the colour-matching claim wearing a different hat: it promised we hold
+       * channel colour against your fascia, and we do not match the channel to anything. */
+      { h: "The visit and the quote are free", p: "The on-site measure, the design and the written quote cost nothing." },
+      { h: "Measured on the property", p: "We walk it with you and measure the roofline rather than quoting off a satellite photograph." },
       { h: "Scenes built while we are there", p: "You leave the appointment knowing what the app does, not reading about it later." },
     ],
     photos: ["sceneWarmBlueBand", "walkthroughDusk", "homeStuccoStone"],
@@ -143,7 +160,10 @@ export const valueProps: Record<string, ValueProp> = {
     title: "Fitted into the fascia, and left on the building.",
     lede: "Measured on site, routed into the fascia, sealed as it goes, commissioned on your phone and signed off with you.",
     points: [
-      { h: "Into fascia, never through shingles", p: "Every penetration sealed at the moment it is made, which is where installs fail at year five." },
+      /* WAS "Into fascia, never through shingles". Sometimes the roof requires a penetration -
+         client's punch list, 29 Aug 2026 - so the absolute is now a qualified claim that is
+         always true. The sealing half, which is the part that actually matters, is unchanged. */
+      { h: "Into the fascia wherever the roof allows", p: "Every penetration sealed at the moment it is made, which is where installs fail at year five." },
       /* WAS: "Most homes are a single day / One crew, one visit, and the drive cleared before we
        * leave." The duration claim is out on the client's instruction. What is left is the part
        * that was never in doubt and is the actual reassurance: the site gets cleared. */
@@ -275,7 +295,9 @@ export function cityValueProp(c: City): ValueProp {
        * for the drive." This rendered on all twelve city pages: a pricing basis plus a
        * no-surcharge guarantee, neither of them from Brytr. */
       { h: "Booked out of west Omaha", p: "The same people who measure the house are the ones the shop sends back to it." },
-      { h: "Designed on your own elevation", p: "Against your own fascia color, before anything is ordered." },
+      /* WAS "Against your own fascia color, before anything is ordered" - the colour-matching
+         claim, on all eighteen city pages. 29 Aug 2026. */
+      { h: "Designed on your own elevation", p: "Walked and measured on the property, before anything is ordered." },
     ],
     photos: shots(`vb-city-${c.slug}`, 3),
     cta: BOOK,
