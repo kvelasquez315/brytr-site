@@ -22,10 +22,10 @@ import type { City } from "./cities";
  *   no founders, no W-2s, no subcontracting
  *   the photographs are chosen against the page, and the lead one wants a wide frame
  *
- * AND, SINCE 29 AUG 2026: nothing in here says the channel is colour matched to anything, nothing
- * says the fixing never goes through a shingle, and nothing promises a daylight curb check. This
- * file reaches about fifty routes, so it is the worst place on the site to carry a claim we
- * cannot make.
+ * AND, SINCE 29 AUG 2026: nothing in here says the channel is color matched to anything, nothing
+ * says the fixing never goes through a shingle, nothing promises a daylight curb check, and
+ * nothing is framed as being judged "from the curb at noon". This file reaches about fifty
+ * routes, so it is the worst place on the site to carry a claim we cannot make.
  */
 export type ValueProp = {
   title: string;
@@ -70,9 +70,9 @@ export const valueProps: Record<string, ValueProp> = {
       { h: "No ladder, ever again", p: "The run is fixed into the fascia once and stays there through every season." },
       { h: "Warm white is the everyday setting", p: "Color is there when you want it. Most nights of the year this looks like good trim lighting." },
       /* WAS "It disappears in daylight / Channel color matched to your fascia, so from the curb at
-         noon it reads as part of the house." Brytr does not colour match the channel. The daylight
-         argument now rests on the noon photographs, which are real and on the gallery. */
-      { h: "It reads as trim in daylight", p: "A slim track tucked up into the eave line. We publish the noon photographs so you can judge that yourself." },
+         noon it reads as part of the house." Brytr does not color match the channel. The daylight
+         argument now rests on the daylight photographs, which are real and on the gallery. */
+      { h: "It reads as trim in daylight", p: "A slim track tucked up into the eave line. We publish the daylight photographs so you can judge that yourself." },
     ],
     photos: ["seqEveryday", "dayShakeGable", "winterSnowDusk"],
     cta: BOOK,
@@ -84,7 +84,7 @@ export const valueProps: Record<string, ValueProp> = {
     lede: "We fit more than one system, so the recommendation is not pre-decided. These pages set them against each other on the things that change on a house.",
     points: [
       { h: "Hardware is half the decision", p: "The other half is who fastens it to your building and who answers when a section goes dark." },
-      { h: "Specs that change something", p: "Diode spacing, diffuser, channel finish. The ones you can see from the curb, not the ones on a datasheet." },
+      { h: "Specs that change something", p: "Diode spacing, diffuser, how the channel is fixed. The ones you can see, not the ones on a datasheet." },
       { h: "Told before you sign", p: "Where a system is genuinely weaker we say so on the page and again at the quote." },
     ],
     photos: ["archByDay", "homeModernStone", "detailGableMiter"],
@@ -98,10 +98,10 @@ export const valueProps: Record<string, ValueProp> = {
     points: [
       { h: "Same-day reply, most days", p: "A person from the shop, not a call center taking a message for somebody else." },
       /* WAS "On your elevation, against your own fascia color, with the scenes built while we are
-         there." The middle clause was the colour-matching claim, on the page people reach when
+         there." The middle clause was the color-matching claim, on the page people reach when
          they are ready to call. 29 Aug 2026. */
       { h: "The design happens on site", p: "On your own elevation, with the scenes built and switched through while we are there." },
-      /* "itemised" -> "itemized" in the same pass. A British spelling the colour sweep missed
+      /* "itemised" -> "itemized" in the same pass. A British spelling the color sweep missed
          outright, because the rule only covered the -ise verbs I had thought to list. */
       { h: "You keep the quote either way", p: "Written, itemized, and yours whether you book the work or not." },
     ],
@@ -130,8 +130,8 @@ export const valueProps: Record<string, ValueProp> = {
        *
        * THEN THE REST OF IT WENT TOO, 29 Aug 2026, on the client's punch list. "nobody follows
        * up for a year" is not true - there is a follow-up sequence. And "Your materials, not a
-       * catalogue" was the colour-matching claim wearing a different hat: it promised we hold
-       * channel colour against your fascia, and we do not match the channel to anything. */
+       * catalogue" was the color-matching claim wearing a different hat: it promised we hold
+       * channel color against your fascia, and we do not match the channel to anything. */
       { h: "The visit and the quote are free", p: "The on-site measure, the design and the written quote cost nothing." },
       { h: "Measured on the property", p: "We walk it with you and measure the roofline rather than quoting off a satellite photograph." },
       { h: "Scenes built while we are there", p: "You leave the appointment knowing what the app does, not reading about it later." },
@@ -146,7 +146,7 @@ export const valueProps: Record<string, ValueProp> = {
     lede: "No renders, no stock houses and no borrowed shots. These are real Omaha properties photographed on nights the systems were already running.",
     points: [
       { h: "One system, every scene here", p: "Nothing on this page needed different hardware. It is the same run set to different things." },
-      { h: "Daylight frames included", p: "The photograph nobody publishes is the one from the curb at noon. There are several here." },
+      { h: "Daylight frames included", p: "Galleries in this trade are night shots only. There are daytime frames here as well." },
       { h: "Zoned, so color lands where you chose", p: "Gables scarlet with the eaves left white is two zones, not a compromise." },
     ],
     photos: ["aerialRedRoofline", "sceneAmberCyan", "gamedayRedBlueGables"],
@@ -299,7 +299,7 @@ export function cityValueProp(c: City): ValueProp {
        * for the drive." This rendered on all twelve city pages: a pricing basis plus a
        * no-surcharge guarantee, neither of them from Brytr. */
       { h: "Booked out of west Omaha", p: "The same people who measure the house are the ones the shop sends back to it." },
-      /* WAS "Against your own fascia color, before anything is ordered" - the colour-matching
+      /* WAS "Against your own fascia color, before anything is ordered" - the color-matching
          claim, on all eighteen city pages. 29 Aug 2026. */
       { h: "Designed on your own elevation", p: "Walked and measured on the property, before anything is ordered." },
     ],
@@ -329,7 +329,7 @@ export function compareValueProp(a: string, b: string, slug: string): ValueProp 
     title: "We fit both, so this is not a pitch.",
     lede: `${a} and ${b} both go on houses in this metro every season. The useful question is which one suits your building, and who is fastening it.`,
     points: [
-      { h: "Compared on what shows", p: "Diode spacing, diffuser and channel finish. The things you can see from the curb." },
+      { h: "Compared on what shows", p: "Diode spacing, diffuser and how the channel is fixed. The things you can actually see." },
       { h: "The install is the variable", p: "The same hardware fitted badly fails long before the cheaper one fitted properly." },
       { h: "Weaknesses named", p: "Where one is genuinely worse we write it down here and say it again at the quote." },
     ],

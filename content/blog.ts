@@ -94,7 +94,7 @@ export const posts: Post[] = [
    * compared brand by brand" - a 6-minute read that told homeowners what to look for in a warranty
    * document, ranked competitors on who administers theirs, and closed with "Manufacturer coverage
    * on the hardware plus our own workmanship coverage on the install, both in writing before you
-   * sign. We come out."
+   * sign."
    *
    * Brytr has given us no warranty terms, so the article was advising people on a document we have
    * never seen and promising coverage nobody authorized. The client's instruction on warranty is to
@@ -140,7 +140,7 @@ export const posts: Post[] = [
        * because the useful half was always the list of what boards object to, which is above and
        * is unchanged. */
       { p: "Most boards want the same three things: the lighting clause in your own covenant, a spec sheet for the hardware, and a drawing or photograph showing what it looks like on your elevation. Read the clause before you plan anything." },
-      { callout: "Worth knowing: an approval is much easier to get with a daylight photograph of a finished install than with a night photograph. Boards are worried about how it looks at noon, not at midnight." },
+      { callout: "Worth knowing: an approval is much easier to get with a daylight photograph of a finished install than with a night photograph. Boards are worried about how it looks in daylight, not at midnight." },
     ] }),
   B({ slug: "husker-gameday-lighting-ideas", title: "Husker Gameday Lighting Ideas",
     h1: "Husker gameday lighting ideas for your roofline.", keyword: "husker gameday lighting",
