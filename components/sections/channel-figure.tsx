@@ -11,15 +11,15 @@
  *
  *   pitch      a length of channel face-on with the diode spacing dimensioned. Answers "will I see
  *              dots or a line", which is the question the diffuser and the spacing decide together.
- *   spectrum   the same length, its diodes stepping through the six scene colours from globals.css,
+ *   spectrum   the same length, its diodes stepping through the six scene colors from globals.css,
  *              with warm white marked as where it sits most of the year.
  *   run        a gable seen straight on with the channel following the eave and both rakes, and the
  *              mitre called out at the peak. Answers "what does it do at the corners".
  *
  * WHY SVG AND NOT A PHOTOGRAPH. These are the parts a photograph cannot show: a dimension, a pitch,
- * a colour range, the geometry of a mitre. Where a photograph can show it, the site uses one.
+ * a color range, the geometry of a mitre. Where a photograph can show it, the site uses one.
  *
- * Every colour is a token. No hex, which scripts/hex-lock.mjs enforces.
+ * Every color is a token. No hex, which scripts/hex-lock.mjs enforces.
  */
 export function ChannelFigure({
   variant,
@@ -92,7 +92,7 @@ export function ChannelFigure({
     const y = 120;
     return (
       <svg viewBox="0 0 700 300" className={className} role="img"
-        aria-label="One length of Brytr channel drawn six times, each in a different saved scene colour, with warm white marked as the everyday setting.">
+        aria-label="One length of Brytr channel drawn six times, each in a different saved scene color, with warm white marked as the everyday setting.">
         <rect x={x0 - 14} y={y - 20} width="648" height="40" rx="8" fill={body} stroke={line} strokeWidth="1.2" />
         {scenes.map(([tok, label], s) => {
           const cx0 = x0 + s * w;
@@ -120,7 +120,7 @@ export function ChannelFigure({
         <text x={x0 - 14} y={y - 42} fill={inkMuted} fontSize="15" fontFamily="var(--font-body)">
           The same run, every saved scene. Nothing is swapped to change it.
         </text>
-        {/* anchored to the start, not centred: centred on the first run of five it overhung the
+        {/* anchored to the start, not centered: centered on the first run of five it overhung the
           * left edge of the viewBox and the W was cut off. */}
         <text x={x0 - 14} y={y + 96} fill={accent} fontSize="14" fontWeight="700" fontFamily="var(--font-body)">
           Warm white is where it sits most of the year
