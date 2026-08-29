@@ -163,8 +163,12 @@ const houses: { h: string; profile: string[]; verdict: string; slug: string }[] 
       "Long unbroken runs where spacing shows",
       "Color on gamedays and holidays, white the rest of the year",
     ],
+    /* THIS VERDICT READ "...where the spacing and the matched channel are visible from the
+       curb..." - the color-match claim and the curb sighting, both retracted, sitting three
+       sections below the sheet row where I had already taken them out. What that house
+       actually shows from the street is the spacing and whether the run holds its line. */
     verdict:
-      "The roofline run, plus soffit fixtures wherever the overhang is deep enough to take them. This is the house where the spacing and the matched channel are visible from the curb, and where the wash off the soffit does something the trim line cannot.",
+      "The roofline run, plus soffit fixtures wherever the overhang is deep enough to take them. This is the house where the spacing and the straightness of the run are visible from the street, and where the wash off the soffit does something the trim line cannot.",
     slug: "haven-q-series",
   },
   {
