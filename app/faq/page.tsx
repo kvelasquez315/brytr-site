@@ -157,7 +157,7 @@ const cannot: { h: string; p: string }[] = [
   },
   {
     h: "Whether your fascia is sound",
-    p: "We will not mount a permanent fixture to failing timber and quietly hope. That is a judgement made off a ladder with a hand on the board, and it occasionally means telling you to get a carpenter first.",
+    p: "We will not mount a permanent fixture to failing timber and quietly hope. That is a judgment made off a ladder with a hand on the board, and it occasionally means telling you to get a carpenter first.",
   },
 ];
 
