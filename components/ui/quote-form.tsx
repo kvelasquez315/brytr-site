@@ -239,7 +239,7 @@ export function QuoteForm({
             id={variant + "-note"}
             name="note"
             rows={mini ? 2 : 3}
-            placeholder="Two storey, dormers on the front elevation."
+            placeholder="Two story, dormers on the front elevation."
           />
         </div>
       </div>
