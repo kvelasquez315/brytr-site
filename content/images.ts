@@ -199,8 +199,12 @@ export const images: Record<string, Slot> = {
    * The site claims the hardware disappears in daylight. These are the only images on the
    * site that let a reader check that claim, so they are worth more than any night shot. */
   dayBrickGable: { src: "/img/day-brick-gable.jpg",
-    alt: "A brick gable and white fascia on an Omaha home in daylight, the channel running under the roof edge as a slim line the color of the trim",
-    subject: "Daylight, close, trim-colored channel. The claim, checkable.", ratio: "3/4" },
+    /* The alt read "a slim line the color of the trim" and the subject called it a
+       trim-colored channel. Brytr does not color match, so a screen reader was being told
+       something the sales copy has just stopped saying. What the frame shows is a slim line
+       tucked under the roof edge, which is the checkable claim and the one we make. */
+    alt: "A brick gable and white fascia on an Omaha home in daylight, the channel tucked under the roof edge as a slim line below the gutter",
+    subject: "Daylight, close, the channel in the eave line. The claim, checkable.", ratio: "3/4" },
   dayShakeGable: { src: "/img/day-shake-gable.jpg",
     alt: "A shake gable meeting a shingled roof on an Omaha home in daylight, the run visible only as a narrow strip below the gutter line",
     subject: "Daylight on a second house, so it is not one lucky angle.", ratio: "4/3" },
@@ -239,6 +243,10 @@ export const images: Record<string, Slot> = {
   deckRanchWarm: { src: "/img/deck-ranch-warm.jpg",
     alt: "A long Omaha ranch at night with warm white along the roofline and a lit deck and pergola at one end",
     subject: "House and deck reading as one property rather than two jobs.", ratio: "4/3" },
+  /* KEY RENAMED patioRearColour -> patioRearColor with the rest of the spelling pass. The FILE
+     on disk keeps its own name: a filename is not user-visible and renaming it would break the
+     path for no reader benefit. scripts/photo-keys.mjs fails the build on any page still
+     referencing the old key, which is how this rename was checked rather than assumed. */
   patioRearColor: { src: "/img/patio-rear-colour.jpg",
     alt: "The back of an Omaha home at dusk with the roofline in teal and the patio furniture below washed violet",
     subject: "Color in the back garden, where it is actually used.", ratio: "4/3" },
@@ -532,7 +540,7 @@ export const galleryShots: GalleryShot[] = [
     caption: "The everyday setting on a front elevation rather than a back garden. This is what the street sees." },
   { src: "/img/home-shake-brick.jpg", ratio: "3/4", scene: "Warm white, shake and brick",
     alt: "An Omaha home in shake and brick with a wood garage door, warm white downlights along every eave and gable",
-    caption: "Downlights under every eave and gable, color matched to the trim." },
+    caption: "Downlights under every eave and gable, tucked up out of the sightline." },
   { src: "/img/home-craftsman-porch.jpg", ratio: "3/4", scene: "Warm white, porch and gables",
     alt: "A craftsman Omaha home at blue hour, warm white along the porch roof and the upper gables",
     caption: "Porch roof and upper gables carried on one run, at blue hour." },
@@ -561,7 +569,7 @@ export const galleryShots: GalleryShot[] = [
 
   { src: "/img/detail-gable-miter.jpg", ratio: "3/4", scene: "The turn at a peak",
     alt: "A lit warm white run following the rake of a gable and turning at the peak on an Omaha home",
-    caption: "One continuous line through the miter, with no gap and no doubled-up section. This is the part that fails on a cheap install." },
+    caption: "One continuous line through the turn, with no gap and no doubled-up section. This is the part that fails on a cheap install." },
 ];
 
 export const img = (key: string): Slot | undefined => images[key];
