@@ -22,9 +22,10 @@ import type { City } from "./cities";
  *   no founders, no W-2s, no subcontracting
  *   the photographs are chosen against the page, and the lead one wants a wide frame
  *
- * AND, SINCE 29 AUG 2026: nothing in here says the channel is colour matched to anything, and
- * nothing says the fixing never goes through a shingle. This file reaches about fifty routes, so
- * it is the worst place on the site to carry a claim we cannot make.
+ * AND, SINCE 29 AUG 2026: nothing in here says the channel is colour matched to anything, nothing
+ * says the fixing never goes through a shingle, and nothing promises a daylight curb check. This
+ * file reaches about fifty routes, so it is the worst place on the site to carry a claim we
+ * cannot make.
  */
 export type ValueProp = {
   title: string;
@@ -168,7 +169,10 @@ export const valueProps: Record<string, ValueProp> = {
        * leave." The duration claim is out on the client's instruction. What is left is the part
        * that was never in doubt and is the actual reassurance: the site gets cleared. */
       { h: "The drive is cleared before we leave", p: "One visit, and nothing left on your property when it is done." },
-      { h: "Checked twice before we go", p: "The sightline from the curb, then every scene walked through with you." },
+      /* WAS "Checked twice before we go / The sightline from the curb, then every scene walked
+         through with you." The daylight curb check is on the client's punch list as not true, so
+         what is left is the scene walk, which is. 29 Aug 2026. */
+      { h: "Walked through before we go", p: "Every scene switched through with you, so nobody is handed an app they have not used." },
     ],
     photos: ["installDayPavilion", "detailGableMiter", "crewRoofFascia"],
     cta: BOOK,
