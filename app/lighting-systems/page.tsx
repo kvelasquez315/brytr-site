@@ -62,9 +62,14 @@ const sheet: { spec: string; value: string; why: string }[] = [
     why: "What you look at from the street is the diffuser, not the diode. It is the part that decides whether the run is a line of light or a row of bright dots.",
   },
   {
-    spec: "Channel finish",
-    value: "Color matched to your fascia",
-    why: "This is the daylight test. A matched extrusion reads as trim from the curb; a stock white channel on a bronze fascia does not.",
+    /* THIS ROW READ `spec: "Finish", value: "Color matched to fascia"` until 29 Aug 2026, with
+       a consequence column arguing that a matched channel is what makes the hardware vanish in
+       daylight. Brytr does not color match, so the row was selling a service that does not
+       exist AND was the anchor for the daylight argument on this page. The honest version of
+       the same row is the construction, which is what actually holds the line straight. */
+    spec: "Channel",
+    value: "Extruded aluminum, screw-fixed",
+    why: "A rigid extrusion screwed to the fascia holds a straight line for the length of the run. Adhesive and clip mounts are the ones that sag and lift.",
   },
   {
     spec: "Zones",
@@ -90,13 +95,19 @@ const sheet: { spec: string; value: string; why: string }[] = [
 
 /* WHAT THE SHEET DOES NOT COVER. Printing this is what keeps the sheet above from reading
  * as a hardware brochure: none of it is on a datasheet and all of it decides whether the
- * run is still right in year three. */
+ * run is still right in year three.
+ *
+ * "Corners mitered and sealed on site" was the fourth item and came off 29 Aug 2026 with the
+ * rest of the mitre claims. That left five items in a two-column grid, which is an orphan
+ * cell, so the zoning commitment took the empty slot - true, on the punch list already as the
+ * correction to "zones wired the way you asked", and belongs in a list about the things a
+ * datasheet cannot tell you. */
 const identical: string[] = [
   "The same crew on every job, measure to handover",
-  "The same fastening method into the fascia board, never through a shingle",
+  "The same fastening method into the fascia board wherever the roof allows",
   "Every penetration sealed at the moment it is made",
-  "Mitered corners at every gable, dormer, bay and valley",
-  "The daylight curb check and the after-dark scene walk, both signed off by you",
+  "The scene walk before we leave, so nobody is handed an app they have not used",
+  "The zoning agreed before anything is drilled",
   "The same fastening and sealing method, whichever hardware is on the house",
 ];
 
@@ -142,7 +153,7 @@ const houses: { h: string; profile: string[]; verdict: string; slug: string }[] 
       "Nobody in the house is going to open the app weekly",
     ],
     verdict:
-      "The roofline run and nothing else, and we will say so at the table. On a run this length in one color, the money is better spent getting the line straight and the corners mitered than on anything added to it.",
+      "The roofline run and nothing else, and we will say so at the table. On a run this length in one color, the money is better spent getting the line straight and the terminations sealed than on anything added to it.",
     slug: "haven-evolution",
   },
   {
@@ -312,16 +323,16 @@ export default function SystemsHub() {
         * photograph below the hero. Every row in the sheet above is a claim about what a part
         * does to a building, and a spec table cannot settle any of them.
         *
-        * The pair is chosen deliberately: the daylight frame answers the row about color
-        * matching, and the close frame answers the row about LED spacing. Those are the two
+        * The pair is chosen deliberately: the daylight frame answers the question of how the
+        * channel reads by day, and the close frame answers the row about LED spacing. Those are the two
         * specifications on this page a homeowner can actually verify with their own eyes, so
         * those are the two that get photographs. */}
       <PhotoPair
         title="The specifications you can check yourself."
-        lede="Most of the sheet above has to be taken on trust. These two do not: whether the channel disappears by day, and how far apart the points sit."
+        lede="Most of the sheet above has to be taken on trust. These two do not: how the channel reads by day, and how far apart the points sit."
         a="dayBrickGable"
         b="homeEaveDownlights"
-        aLabel="Color matched to the fascia. This is the row about finish, photographed at noon rather than asserted."
+        aLabel="The channel under the roof edge in daylight. This is the daylight question, photographed rather than asserted."
         bLabel="And the spacing row: individual points under the eave, set at the measure rather than judged on the day."
         ground="raise"
       />
