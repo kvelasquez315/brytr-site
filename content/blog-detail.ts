@@ -44,8 +44,12 @@ export const postPhotos: Record<string, PostPhoto> = {
   },
   "do-permanent-lights-damage-soffit-or-fascia": {
     photo: "/img/day-brick-gable.jpg",
+    /* WAS "...as a slim line the color of the trim". Alt text is copy, and this was the
+       color-match claim reaching a screen reader after it had been taken out of everything
+       sighted readers see. Kept in step with content/images.ts, which is where this string
+       is copied from. */
     photoAlt:
-      "A brick gable and white fascia on an Omaha home in daylight, the channel running under the roof edge as a slim line the color of the trim",
+      "A brick gable and white fascia on an Omaha home in daylight, the channel tucked under the roof edge as a slim line below the gutter",
     objectPosition: "50% 52%",
   },
   /* "permanent-lighting-warranty-comparison" removed with the article itself. */
