@@ -34,18 +34,18 @@ export type Shot = {
   scene?: string;
 };
 
-/* The general pool. Ordered so that adjacent entries differ — a warm white next to a colour
+/* The general pool. Ordered so that adjacent entries differ — a warm white next to a color
  * scene next to a detail — because `pick` takes a contiguous window and a run of five warm
  * white front elevations would look like a mistake. */
 export const metroShots: Shot[] = [
   { photo: "homeShakeBrick", caption: "Warm white under every eave and gable on a shake-and-brick front. This is the setting the system sits at for most of the year." },
-  { photo: "gamedayRedBlueGables", caption: "One gable red, the next blue, eaves left white. Two team colours held apart because they are on separate zones." },
+  { photo: "gamedayRedBlueGables", caption: "One gable red, the next blue, eaves left white. Two team colors held apart because they are on separate zones." },
   { photo: "detailGableMiter", caption: "The turn at a gable peak, close. One continuous line with no gap and no overlap is the whole difference between a good install and a cheap one." },
   { photo: "homeWideRanch", caption: "A low ranch is the hardest elevation to light: the run has nothing to break it up, so every sag shows for the full length." },
   { photo: "christmasRedGreenGables", caption: "Red and green alternating along every gable. Nothing was hung for this and nothing comes down in January." },
   { photo: "poolPergolaDusk", caption: "A pool and pergola at sunset, the beam run and the roofline behind it on the same schedule." },
   { photo: "homeFarmhouseDark", caption: "Dark siding, restrained output. Warm white on a modern elevation reads as architecture rather than decoration." },
-  { photo: "dayBrickGable", caption: "The same hardware in daylight. Colour matched to the fascia, diffuser facing down, and you have to know it is there to find it." },
+  { photo: "dayBrickGable", caption: "The same hardware in daylight. Color matched to the fascia, diffuser facing down, and you have to know it is there to find it." },
   { photo: "landscapeTreeBeds", caption: "Roofline and landscape on one controller, so the beds and the tree come up with the house rather than on their own timer." },
   { photo: "halloweenOrangePurple", caption: "Orange and violet through October, set from the app and scheduled to switch itself back." },
   { photo: "homePrairieTwilight", caption: "Civil twilight, which is the twenty minutes this product looks best." },
@@ -58,14 +58,14 @@ export const metroShots: Shot[] = [
   { photo: "homeModernStone", caption: "A flat roof edge with no gable to hang a line on, which is a detailing problem rather than a lighting one." },
   { photo: "christmasWreathsNets", caption: "The permanent run alongside the decorations people still want out. It is not either-or." },
   { photo: "homeRanchBluehour", caption: "A long ranch at blue hour behind a bare tree, warm white holding the whole roofline." },
-  { photo: "sceneWarmBlueBand", caption: "Gables warm, the stone band below in blue. Two zones beats one colour on almost every house." },
+  { photo: "sceneWarmBlueBand", caption: "Gables warm, the stone band below in blue. Two zones beats one color on almost every house." },
   { photo: "poolRearWarm", caption: "The back of a house, which is where most of the evening actually happens and where almost nobody photographs." },
   { photo: "dayShakeGable", caption: "Daylight on a second house, so the disappearing act is not one lucky angle." },
   { photo: "homeStoneSiding", caption: "Warm downlights spaced evenly under the eaves of a stone-and-siding front." },
   { photo: "landscapeTreeTeal", caption: "One uplight through a mature tree doing more for a property than a whole roofline would." },
   { photo: "winterGradientSnow", caption: "A gradient run across a single roofline in snow. Every point is addressed separately, so the run can fade rather than step." },
   { photo: "homeBrickGablesGold", caption: "A complicated roof: more gables means more corners, and corners are where installs fail." },
-  { photo: "sceneAmberCyan", caption: "Amber over cyan. Two colours that should clash and do not, because neither is on the other's zone." },
+  { photo: "sceneAmberCyan", caption: "Amber over cyan. Two colors that should clash and do not, because neither is on the other's zone." },
   { photo: "homeTanSunset", caption: "Shot against a bright sky rather than a black one, which is the honest test of how much output a run has." },
   { photo: "christmasEntryShrubs", caption: "Green and red at an entry with snow on the beds. December is the month the product earns its keep." },
   { photo: "homeGreyMoon", caption: "An ordinary evening on an ordinary street, which is most of what this system does." },
@@ -74,20 +74,20 @@ export const metroShots: Shot[] = [
   { photo: "sceneRedBlueHalves", caption: "Left half red, right half blue. Zones are geographic as well as chromatic." },
   { photo: "deckRanchWarm", caption: "House and deck reading as one property rather than as two jobs done by two trades." },
   { photo: "halloweenBlueOrange", caption: "A second October scene on a different house: violet low, orange on the gable." },
-  { photo: "homeStuccoStone", caption: "Warm along the rooflines with a single coloured uplight in the bed. Restraint is a design decision." },
-  { photo: "christmasGreenRed", caption: "Green as the field colour with red on the upper gable, rather than the usual alternation." },
+  { photo: "homeStuccoStone", caption: "Warm along the rooflines with a single colored uplight in the bed. Restraint is a design decision." },
+  { photo: "christmasGreenRed", caption: "Green as the field color with red on the upper gable, rather than the usual alternation." },
   { photo: "homeWhiteTwoStorey", caption: "Full output on light siding, where there is nowhere for a badly aimed diffuser to hide." },
   { photo: "fourthRakeLines", caption: "The line-work itself against a dusk sky. This is what you are actually buying." },
-  { photo: "gamedayRanchWide", caption: "Colour across a long low roofline and a curved drive." },
+  { photo: "gamedayRanchWide", caption: "Color across a long low roofline and a curved drive." },
   { photo: "dayStoneGable", caption: "Overcast daylight against stone, which is the hardest surface for a channel to disappear against." },
   { photo: "christmasBoardBatten", caption: "Restrained red and green on modern board-and-batten." },
   { photo: "sceneWhiteRedEntry", caption: "Cool white everywhere and only the entry alcove changed. One zone at a time is a real option." },
-  { photo: "patioRearColour", caption: "Colour in the back garden, on the roofline and the furniture below it." },
-  { photo: "winterRedBlueSnow", caption: "Colour bouncing off snow, which roughly doubles what you see from the street." },
+  { photo: "patioRearColor", caption: "Color in the back garden, on the roofline and the furniture below it." },
+  { photo: "winterRedBlueSnow", caption: "Color bouncing off snow, which roughly doubles what you see from the street." },
   { photo: "landscapeBrickUplight", caption: "Roofline, gable accent and uplight, each addressed separately and each doing a different job." },
-  { photo: "gamedayRedGable", caption: "How far a saturated colour spills onto a driveway, shown rather than described." },
+  { photo: "gamedayRedGable", caption: "How far a saturated color spills onto a driveway, shown rather than described." },
   { photo: "christmasBrickGable", caption: "Close on a brick gable in December. You can count the points and the gaps between them." },
-  { photo: "gamedayRedWhiteSplit", caption: "Split colours across one elevation with the eaves left white to hold the shape of the roof." },
+  { photo: "gamedayRedWhiteSplit", caption: "Split colors across one elevation with the eaves left white to hold the shape of the roof." },
 ];
 
 /* Windows of the pool, offset by a stable seed so no two slugs open with the same photograph.

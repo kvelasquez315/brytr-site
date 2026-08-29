@@ -26,7 +26,7 @@ import { Elevation } from "./elevation";
  * THE LEDE IS GONE ENTIRELY. Four lines, then one, and now none. The client on the one that was
  * left: "I do not think that we need that text below the heading. It is just there for no reason."
  * Right, and the reason is structural rather than editorial - the three labels immediately beneath
- * it read "Warm white / Drag the line / One colour", so the sentence was captioning a control that
+ * it read "Warm white / Drag the line / One color", so the sentence was captioning a control that
  * captions itself. The heading names the section, the labels say what to do, and the thing itself
  * is the argument.
  *
@@ -37,7 +37,7 @@ import { Elevation } from "./elevation";
  *
  * The left half is genuinely the everyday setting. It briefly was not: the pair used to be
  * hero-warm-white.jpg against hero-game-day.jpg, and the first of those is a soft pink rather than
- * warm white, so this section was captioning the wrong colour of light as the default. See the note
+ * warm white, so this section was captioning the wrong color of light as the default. See the note
  * on the hero pair in content/images.ts.
  */
 
@@ -101,7 +101,7 @@ export function SceneWipe() {
           * from Recent Work's own button and from the footer - so nothing became unreachable.
           *
           * It is also the fourth thing removed from this section in a row: four lines of lede, then
-          * one, then the spec panel, then this. That is not indecision, it is the same judgement
+          * one, then the spec panel, then this. That is not indecision, it is the same judgment
           * applied repeatedly - every one of them was TEXT ABOUT a photograph that changes under
           * your hand, sitting next to the photograph that changes under your hand. */}
         {/* NO WIDTH CAP. "Just make it so that is only one row." At 62px, "Beautiful permanent
@@ -110,7 +110,7 @@ export function SceneWipe() {
           * under it. The lede is gone; three words do not need a measure. It still wraps on a
           * phone, where the clamp takes it to 40px and no cap is involved. */}
         <SectionHead
-          /* Renamed on instruction, from "Warm white every night. Any colour when you want it."
+          /* Renamed on instruction, from "Warm white every night. Any color when you want it."
             * Three words instead of ten, and at the hero scale they are the biggest thing on the
             * page after the h1 - which is right for the section carrying the only interactive
             * proof on the site. */
@@ -126,15 +126,15 @@ export function SceneWipe() {
           *
           * It should not have been rescued by removing the `mt-auto` either. The panel was
           * captioning a control that captions itself: the three labels directly above the track
-          * already read "Warm white / Drag the line / One colour", and the whole argument of this
+          * already read "Warm white / Drag the line / One color", and the whole argument of this
           * section is the photograph changing under the reader's own hand. A table of four
           * specifications is the least persuasive thing that could sit next to that.
           *
           * The image gets the full shell width in exchange, which is the right trade for the one
           * interactive thing on the site. */}
-        {/* THE THREE LABELS ARE GONE TOO - "Warm white / Drag the line / One colour" across the top
+        {/* THE THREE LABELS ARE GONE TOO - "Warm white / Drag the line / One color" across the top
           * of the track. Removed on instruction, and the reasoning holds: they were captioning the
-          * two halves of a photograph that already look like warm white and a colour, and
+          * two halves of a photograph that already look like warm white and a color, and
           * instructing a reader to drag a handle that has drag arrows drawn on it.
           *
           * THE AFFORDANCE DOES NOT DEPEND ON THEM. The handle is an amber block with a
@@ -156,7 +156,7 @@ export function SceneWipe() {
             >
               {hasPair && scene.src && warm.src ? (
                 <>
-                  {/* base layer: the colour scene */}
+                  {/* base layer: the color scene */}
                   <Image src={scene.src} alt={scene.alt} fill sizes="(min-width:1024px) 62vw, 100vw" className="object-cover" />
 
                   {/* warm-white layer, clipped left of the line */}
@@ -178,11 +178,11 @@ export function SceneWipe() {
               <button
                 data-dusk
                 role="slider"
-                aria-label="Drag to switch the roofline between everyday warm white and a saved colour scene"
+                aria-label="Drag to switch the roofline between everyday warm white and a saved color scene"
                 aria-valuemin={6}
                 aria-valuemax={94}
                 aria-valuenow={Math.round(pct)}
-                aria-valuetext={mostlyScene ? "Mostly the saved colour scene" : "Mostly everyday warm white"}
+                aria-valuetext={mostlyScene ? "Mostly the saved color scene" : "Mostly everyday warm white"}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowLeft") { e.preventDefault(); setPct((v) => Math.max(6, v - 5)); }
                   if (e.key === "ArrowRight") { e.preventDefault(); setPct((v) => Math.min(94, v + 5)); }
