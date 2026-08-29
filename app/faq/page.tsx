@@ -107,11 +107,16 @@ const all = groups.flatMap((g) => g.items);
 
 /* THE SHORT ANSWERS. Each one is a compression of the full answer further down — never a
  * different claim, and never a claim the long version does not make. `to` points at the
- * group the long version lives in. */
+ * group the long version lives in.
+ *
+ * TWO OF THEM CHANGED 29 Aug 2026 with the claims they compressed: the daytime answer no
+ * longer says the aluminum is colour matched, and the fascia answer no longer says the fixing
+ * never goes through a shingle. A short answer that outruns its long answer is worse than no
+ * short answer, because this rack is the part of the page people actually read. */
 const shortAnswers: { q: string; a: string; to: string }[] = [
   {
     q: "Can you see it in the daytime?",
-    a: "Barely, and that is the point. Color-matched aluminum tucked into the eave line, which reads as trim from the street.",
+    a: "Barely, and that is the point. A slim aluminum track tucked into the eave line, which reads as trim from the street.",
     to: "Before you buy",
   },
   /* The "What does it cost?" short answer is gone. It stated a pricing basis and pointed at the
@@ -120,7 +125,7 @@ const shortAnswers: { q: string; a: string; to: string }[] = [
    * a link into nothing. */
   {
     q: "Will it damage my fascia?",
-    a: "It fastens into the fascia board, never through the shingles, and every penetration is sealed as it is made.",
+    a: "It fastens into the fascia board wherever the roof allows, and every penetration is sealed as it is made.",
     to: "Install",
   },
   {
