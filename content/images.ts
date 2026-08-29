@@ -2,7 +2,7 @@
  *
  * To add a photo: drop the file in /public/img/ and set `src`. The component picks
  * it up on the next build. Until `src` is set, the component renders its no-photo
- * variant, which is a designed, dense state — never a grey placeholder box.
+ * variant, which is a designed, dense state — never a gray placeholder box.
  *
  * Rules: real photography only. No stock, no AI. `alt` must name the city or the
  * service, because these double as SEO signals. Never name a customer's street —
@@ -24,7 +24,7 @@
  *
  *   the rest  The crew's own phone photographs, across many finished installs. Handheld,
  *          uneven, sometimes portrait — and worth more than a clean stock frame, because a
- *          homeowner recognises the houses. Kept at the orientation they were shot at
+ *          homeowner recognizes the houses. Kept at the orientation they were shot at
  *          rather than cropped to a uniform 16/9, which is why `ratio` now admits 3/4.
  *
  * Every file was stripped of metadata on the way in. The drone frames carried GPS to the
@@ -46,14 +46,14 @@ export const images: Record<string, Slot> = {
    * NOT warm white. Its runs read as a soft pink across the whole elevation — the brick goes
    * rose and the white siding goes pink — and it was captioned "everyday warm white" in eight
    * places, which put the site's single most important product claim (that warm white is
-   * where the system sits all year, and colour is the occasional scene) underneath a
-   * photograph of the wrong colour of light.
+   * where the system sits all year, and color is the occasional scene) underneath a
+   * photograph of the wrong color of light.
    *
    * The fix was available in the archive and nobody had noticed: the pool-deck shoot is one
    * property photographed on one evening in both states. hero-bg.jpg and scene-warm-white.jpg
    * are genuinely warm white; g-pool-red / -blue / -green / -pink are the same camera
-   * position in colour, at the same 16:9. Measured mean luma difference between
-   * scene-warm-white and g-pool-red across a 400px reduction is 12.8, which is colour, not
+   * position in color, at the same 16:9. Measured mean luma difference between
+   * scene-warm-white and g-pool-red across a 400px reduction is 12.8, which is color, not
    * movement — so the registration the wipe depends on survives the swap.
    *
    * So the drag line now genuinely shows the everyday setting against an occasion scene, on
@@ -66,7 +66,7 @@ export const images: Record<string, Slot> = {
     subject: "The everyday setting. Pairs with heroScene, same house and same frame.", ratio: "16/9", priority: true },
   heroScene: { src: "/img/g-pool-red.jpg",
     alt: "The same Omaha home, pergola and pool deck with every run switched to red",
-    subject: "Same frame as heroWarm, one colour scene on.", ratio: "16/9", priority: true },
+    subject: "Same frame as heroWarm, one color scene on.", ratio: "16/9", priority: true },
 
   /* THE HOME HERO IS NOT THE SAME HOUSE AS THE DRAG DEVICE ANY MORE.
    *
@@ -146,7 +146,7 @@ export const images: Record<string, Slot> = {
     alt: "A wide Omaha ranch at blue hour, warm white along the roofline and uplights through a bare tree and the planting beds",
     subject: "Roofline and landscape in one frame: the whole-property argument, photographed.", ratio: "4/3" },
   serviceChristmas: { src: "/img/christmas-brick-two-storey.jpg",
-    alt: "A large brick Omaha two-storey in alternating red and green with uplights on the planting beds",
+    alt: "A large brick Omaha two-story in alternating red and green with uplights on the planting beds",
     subject: "December on a big brick elevation, with the landscape lighting joining in.", ratio: "4/3" },
   servicePatio: { src: "/img/patio-timber-stone.jpg",
     alt: "A timber and stone covered patio at an Omaha home after dark, warm light along the beam and step lights down the stairs",
@@ -163,12 +163,12 @@ export const images: Record<string, Slot> = {
   /* was g-pool-red.jpg — a pool deck with red umbrellas, which is not what a homeowner
    * pictures when they read "game day". The ranch roofline in scarlet is. */
   serviceGameday: { src: "/img/gameday-red-blue-gables.jpg",
-    alt: "A brick Omaha two-storey with one gable in red, another in blue and white along the eaves",
-    subject: "Two team colours held apart by zone rather than washed over the whole house.", ratio: "4/3" },
+    alt: "A brick Omaha two-story with one gable in red, another in blue and white along the eaves",
+    subject: "Two team colors held apart by zone rather than washed over the whole house.", ratio: "4/3" },
   /* was g-ranch-blue.jpg — blue reads as nothing in particular next to the word
    * "seasonal". Halloween violet reads as a season immediately. */
   serviceHoliday: { src: "/img/halloween-orange-purple.jpg",
-    alt: "An Omaha two-storey in orange and violet with a stone column washed amber for Halloween",
+    alt: "An Omaha two-story in orange and violet with a stone column washed amber for Halloween",
     subject: "October rather than December: a saved scene that is not Christmas.", ratio: "3/4" },
   serviceLandscape: { src: "/img/landscape-brick-uplight.jpg",
     alt: "A tall brick Omaha home with white roofline runs, magenta accents on the gables and uplights washing the brick and shrubs",
@@ -187,20 +187,20 @@ export const images: Record<string, Slot> = {
     subject: "Same frame, dimmed. Warm white doing a different job.", ratio: "16/9" },
   seqWarmChristmas: { src: "/img/seq-warm-christmas.jpg",
     alt: "The same house with every point along the roofline and eaves at full warm white",
-    subject: "Same frame, warm white at full. Christmas without colour.", ratio: "16/9" },
+    subject: "Same frame, warm white at full. Christmas without color.", ratio: "16/9" },
   seqRedGreen: { src: "/img/seq-red-green.jpg",
     alt: "The same house with the roofline alternating red and green",
     subject: "Same frame, the December scene.", ratio: "16/9" },
   seqGameday: { src: "/img/seq-gameday.jpg",
     alt: "The same house washed red across the whole elevation with white left at the roof peaks",
-    subject: "Same frame, a colour scene. Note the white peaks: two zones, not one.", ratio: "16/9" },
+    subject: "Same frame, a color scene. Note the white peaks: two zones, not one.", ratio: "16/9" },
 
   /* ── BY DAY ──
    * The site claims the hardware disappears in daylight. These are the only images on the
    * site that let a reader check that claim, so they are worth more than any night shot. */
   dayBrickGable: { src: "/img/day-brick-gable.jpg",
-    alt: "A brick gable and white fascia on an Omaha home in daylight, the channel running under the roof edge as a slim line the colour of the trim",
-    subject: "Daylight, close, trim-coloured channel. The claim, checkable.", ratio: "3/4" },
+    alt: "A brick gable and white fascia on an Omaha home in daylight, the channel running under the roof edge as a slim line the color of the trim",
+    subject: "Daylight, close, trim-colored channel. The claim, checkable.", ratio: "3/4" },
   dayShakeGable: { src: "/img/day-shake-gable.jpg",
     alt: "A shake gable meeting a shingled roof on an Omaha home in daylight, the run visible only as a narrow strip below the gutter line",
     subject: "Daylight on a second house, so it is not one lucky angle.", ratio: "4/3" },
@@ -239,9 +239,9 @@ export const images: Record<string, Slot> = {
   deckRanchWarm: { src: "/img/deck-ranch-warm.jpg",
     alt: "A long Omaha ranch at night with warm white along the roofline and a lit deck and pergola at one end",
     subject: "House and deck reading as one property rather than two jobs.", ratio: "4/3" },
-  patioRearColour: { src: "/img/patio-rear-colour.jpg",
+  patioRearColor: { src: "/img/patio-rear-colour.jpg",
     alt: "The back of an Omaha home at dusk with the roofline in teal and the patio furniture below washed violet",
-    subject: "Colour in the back garden, where it is actually used.", ratio: "4/3" },
+    subject: "Color in the back garden, where it is actually used.", ratio: "4/3" },
 
   /* ── LANDSCAPE ── */
   landscapeTreeBeds: { src: "/img/landscape-tree-beds.jpg",
@@ -270,7 +270,7 @@ export const images: Record<string, Slot> = {
     alt: "A dark-clad modern farmhouse in Omaha with a restrained warm white line along the roof edges",
     subject: "Dark siding. Warm white reads as architecture, not decoration.", ratio: "3/4" },
   homePorchFlag: { src: "/img/home-porch-flag.jpg",
-    alt: "A grey Omaha two-storey at blue hour with warm downlights over the porch and a flag by the door",
+    alt: "A gray Omaha two-story at blue hour with warm downlights over the porch and a flag by the door",
     subject: "The everyday setting on an ordinary street.", ratio: "4/3" },
   homePrairieTwilight: { src: "/img/home-prairie-twilight.jpg",
     alt: "A stucco and stone prairie-style Omaha home at twilight with warm white under the eaves",
@@ -280,12 +280,12 @@ export const images: Record<string, Slot> = {
     subject: "Roofline plus one uplight on the thing you walk to.", ratio: "3/4" },
   homeFarmhouseMoon: { src: "/img/home-farmhouse-moon.jpg",
     alt: "A white modern farmhouse in Omaha at night under a moon, its rooflines picked out in cool white",
-    subject: "Cool white rather than warm, for readers who ask about colour temperature.", ratio: "3/4" },
+    subject: "Cool white rather than warm, for readers who ask about color temperature.", ratio: "3/4" },
   homeTanSunset: { src: "/img/home-tan-sunset.jpg",
-    alt: "A tan Omaha two-storey against a sunset with warm white along the gable and eave lines",
+    alt: "A tan Omaha two-story against a sunset with warm white along the gable and eave lines",
     subject: "Sunset, not dark. Shows the run against a bright sky.", ratio: "3/4" },
   homeWhiteTwoStorey: { src: "/img/home-white-two-storey.jpg",
-    alt: "A white and grey Omaha two-storey lit bright warm white along every roofline",
+    alt: "A white and gray Omaha two-story lit bright warm white along every roofline",
     subject: "Full brightness on light siding.", ratio: "3/4" },
   homeBrickGablesGold: { src: "/img/home-brick-gables-gold.jpg",
     alt: "A brick Omaha home with several gables all lit warm, the entry glowing behind the glass",
@@ -294,7 +294,7 @@ export const images: Record<string, Slot> = {
     alt: "Warm white downlights spaced evenly under the eaves and gable peaks of a modern Omaha farmhouse",
     subject: "Close enough to read the spacing between points.", ratio: "3/4" },
   homeModernStone: { src: "/img/home-modern-stone.jpg",
-    alt: "A modern stone and stucco Omaha two-storey with warm downlights along the flat roof edges",
+    alt: "A modern stone and stucco Omaha two-story with warm downlights along the flat roof edges",
     subject: "Flat roof. No gable to hang a line on.", ratio: "4/3" },
   homeWideRanch: { src: "/img/home-wide-ranch.jpg",
     alt: "A wide low Omaha ranch at night with warm white holding a straight line the full length of the roof",
@@ -303,49 +303,49 @@ export const images: Record<string, Slot> = {
     alt: "A long Omaha ranch at blue hour behind a bare tree, warm white along the whole roofline",
     subject: "Winter blue hour, bare branches, warm run.", ratio: "4/3" },
   homeGreyMoon: { src: "/img/home-grey-moon.jpg",
-    alt: "A grey Omaha two-storey under a moon with cool white along the rooflines and a truck in the drive",
+    alt: "A gray Omaha two-story under a moon with cool white along the rooflines and a truck in the drive",
     subject: "Ordinary evening, ordinary house, lights on.", ratio: "3/4" },
   homeStoneSiding: { src: "/img/home-stone-siding.jpg",
-    alt: "A stone and siding Omaha two-storey with evenly spaced warm downlights under the eaves",
+    alt: "A stone and siding Omaha two-story with evenly spaced warm downlights under the eaves",
     subject: "Even spacing across a broken roofline.", ratio: "3/4" },
   homeStuccoStone: { src: "/img/home-stucco-stone.jpg",
-    alt: "A stucco and stone Omaha two-storey lit warm along the rooflines with a green uplight in the bed below",
-    subject: "Warm roofline, one coloured uplight. Restraint.", ratio: "4/3" },
+    alt: "A stucco and stone Omaha two-story lit warm along the rooflines with a green uplight in the bed below",
+    subject: "Warm roofline, one colored uplight. Restraint.", ratio: "4/3" },
 
   /* ── SCENES, AND WHAT MAKES A GOOD ONE ──
-   * Two zones beats one colour every time, and these are here to show that rather than say it. */
+   * Two zones beats one color every time, and these are here to show that rather than say it. */
   sceneWarmBlueBand: { src: "/img/scene-warm-blue-band.jpg",
     alt: "An Omaha home with the gables in warm white and the stone band below in blue",
-    subject: "Two zones, two colours. The look most people land on.", ratio: "4/3" },
+    subject: "Two zones, two colors. The look most people land on.", ratio: "4/3" },
   sceneAmberCyan: { src: "/img/scene-amber-cyan.jpg",
     alt: "A brick Omaha home with the gable run in amber and the lower run in cyan",
-    subject: "Two colours that should clash and do not, because they are on separate zones.", ratio: "4/3" },
+    subject: "Two colors that should clash and do not, because they are on separate zones.", ratio: "4/3" },
   sceneWhiteRedEntry: { src: "/img/scene-white-red-entry.jpg",
     alt: "A wide Omaha ranch in cool white with only the entry alcove washed red",
     subject: "One zone changed and the rest left alone.", ratio: "4/3" },
   sceneRedBlueHalves: { src: "/img/scene-red-blue-halves.jpg",
-    alt: "An Omaha two-storey with the left half of the elevation in red and the right half in blue",
-    subject: "Zones are geographic, not just colour-wide.", ratio: "4/3" },
+    alt: "An Omaha two-story with the left half of the elevation in red and the right half in blue",
+    subject: "Zones are geographic, not just color-wide.", ratio: "4/3" },
   sceneEaveDownlightsPink: { src: "/img/scene-eave-downlights-pink.jpg",
     alt: "Downlights under the eave of an Omaha home set to a soft pink, each point visible along the run",
-    subject: "A single colour at low brightness. Close enough to count the points.", ratio: "3/4" },
+    subject: "A single color at low brightness. Close enough to count the points.", ratio: "3/4" },
 
   /* ── GAME DAY ── */
   gamedayRedFull: { src: "/img/gameday-red-full.jpg",
-    alt: "An Omaha two-storey washed scarlet across the whole elevation under a moon",
+    alt: "An Omaha two-story washed scarlet across the whole elevation under a moon",
     subject: "Everything red. What people actually ask for on a Saturday.", ratio: "3/4" },
   gamedayRedBlueGables: { src: "/img/gameday-red-blue-gables.jpg",
-    alt: "A brick Omaha two-storey with one gable in red, another in blue and white along the eaves",
-    subject: "Two team colours held apart by zone.", ratio: "4/3" },
+    alt: "A brick Omaha two-story with one gable in red, another in blue and white along the eaves",
+    subject: "Two team colors held apart by zone.", ratio: "4/3" },
   gamedayRedWhiteSplit: { src: "/img/gameday-red-white-split.jpg",
     alt: "An Omaha home with the garage gable in red and the second gable in blue and white, a pickup in the drive",
-    subject: "Split colours on one elevation.", ratio: "3/4" },
+    subject: "Split colors on one elevation.", ratio: "3/4" },
   gamedayRedGable: { src: "/img/gameday-red-gable.jpg",
     alt: "A deep red wash across the gable and eaves of an Omaha home with a car in the driveway lit red",
-    subject: "How far the colour spills onto the drive. Honest about brightness.", ratio: "3/4" },
+    subject: "How far the color spills onto the drive. Honest about brightness.", ratio: "3/4" },
   gamedayRanchWide: { src: "/img/gameday-ranch-wide.jpg",
     alt: "A long Omaha ranch at dusk in red, white and blue along a curved drive",
-    subject: "Colour across a long low roofline.", ratio: "4/3" },
+    subject: "Color across a long low roofline.", ratio: "4/3" },
 
   /* ── THE FOURTH ── */
   fourthBrickRanch: { src: "/img/fourth-brick-ranch.jpg",
@@ -357,20 +357,20 @@ export const images: Record<string, Slot> = {
 
   /* ── DECEMBER ── */
   christmasBrickTwoStorey: { src: "/img/christmas-brick-two-storey.jpg",
-    alt: "A large brick Omaha two-storey in alternating red and green with uplights on the planting beds",
+    alt: "A large brick Omaha two-story in alternating red and green with uplights on the planting beds",
     subject: "Christmas with the landscape lighting joining in.", ratio: "4/3" },
   christmasRedGreenGables: { src: "/img/christmas-red-green-gables.jpg",
     alt: "Alternating red and green along every gable and eave of a brick Omaha home",
-    subject: "Alternating rather than a single colour. Two greens between every red.", ratio: "4/3" },
+    subject: "Alternating rather than a single color. Two greens between every red.", ratio: "4/3" },
   christmasWreathsNets: { src: "/img/christmas-wreaths-nets.jpg",
-    alt: "An Omaha two-storey in red and green with lit wreaths in the windows and net lights over the shrubs",
+    alt: "An Omaha two-story in red and green with lit wreaths in the windows and net lights over the shrubs",
     subject: "The permanent run alongside the decorations people still put out.", ratio: "3/4" },
   christmasEntryShrubs: { src: "/img/christmas-entry-shrubs.jpg",
     alt: "A stucco Omaha entry in green and red with three round shrubs under net lights and snow on the beds",
     subject: "Snow. This is the month the product earns its keep.", ratio: "3/4" },
   christmasGreenRed: { src: "/img/christmas-green-red.jpg",
-    alt: "An Omaha two-storey with the main elevation in green and the upper gable in red",
-    subject: "Green as the field colour rather than an accent.", ratio: "3/4" },
+    alt: "An Omaha two-story with the main elevation in green and the upper gable in red",
+    subject: "Green as the field color rather than an accent.", ratio: "3/4" },
   christmasBoardBatten: { src: "/img/christmas-board-batten.jpg",
     alt: "Red and green points along the gables and porch of a dark board-and-batten Omaha home",
     subject: "Restrained Christmas on modern siding.", ratio: "4/3" },
@@ -380,10 +380,10 @@ export const images: Record<string, Slot> = {
 
   /* ── OCTOBER ── */
   halloweenOrangePurple: { src: "/img/halloween-orange-purple.jpg",
-    alt: "An Omaha two-storey in orange and violet with a stone column washed amber for Halloween",
+    alt: "An Omaha two-story in orange and violet with a stone column washed amber for Halloween",
     subject: "October. Orange and violet, no bulbs changed.", ratio: "3/4" },
   halloweenBlueOrange: { src: "/img/halloween-blue-orange.jpg",
-    alt: "An Omaha two-storey with the lower elevation in violet and the upper gable in orange, a truck in the drive",
+    alt: "An Omaha two-story with the lower elevation in violet and the upper gable in orange, a truck in the drive",
     subject: "Second October frame, different house.", ratio: "3/4" },
 
   /* ── WINTER, WHICH IS THE POINT ──
@@ -393,11 +393,11 @@ export const images: Record<string, Slot> = {
     alt: "A modern Omaha home at dusk above a snow-covered driveway with a warm run along the roofline",
     subject: "Snow on the ground, lights on, nobody on a ladder.", ratio: "4/3" },
   winterGradientSnow: { src: "/img/winter-gradient-snow.jpg",
-    alt: "An Omaha ranch in snow with the roofline running through a gradient of colours under a moon",
+    alt: "An Omaha ranch in snow with the roofline running through a gradient of colors under a moon",
     subject: "A gradient across one run, in February.", ratio: "4/3" },
   winterRedBlueSnow: { src: "/img/winter-red-blue-snow.jpg",
     alt: "An Omaha home with red and blue gables and the snow in front of it lit blue",
-    subject: "Colour bouncing off snow, which doubles the effect.", ratio: "3/4" },
+    subject: "Color bouncing off snow, which doubles the effect.", ratio: "3/4" },
 
   /* ── FROM ABOVE ── */
   aerialRedRoofline: { src: "/img/aerial-red-roofline.jpg",
@@ -469,13 +469,13 @@ export const galleryShots: GalleryShot[] = [
   { src: "/img/christmas-detail.jpg", ratio: "16/9", scene: "Christmas",
     alt: "Individual red and green LEDs alternating along the gables of an Omaha home",
     caption: "Close up, you can count the pixels. Alternating red and green, scheduled Thanksgiving to New Year." },
-  { src: "/img/g-blue-elevation.jpg", ratio: "16/9", scene: "The whole elevation in the same colour",
+  { src: "/img/g-blue-elevation.jpg", ratio: "16/9", scene: "The whole elevation in the same color",
     alt: "An Omaha home with its whole front elevation in blue",
     caption: "Every zone set to one color, front elevation at full brightness." },
   { src: "/img/scene-birthday.jpg", ratio: "16/9", scene: "Birthday",
     alt: "An Omaha roofline in pink and teal",
     caption: "Set from the app the morning of. Back to warm white the next night." },
-  { src: "/img/g-blue-white.jpg", ratio: "16/9", scene: "Colour held apart by zone",
+  { src: "/img/g-blue-white.jpg", ratio: "16/9", scene: "Color held apart by zone",
     alt: "An Omaha home in blue and white with landscape uplighting",
     caption: "Gables in color, eaves left white: the two-zone look most people land on." },
   { src: "/img/scene-husker-red.jpg", ratio: "16/9", scene: "Scarlet",
@@ -532,7 +532,7 @@ export const galleryShots: GalleryShot[] = [
     caption: "The everyday setting on a front elevation rather than a back garden. This is what the street sees." },
   { src: "/img/home-shake-brick.jpg", ratio: "3/4", scene: "Warm white, shake and brick",
     alt: "An Omaha home in shake and brick with a wood garage door, warm white downlights along every eave and gable",
-    caption: "Downlights under every eave and gable, colour matched to the trim." },
+    caption: "Downlights under every eave and gable, color matched to the trim." },
   { src: "/img/home-craftsman-porch.jpg", ratio: "3/4", scene: "Warm white, porch and gables",
     alt: "A craftsman Omaha home at blue hour, warm white along the porch roof and the upper gables",
     caption: "Porch roof and upper gables carried on one run, at blue hour." },
@@ -540,7 +540,7 @@ export const galleryShots: GalleryShot[] = [
     alt: "A stucco and stone prairie-style Omaha home at twilight with warm white under the eaves",
     caption: "The twenty minutes after sunset when this product looks best, which is also when we design it." },
   { src: "/img/home-porch-flag.jpg", ratio: "4/3", scene: "Warm white, an ordinary evening",
-    alt: "A grey Omaha two-storey at blue hour with warm downlights over the porch and a flag by the door",
+    alt: "A gray Omaha two-story at blue hour with warm downlights over the porch and a flag by the door",
     caption: "No occasion, no scene, nobody at home looking at it. Most of what this system does." },
   { src: "/img/home-farmhouse-dark.jpg", ratio: "3/4", scene: "Warm white, dark siding",
     alt: "A dark-clad modern farmhouse in Omaha with a restrained warm white line along the roof edges",
@@ -553,15 +553,15 @@ export const galleryShots: GalleryShot[] = [
     caption: "A low ranch has nothing to break the run, so the line has to hold for its whole length." },
 
   { src: "/img/christmas-brick-two-storey.jpg", ratio: "4/3", scene: "December",
-    alt: "A large brick Omaha two-storey in alternating red and green with uplights on the planting beds",
+    alt: "A large brick Omaha two-story in alternating red and green with uplights on the planting beds",
     caption: "Red and green on the roofline with the landscape lighting joining in on the same scene." },
   { src: "/img/halloween-orange-purple.jpg", ratio: "3/4", scene: "October",
-    alt: "An Omaha two-storey in orange and violet with a stone column washed amber for Halloween",
+    alt: "An Omaha two-story in orange and violet with a stone column washed amber for Halloween",
     caption: "Orange and violet for the month, scheduled, and switching itself back." },
 
   { src: "/img/detail-gable-miter.jpg", ratio: "3/4", scene: "The turn at a peak",
     alt: "A lit warm white run following the rake of a gable and turning at the peak on an Omaha home",
-    caption: "One continuous line through the mitre, with no gap and no doubled-up section. This is the part that fails on a cheap install." },
+    caption: "One continuous line through the miter, with no gap and no doubled-up section. This is the part that fails on a cheap install." },
 ];
 
 export const img = (key: string): Slot | undefined => images[key];
