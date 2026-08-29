@@ -75,9 +75,9 @@ export const posts: Post[] = [
     dek: "Done properly, no more than hanging a gutter does. Done badly, it is a leak. The difference is entirely in where it fastens and how it is sealed.",
     links: { label: "Soffit lighting", href: "/services/soffit-lighting" },
     body: [
-      { p: "The channel fastens into the fascia board, not through the shingles. Every penetration is sealed as it is made. That is the whole answer, and it is also the thing that separates a good install from a callback." },
+      { p: "The channel fastens into the fascia board wherever the roof allows, and every penetration is sealed as it is made. That is the whole answer, and it is also the thing that separates a good install from a callback." },
       { h: "What a correct install looks like" },
-      { list: ["Fasteners into fascia, on a spacing that suits the board", "Every penetration sealed at the time it is made, not afterwards", "No fastening through shingles or into the roof deck", "Mitered and sealed at every corner and transition", "Terminations capped, not taped"] },
+      { list: ["Fasteners into fascia, on a spacing that suits the board", "Every penetration sealed at the time it is made, not afterwards", "Terminations capped, not taped"] },
       { h: "What causes damage" },
       { p: "Fastening through the roof covering, over-driving fasteners into soft or rotten fascia, and skipping sealant on a cold day because it is slow. All three are shortcuts, and all three are why the crew who measures a house is the crew who fits it." },
       { callout: "If your fascia is already soft or rotten, that gets repaired before anything is mounted to it. Mounting a permanent fixture to failing timber is not an install, it is a deferred problem." },
@@ -116,7 +116,11 @@ export const posts: Post[] = [
     body: [
       { p: "Covenant language on permanent exterior lighting is newer than the product, which means a lot of associations are working out their position as applications arrive. That is good news: a well-presented submission usually gets approved." },
       { h: "What boards actually object to" },
-      { list: ["Visible hardware in daylight, which is a design question and answerable with a daytime photo", "Color changing displays running year round, which a scheduling commitment resolves", "Brightness spilling onto neighboring lots, which zoning and aiming resolves", "Non-matching channel finishes, which color matching resolves"] },
+      /* A FOURTH ITEM WAS HERE: "Non-matching channel finishes, which color matching resolves."
+       * Deleted 29 Aug 2026. It was not only a colour-match claim, it told a homeowner that colour
+       * matching is the answer to a board's objection - which would send somebody into a meeting
+       * promising something we do not do. */
+      { list: ["Visible hardware in daylight, which is a design question and answerable with a daytime photo", "Color changing displays running year round, which a scheduling commitment resolves", "Brightness spilling onto neighboring lots, which zoning and aiming resolves"] },
       { h: "What a submission usually needs" },
       /* WAS: "We pull your covenant and read the lighting clause, put together a spec sheet and a
        * rendering of your elevation in the format your board wants, and submit it. Nothing is
