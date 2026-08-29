@@ -158,7 +158,10 @@ export default function Gallery() {
         photo="/img/scene-game-day.jpg"
         photoAlt="An Omaha ranch home with its roofline in red over white for game day"
         objectPosition="50% 48%"
-        h1="The same fixture, every way we have shot it."
+        /* WAS "The same fixture, every way we have shot it." The client's punch list against it is
+          * "Doesn't make sense", and he is right - it is a sentence about our photography, on a
+          * page a visitor opens to look at houses. */
+        h1="Finished installs, and what each one was set to."
         lede="Every photograph on this page is a Brytr system on a real Omaha home: no renders, no stock houses, no borrowed shots. Grouped by what the system is set to rather than by house, because the point is that none of these needed different hardware."
         trail={trail}
       />
@@ -279,11 +282,11 @@ export default function Gallery() {
         * flattering, and because a badly detailed channel is invisible at night and obvious at
         * noon. Publishing the noon photograph is the argument. */}
       <PhotoPair
-        title="The same hardware at noon, which is the photograph nobody in this trade publishes."
-        lede="A night shot flatters any install. Daylight does not: at noon a badly fixed channel has nowhere to hide. Two houses, uncropped and ungraded."
+        title="The same hardware, photographed in daylight."
+        lede="A night shot flatters any install. Daylight does not: at noon a badly fixed channel has nowhere to hide. Two houses, uncropped."
         a="dayBrickGable"
         b="dayShakeGable"
-        aLabel="Brick and white fascia. The channel runs under the roof edge, color matched to the trim, and you have to know it is there to find it."
+        aLabel="Brick and white fascia. The channel runs under the roof edge, and you have to know it is there to find it."
         bLabel="A shake gable on a second house, so this is not one lucky angle. The run reads as a narrow strip below the gutter line."
         ground="muted"
       />
@@ -324,7 +327,11 @@ export default function Gallery() {
               ],
               [
                 "What nobody photographs",
-                "Mitered corners, sealed terminations, capped ends, and channel matched to the fascia.",
+                /* WAS "Mitered corners, sealed terminations, capped ends, and channel matched to
+                   the fascia." Two of those four are things Brytr does not do. What is left is the
+                   two that are true plus the one thing a reader can actually check for themselves
+                   in any installer's photographs. */
+                "Sealed terminations, capped ends, and a run that holds its line the length of an elevation.",
                 "We will show you ours in person.",
               ],
             ].map(([h, p, note]) => (
