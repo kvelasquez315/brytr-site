@@ -14,7 +14,7 @@ import { valueProps } from "@/content/value-props";
  *
  * What it was: no photograph in the hero, a stat row counting the list underneath it, then
  * THREE consecutive sections of the identical city rack, an OpenStreetMap iframe (the same
- * grey-box embed the home page map replaced three iterations ago, with "centered" misspelt
+ * gray-box embed the home page map replaced three iterations ago, with "centered" misspelled
  * in its title attribute), all eleven service rows again, and two closers.
  *
  * What it is now. The honest subject of this page is not a list of towns, it is a RADIUS —
@@ -284,10 +284,14 @@ export default function AreasHub() {
                      AND THE LIST THEN CARRIED "The same crew in every town we serve" TWICE,
                      which is what two removals from a five-item literal will do if you are
                      reading the diff and not the result: one duplicated row, rendered, plus a
-                     duplicate React key on it. */
+                     duplicate React key on it.
+                     29 Aug 2026, off the client punch list: the third row read "The sightline
+                     from the curb, then every scene walked through with you." We do not do a
+                     daylight curb check and the client has said so in writing, so the row now
+                     promises only the half of it that is real. */
                   "The same crew in every town we serve",
                   "The written quote before install day, unchanged on it",
-                  "The curb check and the scene walk at dusk",
+                  "The scene walk before anybody leaves",
                 ].map((x) => (
                   <li key={x} className="py-3 text-[0.95rem] leading-relaxed text-on-dark-muted">{x}</li>
                 ))}
