@@ -17,7 +17,7 @@ import { valueProps } from "@/content/value-props";
  * the brand lock forbids. Then two spec tables in a row, a stats band repeating two figures
  * the hero had already printed, a third spec table, and two closers.
  *
- * THEN IT WAS A PACKAGE PAGE, WHICH WAS WORSE. The rebuild was organised around a choice
+ * THEN IT WAS A PACKAGE PAGE, WHICH WAS WORSE. The rebuild was organized around a choice
  * between two named tiers, a premium one and a value one, with a nine-row table comparing
  * them and three house profiles recommending one or the other. None of it was real: the
  * company does not sell packages, the tier names were mine, and the rows carried figures
@@ -312,7 +312,7 @@ export default function SystemsHub() {
         * photograph below the hero. Every row in the sheet above is a claim about what a part
         * does to a building, and a spec table cannot settle any of them.
         *
-        * The pair is chosen deliberately: the daylight frame answers the row about colour
+        * The pair is chosen deliberately: the daylight frame answers the row about color
         * matching, and the close frame answers the row about LED spacing. Those are the two
         * specifications on this page a homeowner can actually verify with their own eyes, so
         * those are the two that get photographs. */}
@@ -321,7 +321,7 @@ export default function SystemsHub() {
         lede="Most of the sheet above has to be taken on trust. These two do not: whether the channel disappears by day, and how far apart the points sit."
         a="dayBrickGable"
         b="homeEaveDownlights"
-        aLabel="Colour matched to the fascia. This is the row about finish, photographed at noon rather than asserted."
+        aLabel="Color matched to the fascia. This is the row about finish, photographed at noon rather than asserted."
         bLabel="And the spacing row: individual points under the eave, set at the measure rather than judged on the day."
         ground="raise"
       />
