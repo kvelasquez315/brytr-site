@@ -36,7 +36,7 @@ export default function Page() {
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">We try to keep product specifications, service areas and comparisons accurate and current. Manufacturers change specifications without telling installers, so treat any spec here as indicative and ask us to confirm anything you are relying on.</p>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">Comparisons of other manufacturers reflect our own experience installing in this category. They are opinion, offered in good faith, and other installers will reasonably disagree.</p>
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Illustrations</h2>
-          <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">Some images on this site are measured elevation drawings rather than photographs, and are labelled as such where they appear. They illustrate how the system is built and are not a representation of a specific property.</p>
+          <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">Some images on this site are measured elevation drawings rather than photographs, and are labeled as such where they appear. They illustrate how the system is built and are not a representation of a specific property.</p>
           <h2 className="mt-9 text-[1.5rem] text-foreground first:mt-0">Liability</h2>
           <p className="mt-4 text-[1.05rem] leading-relaxed text-muted-foreground">This site is provided as is. We are not liable for decisions made purely on the basis of website content rather than on a written quote and a site survey.</p>
           <div className="mt-10 rounded-lg bg-muted p-6">

@@ -58,7 +58,7 @@ export const postPhotos: Record<string, PostPhoto> = {
   "omaha-hoa-rules-permanent-outdoor-lighting": {
     photo: "/img/home-porch-flag.jpg",
     photoAlt:
-      "A grey Omaha two-story at blue hour with warm downlights over the porch and a flag by the door",
+      "A gray Omaha two-story at blue hour with warm downlights over the porch and a flag by the door",
     objectPosition: "50% 58%",
   },
   "husker-gameday-lighting-ideas": {
