@@ -299,7 +299,11 @@ export function Services() {
             )}
             <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/80 to-primary/45" aria-hidden />
             <div className="relative flex flex-1 flex-col">
-              <p className="label text-accent">Free &middot; On site &middot; No obligation</p>
+              {/* THE THIRD ITEM WAS "No obligation" until 29 Aug 2026. The client's punch list is
+                * explicit that "Free, and genuinely no obligation" is not true, and this card is
+                * the most prominent place on the site the phrase appeared. What is left is the
+                * three things about the appointment that are true and checkable. */}
+              <p className="label text-accent">Free &middot; On site &middot; About an hour</p>
               <h3 className="mt-3 font-display text-[1.5rem] font-bold leading-tight text-on-dark">
                 Not sure what your house needs?
               </h3>
