@@ -46,7 +46,7 @@ export const compares: Compare[] = [
     keyword: "haven lighting vs jellyfish",
     a: "Haven Evolution", b: "Jellyfish Lighting",
     verdict:
-      "We install both. On a large or complex roofline, Haven Evolution is worth the difference. On a simple one-storey or a tighter budget, Jellyfish is the honest answer.",
+      "We install both. On a large or complex roofline, Haven Evolution is worth the difference. On a simple one-story or a tighter budget, Jellyfish is the honest answer.",
     aWinsHead: "Choose Haven Evolution if",
     bWinsHead: "Choose Jellyfish if",
     aWins: [
@@ -162,7 +162,7 @@ export const compares: Compare[] = [
     aWinsHead: "Choose Haven Evolution if",
     bWinsHead: "Choose Minleon or Rainmin if",
     aWins: ["Everyday warm white is the point", "You want the architectural look in daylight", "You want one app for everything"],
-    bWins: ["You want elaborate animated holiday shows", "You already run a display and want to extend it", "Your installer specialises in that ecosystem"],
+    bWins: ["You want elaborate animated holiday shows", "You already run a display and want to extend it", "Your installer specializes in that ecosystem"],
     rows: havenRows("Minleon / Rainmin", { maker: "Minleon / Rainmin", white: "Color-mixed", app: "Show-oriented", price: "Varies" }),
     costA: "Premium tier", costB: "Varies by installer",
   },
