@@ -395,8 +395,9 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                    and the row under it was "Corners on a miter saw". Both retracted 29 Aug 2026:
                    we do not mitre. The daylight argument still holds on how the channel sits and
                    whether the run stays straight, and the sealant row is the honest replacement -
-                   a kit gives you fixings and nothing to close them with. */
-                ["It shows in daylight", "Adhesive mounts sit proud of the board and the run wanders. At noon that is what you look at, and it is the part people regret."],
+                   a kit gives you fixings and nothing to close them with. The "at noon" in the
+                   body went with the rest of the noon framing on the same day. */
+                ["It shows in daylight", "Adhesive mounts sit proud of the board and the run wanders. In daylight that is what you look at, and it is the part people regret."],
                 ["Nothing to seal it with", "A kit gives you fixings and no sealant. Every hole you drill in your own fascia stays open to the weather."],
                 ["No number to ring", "A dead section in December is your problem, in the dark, on a ladder, at height, in ice."],
                 ["It reads as a gadget", "At resale, a permanent lighting system reads as a building feature. A strip on adhesive mounts does not."],
