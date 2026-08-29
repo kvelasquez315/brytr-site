@@ -279,11 +279,11 @@ export default function Gallery() {
         *
         * This is the most valuable section on the page for exactly that reason. Every competitor
         * gallery in this trade is a hundred night shots — because night shots are easy and
-        * flattering, and because a badly detailed channel is invisible at night and obvious at
-        * noon. Publishing the noon photograph is the argument. */}
+        * flattering, and because a badly detailed channel is invisible at night and obvious in
+        * daylight. Publishing the daylight photograph is the argument. */}
       <PhotoPair
         title="The same hardware, photographed in daylight."
-        lede="A night shot flatters any install. Daylight does not: at noon a badly fixed channel has nowhere to hide. Two houses, uncropped."
+        lede="A night shot flatters any install. Daylight does not: in daylight a badly fixed channel has nowhere to hide. Two houses, uncropped."
         a="dayBrickGable"
         b="dayShakeGable"
         aLabel="Brick and white fascia. The channel runs under the roof edge, and you have to know it is there to find it."
