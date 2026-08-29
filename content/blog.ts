@@ -67,7 +67,11 @@ export const posts: Post[] = [
       { list: ["Single story, easy roof access", "You genuinely enjoy the project", "Testing the idea before committing", "Budget is the only consideration"] },
       { h: "Where it goes wrong" },
       { list: ["Two stories, or any pitch you would not walk", "Adhesive mounting in a Nebraska freeze-thaw cycle", "Corners and transitions, which is where amateur runs always show", "Wire management, which is what makes an install look cheap in daylight"] },
-      { callout: "The daylight test is the one DIY installs usually fail. At night almost anything looks fine. From the curb at noon is where you see whether it was done properly." },
+      /* THE CALLOUT ENDED "From the curb at noon is where you see whether it was done properly."
+         The noon-from-the-curb device is retracted everywhere else on the site off the client
+         punch list, so it does not get to survive in a blog callout. The point it was making -
+         that daylight is the honest test - is intact without it. */
+      { callout: "The daylight test is the one DIY installs usually fail. At night almost anything looks fine. Daylight is where you see whether it was done properly." },
     ] }),
   B({ slug: "do-permanent-lights-damage-soffit-or-fascia", title: "Do Permanent Lights Damage Your Soffit or Fascia?",
     h1: "Do permanent lights damage your soffit or fascia?", keyword: "do permanent lights damage soffit",
@@ -79,7 +83,11 @@ export const posts: Post[] = [
       { h: "What a correct install looks like" },
       { list: ["Fasteners into fascia, on a spacing that suits the board", "Every penetration sealed at the time it is made, not afterwards", "Terminations capped, not taped"] },
       { h: "What causes damage" },
-      { p: "Fastening through the roof covering, over-driving fasteners into soft or rotten fascia, and skipping sealant on a cold day because it is slow. All three are shortcuts, and all three are why the crew who measures a house is the crew who fits it." },
+      /* WAS "Fastening through the roof covering, over-driving fasteners...". Naming the
+         penetration itself as the fault contradicts the correction the client made on the punch
+         list - some roofs require one - so the fault named here is now the unsealed penetration,
+         which is the thing that actually leaks. */
+      { p: "An unsealed penetration, over-driving fasteners into soft or rotten fascia, and skipping sealant on a cold day because it is slow. All three are shortcuts, and all three are why the crew who measures a house is the crew who fits it." },
       { callout: "If your fascia is already soft or rotten, that gets repaired before anything is mounted to it. Mounting a permanent fixture to failing timber is not an install, it is a deferred problem." },
     ] }),
   /* THE WARRANTY ARTICLE WAS HERE and is gone, 28 Aug 2026. "Permanent lighting warranties,
@@ -117,7 +125,7 @@ export const posts: Post[] = [
       { p: "Covenant language on permanent exterior lighting is newer than the product, which means a lot of associations are working out their position as applications arrive. That is good news: a well-presented submission usually gets approved." },
       { h: "What boards actually object to" },
       /* A FOURTH ITEM WAS HERE: "Non-matching channel finishes, which color matching resolves."
-       * Deleted 29 Aug 2026. It was not only a colour-match claim, it told a homeowner that colour
+       * Deleted 29 Aug 2026. It was not only a color-match claim, it told a homeowner that color
        * matching is the answer to a board's objection - which would send somebody into a meeting
        * promising something we do not do. */
       { list: ["Visible hardware in daylight, which is a design question and answerable with a daytime photo", "Color changing displays running year round, which a scheduling commitment resolves", "Brightness spilling onto neighboring lots, which zoning and aiming resolves"] },

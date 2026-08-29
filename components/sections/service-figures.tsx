@@ -137,7 +137,7 @@ function EaveFigure() {
   return (
     <Frame
       label="The eave, in section"
-      caption="This is the join every argument about permanent lighting comes down to: the channel is fastened into the fascia board, and the shingles are never touched."
+      caption="This is the join every argument about permanent lighting comes down to: the channel is fastened into the fascia board, and every penetration is sealed as it is made."
       tall
     >
       <div className="grid gap-7 lg:grid-cols-[56fr_44fr] lg:items-center">
@@ -168,9 +168,15 @@ function EaveFigure() {
 
         <ol className="divide-y divide-on-dark/10 border-y border-on-dark/10">
           {[
-            ["Shingles", "Untouched. Nothing is fastened through a roof covering."],
+            /* THE SHINGLE ROW READ "Untouched. Nothing is fastened through a roof covering."
+               until 29 Aug 2026. That is the never-through-shingles claim the client struck off
+               the punch list: the fascia is where we want to be and where we go wherever the roof
+               allows, but some roofs do not allow it and then the fixing goes through and is
+               sealed. Saying "untouched" on a drawing labelled "drawn to what we actually
+               install" was the worst place on the site to be carrying it. */
+            ["Shingles", "We fix into the fascia wherever the roof allows. Where it does not, the fixing is sealed as it is made."],
             ["Fascia board", "The structural fixing. Every penetration sealed as it is made."],
-            ["Aluminum channel", "Extruded, color matched, mitered at each transition."],
+            ["Aluminum channel", "Extruded, screwed to the fascia face, sealed as it goes."],
             ["Diffuser", "Frosted, facing down, so you see light rather than dots."],
             ["Conductor", "Inside the channel. Nothing crosses a soffit or a downspout."],
           ].map(([k, v]) => (
