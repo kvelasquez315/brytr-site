@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { services, serviceBySlug } from "@/content/services";
-import { ChannelFigure } from "@/components/sections/channel-figure";
 import { images } from "@/content/images";
 import { pick } from "@/content/photo-sets";
 import { detailFor } from "@/content/service-detail";
@@ -89,8 +88,13 @@ const valueCards: { scene: string; h: string; p: string }[] = [
     p: "Warm white on a Tuesday in March, red and green in December, team colors on a Saturday. Same run, from your phone." },
   { scene: "blue", h: "Nothing in the garage",
     p: "No boxes, no tangles, no rental return, and no shelf given up to something used six weeks a year." },
+  /* THIS CARD READ "Color matched to your fascia, so in daylight it reads as trim rather than
+     a seasonal add-on", and then briefly "from the curb in daylight". Brytr does not color
+     match and there is no curb check, so the card now makes the same point off the fixing,
+     which is the thing that actually keeps a run looking like part of the building. It renders
+     on eleven service pages, so it was worth getting right twice. */
   { scene: "violet", h: "It reads as part of the house",
-    p: "Color matched to your fascia and sealed in once, so from the curb in daylight it is trim rather than a seasonal add-on." },
+    p: "Screwed into the fascia and sealed in once, so in daylight it reads as trim rather than a seasonal add-on." },
 ];
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -243,7 +247,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             {/* EVERY LIGHT AT FULL OUTPUT, and that is a correction. The first pass ramped them
               * from dim to bright, which is what the device does on the home page, where the five
               * points ARE the install in order. These are not: on this service they read channel
-              * into fascia, mitered transitions, concealed conductor, color matched. That is a
+              * into fascia, sealed fixings, concealed conductor, scenes walked through. That is a
               * set, not a sequence, and a ramp across it tells the reader there is an order to
               * find. The device still marks the section as ours; it just stops implying time. */}
             {(d?.included ?? []).map(([h, p]) => (
