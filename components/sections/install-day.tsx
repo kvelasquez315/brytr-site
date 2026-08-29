@@ -15,6 +15,11 @@
  * weights on currentColor, and AMBER ONLY WHERE LIGHT COMES OUT — which here means the
  * last frame and nothing before it. Three quarters of install day happens with the system
  * dark, and the drawing should say so.
+ *
+ * THE STAGE LABELS CHANGED 29 Aug 2026, punch list #13. They read "First hour / Through the
+ * morning / As we go, not after / At dusk, with you" - half clock and half method, which is why
+ * the client's note against this section was "Confused by this". They are a plain sequence now,
+ * and the last one is "Before we leave" rather than "At dusk" because there are no evening visits.
  */
 
 const INK = "currentColor";
@@ -24,7 +29,7 @@ const INK = "currentColor";
 function Roof() {
   return (
     <>
-      {/* shingles and decking, untouched in every frame */}
+      {/* the shingle course and the decking above it */}
       <path d="M4 8h92l-7 9H11Z" fill={INK} opacity=".2" />
       <path d="M4 8h92l-2 3H6Z" fill={INK} opacity=".34" />
       <path d="M11 17h78v6H11z" fill={INK} opacity=".27" />
@@ -46,7 +51,7 @@ type Stage = {
 
 const stages: Stage[] = [
   {
-    when: "First hour",
+    when: "Before anything is drilled",
     h: "Bare fascia, measured again.",
     p: "Measured again off the ladder before a single hole is drilled.",
     alt: "Cross-section of a roof edge: shingles, decking and a bare fascia board with a dimension line under it",
@@ -69,9 +74,11 @@ const stages: Stage[] = [
     ),
   },
   {
-    when: "Through the morning",
+    when: "The channel goes on",
     h: "Channel up, one elevation at a time.",
-    p: "Extruded aluminum, color matched to your trim, on a fixed screw pitch. Nothing through a shingle.",
+    /* WAS "Extruded aluminum, color matched to your trim, on a fixed screw pitch. Nothing through
+       a shingle." Both halves are claims the client has retracted. */
+    p: "Extruded aluminum, screwed to the fascia on a fixed pitch, sealed as each fixing is driven.",
     alt: "The same roof edge with the aluminum channel fastened under the fascia board on two screws",
     art: (
       <>
@@ -88,9 +95,11 @@ const stages: Stage[] = [
     ),
   },
   {
-    when: "As we go, not after",
+    when: "Sealing, as we go",
     h: "Every penetration sealed at the moment it is made.",
-    p: "Sealant on the screw as it is driven, while the hole is clean and the board is dry.",
+    /* WAS "...while the hole is clean and the board is dry." The client put a question mark
+       against the dry board, so the claim is now only about when the sealant goes on. */
+    p: "Sealant on the screw as it is driven, rather than a pass along the run at the end of the day.",
     alt: "The same roof edge with sealant at each screw and the conductor run inside the channel",
     art: (
       <>
@@ -116,9 +125,9 @@ const stages: Stage[] = [
     ),
   },
   {
-    when: "At dusk, with you",
-    h: "Diffuser on, and every scene walked.",
-    p: "Diffuser clipped in, then the curb check and every scene walked with you.",
+    when: "Before we leave",
+    h: "Diffuser on, and every scene walked with you.",
+    p: "Diffuser clipped in, then every scene walked through with you.",
     alt: "The finished roof edge with the diffuser fitted, the diodes lit and light falling away below",
     art: (
       <>

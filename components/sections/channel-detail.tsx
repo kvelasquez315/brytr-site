@@ -9,12 +9,18 @@
  * a row of glyphs beside a list is a list with decoration on it, not a graphic.
  *
  * SO THIS IS THE THING ITSELF: a cross-section through the roof edge showing what Brytr actually
- * fastens and where. The shingle course that nothing is fixed through, the fascia board that
- * everything is fixed INTO, the channel on its face, the sealed screws, the diode and the lens it
- * throws through. It is the most specific drawing this company could own, because it is the
- * argument the section is already making - "installed once, and installed properly" - stated as
- * geometry instead of as a claim. No competitor has it, because it is a drawing of their own
- * method.
+ * fastens and where. The shingle course, the fascia board the channel is fixed to, the channel on
+ * its face, the sealed screws, the diode and the lens it throws through. It is the most specific
+ * drawing this company could own, because it is the argument the section is already making -
+ * "installed once, and installed properly" - stated as geometry instead of as a claim. No
+ * competitor has it, because it is a drawing of their own method.
+ *
+ * THE CALLOUTS CHANGED 29 Aug 2026, and this is the reason drawn text is dangerous. Two of the five
+ * were the claims the client's punch list retracted, set in SVG where no grep of the page copy
+ * would ever find them: the shingle callout read "Nothing fastens through it" (sometimes the roof
+ * requires a penetration) and the lens callout read "Channel matched to the trim" (Brytr does not
+ * colour match). The aria-label carried the same two, and that string IS the drawing for anyone
+ * using a screen reader, so it was corrected in the same pass.
  *
  * IT IS NOT NEW LANGUAGE EITHER. components/sections/elevation.tsx has drawn measured elevations
  * for this site since it was built - thin linework, a dimension line, callouts on leaders - against
@@ -45,7 +51,7 @@ export function ChannelDetail({ className }: { className?: string }) {
       viewBox="0 0 700 450"
       className={className}
  role="img"
-      aria-label="A measured cross-section through a roof edge: the shingle course with nothing fastened through it, the fascia board every fixing lands in, the aluminum channel screwed to its face, the sealed fixings, and the addressable LED behind its lens."
+      aria-label="A measured cross-section through a roof edge: the shingle course, the fascia board the channel is screwed to, the sealed fixings, and the addressable LED behind its lens."
     >
       <rect width="700" height="450" fill={paper} />
 
@@ -55,7 +61,7 @@ export function ChannelDetail({ className }: { className?: string }) {
       {/* the shingle overhang, past the fascia */}
       <path d="M330 150 378 170l-6 14-42-18Z" fill={mass} stroke={line} strokeWidth="1.5" strokeLinejoin="round" />
 
-      {/* ── the fascia board: everything fastens into this ── */}
+      {/* ── the fascia board: what the channel screws to ── */}
       <rect x="298" y="184" width="34" height="150" fill={mass} stroke={line} strokeWidth="1.5" />
       <path d="M306 196v128M316 190v140M325 200v124" stroke={faint} strokeWidth="0.9" fill="none" />
 
@@ -91,13 +97,13 @@ export function ChannelDetail({ className }: { className?: string }) {
         <circle cx="352" cy="162" r="3" fill={accent} />
         <path d="M352 162 430 104" stroke={faint} strokeWidth="1" fill="none" />
         <text x="438" y="100" fill={ink} fontSize="13" fontWeight="700">Shingle course</text>
-        <text x="438" y="116" fill={ink} fontSize="11.5" opacity="0.75">Nothing fastens through it</text>
+        <text x="438" y="116" fill={ink} fontSize="11.5" opacity="0.75">Left alone where we can</text>
       </g>
       <g>
         <circle cx="315" cy="196" r="3" fill={accent} />
         <path d="M315 196 214 150" stroke={faint} strokeWidth="1" fill="none" />
         <text x="206" y="146" textAnchor="end" fill={ink} fontSize="13" fontWeight="700">Fascia board</text>
-        <text x="206" y="162" textAnchor="end" fill={ink} fontSize="11.5" opacity="0.75">Every fixing lands here</text>
+        <text x="206" y="162" textAnchor="end" fill={ink} fontSize="11.5" opacity="0.75">What the channel screws to</text>
       </g>
       <g>
         <circle cx="306" cy="278" r="3" fill={accent} />
@@ -115,7 +121,7 @@ export function ChannelDetail({ className }: { className?: string }) {
         <circle cx="352" cy="288" r="3" fill={accent} />
         <path d="M352 288 470 336" stroke={faint} strokeWidth="1" fill="none" />
         <text x="478" y="332" fill={ink} fontSize="13" fontWeight="700">Lens</text>
-        <text x="478" y="348" fill={ink} fontSize="11.5" opacity="0.75">Channel matched to the trim</text>
+        <text x="478" y="348" fill={ink} fontSize="11.5" opacity="0.75">Faces down, not at the street</text>
       </g>
 
       {/* the sheet line, so the drawing reads as a drawing */}
