@@ -38,8 +38,8 @@ const BOOK = { href: "/free-design-consultation", label: "Book a free design" };
 const CORE = [
   { h: "Installed once, and left there",
     p: "Routed into your fascia and sealed. No ladder in November, nothing to take down in January." },
-  { h: "Any colour, any night, one app",
-    p: "Warm white most of the year, red and green in December, team colours on a Saturday. Same run." },
+  { h: "Any color, any night, one app",
+    p: "Warm white most of the year, red and green in December, team colors on a Saturday. Same run." },
   { h: "The crew that fits it is local",
     p: "The shop is in west Omaha, and the people who measure your roofline are the people who come back to it." },
 ];
@@ -63,8 +63,8 @@ export const valueProps: Record<string, ValueProp> = {
     lede: "Everything here comes out of installs in the Omaha metro, so it answers what homeowners actually ask rather than what ranks.",
     points: [
       { h: "No ladder, ever again", p: "The run is fixed into the fascia once and stays there through every season." },
-      { h: "Warm white is the everyday setting", p: "Colour is there when you want it. Most nights of the year this looks like good trim lighting." },
-      { h: "It disappears in daylight", p: "Channel colour matched to your fascia, so from the curb at noon it reads as part of the house." },
+      { h: "Warm white is the everyday setting", p: "Color is there when you want it. Most nights of the year this looks like good trim lighting." },
+      { h: "It disappears in daylight", p: "Channel color matched to your fascia, so from the curb at noon it reads as part of the house." },
     ],
     photos: ["seqEveryday", "dayShakeGable", "winterSnowDusk"],
     cta: BOOK,
@@ -88,8 +88,8 @@ export const valueProps: Record<string, ValueProp> = {
     title: "A call, then a date on your own lawn.",
     lede: "The useful next step is somebody standing on your driveway at dusk with a tape measure, not another brochure.",
     points: [
-      { h: "Same-day reply, most days", p: "A person from the shop, not a call centre taking a message for somebody else." },
-      { h: "The design happens on site", p: "On your elevation, against your own fascia colour, with the scenes built while we are there." },
+      { h: "Same-day reply, most days", p: "A person from the shop, not a call center taking a message for somebody else." },
+      { h: "The design happens on site", p: "On your elevation, against your own fascia color, with the scenes built while we are there." },
       { h: "You keep the quote either way", p: "Written, itemised, and yours whether you book the work or not." },
     ],
     photos: ["homePrairieTwilight", "walkthroughDusk", "crewPortrait"],
@@ -99,7 +99,7 @@ export const valueProps: Record<string, ValueProp> = {
 
   "/faq": {
     title: "The short answer, first.",
-    lede: "Permanent lighting is one aluminium channel routed into your eave, one run of addressable LEDs and one app, fitted once and left on the building.",
+    lede: "Permanent lighting is one aluminum channel routed into your eave, one run of addressable LEDs and one app, fitted once and left on the building.",
     points: CORE,
     photos: ["seqSecurity", "dayBrickGable", "homeEaveDownlights"],
     cta: BOOK,
@@ -115,7 +115,7 @@ export const valueProps: Record<string, ValueProp> = {
        * gave us. The visit being free is the offer Brytr leads with everywhere, so that part
        * stays and the invented terms around it do not. */
       { h: "Free, and genuinely no obligation", p: "The visit, the design and the written quote cost nothing, and nobody follows up for a year." },
-      { h: "Your materials, not a catalogue", p: "Channel colour held against your actual fascia, because that is what decides how it looks at noon." },
+      { h: "Your materials, not a catalog", p: "Channel color held against your actual fascia, because that is what decides how it looks at noon." },
       { h: "Scenes built while we are there", p: "You leave the appointment knowing what the app does, not reading about it later." },
     ],
     photos: ["sceneWarmBlueBand", "walkthroughDusk", "homeStuccoStone"],
@@ -129,7 +129,7 @@ export const valueProps: Record<string, ValueProp> = {
     points: [
       { h: "One system, every scene here", p: "Nothing on this page needed different hardware. It is the same run set to different things." },
       { h: "Daylight frames included", p: "The photograph nobody publishes is the one from the curb at noon. There are several here." },
-      { h: "Zoned, so colour lands where you chose", p: "Gables scarlet with the eaves left white is two zones, not a compromise." },
+      { h: "Zoned, so color lands where you chose", p: "Gables scarlet with the eaves left white is two zones, not a compromise." },
     ],
     photos: ["aerialRedRoofline", "sceneAmberCyan", "gamedayRedBlueGables"],
     cta: BOOK,
@@ -186,12 +186,12 @@ export const valueProps: Record<string, ValueProp> = {
   },
 
   "/reviews": {
-    title: "What the neighbours said about the work.",
+    title: "What the neighbors said about the work.",
     lede: "Every review here is verbatim from Google, from homeowners in the Omaha metro who have had a system on the building through a full year.",
     points: [
       { h: "They write about the same things", p: "Communication, the crew, and how it looked the first night. That is more useful than an average." },
       { h: "The work is still ours to fix", p: "A five star install stops meaning much if nobody answers in February. We answer." },
-      { h: "Neighbours notice", p: "The most common line in these reviews is somebody being asked who did it." },
+      { h: "Neighbors notice", p: "The most common line in these reviews is somebody being asked who did it." },
     ],
     photos: ["seqWarmChristmas", "homeWhiteTwoStorey", "christmasEntryShrubs"],
     cta: BOOK,
@@ -275,7 +275,7 @@ export function cityValueProp(c: City): ValueProp {
        * for the drive." This rendered on all twelve city pages: a pricing basis plus a
        * no-surcharge guarantee, neither of them from Brytr. */
       { h: "Booked out of west Omaha", p: "The same people who measure the house are the ones the shop sends back to it." },
-      { h: "Designed on your own elevation", p: "Against your own fascia colour, before anything is ordered." },
+      { h: "Designed on your own elevation", p: "Against your own fascia color, before anything is ordered." },
     ],
     photos: shots(`vb-city-${c.slug}`, 3),
     cta: BOOK,
@@ -316,7 +316,7 @@ export function compareValueProp(a: string, b: string, slug: string): ValueProp 
 export function postValueProp(slug: string): ValueProp {
   return {
     title: "What this is, briefly.",
-    lede: "Permanent outdoor lighting is one aluminium channel routed into your eave, one run of addressable LEDs and one app, fitted once and left on the building.",
+    lede: "Permanent outdoor lighting is one aluminum channel routed into your eave, one run of addressable LEDs and one app, fitted once and left on the building.",
     points: CORE,
     photos: shots(`vb-post-${slug}`, 3),
     cta: BOOK,
