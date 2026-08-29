@@ -141,10 +141,10 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             *
             * The two cost cells were a 384 x 88px object in a 384 x 350px column — one small thing
             * in a wide field, which is the void this site is least allowed to have. And frameLabel
-            * used to sit as a grey line under the verdict, where it read as an orphan caption
+            * used to sit as a gray line under the verdict, where it read as an orphan caption
             * attached to nothing AND repeated the hero's eyebrow word for word a screen above.
             *
-            * As a labelled row it does the job it was written for — telling the reader what kind of
+            * As a labeled row it does the job it was written for — telling the reader what kind of
             * comparison this is and where we stand in it — and it closes the column. */}
           <dl className="overflow-hidden rounded-lg bg-raise ring-1 ring-on-dark/12">
             <div className="grid grid-cols-2 gap-px bg-on-dark/12">
@@ -338,10 +338,17 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
             />
             <ul className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {[
-                ["Ask for a daylight photo from the curb", "Anybody can make a roofline look good at night. The test is whether you can pick the channel out at noon on a house they finished last year."],
+                /* THE FIRST ITEM SAID "Ask for a daylight photo from the curb ... pick the channel
+                   out at noon". The curb-at-noon device is retracted across the site off the
+                   client punch list, so the question keeps the daylight test and drops the
+                   staging. */
+                ["Ask for a daylight photo of a finished job", "Anybody can make a roofline look good at night. The test is whether you can pick the channel out in daylight on a house they finished last year."],
                 ["Ask who is on the ladder", "Whether the people who quote it are the people who fit it. Almost every failure in this trade is workmanship, so this question is the one that predicts year four."],
                 ["Ask when the sealant goes on", "At the moment the screw is driven, or in one pass at the end of the day. Only one of those keeps water out of a fascia board."],
-                ["Ask how corners are handled", "Cut and mitered, or flexed around. A kink at a valley is visible from the street and cracks first in February."],
+                /* WAS "Ask about the corners" - a question whose right answer was a mitred
+                   return. We do not mitre, so we were handing readers a test we fail. How the
+                   channel is fixed is a real difference and one we actually win. */
+                ["Ask how the channel is fixed", "Screwed into the fascia, or stuck on with adhesive. One of those is still straight in year eight."],
                             ["Ask what happens at handover", "Whether somebody walks the scenes with you, or hands you an app and drives off."],
               ].map(([h, p]) => (
                 <li key={h} className="rounded-lg bg-background p-6 shadow-[var(--shadow-lg)] ring-1 ring-border">
@@ -384,8 +391,13 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
               {[
                 ["A weekend at roof height", "The second day is the one where people get careless, and it is the day the corners get done."],
                 ["Holes you drilled yourself", "Every fixing is a penetration in your own fascia. Sealing them properly is the difference between a project and a leak."],
-                ["It shows in daylight", "Consumer channel is not color matched to your trim, and adhesive mounts sit proud of the board. This is the part people regret."],
-                ["Corners", "There is no miter saw in the box. Every gable and valley is a bend, and bends are where a run cracks."],
+                /* "It shows in daylight" used to be about mitred returns against bent corners,
+                   and the row under it was "Corners on a miter saw". Both retracted 29 Aug 2026:
+                   we do not mitre. The daylight argument still holds on how the channel sits and
+                   whether the run stays straight, and the sealant row is the honest replacement -
+                   a kit gives you fixings and nothing to close them with. */
+                ["It shows in daylight", "Adhesive mounts sit proud of the board and the run wanders. At noon that is what you look at, and it is the part people regret."],
+                ["Nothing to seal it with", "A kit gives you fixings and no sealant. Every hole you drill in your own fascia stays open to the weather."],
                 ["No number to ring", "A dead section in December is your problem, in the dark, on a ladder, at height, in ice."],
                 ["It reads as a gadget", "At resale, a permanent lighting system reads as a building feature. A strip on adhesive mounts does not."],
               ].map(([h, p]) => (
@@ -427,7 +439,7 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
                     {gist(o.verdict)}
                   </span>
                   {/* Neutral pages get a neutral label. Putting our accent on a card about two
-                    * rivals is the brand colour taking a side on the one page that says it has
+                    * rivals is the brand color taking a side on the one page that says it has
                     * not got one. */}
                   <span
                     className={`label mt-4 border-t border-on-dark/12 pt-3 ${
