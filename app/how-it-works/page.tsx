@@ -35,29 +35,29 @@ import { valueProps } from "@/content/value-props";
 export const metadata: Metadata = {
   title: "How It Works: Install Day, Start to Finish",
   description:
-    "What happens on a Brytr install day in Omaha: fascia measured off the ladder, channel sealed as we go, mitered corners, then the curb check before we leave.",
+    "What happens on a Brytr install day in Omaha: the fascia measured off the ladder, the channel screwed on and sealed as we go, then every scene walked with you before we leave.",
   alternates: { canonical: "/how-it-works" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "How it works", href: "/how-it-works" }];
 
 /* THE WORK THAT IS NOT IN THE DRAWING. Everything above the fascia line is easy to
- * picture; this is the half of the day nobody thinks about until it goes wrong. */
+ * picture; this is the half of the day nobody thinks about until it goes wrong.
+ *
+ * TWO OF THESE CHANGED HANDS, 29 Aug 2026. "Where the driver lives... Picked with you" and
+ * "Zones wired the way you asked" both described a decision as the customer's, and Brytr makes
+ * both of them. And "Miters at every transition" is gone with the rest of the mitre claim. */
 const invisible: [string, string][] = [
   [
-    "Where the driver lives",
-    "Somewhere serviceable and dry, and not the middle of your garage wall. Picked with you.",
+    "Where the driver goes",
+    "We site it somewhere serviceable and dry, and not the middle of your garage wall. You will know where it is before we leave.",
   ],
   [
     "How the wire gets there",
     "Inside the channel where it can be, then the shortest concealed route. Nothing crosses a soffit in the open.",
   ],
   [
-    "Miters at every transition",
-    "Gables, dormers, bays and valleys are all cut on the angle. Bent channel is the tell of a fast install.",
-  ],
-  [
-    "Zones wired the way you asked",
-    "Wired on install day. Adding one afterwards is a wiring job, not an app setting.",
+    "How the run is zoned",
+    "We work the zoning out at the measure and wire it on install day. Adding one afterwards is a wiring job, not an app setting.",
   ],
   [
     "The ladder, and your landscaping",
@@ -70,32 +70,41 @@ const invisible: [string, string][] = [
 ];
 
 /* WHERE WE DIFFER. Stated as a comparison, because "we care about quality" is what
- * everybody says and the only way to make it mean anything is to name the alternative. */
+ * everybody says and the only way to make it mean anything is to name the alternative.
+ *
+ * TWO ROWS DELETED 29 Aug 2026, and deleted rather than reworded for the same reason the
+ * covenant row went: this component pairs a claim about us against a claim about the trade, and
+ * a pair where our half is false is not repaired by softening theirs.
+ *
+ *   Corners are cut, not bent   "Mitered on the angle at every gable, dormer, bay and valley."
+ *                               Brytr does not miter corners. The row was also attacking the
+ *                               trade for doing the thing we do.
+ *   The curb check in daylight  "We stand where your neighbors stand, at noon, and look at the
+ *                               eave line. If you can pick the channel out, we have not
+ *                               finished." Not true, and it was the strongest promise on the
+ *                               page.
+ *
+ * One row was added to replace them, and it is the only differentiator on this page that
+ * nothing else was claiming: one controller and one app across every fixture type. */
 const differences: { h: string; us: string; trade: string }[] = [
   {
     /* WAS: "We come back in the evening, put a powered sample on your actual elevation, and change
        color on it while you watch." An after-dark return visit with a powered demo rig, which is a
-       second appointment nobody at Brytr has committed to. The claim that survives is the one the
-       client leads with everywhere: the design is done on your own property, on your own elevation,
-       against your own fascia color. */
+       second appointment nobody at Brytr has committed to. Then "against your own fascia color"
+       came out too, 29 Aug 2026, because it read as the colour-matching claim. */
     h: "The design happens on your property",
-    us: "Measured and designed standing on your own driveway, against your own fascia color and your own roof shape.",
+    us: "Measured and designed standing on your own driveway, against your own elevation and your own roof shape.",
     trade: "Quoted from the driveway at two in the afternoon, off a photograph and a rough count.",
   },
   {
-    h: "The curb check happens in daylight",
-    us: "We stand where your neighbors stand, at noon, and look at the eave line. If you can pick the channel out, we have not finished.",
-    trade: "Signed off from the street without the homeowner walking it.",
-  },
-  {
     h: "Sealant goes on as the screw goes in",
-    us: "Every penetration sealed at the moment it is made, while the hole is clean and the board is dry.",
+    us: "Every penetration sealed at the moment it is made, rather than bridged over later.",
     trade: "A pass along the whole run at the end of the day, bridging holes that have already taken dust.",
   },
   {
-    h: "Corners are cut, not bent",
-    us: "Mitered on the angle at every gable, dormer, bay and valley, then sealed at the joint.",
-    trade: "Flexed around the corner, which reads as a kink from the street and cracks first in February.",
+    h: "One controller, one app",
+    us: "Roofline, soffit, landscape and anything over the patio all answer to the same app, because they go in on the same system.",
+    trade: "The roofline on one app and the landscape lighting on another, or on a plug by the back door.",
   },
   {
     h: "The scene library is built with you",
@@ -123,10 +132,13 @@ export default function HowItWorks() {
 
       <PageHero
         photo="/img/g-gable-detail.jpg"
-        photoAlt="Close view of two Omaha gables with the channel following the rake line and mitered at the peak, one gable red and one blue"
+        photoAlt="Close view of two Omaha gables with the channel following the rake line to the peak, one gable red and one blue"
         objectPosition="50% 30%"
-        h1="All of it happens to your fascia board."
-        lede="Permanent lighting is a carpentry job with an electrical job inside it. Everything that decides whether you like it in five years happens in the eight inches between your shingles and your gutter, on the day the van turns up."
+        /* WAS "All of it happens to your fascia board.", with a lede about "the eight inches
+          * between your shingles and your gutter". The client's punch list: "Not sure what this
+          * means." A headline that has to be decoded is not a headline. */
+        h1="What actually happens on install day."
+        lede="Permanent lighting is a carpentry job with an electrical job inside it. Most of what decides whether you still like it in five years is settled at the roof edge, on the day the van turns up."
         trail={trail}
       />
 
@@ -142,12 +154,12 @@ export default function HowItWorks() {
         <div className="shell">
           <SectionHead
             onDark
-            title="The same board, through the day."
+            title="The same eight inches of fascia, four times through the day."
           />
           <div className="mt-10"><InstallDaySequence /></div>
           <p className="mt-7 max-w-[76ch] text-sm leading-relaxed text-on-dark-muted">
-            Drawn to what we actually install: shingles untouched, channel into the fascia board,
-            conductor inside the channel, diffuser facing down.{" "}
+            Drawn to what we actually install: the channel into the fascia board, the conductor inside
+            the channel, the diffuser facing down.{" "}
             <Link
               href="/services/permanent-roofline-lighting"
               className="text-on-dark underline decoration-accent decoration-2 underline-offset-4"
@@ -170,7 +182,7 @@ export default function HowItWorks() {
               * measured count was twelve of these on one service page and fifteen on a city page.
               * Kept whichever of the two carried the claim rather than the run-up to it. */}
               <p className="text-lg text-foreground">
-                The channel is the easy part. Six other decisions get made on your property that day,
+                The channel is the easy part. Five other decisions get made on your property that day,
                 and every one of them is a thing you would only notice if somebody got it wrong.
               </p>
             </div>
@@ -206,9 +218,9 @@ export default function HowItWorks() {
       />
 
       {/* ── US AGAINST THE TRADE ──
-        * Five claims, each with the alternative named. "We care about quality"
-        * means nothing until you say what the other option looks like. The sixth was the covenant
-        * row and it came out with the HOA submission service - see the note on `differences`. */}
+        * Four claims, each with the alternative named. "We care about quality"
+        * means nothing until you say what the other option looks like. The covenant row, the mitre
+        * row and the curb-check row all came out - see the note on `differences`. */}
       <section className="section bg-muted">
         <div className="shell">
           <SectionHead
@@ -270,11 +282,11 @@ export default function HowItWorks() {
             <article className="flex flex-col rounded-lg bg-raise p-7 ring-1 ring-on-dark/10">
               <h3 className="font-display text-2xl font-bold text-on-dark">Before</h3>
               <p className="mt-3 text-[1.05rem] leading-relaxed text-on-dark/85">
-                One evening visit and one piece of paper. That is the whole of it.
+                One visit and one piece of paper. That is the whole of it.
               </p>
               <ul className="mt-6 flex-1 divide-y divide-on-dark/10 border-y border-on-dark/10">
                 {[
-                  ["The consultation", "About an hour, no charge and nothing to sign. It has its own page because it is the part people ask about most."],
+                  ["The consultation", "About an hour, and no charge for the visit. It has its own page because it is the part people ask about most."],
                   ["The written quote", "One number for the whole scope, itemized by elevation, hardware and zone, unchanged on install day."],
                   ["The covenant", "Worth reading the lighting clause before anything is ordered, if your neighborhood has one."],
                 ].map(([h, p]) => (
@@ -292,7 +304,7 @@ export default function HowItWorks() {
             <article className="flex flex-col rounded-lg bg-raise p-7 ring-1 ring-on-dark/10">
               <h3 className="font-display text-2xl font-bold text-on-dark">After</h3>
               <p className="mt-3 text-[1.05rem] leading-relaxed text-on-dark/85">
-                The part that decides whether you recommend us, and it starts the following winter.
+                What happens after we leave, which is the part you will actually judge us on.
               </p>
               <ul className="mt-6 flex-1 divide-y divide-on-dark/10 border-y border-on-dark/10">
                 {[
