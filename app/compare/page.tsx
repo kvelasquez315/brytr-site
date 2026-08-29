@@ -326,7 +326,7 @@ export default function CompareHub() {
       {/* ── WHAT WE ACTUALLY HAND OVER ──
         * Nine comparison pages, a market table and a methodology note: this whole page is about
         * other companies. One band of our own work before the methodology section, because the
-        * methodology is a claim about our judgement and this is the evidence for it. */}
+        * methodology is a claim about our judgment and this is the evidence for it. */}
       {/* Three frames, because scripts/images.mjs had this page rendering two photographs in
         * total. `background` keeps the run alternating: muted above, raise on the band below. */}
       <PhotoStrip
@@ -344,7 +344,7 @@ export default function CompareHub() {
       />
 
       {/* ── METHODOLOGY ──
-        * How the judgements were reached, and what would change one. */}
+        * How the judgments were reached, and what would change one. */}
       <section className="section bg-primary">
         <div className="shell grid items-start gap-10 lg:grid-cols-[44fr_56fr] lg:gap-14">
           <div>
@@ -374,7 +374,10 @@ export default function CompareHub() {
               <ul className="mt-5 divide-y divide-on-dark/10 border-t border-on-dark/10">
                 {[
                   "White quality: side by side on a real elevation, never off a datasheet",
-                  "Channel: from the curb at noon, which is where it matters",
+                  /* WAS "Channel: from the curb at noon, which is where it matters" - the
+                     curb-at-noon device, retracted across the site off the client punch list.
+                     What the comparison pages actually turn on is how the channel is fixed. */
+                  "Channel: how it is fixed to the building, which is what lasts",
                   "App: on whether a customer still opens it in year two",
                   "Failure modes: on what actually fails in this category, not on a rated diode life",
                   /* "Price: as a band, because per-foot varies house to house" removed
