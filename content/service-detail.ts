@@ -112,10 +112,15 @@ export const serviceDetail: Record<string, ServiceDetail> = {
     ],
     included: [
       ["The walk-around", "We design on your property, to what you actually want lit rather than to a package."],
-      ["Channel and diffuser", "Extruded aluminum color matched to the fascia, frosted diffuser facing down."],
+      /* WAS "Extruded aluminum color matched to the fascia". Brytr does not colour match the
+         channel - client's punch list, 29 Aug 2026. */
+      ["Channel and diffuser", "Extruded aluminum track screwed to the fascia, frosted diffuser facing down."],
       ["Controller and app", "Sited, commissioned, and set up on your phone with your first scenes built while we are there."],
       ["Zoning", "Front, sides, back and landscape switched separately, so the back can stay dark."],
-      ["Both states checked", "The sightline from the curb, then every scene walked through with you."],
+      /* WAS "Both states checked / The sightline from the curb, then every scene walked through
+         with you." The daylight curb check is not true either, so what is left is the scene walk,
+         which is. */
+      ["The scene walk", "Every scene switched through with you before anybody leaves, so you have used the app before you own it."],
     ],
     alsoSee: ["permanent-roofline-lighting", "landscape-lighting", "patio-pergola-bistro-lighting", "holiday-seasonal-scenes"],
     /* Was hero-warm-white.jpg captioned "warm white, dimmed" — see the note on heroWarm in
@@ -162,26 +167,30 @@ export const serviceDetail: Record<string, ServiceDetail> = {
       lede: "Any installer can light a gable. What separates a good roofline job from a cheap one is whether the line keeps going through the awkward part.",
     },
     shots: [
-      { photo: "detailGableMiter", caption: "The turn at a peak. One continuous line, mitered, with no gap and no doubled-up section." },
+      { photo: "detailGableMiter", caption: "The turn at a peak. One continuous line, with no gap and no doubled-up section." },
       { photo: "homeWideRanch", caption: "A long low ranch, which is the hardest elevation there is, because nothing breaks the run, so every sag shows." },
       { photo: "homeBrickGablesGold", caption: "A complicated roof. More gables means more corners, and corners are where installs fail." },
     ],
     secondPara:
-      "Everything that decides whether you still like it in year five happens in the eight inches between your shingles and your gutter. The channel goes into fascia, never through shingles, and the diffuser faces down so the curb sees light rather than diodes.",
+      "Everything that decides whether you still like it in year five happens in the eight inches between your shingles and your gutter. The channel goes into the fascia wherever the roof allows, and the diffuser faces down so the curb sees light rather than diodes.",
     figure: "eave",
     compare: true,
+    /* THE "Corners | Mitered at every transition" ROW IS GONE, 29 Aug 2026, with the rest of the
+       mitre claim. Four facts rather than five; this renders as a definition list, so there is no
+       grid remainder to worry about. */
     facts: [
-      ["Fastened into", "Fascia, never shingles"],
+      ["Fastened into", "The fascia board"],
       ["LED spacing", "4 in. on Haven Evolution"],
-      ["Corners", "Mitered at every transition"],
       ["Terminations", "Sealed end caps, not tape"],
       ["By day", "Reads as trim"],
     ],
     included: [
-      ["Channel into fascia", "Every penetration sealed as it is made. Nothing goes through a shingle."],
-      ["Mitered transitions", "Valleys, dormers and returns cut and closed, so the line does not break at a corner."],
+      ["Channel into fascia", "Fixed into the fascia board wherever the roof allows, and every penetration sealed as it is made."],
       ["Concealed conductor", "The wire runs inside the channel. Nothing drops down a downspout or crosses a soffit."],
-      ["Color matched", "Channel finished to your fascia color, so the hardware disappears in daylight."],
+      /* WAS "Color matched / Channel finished to your fascia color, so the hardware disappears in
+         daylight." Replaced with the termination detail, which is the real craft point on a run
+         and is already claimed in content/services.ts. */
+      ["Capped terminations", "Every end cap and joint closed and sealed, which is where water finds its way into a run."],
     ],
     alsoSee: ["soffit-lighting", "permanent-outdoor-lighting", "permanent-christmas-lights", "landscape-lighting"],
     proofShot: "/img/roofline-detail.jpg",
