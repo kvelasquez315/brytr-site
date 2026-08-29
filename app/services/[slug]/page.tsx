@@ -73,10 +73,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
  * nobody goes up a ladder, the storage row becomes nothing in the garage, and the two cost rows
  * collapse into one, because "higher, once" and "one install" were the same point twice.
  *
- * COLOURFUL WITHOUT INVENTING A PALETTE. Each card carries a lit run across its top in a real
- * scene colour, from the six defined in globals.css. They are what a Brytr roofline is actually
- * set to on a given night, so the colour on the card is the product rather than decoration
- * applied to a box, and the section gets its colour from the one place this site is allowed to
+ * COLORFUL WITHOUT INVENTING A PALETTE. Each card carries a lit run across its top in a real
+ * scene color, from the six defined in globals.css. They are what a Brytr roofline is actually
+ * set to on a given night, so the color on the card is the product rather than decoration
+ * applied to a box, and the section gets its color from the one place this site is allowed to
  * take it from. */
 const valueCards: { scene: string; h: string; p: string }[] = [
   { scene: "warm", h: "One cost, not ten",
@@ -85,12 +85,12 @@ const valueCards: { scene: string; h: string; p: string }[] = [
     p: "Not in November to put them up, not in January to take them down, and not in between when a section goes dark." },
   { scene: "red", h: "January is a month, not a job",
     p: "There is nothing to take down, so the weekend you normally lose to it stays yours." },
-  { scene: "green", h: "Any colour, any night",
-    p: "Warm white on a Tuesday in March, red and green in December, team colours on a Saturday. Same run, from your phone." },
+  { scene: "green", h: "Any color, any night",
+    p: "Warm white on a Tuesday in March, red and green in December, team colors on a Saturday. Same run, from your phone." },
   { scene: "blue", h: "Nothing in the garage",
     p: "No boxes, no tangles, no rental return, and no shelf given up to something used six weeks a year." },
   { scene: "violet", h: "It reads as part of the house",
-    p: "Colour matched to your fascia and sealed in once, so from the curb in daylight it is trim rather than a seasonal add-on." },
+    p: "Color matched to your fascia and sealed in once, so from the curb in daylight it is trim rather than a seasonal add-on." },
 ];
 
 export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
@@ -209,7 +209,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             * field of nothing at the top right. A technical drawing does not get better at 1328px;
             * it just takes its own whitespace with it.
             *
-            * Capped at 62rem and centred. Same drawing, a third less dead panel, and it reads as a
+            * Capped at 62rem and centered. Same drawing, a third less dead panel, and it reads as a
             * plate on a page rather than as a section that failed to fill. */}
           <div className="shell">
             <div className="mx-auto max-w-[62rem]">
@@ -243,7 +243,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             {/* EVERY LIGHT AT FULL OUTPUT, and that is a correction. The first pass ramped them
               * from dim to bright, which is what the device does on the home page, where the five
               * points ARE the install in order. These are not: on this service they read channel
-              * into fascia, mitered transitions, concealed conductor, colour matched. That is a
+              * into fascia, mitered transitions, concealed conductor, color matched. That is a
               * set, not a sequence, and a ramp across it tells the reader there is an order to
               * find. The device still marks the section as ours; it just stops implying time. */}
             {(d?.included ?? []).map(([h, p]) => (
@@ -368,7 +368,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
           {/* CARDS WITH THE PHOTOGRAPH OF THAT SERVICE. "These service links should be cards side
             * by side with images of that other service."
             *
-            * They were stacked full-width text rows inside one framed rack: bold name, grey line,
+            * They were stacked full-width text rows inside one framed rack: bold name, gray line,
             * hairline, repeat. That is a table of contents, and it was the only link block on the
             * site with nothing to look at, on the section whose whole job is to make somebody want
             * the next thing. Every service already carries a `photo` key into content/images.ts.
