@@ -16,8 +16,12 @@ export const homeFaqs: Faq[] = [
     a: "Yes, and we do it all winter in Nebraska. Extreme cold affects adhesive and sealant cure times, so we adjust method rather than turning the work down. If conditions genuinely will not allow a good install that day, we reschedule rather than push through." },
   { q: "Do I need to be home for the install?",
     a: "Not for the whole day, but we do want you there at the end. Handover includes walking the app with you and switching through every scene before we leave, which is the step most installers skip." },
+  /* THE HOA ANSWER ENDED "...and bring it to the visit, and we will go through it with you."
+   * Removed 29 Aug 2026 off the client punch list: HOA has never been a problem for Brytr and it
+   * is not something the crew discusses on site, so the site should not be promising a covenant
+   * review at the appointment. The useful half - read your own clause first - stays. */
   { q: "Will my HOA allow it?",
-    a: "Most do, and several of the newer west Omaha developments have specific language about permanent exterior lighting. Read the lighting clause in your covenant before you plan anything and bring it to the visit, and we will go through it with you." },
+    a: "Most do, and several of the newer west Omaha developments have specific language about permanent exterior lighting. Read the lighting clause in your covenant before you plan anything." },
   { q: "How long does an install take?",
     a: "It depends on the size of the elevation and whether landscape or hardscape fixtures go on the same visit. We give you the actual number in the written quote after the on-site measure, rather than a figure on a web page." },
 ];

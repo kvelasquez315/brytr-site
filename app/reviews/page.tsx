@@ -80,8 +80,11 @@ const practice: { h: string; p: string; href: string }[] = [
     href: "/about",
   },
   {
-    h: "Signed off twice, by you",
-    p: "Once from the curb, once walking every scene with you. A job is not finished until both of those have happened with you standing there.",
+    /* WAS "Signed off twice, by you / Once from the curb, once walking every scene with you."
+       There is no daylight curb sign-off - the client struck it off the punch list - so there
+       is one sign-off on this site and it is the scene walk. */
+    h: "Signed off with you standing there",
+    p: "Every scene walked through with you before anybody leaves. A job is not finished until that has happened.",
     href: "/how-it-works",
   },
   {
