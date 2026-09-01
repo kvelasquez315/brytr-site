@@ -190,16 +190,36 @@
  *
  * The 34% stop was the thin point — the lede lands right on it, and on the two brightest hero
  * photographs it measured 6.5:1, which clears the 4.5 floor but not the 7.0 this site holds
- * body copy to. Raised to 84%. */
+ * body copy to. Raised to 84%.
+ *
+ * AND THEN NOBODY CAME BACK TO IT. The desktop ramp above has been measured three separate times
+ * and is genuinely at its limit. This query was never put under the same instrument, and it was
+ * carrying two full stops of margin it did not need: at 92 / 84 / 86 / 95 every mobile hero on
+ * the site measured between 9.3:1 and 15:1 against a 7.0 bar, and the site paid for that margin
+ * in photograph. On a 390px screen the hero read as a flat navy slab with type on it — word for
+ * word the complaint the desktop scrim was rewritten to answer.
+ *
+ * 86 / 77 / 80 / 91, found by bisection against scripts/hero-contrast.py over all 18 hero pages
+ * rather than by eye:
+ *
+ *     78 / 66 / 72 / 88    fifteen heroes under 7.0, worst 5.14
+ *     85 / 75 / 79 / 91    two heroes under 7.0, worst 6.90
+ *     86 / 77 / 80 / 91    worst ratio anywhere 7.35, zero warns   <- this one
+ *
+ * So the margin is real but it is thin. Move any stop down and re-run the script over every page
+ * before believing it. And note what this does NOT buy: the mobile hero photograph comes up about
+ * four points of mean luminance, because most of what makes it dark is the crop rather than the
+ * veil. The line at the end of the desktop block applies here too — past this point the way to
+ * show more photograph is to take the type off it. */
 @media (max-width: 1023px) {
   .hero-scrim {
     background:
       linear-gradient(
         to bottom,
-        color-mix(in oklab, var(--brand-primary) 92%, transparent) 0%,
-        color-mix(in oklab, var(--brand-primary) 84%, transparent) 34%,
-        color-mix(in oklab, var(--brand-primary) 86%, transparent) 70%,
-        color-mix(in oklab, var(--brand-primary) 95%, transparent) 100%
+        color-mix(in oklab, var(--brand-primary) 86%, transparent) 0%,
+        color-mix(in oklab, var(--brand-primary) 77%, transparent) 34%,
+        color-mix(in oklab, var(--brand-primary) 80%, transparent) 70%,
+        color-mix(in oklab, var(--brand-primary) 91%, transparent) 100%
       );
   }
 }
