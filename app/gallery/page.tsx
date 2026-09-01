@@ -70,7 +70,12 @@ const CARD_RATIO = "aspect-4/3";
  * Blank space is the failure this client cares about most and I generated it structurally.
  *
  * So: add photographs or move them, never ship a remainder. If a group cannot reach the next
- * multiple of three honestly, it should be merged into a neighbor instead. */
+ * multiple of three honestly, it should be merged into a neighbor instead.
+ *
+ * AND THE LEAD SHOT IS A SEPARATE DECISION FROM THE GROUPING. The first src in each array
+ * renders full width at about 1240px; the rest render in the grid at about 380px. A frame that
+ * holds up at 380px can fall apart at 1240px, so the lead has to be chosen on sharpness and not
+ * only on subject. See the notes on the two groups that had this wrong. */
 const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
   {
     h: "The everyday setting",
@@ -102,10 +107,18 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
     note: "Set once, scheduled, forgotten",
     lede:
       "Saved scenes, not different hardware. They run on a date range and put themselves back afterwards.",
+    /* LEAD SWAPPED 1 Sep 2026. This group led with christmas-detail.jpg, which renders full
+       width at 1240px - the largest image slot on the page - and measures 38.5 on Laplacian
+       sharpness against a library median of 58.8. It is the softest frame in its own group and
+       it was in the biggest slot, which is exactly what the client saw: "too big for this spot
+       since it looks super blurry." scene-fourth.jpg is 107.2, is 2200px rather than 2000, is
+       the same 16/9 so the section rhythm is unchanged, and reads as an occasion instantly.
+       christmas-detail keeps its place in the grid, where it renders at about 380px and its
+       softness does not show. */
     srcs: [
-      "/img/christmas-detail.jpg",
-      "/img/scene-halloween.jpg",
       "/img/scene-fourth.jpg",
+      "/img/scene-halloween.jpg",
+      "/img/christmas-detail.jpg",
       "/img/scene-birthday.jpg",
       "/img/scene-husker-red.jpg",
       "/img/scene-game-day.jpg",
@@ -143,7 +156,9 @@ const groups: { h: string; note: string; lede: string; srcs: string[] }[] = [
     note: "The channel, and the structures",
     lede:
       "Nobody in this trade photographs the hardware, which is why it is worth photographing.",
-    srcs: ["/img/g-gable-detail.jpg", "/img/patio-pergola.jpg", "/img/detail-gable-miter.jpg"],
+    /* Same swap, same reason. g-gable-detail.jpg measures 36.6 and was leading full width;
+       patio-pergola.jpg is 94.6 at the same 16/9. Both stay in the group. */
+    srcs: ["/img/patio-pergola.jpg", "/img/g-gable-detail.jpg", "/img/detail-gable-miter.jpg"],
   },
 ];
 
