@@ -154,8 +154,20 @@ export const images: Record<string, Slot> = {
   serviceRoofline: { src: "/img/home-wide-ranch.jpg",
     alt: "A wide low Omaha ranch at night with warm white holding a straight line the full length of the roof",
     subject: "A long low ranch. The hardest run to hold straight, so the best roofline proof.", ratio: "4/3" },
-  serviceSoffit: { src: "/img/home-eave-downlights.jpg",
-    alt: "Warm white downlights spaced evenly under the eaves and gable peaks of a modern Omaha farmhouse",
+  /* WAS home-eave-downlights.jpg, WHICH COULD NOT SHOW WHAT THIS SLOT ASKS FOR.
+   *
+   * The subject line below has always said "close enough to read the spacing between the
+   * downlights under the eave." The old file is a distant, nearly black frame of a whole house
+   * with a handful of pinpricks along the roof — Laplacian sharpness 5.9 against a library
+   * median of 58.8, the second-lowest of all 102 files. You cannot resolve individual points
+   * in it, let alone the gaps between them. It was rendering at 678px wide.
+   *
+   * home-shake-brick-dusk.jpg was already in this manifest, already on disk, and pointed at by
+   * nothing. Same 3/4 ratio, so this is a straight swap with no layout consequence. Sharpness
+   * 125.2, blue hour, downlights just up, and the spacing along each run is legible — which is
+   * the entire reason this slot exists. */
+  serviceSoffit: { src: "/img/home-shake-brick-dusk.jpg",
+    alt: "Warm white downlights under the eaves and gable peaks of a shake and brick Omaha home at blue hour, the spacing between points readable along each run",
     subject: "Close enough to read the spacing between the downlights under the eave.", ratio: "3/4" },
   serviceHardscape: { src: "/img/hardscape-seatwall.jpg",
     alt: "A stone seat wall with lit caps in the foreground and a covered porch behind it washed red at an Omaha home",
@@ -298,8 +310,11 @@ export const images: Record<string, Slot> = {
   homeBrickGablesGold: { src: "/img/home-brick-gables-gold.jpg",
     alt: "A brick Omaha home with several gables all lit warm, the entry glowing behind the glass",
     subject: "A complicated roof. More gables means more corners to get right.", ratio: "4/3" },
-  homeEaveDownlights: { src: "/img/home-eave-downlights.jpg",
-    alt: "Warm white downlights spaced evenly under the eaves and gable peaks of a modern Omaha farmhouse",
+  /* SAME SWAP AS serviceSoffit ABOVE, AND FOR THE SAME REASON — this key and that one both
+   * pointed at home-eave-downlights.jpg, and both are specified as close enough to count the
+   * points. See the note on serviceSoffit. */
+  homeEaveDownlights: { src: "/img/home-shake-brick-dusk.jpg",
+    alt: "Warm white downlights under the eaves and gable peaks of a shake and brick Omaha home at blue hour, the spacing between points readable along each run",
     subject: "Close enough to read the spacing between points.", ratio: "3/4" },
   homeModernStone: { src: "/img/home-modern-stone.jpg",
     alt: "A modern stone and stucco Omaha two-story with warm downlights along the flat roof edges",
