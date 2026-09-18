@@ -39,8 +39,8 @@ import { valueProps } from "@/content/value-props";
  */
 
 export const metadata: Metadata = {
-  title: `Brytr Reviews: ${reviewProof.average} Across ${reviewProof.count} Google Reviews`,
-  description: `Brytr Co holds a ${reviewProof.average} average across ${reviewProof.count} Google reviews for permanent outdoor lighting in the Omaha metro. Read what they mention, then read them on Google.`,
+  title: `Brytr Reviews: ${reviewProof.average} Across ${reviewProof.countLabel} Google Reviews`,
+  description: `Brytr Co holds a ${reviewProof.average} average across ${reviewProof.countLabel} Google reviews for permanent outdoor lighting in the Omaha metro. Read what they mention, then read them on Google.`,
   alternates: { canonical: "/reviews" },
 };
 const trail = [{ name: "Home", href: "/" }, { name: "Reviews", href: "/reviews" }];
@@ -150,14 +150,14 @@ export default function Reviews() {
               {reviewProof.average}
             </p>
             <p className="u mt-4 text-lg text-muted-foreground">
-              from {reviewProof.count} reviews
+              from {reviewProof.countLabel} reviews
             </p>
             <p className="mt-5 max-w-[36ch] text-[0.95rem] leading-relaxed text-muted-foreground">
               Every one of them left by somebody in this metro, on a platform where we cannot edit,
               reorder or hide any of it.
             </p>
             <div className="mt-7">
-              <TextLink href={reviewProof.url}>Read all {reviewProof.count} on Google</TextLink>
+              <TextLink href={reviewProof.url}>Read them on Google</TextLink>
             </div>
 
             {/* why the quotes below are typed out rather than pulled in by a widget */}
@@ -187,7 +187,7 @@ export default function Reviews() {
               ))}
             </ul>
             <p className="mt-4 text-xs leading-relaxed text-muted-foreground">
-              Counts are of the six reviews quoted in full below, not of all {reviewProof.count}. Counting
+              Counts are of the six reviews quoted in full below, not of all {reviewProof.countLabel}. Counting
               themes across the whole profile would mean reading the whole profile, and we have not.
             </p>
           </div>
@@ -313,7 +313,7 @@ export default function Reviews() {
         </div>
       </section>
 
-      <PageCta variant="phone" photos={valueProps["/reviews"].photos} panelLink={{ href: reviewProof.url, label: `Read all ${reviewProof.count} reviews` }} />
+      <PageCta variant="phone" photos={valueProps["/reviews"].photos} panelLink={{ href: reviewProof.url, label: `Read all ${reviewProof.countLabel} reviews` }} />
     </Shell>
   );
 }

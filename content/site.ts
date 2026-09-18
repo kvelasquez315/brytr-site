@@ -1,5 +1,5 @@
 /* Confirmed facts only. Anything not verified from the client is absent by design.
- * Verified: 201 five-star Google reviews · 5.0 average (Google Business Profile, 28 Aug 2026)
+ * Verified: 215+ five-star Google reviews · 5.0 average (Google Business Profile, 28 Aug 2026)
  * One crew from measure to handover · founders Zac Van Buren & Sam Greguska
  * Phone 402-810-3973 · Omaha, NE · carries both Haven Evolution and Jellyfish
  */
@@ -77,7 +77,7 @@ export const site = {
     /* The count is interpolated from content/reviews.ts rather than typed here. It was "196"
        in this string while reviews.ts said the same, and the client has corrected this number
        twice - each correction had to find three files or the site disagreed with itself. */
-    { figure: reviewProof.average, label: `Average from ${reviewProof.count} Google reviews`, icon: "stars" },
+    { figure: reviewProof.average, label: `Average from ${reviewProof.countLabel} Google reviews`, icon: "stars" },
     { figure: "1 crew", label: "From the measure to the handover", icon: "hardHat" },
     /* This slot held "25 yr — LED rating on the Signature system", which was an invented number
      * on an invented tier. It was swapped for IP66, but that rating came out of the same batch

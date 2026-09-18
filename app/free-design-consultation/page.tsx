@@ -218,7 +218,7 @@ export default function Consult() {
               <figure className="rounded-lg bg-raise p-7 ring-1 ring-on-dark/10">
                 <p className="u text-sm font-medium text-accent">
                   {reviewProof.average} on {reviewProof.platform}
-                  <span className="text-on-dark-muted"> · {reviewProof.count} reviews</span>
+                  <span className="text-on-dark-muted"> · {reviewProof.countLabel} reviews</span>
                 </p>
                 <blockquote className="mt-4 text-[1.15rem] leading-relaxed text-on-dark">
                   “{quote.text}”

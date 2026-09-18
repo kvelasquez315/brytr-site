@@ -33,9 +33,10 @@ export const metadata: Metadata = {
     default: "Permanent Outdoor Lighting in Omaha, NE | Brytr Co",
     template: "%s | Brytr Co",
   },
-  /* The review count comes from content/reviews.ts. It was hardcoded here as 177 while the
-   * Google Business Profile said 196, on the site's default description. */
-  description: `Permanent outdoor lighting installed once for Omaha homes. Smart app control, every color, every holiday. ${reviewProof.average} from ${reviewProof.count} ${reviewProof.platform} reviews. Free design consultation.`,
+  /* The review count comes from content/reviews.ts, and from countLabel rather than count,
+   * so this description reads 215+ and does not go stale. It was hardcoded here as 177 while
+   * the Google Business Profile said 196, on the site's default description. */
+  description: `Permanent outdoor lighting installed once for Omaha homes. Smart app control, every color, every holiday. ${reviewProof.average} from ${reviewProof.countLabel} ${reviewProof.platform} reviews. Free design consultation.`,
   /* THE SHARE CARD, and it was missing on all seventy-four pages.
    *
    * `openGraph` declared a type, a locale and a site name and no image, so every link to this site

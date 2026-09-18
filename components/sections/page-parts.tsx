@@ -497,7 +497,7 @@ export function PageCta({
    * twelve towns in content/cities.ts, both counted from the arrays rather than typed, so neither
    * can drift from what the site actually publishes. */
   const statList: [string, string][] = [
-    [reviewProof.average, `from ${reviewProof.count} reviews`],
+    [reviewProof.average, `from ${reviewProof.countLabel} reviews`],
     ["Free", "design consultation"],
     [String(systems.length), "systems we install"],
     [String(cities.length), "towns we cover"],

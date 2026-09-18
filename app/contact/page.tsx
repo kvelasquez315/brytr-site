@@ -199,7 +199,7 @@ export default function Contact() {
                 {[
                   ["Instagram", site.social.instagram, "Finished installs, most weeks"],
                   ["Facebook", site.social.facebook, "The same work, and the reviews"],
-                  [`${reviewProof.platform} profile`, reviewProof.url, `${reviewProof.average} from ${reviewProof.count} reviews`],
+                  [`${reviewProof.platform} profile`, reviewProof.url, `${reviewProof.average} from ${reviewProof.countLabel} reviews`],
                 ].map(([label, href, note]) => (
                   <li key={label} className="py-3.5">
                     <a

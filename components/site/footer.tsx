@@ -143,7 +143,7 @@ export function Footer() {
               <p><a href={site.phoneHref} className="u text-on-dark hover:text-accent">{site.phone}</a></p>
               <p className="pt-2">
                 <a href={reviewProof.url} target="_blank" rel="noopener noreferrer" className="text-on-dark hover:text-accent">
-                  <span className="u">{reviewProof.average}</span> from <span className="u">{reviewProof.count}</span> Google reviews
+                  <span className="u">{reviewProof.average}</span> from <span className="u">{reviewProof.countLabel}</span> Google reviews
                 </a>
               </p>
             </address>

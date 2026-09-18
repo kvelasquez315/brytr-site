@@ -165,7 +165,7 @@ export function TrustPlinth() {
         ))}
       </span>
       <span className="text-[1.25rem] text-on-dark-muted">
-        across <span className="u font-semibold text-on-dark">{reviewProof.count}</span> reviews on{" "}
+        across <span className="u font-semibold text-on-dark">{reviewProof.countLabel}</span> reviews on{" "}
         {googleLogo ? (
           /* `unoptimized` because Next refuses SVG through the image optimizer unless
             * images.dangerouslyAllowSVG is set for the whole site, and this is one first-party

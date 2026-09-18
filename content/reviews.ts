@@ -71,7 +71,14 @@ export const reviews: Review[] = [
 
 export const reviewProof = {
   average: "5.0",
-  count: 201,
+  /* TWO FIGURES, ON PURPOSE. A fixed integer is wrong the week after it ships, and this
+   * profile only ever climbs: it has been 177, 196 and 201 on this site already. `count`
+   * is the bare integer and it exists for exactly one reason - schema.org AggregateRating
+   * defines reviewCount as a number, and "215+" in that slot is invalid structured data
+   * that Search Console flags. `countLabel` is what every visible string uses, and the
+   * plus is what keeps the sentence true as the profile grows. Never print `count` in copy. */
+  count: 215,
+  countLabel: "215+",
   platform: "Google",
   /* the profile itself, so "read them yourself" is a real link */
   url: "https://www.google.com/maps/place/Brytr+-+Permanent+Roofline+%26+Smart+Landscape+Lighting/@41.2226632,-96.1244091,17z",

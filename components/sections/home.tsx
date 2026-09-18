@@ -695,7 +695,7 @@ export function Reviews() {
           * sentence, which is what it is standing in for. */}
         <div className="flex flex-wrap items-end gap-x-5 gap-y-3">
           <h2 className="display-section max-w-[34ch] text-foreground">
-            Our clients have consistently rated us 5 stars across {reviewProof.count} reviews
+            Our clients have consistently rated us 5 stars across {reviewProof.countLabel} reviews
           </h2>
           {googleLogo && (
             <Image

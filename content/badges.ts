@@ -83,7 +83,7 @@ export const reviewProofBadge = {
    * and when the client corrected the count to 201 that correction would have fixed reviews.ts and
    * left this badge saying 196 on whatever renders it. One number, one home. */
   score: reviewProof.average,
-  count: String(reviewProof.count),
+  count: reviewProof.countLabel,
   source: "Google reviews",
   note: "Every one from an Omaha homeowner",
 };

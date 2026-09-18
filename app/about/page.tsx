@@ -317,7 +317,7 @@ export default function About() {
                 * from the profile, the two brands off the shelf, and the towns off our own
                 * service-area list. */}
               {[
-                [reviewProof.average, `from ${reviewProof.count} reviews`, `${reviewProof.platform}, ${reviewProof.checked}`],
+                [reviewProof.average, `from ${reviewProof.countLabel} reviews`, `${reviewProof.platform}, ${reviewProof.checked}`],
                 ["2", "brands stocked", "Haven and Jellyfish"],
                 ["12", "towns we install in", "The Omaha metro and Council Bluffs"],
               ].map(([f, l, src]) => (

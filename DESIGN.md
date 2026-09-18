@@ -294,7 +294,10 @@ document. It is the one icon in the set that could belong to another industry.
 Review text is now real (`content/reviews.ts`) and the source of every line is recorded in that
 file's header: five are the testimonials Brytr publishes on brytrco.com, verbatim; the rest are
 quoted verbatim from the Google Business Profile with the reviewer's name and the age Google shows.
-The rating and count come off the profile — **5.0 from 196**, read 20 Aug 2026. The client's own site
+The rating and count come off the profile — **5.0 from 215+**, read 20 Aug 2026. It only ever
+goes up, so the site publishes it with a plus: `reviewProof.countLabel` is what every visible
+string uses, and the bare integer `reviewProof.count` exists only because schema.org
+AggregateRating requires reviewCount to be a number. Never print the integer in copy. The client's own site
 still says "135+" and their Instagram says "170+"; the profile is the live number and the one to
 publish. It only goes up, so re-check it before quoting it anywhere permanent.
 
